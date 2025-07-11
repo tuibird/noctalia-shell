@@ -2,7 +2,7 @@
 
 **_quiet by design_**
 
-A sleek, minimal, and thoughtfully crafted setup for Wayland using **Quickshell**. This setup includes a status bar, notification system, control panel, wifi & bluetooth indicators, power profiles, lockscreen, tray, workspaces, and more — all styled with a warm lavender palette.
+A sleek, minimal, and thoughtfully crafted setup for Wayland using **Quickshell**. This setup includes a status bar, notification system, control panel, wifi & bluetooth support, power profiles, lockscreen, tray, workspaces, and more — all styled with a warm lavender palette.
 
 ## Preview
 
@@ -43,27 +43,27 @@ A sleek, minimal, and thoughtfully crafted setup for Wayland using **Quickshell*
 <details>
 <summary><strong>Theme Colors</strong></summary>
 
-| Color Role                                                                                                                 | Color       | Description                                       |
-| -------------------------------------------------------------------------------------------------------------------------- | ----------- | ------------------------------------------------- |
-| <span style="display:inline-block;width:15px;height:15px;border-radius:50%;background:#0C0D11;margin-right:8px;"></span>   | `#0C0D11`   | Background Primary — Deep indigo-black            |
-| <span style="display:inline-block;width:15px;height:15px;border-radius:50%;background:#151720;margin-right:8px;"></span>   | `#151720`   | Background Secondary — Slightly lifted dark       |
-| <span style="display:inline-block;width:15px;height:15px;border-radius:50%;background:#1D202B;margin-right:8px;"></span>   | `#1D202B`   | Background Tertiary — Soft contrast surface       |
-| <span style="display:inline-block;width:15px;height:15px;border-radius:50%;background:#1A1C26;margin-right:8px;"></span>   | `#1A1C26`   | Surface — Material-like base layer                |
-| <span style="display:inline-block;width:15px;height:15px;border-radius:50%;background:#2A2D3A;margin-right:8px;"></span>   | `#2A2D3A`   | Surface Variant — Lightly elevated                |
-| <span style="display:inline-block;width:15px;height:15px;border-radius:50%;background:#CACEE2;margin-right:8px;"></span>   | `#CACEE2`   | Text Primary — Gentle off-white                   |
-| <span style="display:inline-block;width:15px;height:15px;border-radius:50%;background:#B7BBD0;margin-right:8px;"></span>   | `#B7BBD0`   | Text Secondary — Muted lavender-blue              |
-| <span style="display:inline-block;width:15px;height:15px;border-radius:50%;background:#6B718A;margin-right:8px;"></span>   | `#6B718A`   | Text Disabled — Dimmed blue-gray                  |
-| <span style="display:inline-block;width:15px;height:15px;border-radius:50%;background:#A8AEFF;margin-right:8px;"></span>   | `#A8AEFF`   | Accent Primary — Light enchanted lavender         |
-| <span style="display:inline-block;width:15px;height:15px;border-radius:50%;background:#9EA0FF;margin-right:8px;"></span>   | `#9EA0FF`   | Accent Secondary — Softer lavender hue            |
-| <span style="display:inline-block;width:15px;height:15px;border-radius:50%;background:#8EABFF;margin-right:8px;"></span>   | `#8EABFF`   | Accent Tertiary — Warm golden glow (from lantern) |
-| <span style="display:inline-block;width:15px;height:15px;border-radius:50%;background:#FF6B81;margin-right:8px;"></span>   | `#FF6B81`   | Error — Soft rose red                             |
-| <span style="display:inline-block;width:15px;height:15px;border-radius:50%;background:#FFBB66;margin-right:8px;"></span>   | `#FFBB66`   | Warning — Candlelight amber-orange                |
-| <span style="display:inline-block;width:15px;height:15px;border-radius:50%;background:#E3C2FF;margin-right:8px;"></span>   | `#E3C2FF`   | Highlight — Bright magical lavender               |
-| <span style="display:inline-block;width:15px;height:15px;border-radius:50%;background:#F3DEFF;margin-right:8px;"></span>   | `#F3DEFF`   | Ripple Effect — Gentle soft splash                |
-| <span style="display:inline-block;width:15px;height:15px;border-radius:50%;background:#1A1A1A;margin-right:8px;"></span>   | `#1A1A1A`   | On Accent — Text on accent background             |
-| <span style="display:inline-block;width:15px;height:15px;border-radius:50%;background:#44485A;margin-right:8px;"></span>   | `#44485A`   | Outline — Subtle bluish-gray line                 |
-| <span style="display:inline-block;width:15px;height:15px;border-radius:50%;background:#000000B3;margin-right:8px;"></span> | `#000000B3` | Shadow — Standard soft black shadow               |
-| <span style="display:inline-block;width:15px;height:15px;border-radius:50%;background:#11121ACC;margin-right:8px;"></span> | `#11121ACC` | Overlay — Deep bluish overlay                     |
+| Color Role           | Color       | Description                     |
+| -------------------- | ----------- | ------------------------------- |
+| Background Primary   | `#0C0D11`   | Deep indigo-black               |
+| Background Secondary | `#151720`   | Slightly lifted dark            |
+| Background Tertiary  | `#1D202B`   | Soft contrast surface           |
+| Surface              | `#1A1C26`   | Material-like base layer        |
+| Surface Variant      | `#2A2D3A`   | Lightly elevated                |
+| Text Primary         | `#CACEE2`   | Gentle off-white                |
+| Text Secondary       | `#B7BBD0`   | Muted lavender-blue             |
+| Text Disabled        | `#6B718A`   | Dimmed blue-gray                |
+| Accent Primary       | `#A8AEFF`   | Light enchanted lavender        |
+| Accent Secondary     | `#9EA0FF`   | Softer lavender hue             |
+| Accent Tertiary      | `#8EABFF`   | Warm golden glow (from lantern) |
+| Error                | `#FF6B81`   | Soft rose red                   |
+| Warning              | `#FFBB66`   | Candlelight amber-orange        |
+| Highlight            | `#E3C2FF`   | Bright magical lavender         |
+| Ripple Effect        | `#F3DEFF`   | Gentle soft splash              |
+| On Accent            | `#1A1A1A`   | Text on accent background       |
+| Outline              | `#44485A`   | Subtle bluish-gray line         |
+| Shadow               | `#000000B3` | Standard soft black shadow      |
+| Overlay              | `#11121ACC` | Deep bluish overlay             |
 
 </details>
 
