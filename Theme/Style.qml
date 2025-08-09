@@ -11,10 +11,10 @@ Singleton {
     */
 
    // Font
-    property int fontExtraLarge: 32
-    property int fontLarge: 16
-    property int fontMedium: 14
-    property int fontSmall: 12
+    property real fontExtraLarge: 32
+    property real fontLarge: 16
+    property real fontMedium: 14
+    property real fontSmall: 12
 
     // Font weight
     property int fontWeightRegular: 400
