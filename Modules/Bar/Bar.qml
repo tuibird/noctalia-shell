@@ -3,15 +3,17 @@ import Quickshell
 import QtQuick.Controls
 import QtQuick.Layouts
 import qs.Widgets
+import qs.Services
 import qs.Theme
 
 PanelWindow {
   id: root
 
+  readonly property real scaling: Scaling.scale(screen)
   property var modelData
 
   screen: modelData
-  implicitHeight: 36
+  implicitHeight: Style.barHeight * scaling
   color: "transparent"
 
   anchors {
@@ -31,12 +33,12 @@ PanelWindow {
 
     RowLayout {
       // Just testing
-      NoctaliaToggle {
+      NToggle {
         label: "Label"
         description: "Description"
       }
 
-      NoctaliaIconButton {
+      NIconButton {
         icon: "refresh"
       }
     }

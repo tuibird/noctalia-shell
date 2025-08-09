@@ -13,10 +13,10 @@ Singleton {
     */
 
   // Font
-  property real fontExtraLarge: 32
-  property real fontLarge: 16
-  property real fontMedium: 14
-  property real fontSmall: 12
+  property real fontExtraLarge: 20
+  property real fontLarge: 14
+  property real fontMedium: 10
+  property real fontSmall: 8
 
   // Font weight
   property int fontWeightRegular: 400
@@ -43,4 +43,7 @@ Singleton {
   property int animationFast: 150
   property int animationNormal: 300
   property int animationSlow: 500
+
+  property int barHeight: 36
+  property int baseWidgetHeight: 32
 }

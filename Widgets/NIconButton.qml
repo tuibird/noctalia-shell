@@ -7,11 +7,8 @@ import qs.Theme
 Rectangle {
   id: root
 
-  // Local scale convenience with safe fallback
-  readonly property real scale: (typeof screen !== 'undefined'
-                                 && screen) ? Scaling.scale(screen) : 1.0
-
-  property real size: 32 * scale
+  readonly property real scaling: Scaling.scale(screen)
+  property real size: Style.baseWidgetHeight * scaling
   property string icon
   property bool enabled: true
   property bool hovering: false
@@ -27,7 +24,7 @@ Rectangle {
     anchors.centerIn: parent
     text: root.icon
     font.family: "Material Symbols Outlined"
-    font.pixelSize: 24 * scale
+    font.pointSize: Style.fontExtraLarge * scaling
     color: root.hovering ? Theme.onAccent : Theme.textPrimary
     horizontalAlignment: Text.AlignHCenter
     verticalAlignment: Text.AlignVCenter
