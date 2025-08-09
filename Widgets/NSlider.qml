@@ -10,7 +10,7 @@ Slider {
   readonly property real scaling: Scaling.scale(screen)
   readonly property real knobDiameter: Style.baseWidgetHeight * 0.75 * scaling
   readonly property real trackHeight: knobDiameter * 0.5
-  readonly property real cutoutExtra: Style.baseWidgetHeight * 0.25 * scaling
+  readonly property real cutoutExtra: Style.baseWidgetHeight * 0.1 * scaling
 
   // Optional color to cut the track beneath the knob (should match surrounding background)
   property var cutoutColor
@@ -18,7 +18,6 @@ Slider {
   property bool snapAlways: true
 
   snapMode: snapAlways ? Slider.SnapAlways : Slider.SnapOnRelease
-
   implicitHeight: Math.max(trackHeight, knobDiameter)
 
   background: Rectangle {
@@ -88,7 +87,7 @@ Slider {
       radius: width * 0.5
       color: slider.pressed ? Theme.surfaceVariant : Theme.surface
       border.color: Theme.accentPrimary
-      border.width: 2 * scaling
+      border.width: Math.max(1, 2 * scaling)
       // Press feedback halo (using accent color, low opacity)
       Rectangle {
         anchors.centerIn: parent
