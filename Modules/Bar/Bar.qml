@@ -33,32 +33,13 @@ PanelWindow {
     // Testing widgets
     RowLayout {
 
-      NToggle {
-        label: "Label"
-        description: "Description"
-        onToggled: function(value: bool) {
-          console.log("NToggle: " + value)
-        }
-      }
-
       NIconButton {
-        id: myIconButton
-        icon: "refresh"
-        onEntered: function() {
-          myTooltip.show();
-        }
-        onExited: function() {
-          myTooltip.hide();
+        id: demoPanelToggler
+        icon: "experiment"
+        onClicked: function () {
+          demoPanel.visible ? demoPanel.hide() : demoPanel.show()
         }
       }
-      NTooltip {
-        id: myTooltip
-        target: myIconButton
-        positionAbove: false
-        text: "Hello world"
-      }
-
-      NSlider {}
 
       Clock {}
     }

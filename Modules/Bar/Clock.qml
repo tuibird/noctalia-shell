@@ -37,7 +37,7 @@ Rectangle {
     onClicked: function () {
       calendar.visible = !calendar.visible
       if (calendar.visible) {
-        tooltip.hide();
+        tooltip.hide()
       }
     }
   }
