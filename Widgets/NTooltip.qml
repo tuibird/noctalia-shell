@@ -1,5 +1,4 @@
 import QtQuick
-import QtQuick.Window 2.15
 import qs.Services
 import qs.Theme
 
@@ -8,12 +7,10 @@ Window {
 
   readonly property real scaling: Scaling.scale(screen)
   property bool isVisible: false
-  property string text: ""
+  property string text: "Placeholder"
   property Item target: null
   property int delay: 300
   property bool positionAbove: false
-  property var _timerObj: null
-
 
   flags: Qt.ToolTip | Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint
   color: "transparent"
@@ -22,14 +19,7 @@ Window {
   onIsVisibleChanged: {
     if (isVisible) {
       if (delay > 0) {
-        if (_timerObj) {
-          _timerObj.destroy()
-          _timerObj = null
-        }
-        _timerObj = Qt.createQmlObject(
-              'import QtQuick 2.0; Timer { interval: ' + delay
-              + '; running: true; repeat: false; onTriggered: root._showNow() }',
-              root)
+        timerShow.running = true
       } else {
         _showNow()
       }
@@ -39,10 +29,10 @@ Window {
   }
 
   function show() {
-    isVisible = true;
+    isVisible = true
   }
   function hide() {
-    isVisible = false;
+    isVisible = false
   }
 
   function _showNow() {
@@ -70,10 +60,6 @@ Window {
 
   function _hideNow() {
     visible = false
-    if (_timerObj) {
-      _timerObj.destroy()
-      _timerObj = null
-    }
   }
 
   Connections {
@@ -100,6 +86,17 @@ Window {
     }
   }
 
+  Timer {
+    id: timerShow
+    interval: delay
+    running: false
+    repeat: false
+    onTriggered: {
+      _showNow()
+      running = false
+    }
+  }
+
   Rectangle {
     anchors.fill: parent
     radius: Style.radiusMedium * scaling
@@ -112,11 +109,11 @@ Window {
 
   Text {
     id: tooltipText
+    anchors.centerIn: parent
     text: root.text
     color: Theme.textPrimary
     font.family: Theme.fontFamily
-    font.pointSize: Theme.fontSizeMedium * scaling * 4
-    anchors.centerIn: parent
+    font.pointSize: Style.fontSmall * scaling
     horizontalAlignment: Text.AlignHCenter
     verticalAlignment: Text.AlignVCenter
     wrapMode: Text.Wrap
