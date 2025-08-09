@@ -38,12 +38,13 @@ Slider {
       color: Theme.accentPrimary
       radius: parent.radius
 
-      Behavior on width {
-        NumberAnimation {
-          duration: 120
-          easing.type: Easing.OutQuad
-        }
-      }
+      // Feels more responsive without animation
+      //   Behavior on width {
+      //     NumberAnimation {
+      //       duration: 50
+      //       easing.type: Easing.OutQuad
+      //     }
+      //   }
     }
 
     // Circular cutout
