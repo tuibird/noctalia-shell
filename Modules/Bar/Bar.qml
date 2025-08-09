@@ -35,6 +35,10 @@ PanelWindow {
         label: "Label"
         description: "Description"
       }
+
+      NoctaliaIconButton {
+        icon: "refresh"
+      }
     }
   }
 }
