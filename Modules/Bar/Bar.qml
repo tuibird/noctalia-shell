@@ -46,15 +46,15 @@ PanelWindow {
         id: myIconButton
         icon: "refresh"
         onEntered: function() {
-          myTooltip.tooltipVisible = true;
+          myTooltip.show();
         }
         onExited: function() {
-          myTooltip.tooltipVisible = false;
+          myTooltip.hide();
         }
       }
       NTooltip {
         id: myTooltip
-        targetItem: myIconButton
+        target: myIconButton
         positionAbove: false
         text: "Hello world"
       }

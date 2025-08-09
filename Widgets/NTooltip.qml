@@ -4,23 +4,23 @@ import qs.Services
 import qs.Theme
 
 Window {
-  id: tooltipWindow
+  id: root
 
   readonly property real scaling: Scaling.scale(screen)
+  property bool isVisible: false
   property string text: ""
-  property bool tooltipVisible: false
-  property Item targetItem: null
+  property Item target: null
   property int delay: 300
-  property bool positionAbove: true
+  property bool positionAbove: false
+  property var _timerObj: null
+
 
   flags: Qt.ToolTip | Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint
   color: "transparent"
   visible: false
 
-  property var _timerObj: null
-
-  onTooltipVisibleChanged: {
-    if (tooltipVisible) {
+  onIsVisibleChanged: {
+    if (isVisible) {
       if (delay > 0) {
         if (_timerObj) {
           _timerObj.destroy()
@@ -28,8 +28,8 @@ Window {
         }
         _timerObj = Qt.createQmlObject(
               'import QtQuick 2.0; Timer { interval: ' + delay
-              + '; running: true; repeat: false; onTriggered: tooltipWindow._showNow() }',
-              tooltipWindow)
+              + '; running: true; repeat: false; onTriggered: root._showNow() }',
+              root)
       } else {
         _showNow()
       }
@@ -38,23 +38,31 @@ Window {
     }
   }
 
+  function show() {
+    isVisible = true;
+  }
+  function hide() {
+    isVisible = false;
+  }
+
   function _showNow() {
-    
+    // Compute new size everytime we show the tooltip
     width = Math.max(50 * scaling, tooltipText.implicitWidth + 24 * scaling)
     height = Math.max(50 * scaling, tooltipText.implicitHeight + 16 * scaling)
 
-    if (!targetItem)
+    if (!target) {
       return
+    }
 
     if (positionAbove) {
-      // Position tooltip above the target item
-      var pos = targetItem.mapToGlobal(0, 0)
-      x = pos.x - width / 2 + targetItem.width / 2
+      // Position tooltip above the target
+      var pos = target.mapToGlobal(0, 0)
+      x = pos.x - width / 2 + target.width / 2
       y = pos.y - height - 12 // 12 px margin above
     } else {
-      // Position tooltip below the target item
-      var pos = targetItem.mapToGlobal(0, targetItem.height)
-      x = pos.x - width / 2 + targetItem.width / 2
+      // Position tooltip below the target
+      var pos = target.mapToGlobal(0, target.height)
+      x = pos.x - width / 2 + target.width / 2
       y = pos.y + 12 // 12 px margin below
     }
     visible = true
@@ -69,30 +77,34 @@ Window {
   }
 
   Connections {
-    target: tooltipWindow.targetItem
+    target: root.target
     function onXChanged() {
-      if (tooltipWindow.visible)
-        tooltipWindow._showNow()
+      if (root.visible) {
+        root._showNow()
+      }
     }
     function onYChanged() {
-      if (tooltipWindow.visible)
-        tooltipWindow._showNow()
+      if (root.visible) {
+        root._showNow()
+      }
     }
     function onWidthChanged() {
-      if (tooltipWindow.visible)
-        tooltipWindow._showNow()
+      if (root.visible) {
+        root._showNow()
+      }
     }
     function onHeightChanged() {
-      if (tooltipWindow.visible)
-        tooltipWindow._showNow()
+      if (root.visible) {
+        root._showNow()
+      }
     }
   }
 
   Rectangle {
     anchors.fill: parent
-    radius: 18
-    color: Theme.backgroundTertiary || "#222"
-    border.color: Theme.outline || "#444"
+    radius: Style.radiusMedium * scaling
+    color: Theme.backgroundTertiary
+    border.color: Theme.outline
     border.width: 1 * scaling
     opacity: 0.97
     z: 1
@@ -100,30 +112,14 @@ Window {
 
   Text {
     id: tooltipText
-    text: tooltipWindow.text
+    text: root.text
     color: Theme.textPrimary
     font.family: Theme.fontFamily
-    font.pixelSize: Theme.fontSizeSmall * scaling
+    font.pointSize: Theme.fontSizeMedium * scaling * 4
     anchors.centerIn: parent
     horizontalAlignment: Text.AlignHCenter
     verticalAlignment: Text.AlignVCenter
     wrapMode: Text.Wrap
-    padding: 8
-    z: 2
-  }
-
-  MouseArea {
-    anchors.fill: parent
-    cursorShape: Qt.ArrowCursor
-    hoverEnabled: true
-    onExited: tooltipWindow.tooltipVisible = false
-    
-  }
-
-  onTextChanged: {
-    width = Math.max(minimumWidth * scaling,
-                     tooltipText.implicitWidth + 24 * scaling)
-    height = Math.max(minimumHeight * scaling,
-                      tooltipText.implicitHeight + 16 * scaling)
+    z: 1
   }
 }
