@@ -8,15 +8,15 @@ import qs.Services
 import "../Helpers/Holidays.js" as Holidays
 
 NPanel {
-  id: calendarOverlay
+  id: root
 
   readonly property real scaling: Scaling.scale(screen)
 
   Rectangle {
     color: Theme.backgroundPrimary
-    radius: 12
+    radius: Style.radiusMedium * scaling
     border.color: Theme.backgroundTertiary
-    border.width: 1
+    border.width: Math.max(1, 1.5 * scale)
     width: 340 * scaling
     height: 380
     anchors.top: parent.top
@@ -31,8 +31,8 @@ NPanel {
 
     ColumnLayout {
       anchors.fill: parent
-      anchors.margins: 16
-      spacing: 12
+      anchors.margins: 16 * scaling
+      spacing: 12 * scaling
 
       // Month/Year header with navigation
       RowLayout {
@@ -113,14 +113,14 @@ NPanel {
         // Optionally, update when the panel becomes visible
         Connections {
           function onVisibleChanged() {
-            if (calendarOverlay.visible) {
+            if (root.visible) {
               calendar.month = Time.date.getMonth()
               calendar.year = Time.date.getFullYear()
               calendar.updateHolidays()
             }
           }
 
-          target: calendarOverlay
+          target: root
         }
 
         delegate: Rectangle {
@@ -179,8 +179,8 @@ NPanel {
                   return h.localName + (h.name !== h.localName ? " (" + h.name + ")" : "")
                       + (h.global ? " [Global]" : "")
                 }).join(", ")
-                holidayTooltip.target = parent;
-                holidayTooltip.show();
+                holidayTooltip.target = parent
+                holidayTooltip.show()
               }
             }
             onExited: holidayTooltip.hide()

@@ -11,7 +11,7 @@ PanelWindow {
   property int topMargin: Style.barHeight * scaling
   property color overlayColor: showOverlay ? Theme.overlay : "transparent"
 
-  function dismiss() {
+  function hide() {
     visible = false
   }
 
@@ -33,7 +33,7 @@ PanelWindow {
 
   MouseArea {
     anchors.fill: parent
-    onClicked: outerPanel.dismiss()
+    onClicked: outerPanel.hide()
   }
 
   Behavior on color {

@@ -112,7 +112,7 @@ Window {
     text: root.text
     color: Theme.textPrimary
     font.family: Theme.fontFamily
-    font.pointSize: Style.fontSmall * scaling
+    font.pointSize: Style.fontMedium * scaling
     horizontalAlignment: Text.AlignHCenter
     verticalAlignment: Text.AlignVCenter
     wrapMode: Text.Wrap

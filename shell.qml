@@ -10,6 +10,7 @@ import Quickshell
 import Quickshell.Io
 import Quickshell.Widgets
 import qs.Modules.Bar
+import qs.Modules.DemoPanel
 
 ShellRoot {
   id: root
@@ -20,5 +21,9 @@ ShellRoot {
     delegate: Bar {
       modelData: item
     }
+  }
+
+  DemoPanel {
+    id: demoPanel
   }
 }
