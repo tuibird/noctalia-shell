@@ -12,6 +12,8 @@ Rectangle {
   property string icon
   property bool enabled: true
   property bool hovering: false
+  property var onEntered: function () {}
+  property var onExited: function () {}
 
   implicitWidth: size
   implicitHeight: size
@@ -35,7 +37,13 @@ Rectangle {
     anchors.fill: parent
     cursorShape: Qt.PointingHandCursor
     hoverEnabled: true
-    onEntered: hovering = true
-    onExited: hovering = false
+    onEntered: {
+      hovering = true
+      root.onEntered()
+    }
+    onExited: {
+      hovering = false
+      root.onExited()
+    }
   }
 }

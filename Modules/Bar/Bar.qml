@@ -31,18 +31,37 @@ PanelWindow {
       layer.enabled: true
     }
 
+    // Testing widgets
     RowLayout {
-      // Just testing
+
       NToggle {
         label: "Label"
         description: "Description"
+        onToggled: function(value: bool) {
+          console.log("NToggle: " + value)
+        }
       }
 
       NIconButton {
+        id: myIconButton
         icon: "refresh"
+        onEntered: function() {
+          myTooltip.tooltipVisible = true;
+        }
+        onExited: function() {
+          myTooltip.tooltipVisible = false;
+        }
+      }
+      NTooltip {
+        id: myTooltip
+        targetItem: myIconButton
+        positionAbove: false
+        text: "Hello world"
       }
 
       NSlider {}
+
+
     }
   }
 }
