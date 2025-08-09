@@ -4,7 +4,6 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import qs.Widgets
 import qs.Services
-import qs.Theme
 
 PanelWindow {
   id: root

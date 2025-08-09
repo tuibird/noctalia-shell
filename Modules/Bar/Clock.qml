@@ -1,6 +1,5 @@
 import QtQuick
 import qs.Services
-import qs.Theme
 import qs.Widgets
 
 Rectangle {

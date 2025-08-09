@@ -4,7 +4,6 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Wayland
 import qs.Services
-import qs.Theme
 
 import "../Helpers/Holidays.js" as Holidays
 

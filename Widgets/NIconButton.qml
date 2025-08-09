@@ -2,7 +2,6 @@ import QtQuick
 import Quickshell
 import Quickshell.Widgets
 import qs.Services
-import qs.Theme
 
 Rectangle {
   id: root

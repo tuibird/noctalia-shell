@@ -2,7 +2,6 @@ import QtQuick
 import Quickshell
 import Quickshell.Wayland
 import qs.Services
-import qs.Theme
 
 PanelWindow {
   id: outerPanel
