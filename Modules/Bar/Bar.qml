@@ -41,6 +41,8 @@ PanelWindow {
       NIconButton {
         icon: "refresh"
       }
+
+      NSlider {}
     }
   }
 }
