@@ -21,12 +21,10 @@ NPanel {
     radius: Style.radiusMedium * scaling
     border.color: Theme.backgroundTertiary
     border.width: Math.max(1, 1.5 * scale)
-    width: 340 * scaling
-    height: 200
-    anchors.top: parent.top
-    anchors.right: parent.right
-    anchors.topMargin: 4 * scaling
-    anchors.rightMargin: 4 * scaling
+    width: 500 * scaling
+    height: 300
+    anchors.centerIn: parent
+
 
     // Prevent closing when clicking in the panel bg
     MouseArea {
@@ -38,34 +36,63 @@ NPanel {
       anchors.margins: 16 * scaling
       spacing: 12 * scaling
 
-      NToggle {
-        label: "Label"
-        description: "Description"
-        onToggled: function(value: bool) {
-          console.log("NToggle: " + value)
+
+      // NIconButton
+      RowLayout {
+        spacing: 16 * scaling
+        Text {
+          text: "NIconButton"
+          color: Theme.textPrimary
+        }
+
+        NIconButton {
+          id: myIconButton
+          icon: "refresh"
+          onEntered: function() {
+            myTooltip.show();
+          }
+          onExited: function() {
+            myTooltip.hide();
+          }
         }
       }
 
-      NIconButton {
-        id: myIconButton
-        icon: "refresh"
-        onEntered: function() {
-          myTooltip.show();
+
+      // NToggle
+      RowLayout {
+        spacing: 16 * scaling
+        uniformCellSizes: true
+        Text {
+          text: "NToggle + NTooltip"
+          color: Theme.textPrimary
         }
-        onExited: function() {
-          myTooltip.hide();
+
+        NToggle {
+          label: "Label"
+          description: "Description"
+          onToggled: function(value: bool) {
+            console.log("NToggle: " + value)
+          }
+        }
+
+        NTooltip {
+          id: myTooltip
+          target: myIconButton
+          positionAbove: false
+          text: "Hello world"
         }
       }
 
-      NTooltip {
-        id: myTooltip
-        target: myIconButton
-        positionAbove: false
-        text: "Hello world"
-      }
+      // NSlider
+      RowLayout {
+        spacing: 16 * scaling
+        Text {
+          text: "NSlider"
+          color: Theme.textPrimary
+        }
 
-      NSlider {}
-     
+        NSlider {}
+      }
 
     }
   }
