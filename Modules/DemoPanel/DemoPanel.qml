@@ -17,9 +17,9 @@ NPanel {
   readonly property real scaling: Scaling.scale(screen)
 
   Rectangle {
-    color: Theme.backgroundPrimary
+    color: Colors.backgroundPrimary
     radius: Style.radiusMedium * scaling
-    border.color: Theme.backgroundTertiary
+    border.color: Colors.backgroundTertiary
     border.width: Math.max(1, 1.5 * scale)
     width: 500 * scaling
     height: 300
@@ -42,7 +42,7 @@ NPanel {
         spacing: 16 * scaling
         Text {
           text: "NIconButton"
-          color: Theme.textPrimary
+          color: Colors.textPrimary
         }
 
         NIconButton {
@@ -64,7 +64,7 @@ NPanel {
         uniformCellSizes: true
         Text {
           text: "NToggle + NTooltip"
-          color: Theme.textPrimary
+          color: Colors.textPrimary
         }
 
         NToggle {
@@ -88,7 +88,7 @@ NPanel {
         spacing: 16 * scaling
         Text {
           text: "NSlider"
-          color: Theme.textPrimary
+          color: Colors.textPrimary
         }
 
         NSlider {}

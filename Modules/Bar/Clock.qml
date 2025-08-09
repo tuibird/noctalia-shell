@@ -14,10 +14,10 @@ Rectangle {
   Text {
     id: textItem
     text: Time.time
-    font.family: Theme.fontFamily
+    font.family: Settings.settings.fontFamily
     font.weight: Font.Bold
     font.pointSize: Style.fontMedium * scaling
-    color: Theme.textPrimary
+    color: Colors.textPrimary
     anchors.centerIn: parent
   }
 

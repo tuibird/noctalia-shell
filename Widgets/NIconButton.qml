@@ -19,7 +19,7 @@ Rectangle {
   implicitHeight: size
   radius: width * 0.5
 
-  color: root.hovering ? Theme.accentPrimary : "transparent"
+  color: root.hovering ? Colors.accentPrimary : "transparent"
 
   Text {
     id: iconText
@@ -27,7 +27,7 @@ Rectangle {
     text: root.icon
     font.family: "Material Symbols Outlined"
     font.pointSize: Style.fontExtraLarge * scaling
-    color: root.hovering ? Theme.onAccent : Theme.textPrimary
+    color: root.hovering ? Colors.onAccent : Colors.textPrimary
     horizontalAlignment: Text.AlignHCenter
     verticalAlignment: Text.AlignVCenter
     opacity: root.enabled ? 1.0 : 0.5

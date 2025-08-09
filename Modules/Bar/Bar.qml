@@ -26,7 +26,7 @@ PanelWindow {
 
     Rectangle {
       anchors.fill: parent
-      color: Theme.backgroundPrimary
+      color: Colors.backgroundPrimary
       layer.enabled: true
     }
 

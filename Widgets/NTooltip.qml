@@ -99,8 +99,8 @@ Window {
   Rectangle {
     anchors.fill: parent
     radius: Style.radiusMedium * scaling
-    color: Theme.backgroundTertiary
-    border.color: Theme.outline
+    color: Colors.backgroundTertiary
+    border.color: Colors.outline
     border.width: 1 * scaling
     opacity: 0.97
     z: 1
@@ -110,8 +110,8 @@ Window {
     id: tooltipText
     anchors.centerIn: parent
     text: root.text
-    color: Theme.textPrimary
-    font.family: Theme.fontFamily
+    color: Colors.textPrimary
+    font.family: Settings.settings.fontFamily
     font.pointSize: Style.fontMedium * scaling
     horizontalAlignment: Text.AlignHCenter
     verticalAlignment: Text.AlignVCenter

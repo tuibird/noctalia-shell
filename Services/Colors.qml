@@ -43,9 +43,6 @@ Singleton {
   property color shadow: applyOpacity(themeData.shadow, "B3")
   property color overlay: applyOpacity(themeData.overlay, "66")
 
-  // Font Properties
-  property string fontFamily: "Roboto" // Family for all text
-
   function applyOpacity(color, opacity) {
     return color.replace("#", "#" + opacity)
   }
@@ -53,7 +50,7 @@ Singleton {
   // FileView to load theme data from JSON file
   FileView {
     id: themeFile
-    path: Settings.themeFile
+    path: Settings.colorsFile
     watchChanges: true
     onFileChanged: reload()
     onAdapterUpdated: writeAdapter()

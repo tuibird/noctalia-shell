@@ -14,8 +14,8 @@ Singleton {
                                      "HOME") + "/.config") + "/" + shellName + "/"
   property string settingsFile: Quickshell.env("NOCTALIA_SETTINGS_FILE")
                                 || (settingsDir + "Settings.json")
-  property string themeFile: Quickshell.env("NOCTALIA_THEME_FILE")
-                             || (settingsDir + "Theme.json")
+  property string colorsFile: Quickshell.env("NOCTALIA_COLORS_FILE")
+                             || (settingsDir + "Colors.json")
   property var settings: settingAdapter
 
   Item {
@@ -91,7 +91,9 @@ Singleton {
       property var notificationMonitors: [] // Array of monitor names to show notifications on, "*" means all monitors
       property var monitorScaleOverrides: {
 
-      } // Map of monitor name -> scale override (e.g., 0.8..2.0). When set, Theme.scale() returns this value
+      } // Map of monitor name -> scale override (e.g., 0.8..2.0). When set, Colors.scale() returns this value
+
+      property string fontFamily: "Roboto" // Family for all text
     }
   }
 

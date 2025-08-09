@@ -9,7 +9,7 @@ PanelWindow {
   readonly property real scaling: Scaling.scale(screen)
   property bool showOverlay: Settings.settings.dimPanels
   property int topMargin: Style.barHeight * scaling
-  property color overlayColor: showOverlay ? Theme.overlay : "transparent"
+  property color overlayColor: showOverlay ? Colors.overlay : "transparent"
 
   function hide() {
     visible = false

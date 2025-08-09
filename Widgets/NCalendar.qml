@@ -13,9 +13,9 @@ NPanel {
   readonly property real scaling: Scaling.scale(screen)
 
   Rectangle {
-    color: Theme.backgroundPrimary
+    color: Colors.backgroundPrimary
     radius: Style.radiusMedium * scaling
-    border.color: Theme.backgroundTertiary
+    border.color: Colors.backgroundTertiary
     border.width: Math.max(1, 1.5 * scale)
     width: 340 * scaling
     height: 380
@@ -52,10 +52,10 @@ NPanel {
           Layout.fillWidth: true
           horizontalAlignment: Text.AlignHCenter
           text: calendar.title
-          color: Theme.textPrimary
+          color: Colors.textPrimary
           opacity: 0.7
           font.pointSize: Style.fontSmall * scaling
-          font.family: Theme.fontFamily
+          font.family: Settings.settings.fontFamily
           font.bold: true
         }
 
@@ -77,10 +77,10 @@ NPanel {
 
         delegate: Text {
           text: shortName
-          color: Theme.textPrimary
+          color: Colors.textPrimary
           opacity: 0.8
           font.pointSize: Style.fontSmall * scaling
-          font.family: Theme.fontFamily
+          font.family: Settings.settings.fontFamily
           font.bold: true
           horizontalAlignment: Text.AlignHCenter
           width: 32
@@ -136,10 +136,10 @@ NPanel {
           radius: 8
           color: {
             if (model.today)
-              return Theme.accentPrimary
+              return Colors.accentPrimary
 
             if (mouseArea2.containsMouse)
-              return Theme.backgroundTertiary
+              return Colors.backgroundTertiary
 
             return "transparent"
           }
@@ -150,7 +150,7 @@ NPanel {
             width: 4
             height: 4
             radius: 4
-            color: Theme.accentTertiary
+            color: Colors.accentTertiary
             anchors.top: parent.top
             anchors.right: parent.right
             anchors.topMargin: 4
@@ -161,10 +161,10 @@ NPanel {
           Text {
             anchors.centerIn: parent
             text: model.day
-            color: model.today ? Theme.onAccent : Theme.textPrimary
+            color: model.today ? Colors.onAccent : Colors.textPrimary
             opacity: model.month === calendar.month ? (mouseArea2.containsMouse ? 1 : 0.7) : 0.3
             font.pointSize: Style.fontSmall * scaling
-            font.family: Theme.fontFamily
+            font.family: Settings.settings.fontFamily
             font.bold: model.today ? true : false
           }
 

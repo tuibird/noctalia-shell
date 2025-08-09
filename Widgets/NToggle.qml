@@ -23,13 +23,13 @@ RowLayout {
       text: label
       font.pointSize: Style.fontMedium * scaling
       font.bold: true
-      color: Theme.textPrimary
+      color: Colors.textPrimary
     }
 
     Text {
       text: description
       font.pointSize: Style.fontSmall * scaling
-      color: Theme.textSecondary
+      color: Colors.textSecondary
       wrapMode: Text.WordWrap
       Layout.fillWidth: true
     }
@@ -41,16 +41,16 @@ RowLayout {
     width: Style.baseWidgetHeight * 1.625 * scaling
     height: Style.baseWidgetHeight * scaling
     radius: height * 0.5
-    color: value ? Theme.accentPrimary :Theme.surfaceVariant
-    border.color: value ? Theme.accentPrimary : Theme.outline
+    color: value ? Colors.accentPrimary :Colors.surfaceVariant
+    border.color: value ? Colors.accentPrimary : Colors.outline
     border.width: Math.max(1, 1.5 * scale)
 
     Rectangle {
       width: (Style.baseWidgetHeight- 4) * scaling
       height: (Style.baseWidgetHeight - 4) * scaling
       radius: height * 0.5
-      color: Theme.surface
-      border.color: hovering ? Theme.textDisabled : Theme.outline
+      color: Colors.surface
+      border.color: hovering ? Colors.textDisabled : Colors.outline
       border.width: Math.max(1, 1.5 * scale)
       y: 2 * scaling
       x: value ? switcher.width - width - 2 * scale : 2 * scaling
