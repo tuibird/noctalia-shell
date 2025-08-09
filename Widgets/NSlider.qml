@@ -5,7 +5,7 @@ import qs.Services
 import qs.Theme
 
 Slider {
-  id: slider
+  id: root
 
   readonly property real scaling: Scaling.scale(screen)
   readonly property real knobDiameter: Style.baseWidgetHeight * 0.75 * scaling
@@ -21,18 +21,18 @@ Slider {
   implicitHeight: Math.max(trackHeight, knobDiameter)
 
   background: Rectangle {
-    x: slider.leftPadding
-    y: slider.topPadding + slider.availableHeight / 2 - height / 2
+    x: root.leftPadding
+    y: root.topPadding + root.availableHeight / 2 - height / 2
     implicitWidth: Style.sliderWidth
     implicitHeight: trackHeight
-    width: slider.availableWidth
+    width: root.availableWidth
     height: implicitHeight
     radius: height / 2
     color: Theme.surfaceVariant
 
     Rectangle {
       id: activeTrack
-      width: slider.visualPosition * parent.width
+      width: root.visualPosition * parent.width
       height: parent.height
       color: Theme.accentPrimary
       radius: parent.radius
@@ -52,21 +52,20 @@ Slider {
       width: knobDiameter + cutoutExtra
       height: knobDiameter + cutoutExtra
       radius: width / 2
-      color: slider.cutoutColor !== undefined ? slider.cutoutColor : Theme.backgroundPrimary
+      color: root.cutoutColor !== undefined ? root.cutoutColor : Theme.backgroundPrimary
       x: Math.max(
            0, Math.min(
              parent.width - width,
-             slider.visualPosition * (parent.width - slider.knobDiameter) - cutoutExtra / 2))
+             root.visualPosition * (parent.width - root.knobDiameter) - cutoutExtra / 2))
       y: (parent.height - height) / 2
     }
   }
 
   handle: Item {
-    id: handleRoot
     width: knob.implicitWidth
     height: knob.implicitHeight
-    x: slider.leftPadding + slider.visualPosition * (slider.availableWidth - width)
-    y: slider.topPadding + slider.availableHeight / 2 - height / 2
+    x: root.leftPadding + root.visualPosition * (root.availableWidth - width)
+    y: root.topPadding + root.availableHeight / 2 - height / 2
 
     // Subtle shadow for a more polished look (keeps theme colors)
     MultiEffect {
@@ -85,7 +84,7 @@ Slider {
       implicitWidth: knobDiameter
       implicitHeight: knobDiameter
       radius: width * 0.5
-      color: slider.pressed ? Theme.surfaceVariant : Theme.surface
+      color: root.pressed ? Theme.surfaceVariant : Theme.surface
       border.color: Theme.accentPrimary
       border.width: Math.max(1, 2 * scaling)
       // Press feedback halo (using accent color, low opacity)
@@ -95,7 +94,7 @@ Slider {
         height: parent.height + 8 * scaling
         radius: width / 2
         color: Theme.accentPrimary
-        opacity: slider.pressed ? 0.16 : 0.0
+        opacity: root.pressed ? 0.16 : 0.0
       }
     }
   }
