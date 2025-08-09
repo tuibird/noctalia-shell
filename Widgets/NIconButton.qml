@@ -14,6 +14,7 @@ Rectangle {
   property bool hovering: false
   property var onEntered: function () {}
   property var onExited: function () {}
+  property var onClicked: function () {}
 
   implicitWidth: size
   implicitHeight: size
@@ -44,6 +45,9 @@ Rectangle {
     onExited: {
       hovering = false
       root.onExited()
+    }
+    onClicked: {
+      root.onClicked()
     }
   }
 }

@@ -61,7 +61,7 @@ PanelWindow {
 
       NSlider {}
 
-
+      Clock {}
     }
   }
 }

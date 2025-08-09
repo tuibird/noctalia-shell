@@ -47,4 +47,6 @@ Singleton {
   property int barHeight: 36
   property int baseWidgetHeight: 32
   property int sliderWidth: 200
+
+  property int tooltipDelay: 300
 }

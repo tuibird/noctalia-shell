@@ -9,7 +9,7 @@ Window {
   property bool isVisible: false
   property string text: "Placeholder"
   property Item target: null
-  property int delay: 300
+  property int delay: Style.tooltipDelay
   property bool positionAbove: false
 
   flags: Qt.ToolTip | Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint
