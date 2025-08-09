@@ -16,7 +16,7 @@ Rectangle {
     text: Time.time
     font.family: Theme.fontFamily
     font.weight: Font.Bold
-    font.pointSize: Style.fontSmall * scaling
+    font.pointSize: Style.fontMedium * scaling
     color: Theme.textPrimary
     anchors.centerIn: parent
   }
