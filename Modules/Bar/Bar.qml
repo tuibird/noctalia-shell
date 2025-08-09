@@ -1,28 +1,33 @@
 import QtQuick
 import Quickshell
+import qs.Widgets
+import qs.Theme
 
 PanelWindow {
-    id: root
+  id: root
 
-    property var modelData
+  property var modelData
 
-    screen: modelData
-    implicitHeight: 36
-    color: "transparent"
+  screen: modelData
+  implicitHeight: 36
+  color: "transparent"
 
-    anchors {
-        top: true
-        left: true
-        right: true
+  anchors {
+    top: true
+    left: true
+    right: true
+  }
+
+  Item {
+    anchors.fill: parent
+
+    Rectangle {
+      anchors.fill: parent
+      color: Theme.backgroundPrimary
+      layer.enabled: true
     }
 
-    Item {
-        anchors.fill: parent
-
-        Rectangle {
-            anchors.fill: parent
-            color: "purple"
-            layer.enabled: true
-        }
-    }
+    // Just testing
+    NoctaliaToggle {}
+  }
 }
