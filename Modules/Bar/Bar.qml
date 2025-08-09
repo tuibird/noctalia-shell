@@ -1,5 +1,7 @@
 import QtQuick
 import Quickshell
+import QtQuick.Controls
+import QtQuick.Layouts
 import qs.Widgets
 import qs.Theme
 
@@ -27,7 +29,12 @@ PanelWindow {
       layer.enabled: true
     }
 
-    // Just testing
-    NoctaliaToggle {}
+    RowLayout {
+      // Just testing
+      NoctaliaToggle {
+        label: "Label"
+        description: "Description"
+      }
+    }
   }
 }

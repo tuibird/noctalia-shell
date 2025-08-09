@@ -1,19 +1,21 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import qs.Services
 import qs.Theme
+
 
 RowLayout {
   id: root
 
   // Local scale convenience with safe fallback
   readonly property real scale: (typeof screen !== 'undefined'
-                                 && screen) ? Theme.scale(screen) : 1.0
+                                 && screen) ? Scaling.scale(screen) : 1.0
 
   property string label: ""
   property string description: ""
   property bool value: false
-  property var onToggled: function () {}
+  property var onToggled: function (value: bool) {}
 
   Layout.fillWidth: true
 
@@ -69,7 +71,8 @@ RowLayout {
       anchors.fill: parent
       cursorShape: Qt.PointingHandCursor
       onClicked: {
-        root.onToggled()
+        value = !value;
+        root.onToggled(value);
       }
     }
   }
