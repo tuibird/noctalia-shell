@@ -59,9 +59,8 @@ NLoader {
         // Place the panel just below the bar (overlay content starts below bar due to topMargin)
         y: Style.marginSmall * scaling
         // Center horizontally under the anchorX, clamped to the screen bounds
-        x: Math.max(Style.marginSmall * scaling, Math.min(
-                      parent.width - width - Style.marginSmall * scaling,
-                      Math.round(anchorX - width / 2)))
+        x: Math.max(Style.marginSmall * scaling, Math.min(parent.width - width - Style.marginSmall * scaling,
+                                                          Math.round(anchorX - width / 2)))
 
         // Prevent closing when clicking in the panel bg
         MouseArea {

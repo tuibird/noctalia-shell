@@ -6,7 +6,7 @@ import qs.Services
 import qs.Widgets
 import "../../Helpers/Duration.js" as Duration
 
-Item {
+NPill {
   id: root
 
   // Test mode
@@ -15,9 +15,7 @@ Item {
   property bool testCharging: false
 
   property var battery: UPower.displayDevice
-  property bool isReady: testMode ? true : (battery && battery.ready
-                                            && battery.isLaptopBattery
-                                            && battery.isPresent)
+  property bool isReady: testMode ? true : (battery && battery.ready && battery.isLaptopBattery && battery.isPresent)
   property real percent: testMode ? testPercent : (isReady ? (battery.percentage * 100) : 0)
   property bool charging: testMode ? testCharging : (isReady ? battery.state === UPowerDeviceState.Charging : false)
   property bool show: isReady && percent > 0
@@ -51,54 +49,44 @@ Item {
   }
 
   visible: testMode || (isReady && battery.isLaptopBattery)
-  width: pill.width
-  height: pill.height
 
-  NPill {
-    id: pill
-    icon: root.batteryIcon()
-    text: Math.round(root.percent) + "%"
-    pillColor: Colors.surfaceVariant
-    iconCircleColor: Colors.accentPrimary
-    iconTextColor: Colors.backgroundPrimary
-    textColor: charging ? Colors.accentPrimary : Colors.textPrimary
-    tooltipText: {
-      let lines = []
-      if (!root.isReady) {
-        return ""
-      }
-
-      if (root.battery.timeToEmpty > 0) {
-        lines.push("Time left: " + Time.formatVagueHumanReadableTime(
-                     root.battery.timeToEmpty))
-      }
-
-      if (root.battery.timeToFull > 0) {
-        lines.push("Time until full: " + Time.formatVagueHumanReadableTime(
-                     root.battery.timeToFull))
-      }
-
-      if (root.battery.changeRate !== undefined) {
-        const rate = root.battery.changeRate
-        if (rate > 0) {
-          lines.push(
-                root.charging ? "Charging rate: " + rate.toFixed(
-                                  2) + " W" : "Discharging rate: " + rate.toFixed(
-                                  2) + " W")
-        } else if (rate < 0) {
-          lines.push("Discharging rate: " + Math.abs(rate).toFixed(2) + " W")
-        } else {
-          lines.push("Estimating...")
-        }
-      } else {
-        lines.push(root.charging ? "Charging" : "Discharging")
-      }
-
-      if (root.battery.healthPercentage !== undefined
-          && root.battery.healthPercentage > 0) {
-        lines.push("Health: " + Math.round(root.battery.healthPercentage) + "%")
-      }
-      return lines.join("\n")
+  icon: root.batteryIcon()
+  text: Math.round(root.percent) + "%"
+  pillColor: Colors.surfaceVariant
+  iconCircleColor: Colors.accentPrimary
+  iconTextColor: Colors.backgroundPrimary
+  textColor: charging ? Colors.accentPrimary : Colors.textPrimary
+  tooltipText: {
+    let lines = []
+    if (!root.isReady) {
+      return ""
     }
+
+    if (root.battery.timeToEmpty > 0) {
+      lines.push("Time left: " + Time.formatVagueHumanReadableTime(root.battery.timeToEmpty))
+    }
+
+    if (root.battery.timeToFull > 0) {
+      lines.push("Time until full: " + Time.formatVagueHumanReadableTime(root.battery.timeToFull))
+    }
+
+    if (root.battery.changeRate !== undefined) {
+      const rate = root.battery.changeRate
+      if (rate > 0) {
+        lines.push(root.charging ? "Charging rate: " + rate.toFixed(2) + " W" : "Discharging rate: " + rate.toFixed(
+                                     2) + " W")
+      } else if (rate < 0) {
+        lines.push("Discharging rate: " + Math.abs(rate).toFixed(2) + " W")
+      } else {
+        lines.push("Estimating...")
+      }
+    } else {
+      lines.push(root.charging ? "Charging" : "Discharging")
+    }
+
+    if (root.battery.healthPercentage !== undefined && root.battery.healthPercentage > 0) {
+      lines.push("Health: " + Math.round(root.battery.healthPercentage) + "%")
+    }
+    return lines.join("\n")
   }
 }

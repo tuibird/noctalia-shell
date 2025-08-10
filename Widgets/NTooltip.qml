@@ -37,12 +37,8 @@ Window {
 
   function _showNow() {
     // Compute new size everytime we show the tooltip
-    width = Math.max(
-          50 * scaling,
-          tooltipText.implicitWidth + Style.marginLarge * 2 * scaling)
-    height = Math.max(
-          50 * scaling,
-          tooltipText.implicitHeight + Style.marginSmall * 2 * scaling)
+    width = Math.max(50 * scaling, tooltipText.implicitWidth + Style.marginLarge * 2 * scaling)
+    height = Math.max(50 * scaling, tooltipText.implicitHeight + Style.marginSmall * 2 * scaling)
 
     if (!target) {
       return

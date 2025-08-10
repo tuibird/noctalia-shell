@@ -8,9 +8,7 @@ Singleton {
   id: root
 
   property var date: new Date()
-  property string time: Settings.data.location.use12HourClock ? Qt.formatDateTime(
-                                                                  date,
-                                                                  "h:mm AP") : Qt.formatDateTime(
+  property string time: Settings.data.location.use12HourClock ? Qt.formatDateTime(date, "h:mm AP") : Qt.formatDateTime(
                                                                   date, "HH:mm")
   property string dateString: {
     let now = date
@@ -36,7 +34,8 @@ Singleton {
     }
     let month = now.toLocaleDateString(Qt.locale(), "MMMM")
     let year = now.toLocaleDateString(Qt.locale(), "yyyy")
-    return `${dayName}, ` + (Settings.data.location.reverseDayMonth ? `${month} ${day}${suffix} ${year}` : `${day}${suffix} ${month} ${year}`)
+    return `${dayName}, `
+    + (Settings.data.location.reverseDayMonth ? `${month} ${day}${suffix} ${year}` : `${day}${suffix} ${month} ${year}`)
   }
 
   Timer {

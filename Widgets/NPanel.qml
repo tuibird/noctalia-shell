@@ -20,8 +20,7 @@ PanelWindow {
   function show() {
     // Ensure only one panel is visible at a time using Settings as ephemeral store
     try {
-      if (Settings.openPanel && Settings.openPanel !== outerPanel
-          && Settings.openPanel.hide) {
+      if (Settings.openPanel && Settings.openPanel !== outerPanel && Settings.openPanel.hide) {
         Settings.openPanel.hide()
       }
       Settings.openPanel = outerPanel

@@ -26,8 +26,7 @@ Singleton {
     scanning = true
     wallpaperList = []
     folderModel.folder = ""
-    folderModel.folder = "file://" + (Settings.data.wallpaper.directory
-                                      !== undefined ? Settings.data.wallpaper.directory : "")
+    folderModel.folder = "file://" + (Settings.data.wallpaper.directory !== undefined ? Settings.data.wallpaper.directory : "")
   }
 
   function changeWallpaper(path) {
@@ -41,8 +40,7 @@ Singleton {
     }
     if (Settings.data.swww.enabled) {
       if (Settings.data.swww.transitionType === "random") {
-        transitionType = randomChoices[Math.floor(Math.random(
-                                                    ) * randomChoices.length)]
+        transitionType = randomChoices[Math.floor(Math.random() * randomChoices.length)]
       } else {
         transitionType = Settings.data.swww.transitionType
       }
@@ -107,8 +105,7 @@ Singleton {
         var files = []
         var filesSwww = []
         for (var i = 0; i < count; i++) {
-          var filepath = (Settings.data.wallpaper.folder
-                          !== undefined ? Settings.data.wallpaper.folder : "") + "/" + get(
+          var filepath = (Settings.data.wallpaper.folder !== undefined ? Settings.data.wallpaper.folder : "") + "/" + get(
             i, "fileName")
           files.push(filepath)
         }

@@ -143,9 +143,7 @@ Singleton {
       }
     } else if (isNiri) {
       try {
-        Quickshell.execDetached(
-              ["niri", "msg", "action", "focus-workspace", workspaceId.toString(
-                 )])
+        Quickshell.execDetached(["niri", "msg", "action", "focus-workspace", workspaceId.toString()])
       } catch (e) {
         console.error("Error switching Niri workspace:", e)
       }

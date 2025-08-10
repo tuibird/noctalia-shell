@@ -7,13 +7,10 @@ pragma Singleton
 Singleton {
   property string shellName: "noctalia"
   property string settingsDir: Quickshell.env("NOCTALIA_SETTINGS_DIR")
-                               || (Quickshell.env("XDG_CONFIG_HOME")
-                                   || Quickshell.env(
+                               || (Quickshell.env("XDG_CONFIG_HOME") || Quickshell.env(
                                      "HOME") + "/.config") + "/" + shellName + "/"
-  property string settingsFile: Quickshell.env("NOCTALIA_SETTINGS_FILE")
-                                || (settingsDir + "settings.json")
-  property string colorsFile: Quickshell.env("NOCTALIA_COLORS_FILE")
-                              || (settingsDir + "colors.json")
+  property string settingsFile: Quickshell.env("NOCTALIA_SETTINGS_FILE") || (settingsDir + "settings.json")
+  property string colorsFile: Quickshell.env("NOCTALIA_COLORS_FILE") || (settingsDir + "colors.json")
   property var data: settingAdapter
 
   // Needed to only have one NPanel loaded at a time.

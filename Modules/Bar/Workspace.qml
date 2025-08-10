@@ -123,8 +123,7 @@ Item {
     anchors.verticalCenter: parent.verticalCenter
     radius: Math.round(12 * s)
     color: Colors.surfaceVariant
-    border.color: Qt.rgba(Colors.textPrimary.r, Colors.textPrimary.g,
-                          Colors.textPrimary.b, 0.1)
+    border.color: Qt.rgba(Colors.textPrimary.r, Colors.textPrimary.g, Colors.textPrimary.b, 0.1)
     border.width: Math.max(1, Math.round(1 * s))
     layer.enabled: true
     layer.effect: MultiEffect {
@@ -252,10 +251,8 @@ Item {
           radius: width / 2
           color: "transparent"
           border.color: root.effectColor
-          border.width: Math.max(1, Math.round(
-                                   (2 + 6 * (1.0 - root.masterProgress)) * s))
-          opacity: root.effectsActive
-                   && model.isFocused ? (1.0 - root.masterProgress) * 0.7 : 0
+          border.width: Math.max(1, Math.round((2 + 6 * (1.0 - root.masterProgress)) * s))
+          opacity: root.effectsActive && model.isFocused ? (1.0 - root.masterProgress) * 0.7 : 0
           visible: root.effectsActive && model.isFocused
           z: 1
         }

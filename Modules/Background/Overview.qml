@@ -9,8 +9,7 @@ Variants {
 
   delegate: PanelWindow {
     required property ShellScreen modelData
-    property string wallpaperSource: Qt.resolvedUrl(
-                                       "../../Assets/Tests/wallpaper.png")
+    property string wallpaperSource: Qt.resolvedUrl("../../Assets/Tests/wallpaper.png")
 
     visible: wallpaperSource !== ""
     color: "transparent"
@@ -50,8 +49,7 @@ Variants {
 
     Rectangle {
       anchors.fill: parent
-      color: Qt.rgba(Colors.backgroundPrimary.r, Colors.backgroundPrimary.g,
-                     Colors.backgroundPrimary.b, 0.5)
+      color: Qt.rgba(Colors.backgroundPrimary.r, Colors.backgroundPrimary.g, Colors.backgroundPrimary.b, 0.5)
     }
   }
 }

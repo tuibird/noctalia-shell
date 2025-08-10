@@ -4,4 +4,4 @@
 # Can be installed from AUR "qmlfmt-git"
 # Requires qt6-5compat
 
-find . -name "*.qml" -exec qmlfmt -t 2 -i 2 -w {} \;
+find . -name "*.qml" -exec qmlfmt -e -b 120 -t 2 -i 2 -w {} \;

@@ -27,9 +27,7 @@ Item {
   readonly property int iconSize: Style.baseWidgetSize * sizeMultiplier * scaling
   readonly property int pillPaddingHorizontal: 14 * scaling
   readonly property int pillOverlap: iconSize * 0.5
-  readonly property int maxPillWidth: Math.max(
-                                        1, textItem.implicitWidth
-                                        + pillPaddingHorizontal * 2 + pillOverlap)
+  readonly property int maxPillWidth: Math.max(1, textItem.implicitWidth + pillPaddingHorizontal * 2 + pillOverlap)
 
   // TBC, do we use those ?
   signal shown

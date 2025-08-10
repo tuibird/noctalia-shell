@@ -17,8 +17,7 @@ Singleton {
 
   function updateFocusedWindowTitle() {
     if (focusedWindowIndex >= 0 && focusedWindowIndex < windows.length) {
-      focusedWindowTitle = windows[focusedWindowIndex].title
-          || "(Unnamed window)"
+      focusedWindowTitle = windows[focusedWindowIndex].title || "(Unnamed window)"
     } else {
       focusedWindowTitle = "(No active window)"
     }
@@ -113,8 +112,7 @@ Singleton {
             try {
               const focusedId = event.WindowFocusChanged.id
               if (focusedId) {
-                root.focusedWindowIndex = root.windows.findIndex(
-                  w => w.id === focusedId)
+                root.focusedWindowIndex = root.windows.findIndex(w => w.id === focusedId)
                 if (root.focusedWindowIndex < 0) {
                   root.focusedWindowIndex = 0
                 }

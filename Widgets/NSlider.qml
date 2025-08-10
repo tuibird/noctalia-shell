@@ -52,10 +52,8 @@ Slider {
       height: knobDiameter + cutoutExtra
       radius: width / 2
       color: root.cutoutColor !== undefined ? root.cutoutColor : Colors.backgroundPrimary
-      x: Math.max(
-           0, Math.min(
-             parent.width - width,
-             root.visualPosition * (parent.width - root.knobDiameter) - cutoutExtra / 2))
+      x: Math.max(0, Math.min(parent.width - width,
+                              root.visualPosition * (parent.width - root.knobDiameter) - cutoutExtra / 2))
       y: (parent.height - height) / 2
     }
   }
