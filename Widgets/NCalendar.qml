@@ -18,7 +18,7 @@ NPanel {
     border.color: Colors.backgroundTertiary
     border.width: Math.min(1, Style.borderMedium * scaling)
     width: 340 * scaling
-    height: 300
+    height: 320 // TBC
     anchors.top: parent.top
     anchors.right: parent.right
     anchors.topMargin: Style.marginTiny * scaling
@@ -64,6 +64,10 @@ NPanel {
             calendar.month = newDate.getMonth()
           }
         }
+      }
+
+      NDivider {
+        Layout.fillWidth: true
       }
 
       DayOfWeekRow {

@@ -25,7 +25,9 @@ PanelWindow {
 
   Item {
     anchors.fill: parent
+    clip: true
 
+    // Background fill
     Rectangle {
       id: bar
       anchors.fill: parent
@@ -35,9 +37,10 @@ PanelWindow {
 
     Row {
       id: leftSection
-      anchors.left: bar.left
+      height: parent.height
+      anchors.left: parent.left
       anchors.leftMargin: Style.marginMedium * scaling
-      anchors.verticalCenter: bar.verticalCenter
+      anchors.verticalCenter: parent.verticalCenter
       spacing: Style.marginMedium * scaling
 
       NText {
@@ -47,9 +50,11 @@ PanelWindow {
 
     Row {
       id: centerSection
+      height: parent.height
       anchors.horizontalCenter: parent.horizontalCenter
-      anchors.verticalCenter: bar.verticalCenter
+      anchors.verticalCenter: parent.verticalCenter
       spacing: Style.marginMedium * scaling
+
       NText {
         text: "Center"
       }
@@ -57,7 +62,7 @@ PanelWindow {
 
     Row {
       id: rightSection
-
+      height: parent.height
       anchors.right: bar.right
       anchors.rightMargin: Style.marginMedium * scaling
       anchors.verticalCenter: bar.verticalCenter
@@ -65,6 +70,7 @@ PanelWindow {
 
       NText {
         text: "Right"
+        Layout.alignment: Qt.AlignVCenter
       }
 
       Clock {}

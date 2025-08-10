@@ -55,8 +55,8 @@ Singleton {
   property int marginTiny: 4
   property int marginSmall: 8
   property int marginMedium: 12
-  property int marginLarge: 18
-  property int marginXL: 24
+  property int marginLarge: 16
+  property int marginXL: 20
 
   // Opacity
   property real opacityLight: 0.25

@@ -22,7 +22,7 @@ NPanel {
     border.color: Colors.backgroundTertiary
     border.width: Math.min(1, Style.borderMedium * scaling)
     width: 500 * scaling
-    height: 300
+    height: 400
     anchors.centerIn: parent
 
 
@@ -33,15 +33,15 @@ NPanel {
 
     ColumnLayout {
       anchors.fill: parent
-      anchors.margins: 16 * scaling
-      spacing: 12 * scaling
-
+      anchors.margins: Style.marginXL * scaling
+      spacing: Style.marginSmall * scaling
 
       // NIconButton
       ColumnLayout {
         spacing: 16 * scaling
         NText {
           text: "NIconButton"
+          color: Colors.accentSecondary
         }
 
         NIconButton {
@@ -54,15 +54,18 @@ NPanel {
             myTooltip.hide();
           }
         }
+
+        NDivider {Layout.fillWidth: true}
       }
 
 
       // NToggle
       ColumnLayout {
-        spacing: 16 * scaling
+        spacing: Style.marginLarge * scaling
         uniformCellSizes: true
         NText {
           text: "NToggle + NTooltip"
+          color: Colors.accentSecondary
         }
 
         NToggle {
@@ -79,16 +82,24 @@ NPanel {
           positionAbove: false
           text: "Hello world"
         }
+        NDivider {
+          Layout.fillWidth: true
+        }
       }
 
       // NSlider
       ColumnLayout {
         spacing: 16 * scaling
+
         NText {
           text: "NSlider"
+          color: Colors.accentSecondary
         }
 
         NSlider {}
+        NDivider {
+          Layout.fillWidth: true
+        }
       }
 
     }

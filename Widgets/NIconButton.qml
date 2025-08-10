@@ -22,7 +22,6 @@ Rectangle {
   color: root.hovering ? Colors.accentPrimary : "transparent"
 
   Text {
-    id: iconText
     anchors.centerIn: parent
     text: root.icon
     font.family: "Material Symbols Outlined"
