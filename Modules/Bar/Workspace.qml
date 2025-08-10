@@ -12,19 +12,18 @@ Item {
   property bool isDestroying: false
   property bool hovered: false
 
-  readonly property real scaling: Scaling.scale(screen)
-
-  signal workspaceChanged(int workspaceId, color accentColor)
+  // Unified scale
+  readonly property real s: Scaling.scale(screen)
 
   property ListModel localWorkspaces: ListModel {}
   property real masterProgress: 0.0
   property bool effectsActive: false
   property color effectColor: Colors.accentPrimary
 
-  // Unified scale
-  property real s: scale
   property int horizontalPadding: Math.round(16 * s)
   property int spacingBetweenPills: Math.round(8 * s)
+
+  signal workspaceChanged(int workspaceId, color accentColor)
 
   width: {
     let total = 0
