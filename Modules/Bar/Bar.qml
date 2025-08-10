@@ -76,6 +76,10 @@ Variants {
                 anchors.verticalCenter: bar.verticalCenter
                 spacing: Style.marginSmall * scaling
 
+                Battery {
+                  anchors.verticalCenter: parent.verticalCenter
+                }
+
                 Clock {
                     anchors.verticalCenter: parent.verticalCenter
                 }

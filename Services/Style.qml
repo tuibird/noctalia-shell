@@ -44,12 +44,15 @@ Singleton {
   property int animationNormal: 300
   property int animationSlow: 500
 
+  // Dimensions
   property int barHeight: 36
   property int baseWidgetSize: 32
   property int sliderWidth: 200
 
-  // Delay
+  // Delays
   property int tooltipDelay: 300
+  property int tooltipDelayLong: 1500
+  property int pillDelay: 500
 
   // Margins and spacing
   property int marginTiny: 4
