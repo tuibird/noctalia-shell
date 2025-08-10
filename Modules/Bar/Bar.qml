@@ -85,7 +85,7 @@ PanelWindow {
         icon: "widgets"
         anchors.verticalCenter: parent.verticalCenter
         onClicked: function () {
-          sidePanel.isLoaded = !demoPanel.isLoaded
+          sidePanel.isLoaded = !sidePanel.isLoaded
         }
       }
     }

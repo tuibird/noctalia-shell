@@ -26,6 +26,8 @@ ShellRoot {
   Background {}
   Overview {}
 
+  Corner{}
+
   DemoPanel {
     id: demoPanel
   }
