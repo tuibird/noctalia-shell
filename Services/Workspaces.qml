@@ -17,7 +17,7 @@ Singleton {
   property var hlWorkspaces: Hyprland.workspaces.values
   // Detect which compositor we're using
   Component.onCompleted: {
-    console.log("WorkspaceManager initializing...")
+    console.log("Workspace initializing...")
     detectCompositor()
   }
 

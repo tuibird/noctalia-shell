@@ -45,6 +45,7 @@ PanelWindow {
 
       NText {
         text: "Left"
+        anchors.verticalCenter: parent.verticalCenter
       }
     }
 
@@ -55,9 +56,8 @@ PanelWindow {
       anchors.verticalCenter: parent.verticalCenter
       spacing: Style.marginMedium * scaling
 
-      NText {
-        text: "Center"
-      }
+      Workspace {}
+
     }
 
     Row {
@@ -70,10 +70,12 @@ PanelWindow {
 
       NText {
         text: "Right"
-        Layout.alignment: Qt.AlignVCenter
+        anchors.verticalCenter: parent.verticalCenter
       }
 
-      Clock {}
+      Clock {
+        anchors.verticalCenter: parent.verticalCenter
+      }
 
       NIconButton {
         id: demoPanelToggler

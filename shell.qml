@@ -1,16 +1,13 @@
+// Disable reload popup
+//@ pragma Env QS_NO_RELOAD_POPUP=1
 
-
-/*
-    Here we go, this is it. Rebuild time...
-    No spaghetti code, preset sizing, proper project structure
-    only "spawn" UI, do not do anything else here.
-*/
 import QtQuick
 import Quickshell
 import Quickshell.Io
 import Quickshell.Widgets
 import qs.Modules.Bar
 import qs.Modules.DemoPanel
+import qs.Modules.Background
 
 ShellRoot {
   id: root
@@ -18,8 +15,16 @@ ShellRoot {
   Variants {
     model: Quickshell.screens
 
-    delegate: Bar {
-      modelData: item
+    delegate: Item {
+      required property ShellScreen modelData
+      
+      Bar {
+        modelData: parent.modelData
+      }
+
+     // Background {}
+
+     // Overview {}
     }
   }
 
