@@ -59,7 +59,7 @@ NPill {
     let lines = []
 
     if (testMode) {
-      lines.push("Time left: " + Time.formatVagueHumanReadableDuration(1234567))
+      lines.push("Time left: " + Time.formatVagueHumanReadableDuration(12345))
       return lines.join("\n");
     }
 
