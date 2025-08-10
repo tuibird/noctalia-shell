@@ -1,19 +1,22 @@
 import QtQuick
 
+// Example usage:
+// NLoader {
+//   content: Component {
+//     NPanel {
+
 Loader {
   id: loader
 
   // Boolean control to load/unload the item
   property bool isLoaded: false
 
-  // Provide the component to load.
-  // Example usage:
-  // content: Component { NPanel { /* ... */ } }
-  property Component panel
+  // Provide the component to be loaded.
+  property Component content
 
   active: isLoaded
   asynchronous: true
-  sourceComponent: panel
+  sourceComponent: content
 
   onActiveChanged: {
     if (active && item && item.show)

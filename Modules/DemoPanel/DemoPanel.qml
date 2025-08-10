@@ -13,7 +13,7 @@ import qs.Widgets
 NLoader {
   id: root
 
-  panel: Component {
+  content: Component {
     NPanel {
       id: demoPanel
 

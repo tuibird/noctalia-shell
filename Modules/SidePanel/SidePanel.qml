@@ -29,7 +29,7 @@ NLoader {
     }
   }
 
-  panel: Component {
+  content: Component {
     NPanel {
       id: sidePanel
 

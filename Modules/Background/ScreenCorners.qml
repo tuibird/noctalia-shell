@@ -8,7 +8,7 @@ import qs.Widgets
 NLoader {
   isLoaded: Settings.data.general.showScreenCorners
 
-  panel: Variants {
+  content: Variants {
     model: Quickshell.screens
 
     PanelWindow {
