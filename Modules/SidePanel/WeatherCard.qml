@@ -46,9 +46,9 @@ NBox {
       color: Colors.backgroundTertiary
     }
 
-      RowLayout {
-        Layout.fillWidth: true
-        spacing: Style.marginMedium * scaling
+    RowLayout {
+      Layout.fillWidth: true
+      spacing: Style.marginMedium * scaling
       Repeater {
         model: 5
         delegate: ColumnLayout {
