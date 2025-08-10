@@ -39,9 +39,9 @@ PanelWindow {
       id: leftSection
       height: parent.height
       anchors.left: parent.left
-      anchors.leftMargin: Style.marginMedium * scaling
+      anchors.leftMargin: Style.marginSmall * scaling
       anchors.verticalCenter: parent.verticalCenter
-      spacing: Style.marginMedium * scaling
+      spacing: Style.marginSmall * scaling
 
       NText {
         text: screen.name
@@ -54,7 +54,7 @@ PanelWindow {
       height: parent.height
       anchors.horizontalCenter: parent.horizontalCenter
       anchors.verticalCenter: parent.verticalCenter
-      spacing: Style.marginMedium * scaling
+      spacing: Style.marginSmall * scaling
 
       Workspace {}
     }
@@ -63,9 +63,9 @@ PanelWindow {
       id: rightSection
       height: parent.height
       anchors.right: bar.right
-      anchors.rightMargin: Style.marginMedium * scaling
+      anchors.rightMargin: Style.marginSmall * scaling
       anchors.verticalCenter: bar.verticalCenter
-      spacing: Style.marginMedium * scaling
+      spacing: Style.marginSmall * scaling
 
       NText {
         text: "Right"
@@ -77,10 +77,22 @@ PanelWindow {
       }
 
       NIconButton {
-        id: demoPanelToggler
+        id: demoPanelToggle
         icon: "experiment"
+        fontPointSize: Style.fontSizeMedium
+        anchors.verticalCenter: parent.verticalCenter
         onClicked: function () {
           demoPanel.isLoaded = !demoPanel.isLoaded
+        }
+      }
+
+      NIconButton {
+        id: sidePanelToggle
+        icon: "widgets"
+        fontPointSize: Style.fontSizeMedium
+        anchors.verticalCenter: parent.verticalCenter
+        onClicked: function () {
+          sidePanel.isLoaded = !demoPanel.isLoaded
         }
       }
     }
