@@ -7,13 +7,16 @@ Rectangle {
   id: root
 
   readonly property real scaling: Scaling.scale(screen)
-  property real size: Style.baseWidgetSize * scaling
+  // Multiplier to control how large the button container is relative to Style.baseWidgetSize
+  property real sizeMultiplier: 0.8
+  property real size: Style.baseWidgetSize * sizeMultiplier * scaling
   property string icon
   property bool enabled: true
   property bool hovering: false
   property var onEntered: function () {}
   property var onExited: function () {}
   property var onClicked: function () {}
+  property real fontPointSize: Style.fontSizeXL
 
   implicitWidth: size
   implicitHeight: size
@@ -23,9 +26,11 @@ Rectangle {
 
   Text {
     anchors.centerIn: parent
+    anchors.horizontalCenterOffset: 0
+    anchors.verticalCenterOffset: 0
     text: root.icon
     font.family: "Material Symbols Outlined"
-    font.pointSize: Style.fontSizeXL * scaling
+    font.pointSize: root.fontPointSize * scaling
     color: root.hovering ? Colors.onAccent : Colors.textPrimary
     horizontalAlignment: Text.AlignHCenter
     verticalAlignment: Text.AlignVCenter
