@@ -9,7 +9,7 @@ function getCountryCode(callback) {
         return;
     }
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "https://nominatim.openstreetmap.org/search?city="+ Settings.settings.weatherCity+"&country=&format=json&addressdetails=1&extratags=1", true);
+    xhr.open("GET", "https://nominatim.openstreetmap.org/search?city="+ Settings.data.location.name+"&country=&format=json&addressdetails=1&extratags=1", true);
     xhr.onreadystatechange = function() {
         if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
             var response = JSON.parse(xhr.responseText);

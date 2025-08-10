@@ -17,17 +17,17 @@ Singleton {
   }
 
   property var wallpaperList: []
-  property string currentWallpaper: Settings.settings.currentWallpaper
+  property string currentWallpaper: Settings.data.wallpaper.current
   property bool scanning: false
-  property string transitionType: Settings.settings.transitionType
+  property string transitionType: Settings.data.wallpaper.swww.transitionType
   property var randomChoices: ["fade", "left", "right", "top", "bottom", "wipe", "wave", "grow", "center", "any", "outer"]
 
   function loadWallpapers() {
     scanning = true
     wallpaperList = []
     folderModel.folder = ""
-    folderModel.folder = "file://" + (Settings.settings.wallpaperFolder
-                                      !== undefined ? Settings.settings.wallpaperFolder : "")
+    folderModel.folder = "file://" + (Settings.data.wallpaper.directory
+                                      !== undefined ? Settings.data.wallpaper.directory : "")
   }
 
   function changeWallpaper(path) {
@@ -37,14 +37,14 @@ Singleton {
   function setCurrentWallpaper(path, isInitial) {
     currentWallpaper = path
     if (!isInitial) {
-      Settings.settings.currentWallpaper = path
+      Settings.data.wallpaper.current = path
     }
-    if (Settings.settings.useSWWW) {
-      if (Settings.settings.transitionType === "random") {
+    if (Settings.data.swww.enabled) {
+      if (Settings.data.swww.transitionType === "random") {
         transitionType = randomChoices[Math.floor(Math.random(
                                                     ) * randomChoices.length)]
       } else {
-        transitionType = Settings.settings.transitionType
+        transitionType = Settings.data.swww.transitionType
       }
       changeWallpaperProcess.running = true
     }
@@ -66,31 +66,31 @@ Singleton {
   }
 
   function toggleRandomWallpaper() {
-    if (Settings.settings.randomWallpaper && !randomWallpaperTimer.running) {
+    if (Settings.data.wallpaper.isRandom && !randomWallpaperTimer.running) {
       randomWallpaperTimer.start()
       setRandomWallpaper()
-    } else if (!Settings.settings.randomWallpaper
+    } else if (!Settings.data.randomWallpaper
                && randomWallpaperTimer.running) {
       randomWallpaperTimer.stop()
     }
   }
 
   function restartRandomWallpaperTimer() {
-    if (Settings.settings.randomWallpaper) {
+    if (Settings.data.wallpaper.isRandom) {
       randomWallpaperTimer.stop()
       randomWallpaperTimer.start()
     }
   }
 
   function generateTheme() {
-    if (Settings.settings.useWallpaperTheme) {
+    if (Settings.data.wallpaper.generateTheme) {
       generateThemeProcess.running = true
     }
   }
 
   Timer {
     id: randomWallpaperTimer
-    interval: Settings.settings.wallpaperInterval * 1000
+    interval: Settings.data.wallpaper.randomInterval * 1000
     running: false
     repeat: true
     onTriggered: setRandomWallpaper()
@@ -108,8 +108,8 @@ Singleton {
         var files = []
         var filesSwww = []
         for (var i = 0; i < count; i++) {
-          var filepath = (Settings.settings.wallpaperFolder
-                          !== undefined ? Settings.settings.wallpaperFolder : "") + "/" + get(
+          var filepath = (Settings.data.wallpaper.folder
+                          !== undefined ? Settings.data.wallpaper.folder : "") + "/" + get(
             i, "fileName")
           files.push(filepath)
         }
@@ -121,8 +121,8 @@ Singleton {
 
   Process {
     id: changeWallpaperProcess
-    command: ["swww", "img", "--resize", Settings.settings.wallpaperResize, "--transition-fps", Settings.settings.transitionFps.toString(
-        ), "--transition-type", transitionType, "--transition-duration", Settings.settings.transitionDuration.toString(
+    command: ["swww", "img", "--resize", Settings.data.wallpaper.swww.resizeMethod, "--transition-fps", Settings.data.wallpaper.swww.transitionFps.toString(
+        ), "--transition-type", transitionType, "--transition-duration", Settings.data.wallpaper.transitionDuration.toString(
         ), currentWallpaper]
     running: false
   }

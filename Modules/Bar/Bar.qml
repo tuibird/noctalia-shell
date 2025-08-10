@@ -14,8 +14,8 @@ PanelWindow {
   screen: modelData
   implicitHeight: Style.barHeight * scaling
   color: "transparent"
-  visible: Settings.settings.barMonitors.includes(modelData.name)
-           || (Settings.settings.barMonitors.length === 0)
+  visible: Settings.data.bar.monitors.includes(modelData.name)
+           || (Settings.data.bar.monitors.length === 0)
 
   anchors {
     top: true

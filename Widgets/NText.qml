@@ -7,7 +7,7 @@ Text {
 
   readonly property real scaling: Scaling.scale(screen)
 
-  font.family: Settings.settings.fontFamily
+  font.family: Settings.data.ui.fontFamily
   font.pointSize: Style.fontSizeMedium * scaling
   font.weight: Font.Bold
   color: Colors.textPrimary

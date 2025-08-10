@@ -111,12 +111,10 @@ Window {
     z: 1
   }
 
-  Text {
+  NText {
     id: tooltipText
     anchors.centerIn: parent
     text: root.text
-    color: Colors.textPrimary
-    font.family: Settings.settings.fontFamily
     font.pointSize: Style.fontSizeMedium * scaling
     horizontalAlignment: Text.AlignHCenter
     verticalAlignment: Text.AlignVCenter

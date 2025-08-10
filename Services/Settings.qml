@@ -1,22 +1,20 @@
-pragma Singleton
-
 import QtQuick
 import Quickshell
 import Quickshell.Io
 import qs.Services
+pragma Singleton
 
 Singleton {
-
-  property string shellName: "Noctalia"
+  property string shellName: "noctalia"
   property string settingsDir: Quickshell.env("NOCTALIA_SETTINGS_DIR")
                                || (Quickshell.env("XDG_CONFIG_HOME")
                                    || Quickshell.env(
                                      "HOME") + "/.config") + "/" + shellName + "/"
   property string settingsFile: Quickshell.env("NOCTALIA_SETTINGS_FILE")
-                                || (settingsDir + "Settings.json")
+                                || (settingsDir + "settings.json")
   property string colorsFile: Quickshell.env("NOCTALIA_COLORS_FILE")
-                              || (settingsDir + "Colors.json")
-  property var settings: settingAdapter
+                              || (settingsDir + "colors.json")
+  property var data: settingAdapter
 
   Item {
     Component.onCompleted: {
@@ -26,7 +24,14 @@ Singleton {
   }
 
   FileView {
+
+    // TBC ? needed for SWWW only ?
+    // Qt.callLater(function () {
+    //     WallpaperManager.setCurrentWallpaper(settings.currentWallpaper, true);
+    // })
+
     id: settingFileView
+
     path: settingsFile
     watchChanges: true
     onFileChanged: reload()
@@ -34,80 +39,127 @@ Singleton {
     Component.onCompleted: function () {
       reload()
     }
-    onLoaded: function () {// Qt.callLater(function () {
-      //     WallpaperManager.setCurrentWallpaper(settings.currentWallpaper, true);
-      // })
-    }
+    onLoaded: function () {}
     onLoadFailed: function (error) {
-      if (error.toString().includes("No such file") || error === 2) {
+      if (error.toString().includes("No such file") || error === 2)
         // File doesn't exist, create it with default values
         writeAdapter()
-      }
     }
+
     JsonAdapter {
       id: settingAdapter
-      property string weatherCity: "Dinslaken"
-      property string profileImage: Quickshell.env("HOME") + "/.face"
-      property bool useFahrenheit: false
-      property string wallpaperFolder: "/usr/share/wallpapers"
-      property string currentWallpaper: ""
-      property string videoPath: "~/Videos/"
-      property bool showActiveWindow: true
-      property bool showActiveWindowIcon: false
-      property bool showSystemInfoInBar: false
-      property bool showCorners: false
-      property bool showTaskbar: true
-      property bool showMediaInBar: false
-      property bool useSWWW: false
-      property bool randomWallpaper: false
-      property bool useWallpaperTheme: false
-      property int wallpaperInterval: 300
-      property string wallpaperResize: "crop"
-      property int transitionFps: 60
-      property string transitionType: "random"
-      property real transitionDuration: 1.1
-      property string visualizerType: "radial"
-      property bool reverseDayMonth: false
-      property bool use12HourClock: false
-      property bool dimPanels: true
-      property real fontSizeMultiplier: 1.0 // Font size multiplier (1.0 = normal, 1.2 = 20% larger, 0.8 = 20% smaller)
-      property int taskbarIconSize: 24 // Taskbar icon button size in pixels (default: 32, smaller: 24, larger: 40)
-      property var pinnedExecs: [] // Added for AppLauncher pinned apps
 
-      property bool showDock: true
-      property bool dockExclusive: false
-      property bool wifiEnabled: false
-      property bool bluetoothEnabled: false
-      property int recordingFrameRate: 60
-      property string recordingQuality: "very_high"
-      property string recordingCodec: "h264"
-      property string audioCodec: "opus"
-      property bool showCursor: true
-      property string colorRange: "limited"
+      // bar
+      property JsonObject bar
 
-      // Monitor/Display Settings
-      property var barMonitors: [] // Array of monitor names to show the bar on
-      property var dockMonitors: [] // Array of monitor names to show the dock on
-      property var notificationMonitors: [] // Array of monitor names to show notifications on, "*" means all monitors
-      property var monitorScaleOverrides: {
+      bar: JsonObject {
+        property bool showActiveWindow: true
+        property bool showActiveWindowIcon: false
+        property bool showSystemInfo: false
+        property bool showMedia: false
+        property list<string> monitors: []
+      }
 
-      } // Map of monitor name -> scale override (e.g., 0.8..2.0). When set, Colors.scale() returns this value
+      // general
+      property JsonObject general
 
-      property string fontFamily: "Roboto" // Family for all text
+      general: JsonObject {
+        property string avatarImage: Quickshell.env("HOME") + "/.face"
+        property bool dimDesktop: true
+        property bool showScreenCorners: false
+      }
+
+      // location
+      property JsonObject location
+
+      location: JsonObject {
+        property bool name: true
+        property bool useFahrenheit: false
+        property bool reverseDayMonth: false
+        property bool use12HourClock: false
+      }
+
+      // screen recorder
+      property JsonObject screenRecorder
+
+      screenRecorder: JsonObject {
+        property string directory: "~/Videos"
+        property int frameRate: 60
+        property string audioCodec: "opus"
+        property string videoCodec: "h264"
+        property string quality: "very_high"
+        property string colorRange: "limited"
+        property bool showCursor: true
+      }
+
+      // wallpaper
+      property JsonObject wallpaper
+
+      wallpaper: JsonObject {
+        property string directory: "/usr/share/wallpapers"
+        property string current: ""
+        property bool isRandom: false
+        property int randomInterval: 300
+        property bool generateTheme: false
+        property JsonObject swww
+
+        onDirectoryChanged: WallpaperManager.loadWallpapers()
+        onIsRandomChanged: WallpaperManager.toggleRandomWallpaper()
+        onRandomIntervalChanged: WallpaperManager.restartRandomWallpaperTimer()
+
+        swww: JsonObject {
+          property bool enabled: false
+          property string resizeMethod: "crop"
+          property int transitionFps: 60
+          property string transitionType: "random"
+          property real transitionDuration: 1.1
+        }
+      }
+
+      // applauncher
+      property JsonObject appLauncher
+
+      appLauncher: JsonObject {
+        property list<string> pinnedExecs: []
+      }
+
+      // dock
+      property JsonObject dock
+
+      dock: JsonObject {
+        property bool exclusive: false
+        property list<string> monitors: []
+      }
+
+      // network
+      property JsonObject network
+
+      network: JsonObject {
+        property bool wifiEnabled: true
+        property bool bluetoothEnabled: true
+      }
+
+      // notifications
+      property JsonObject notifications
+
+      notifications: JsonObject {
+        property list<string> monitors: []
+      }
+
+      // audioVisualizer
+      property JsonObject audioVisualizer
+
+      audioVisualizer: JsonObject {
+        property string type: "radial"
+      }
+
+      // ui
+      property JsonObject ui
+
+      ui: JsonObject {
+        property string fontFamily: "Roboto" // Family for all text
+        property list<string> monitorsScale: []
+      }
     }
-  }
-
-  Connections {
-    target: settingAdapter
-    function onRandomWallpaperChanged() {
-      WallpaperManager.toggleRandomWallpaper()
-    }
-    function onWallpaperIntervalChanged() {
-      WallpaperManager.restartRandomWallpaperTimer()
-    }
-    function onWallpaperFolderChanged() {
-      WallpaperManager.loadWallpapers()
-    }
-    function onNotificationMonitorsChanged() {}
   }
 }

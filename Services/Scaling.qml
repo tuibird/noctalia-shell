@@ -15,7 +15,7 @@ Singleton {
 
       // // 1) Per-monitor override wins
       // try {
-      //     const overrides = Settings.settings.monitorScaleOverrides || {};
+      //     const overrides = Settings.data.ui.monitorsScale || {};
       //     if (currentScreen && currentScreen.name && overrides[currentScreen.name] !== undefined) {
       //         const overrideValue = overrides[currentScreen.name]
       //         if (isFinite(overrideValue)) return overrideValue
