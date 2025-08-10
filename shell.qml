@@ -6,6 +6,7 @@ import Quickshell.Io
 import Quickshell.Widgets
 import Quickshell.Services.Pipewire
 import qs.Widgets
+import qs.Modules.Audio
 import qs.Modules.Bar
 import qs.Modules.DemoPanel
 import qs.Modules.Background
@@ -31,5 +32,9 @@ ShellRoot {
 
   Notification {
     id: notification
+  }
+
+  AudioDeviceSelector {
+    id: audioDeviceSelector
   }
 }

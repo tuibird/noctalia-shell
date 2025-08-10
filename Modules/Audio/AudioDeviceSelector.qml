@@ -119,9 +119,7 @@ NLoader {
       }
     }
   }
-}
-// NPanel {
-//   id: ioSelector
+} // NPanel {//   id: ioSelector
 
 // property int tabIndex: 0
 // property Item anchorItem: null

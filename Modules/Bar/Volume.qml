@@ -2,7 +2,6 @@ import QtQuick
 import Quickshell
 import Quickshell.Services.Pipewire
 import qs.Services
-import qs.Modules.Audio
 import qs.Widgets
 
 Item {
@@ -72,11 +71,7 @@ Item {
       }
     }
     onClicked: function () {
-      ioSelector.isLoaded = !ioSelector.isLoaded
+      audioDeviceSelector.isLoaded = !audioDeviceSelector.isLoaded
     }
-  }
-
-  AudioDeviceSelector {
-    id: ioSelector
   }
 }

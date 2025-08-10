@@ -18,13 +18,15 @@ Loader {
   sourceComponent: content
 
   onActiveChanged: {
-    if (active && item && item.show)
+    if (active && item && item.show) {
       item.show()
+    }
   }
 
   onItemChanged: {
-    if (active && item && item.show)
+    if (active && item && item.show) {
       item.show()
+    }
   }
 
   Connections {
