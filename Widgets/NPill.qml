@@ -18,6 +18,10 @@ Item {
   property real sizeMultiplier: 0.8
   property bool autoHide: false
 
+  property var onEntered: function () {}
+  property var onExited: function () {}
+  property var onClicked: function () {}
+
   // Internal state
   property bool showPill: false
   property bool shouldAnimateHide: false
@@ -190,10 +194,15 @@ Item {
     onEntered: {
       showDelayed()
       tooltip.show()
+      root.onEntered()
     }
     onExited: {
       hide()
       tooltip.hide()
+      root.onExited()
+    }
+    onClicked: {
+      root.onClicked()
     }
   }
 

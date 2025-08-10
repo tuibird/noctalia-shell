@@ -64,10 +64,10 @@ Rectangle {
       root.onExited()
     }
     onClicked: {
-      root.onClicked()
       if (tooltipText) {
         tooltip.hide()
       }
+      root.onClicked()
     }
   }
 }

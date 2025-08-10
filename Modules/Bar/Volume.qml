@@ -6,125 +6,99 @@ import qs.Widgets
 
 Item {
   id: volumeDisplay
-  property var shell
-  property int volume: 0
-  property bool firstChange: true
 
   width: pillIndicator.width
   height: pillIndicator.height
 
-  function getVolumeColor() {
-    if (volume <= 100)
-      return Colors.accentPrimary
-    // Calculate interpolation factor (0 at 100%, 1 at 200%)
-    var factor = (volume - 100) / 100
-    // Blend between accent and warning colors
-    return Qt.rgba(Colors.accentPrimary.r + (Colors.warning.r - Colors.accentPrimary.r) * factor,
-                   Colors.accentPrimary.g + (Colors.warning.g - Colors.accentPrimary.g) * factor,
-                   Colors.accentPrimary.b + (Colors.warning.b - Colors.accentPrimary.b) * factor, 1)
+  function getIcon() {
+    if (PipeWireAudio.muted) {
+      return "volume_off"
+    }
+    return PipeWireAudio.volume === 0 ? "volume_off" : (PipeWireAudio.volume < 0.33 ? "volume_down" : "volume_up")
   }
 
   function getIconColor() {
-    if (volume <= 100)
+    if (PipeWireAudio.volume <= 1.0) {
       return Colors.textPrimary
-    return getVolumeColor() // Only use warning blend when >100%
+    }
+
+    // Indicate that the volume is over 100%
+    // Calculate interpolation factor (0 at 100%, 1.0 at 200%)
+    let factor = (PipeWireAudio.volume - 1)
+
+    // Blend between accent and warning colors
+    return Qt.rgba(Colors.textPrimary.r + (Colors.warning.r - Colors.textPrimary.r) * factor,
+                   Colors.textPrimary.g + (Colors.warning.g - Colors.textPrimary.g) * factor,
+                   Colors.textPrimary.b + (Colors.warning.b - Colors.textPrimary.b) * factor, 1)
   }
 
   NPill {
     id: pillIndicator
-    icon: shell && shell.defaultAudioSink && shell.defaultAudioSink.audio
-          && shell.defaultAudioSink.audio.muted ? "volume_off" : (volume === 0 ? "volume_off" : (volume < 30 ? "volume_down" : "volume_up"))
-    text: volume + "%"
+    icon: getIcon()
+    text: Math.round(PipeWireAudio.volume * 100) + "%"
+    tooltipText: "Volume: " + Math.round(
+                   PipeWireAudio.volume * 100) + "%\nLeft click for advanced settings.\nScroll up/down to change volume."
+    onClicked: function () {
+      console.log("onClicked")
+      //if (ioSelector.visible) {
+      //             ioSelector.dismiss();
+      //         } else {
+      //             ioSelector.show();
+      //         }
+    }
 
-    pillColor: Colors.surfaceVariant
-    iconCircleColor: getVolumeColor()
-    iconTextColor: Colors.backgroundPrimary
-    textColor: Colors.textPrimary
-    collapsedIconColor: getIconColor()
-    autoHide: true
-
-    // StyledTooltip {
-    //     id: volumeTooltip
-    //     text: "Volume: " + volume + "%\nLeft click for advanced settings.\nScroll up/down to change volume."
-    //     positionAbove: false
-    //     tooltipVisible: !ioSelector.visible && volumeDisplay.containsMouse
-    //     targetItem: pillIndicator
-    //     delay: 1500
-    // }
-
-    // MouseArea {
-    //     anchors.fill: parent
-    //     hoverEnabled: true
-    //     cursorShape: Qt.PointingHandCursor
-    //     onClicked: {
-    //         if (ioSelector.visible) {
-    //             ioSelector.dismiss();
-    //         } else {
-    //             ioSelector.show();
-    //         }
-    //     }
-    // }
+    // pillColor: Colors.surfaceVariant
+    // iconCircleColor: Colors.// getVolumeColor()
+    // iconTextColor: Colors.backgroundPrimary
+    // textColor: Colors.textPrimary
+    // collapsedIconColor: getIconColor()
+    // autoHide: true
   }
 
-  Connections {
-    target: shell ?? null
-    function onVolumeChanged() {
-      if (shell) {
-        const clampedVolume = Math.max(0, Math.min(200, shell.volume))
-        if (clampedVolume !== volume) {
-          volume = clampedVolume
-          pillIndicator.text = volume + "%"
-          pillIndicator.icon = shell.defaultAudioSink && shell.defaultAudioSink.audio
-              && shell.defaultAudioSink.audio.muted ? "volume_off" : (volume === 0 ? "volume_off" : (volume
-                                                                                                     < 30 ? "volume_down" : "volume_up"))
-
-          if (firstChange) {
-            firstChange = false
-          } else {
-            pillIndicator.show()
-          }
-        }
-      }
-    }
+  AudioDeviceSelector {
+    id: ioSelector
+    //     onPanelClosed: ioSelector.dismiss()
   }
 
-  Component.onCompleted: {
-    if (shell && shell.volume !== undefined) {
-      volume = Math.max(0, Math.min(200, shell.volume))
-    }
-  }
+  //     Connections {
+  //       target: PipeWireAudio
+  //     function onVolumeChanged() {
+  //       console.log("onVolumeChanged")
+  //     }
 
-  MouseArea {
-    anchors.fill: parent
-    hoverEnabled: true
-    acceptedButtons: Qt.NoButton
-    propagateComposedEvents: true
-    onEntered: {
-      volumeDisplay.containsMouse = true
-      pillIndicator.autoHide = false
-      pillIndicator.showDelayed()
-    }
-    onExited: {
-      volumeDisplay.containsMouse = false
-      pillIndicator.autoHide = true
-      pillIndicator.hide()
-    }
-    cursorShape: Qt.PointingHandCursor
-    onWheel: wheel => {
-               if (!shell)
-               return
-               let step = 5
-               if (wheel.angleDelta.y > 0) {
-                 shell.updateVolume(Math.min(200, shell.volume + step))
-               } else if (wheel.angleDelta.y < 0) {
-                 shell.updateVolume(Math.max(0, shell.volume - step))
-               }
-             }
-  }
+  //     function onSinkChanged() {
+  // console.log("onSinkChanged")
+  //     }
 
-  // AudioDeviceSelector {
-  //     id: ioSelector
-  //     onPanelClosed: ioSelector.dismiss()
+  //   }
+
+  // MouseArea {
+  //   anchors.fill: parent
+  //   hoverEnabled: true
+  //   acceptedButtons: Qt.NoButton
+  //   propagateComposedEvents: true
+  //   onEntered: {
+  //     volumeDisplay.containsMouse = true
+  //     pillIndicator.autoHide = false
+  //     pillIndicator.showDelayed()
+  //   }
+  //   onExited: {
+  //     volumeDisplay.containsMouse = false
+  //     pillIndicator.autoHide = true
+  //     pillIndicator.hide()
+  //   }
+  //   cursorShape: Qt.PointingHandCursor
+  //   onWheel: wheel => {
+  //              if (!shell)
+  //              return
+  //              let step = 5
+  //              if (wheel.angleDelta.y > 0) {
+  //                shell.updateVolume(Math.min(200, shell.volume + step))
+  //              } else if (wheel.angleDelta.y < 0) {
+  //                shell.updateVolume(Math.max(0, shell.volume - step))
+  //              }
+  //            }
   // }
-  property bool containsMouse: false
+
+  // property bool containsMouse: false
 }

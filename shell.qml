@@ -4,6 +4,7 @@ import QtQuick
 import Quickshell
 import Quickshell.Io
 import Quickshell.Widgets
+import Quickshell.Services.Pipewire
 import qs.Widgets
 import qs.Modules.Bar
 import qs.Modules.DemoPanel
@@ -13,7 +14,7 @@ import qs.Modules.Notification
 import qs.Services
 
 ShellRoot {
-  id: root
+  id: shellRoot
 
   Background {}
   Overview {}
