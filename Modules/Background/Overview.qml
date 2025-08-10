@@ -5,7 +5,7 @@ import Quickshell.Wayland
 import qs.Services
 
 ShellRoot {
-    property string wallpaperSource: "/home/lysec/Pictures/wallpapers/wallhaven-6lqvql.jpg"
+    property string wallpaperSource: Qt.resolvedUrl("../../Assets/Tests/wallpaper.png")
     property var modelData
 
     Variants {
