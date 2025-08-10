@@ -79,9 +79,7 @@ PanelWindow {
       NIconButton {
         id: demoPanelToggler
         icon: "experiment"
-        onClicked: function () {
-          demoPanel.visible ? demoPanel.hide() : demoPanel.show()
-        }
+        onClicked: function () { demoPanel.isLoaded = !demoPanel.isLoaded }
       }
     }
   }

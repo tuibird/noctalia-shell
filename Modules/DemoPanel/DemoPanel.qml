@@ -10,100 +10,75 @@ import qs.Widgets
   An experiment/demo panel to tweaks widgets
 */
 
-
-NPanel {
+NLoader {
   id: root
 
-  readonly property real scaling: Scaling.scale(screen)
+  panel: Component {
+    NPanel {
+      id: demoPanel
 
-  Rectangle {
-    color: Colors.backgroundPrimary
-    radius: Style.radiusMedium * scaling
-    border.color: Colors.backgroundTertiary
-    border.width: Math.min(1, Style.borderMedium * scaling)
-    width: 500 * scaling
-    height: 400
-    anchors.centerIn: parent
+      readonly property real scaling: Scaling.scale(screen)
 
+      // Ensure panel shows itself once created
+      Component.onCompleted: show()
 
-    // Prevent closing when clicking in the panel bg
-    MouseArea {
-      anchors.fill: parent
-    }
+      Rectangle {
+        color: Colors.backgroundPrimary
+        radius: Style.radiusMedium * scaling
+        border.color: Colors.backgroundTertiary
+        border.width: Math.min(1, Style.borderMedium * scaling)
+        width: 500 * scaling
+        height: 400
+        anchors.centerIn: parent
 
-    ColumnLayout {
-      anchors.fill: parent
-      anchors.margins: Style.marginXL * scaling
-      spacing: Style.marginSmall * scaling
+        // Prevent closing when clicking in the panel bg
+        MouseArea { anchors.fill: parent }
 
-      // NIconButton
-      ColumnLayout {
-        spacing: 16 * scaling
-        NText {
-          text: "NIconButton + NTooltip"
-          color: Colors.accentSecondary
-        }
+        ColumnLayout {
+          anchors.fill: parent
+          anchors.margins: Style.marginXL * scaling
+          spacing: Style.marginSmall * scaling
 
-        NIconButton {
-          id: myIconButton
-          icon: "refresh"
-          onEntered: function() {
-            myTooltip.show();
+          // NIconButton
+          ColumnLayout {
+            spacing: 16 * scaling
+            NText { text: "NIconButton"; color: Colors.accentSecondary }
+
+            NIconButton {
+              id: myIconButton
+              icon: "refresh"
+              onEntered: function() { myTooltip.show() }
+              onExited: function() { myTooltip.hide() }
+            }
+
+            NDivider { Layout.fillWidth: true }
           }
-          onExited: function() {
-            myTooltip.hide();
+
+          // NToggle
+          ColumnLayout {
+            spacing: Style.marginLarge * scaling
+            uniformCellSizes: true
+            NText { text: "NToggle + NTooltip"; color: Colors.accentSecondary }
+
+            NToggle {
+              label: "Label"
+              description: "Description"
+              onToggled: function(value: bool) { console.log("NToggle: " + value) }
+            }
+
+            NTooltip { id: myTooltip; target: myIconButton; positionAbove: false; text: "Hello world" }
+            NDivider { Layout.fillWidth: true }
           }
-        }
 
-        NTooltip {
-          id: myTooltip
-          target: myIconButton
-          positionAbove: false
-          text: "Hello world"
-        }
-
-        NDivider {Layout.fillWidth: true}
-      }
-
-
-      // NToggle
-      ColumnLayout {
-        spacing: Style.marginLarge * scaling
-        uniformCellSizes: true
-        NText {
-          text: "NToggle"
-          color: Colors.accentSecondary
-        }
-
-        NToggle {
-          label: "Label"
-          description: "Description"
-          onToggled: function(value: bool) {
-            console.log("NToggle: " + value)
+          // NSlider
+          ColumnLayout {
+            spacing: 16 * scaling
+            NText { text: "NSlider"; color: Colors.accentSecondary }
+            NSlider {}
+            NDivider { Layout.fillWidth: true }
           }
         }
-
-
-        NDivider {
-          Layout.fillWidth: true
-        }
       }
-
-      // NSlider
-      ColumnLayout {
-        spacing: 16 * scaling
-
-        NText {
-          text: "NSlider"
-          color: Colors.accentSecondary
-        }
-
-        NSlider {}
-        NDivider {
-          Layout.fillWidth: true
-        }
-      }
-
     }
   }
 }
