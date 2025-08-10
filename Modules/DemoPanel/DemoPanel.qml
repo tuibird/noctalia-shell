@@ -20,7 +20,7 @@ NPanel {
     color: Colors.backgroundPrimary
     radius: Style.radiusMedium * scaling
     border.color: Colors.backgroundTertiary
-    border.width: Math.max(1, 1.5 * scale)
+    border.width: Math.min(1, Style.borderMedium * scaling)
     width: 500 * scaling
     height: 300
     anchors.centerIn: parent
@@ -38,11 +38,10 @@ NPanel {
 
 
       // NIconButton
-      RowLayout {
+      ColumnLayout {
         spacing: 16 * scaling
-        Text {
+        NText {
           text: "NIconButton"
-          color: Colors.textPrimary
         }
 
         NIconButton {
@@ -59,12 +58,11 @@ NPanel {
 
 
       // NToggle
-      RowLayout {
+      ColumnLayout {
         spacing: 16 * scaling
         uniformCellSizes: true
-        Text {
+        NText {
           text: "NToggle + NTooltip"
-          color: Colors.textPrimary
         }
 
         NToggle {
@@ -84,11 +82,10 @@ NPanel {
       }
 
       // NSlider
-      RowLayout {
+      ColumnLayout {
         spacing: 16 * scaling
-        Text {
+        NText {
           text: "NSlider"
-          color: Colors.textPrimary
         }
 
         NSlider {}

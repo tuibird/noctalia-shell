@@ -7,9 +7,9 @@ Slider {
   id: root
 
   readonly property real scaling: Scaling.scale(screen)
-  readonly property real knobDiameter: Style.baseWidgetHeight * 0.75 * scaling
+  readonly property real knobDiameter: Style.baseWidgetSize * 0.75 * scaling
   readonly property real trackHeight: knobDiameter * 0.5
-  readonly property real cutoutExtra: Style.baseWidgetHeight * 0.1 * scaling
+  readonly property real cutoutExtra: Style.baseWidgetSize * 0.1 * scaling
 
   // Optional color to cut the track beneath the knob (should match surrounding background)
   property var cutoutColor
@@ -85,7 +85,7 @@ Slider {
       radius: width * 0.5
       color: root.pressed ? Colors.surfaceVariant : Colors.surface
       border.color: Colors.accentPrimary
-      border.width: Math.max(1, 2 * scaling)
+      border.width: Math.min(1, Style.borderThick * scaling)
       // Press feedback halo (using accent color, low opacity)
       Rectangle {
         anchors.centerIn: parent

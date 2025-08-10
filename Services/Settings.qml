@@ -15,7 +15,7 @@ Singleton {
   property string settingsFile: Quickshell.env("NOCTALIA_SETTINGS_FILE")
                                 || (settingsDir + "Settings.json")
   property string colorsFile: Quickshell.env("NOCTALIA_COLORS_FILE")
-                             || (settingsDir + "Colors.json")
+                              || (settingsDir + "Colors.json")
   property var settings: settingAdapter
 
   Item {

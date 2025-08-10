@@ -21,14 +21,14 @@ RowLayout {
 
     Text {
       text: label
-      font.pointSize: Style.fontMedium * scaling
+      font.pointSize: Style.fontSizeMedium * scaling
       font.bold: true
       color: Colors.textPrimary
     }
 
     Text {
       text: description
-      font.pointSize: Style.fontSmall * scaling
+      font.pointSize: Style.fontSizeSmall * scaling
       color: Colors.textSecondary
       wrapMode: Text.WordWrap
       Layout.fillWidth: true
@@ -38,22 +38,22 @@ RowLayout {
   Rectangle {
     id: switcher
 
-    width: Style.baseWidgetHeight * 1.625 * scaling
-    height: Style.baseWidgetHeight * scaling
+    width: Style.baseWidgetSize * 1.625 * scaling
+    height: Style.baseWidgetSize * scaling
     radius: height * 0.5
     color: value ? Colors.accentPrimary :Colors.surfaceVariant
     border.color: value ? Colors.accentPrimary : Colors.outline
-    border.width: Math.max(1, 1.5 * scale)
+    border.width: Math.min(1, Style.borderMedium * scaling)
 
     Rectangle {
-      width: (Style.baseWidgetHeight- 4) * scaling
-      height: (Style.baseWidgetHeight - 4) * scaling
+      width: (Style.baseWidgetSize - 4) * scaling
+      height: (Style.baseWidgetSize - 4) * scaling
       radius: height * 0.5
       color: Colors.surface
       border.color: hovering ? Colors.textDisabled : Colors.outline
-      border.width: Math.max(1, 1.5 * scale)
+      border.width: Math.min(1, Style.borderMedium * scaling)
       y: 2 * scaling
-      x: value ? switcher.width - width - 2 * scale : 2 * scaling
+      x: value ? switcher.width - width - 2 * scaling : 2 * scaling
 
       Behavior on x {
         NumberAnimation {

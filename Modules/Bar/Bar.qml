@@ -14,6 +14,8 @@ PanelWindow {
   screen: modelData
   implicitHeight: Style.barHeight * scaling
   color: "transparent"
+  visible: Settings.settings.barMonitors.includes(modelData.name)
+           || (Settings.settings.barMonitors.length === 0)
 
   anchors {
     top: true
@@ -25,13 +27,47 @@ PanelWindow {
     anchors.fill: parent
 
     Rectangle {
+      id: bar
       anchors.fill: parent
       color: Colors.backgroundPrimary
       layer.enabled: true
     }
 
-    // Testing widgets
-    RowLayout {
+    Row {
+      id: leftSection
+      anchors.left: bar.left
+      anchors.leftMargin: Style.marginMedium * scaling
+      anchors.verticalCenter: bar.verticalCenter
+      spacing: Style.marginMedium * scaling
+
+      NText {
+        text: "Left"
+      }
+    }
+
+    Row {
+      id: centerSection
+      anchors.horizontalCenter: parent.horizontalCenter
+      anchors.verticalCenter: bar.verticalCenter
+      spacing: Style.marginMedium * scaling
+      NText {
+        text: "Center"
+      }
+    }
+
+    Row {
+      id: rightSection
+
+      anchors.right: bar.right
+      anchors.rightMargin: Style.marginMedium * scaling
+      anchors.verticalCenter: bar.verticalCenter
+      spacing: Style.marginMedium * scaling
+
+      NText {
+        text: "Right"
+      }
+
+      Clock {}
 
       NIconButton {
         id: demoPanelToggler
@@ -40,8 +76,6 @@ PanelWindow {
           demoPanel.visible ? demoPanel.hide() : demoPanel.show()
         }
       }
-
-      Clock {}
     }
   }
 }

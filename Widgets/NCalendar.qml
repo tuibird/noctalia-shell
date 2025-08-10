@@ -13,16 +13,16 @@ NPanel {
   readonly property real scaling: Scaling.scale(screen)
 
   Rectangle {
-    color: Colors.backgroundPrimary
+    color: Colors.backgroundSecondary
     radius: Style.radiusMedium * scaling
     border.color: Colors.backgroundTertiary
-    border.width: Math.max(1, 1.5 * scale)
+    border.width: Math.min(1, Style.borderMedium * scaling)
     width: 340 * scaling
-    height: 380
+    height: 300
     anchors.top: parent.top
     anchors.right: parent.right
-    anchors.topMargin: 4 * scaling
-    anchors.rightMargin: 4 * scaling
+    anchors.topMargin: Style.marginTiny * scaling
+    anchors.rightMargin: Style.marginTiny * scaling
 
     // Prevent closing when clicking in the panel bg
     MouseArea {
@@ -31,13 +31,13 @@ NPanel {
 
     ColumnLayout {
       anchors.fill: parent
-      anchors.margins: 16 * scaling
-      spacing: 12 * scaling
+      anchors.margins: Style.marginMedium * scaling
+      spacing: Style.marginMedium * scaling
 
       // Month/Year header with navigation
       RowLayout {
         Layout.fillWidth: true
-        spacing: 8
+        spacing: Style.marginSmall * scaling
 
         NIconButton {
           icon: "chevron_left"
@@ -48,15 +48,12 @@ NPanel {
           }
         }
 
-        Text {
+        NText {
+          text: calendar.title
           Layout.fillWidth: true
           horizontalAlignment: Text.AlignHCenter
-          text: calendar.title
-          color: Colors.textPrimary
-          opacity: 0.7
-          font.pointSize: Style.fontSmall * scaling
-          font.family: Settings.settings.fontFamily
-          font.bold: true
+          font.pointSize: Style.fontSizeMedium * scaling
+          color: Colors.accentPrimary
         }
 
         NIconButton {
@@ -72,18 +69,15 @@ NPanel {
       DayOfWeekRow {
         Layout.fillWidth: true
         spacing: 0
-        Layout.leftMargin: 8 // Align with grid
-        Layout.rightMargin: 8
+        Layout.leftMargin: Style.marginSmall * scaling // Align with grid
+        Layout.rightMargin: Style.marginSmall * scaling
 
-        delegate: Text {
+        delegate: NText {
           text: shortName
-          color: Colors.textPrimary
-          opacity: 0.8
-          font.pointSize: Style.fontSmall * scaling
-          font.family: Settings.settings.fontFamily
-          font.bold: true
+          color: Colors.accentSecondary
+          font.pointSize: Style.fontSizeMedium * scaling
           horizontalAlignment: Text.AlignHCenter
-          width: 32
+          width: Style.baseWidgetSize * scaling
         }
       }
 
@@ -101,8 +95,8 @@ NPanel {
         }
 
         Layout.fillWidth: true
-        Layout.leftMargin: 8
-        Layout.rightMargin: 8
+        Layout.leftMargin: Style.marginSmall * scaling
+        Layout.rightMargin: Style.marginSmall * scaling
         spacing: 0
         month: Time.date.getMonth()
         year: Time.date.getFullYear()
@@ -131,9 +125,9 @@ NPanel {
           })
           property bool isHoliday: holidayInfo.length > 0
 
-          width: 32
-          height: 32
-          radius: 8
+          width: Style.baseWidgetSize * scaling
+          height: Style.baseWidgetSize * scaling
+          radius: Style.radiusSmall * scaling
           color: {
             if (model.today)
               return Colors.accentPrimary
@@ -147,24 +141,23 @@ NPanel {
           // Holiday dot indicator
           Rectangle {
             visible: isHoliday
-            width: 4
-            height: 4
-            radius: 4
+            width: Style.baseWidgetSize / 8 * scaling
+            height: Style.baseWidgetSize / 8 * scaling
+            radius: Style.radiusSmall * scaling
             color: Colors.accentTertiary
             anchors.top: parent.top
             anchors.right: parent.right
-            anchors.topMargin: 4
-            anchors.rightMargin: 4
+            anchors.topMargin: Style.marginTiny * scaling
+            anchors.rightMargin: Style.marginTiny * scaling
             z: 2
           }
 
-          Text {
+          NText {
             anchors.centerIn: parent
             text: model.day
             color: model.today ? Colors.onAccent : Colors.textPrimary
-            opacity: model.month === calendar.month ? (mouseArea2.containsMouse ? 1 : 0.7) : 0.3
-            font.pointSize: Style.fontSmall * scaling
-            font.family: Settings.settings.fontFamily
+            opacity: model.month === calendar.month ? (mouseArea2.containsMouse ? Style.opacityFull : Style.opacityHeavy) : Style.opacityLight
+            font.pointSize: Style.fontSizeMedium * scaling
             font.bold: model.today ? true : false
           }
 

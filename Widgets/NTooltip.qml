@@ -32,12 +32,17 @@ Window {
   }
   function hide() {
     isVisible = false
+    timerShow.running = false
   }
 
   function _showNow() {
     // Compute new size everytime we show the tooltip
-    width = Math.max(50 * scaling, tooltipText.implicitWidth + 24 * scaling)
-    height = Math.max(50 * scaling, tooltipText.implicitHeight + 16 * scaling)
+    width = Math.max(
+          50 * scaling,
+          tooltipText.implicitWidth + Style.marginLarge * 2 * scaling)
+    height = Math.max(
+          50 * scaling,
+          tooltipText.implicitHeight + Style.marginSmall * 2 * scaling)
 
     if (!target) {
       return
@@ -101,8 +106,8 @@ Window {
     radius: Style.radiusMedium * scaling
     color: Colors.backgroundTertiary
     border.color: Colors.outline
-    border.width: 1 * scaling
-    opacity: 0.97
+    border.width: Math.min(1, Style.borderThin * scaling)
+    opacity: Style.opacityFull
     z: 1
   }
 
@@ -112,7 +117,7 @@ Window {
     text: root.text
     color: Colors.textPrimary
     font.family: Settings.settings.fontFamily
-    font.pointSize: Style.fontMedium * scaling
+    font.pointSize: Style.fontSizeMedium * scaling
     horizontalAlignment: Text.AlignHCenter
     verticalAlignment: Text.AlignVCenter
     wrapMode: Text.Wrap

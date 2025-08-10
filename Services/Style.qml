@@ -12,13 +12,13 @@ Singleton {
     Preset sizes for font, radii, ?
     */
 
-  // Font
-  property real fontExtraLarge: 20
-  property real fontLarge: 14
-  property real fontMedium: 10
-  property real fontSmall: 8
+  // Font size
+  property real fontSizeSmall: 9
+  property real fontSizeMedium: 11
+  property real fontSizeLarge: 13
+  property real fontSizeXL: 18
 
-  // Font weight
+  // Font weight / Unsure if we keep em?
   property int fontWeightRegular: 400
   property int fontWeightMedium: 500
   property int fontWeightBold: 700
@@ -45,8 +45,23 @@ Singleton {
   property int animationSlow: 500
 
   property int barHeight: 36
-  property int baseWidgetHeight: 32
+  property int baseWidgetSize: 32
   property int sliderWidth: 200
 
+  // Delay
   property int tooltipDelay: 300
+
+  // Margins and spacing
+  property int marginTiny: 4
+  property int marginSmall: 8
+  property int marginMedium: 12
+  property int marginLarge: 18
+  property int marginXL: 24
+
+  // Opacity
+  property real opacityLight: 0.25
+  property real opacityMedium: 0.5
+  property real opacityHeavy: 0.75
+  property real opacityAlmost: 0.95
+  property real opacityFull: 1.0
 }

@@ -11,13 +11,9 @@ Rectangle {
   height: textItem.paintedHeight
   color: "transparent"
 
-  Text {
+  NText {
     id: textItem
     text: Time.time
-    font.family: Settings.settings.fontFamily
-    font.weight: Font.Bold
-    font.pointSize: Style.fontMedium * scaling
-    color: Colors.textPrimary
     anchors.centerIn: parent
   }
 
@@ -36,9 +32,7 @@ Rectangle {
     }
     onClicked: function () {
       calendar.visible = !calendar.visible
-      if (calendar.visible) {
-        tooltip.hide()
-      }
+      tooltip.hide()
     }
   }
 
