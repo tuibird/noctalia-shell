@@ -6,10 +6,13 @@ import qs.Modules.Audio
 import qs.Widgets
 
 Item {
-  id: volumeDisplay
+  id: root
 
-  width: pillIndicator.width
-  height: pillIndicator.height
+  width: pill.width
+  height: pill.height
+
+  // Used to avoid opening the pill on Quickshell startup
+  property bool firstVolumeReceived: false
 
   function getIcon() {
     if (Audio.muted) {
@@ -19,7 +22,7 @@ Item {
   }
 
   function getIconColor() {
-    return (Audio.volume <= 1.0) ? Colors.textPrimary : getVolumeColor();
+    return (Audio.volume <= 1.0) ? Colors.textPrimary : getVolumeColor()
   }
 
   function getVolumeColor() {
@@ -38,7 +41,7 @@ Item {
   }
 
   NPill {
-    id: pillIndicator
+    id: pill
     icon: getIcon()
     iconCircleColor: getVolumeColor()
     collapsedIconColor: getIconColor()
@@ -48,19 +51,32 @@ Item {
                    Audio.volume * 100) + "%\nLeft click for advanced settings.\nScroll up/down to change volume."
     onClicked: function () {
       console.log("onClicked")
-      //if (ioSelector.visible) {
-      //             ioSelector.dismiss();
-      //         } else {
-      //             ioSelector.show();
-      //         }
+      // if (ioSelector.visible) {
+      //   ioSelector.dismiss()
+      // } else {
+      //   ioSelector.show()
+      // }
+    }
+    onWheel: function (angle) {
+      if (angle > 0) {
+        Audio.volumeIncrement()
+      } else if (angle < 0) {
+        Audio.volumeDecrement()
+      }
     }
   }
 
+  // Connection used to open the pill when volume changes
   Connections {
-    target: Pipewire.defaultAudioSink?.audio ? Pipewire.defaultAudioSink?.audio : null
-
+    target: Audio.sink?.audio ? Audio.sink?.audio : null
     function onVolumeChanged() {
-      console.log("[Bar:Volume] onVolumeChanged")
+      // console.log("[Bar:Volume] onVolumeChanged")
+      if (!firstVolumeReceived) {
+        // Ignore the first volume change
+        firstVolumeReceived = true
+      } else {
+        pill.show()
+      }
     }
   }
 
@@ -68,44 +84,4 @@ Item {
     id: ioSelector
     //     onPanelClosed: ioSelector.dismiss()
   }
-
-  //     Connections {
-  //       target: Audio
-  //     function onVolumeChanged() {
-  //       console.log("onVolumeChanged")
-  //     }
-
-  //     function onSinkChanged() {
-  // console.log("onSinkChanged")
-  //     }
-
-  //   }
-
-  // MouseArea {
-  //   anchors.fill: parent
-  //   hoverEnabled: true
-  //   acceptedButtons: Qt.NoButton
-  //   propagateComposedEvents: true
-  //   onEntered: {
-  //     volumeDisplay.containsMouse = true
-  //     pillIndicator.autoHide = false
-  //     pillIndicator.showDelayed()
-  //   }
-  //   onExited: {
-  //     volumeDisplay.containsMouse = false
-  //     pillIndicator.autoHide = true
-  //     pillIndicator.hide()
-  //   }
-  //   cursorShape: Qt.PointingHandCursor
-  //   onWheel: wheel => {
-  //              if (!shell)
-  //              return
-  //              let step = 5
-  //              if (wheel.angleDelta.y > 0) {
-  //                shell.updateVolume(Math.min(200, shell.volume + step))
-  //              } else if (wheel.angleDelta.y < 0) {
-  //                shell.updateVolume(Math.max(0, shell.volume - step))
-  //              }
-  //            }
-  // }
 }
