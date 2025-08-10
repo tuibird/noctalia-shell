@@ -74,7 +74,6 @@ PanelWindow {
       NIconButton {
         id: demoPanelToggle
         icon: "experiment"
-        fontPointSize: Style.fontSizeMedium
         anchors.verticalCenter: parent.verticalCenter
         onClicked: function () {
           demoPanel.isLoaded = !demoPanel.isLoaded
@@ -84,7 +83,6 @@ PanelWindow {
       NIconButton {
         id: sidePanelToggle
         icon: "widgets"
-        fontPointSize: Style.fontSizeMedium
         anchors.verticalCenter: parent.verticalCenter
         onClicked: function () {
           sidePanel.isLoaded = !demoPanel.isLoaded

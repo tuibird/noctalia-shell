@@ -16,7 +16,7 @@ Rectangle {
   property var onEntered: function () {}
   property var onExited: function () {}
   property var onClicked: function () {}
-  property real fontPointSize: Style.fontSizeXL
+  property real fontPointSize: Style.fontSizeMedium
 
   implicitWidth: size
   implicitHeight: size
