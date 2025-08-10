@@ -11,7 +11,7 @@ RowLayout {
   property string description: ""
   property bool value: false
   property bool hovering: false
-  property var onToggled: function (value: bool) {}
+  property var onToggled: function (value) {}
 
   Layout.fillWidth: true
 
@@ -41,7 +41,7 @@ RowLayout {
     width: Style.baseWidgetSize * 1.625 * scaling
     height: Style.baseWidgetSize * scaling
     radius: height * 0.5
-    color: value ? Colors.accentPrimary :Colors.surfaceVariant
+    color: value ? Colors.accentPrimary : Colors.surfaceVariant
     border.color: value ? Colors.accentPrimary : Colors.outline
     border.width: Math.min(1, Style.borderMedium * scaling)
 
@@ -70,8 +70,8 @@ RowLayout {
       onEntered: hovering = true
       onExited: hovering = false
       onClicked: {
-        value = !value;
-        root.onToggled(value);
+        value = !value
+        root.onToggled(value)
       }
     }
   }

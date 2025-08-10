@@ -6,10 +6,10 @@ import Quickshell.Wayland
 import qs.Services
 import qs.Widgets
 
+
 /*
   An experiment/demo panel to tweaks widgets
 */
-
 NLoader {
   id: root
 
@@ -32,7 +32,9 @@ NLoader {
         anchors.centerIn: parent
 
         // Prevent closing when clicking in the panel bg
-        MouseArea { anchors.fill: parent }
+        MouseArea {
+          anchors.fill: parent
+        }
 
         ColumnLayout {
           anchors.fill: parent
@@ -42,61 +44,93 @@ NLoader {
           // NIconButton
           ColumnLayout {
             spacing: 16 * scaling
-            NText { text: "NIconButton"; color: Colors.accentSecondary }
+            NText {
+              text: "NIconButton"
+              color: Colors.accentSecondary
+            }
 
             NIconButton {
               id: myIconButton
               icon: "refresh"
-              onEntered: function() { myTooltip.show() }
-              onExited: function() { myTooltip.hide() }
+              onEntered: function () {
+                myTooltip.show()
+              }
+              onExited: function () {
+                myTooltip.hide()
+              }
             }
-            NTooltip { id: myTooltip; target: myIconButton; positionAbove: false; text: "Hello world"; }
+            NTooltip {
+              id: myTooltip
+              target: myIconButton
+              positionAbove: false
+              text: "Hello world"
+            }
 
-            NDivider { Layout.fillWidth: true }
+            NDivider {
+              Layout.fillWidth: true
+            }
           }
 
           // NToggle
           ColumnLayout {
             spacing: Style.marginLarge * scaling
             uniformCellSizes: true
-            NText { text: "NToggle + NTooltip"; color: Colors.accentSecondary }
+            NText {
+              text: "NToggle + NTooltip"
+              color: Colors.accentSecondary
+            }
 
             NToggle {
               label: "Label"
               description: "Description"
-              onToggled: function(value: bool) { console.log("NToggle: " + value) }
+              onToggled: function (value) {
+                console.log("NToggle: " + value)
+              }
             }
 
-
-            NDivider { Layout.fillWidth: true }
+            NDivider {
+              Layout.fillWidth: true
+            }
           }
 
           // NSlider
           ColumnLayout {
             spacing: 16 * scaling
-            NText { text: "Scaling"; color: Colors.accentSecondary }
+            NText {
+              text: "Scaling"
+              color: Colors.accentSecondary
+            }
             RowLayout {
               spacing: Style.marginSmall * scaling
-              NText { text: `${Math.round(Scaling.overrideScale * 100)}%`; Layout.alignment: Qt.AlignVCenter }
+              NText {
+                text: `${Math.round(Scaling.overrideScale * 100)}%`
+                Layout.alignment: Qt.AlignVCenter
+              }
               NSlider {
                 id: scaleSlider
                 from: 0.6
                 to: 1.8
                 stepSize: 0.01
                 value: Scaling.overrideScale
-                onMoved: function() { Scaling.overrideScale = value }
-                onPressedChanged: function() { Scaling.overrideEnabled = true }
+                onMoved: function () {
+                  Scaling.overrideScale = value
+                }
+                onPressedChanged: function () {
+                  Scaling.overrideEnabled = true
+                }
               }
               NIconButton {
                 icon: "restart_alt"
                 sizeMultiplier: 0.7
-                onClicked: function() {
+                onClicked: function () {
                   Scaling.overrideEnabled = false
                   Scaling.overrideScale = 1.0
                 }
               }
             }
-            NDivider { Layout.fillWidth: true }
+            NDivider {
+              Layout.fillWidth: true
+            }
           }
         }
       }
