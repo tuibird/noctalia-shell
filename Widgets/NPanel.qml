@@ -13,11 +13,20 @@ PanelWindow {
   signal dismissed
 
   function hide() {
-    visible = false
+    //visible = false
     dismissed()
   }
 
   function show() {
+    // Ensure only one panel is visible at a time using Settings as ephemeral store
+    try {
+      if (Settings.openPanel && Settings.openPanel !== outerPanel && Settings.openPanel.hide) {
+        Settings.openPanel.hide()
+      }
+      Settings.openPanel = outerPanel
+    } catch (e) {
+      // ignore
+    }
     visible = true
   }
 
@@ -43,5 +52,17 @@ PanelWindow {
       duration: 350
       easing.type: Easing.InOutCubic
     }
+  }
+
+  Component.onDestruction: {
+    try {
+      if (visible && Settings.openPanel === outerPanel) Settings.openPanel = null
+    } catch (e) {}
+  }
+
+  onVisibleChanged: function() {
+    try {
+      if (!visible && Settings.openPanel === outerPanel) Settings.openPanel = null
+    } catch (e) {}
   }
 }

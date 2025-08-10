@@ -5,6 +5,7 @@ import QtQuick
 import Quickshell
 import Quickshell.Io
 import Quickshell.Widgets
+import qs.Widgets
 import qs.Modules.Bar
 import qs.Modules.DemoPanel
 import qs.Modules.Background
@@ -26,7 +27,7 @@ ShellRoot {
   Background {}
   Overview {}
 
-  Corner{}
+  ScreenCorner {}
 
   DemoPanel {
     id: demoPanel

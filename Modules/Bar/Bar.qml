@@ -85,7 +85,18 @@ PanelWindow {
         icon: "widgets"
         anchors.verticalCenter: parent.verticalCenter
         onClicked: function () {
-          sidePanel.isLoaded = !sidePanel.isLoaded
+          // Map this button's center to the screen and open the side panel below it
+          const localCenterX = width / 2
+          const localCenterY = height / 2
+          const globalPoint = mapToItem(null, localCenterX, localCenterY)
+          if (sidePanel.isLoaded) {
+            sidePanel.isLoaded = false
+          } else if (sidePanel.openAt) {
+            sidePanel.openAt(globalPoint.x, screen)
+          } else {
+            // Fallback: toggle if API unavailable
+            sidePanel.isLoaded = true
+          }
         }
       }
     }

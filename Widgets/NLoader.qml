@@ -27,6 +27,7 @@ Loader {
 
   Connections {
     target: loader.item
+    ignoreUnknownSignals: true
     function onDismissed() {
       loader.isLoaded = false
     }
