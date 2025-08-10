@@ -4,4 +4,5 @@
 # Can be installed from AUR "qmlfmt-git"
 # Requires qt6-5compat
 
-find . -name "*.qml" -exec qmlfmt -e -b 120 -t 2 -i 2 -w {} \;
+#find . -name "*.qml" -exec sh -c 'echo "Formatting $0..."; qmlfmt -e -b 120 -t 2 -i 2 -w "$0"' {} \;
+find . -name "*.qml" -print -exec qmlfmt -e -b 120 -t 2 -i 2 -w {} \;
