@@ -40,7 +40,7 @@ NPanel {
       ColumnLayout {
         spacing: 16 * scaling
         NText {
-          text: "NIconButton"
+          text: "NIconButton + NTooltip"
           color: Colors.accentSecondary
         }
 
@@ -55,6 +55,13 @@ NPanel {
           }
         }
 
+        NTooltip {
+          id: myTooltip
+          target: myIconButton
+          positionAbove: false
+          text: "Hello world"
+        }
+
         NDivider {Layout.fillWidth: true}
       }
 
@@ -64,7 +71,7 @@ NPanel {
         spacing: Style.marginLarge * scaling
         uniformCellSizes: true
         NText {
-          text: "NToggle + NTooltip"
+          text: "NToggle"
           color: Colors.accentSecondary
         }
 
@@ -76,12 +83,7 @@ NPanel {
           }
         }
 
-        NTooltip {
-          id: myTooltip
-          target: myIconButton
-          positionAbove: false
-          text: "Hello world"
-        }
+
         NDivider {
           Layout.fillWidth: true
         }
