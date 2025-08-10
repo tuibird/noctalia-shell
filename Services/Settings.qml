@@ -17,7 +17,7 @@ Singleton {
   property var data: settingAdapter
 
   // Needed to only have one NPanel loaded at a time.
-  property var openPanel: null
+ // property var openPanel: null
 
   Item {
     Component.onCompleted: {

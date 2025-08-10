@@ -73,8 +73,28 @@ NLoader {
           // NSlider
           ColumnLayout {
             spacing: 16 * scaling
-            NText { text: "NSlider"; color: Colors.accentSecondary }
-            NSlider {}
+            NText { text: "Scaling"; color: Colors.accentSecondary }
+            RowLayout {
+              spacing: Style.marginSmall * scaling
+              NText { text: `${Math.round(Scaling.overrideScale * 100)}%`; Layout.alignment: Qt.AlignVCenter }
+              NSlider {
+                id: scaleSlider
+                from: 0.6
+                to: 1.8
+                stepSize: 0.01
+                value: Scaling.overrideScale
+                onMoved: function() { Scaling.overrideScale = value }
+                onPressedChanged: function() { Scaling.overrideEnabled = true }
+              }
+              NIconButton {
+                icon: "restart_alt"
+                sizeMultiplier: 0.7
+                onClicked: function() {
+                  Scaling.overrideEnabled = false
+                  Scaling.overrideScale = 1.0
+                }
+              }
+            }
             NDivider { Layout.fillWidth: true }
           }
         }

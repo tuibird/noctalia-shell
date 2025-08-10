@@ -5,12 +5,26 @@ import Quickshell
 Singleton {
   id: root
 
+  // Manual override for testing UI scale across the whole shell
+  // Enable this from the DemoPanel slider
+  property bool overrideEnabled: false
+  property real overrideScale: 1.0
+
   // Design reference resolution (for scale = 1.0)
   readonly property int designScreenWidth: 2560
   readonly property int designScreenHeight: 1440
 
   // Automatic, orientation-agnostic scaling
   function scale(aScreen) {
+    // 0) Manual override (for development/testing)
+    try {
+      if (overrideEnabled && isFinite(overrideScale)) {
+        // Clamp to keep UI usable
+        const clamped = Math.max(0.6, Math.min(1.8, overrideScale))
+        return clamped
+      }
+    } catch (e) {}
+
     if (typeof aScreen !== 'undefined' & aScreen) {
 
       // // 1) Per-monitor override wins
