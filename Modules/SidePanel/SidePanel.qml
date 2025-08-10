@@ -35,7 +35,7 @@ NLoader {
 
       readonly property real scaling: Scaling.scale(screen)
       // Single source of truth for spacing between cards (both axes)
-      property real cardSpacing: Style.marginLarge * scaling
+      property real cardSpacing: Style.spacingLarge * scaling
       // X coordinate from the bar to align this panel under
       property real anchorX: root.anchorX
       // Ensure this panel attaches to the intended screen

@@ -9,6 +9,7 @@ import qs.Modules.Bar
 import qs.Modules.DemoPanel
 import qs.Modules.Background
 import qs.Modules.SidePanel
+import qs.Modules.Notification
 import qs.Services
 
 ShellRoot {
@@ -25,5 +26,9 @@ ShellRoot {
 
   SidePanel {
     id: sidePanel
+  }
+
+  Notification {
+    id: notification
   }
 }

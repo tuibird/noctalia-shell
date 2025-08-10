@@ -19,12 +19,10 @@ NBox {
     anchors.left: parent.left
     anchors.right: parent.right
     anchors.top: parent.top
-    anchors.margins: Style.marginXL * scaling
-    spacing: Style.marginSmall * scaling
+    anchors.margins: Style.marginMedium * scaling
+    spacing: Style.marginMedium * scaling
 
-    Item {
-      height: 36 * scaling
-    }
+    Item { height: Style.marginLarge * scaling }
 
     Text {
       text: "music_note"
@@ -40,8 +38,6 @@ NBox {
       anchors.horizontalCenter: parent.horizontalCenter
     }
 
-    Item {
-      height: 36 * scaling
-    }
+    Item { height: Style.marginLarge * scaling }
   }
 }

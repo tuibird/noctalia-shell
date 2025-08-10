@@ -25,8 +25,8 @@ NBox {
 
     Item {
       id: avatarBox
-      width: 40 * scaling
-      height: 40 * scaling
+      width: Style.baseWidgetSize * 1.25 * scaling
+      height: Style.baseWidgetSize * 1.25 * scaling
 
       Image {
         id: avatarImage
@@ -69,11 +69,11 @@ NBox {
       }
       NIconButton {
         icon: "settings"
-        sizeMultiplier: 0.8
+        sizeMultiplier: 0.9
       }
       NIconButton {
         icon: "power_settings_new"
-        sizeMultiplier: 0.8
+        sizeMultiplier: 0.9
       }
     }
   }
