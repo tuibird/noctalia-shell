@@ -14,7 +14,7 @@ PanelWindow {
   screen: modelData
   implicitHeight: Style.barHeight * scaling
   color: "transparent"
-  visible: true //Settings.settings.barMonitors.includes(modelData.name) || (Settings.settings.barMonitors.length === 0)
+  visible: Settings.settings.barMonitors.includes(modelData.name) || (Settings.settings.barMonitors.length === 0)
 
   anchors {
     top: true
@@ -43,7 +43,7 @@ PanelWindow {
       spacing: Style.marginMedium * scaling
 
       NText {
-        text: "Left"
+        text: screen.name
         anchors.verticalCenter: parent.verticalCenter
       }
     }
