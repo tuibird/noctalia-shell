@@ -24,7 +24,12 @@ Singleton {
 
     function onVolumeChanged() {
       root._volume = (Pipewire.defaultAudioSink?.audio.volume ?? 0)
-      console.log("onVolumeChanged: " + volume)
+      console.log("[Audio] onVolumeChanged: " + volume)
+    }
+
+    function onMutedChanged() {
+      root._muted = (Pipewire.defaultAudioSink?.audio.muted ?? true)
+      console.log("[Audio] onMuteChanged " + muted)
     }
   }
 }

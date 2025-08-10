@@ -1,5 +1,6 @@
 import QtQuick
 import Quickshell
+import Quickshell.Services.Pipewire
 import qs.Services
 import qs.Modules.Audio
 import qs.Widgets
@@ -11,33 +12,40 @@ Item {
   height: pillIndicator.height
 
   function getIcon() {
-    if (PipeWireAudio.muted) {
+    if (Audio.muted) {
       return "volume_off"
     }
-    return PipeWireAudio.volume === 0 ? "volume_off" : (PipeWireAudio.volume < 0.33 ? "volume_down" : "volume_up")
+    return Audio.volume === 0 ? "volume_off" : (Audio.volume < 0.33 ? "volume_down" : "volume_up")
   }
 
   function getIconColor() {
-    if (PipeWireAudio.volume <= 1.0) {
-      return Colors.textPrimary
+    return (Audio.volume <= 1.0) ? Colors.textPrimary : getVolumeColor();
+  }
+
+  function getVolumeColor() {
+    if (Audio.volume <= 1.0) {
+      return Colors.accentPrimary
     }
 
     // Indicate that the volume is over 100%
     // Calculate interpolation factor (0 at 100%, 1.0 at 200%)
-    let factor = (PipeWireAudio.volume - 1)
+    let factor = (Audio.volume - 1.0)
 
     // Blend between accent and warning colors
-    return Qt.rgba(Colors.textPrimary.r + (Colors.warning.r - Colors.textPrimary.r) * factor,
-                   Colors.textPrimary.g + (Colors.warning.g - Colors.textPrimary.g) * factor,
-                   Colors.textPrimary.b + (Colors.warning.b - Colors.textPrimary.b) * factor, 1)
+    return Qt.rgba(Colors.accentPrimary.r + (Colors.error.r - Colors.accentPrimary.r) * factor,
+                   Colors.accentPrimary.g + (Colors.error.g - Colors.accentPrimary.g) * factor,
+                   Colors.accentPrimary.b + (Colors.error.b - Colors.accentPrimary.b) * factor, 1)
   }
 
   NPill {
     id: pillIndicator
     icon: getIcon()
-    text: Math.round(PipeWireAudio.volume * 100) + "%"
+    iconCircleColor: getVolumeColor()
+    collapsedIconColor: getIconColor()
+    autoHide: true
+    text: Math.round(Audio.volume * 100) + "%"
     tooltipText: "Volume: " + Math.round(
-                   PipeWireAudio.volume * 100) + "%\nLeft click for advanced settings.\nScroll up/down to change volume."
+                   Audio.volume * 100) + "%\nLeft click for advanced settings.\nScroll up/down to change volume."
     onClicked: function () {
       console.log("onClicked")
       //if (ioSelector.visible) {
@@ -46,13 +54,14 @@ Item {
       //             ioSelector.show();
       //         }
     }
+  }
 
-    // pillColor: Colors.surfaceVariant
-    // iconCircleColor: Colors.// getVolumeColor()
-    // iconTextColor: Colors.backgroundPrimary
-    // textColor: Colors.textPrimary
-    // collapsedIconColor: getIconColor()
-    // autoHide: true
+  Connections {
+    target: Pipewire.defaultAudioSink?.audio ? Pipewire.defaultAudioSink?.audio : null
+
+    function onVolumeChanged() {
+      console.log("[Bar:Volume] onVolumeChanged")
+    }
   }
 
   AudioDeviceSelector {
@@ -61,7 +70,7 @@ Item {
   }
 
   //     Connections {
-  //       target: PipeWireAudio
+  //       target: Audio
   //     function onVolumeChanged() {
   //       console.log("onVolumeChanged")
   //     }
@@ -99,6 +108,4 @@ Item {
   //              }
   //            }
   // }
-
-  // property bool containsMouse: false
 }
