@@ -4,7 +4,6 @@ import Quickshell.Services.UPower
 import QtQuick.Layouts
 import qs.Services
 import qs.Widgets
-import "../../Helpers/Duration.js" as Duration
 
 NPill {
   id: root
@@ -58,16 +57,22 @@ NPill {
   textColor: charging ? Colors.accentPrimary : Colors.textPrimary
   tooltipText: {
     let lines = []
+
+    if (testMode) {
+      lines.push("Time left: " + Time.formatVagueHumanReadableDuration(1234567))
+      return lines.join("\n");
+    }
+
     if (!root.isReady) {
       return ""
     }
 
     if (root.battery.timeToEmpty > 0) {
-      lines.push("Time left: " + Time.formatVagueHumanReadableTime(root.battery.timeToEmpty))
+      lines.push("Time left: " + Time.formatVagueHumanReadableDuration(root.battery.timeToEmpty))
     }
 
     if (root.battery.timeToFull > 0) {
-      lines.push("Time until full: " + Time.formatVagueHumanReadableTime(root.battery.timeToFull))
+      lines.push("Time until full: " + Time.formatVagueHumanReadableDuration(root.battery.timeToFull))
     }
 
     if (root.battery.changeRate !== undefined) {
