@@ -38,6 +38,7 @@ Variants {
         layer.enabled: true
       }
 
+      // Left
       Row {
         id: leftSection
 
@@ -53,6 +54,7 @@ Variants {
         }
       }
 
+      // Center
       Row {
         id: centerSection
 
@@ -64,6 +66,7 @@ Variants {
         Workspace {}
       }
 
+      // Right
       Row {
         id: rightSection
 
@@ -74,6 +77,10 @@ Variants {
         spacing: Style.marginSmall * scaling
 
         Battery {
+          anchors.verticalCenter: parent.verticalCenter
+        }
+
+        Volume {
           anchors.verticalCenter: parent.verticalCenter
         }
 

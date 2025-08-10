@@ -25,7 +25,7 @@ Item {
   // Exposed width logic
   readonly property int pillHeight: Style.baseWidgetSize * sizeMultiplier * scaling
   readonly property int iconSize: Style.baseWidgetSize * sizeMultiplier * scaling
-  readonly property int pillPaddingHorizontal: 14 * scaling
+  readonly property int pillPaddingHorizontal: Style.marginMedium * scaling
   readonly property int pillOverlap: iconSize * 0.5
   readonly property int maxPillWidth: Math.max(1, textItem.implicitWidth + pillPaddingHorizontal * 2 + pillOverlap)
 
@@ -41,7 +41,7 @@ Item {
     width: showPill ? maxPillWidth : 1
     height: pillHeight
     x: (iconCircle.x + iconCircle.width / 2) - width
-    opacity: showPill ? 1 : 0
+    opacity: showPill ? Style.opacityFull : Style.opacityNone
     color: pillColor
     topLeftRadius: pillHeight * 0.5
     bottomLeftRadius: pillHeight * 0.5
@@ -68,7 +68,7 @@ Item {
     Behavior on opacity {
       enabled: showAnim.running || hideAnim.running
       NumberAnimation {
-        duration: 250
+        duration: Style.animationNormal
         easing.type: Easing.OutCubic
       }
     }
@@ -78,14 +78,14 @@ Item {
     id: iconCircle
     width: iconSize
     height: iconSize
-    radius: width / 2
+    radius: width * 0.5
     color: showPill ? iconCircleColor : "transparent"
     anchors.verticalCenter: parent.verticalCenter
     anchors.right: parent.right
 
     Behavior on color {
       ColorAnimation {
-        duration: 200
+        duration: Style.animationNormal
         easing.type: Easing.InOutQuad
       }
     }
@@ -134,8 +134,9 @@ Item {
       duration: 2500
     }
     ScriptAction {
-      script: if (shouldAnimateHide)
+      script: if (shouldAnimateHide) {
                 hideAnim.start()
+              }
     }
   }
 
