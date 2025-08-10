@@ -52,18 +52,6 @@ NLoader {
             NIconButton {
               id: myIconButton
               icon: "refresh"
-              onEntered: function () {
-                myTooltip.show()
-              }
-              onExited: function () {
-                myTooltip.hide()
-              }
-            }
-            NTooltip {
-              id: myTooltip
-              target: myIconButton
-              positionAbove: false
-              text: "Hello world"
             }
 
             NDivider {
@@ -74,9 +62,8 @@ NLoader {
           // NToggle
           ColumnLayout {
             spacing: Style.marginLarge * scaling
-            uniformCellSizes: true
             NText {
-              text: "NToggle + NTooltip"
+              text: "NToggle"
               color: Colors.accentSecondary
             }
 

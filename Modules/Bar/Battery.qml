@@ -60,7 +60,7 @@ NPill {
 
     if (testMode) {
       lines.push("Time left: " + Time.formatVagueHumanReadableDuration(12345))
-      return lines.join("\n");
+      return lines.join("\n")
     }
 
     if (!root.isReady) {

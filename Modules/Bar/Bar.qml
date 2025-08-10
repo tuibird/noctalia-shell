@@ -83,8 +83,8 @@ Variants {
 
         NIconButton {
           id: demoPanelToggle
-
           icon: "experiment"
+          tooltipText: "Open demo panel"
           anchors.verticalCenter: parent.verticalCenter
           onClicked: function () {
             demoPanel.isLoaded = !demoPanel.isLoaded
@@ -93,8 +93,8 @@ Variants {
 
         NIconButton {
           id: sidePanelToggle
-
           icon: "widgets"
+          tooltipText: "Open side panel"
           anchors.verticalCenter: parent.verticalCenter
           onClicked: function () {
             // Map this button's center to the screen and open the side panel below it
