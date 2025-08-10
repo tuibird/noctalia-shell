@@ -48,7 +48,7 @@ Item {
     Component.onCompleted: {
         localWorkspaces.clear();
         for (let i = 0; i < Workspaces.workspaces.count; i++) {
-            const ws = Services.Workspaces.workspaces.get(i);
+            const ws = Workspaces.workspaces.get(i);
             if (ws.output.toLowerCase() === screen.name.toLowerCase()) {
                 localWorkspaces.append(ws);
             }
