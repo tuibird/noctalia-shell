@@ -73,7 +73,7 @@ PanelWindow {
         Layout.alignment: Qt.AlignVCenter
       }
 
-      Clock {}
+      NClock {}
 
       NIconButton {
         id: demoPanelToggler
