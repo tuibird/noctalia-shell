@@ -17,7 +17,7 @@ ShellRoot {
   Background {}
   Overview {}
   ScreenCorners {}
-  Bars {}
+  Bar {}
 
   DemoPanel {
     id: demoPanel

@@ -6,7 +6,7 @@ import qs.Services
 Variants {
   model: Quickshell.screens
 
-  PanelWindow {
+  delegate: PanelWindow {
     required property ShellScreen modelData
     property string wallpaperSource: Qt.resolvedUrl(
                                        "../../Assets/Tests/wallpaper.png")
