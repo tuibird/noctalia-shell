@@ -15,4 +15,3 @@ Rectangle {
   border.color: Colors.backgroundTertiary
   border.width: Math.min(1, Style.borderThin * scaling)
 }
-

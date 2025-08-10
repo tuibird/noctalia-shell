@@ -27,7 +27,7 @@ NBox {
       id: avatarBox
       width: 40 * scaling
       height: 40 * scaling
-      
+
       Image {
         id: avatarImage
         anchors.fill: parent
@@ -52,17 +52,29 @@ NBox {
     ColumnLayout {
       Layout.fillWidth: true
       spacing: 2 * scaling
-      NText { text: Quickshell.env("USER") || "user" }
-      NText { text: "System Uptime: —"; color: Colors.textSecondary }
+      NText {
+        text: Quickshell.env("USER") || "user"
+      }
+      NText {
+        text: "System Uptime: —"
+        color: Colors.textSecondary
+      }
     }
 
     RowLayout {
       spacing: Style.marginSmall * scaling
       Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
-      Item { Layout.fillWidth: true }
-      NIconButton { icon: "settings"; sizeMultiplier: 0.8 }
-      NIconButton { icon: "power_settings_new"; sizeMultiplier: 0.8 }
+      Item {
+        Layout.fillWidth: true
+      }
+      NIconButton {
+        icon: "settings"
+        sizeMultiplier: 0.8
+      }
+      NIconButton {
+        icon: "power_settings_new"
+        sizeMultiplier: 0.8
+      }
     }
   }
 }
-

@@ -6,7 +6,7 @@ Rectangle {
   id: root
 
   readonly property real scaling: Scaling.scale(screen)
-  property real value: 0           // 0..100 (or any range visually mapped)
+  property real value: 0 // 0..100 (or any range visually mapped)
   property string icon: ""
   property string suffix: "%"
 
@@ -109,4 +109,3 @@ Rectangle {
     }
   }
 }
-

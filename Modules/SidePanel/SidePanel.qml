@@ -6,7 +6,6 @@ import Quickshell.Wayland
 import qs.Services
 import qs.Widgets
 
-
 NLoader {
   id: root
 
@@ -46,7 +45,6 @@ NLoader {
       Component.onCompleted: show()
 
       // Inline helpers moved to dedicated widgets: NCard and NCircleStat
-
       Rectangle {
         id: panelBackground
         color: Colors.backgroundPrimary
@@ -61,13 +59,14 @@ NLoader {
         // Place the panel just below the bar (overlay content starts below bar due to topMargin)
         y: Style.marginSmall * scaling
         // Center horizontally under the anchorX, clamped to the screen bounds
-        x: Math.max(
-             Style.marginSmall * scaling,
-             Math.min(parent.width - width - Style.marginSmall * scaling,
+        x: Math.max(Style.marginSmall * scaling, Math.min(
+                      parent.width - width - Style.marginSmall * scaling,
                       Math.round(anchorX - width / 2)))
 
         // Prevent closing when clicking in the panel bg
-        MouseArea { anchors.fill: parent }
+        MouseArea {
+          anchors.fill: parent
+        }
 
         // Content wrapper to ensure childrenRect drives implicit height
         Item {
@@ -88,8 +87,14 @@ NLoader {
             spacing: sidePanel.cardSpacing
 
             // Cards (consistent inter-card spacing via ColumnLayout spacing)
-            ProfileCard { Layout.topMargin: 0; Layout.bottomMargin: 0 }
-            WeatherCard { Layout.topMargin: 0; Layout.bottomMargin: 0 }
+            ProfileCard {
+              Layout.topMargin: 0
+              Layout.bottomMargin: 0
+            }
+            WeatherCard {
+              Layout.topMargin: 0
+              Layout.bottomMargin: 0
+            }
 
             // Middle section: media + stats column
             RowLayout {
@@ -99,10 +104,16 @@ NLoader {
               spacing: sidePanel.cardSpacing
 
               // Media card
-              MediaCard { id: mediaCard; Layout.fillWidth: true; implicitHeight: statsCard.implicitHeight }
+              MediaCard {
+                id: mediaCard
+                Layout.fillWidth: true
+                implicitHeight: statsCard.implicitHeight
+              }
 
               // System monitors combined in one card
-              SystemCard { id: statsCard }
+              SystemCard {
+                id: statsCard
+              }
             }
 
             // Bottom actions (two grouped rows of round buttons)
@@ -111,7 +122,7 @@ NLoader {
               Layout.topMargin: 0
               Layout.bottomMargin: 0
               spacing: sidePanel.cardSpacing
-              
+
               // Power Profiles: performance, balanced, eco
               NBox {
                 Layout.fillWidth: true
@@ -122,26 +133,30 @@ NLoader {
                   anchors.fill: parent
                   anchors.margins: Style.marginSmall * scaling
                   spacing: sidePanel.cardSpacing
-                  Item { Layout.fillWidth: true }
+                  Item {
+                    Layout.fillWidth: true
+                  }
                   // Performance
                   NIconButton {
                     icon: "speed"
                     sizeMultiplier: 1.0
-                    onClicked: function () { /* TODO: hook to power profile */ }
+                    onClicked: function () {/* TODO: hook to power profile */ }
                   }
                   // Balanced
                   NIconButton {
                     icon: "balance"
                     sizeMultiplier: 1.0
-                    onClicked: function () { /* TODO: hook to power profile */ }
+                    onClicked: function () {/* TODO: hook to power profile */ }
                   }
                   // Eco
                   NIconButton {
                     icon: "eco"
                     sizeMultiplier: 1.0
-                    onClicked: function () { /* TODO: hook to power profile */ }
+                    onClicked: function () {/* TODO: hook to power profile */ }
                   }
-                  Item { Layout.fillWidth: true }
+                  Item {
+                    Layout.fillWidth: true
+                  }
                 }
               }
 
@@ -155,12 +170,22 @@ NLoader {
                   anchors.fill: parent
                   anchors.margins: Style.marginSmall * scaling
                   spacing: sidePanel.cardSpacing
-                  Item { Layout.fillWidth: true }
+                  Item {
+                    Layout.fillWidth: true
+                  }
                   // Record
-                  NIconButton { icon: "fiber_manual_record"; sizeMultiplier: 1.0 }
+                  NIconButton {
+                    icon: "fiber_manual_record"
+                    sizeMultiplier: 1.0
+                  }
                   // Wallpaper
-                  NIconButton { icon: "image"; sizeMultiplier: 1.0 }
-                  Item { Layout.fillWidth: true }
+                  NIconButton {
+                    icon: "image"
+                    sizeMultiplier: 1.0
+                  }
+                  Item {
+                    Layout.fillWidth: true
+                  }
                 }
               }
             }

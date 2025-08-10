@@ -30,12 +30,21 @@ NBox {
         color: Colors.accentSecondary
       }
       ColumnLayout {
-        NText { text: "Dinslaken (GMT+2)" }
-        NText { text: "26°C"; font.pointSize: (Style.fontSizeXL + 6) * scaling }
+        NText {
+          text: "Dinslaken (GMT+2)"
+        }
+        NText {
+          text: "26°C"
+          font.pointSize: (Style.fontSizeXL + 6) * scaling
+        }
       }
     }
 
-    Rectangle { height: 1; width: parent.width; color: Colors.backgroundTertiary }
+    Rectangle {
+      height: 1
+      width: parent.width
+      color: Colors.backgroundTertiary
+    }
 
     RowLayout {
       Layout.fillWidth: true
@@ -44,16 +53,20 @@ NBox {
         model: 5
         delegate: ColumnLayout {
           spacing: 2 * scaling
-          NText { text: ["Sun","Mon","Tue","Wed","Thu"][index] }
+          NText {
+            text: ["Sun", "Mon", "Tue", "Wed", "Thu"][index]
+          }
           Text {
             text: index % 2 === 0 ? "wb_sunny" : "cloud"
             font.family: "Material Symbols Outlined"
             color: Colors.textSecondary
           }
-          NText { text: "26° / 14°"; color: Colors.textSecondary }
+          NText {
+            text: "26° / 14°"
+            color: Colors.textSecondary
+          }
         }
       }
     }
   }
 }
-

@@ -17,4 +17,3 @@ Rectangle {
   border.width: Math.min(1, Style.borderThin * scaling)
   clip: true
 }
-

@@ -23,7 +23,9 @@ Singleton {
         const clamped = Math.max(0.6, Math.min(1.8, overrideScale))
         return clamped
       }
-    } catch (e) {}
+    } catch (e) {
+
+    }
 
     if (typeof aScreen !== 'undefined' & aScreen) {
 
