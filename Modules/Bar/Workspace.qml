@@ -13,7 +13,6 @@ Item {
   property bool hovered: false
 
   readonly property real scaling: Scaling.scale(screen)
-  property var modelData
 
   signal workspaceChanged(int workspaceId, color accentColor)
 
