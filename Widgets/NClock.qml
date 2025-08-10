@@ -6,6 +6,9 @@ Rectangle {
   id: root
 
   readonly property real scaling: Scaling.scale(screen)
+  property var onEntered: function () {}
+  property var onExited: function () {}
+  property var onClicked: function () {}
 
   width: textItem.paintedWidth
   height: textItem.paintedHeight
@@ -22,28 +25,8 @@ Rectangle {
     anchors.fill: parent
     cursorShape: Qt.PointingHandCursor
     hoverEnabled: true
-    onEntered: {
-      if (!calendar.visible) {
-        tooltip.show()
-      }
-    }
-    onExited: {
-      tooltip.hide()
-    }
-    onClicked: function () {
-      calendar.visible = !calendar.visible
-      tooltip.hide()
-    }
-  }
-
-  NCalendar {
-    id: calendar
-    visible: false
-  }
-
-  NTooltip {
-    id: tooltip
-    text: Time.dateString
-    target: root
+    onEntered:  root.onEntered()
+    onExited: root.onExited()
+    onClicked: root.onClicked()
   }
 }
