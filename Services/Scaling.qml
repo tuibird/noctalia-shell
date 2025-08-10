@@ -57,6 +57,6 @@ Singleton {
     }
 
     // 3) Safe default
-    return 1.4
+    return 1.0
   }
 }
