@@ -9,9 +9,9 @@ Singleton {
 
   property var date: new Date()
   property string time: Settings.data.location.use12HourClock ? Qt.formatDateTime(
-                                                             date,
-                                                             "h:mm AP") : Qt.formatDateTime(
-                                                             date, "HH:mm")
+                                                                  date,
+                                                                  "h:mm AP") : Qt.formatDateTime(
+                                                                  date, "HH:mm")
   property string dateString: {
     let now = date
     let dayName = now.toLocaleDateString(Qt.locale(), "ddd")

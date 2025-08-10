@@ -15,7 +15,7 @@ Singleton {
   property string colorsFile: Quickshell.env("NOCTALIA_COLORS_FILE")
                               || (settingsDir + "colors.json")
   property var data: settingAdapter
-  
+
   // Needed to only have one NPanel loaded at a time.
   property var openPanel: null
 
@@ -32,7 +32,6 @@ Singleton {
     // Qt.callLater(function () {
     //     WallpaperManager.setCurrentWallpaper(settings.currentWallpaper, true);
     // })
-
     id: settingFileView
 
     path: settingsFile

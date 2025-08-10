@@ -69,8 +69,7 @@ Singleton {
     if (Settings.data.wallpaper.isRandom && !randomWallpaperTimer.running) {
       randomWallpaperTimer.start()
       setRandomWallpaper()
-    } else if (!Settings.data.randomWallpaper
-               && randomWallpaperTimer.running) {
+    } else if (!Settings.data.randomWallpaper && randomWallpaperTimer.running) {
       randomWallpaperTimer.stop()
     }
   }

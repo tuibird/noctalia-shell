@@ -66,37 +66,38 @@ NLoader {
             anchors.fill: parent
             antialiasing: true
             renderTarget: Canvas.FramebufferObject
-            onPaint: function() {
-              const ctx = getContext("2d");
-              ctx.reset();
-              ctx.clearRect(0, 0, width, height);
+            onPaint: function () {
+              const ctx = getContext("2d")
+              ctx.reset()
+              ctx.clearRect(0, 0, width, height)
               // Solid white base (alpha=1)
-              ctx.globalCompositeOperation = "source-over";
-              ctx.fillStyle = "#ffffffff";
-              ctx.fillRect(0, 0, width, height);
+              ctx.globalCompositeOperation = "source-over"
+              ctx.fillStyle = "#ffffffff"
+              ctx.fillRect(0, 0, width, height)
 
               // Punch hole using destination-out with rounded rect path
-              const x = Math.round(root.borderWidth / 2);
-              const y = Math.round(root.borderWidth / 2);
-              const w = Math.max(0, width - root.borderWidth);
-              const h = Math.max(0, height - root.borderWidth);
-              const r = Math.max(0, Math.min(root.innerRadius, Math.min(w, h) / 2));
+              const x = Math.round(root.borderWidth / 2)
+              const y = Math.round(root.borderWidth / 2)
+              const w = Math.max(0, width - root.borderWidth)
+              const h = Math.max(0, height - root.borderWidth)
+              const r = Math.max(0, Math.min(root.innerRadius,
+                                             Math.min(w, h) / 2))
 
-              ctx.globalCompositeOperation = "destination-out";
-              ctx.fillStyle = "#ffffffff";
-              ctx.beginPath();
+              ctx.globalCompositeOperation = "destination-out"
+              ctx.fillStyle = "#ffffffff"
+              ctx.beginPath()
               // rounded rectangle path using arcTo
-              ctx.moveTo(x + r, y);
-              ctx.lineTo(x + w - r, y);
-              ctx.arcTo(x + w, y, x + w, y + r, r);
-              ctx.lineTo(x + w, y + h - r);
-              ctx.arcTo(x + w, y + h, x + w - r, y + h, r);
-              ctx.lineTo(x + r, y + h);
-              ctx.arcTo(x, y + h, x, y + h - r, r);
-              ctx.lineTo(x, y + r);
-              ctx.arcTo(x, y, x + r, y, r);
-              ctx.closePath();
-              ctx.fill();
+              ctx.moveTo(x + r, y)
+              ctx.lineTo(x + w - r, y)
+              ctx.arcTo(x + w, y, x + w, y + r, r)
+              ctx.lineTo(x + w, y + h - r)
+              ctx.arcTo(x + w, y + h, x + w - r, y + h, r)
+              ctx.lineTo(x + r, y + h)
+              ctx.arcTo(x, y + h, x, y + h - r, r)
+              ctx.lineTo(x, y + r)
+              ctx.arcTo(x, y, x + r, y, r)
+              ctx.closePath()
+              ctx.fill()
             }
             onWidthChanged: requestPaint()
             onHeightChanged: requestPaint()
@@ -105,9 +106,13 @@ NLoader {
           // Repaint mask when properties change
           Connections {
             target: root
-            function onBorderWidthChanged() { maskSource.requestPaint() }
-            function onRingColorChanged() { /* no-op for mask */ }
-            function onInnerRadiusChanged() { maskSource.requestPaint() }
+            function onBorderWidthChanged() {
+              maskSource.requestPaint()
+            }
+            function onRingColorChanged() {/* no-op for mask */ }
+            function onInnerRadiusChanged() {
+              maskSource.requestPaint()
+            }
           }
 
           // Texture for maskSource; hides the original
@@ -133,4 +138,3 @@ NLoader {
     }
   }
 }
-

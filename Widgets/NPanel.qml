@@ -20,11 +20,13 @@ PanelWindow {
   function show() {
     // Ensure only one panel is visible at a time using Settings as ephemeral store
     try {
-      if (Settings.openPanel && Settings.openPanel !== outerPanel && Settings.openPanel.hide) {
+      if (Settings.openPanel && Settings.openPanel !== outerPanel
+          && Settings.openPanel.hide) {
         Settings.openPanel.hide()
       }
       Settings.openPanel = outerPanel
     } catch (e) {
+
       // ignore
     }
     visible = true
@@ -56,13 +58,19 @@ PanelWindow {
 
   Component.onDestruction: {
     try {
-      if (visible && Settings.openPanel === outerPanel) Settings.openPanel = null
-    } catch (e) {}
+      if (visible && Settings.openPanel === outerPanel)
+        Settings.openPanel = null
+    } catch (e) {
+
+    }
   }
 
-  onVisibleChanged: function() {
+  onVisibleChanged: function () {
     try {
-      if (!visible && Settings.openPanel === outerPanel) Settings.openPanel = null
-    } catch (e) {}
+      if (!visible && Settings.openPanel === outerPanel)
+        Settings.openPanel = null
+    } catch (e) {
+
+    }
   }
 }
