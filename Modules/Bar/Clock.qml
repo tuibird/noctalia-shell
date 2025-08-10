@@ -17,12 +17,12 @@ NClock {
     visible: false
   }
 
-  onEntered: function (){
+  onEntered: function () {
     if (!calendar.visible) {
       tooltip.show()
     }
   }
-  onExited: function (){
+  onExited: function () {
     tooltip.hide()
   }
   onClicked: function () {

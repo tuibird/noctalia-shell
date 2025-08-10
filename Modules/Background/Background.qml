@@ -4,42 +4,41 @@ import Quickshell.Wayland
 import qs.Services
 
 ShellRoot {
-    
-    property var modelData
-    property string wallpaperSource: Qt.resolvedUrl("../../Assets/Tests/wallpaper.png")
 
-    Variants {
-        model: Quickshell.screens
+  property var modelData
+  property string wallpaperSource: Qt.resolvedUrl(
+                                     "../../Assets/Tests/wallpaper.png")
 
-        PanelWindow {
-            required property ShellScreen modelData
+  Variants {
+    model: Quickshell.screens
 
-            visible: wallpaperSource !== ""
-            anchors {
-                bottom: true
-                top: true
-                right: true
-                left: true
-            }
-            margins {
-                top: 0
-            }
-            color: "transparent"
-            screen: modelData
-            WlrLayershell.layer: WlrLayer.Background
-            WlrLayershell.exclusionMode: ExclusionMode.Ignore
-            WlrLayershell.namespace: "quickshell-wallpaper"
-            Image {
-                anchors.fill: parent
-                fillMode: Image.PreserveAspectCrop
-                source: wallpaperSource
-                visible: wallpaperSource !== ""
-                cache: true
-                smooth: true
-                mipmap: false
-            }
-        }
+    PanelWindow {
+      required property ShellScreen modelData
+
+      visible: wallpaperSource !== ""
+      anchors {
+        bottom: true
+        top: true
+        right: true
+        left: true
+      }
+      margins {
+        top: 0
+      }
+      color: "transparent"
+      screen: modelData
+      WlrLayershell.layer: WlrLayer.Background
+      WlrLayershell.exclusionMode: ExclusionMode.Ignore
+      WlrLayershell.namespace: "quickshell-wallpaper"
+      Image {
+        anchors.fill: parent
+        fillMode: Image.PreserveAspectCrop
+        source: wallpaperSource
+        visible: wallpaperSource !== ""
+        cache: true
+        smooth: true
+        mipmap: false
+      }
     }
-
-
+  }
 }

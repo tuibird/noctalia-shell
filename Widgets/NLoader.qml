@@ -16,16 +16,19 @@ Loader {
   sourceComponent: panel
 
   onActiveChanged: {
-    if (active && item && item.show) item.show()
+    if (active && item && item.show)
+      item.show()
   }
 
   onItemChanged: {
-    if (active && item && item.show) item.show()
+    if (active && item && item.show)
+      item.show()
   }
 
   Connections {
     target: loader.item
-    function onDismissed() { loader.isLoaded = false }
+    function onDismissed() {
+      loader.isLoaded = false
+    }
   }
 }
-

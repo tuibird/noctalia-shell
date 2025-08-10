@@ -25,7 +25,7 @@ Rectangle {
     anchors.fill: parent
     cursorShape: Qt.PointingHandCursor
     hoverEnabled: true
-    onEntered:  root.onEntered()
+    onEntered: root.onEntered()
     onExited: root.onExited()
     onClicked: root.onClicked()
   }

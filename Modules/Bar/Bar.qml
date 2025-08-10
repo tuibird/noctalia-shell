@@ -14,7 +14,8 @@ PanelWindow {
   screen: modelData
   implicitHeight: Style.barHeight * scaling
   color: "transparent"
-  visible: Settings.settings.barMonitors.includes(modelData.name) || (Settings.settings.barMonitors.length === 0)
+  visible: Settings.settings.barMonitors.includes(modelData.name)
+           || (Settings.settings.barMonitors.length === 0)
 
   anchors {
     top: true
@@ -56,7 +57,6 @@ PanelWindow {
       spacing: Style.marginMedium * scaling
 
       Workspace {}
-
     }
 
     Row {
@@ -79,7 +79,9 @@ PanelWindow {
       NIconButton {
         id: demoPanelToggler
         icon: "experiment"
-        onClicked: function () { demoPanel.isLoaded = !demoPanel.isLoaded }
+        onClicked: function () {
+          demoPanel.isLoaded = !demoPanel.isLoaded
+        }
       }
     }
   }
