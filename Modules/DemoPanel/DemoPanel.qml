@@ -50,6 +50,7 @@ NLoader {
               onEntered: function() { myTooltip.show() }
               onExited: function() { myTooltip.hide() }
             }
+            NTooltip { id: myTooltip; target: myIconButton; positionAbove: false; text: "Hello world"; }
 
             NDivider { Layout.fillWidth: true }
           }
@@ -66,7 +67,7 @@ NLoader {
               onToggled: function(value: bool) { console.log("NToggle: " + value) }
             }
 
-            NTooltip { id: myTooltip; target: myIconButton; positionAbove: false; text: "Hello world" }
+
             NDivider { Layout.fillWidth: true }
           }
 
