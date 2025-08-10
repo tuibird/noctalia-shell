@@ -4,7 +4,6 @@ import QtQuick
 // NLoader {
 //   content: Component {
 //     NPanel {
-
 Loader {
   id: loader
 

@@ -40,32 +40,6 @@ Item {
                    Colors.accentPrimary.b + (Colors.error.b - Colors.accentPrimary.b) * factor, 1)
   }
 
-  NPill {
-    id: pill
-    icon: getIcon()
-    iconCircleColor: getVolumeColor()
-    collapsedIconColor: getIconColor()
-    autoHide: true
-    text: Math.round(Audio.volume * 100) + "%"
-    tooltipText: "Volume: " + Math.round(
-                   Audio.volume * 100) + "%\nLeft click for advanced settings.\nScroll up/down to change volume."
-    onClicked: function () {
-      console.log("onClicked")
-      // if (ioSelector.visible) {
-      //   ioSelector.dismiss()
-      // } else {
-      //   ioSelector.show()
-      // }
-    }
-    onWheel: function (angle) {
-      if (angle > 0) {
-        Audio.volumeIncrement()
-      } else if (angle < 0) {
-        Audio.volumeDecrement()
-      }
-    }
-  }
-
   // Connection used to open the pill when volume changes
   Connections {
     target: Audio.sink?.audio ? Audio.sink?.audio : null
@@ -80,8 +54,29 @@ Item {
     }
   }
 
+  NPill {
+    id: pill
+    icon: getIcon()
+    iconCircleColor: getVolumeColor()
+    collapsedIconColor: getIconColor()
+    autoHide: true
+    text: Math.round(Audio.volume * 100) + "%"
+    tooltipText: "Volume: " + Math.round(
+                   Audio.volume * 100) + "%\nLeft click for advanced settings.\nScroll up/down to change volume."
+
+    onWheel: function (angle) {
+      if (angle > 0) {
+        Audio.volumeIncrement()
+      } else if (angle < 0) {
+        Audio.volumeDecrement()
+      }
+    }
+    onClicked: function () {
+      ioSelector.isLoaded = !ioSelector.isLoaded
+    }
+  }
+
   AudioDeviceSelector {
     id: ioSelector
-    //     onPanelClosed: ioSelector.dismiss()
   }
 }

@@ -37,7 +37,7 @@ Singleton {
   }
 
   PwObjectTracker {
-    objects: [Pipewire.defaultAudioSink]
+    objects: [Pipewire.defaultAudioSink, Pipewire.nodes]
   }
 
   Connections {
