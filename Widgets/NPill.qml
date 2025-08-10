@@ -21,6 +21,7 @@ Item {
   property var onEntered: function () {}
   property var onExited: function () {}
   property var onClicked: function () {}
+  property var onWheel: function (delta) {}
 
   // Internal state
   property bool showPill: false
@@ -204,6 +205,9 @@ Item {
     onClicked: {
       root.onClicked()
     }
+    onWheel: wheel => {
+               root.onWheel(wheel.angleDelta.y)
+             }
   }
 
   function show() {
