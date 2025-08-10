@@ -9,6 +9,7 @@ Item {
 
   property string icon: ""
   property string text: ""
+  property string tooltipText: ""
   property color pillColor: Colors.surfaceVariant
   property color textColor: Colors.textPrimary
   property color iconCircleColor: Colors.accentPrimary
@@ -30,6 +31,7 @@ Item {
                                         1, textItem.implicitWidth
                                         + pillPaddingHorizontal * 2 + pillOverlap)
 
+  // TBC, do we use those ?
   signal shown
   signal hidden
 
@@ -165,6 +167,37 @@ Item {
     }
   }
 
+  NTooltip {
+    id: tooltip
+    positionAbove: false
+    target: pill
+    delay: Style.tooltipDelayLong
+    text: root.tooltipText
+  }
+
+  Timer {
+    id: showTimer
+    interval: Style.pillDelay
+    onTriggered: {
+      if (!showPill) {
+        showAnim.start()
+      }
+    }
+  }
+
+  MouseArea {
+    anchors.fill: parent
+    hoverEnabled: true
+    onEntered: {
+      showDelayed()
+      tooltip.show()
+    }
+    onExited: {
+      hide()
+      tooltip.hide()
+    }
+  }
+
   function show() {
     if (!showPill) {
       shouldAnimateHide = autoHide
@@ -189,16 +222,6 @@ Item {
     } else {
       hideAnim.stop()
       delayedHideAnim.restart()
-    }
-  }
-
-  Timer {
-    id: showTimer
-    interval: Style.pillDelay
-    onTriggered: {
-      if (!showPill) {
-        showAnim.start()
-      }
     }
   }
 }

@@ -62,62 +62,43 @@ Item {
     iconCircleColor: Colors.accentPrimary
     iconTextColor: Colors.backgroundPrimary
     textColor: charging ? Colors.accentPrimary : Colors.textPrimary
-    MouseArea {
-      anchors.fill: parent
-      hoverEnabled: true
-      onEntered: {
-        pill.showDelayed()
-        batteryTooltip.show()
+    tooltipText: {
+      let lines = []
+      if (!root.isReady) {
+        return ""
       }
-      onExited: {
-        pill.hide()
-        batteryTooltip.show()
+
+      if (root.battery.timeToEmpty > 0) {
+        lines.push("Time left: " + Time.formatVagueHumanReadableTime(
+                     root.battery.timeToEmpty))
       }
-    }
-    NTooltip {
-      id: batteryTooltip
-      positionAbove: false
-      target: pill
-      delay: Style.tooltipDelayLong
-      text: {
-        let lines = []
-        if (!root.isReady) {
-          return ""
-        }
 
-        if (root.battery.timeToEmpty > 0) {
-          lines.push("Time left: " + Time.formatVagueHumanReadableTime(
-                       root.battery.timeToEmpty))
-        }
+      if (root.battery.timeToFull > 0) {
+        lines.push("Time until full: " + Time.formatVagueHumanReadableTime(
+                     root.battery.timeToFull))
+      }
 
-        if (root.battery.timeToFull > 0) {
-          lines.push("Time until full: " + Time.formatVagueHumanReadableTime(
-                       root.battery.timeToFull))
-        }
-
-        if (root.battery.changeRate !== undefined) {
-          const rate = root.battery.changeRate
-          if (rate > 0) {
-            lines.push(
-                  root.charging ? "Charging rate: " + rate.toFixed(
-                                    2) + " W" : "Discharging rate: " + rate.toFixed(
-                                    2) + " W")
-          } else if (rate < 0) {
-            lines.push("Discharging rate: " + Math.abs(rate).toFixed(2) + " W")
-          } else {
-            lines.push("Estimating...")
-          }
+      if (root.battery.changeRate !== undefined) {
+        const rate = root.battery.changeRate
+        if (rate > 0) {
+          lines.push(
+                root.charging ? "Charging rate: " + rate.toFixed(
+                                  2) + " W" : "Discharging rate: " + rate.toFixed(
+                                  2) + " W")
+        } else if (rate < 0) {
+          lines.push("Discharging rate: " + Math.abs(rate).toFixed(2) + " W")
         } else {
-          lines.push(root.charging ? "Charging" : "Discharging")
+          lines.push("Estimating...")
         }
-
-        if (root.battery.healthPercentage !== undefined
-            && root.battery.healthPercentage > 0) {
-          lines.push("Health: " + Math.round(
-                       root.battery.healthPercentage) + "%")
-        }
-        return lines.join("\n")
+      } else {
+        lines.push(root.charging ? "Charging" : "Discharging")
       }
+
+      if (root.battery.healthPercentage !== undefined
+          && root.battery.healthPercentage > 0) {
+        lines.push("Health: " + Math.round(root.battery.healthPercentage) + "%")
+      }
+      return lines.join("\n")
     }
   }
 }
