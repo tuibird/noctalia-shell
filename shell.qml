@@ -12,21 +12,20 @@ import qs.Modules.Background
 ShellRoot {
   id: root
 
+
   Variants {
     model: Quickshell.screens
 
-    delegate: Item {
-      required property ShellScreen modelData
-      
-      Bar {
-        modelData: parent.modelData
-      }
-
-     // Background {}
-
-     // Overview {}
+    delegate: Bar {
+      modelData: item
     }
+
+
+    Background {}
+
+    Overview {}
   }
+
 
   DemoPanel {
     id: demoPanel
