@@ -5,8 +5,6 @@ import Quickshell
 import Quickshell.Wayland
 import qs.Services
 
-import "../Helpers/Holidays.js" as Holidays
-
 NPanel {
   id: root
 
@@ -88,25 +86,12 @@ NPanel {
       MonthGrid {
         id: calendar
 
-        property var holidays: []
-
-        // Fetch holidays when calendar is opened or month/year changes
-        function updateHolidays() {
-          Holidays.getHolidaysForMonth(calendar.year, calendar.month,
-                                       function (holidays) {
-                                         calendar.holidays = holidays
-                                       })
-        }
-
         Layout.fillWidth: true
         Layout.leftMargin: Style.marginSmall * scaling
         Layout.rightMargin: Style.marginSmall * scaling
         spacing: 0
         month: Time.date.getMonth()
         year: Time.date.getFullYear()
-        onMonthChanged: updateHolidays()
-        onYearChanged: updateHolidays()
-        Component.onCompleted: updateHolidays()
 
         // Optionally, update when the panel becomes visible
         Connections {
@@ -114,7 +99,6 @@ NPanel {
             if (root.visible) {
               calendar.month = Time.date.getMonth()
               calendar.year = Time.date.getFullYear()
-              calendar.updateHolidays()
             }
           }
 
@@ -122,70 +106,18 @@ NPanel {
         }
 
         delegate: Rectangle {
-          property var holidayInfo: calendar.holidays.filter(function (h) {
-            var d = new Date(h.date)
-            return d.getDate() === model.day && d.getMonth() === model.month
-                && d.getFullYear() === model.year
-          })
-          property bool isHoliday: holidayInfo.length > 0
-
           width: Style.baseWidgetSize * scaling
           height: Style.baseWidgetSize * scaling
           radius: Style.radiusSmall * scaling
-          color: {
-            if (model.today)
-              return Colors.accentPrimary
-
-            if (mouseArea2.containsMouse)
-              return Colors.backgroundTertiary
-
-            return "transparent"
-          }
-
-          // Holiday dot indicator
-          Rectangle {
-            visible: isHoliday
-            width: Style.baseWidgetSize / 8 * scaling
-            height: Style.baseWidgetSize / 8 * scaling
-            radius: Style.radiusSmall * scaling
-            color: Colors.accentTertiary
-            anchors.top: parent.top
-            anchors.right: parent.right
-            anchors.topMargin: Style.marginTiny * scaling
-            anchors.rightMargin: Style.marginTiny * scaling
-            z: 2
-          }
+          color: model.today ? Colors.accentPrimary : "transparent"
 
           NText {
             anchors.centerIn: parent
             text: model.day
             color: model.today ? Colors.onAccent : Colors.textPrimary
-            opacity: model.month === calendar.month ? (mouseArea2.containsMouse ? Style.opacityFull : Style.opacityHeavy) : Style.opacityLight
+            opacity: model.month === calendar.month ? Style.opacityHeavy : Style.opacityLight
             font.pointSize: Style.fontSizeMedium * scaling
             font.bold: model.today ? true : false
-          }
-
-          MouseArea {
-            id: mouseArea2
-
-            anchors.fill: parent
-            hoverEnabled: true
-            onEntered: {
-              if (isHoliday) {
-                holidayTooltip.text = holidayInfo.map(function (h) {
-                  return h.localName + (h.name !== h.localName ? " (" + h.name + ")" : "")
-                      + (h.global ? " [Global]" : "")
-                }).join(", ")
-                holidayTooltip.target = parent
-                holidayTooltip.show()
-              }
-            }
-            onExited: holidayTooltip.hide()
-          }
-
-          NTooltip {
-            id: holidayTooltip
-            text: ""
           }
 
           Behavior on color {
