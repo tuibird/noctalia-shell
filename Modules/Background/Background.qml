@@ -6,7 +6,7 @@ import qs.Services
 ShellRoot {
     
     property var modelData
-    property string wallpaperSource: "/home/lysec/Pictures/wallpapers/wallhaven-6lqvql.jpg"
+    property string wallpaperSource: "/home/seb/Development/misc/Noctalia/Assets/Tests/wallpaper.png"
 
     Variants {
         model: Quickshell.screens

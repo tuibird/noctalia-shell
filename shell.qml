@@ -19,13 +19,15 @@ ShellRoot {
     delegate: Bar {
       modelData: item
     }
-
-
-    // Background {}
-
-    // Overview {}
   }
+  
+  Variants {
+    model: Quickshell.screens
 
+    delegate: Background {
+      modelData: item
+    }
+  }
 
   DemoPanel {
     id: demoPanel
