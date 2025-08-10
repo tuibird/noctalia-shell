@@ -24,22 +24,6 @@ ShellRoot {
   Background {}
   Overview {}
 
-  // Variants {
-  //   model: Quickshell.screens
-
-  //   delegate: Background {
-  //     modelData: item
-  //   }
-  // }
-
-  // Variants {
-  //   model: Quickshell.screens
-
-  //   delegate: Overview {
-  //     modelData: item
-  //   }
-  // }
-
   DemoPanel {
     id: demoPanel
   }

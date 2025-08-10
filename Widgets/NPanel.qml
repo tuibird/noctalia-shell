@@ -10,9 +10,11 @@ PanelWindow {
   property bool showOverlay: Settings.settings.dimPanels
   property int topMargin: Style.barHeight * scaling
   property color overlayColor: showOverlay ? Colors.overlay : "transparent"
+  signal dismissed()
 
   function hide() {
     visible = false
+    dismissed()
   }
 
   function show() {
