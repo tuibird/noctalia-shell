@@ -82,6 +82,14 @@ Variants {
           anchors.verticalCenter: parent.verticalCenter
         }
 
+        // TODO: Notification Icon
+        Wifi {
+          anchors.verticalCenter: parent.verticalCenter
+        }
+
+        // Bluetooth {
+        //     anchors.verticalCenter: parent.verticalCenter
+        // }
         Battery {
           anchors.verticalCenter: parent.verticalCenter
         }
