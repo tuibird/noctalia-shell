@@ -45,7 +45,6 @@ Item {
 
       // Optional leading icon slot in the future
       // Item { Layout.preferredWidth: 0 }
-
       TextField {
         id: input
         Layout.fillWidth: true
@@ -63,4 +62,3 @@ Item {
     }
   }
 }
-
