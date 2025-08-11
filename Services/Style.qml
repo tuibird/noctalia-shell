@@ -54,7 +54,7 @@ Singleton {
 
   // Delays
   property int tooltipDelay: 300
-  property int tooltipDelayLong: 1500
+  property int tooltipDelayLong: 1200
   property int pillDelay: 500
 
   // Margins and spacing
