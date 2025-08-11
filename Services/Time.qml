@@ -39,8 +39,8 @@ Singleton {
   }
 
   // Returns a Unix Timestamp (in seconds)
-  readonly property string timestamp:  {
-    return Math.floor(Date.now() / 1000);
+  readonly property string timestamp: {
+    return Math.floor(Date.now() / 1000)
   }
 
   // Format an easy to read approximate duration ex: 4h32m

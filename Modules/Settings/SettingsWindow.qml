@@ -96,7 +96,7 @@ NLoader {
             Column {
               anchors.fill: parent
               anchors.margins: Style.marginSmall * scaling
-              spacing: 2 * scaling  // Minimal spacing between tabs
+              spacing: 2 * scaling // Minimal spacing between tabs
 
               Repeater {
                 id: sections
@@ -106,7 +106,7 @@ NLoader {
                   id: tabItem
                   readonly property bool selected: index === settingsPanel.currentTabIndex
                   width: parent.width
-                  height: 32 * scaling  // Back to original height
+                  height: 32 * scaling // Back to original height
                   radius: Style.radiusSmall * scaling
                   color: selected ? Colors.accentPrimary : (tabItem.hovering ? Colors.highlight : "transparent")
                   border.color: "transparent"

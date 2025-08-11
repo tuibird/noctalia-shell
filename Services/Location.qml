@@ -40,21 +40,18 @@ Singleton {
     }
   }
 
-
   Timer {
     id: updateTimer
     interval: 60 * 1000
     repeat: true
     onTriggered: {
-      updateWeather();
+      updateWeather()
     }
   }
 
   // --------------------------------
-  function init() {
-    // does nothing but ensure the singleton is created
+  function init() {// does nothing but ensure the singleton is created
   }
-
 
   // --------------------------------
   function updateWeather() {
@@ -135,7 +132,7 @@ Singleton {
     xhr.send()
   }
 
-    // --------------------------------
+  // --------------------------------
   function errorCallback(message) {
     console.error(message)
   }
