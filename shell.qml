@@ -1,5 +1,4 @@
-// Disable reload popup
-//@ pragma Env QS_NO_RELOAD_POPUP=1
+// Disable reload popup add this as a new row:  //pragma Env QS_NO_RELOAD_POPUP=1
 import QtQuick
 import Quickshell
 import Quickshell.Io

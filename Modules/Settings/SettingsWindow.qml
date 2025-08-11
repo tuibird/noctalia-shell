@@ -17,9 +17,7 @@ NLoader {
       WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
 
       readonly property real scaling: Scaling.scale(screen)
-      // Active tab index unified for sidebar, header, and content stack
       property int currentTabIndex: 0
-      // Single source of truth for tabs (explicit icon/label here)
       property var tabsModel: [{
           "icon": "tune",
           "label": "General",
@@ -58,13 +56,11 @@ NLoader {
           "source": "Tabs/About.qml"
         }]
 
-      // Always default to the first tab (General) when the panel becomes visible
       onVisibleChanged: function () {
         if (visible)
           currentTabIndex = 0
       }
 
-      // Ensure panel shows itself once created
       Component.onCompleted: show()
 
       Rectangle {
@@ -78,18 +74,16 @@ NLoader {
         height: 640 * scaling
         anchors.centerIn: parent
 
-        // Prevent closing when clicking in the panel bg
         MouseArea {
           anchors.fill: parent
         }
 
-        // Main two-pane layout
         RowLayout {
           anchors.fill: parent
           anchors.margins: Style.marginLarge * scaling
           spacing: Style.marginLarge * scaling
 
-          // Sidebar
+          // Sidebar with tighter spacing
           Rectangle {
             id: sidebar
             Layout.preferredWidth: 260 * scaling
@@ -99,45 +93,55 @@ NLoader {
             border.color: Colors.outline
             border.width: Math.max(1, Style.borderThin * scaling)
 
-            ColumnLayout {
+            Column {
               anchors.fill: parent
               anchors.margins: Style.marginSmall * scaling
-              spacing: Style.marginSmall * scaling
+              spacing: 2 * scaling  // Minimal spacing between tabs
 
               Repeater {
                 id: sections
                 model: settingsPanel.tabsModel
 
                 delegate: Rectangle {
+                  id: tabItem
                   readonly property bool selected: index === settingsPanel.currentTabIndex
-                  Layout.fillWidth: true
-                  height: 44 * scaling
+                  width: parent.width
+                  height: 32 * scaling  // Back to original height
                   radius: Style.radiusSmall * scaling
-                  color: selected ? Colors.highlight : "transparent"
-                  border.color: Colors.outline
-                  border.width: Math.max(1, Style.borderThin * scaling)
+                  color: selected ? Colors.accentPrimary : (tabItem.hovering ? Colors.highlight : "transparent")
+                  border.color: "transparent"
+                  border.width: 0
+
+                  // Subtle hover effect: only icon/text color tint on hover
+                  property bool hovering: false
 
                   RowLayout {
                     anchors.fill: parent
-                    anchors.leftMargin: Style.marginMedium * scaling
-                    anchors.rightMargin: Style.marginMedium * scaling
-                    spacing: Style.marginSmall * scaling
+                    anchors.leftMargin: Style.marginSmall * scaling
+                    anchors.rightMargin: Style.marginSmall * scaling
+                    spacing: Style.marginTiny * scaling
                     NText {
                       text: modelData.icon
                       font.family: "Material Symbols Outlined"
                       font.variableAxes: {
                         "wght": (Font.Normal + Font.Bold) / 2.0
                       }
-                      color: selected ? Colors.onAccent : Colors.textSecondary
+                      color: selected ? Colors.onAccent : (tabItem.hovering ? Colors.onAccent : Colors.textSecondary)
                     }
                     NText {
                       text: modelData.label
-                      color: selected ? Colors.onAccent : Colors.textPrimary
+                      color: selected ? Colors.onAccent : (tabItem.hovering ? Colors.onAccent : Colors.textPrimary)
+                      font.weight: Style.fontWeightBold
                       Layout.fillWidth: true
                     }
                   }
                   MouseArea {
                     anchors.fill: parent
+                    hoverEnabled: true
+                    acceptedButtons: Qt.LeftButton
+                    onEntered: tabItem.hovering = true
+                    onExited: tabItem.hovering = false
+                    onCanceled: tabItem.hovering = false
                     onClicked: settingsPanel.currentTabIndex = index
                   }
                 }
@@ -145,7 +149,7 @@ NLoader {
             }
           }
 
-          // Content
+          // Content (unchanged)
           Rectangle {
             id: contentPane
             Layout.fillWidth: true
@@ -156,14 +160,12 @@ NLoader {
             border.width: Math.max(1, Style.borderThin * scaling)
             clip: true
 
-            // Content layout: header + divider + pages
             ColumnLayout {
               id: contentLayout
               anchors.fill: parent
               anchors.margins: Style.marginLarge * scaling
               spacing: Style.marginSmall * scaling
 
-              // Header row
               RowLayout {
                 id: headerRow
                 Layout.fillWidth: true
@@ -189,14 +191,12 @@ NLoader {
                 Layout.fillWidth: true
               }
 
-              // Stacked pages
               StackLayout {
                 id: stack
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 currentIndex: settingsPanel.currentTabIndex
 
-                // Pages generated from tabsModel
                 Repeater {
                   model: settingsPanel.tabsModel
                   delegate: Loader {
