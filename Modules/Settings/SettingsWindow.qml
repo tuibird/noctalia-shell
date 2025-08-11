@@ -17,6 +17,8 @@ NLoader {
       WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
 
       readonly property real scaling: Scaling.scale(screen)
+      // Active tab index unified for sidebar, header, and content stack
+      property int currentTabIndex: 0
       // Single source of truth for tabs
       // Each tab points to a QML file path. The content stack simply loads the file via Loader.source.
       property var tabsModel: [
@@ -33,13 +35,7 @@ NLoader {
 
       // Always default to the first tab (General) when the panel becomes visible
       onVisibleChanged: function () {
-        if (visible) {
-          Qt.callLater(function () {
-            if (typeof stack !== 'undefined' && stack) {
-              stack.currentIndex = 0
-            }
-          })
-        }
+        if (visible) currentTabIndex = 0
       }
 
       // Ensure panel shows itself once created
@@ -86,7 +82,7 @@ NLoader {
                 model: settingsPanel.tabsModel
 
                 delegate: Rectangle {
-                  readonly property bool selected: index === stack.currentIndex
+                  readonly property bool selected: index === settingsPanel.currentTabIndex
                   Layout.fillWidth: true
                   height: 44 * scaling
                   radius: Style.radiusSmall * scaling
@@ -107,7 +103,7 @@ NLoader {
                     }
                     NText { text: modelData.label; color: selected ? Colors.onAccent : Colors.textPrimary; Layout.fillWidth: true }
                   }
-                  MouseArea { anchors.fill: parent; onClicked: stack.currentIndex = index }
+                  MouseArea { anchors.fill: parent; onClicked: settingsPanel.currentTabIndex = index }
                 }
               }
             }
@@ -137,7 +133,7 @@ NLoader {
                 Layout.fillWidth: true
                 spacing: Style.marginSmall * scaling
                 NText {
-                  text: settingsPanel.tabsModel[stack.currentIndex].label
+                  text: settingsPanel.tabsModel[settingsPanel.currentTabIndex].label
                   font.weight: Style.fontWeightBold
                   color: Colors.textPrimary
                   Layout.fillWidth: true
@@ -145,7 +141,7 @@ NLoader {
                 NIconButton {
                   id: demoPanelToggle
                   icon: "close"
-                  tooltipText: "Open demo panel"
+                  tooltipText: "Close settings panel"
                   Layout.alignment: Qt.AlignVCenter
                   onClicked: function () { settingsWindow.isLoaded = !settingsWindow.isLoaded }
                 }
@@ -158,14 +154,13 @@ NLoader {
                 id: stack
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                currentIndex: 0
-                Component.onCompleted: currentIndex = 0
+                currentIndex: settingsPanel.currentTabIndex
 
                 // Pages generated from tabsModel
                 Repeater {
                   model: settingsPanel.tabsModel
                   delegate: Loader {
-                    active: index === stack.currentIndex
+                    active: index === settingsPanel.currentTabIndex
                     visible: active
                     source: modelData.source
                   }
