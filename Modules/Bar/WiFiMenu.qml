@@ -150,7 +150,7 @@ NLoader {
                         color: modelData.connected ? Colors.backgroundPrimary : (networkMouseArea.containsMouse ? Colors.backgroundPrimary : Colors.textPrimary)
                       }
 
-                      Text {
+                      NText {
                         visible: network.connectStatusSsid === modelData.ssid && network.connectStatus === "error"
                                  && network.connectError.length > 0
                         text: network.connectError
