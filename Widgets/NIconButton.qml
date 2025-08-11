@@ -18,6 +18,7 @@ Rectangle {
   property var onExited: function () {}
   property var onClicked: function () {}
   property real fontPointSize: Style.fontSizeMedium
+  property string fontFamily: "Material Symbols Outlined"
 
   implicitWidth: size
   implicitHeight: size
@@ -30,7 +31,7 @@ Rectangle {
     anchors.horizontalCenterOffset: 0
     anchors.verticalCenterOffset: 0
     text: root.icon
-    font.family: "Material Symbols Outlined"
+    font.family: fontFamily
     font.pointSize: root.fontPointSize * scaling
     color: root.hovering ? Colors.onAccent : Colors.textPrimary
     horizontalAlignment: Text.AlignHCenter
