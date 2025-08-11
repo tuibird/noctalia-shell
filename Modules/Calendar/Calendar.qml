@@ -21,7 +21,7 @@ NLoader {
         border.color: Colors.backgroundTertiary
         border.width: Math.max(1, Style.borderMedium * scaling)
         width: 340 * scaling
-        height: 320 * scaling  // Reduced height to eliminate bottom space
+        height: 320 * scaling // Reduced height to eliminate bottom space
         anchors.top: parent.top
         anchors.right: parent.right
         anchors.topMargin: Style.marginTiny * scaling
@@ -89,7 +89,7 @@ NLoader {
 
             Repeater {
               model: 7
-              
+
               NText {
                 text: {
                   // Use the locale's first day of week setting
@@ -112,7 +112,7 @@ NLoader {
             id: grid
 
             Layout.fillWidth: true
-            Layout.fillHeight: true  // Take remaining space
+            Layout.fillHeight: true // Take remaining space
             Layout.leftMargin: Style.marginSmall * scaling
             Layout.rightMargin: Style.marginSmall * scaling
             spacing: 0

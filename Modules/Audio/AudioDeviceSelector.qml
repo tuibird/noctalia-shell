@@ -38,8 +38,7 @@ NLoader {
       }
     }
   }
-} // NPanel {//   id: ioSelector// property int tabIndex: 0// property Item anchorItem: null// signal panelClosed()// function sinkNodes() {//     let nodes = Pipewire.nodes && Pipewire.nodes.values ? Pipewire.nodes.values.filter(function(n) {//         return n.isSink && n.audio && n.isStream === false;//     }) : [];//     if (Pipewire.defaultAudioSink)//         nodes = nodes.slice().sort(function(a, b) {//             if (a.id === Pipewire.defaultAudioSink.id)
-//                 return -1;
+} // NPanel {//   id: ioSelector// property int tabIndex: 0// property Item anchorItem: null// signal panelClosed()// function sinkNodes() {//     let nodes = Pipewire.nodes && Pipewire.nodes.values ? Pipewire.nodes.values.filter(function(n) {//         return n.isSink && n.audio && n.isStream === false;//     }) : [];//     if (Pipewire.defaultAudioSink)//         nodes = nodes.slice().sort(function(a, b) {//             if (a.id === Pipewire.defaultAudioSink.id)//                 return -1;
 
 //             if (b.id === Pipewire.defaultAudioSink.id)
 //                 return 1;

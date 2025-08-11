@@ -66,9 +66,15 @@ PanelWindow {
         border.color: Colors.accentPrimary
         border.width: Math.max(1, Style.borderThin * scaling)
         gradient: Gradient {
-        GradientStop { position: 0.0; color: Colors.backgroundTertiary }
-        GradientStop { position: 1.0; color: Colors.backgroundSecondary }
-    }
+          GradientStop {
+            position: 0.0
+            color: Colors.backgroundTertiary
+          }
+          GradientStop {
+            position: 1.0
+            color: Colors.backgroundSecondary
+          }
+        }
 
         // Animation properties
         property real scaleValue: 0.8

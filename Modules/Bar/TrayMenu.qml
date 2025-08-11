@@ -98,8 +98,7 @@ PopupWindow {
       required property var modelData
 
       width: listView.width
-      height: (modelData?.isSeparator) ? 8 * scaling : Math.max(32 * scaling,
-          text.height + 8)
+      height: (modelData?.isSeparator) ? 8 * scaling : Math.max(32 * scaling, text.height + 8)
       color: "transparent"
 
       property var subMenu: null
@@ -334,8 +333,7 @@ PopupWindow {
           required property var modelData
 
           width: listView.width
-          height: (modelData?.isSeparator) ? 8 * scaling : Math.max(32 * scaling,
-           subText.height + 8)
+          height: (modelData?.isSeparator) ? 8 * scaling : Math.max(32 * scaling, subText.height + 8)
           color: "transparent"
 
           property var subMenu: null
