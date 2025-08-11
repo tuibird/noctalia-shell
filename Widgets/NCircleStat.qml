@@ -21,7 +21,7 @@ Rectangle {
   color: flat ? "transparent" : Colors.backgroundSecondary
   radius: Style.radiusSmall * scaling
   border.color: flat ? "transparent" : Colors.backgroundTertiary
-  border.width: flat ? 0 : Math.min(1, Style.borderThin * scaling)
+  border.width: flat ? 0 : Math.max(1, Style.borderThin * scaling)
   clip: true
 
   // Repaint gauge when the bound value changes
@@ -90,7 +90,7 @@ Rectangle {
         radius: width / 2
         color: Colors.backgroundPrimary
         border.color: Colors.accentPrimary
-        border.width: Math.min(1, Style.borderThin * scaling)
+        border.width: Math.max(1, Style.borderThin * scaling)
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         anchors.rightMargin: 4 * scaling * contentScale

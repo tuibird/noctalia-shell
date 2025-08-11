@@ -102,7 +102,7 @@ Window {
     radius: Style.radiusMedium * scaling
     color: Colors.backgroundTertiary
     border.color: Colors.outline
-    border.width: Math.min(1, Style.borderThin * scaling)
+    border.width: Math.max(1, Style.borderThin * scaling)
     opacity: Style.opacityFull
     z: 1
   }

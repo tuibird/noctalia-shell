@@ -13,5 +13,5 @@ Rectangle {
   color: Colors.backgroundSecondary
   radius: Style.radiusMedium * scaling
   border.color: Colors.backgroundTertiary
-  border.width: Math.min(1, Style.borderThin * scaling)
+  border.width: Math.max(1, Style.borderThin * scaling)
 }

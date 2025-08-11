@@ -43,7 +43,7 @@ RowLayout {
     radius: height * 0.5
     color: value ? Colors.accentPrimary : Colors.surfaceVariant
     border.color: value ? Colors.accentPrimary : Colors.outline
-    border.width: Math.min(1, Style.borderMedium * scaling)
+    border.width: Math.max(1, Style.borderMedium * scaling)
 
     Rectangle {
       width: (Style.baseWidgetSize - 4) * scaling
@@ -51,7 +51,7 @@ RowLayout {
       radius: height * 0.5
       color: Colors.surface
       border.color: hovering ? Colors.textDisabled : Colors.outline
-      border.width: Math.min(1, Style.borderMedium * scaling)
+      border.width: Math.max(1, Style.borderMedium * scaling)
       y: 2 * scaling
       x: value ? switcher.width - width - 2 * scaling : 2 * scaling
 

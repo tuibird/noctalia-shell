@@ -50,7 +50,7 @@ NLoader {
         color: Colors.backgroundPrimary
         radius: Style.radiusLarge * scaling
         border.color: Colors.backgroundTertiary
-        border.width: Math.min(1, Style.borderMedium * scaling)
+        border.width: Math.max(1, Style.borderMedium * scaling)
         layer.enabled: true
         width: 460 * scaling
         property real innerMargin: sidePanel.cardSpacing

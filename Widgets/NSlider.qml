@@ -83,7 +83,7 @@ Slider {
       radius: width * 0.5
       color: root.pressed ? Colors.surfaceVariant : Colors.surface
       border.color: Colors.accentPrimary
-      border.width: Math.min(1, Style.borderThick * scaling)
+      border.width: Math.max(1, Style.borderThick * scaling)
       // Press feedback halo (using accent color, low opacity)
       Rectangle {
         anchors.centerIn: parent

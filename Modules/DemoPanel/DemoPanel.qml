@@ -27,7 +27,7 @@ NLoader {
         color: Colors.backgroundPrimary
         radius: Style.radiusMedium * scaling
         border.color: Colors.backgroundTertiary
-        border.width: Math.min(1, Style.borderMedium * scaling)
+        border.width: Math.max(1, Style.borderMedium * scaling)
         width: 500 * scaling
         height: 400 * scaling
         anchors.centerIn: parent

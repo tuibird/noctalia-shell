@@ -64,8 +64,8 @@ PanelWindow {
         clip: true
         color: Colors.backgroundSecondary
         radius: Style.radiusMedium * scaling
-        border.color: Colors.backgroundTertiary
-        border.width: Math.min(1, Style.borderThin * scaling)
+        border.color: Colors.accentTertiary
+        border.width: Math.max(1, Style.borderThin * scaling)
 
         // Animation properties
         property real scaleValue: 0.8

@@ -22,7 +22,7 @@ NLoader {
         color: Colors.backgroundPrimary
         radius: Style.radiusMedium * scaling
         border.color: Colors.backgroundTertiary
-        border.width: Math.min(1, Style.borderMedium * scaling)
+        border.width: Math.max(1, Style.borderMedium * scaling)
         width: 500 * scaling
         height: 400
         anchors.centerIn: parent
@@ -38,9 +38,7 @@ NLoader {
       }
     }
   }
-} // NPanel {//   id: ioSelector// property int tabIndex: 0// property Item anchorItem: null// signal panelClosed()// function sinkNodes() {//     let nodes = Pipewire.nodes && Pipewire.nodes.values ? Pipewire.nodes.values.filter(function(n) {//         return n.isSink && n.audio && n.isStream === false;//     }) : [];//     if (Pipewire.defaultAudioSink)
-//         nodes = nodes.slice().sort(function(a, b) {
-//             if (a.id === Pipewire.defaultAudioSink.id)
+} // NPanel {//   id: ioSelector// property int tabIndex: 0// property Item anchorItem: null// signal panelClosed()// function sinkNodes() {//     let nodes = Pipewire.nodes && Pipewire.nodes.values ? Pipewire.nodes.values.filter(function(n) {//         return n.isSink && n.audio && n.isStream === false;//     }) : [];//     if (Pipewire.defaultAudioSink)//         nodes = nodes.slice().sort(function(a, b) {//             if (a.id === Pipewire.defaultAudioSink.id)
 //                 return -1;
 
 //             if (b.id === Pipewire.defaultAudioSink.id)
