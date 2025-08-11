@@ -193,37 +193,37 @@ Item {
           // Material 3-inspired smooth animation for width, height, scale, color, opacity, and radius
           Behavior on width {
             NumberAnimation {
-              duration: 350
+              duration: Style.animationNormal
               easing.type: Easing.OutBack
             }
           }
           Behavior on height {
             NumberAnimation {
-              duration: 350
+              duration: Style.animationNormal
               easing.type: Easing.OutBack
             }
           }
           Behavior on scale {
             NumberAnimation {
-              duration: 300
+              duration: Style.animationNormal
               easing.type: Easing.OutBack
             }
           }
           Behavior on color {
             ColorAnimation {
-              duration: 200
+              duration: Style.animationFast
               easing.type: Easing.InOutCubic
             }
           }
           Behavior on opacity {
             NumberAnimation {
-              duration: 200
+              duration: Style.animationFast
               easing.type: Easing.InOutCubic
             }
           }
           Behavior on radius {
             NumberAnimation {
-              duration: 350
+              duration: Style.animationNormal
               easing.type: Easing.OutBack
             }
           }

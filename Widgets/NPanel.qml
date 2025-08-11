@@ -50,7 +50,7 @@ PanelWindow {
 
   Behavior on color {
     ColorAnimation {
-      duration: 350
+      duration: Style.animationNormal
       easing.type: Easing.InOutCubic
     }
   }
