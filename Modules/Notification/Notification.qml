@@ -62,7 +62,7 @@ PanelWindow {
         width: 360 * scaling
         height: Math.max(80 * scaling, contentColumn.implicitHeight + (Style.marginMedium * 2 * scaling))
         clip: true
-        color: Colors.backgroundPrimary
+        color: Colors.backgroundSecondary
         radius: Style.radiusMedium * scaling
         border.color: Colors.backgroundTertiary
         border.width: Math.min(1, Style.borderThin * scaling)
