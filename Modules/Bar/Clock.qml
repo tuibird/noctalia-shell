@@ -23,6 +23,5 @@ NClock {
   onClicked: function () {
     tooltip.hide()
     calendar.isLoaded = !calendar.isLoaded
-    
   }
 }

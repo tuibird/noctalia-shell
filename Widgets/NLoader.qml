@@ -20,7 +20,6 @@ Loader {
   // onLoaded: {
   //   console.log("NLoader onLoaded: " + item.toString());
   // }
-
   onActiveChanged: {
     if (active && item && item.show) {
       item.show()
