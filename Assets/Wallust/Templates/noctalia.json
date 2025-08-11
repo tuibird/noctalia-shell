@@ -18,8 +18,6 @@
   "warning": "{{ color5 | lighten(0.3) }}",
   
   "highlight": "{{ color4 | lighten(0.4) }}",
-  "rippleEffect": "{{ color4 | lighten(0.1) }}",
-  
   "onAccent": "{{ background }}",
   "outline": "{{ background | lighten(0.3) }}",
   

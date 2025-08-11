@@ -31,9 +31,8 @@ Singleton {
   property color error: themeData.error
   property color warning: themeData.warning
 
-  // Highlights & Focus
+  // Highlights
   property color highlight: themeData.highlight
-  property color rippleEffect: themeData.rippleEffect
 
   // Additional Theme Properties
   property color onAccent: themeData.onAccent
@@ -86,9 +85,8 @@ Singleton {
       property string error: "#eb6f92"
       property string warning: "#f6c177"
 
-      // Highlights & Focus
+      // Highlights
       property string highlight: "#c4a7e7"
-      property string rippleEffect: "#9ccfd8"
 
       // Additional Theme Properties
       property string onAccent: "#191724"
