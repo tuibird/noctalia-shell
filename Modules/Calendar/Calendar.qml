@@ -21,7 +21,7 @@ NLoader {
         border.color: Colors.backgroundTertiary
         border.width: Math.max(1, Style.borderMedium * scaling)
         width: 340 * scaling
-        height: 320 // TBC
+        height: 380 * scaling  // Scale the height and make it larger
         anchors.top: parent.top
         anchors.right: parent.right
         anchors.topMargin: Style.marginTiny * scaling
@@ -75,7 +75,7 @@ NLoader {
             Layout.fillWidth: true
           }
 
-          // Columns label (Monday to Sunday)
+          // Columns label (respects locale's first day of week)
           RowLayout {
             Layout.fillWidth: true
             Layout.leftMargin: Style.marginSmall * scaling // Align with grid
@@ -87,8 +87,9 @@ NLoader {
               
               NText {
                 text: {
-                  // Start with Monday (1) instead of Sunday (0)
-                  let dayIndex = (index + 1) % 7
+                  // Use the locale's first day of week setting
+                  let firstDay = Qt.locale().firstDayOfWeek
+                  let dayIndex = (firstDay + index) % 7
                   return Qt.locale().dayName(dayIndex, Locale.ShortFormat)
                 }
                 color: Colors.accentSecondary
@@ -125,8 +126,8 @@ NLoader {
             }
 
             delegate: Rectangle {
-              width: Style.baseWidgetSize * scaling
-              height: Style.baseWidgetSize * scaling
+              width: (Style.baseWidgetSize * scaling)
+              height: (Style.baseWidgetSize * scaling)
               radius: Style.radiusSmall * scaling
               color: model.today ? Colors.accentPrimary : "transparent"
 
@@ -135,7 +136,7 @@ NLoader {
                 text: model.day
                 color: model.today ? Colors.onAccent : Colors.textPrimary
                 opacity: model.month === grid.month ? Style.opacityHeavy : Style.opacityLight
-                font.pointSize: Style.fontSizeMedium * scaling
+                font.pointSize: (Style.fontSizeMedium * scaling)
                 font.weight: model.today ? Style.fontWeightBold : Style.fontWeightRegular
               }
 
