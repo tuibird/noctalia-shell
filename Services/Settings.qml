@@ -5,20 +5,28 @@ import qs.Services
 pragma Singleton
 
 Singleton {
+  id: root
+
   property string shellName: "noctalia"
-  property string settingsDir: Quickshell.env("NOCTALIA_SETTINGS_DIR")
+  property string configDir: Quickshell.env("NOCTALIA_CONFIG_DIR")
                                || (Quickshell.env("XDG_CONFIG_HOME") || Quickshell.env(
                                      "HOME") + "/.config") + "/" + shellName + "/"
-  property string settingsFile: Quickshell.env("NOCTALIA_SETTINGS_FILE") || (settingsDir + "settings.json")
-  property string colorsFile: Quickshell.env("NOCTALIA_COLORS_FILE") || (settingsDir + "colors.json")
+  property string cacheDir: Quickshell.env("NOCTALIA_CACHE_DIR")
+                               || (Quickshell.env("XDG_CACHE_HOME") || Quickshell.env(
+                                     "HOME") + "/.cache") + "/" + shellName + "/"
+  property string settingsFile: Quickshell.env("NOCTALIA_SETTINGS_FILE") || (configDir + "settings.json")
+  property string colorsFile: Quickshell.env("NOCTALIA_COLORS_FILE") || (configDir + "colors.json")
   property var data: settingAdapter
+
+  property string defaultWallpaper: Qt.resolvedUrl("../Assets/Tests/wallpaper.png")
 
   // Needed to only have one NPanel loaded at a time.
   // property var openPanel: null
   Item {
     Component.onCompleted: {
-      // ensure settings dir
-      Quickshell.execDetached(["mkdir", "-p", settingsDir])
+      // ensure settings dir exists
+      Quickshell.execDetached(["mkdir", "-p", configDir])
+      Quickshell.execDetached(["mkdir", "-p", cacheDir])
     }
   }
 
@@ -96,7 +104,7 @@ Singleton {
 
       wallpaper: JsonObject {
         property string directory: "/usr/share/wallpapers"
-        property string current: ""
+        property string current: defaultWallpaper
         property bool isRandom: false
         property int randomInterval: 300
         property bool generateTheme: false
