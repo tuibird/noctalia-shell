@@ -10,6 +10,8 @@ NBox {
   id: root
 
   readonly property real scaling: Scaling.scale(screen)
+  // Hold a single instance of the Settings window (root is NLoader)
+  property var settingsWindow: null
 
   Layout.fillWidth: true
   // Height driven by content
@@ -71,6 +73,23 @@ NBox {
       NIconButton {
         icon: "settings"
         sizeMultiplier: 0.9
+        onClicked: function () {
+          if (!root.settingsWindow) {
+            const comp = Qt.createComponent("../Settings/SettingsWindow.qml")
+            if (comp.status === Component.Ready) {
+              root.settingsWindow = comp.createObject(root)
+            } else {
+              comp.statusChanged.connect(function () {
+                if (comp.status === Component.Ready) {
+                  root.settingsWindow = comp.createObject(root)
+                }
+              })
+            }
+          }
+          if (root.settingsWindow) {
+            root.settingsWindow.isLoaded = !root.settingsWindow.isLoaded
+          }
+        }
       }
       NIconButton {
         icon: "power_settings_new"

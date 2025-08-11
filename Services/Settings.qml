@@ -65,6 +65,7 @@ Singleton {
         property string avatarImage: Quickshell.env("HOME") + "/.face"
         property bool dimDesktop: true
         property bool showScreenCorners: false
+        property bool showDock: false
       }
 
       // location

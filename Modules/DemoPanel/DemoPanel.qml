@@ -6,10 +6,6 @@ import Quickshell.Wayland
 import qs.Services
 import qs.Widgets
 
-
-/*
-  An experiment/demo panel to tweaks widgets
-*/
 NLoader {
   id: root
 
