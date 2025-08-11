@@ -8,9 +8,10 @@ ComboBox {
   id: root
 
   readonly property real scaling: Scaling.scale(screen)
-  property list<string> optionsKeys: ['cat', 'dog', 'bird', 'monkey', 'fish', 'turtle', 'elephant', 'tiger']
-  property list<string> optionsLabels: ['Cat ', 'Dog', 'Bird', 'Monkey', 'Fish', 'Turtle', 'Elephant', 'Tiger']
-  property string currentKey: "cat"
+  
+  property list<string> optionsKeys: []
+  property list<string> optionsLabels: []
+  property string currentKey: ''
   property var onSelected: function (string) {}
 
   Layout.fillWidth: true
@@ -19,7 +20,7 @@ ComboBox {
   model: optionsKeys
   currentIndex: model.indexOf(currentKey)
   onActivated: {
-   root.onSelected(model[currentIndex])
+    root.onSelected(model[currentIndex])
   }
 
   // Rounded background

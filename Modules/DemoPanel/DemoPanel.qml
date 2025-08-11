@@ -133,10 +133,12 @@ NLoader {
               font.weight: Style.fontWeightBold
             }
 
-            NComboBox {// label: "Label"
-              // description: "Description"
+            NComboBox {
+              optionsKeys: ["cat", "dog", "bird", "monkey", "fish", "turtle", "elephant", "tiger"]
+              optionsLabels: ["Cat", "Dog", "Bird", "Monkey", "Fish", "Turtle", "Elephant", "Tiger"]
+              currentKey: "cat"
               onSelected: function (value) {
-                console.log("NComboBox: " + value)
+                console.log("NComboBox: selected " + value)
               }
             }
 
