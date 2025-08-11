@@ -38,6 +38,49 @@ NLoader {
           anchors.margins: Style.marginXL * scaling
           spacing: Style.marginSmall * scaling
 
+          // NSlider
+          ColumnLayout {
+            spacing: 16 * scaling
+            NText {
+              text: "Scaling"
+              color: Colors.accentSecondary
+              font.weight: Style.fontWeightBold
+            }
+            RowLayout {
+              spacing: Style.marginSmall * scaling
+              NText {
+                text: `${Math.round(Scaling.overrideScale * 100)}%`
+                Layout.alignment: Qt.AlignVCenter
+              }
+              NSlider {
+                id: scaleSlider
+                from: 0.6
+                to: 1.8
+                stepSize: 0.01
+                value: Scaling.overrideScale
+                implicitWidth: bgRect.width * 0.75
+                onMoved: function () {
+                  Scaling.overrideScale = value
+                }
+                onPressedChanged: function () {
+                  Scaling.overrideEnabled = true
+                }
+              }
+              NIconButton {
+                icon: "refresh"
+                sizeMultiplier: 1.0
+                fontPointSize: Style.fontSizeXL * scaling
+                onClicked: function () {
+                  Scaling.overrideEnabled = false
+                  Scaling.overrideScale = 1.0
+                }
+              }
+            }
+            NDivider {
+              Layout.fillWidth: true
+            }
+          }
+
           // NIconButton
           ColumnLayout {
             spacing: 16 * scaling
@@ -81,44 +124,22 @@ NLoader {
             }
           }
 
-          // NSlider
+          // NComboBox
           ColumnLayout {
-            spacing: 16 * scaling
+            spacing: Style.marginLarge * scaling
             NText {
-              text: "Scaling"
+              text: "NComboBox"
               color: Colors.accentSecondary
               font.weight: Style.fontWeightBold
             }
-            RowLayout {
-              spacing: Style.marginSmall * scaling
-              NText {
-                text: `${Math.round(Scaling.overrideScale * 100)}%`
-                Layout.alignment: Qt.AlignVCenter
-              }
-              NSlider {
-                id: scaleSlider
-                from: 0.6
-                to: 1.8
-                stepSize: 0.01
-                value: Scaling.overrideScale
-                implicitWidth: bgRect.width * 0.75
-                onMoved: function () {
-                  Scaling.overrideScale = value
-                }
-                onPressedChanged: function () {
-                  Scaling.overrideEnabled = true
-                }
-              }
-              NIconButton {
-                icon: "refresh"
-                sizeMultiplier: 1.0
-                fontPointSize: Style.fontSizeXL * scaling
-                onClicked: function () {
-                  Scaling.overrideEnabled = false
-                  Scaling.overrideScale = 1.0
-                }
+
+            NComboBox {// label: "Label"
+              // description: "Description"
+              onSelected: function (value) {
+                console.log("NComboBox: " + value)
               }
             }
+
             NDivider {
               Layout.fillWidth: true
             }
