@@ -35,10 +35,6 @@ ShellRoot {
     id: notification
   }
 
-  AudioDeviceSelector {
-    id: audioDeviceSelector
-  }
-
   Calendar {
     id: calendar
   }
