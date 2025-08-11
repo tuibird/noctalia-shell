@@ -98,7 +98,8 @@ PopupWindow {
       required property var modelData
 
       width: listView.width
-      height: (modelData?.isSeparator) ? 8 * scaling : 32 * scaling
+      height: (modelData?.isSeparator) ? 8 * scaling : Math.max(32 * scaling,
+          text.height + 8)
       color: "transparent"
 
       property var subMenu: null
@@ -123,6 +124,7 @@ PopupWindow {
           spacing: Style.marginSmall * scaling
 
           NText {
+            id: text
             Layout.fillWidth: true
             color: (modelData?.enabled
                     ?? true) ? (mouseArea.containsMouse ? Colors.onAccent : Colors.textPrimary) : Colors.textDisabled
@@ -144,7 +146,7 @@ PopupWindow {
           Text {
             text: modelData?.hasChildren ? "menu" : ""
             font.family: "Material Symbols Outlined"
-            font.pointSize: Colors.fontSizeMedium * scaling
+            font.pointSize: Colors.fontSizeSmall * scaling
             verticalAlignment: Text.AlignVCenter
             visible: modelData?.hasChildren ?? false
             color: Colors.textPrimary
@@ -307,7 +309,7 @@ PopupWindow {
       Rectangle {
         id: bg
         anchors.fill: parent
-        color: Colors.backgroundPrimary
+        color: Colors.backgroundSecondary
         border.color: Colors.outline
         border.width: Math.max(1, Style.borderThin * scaling)
         radius: Style.radiusMedium * scaling
@@ -332,7 +334,8 @@ PopupWindow {
           required property var modelData
 
           width: listView.width
-          height: (modelData?.isSeparator) ? 8 * scaling : 32 * scaling
+          height: (modelData?.isSeparator) ? 8 * scaling : Math.max(32 * scaling,
+           subText.height + 8)
           color: "transparent"
 
           property var subMenu: null
@@ -358,6 +361,7 @@ PopupWindow {
               spacing: Style.spacingSmall * scaling
 
               NText {
+                id: subText
                 Layout.fillWidth: true
                 color: (modelData?.enabled ?? true) ? bg.hoverTextColor : Colors.textDisabled
                 text: modelData?.text ?? ""
@@ -378,7 +382,7 @@ PopupWindow {
               NText {
                 text: modelData?.hasChildren ? "\uE5CC" : ""
                 font.family: "Material Symbols Outlined"
-                font.pointSize: Colors.fontSizeMedium * scaling
+                font.pointSize: Colors.fontSizeSmall * scaling
                 verticalAlignment: Text.AlignVCenter
                 visible: modelData?.hasChildren ?? false
               }
@@ -388,7 +392,7 @@ PopupWindow {
               id: mouseArea
               anchors.fill: parent
               hoverEnabled: true
-              enabled: (modelData?.enabled ?? true) && !(modelData?.isSeparator ?? false) && subMenu.visible
+              enabled: (modelData?.enabled ?? true) && !(modelData?.isSeparator ?? false)
 
               onClicked: {
                 if (modelData && !modelData.isSeparator) {
@@ -401,7 +405,7 @@ PopupWindow {
               }
 
               onEntered: {
-                if (!subMenu.visible) {
+                if (subMenu && !subMenu.visible) {
                   return
                 }
 
