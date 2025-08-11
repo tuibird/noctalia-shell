@@ -20,21 +20,48 @@ NLoader {
       // Active tab index unified for sidebar, header, and content stack
       property int currentTabIndex: 0
       // Single source of truth for tabs (explicit icon/label here)
-      property var tabsModel: [
-        { icon: "tune", label: "General", source: "Tabs/General.qml" },
-        { icon: "web_asset", label: "Bar", source: "Tabs/Bar.qml" },
-        { icon: "schedule", label: "Time & Weather", source: "Tabs/TimeWeather.qml" },
-        { icon: "videocam", label: "Screen Recorder", source: "Tabs/ScreenRecorder.qml" },
-        { icon: "wifi", label: "Network", source: "Tabs/Network.qml" },
-        { icon: "monitor", label: "Display", source: "Tabs/Display.qml" },
-        { icon: "image", label: "Wallpaper", source: "Tabs/Wallpaper.qml" },
-        { icon: "more_horiz", label: "Misc", source: "Tabs/Misc.qml" },
-        { icon: "info", label: "About", source: "Tabs/About.qml" }
-      ]
+      property var tabsModel: [{
+          "icon": "tune",
+          "label": "General",
+          "source": "Tabs/General.qml"
+        }, {
+          "icon": "web_asset",
+          "label": "Bar",
+          "source": "Tabs/Bar.qml"
+        }, {
+          "icon": "schedule",
+          "label": "Time & Weather",
+          "source": "Tabs/TimeWeather.qml"
+        }, {
+          "icon": "videocam",
+          "label": "Screen Recorder",
+          "source": "Tabs/ScreenRecorder.qml"
+        }, {
+          "icon": "wifi",
+          "label": "Network",
+          "source": "Tabs/Network.qml"
+        }, {
+          "icon": "monitor",
+          "label": "Display",
+          "source": "Tabs/Display.qml"
+        }, {
+          "icon": "image",
+          "label": "Wallpaper",
+          "source": "Tabs/Wallpaper.qml"
+        }, {
+          "icon": "more_horiz",
+          "label": "Misc",
+          "source": "Tabs/Misc.qml"
+        }, {
+          "icon": "info",
+          "label": "About",
+          "source": "Tabs/About.qml"
+        }]
 
       // Always default to the first tab (General) when the panel becomes visible
       onVisibleChanged: function () {
-        if (visible) currentTabIndex = 0
+        if (visible)
+          currentTabIndex = 0
       }
 
       // Ensure panel shows itself once created
@@ -52,8 +79,9 @@ NLoader {
         anchors.centerIn: parent
 
         // Prevent closing when clicking in the panel bg
-        MouseArea { anchors.fill: parent }
-
+        MouseArea {
+          anchors.fill: parent
+        }
 
         // Main two-pane layout
         RowLayout {
@@ -97,12 +125,21 @@ NLoader {
                     NText {
                       text: modelData.icon
                       font.family: "Material Symbols Outlined"
-                      font.variableAxes: { "wght": (Font.Normal + Font.Bold) / 2.0 }
+                      font.variableAxes: {
+                        "wght": (Font.Normal + Font.Bold) / 2.0
+                      }
                       color: selected ? Colors.onAccent : Colors.textSecondary
                     }
-                    NText { text: modelData.label; color: selected ? Colors.onAccent : Colors.textPrimary; Layout.fillWidth: true }
+                    NText {
+                      text: modelData.label
+                      color: selected ? Colors.onAccent : Colors.textPrimary
+                      Layout.fillWidth: true
+                    }
                   }
-                  MouseArea { anchors.fill: parent; onClicked: settingsPanel.currentTabIndex = index }
+                  MouseArea {
+                    anchors.fill: parent
+                    onClicked: settingsPanel.currentTabIndex = index
+                  }
                 }
               }
             }
@@ -142,11 +179,15 @@ NLoader {
                   icon: "close"
                   tooltipText: "Close settings panel"
                   Layout.alignment: Qt.AlignVCenter
-                  onClicked: function () { settingsWindow.isLoaded = !settingsWindow.isLoaded }
+                  onClicked: function () {
+                    settingsWindow.isLoaded = !settingsWindow.isLoaded
+                  }
                 }
               }
 
-              NDivider { Layout.fillWidth: true }
+              NDivider {
+                Layout.fillWidth: true
+              }
 
               // Stacked pages
               StackLayout {
@@ -172,4 +213,3 @@ NLoader {
     }
   }
 }
-

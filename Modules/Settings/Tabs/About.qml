@@ -13,9 +13,17 @@ Item {
   ColumnLayout {
     anchors.fill: parent
     spacing: Style.marginMedium * scaling
-    NText { text: "About"; font.weight: Style.fontWeightBold; color: Colors.accentSecondary }
-    NText { text: "Coming soon"; color: Colors.textSecondary }
-    Item { Layout.fillHeight: true }
+    NText {
+      text: "About"
+      font.weight: Style.fontWeightBold
+      color: Colors.accentSecondary
+    }
+    NText {
+      text: "Coming soon"
+      color: Colors.textSecondary
+    }
+    Item {
+      Layout.fillHeight: true
+    }
   }
 }
-
