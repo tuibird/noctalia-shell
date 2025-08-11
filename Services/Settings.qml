@@ -7,23 +7,30 @@ pragma Singleton
 Singleton {
   id: root
 
+  // Define our app directories
+  // Default config directory: ~/.config/noctalia
+  // Default cache directory: ~/.cache/noctalia
   property string shellName: "noctalia"
-  property string configDir: Quickshell.env("NOCTALIA_CONFIG_DIR")
-                               || (Quickshell.env("XDG_CONFIG_HOME") || Quickshell.env(
-                                     "HOME") + "/.config") + "/" + shellName + "/"
-  property string cacheDir: Quickshell.env("NOCTALIA_CACHE_DIR")
-                               || (Quickshell.env("XDG_CACHE_HOME") || Quickshell.env(
-                                     "HOME") + "/.cache") + "/" + shellName + "/"
+  property string configDir: Quickshell.env("NOCTALIA_CONFIG_DIR") || (Quickshell.env("XDG_CONFIG_HOME")
+                                                                       || Quickshell.env(
+                                                                         "HOME") + "/.config") + "/" + shellName + "/"
+  property string cacheDir: Quickshell.env("NOCTALIA_CACHE_DIR") || (Quickshell.env("XDG_CACHE_HOME") || Quickshell.env(
+                                                                       "HOME") + "/.cache") + "/" + shellName + "/"
+
   property string settingsFile: Quickshell.env("NOCTALIA_SETTINGS_FILE") || (configDir + "settings.json")
   property string colorsFile: Quickshell.env("NOCTALIA_COLORS_FILE") || (configDir + "colors.json")
-  property var data: settingAdapter
 
   property string defaultWallpaper: Qt.resolvedUrl("../Assets/Tests/wallpaper.png")
+  property string defaultAvatar: Quickshell.env("HOME") + "/.face"
+
+  // Used to access via Settings.data.xxx.yyy
+  property var data: adapter
 
   // Needed to only have one NPanel loaded at a time.
   // property var openPanel: null
   Item {
     Component.onCompleted: {
+
       // ensure settings dir exists
       Quickshell.execDetached(["mkdir", "-p", configDir])
       Quickshell.execDetached(["mkdir", "-p", cacheDir])
@@ -36,8 +43,6 @@ Singleton {
     // Qt.callLater(function () {
     //     WallpaperManager.setCurrentWallpaper(settings.currentWallpaper, true);
     // })
-    id: settingFileView
-
     path: settingsFile
     watchChanges: true
     onFileChanged: reload()
@@ -53,7 +58,7 @@ Singleton {
     }
 
     JsonAdapter {
-      id: settingAdapter
+      id: adapter
 
       // bar
       property JsonObject bar
@@ -70,7 +75,7 @@ Singleton {
       property JsonObject general
 
       general: JsonObject {
-        property string avatarImage: Quickshell.env("HOME") + "/.face"
+        property string avatarImage: defaultAvatar
         property bool dimDesktop: true
         property bool showScreenCorners: false
         property bool showDock: false
@@ -80,7 +85,7 @@ Singleton {
       property JsonObject location
 
       location: JsonObject {
-        property bool name: true
+        property string name: "Dinslaken"
         property bool useFahrenheit: false
         property bool reverseDayMonth: false
         property bool use12HourClock: false
