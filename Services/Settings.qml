@@ -85,7 +85,7 @@ Singleton {
       property JsonObject location
 
       location: JsonObject {
-        property string name: "Dinslaken"
+        property string name: "Tokyo"
         property bool useFahrenheit: false
         property bool reverseDayMonth: false
         property bool use12HourClock: false

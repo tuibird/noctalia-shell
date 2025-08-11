@@ -112,7 +112,7 @@ PopupWindow {
       Rectangle {
         id: bg
         anchors.fill: parent
-        color: mouseArea.containsMouse ? Colors.highlight : "transparent"
+        color: mouseArea.containsMouse ? Colors.hover : "transparent"
         radius: Style.radiusSmall * scaling
         visible: !(modelData?.isSeparator ?? false)
 
@@ -347,7 +347,7 @@ PopupWindow {
           Rectangle {
             id: bg
             anchors.fill: parent
-            color: mouseArea.containsMouse ? Colors.highlight : "transparent"
+            color: mouseArea.containsMouse ? Colors.hover : "transparent"
             radius: Style.radiusSmall * scaling
             visible: !(modelData?.isSeparator ?? false)
             property color hoverTextColor: mouseArea.containsMouse ? Colors.onAccent : Colors.textPrimary

@@ -114,7 +114,7 @@ NLoader {
                   Layout.fillWidth: true
                   Layout.preferredHeight: Style.baseWidgetSize * 1.5 * scaling
                   radius: Style.radiusMedium * scaling
-                  color: modelData.connected ? Colors.accentPrimary : (networkMouseArea.containsMouse ? Colors.highlight : "transparent")
+                  color: modelData.connected ? Colors.accentPrimary : (networkMouseArea.containsMouse ? Colors.hover : "transparent")
 
                   RowLayout {
                     anchors.fill: parent

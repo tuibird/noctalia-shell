@@ -28,7 +28,7 @@ ComboBox {
     implicitWidth: 120 * scaling
     implicitHeight: Style.baseWidgetSize * scaling
     color: Colors.surfaceVariant
-    border.color: root.activeFocus ? Colors.highlight : Colors.outline
+    border.color: root.activeFocus ? Colors.hover : Colors.outline
     border.width: Math.max(1, Style.borderThin * scaling)
     radius: Style.radiusMedium * scaling
   }
@@ -93,7 +93,7 @@ ComboBox {
 
     background: Rectangle {
       width: root.width - Style.spacingMedium * scaling * 3
-      color: highlighted ? Colors.highlight : "transparent"
+      color: highlighted ? Colors.hover : "transparent"
       radius: Style.radiusSmall * scaling
     }
   }

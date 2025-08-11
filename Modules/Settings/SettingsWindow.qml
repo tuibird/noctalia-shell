@@ -108,7 +108,7 @@ NLoader {
                   width: parent.width
                   height: 32 * scaling // Back to original height
                   radius: Style.radiusSmall * scaling
-                  color: selected ? Colors.accentPrimary : (tabItem.hovering ? Colors.highlight : "transparent")
+                  color: selected ? Colors.accentPrimary : (tabItem.hovering ? Colors.hover : "transparent")
                   border.color: "transparent"
                   border.width: 0
 

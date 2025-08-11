@@ -31,8 +31,8 @@ Singleton {
   property color error: themeData.error
   property color warning: themeData.warning
 
-  // Highlights
-  property color highlight: themeData.highlight
+  // Hover
+  property color hover: themeData.hover
 
   // Additional Theme Properties
   property color onAccent: themeData.onAccent
@@ -85,8 +85,8 @@ Singleton {
       property string error: "#eb6f92"
       property string warning: "#f6c177"
 
-      // Highlights
-      property string highlight: "#c4a7e7"
+      // Hover
+      property string hover: "#c4a7e7"
 
       // Additional Theme Properties
       property string onAccent: "#191724"
