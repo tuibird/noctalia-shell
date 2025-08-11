@@ -9,7 +9,7 @@ Singleton {
   id: root
 
   property string locationFile: Quickshell.env("NOCTALIA_WEATHER_FILE") || (Settings.cacheDir + "location.json")
-  property int weatherUpdateFrequency: 30 * 60 * 1000 // 30 minutes expressed in milliseconds
+  property int weatherUpdateFrequency: 30 * 60 // 30 minutes expressed in seconds
   property var data: adapter // Used to access via Location.data.xxx.yyy
 
   FileView {
@@ -58,8 +58,7 @@ Singleton {
 
   // --------------------------------
   function updateWeather() {
-    var now = Date.now()
-    if ((data.weatherLastFetch === "") || (now >= data.weatherLastFetch + weatherUpdateFrequency)) {
+    if ((data.weatherLastFetch === "") || (Time.timestamp >= data.weatherLastFetch + weatherUpdateFrequency)) {
       getFreshWeather()
     }
   }
@@ -122,7 +121,7 @@ Singleton {
 
             // Save to json
             data.weather = weatherData
-            data.weatherLastFetch = Date.now()
+            data.weatherLastFetch = Time.timestamp
             console.log("Cached weather to disk")
           } catch (e) {
             errorCallback("Failed to parse weather data.")

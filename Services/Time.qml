@@ -10,7 +10,7 @@ Singleton {
   property var date: new Date()
   property string time: Settings.data.location.use12HourClock ? Qt.formatDateTime(date, "h:mm AP") : Qt.formatDateTime(
                                                                   date, "HH:mm")
-  property string dateString: {
+  readonly property string dateString: {
     let now = date
     let dayName = now.toLocaleDateString(Qt.locale(), "ddd")
     dayName = dayName.charAt(0).toUpperCase() + dayName.slice(1)
@@ -36,6 +36,11 @@ Singleton {
     let year = now.toLocaleDateString(Qt.locale(), "yyyy")
     return `${dayName}, `
     + (Settings.data.location.reverseDayMonth ? `${month} ${day}${suffix} ${year}` : `${day}${suffix} ${month} ${year}`)
+  }
+
+  // Returns a Unix Timestamp (in seconds)
+  readonly property string timestamp:  {
+    return Math.floor(Date.now() / 1000);
   }
 
   // Format an easy to read approximate duration ex: 4h32m
