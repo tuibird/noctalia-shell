@@ -231,13 +231,13 @@ Item {
 
         Behavior on width {
           NumberAnimation {
-            duration: 350
+            duration: Style.animationNormal
             easing.type: Easing.OutBack
           }
         }
         Behavior on height {
           NumberAnimation {
-            duration: 350
+            duration: Style.animationNormal
             easing.type: Easing.OutBack
           }
         }
