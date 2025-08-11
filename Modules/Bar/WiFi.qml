@@ -25,7 +25,7 @@ NIconButton {
   tooltipText: "WiFi Networks"
   onClicked: function () {
     if (!wifiMenuLoader.active) {
-      wifiMenuLoader.loading = true
+      wifiMenuLoader.isLoaded = true
     }
     if (wifiMenuLoader.item) {
       wifiMenuLoader.item.visible = !wifiMenuLoader.item.visible

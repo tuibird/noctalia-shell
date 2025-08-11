@@ -7,15 +7,25 @@ import qs.Services
 import qs.Widgets
 
 // LazyLoader for WiFi menu
-LazyLoader {
-  id: wifiMenuLoader
-  loading: false
-  component: NPanel {
-    id: wifiMenu
+NLoader {
+  id: root
+
+  content: Component {
+    NPanel {
+    id: wifiPanel
 
     property string passwordPromptSsid: ""
     property string passwordInput: ""
     property bool showPasswordPrompt: false
+
+    Connections {
+      target: wifiPanel
+      ignoreUnknownSignals: true
+      function onDismissed() {
+        wifiPanel.visible = false
+        network.onMenuClosed()
+      }
+    }
 
     WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
 
@@ -48,11 +58,21 @@ LazyLoader {
           }
 
           NText {
-            text: "WiFi Networks"
+            text: "WiFi"
             font.pointSize: Style.fontSizeLarge * scaling
             font.bold: true
             color: Colors.textPrimary
             Layout.fillWidth: true
+          }
+
+          NToggle {
+            baseSize: Style.baseWidgetSize * 0.75
+            value: Settings.data.network.wifiEnabled
+            onToggled: function (value) {
+              Settings.data.network.wifiEnabled = value
+              // TBC: This should be done in a service
+              Quickshell.execDetached(["nmcli", "radio", "wifi", Settings.data.network.wifiEnabled ? "on" : "off"])
+            }
           }
 
           NIconButton {
@@ -65,15 +85,13 @@ LazyLoader {
           NIconButton {
             icon: "close"
             onClicked: function () {
-              wifiMenu.visible = false
+              wifiPanel.visible = false
               network.onMenuClosed()
             }
           }
         }
 
-        NDivider {
-
-        }
+        NDivider {}
 
         ListView {
           id: networkList
@@ -96,42 +114,40 @@ LazyLoader {
                 Layout.fillWidth: true
                 Layout.preferredHeight: 48
                 radius: Style.radiusMedium * scaling
-                color: modelData.connected ? Qt.rgba(
-                                               Colors.accentPrimary.r, Colors.accentPrimary.g, Colors.accentPrimary.b,
-                                               0.44) : (networkMouseArea.containsMouse ? Colors.highlight : "transparent")
+                color: modelData.connected ? Colors.accentPrimary : (networkMouseArea.containsMouse ? Colors.highlight : "transparent")
 
                 RowLayout {
                   anchors.fill: parent
-                  anchors.margins: 8
-                  spacing: 8
+                  anchors.margins: Style.marginSmall * scaling
+                  spacing: Style.marginSmall * scaling
 
                   NText {
                     text: network.signalIcon(modelData.signal)
                     font.family: "Material Symbols Outlined"
                     font.pointSize: Style.fontSizeXL * scaling
-                    color: networkMouseArea.containsMouse ? Colors.backgroundPrimary : (modelData.connected ? Colors.accentPrimary : Colors.textSecondary)
+                    color: modelData.connected ? Colors.backgroundPrimary : (networkMouseArea.containsMouse ? Colors.backgroundPrimary : Colors.textPrimary)
                   }
 
                   ColumnLayout {
                     Layout.fillWidth: true
-                    spacing: 2
+                    spacing: Style.marginTiny * scaling
 
                     // SSID
                     NText {
                       text: modelData.ssid || "Unknown Network"
-                      color: networkMouseArea.containsMouse ? Colors.backgroundPrimary : (modelData.connected ? Colors.accentPrimary : Colors.textPrimary)
                       font.pointSize: Style.fontSizeNormal * scaling
                       elide: Text.ElideRight
                       Layout.fillWidth: true
+                      color: modelData.connected ? Colors.backgroundPrimary : (networkMouseArea.containsMouse ? Colors.backgroundPrimary : Colors.textPrimary)
                     }
 
                     // Security Protocol
                     NText {
                       text: modelData.security && modelData.security !== "--" ? modelData.security : "Open"
-                      color: networkMouseArea.containsMouse ? Colors.backgroundPrimary : (modelData.connected ? Colors.accentPrimary : Colors.textSecondary)
                       font.pointSize: Style.fontSizeTiny * scaling
                       elide: Text.ElideRight
                       Layout.fillWidth: true
+                      color: modelData.connected ? Colors.backgroundPrimary : (networkMouseArea.containsMouse ? Colors.backgroundPrimary : Colors.textPrimary)
                     }
 
                     Text {
@@ -139,7 +155,7 @@ LazyLoader {
                                && network.connectError.length > 0
                       text: network.connectError
                       color: Colors.error
-                      font.pointSize: 11 * scaling
+                      font.pointSize: Style.fontSizeSmall * scaling
                       elide: Text.ElideRight
                       Layout.fillWidth: true
                     }
@@ -159,7 +175,8 @@ LazyLoader {
                     //   anchors.centerIn: parent
                     //   size: 22
                     // }
-                    Text {
+
+                    NText {
                       visible: network.connectStatus === "success" && !network.connectingSsid
                       text: "check_circle"
                       font.family: "Material Symbols Outlined"
@@ -168,21 +185,21 @@ LazyLoader {
                       anchors.centerIn: parent
                     }
 
-                    Text {
+                    NText {
                       visible: network.connectStatus === "error" && !network.connectingSsid
                       text: "error"
                       font.family: "Material Symbols Outlined"
-                      font.pointSize: 18 * scaling
+                      font.pointSize: Style.fontSizeSmall * scaling
                       color: Colors.error
                       anchors.centerIn: parent
                     }
                   }
 
-                  Text {
+                  NText {
                     visible: modelData.connected
                     text: "connected"
                     color: networkMouseArea.containsMouse ? Colors.backgroundPrimary : Colors.accentPrimary
-                    font.pointSize: 11 * scaling
+                    font.pointSize: Style.fontSizeSmall * scaling
                   }
                 }
 
@@ -215,12 +232,12 @@ LazyLoader {
                 Layout.margins: 8
                 visible: modelData.ssid === passwordPromptSsid && showPasswordPrompt
                 color: Colors.surfaceVariant
-                radius: 8
+                radius: Style.radiusSmall * scaling
 
                 RowLayout {
                   anchors.fill: parent
-                  anchors.margins: 12
-                  spacing: 10
+                  anchors.margins: Style.spacingSmall * scaling
+                  spacing: Style.spacingSmall * scaling
 
                   Item {
                     Layout.fillWidth: true
@@ -236,9 +253,9 @@ LazyLoader {
                       TextInput {
                         id: passwordInputField
                         anchors.fill: parent
-                        anchors.margins: 12
+                        anchors.margins: Style.spacingMedium * scaling
                         text: passwordInput
-                        font.pointSize: 13 * scaling
+                        font.pointSize: Style.fontSizeMedium * scaling
                         color: Colors.textPrimary
                         verticalAlignment: TextInput.AlignVCenter
                         clip: true
@@ -265,16 +282,22 @@ LazyLoader {
                   Rectangle {
                     Layout.preferredWidth: 80
                     Layout.preferredHeight: 36
-                    radius: 18
+                    radius: Style.radiusMedium * scaling
                     color: Colors.accentPrimary
                     border.color: Colors.accentPrimary
                     border.width: 0
-                    opacity: 1.0
 
                     Behavior on color {
                       ColorAnimation {
-                        duration: 100
+                        duration: Style.animationFast
                       }
+                    }
+
+                    NText {
+                      anchors.centerIn: parent
+                      text: "Connect"
+                      color: Colors.backgroundPrimary
+                      font.pointSize: Style.fontSizeSmall * scaling
                     }
 
                     MouseArea {
@@ -288,14 +311,6 @@ LazyLoader {
                       onEntered: parent.color = Qt.darker(Colors.accentPrimary, 1.1)
                       onExited: parent.color = Colors.accentPrimary
                     }
-
-                    Text {
-                      anchors.centerIn: parent
-                      text: "Connect"
-                      color: Colors.backgroundPrimary
-                      font.pointSize: 14 * scaling
-                      font.bold: true
-                    }
                   }
                 }
               }
@@ -305,4 +320,5 @@ LazyLoader {
       }
     }
   }
+}
 }

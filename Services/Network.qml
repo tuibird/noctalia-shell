@@ -20,7 +20,7 @@ QtObject {
       return "network_wifi_2_bar"
     if (signal >= 20)
       return "network_wifi_1_bar"
-    return "wifi_0_bar"
+    return "signal_wifi_0_bar"
   }
 
   function isSecured(security) {
