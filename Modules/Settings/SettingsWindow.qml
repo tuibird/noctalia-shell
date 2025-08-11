@@ -19,8 +19,7 @@ NLoader {
       readonly property real scaling: Scaling.scale(screen)
       // Active tab index unified for sidebar, header, and content stack
       property int currentTabIndex: 0
-      // Single source of truth for tabs
-      // Each tab points to a QML file path. The content stack simply loads the file via Loader.source.
+      // Single source of truth for tabs (explicit icon/label here)
       property var tabsModel: [
         { icon: "tune", label: "General", source: "Tabs/General.qml" },
         { icon: "web_asset", label: "Bar", source: "Tabs/Bar.qml" },

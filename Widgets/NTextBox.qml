@@ -14,7 +14,6 @@ Item {
   property bool readOnly: false
   property bool enabled: true
   property var onEditingFinished: function () {}
-  property var onTextChanged: function (value) {}
 
   // Sizing
   implicitHeight: Style.baseWidgetSize * 1.25 * scaling
@@ -58,7 +57,8 @@ Item {
         background: null
         font.pointSize: Colors.fontSizeSmall * scaling
         onEditingFinished: root.onEditingFinished()
-        onTextChanged: root.onTextChanged(text)
+        // Text changes are observable via the aliased 'text' property (root.text) and its 'textChanged' signal.
+        // No additional callback is invoked here to avoid conflicts with QML's onTextChanged handler semantics.
       }
     }
   }
