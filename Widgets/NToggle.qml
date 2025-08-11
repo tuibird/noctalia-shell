@@ -11,6 +11,7 @@ RowLayout {
   property string description: ""
   property bool value: false
   property bool hovering: false
+  property int baseSize: Style.baseWidgetSize
   property var onToggled: function (value) {}
 
   Layout.fillWidth: true
@@ -38,16 +39,16 @@ RowLayout {
   Rectangle {
     id: switcher
 
-    width: Style.baseWidgetSize * 1.625 * scaling
-    height: Style.baseWidgetSize * scaling
+    width: root.baseSize * 1.625 * scaling
+    height: root.baseSize * scaling
     radius: height * 0.5
     color: value ? Colors.accentPrimary : Colors.surfaceVariant
     border.color: value ? Colors.accentPrimary : Colors.outline
     border.width: Math.max(1, Style.borderMedium * scaling)
 
     Rectangle {
-      width: (Style.baseWidgetSize - 4) * scaling
-      height: (Style.baseWidgetSize - 4) * scaling
+      width: (root.baseSize - 4) * scaling
+      height: (root.baseSize - 4) * scaling
       radius: height * 0.5
       color: Colors.surface
       border.color: hovering ? Colors.textDisabled : Colors.outline
