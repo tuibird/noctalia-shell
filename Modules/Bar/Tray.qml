@@ -123,13 +123,13 @@ Item {
     id: trayPanel
     showOverlay: false // no colors overlay even if activated in settings
     Connections {
-        target: trayPanel
-        ignoreUnknownSignals: true
-        function onDismissed() {
-          trayPanel.visible = false
-          trayMenu.hideMenu()
-        }
+      target: trayPanel
+      ignoreUnknownSignals: true
+      function onDismissed() {
+        trayPanel.visible = false
+        trayMenu.hideMenu()
       }
+    }
     TrayMenu {
       id: trayMenu
     }
