@@ -13,17 +13,24 @@ Item {
   ColumnLayout {
     anchors.fill: parent
     spacing: Style.marginMedium * scaling
+
     NText {
-      text: "Misc"
+      text: "Media"
       font.weight: Style.fontWeightBold
       color: Colors.accentSecondary
     }
-    NText {
-      text: "Coming soon"
-      color: Colors.textSecondary
+
+    NText { text: "Visualizer Type"; color: Colors.textPrimary; font.weight: Style.fontWeightBold }
+    NText { text: "Choose the style of the audio visualizer"; color: Colors.textSecondary }
+
+    NComboBox {
+      id: visualizerTypeComboBox
+      optionsKeys: ["radial", "fire", "diamond"]
+      optionsLabels: ["Radial", "Fire", "Diamond"]
+      currentKey: Settings.data.audioVisualizer.type
+      onSelected: function (key) { Settings.data.audioVisualizer.type = key }
     }
-    Item {
-      Layout.fillHeight: true
-    }
+
+    Item { Layout.fillHeight: true }
   }
 }

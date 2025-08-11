@@ -26,8 +26,8 @@ Singleton {
   // Used to access via Settings.data.xxx.yyy
   property var data: adapter
 
-  // Needed to only have one NPanel loaded at a time.
-  // property var openPanel: null
+  // Needed to only have one NPanel loaded at a time. <--- VERY BROKEN
+  //property var openPanel: null
   Item {
     Component.onCompleted: {
 
@@ -68,6 +68,8 @@ Singleton {
         property bool showActiveWindowIcon: false
         property bool showSystemInfo: false
         property bool showMedia: false
+        // New: optional taskbar visibility in bar
+        property bool showTaskbar: false
         property list<string> monitors: []
       }
 
@@ -102,6 +104,8 @@ Singleton {
         property string quality: "very_high"
         property string colorRange: "limited"
         property bool showCursor: true
+        // New: optional audio source selection (default: system output)
+        property string audioSource: "default_output"
       }
 
       // wallpaper
