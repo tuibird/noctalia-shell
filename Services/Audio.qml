@@ -44,13 +44,17 @@ Singleton {
     target: sink?.audio ? sink?.audio : null
 
     function onVolumeChanged() {
-      root._volume = (sink?.audio.volume ?? 0)
-      console.log("[Audio] onVolumeChanged: " + volume)
+      var vol = (sink?.audio.volume ?? 0)
+      if (isNaN(vol)) {
+        vol = 0
+      }
+      root._volume = vol
+      console.log("[Audio] onVolumeChanged: " + root._volume.toFixed(2))
     }
 
     function onMutedChanged() {
       root._muted = (sink?.audio.muted ?? true)
-      console.log("[Audio] onMuteChanged " + muted)
+      console.log("[Audio] onMuteChanged " + root._muted)
     }
   }
 }
