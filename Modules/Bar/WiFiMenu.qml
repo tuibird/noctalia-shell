@@ -172,7 +172,7 @@ NLoader {
                         running: network.connectingSsid === modelData.ssid
                         color: Colors.accentPrimary
                         anchors.centerIn: parent
-                        size: 22 * scaling
+                        size: Style.baseWidgetSize * 0.7 * scaling
                       }
 
                       // TBC: Does nothing on my setup

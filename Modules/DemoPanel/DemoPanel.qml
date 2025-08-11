@@ -24,8 +24,8 @@ NLoader {
         radius: Style.radiusMedium * scaling
         border.color: Colors.backgroundTertiary
         border.width: Math.max(1, Style.borderMedium * scaling)
-        width: 500 * scaling
-        height: 400 * scaling
+        width: 600 * scaling
+        height: 600 * scaling
         anchors.centerIn: parent
 
         // Prevent closing when clicking in the panel bg
@@ -104,7 +104,7 @@ NLoader {
 
           // NToggle
           ColumnLayout {
-            spacing: Style.marginLarge * scaling
+            spacing: Style.marginMedium * scaling
             NText {
               text: "NToggle"
               color: Colors.accentSecondary
@@ -126,7 +126,7 @@ NLoader {
 
           // NComboBox
           ColumnLayout {
-            spacing: Style.marginLarge * scaling
+            spacing: Style.marginMedium * scaling
             NText {
               text: "NComboBox"
               color: Colors.accentSecondary
@@ -140,6 +140,23 @@ NLoader {
               onSelected: function (value) {
                 console.log("NComboBox: selected " + value)
               }
+            }
+
+            NDivider {
+              Layout.fillWidth: true
+            }
+          }
+
+          // NBusyIndicator
+          ColumnLayout {
+            spacing: Style.marginMedium * scaling
+            NText {
+              text: "NBusyIndicator"
+              color: Colors.accentSecondary
+              font.weight: Style.fontWeightBold
+            }
+
+            NBusyIndicator {
             }
 
             NDivider {

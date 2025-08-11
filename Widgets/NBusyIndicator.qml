@@ -6,10 +6,10 @@ Item {
 
   readonly property real scaling: Scaling.scale(screen)
 
-  property bool running: false
-  property color color: "white"
-  property int size: baseWidgetSize * 0.5 * scaling
-  property int strokeWidth: 2 * scaling
+  property bool running: true
+  property color color: Colors.accentPrimary
+  property int size: Style.baseWidgetSize * scaling
+  property int strokeWidth: Style.borderThick * scaling
   property int duration: 1000
 
   implicitWidth: size
@@ -28,7 +28,7 @@ Item {
       var radius = Math.min(width, height) / 2 - strokeWidth / 2
 
       ctx.strokeStyle = root.color
-      ctx.lineWidth = root.strokeWidth
+      ctx.lineWidth = Math.max(1, root.strokeWidth)
       ctx.lineCap = "round"
 
       // Draw arc with gap (270 degrees with 90 degree gap)
