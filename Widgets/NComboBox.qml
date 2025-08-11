@@ -8,8 +8,8 @@ ComboBox {
   id: root
 
   readonly property real scaling: Scaling.scale(screen)
-  property list<string> optionsKeys: ['cat', 'dog', 'bird']
-  property list<string> optionsLabels: ['Cat ', 'Dog', 'Bird']
+  property list<string> optionsKeys: ['cat', 'dog', 'bird', 'monkey', 'fish', 'turtle', 'elephant', 'tiger']
+  property list<string> optionsLabels: ['Cat ', 'Dog', 'Bird', 'Monkey', 'Fish', 'Turtle', 'Elephant', 'Tiger']
   property string currentKey: "cat"
   property var onSelected: function (string) {}
 
@@ -25,7 +25,7 @@ ComboBox {
   // Rounded background
   background: Rectangle {
     implicitWidth: 120 * scaling
-    implicitHeight: 40 * scaling
+    implicitHeight: Style.baseWidgetSize * scaling
     color: Colors.surfaceVariant
     border.color: root.activeFocus ? Colors.highlight : Colors.outline
     border.width: Math.max(1, Style.borderThin * scaling)
@@ -37,6 +37,7 @@ ComboBox {
     leftPadding: Style.spacingLarge * scaling
     rightPadding: root.indicator.width + Style.spacingLarge * scaling
     font.pointSize: Style.fontSizeMedium * scaling
+    font.weight: Style.fontWeightBold
     verticalAlignment: Text.AlignVCenter
     elide: Text.ElideRight
     text: {
@@ -56,8 +57,8 @@ ComboBox {
   popup: Popup {
     y: root.height
     width: root.width
-    implicitHeight: contentItem.implicitHeight
-    padding: 1
+    implicitHeight: Math.min(160 * scaling, contentItem.implicitHeight + Style.spacingMedium * scaling * 2)
+    padding: Style.spacingMedium * scaling
 
     contentItem: ListView {
       clip: true
@@ -79,18 +80,20 @@ ComboBox {
     width: root.width
     highlighted: root.highlightedIndex === index
 
-    contentItem: Text {
+    contentItem: NText {
       text: {
         return root.optionsLabels[root.model.indexOf(modelData)]
       }
-      font.pointSize: Style.fontSizeSmall * scaling
+      font.pointSize: Style.fontSizeMedium * scaling
       color: highlighted ? Colors.backgroundPrimary : Colors.textPrimary
       verticalAlignment: Text.AlignVCenter
       elide: Text.ElideRight
     }
 
     background: Rectangle {
+      width: root.width - Style.spacingMedium * scaling * 3
       color: highlighted ? Colors.highlight : "transparent"
+      radius: Style.radiusSmall * scaling
     }
   }
 }
