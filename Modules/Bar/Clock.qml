@@ -12,13 +12,8 @@ NClock {
     target: root
   }
 
-  NCalendar {
-    id: calendar
-    visible: false
-  }
-
   onEntered: function () {
-    if (!calendar.visible) {
+    if (!calendar.isLoaded) {
       tooltip.show()
     }
   }
@@ -26,7 +21,8 @@ NClock {
     tooltip.hide()
   }
   onClicked: function () {
-    calendar.visible = !calendar.visible
     tooltip.hide()
+    calendar.isLoaded = !calendar.isLoaded
+    
   }
 }

@@ -8,6 +8,7 @@ import Quickshell.Services.Pipewire
 import qs.Widgets
 import qs.Modules.Audio
 import qs.Modules.Bar
+import qs.Modules.Calendar
 import qs.Modules.DemoPanel
 import qs.Modules.Background
 import qs.Modules.SidePanel
@@ -36,5 +37,9 @@ ShellRoot {
 
   AudioDeviceSelector {
     id: audioDeviceSelector
+  }
+
+  Calendar {
+    id: calendar
   }
 }

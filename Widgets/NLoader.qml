@@ -17,6 +17,10 @@ Loader {
   asynchronous: true
   sourceComponent: content
 
+  // onLoaded: {
+  //   console.log("NLoader onLoaded: " + item.toString());
+  // }
+
   onActiveChanged: {
     if (active && item && item.show) {
       item.show()
