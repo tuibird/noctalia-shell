@@ -97,6 +97,7 @@ Item {
                            const menuY = (Style.barHeight * scaling)
                            trayMenu.menu = modelData.menu
                            trayMenu.showAt(parent, menuX, menuY)
+                           trayPanel.show()
                          } else {
 
                            console.log("Tray: no menu available for", modelData.id, "or trayMenu not set")
@@ -116,8 +117,20 @@ Item {
     }
   }
 
-  // Attached TrayMenu
-  TrayMenu {
-    id: trayMenu
+  // Attached TrayMenu drop down
+  NPanel {
+    id: trayPanel
+    showOverlay: false // no colors overlay even if activated in settings
+    Connections {
+        target: trayPanel
+        ignoreUnknownSignals: true
+        function onDismissed() {
+          trayPanel.visible = false
+          trayMenu.hideMenu()
+        }
+      }
+    TrayMenu {
+      id: trayMenu
+    }
   }
 }
