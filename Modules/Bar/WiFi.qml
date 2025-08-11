@@ -1,0 +1,47 @@
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
+import Quickshell
+import Quickshell.Wayland
+import qs.Services
+import qs.Widgets
+
+NIconButton {
+  id: root
+
+  readonly property real scaling: Scaling.scale(screen)
+  readonly property bool wifiEnabled: Settings.data.network.wifiEnabled
+
+  icon: {
+    let connected = false
+    for (const net in network.networks) {
+      if (network.networks[net].connected) {
+        connected = true
+        break
+      }
+    }
+    return connected ? network.signalIcon(parent.currentSignal) : "wifi_off"
+  }
+  tooltipText: "WiFi Networks"
+  onClicked: function () {
+    if (!wifiMenuLoader.active) {
+      wifiMenuLoader.loading = true
+    }
+    if (wifiMenuLoader.item) {
+      wifiMenuLoader.item.visible = !wifiMenuLoader.item.visible
+      if (wifiMenuLoader.item.visible) {
+        network.onMenuOpened()
+      } else {
+        network.onMenuClosed()
+      }
+    }
+  }
+
+  Network {
+    id: network
+  }
+
+  WiFiMenu {
+    id: wifiMenuLoader
+  }
+}

@@ -83,7 +83,7 @@ Variants {
         }
 
         // TODO: Notification Icon
-        Wifi {
+        WiFi {
           anchors.verticalCenter: parent.verticalCenter
         }
 
