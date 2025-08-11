@@ -14,6 +14,8 @@ NLoader {
     NPanel {
       id: settingsPanel
 
+      WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
+
       readonly property real scaling: Scaling.scale(screen)
       // Single source of truth for tabs
       // Each tab points to a QML file path. The content stack simply loads the file via Loader.source.
