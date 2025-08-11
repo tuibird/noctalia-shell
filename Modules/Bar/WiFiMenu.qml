@@ -33,23 +33,23 @@ LazyLoader {
 
       ColumnLayout {
         anchors.fill: parent
-        anchors.margins: 16
-        spacing: 16
+        anchors.margins: Style.marginLarge * scaling
+        spacing: Style.marginMedium * scaling
 
         RowLayout {
           Layout.fillWidth: true
-          spacing: 12
+          spacing: Style.marginMedium * scaling
 
-          Text {
+          NText {
             text: "wifi"
             font.family: "Material Symbols Outlined"
-            font.pointSize: 24 * scaling
+            font.pointSize: Style.fontSizeXL * scaling
             color: Colors.accentPrimary
           }
 
-          Text {
+          NText {
             text: "WiFi Networks"
-            font.pointSize: 18 * scaling
+            font.pointSize: Style.fontSizeLarge * scaling
             font.bold: true
             color: Colors.textPrimary
             Layout.fillWidth: true
@@ -71,11 +71,8 @@ LazyLoader {
           }
         }
 
-        Rectangle {
-          Layout.fillWidth: true
-          height: 1
-          color: Colors.outline
-          opacity: 0.12
+        NDivider {
+
         }
 
         ListView {
@@ -83,7 +80,7 @@ LazyLoader {
           Layout.fillWidth: true
           Layout.fillHeight: true
           model: Object.values(network.networks)
-          spacing: 8
+          spacing: Style.marginMedium * scaling
           clip: true
 
           delegate: Item {
@@ -98,7 +95,7 @@ LazyLoader {
               Rectangle {
                 Layout.fillWidth: true
                 Layout.preferredHeight: 48
-                radius: 8
+                radius: Style.radiusMedium * scaling
                 color: modelData.connected ? Qt.rgba(
                                                Colors.accentPrimary.r, Colors.accentPrimary.g, Colors.accentPrimary.b,
                                                0.44) : (networkMouseArea.containsMouse ? Colors.highlight : "transparent")
@@ -108,10 +105,10 @@ LazyLoader {
                   anchors.margins: 8
                   spacing: 8
 
-                  Text {
+                  NText {
                     text: network.signalIcon(modelData.signal)
                     font.family: "Material Symbols Outlined"
-                    font.pointSize: 18 * scaling
+                    font.pointSize: Style.fontSizeXL * scaling
                     color: networkMouseArea.containsMouse ? Colors.backgroundPrimary : (modelData.connected ? Colors.accentPrimary : Colors.textSecondary)
                   }
 
@@ -119,18 +116,20 @@ LazyLoader {
                     Layout.fillWidth: true
                     spacing: 2
 
-                    Text {
+                    // SSID
+                    NText {
                       text: modelData.ssid || "Unknown Network"
                       color: networkMouseArea.containsMouse ? Colors.backgroundPrimary : (modelData.connected ? Colors.accentPrimary : Colors.textPrimary)
-                      font.pointSize: 14 * scaling
+                      font.pointSize: Style.fontSizeNormal * scaling
                       elide: Text.ElideRight
                       Layout.fillWidth: true
                     }
 
-                    Text {
+                    // Security Protocol
+                    NText {
                       text: modelData.security && modelData.security !== "--" ? modelData.security : "Open"
                       color: networkMouseArea.containsMouse ? Colors.backgroundPrimary : (modelData.connected ? Colors.accentPrimary : Colors.textSecondary)
-                      font.pointSize: 11 * scaling
+                      font.pointSize: Style.fontSizeTiny * scaling
                       elide: Text.ElideRight
                       Layout.fillWidth: true
                     }
