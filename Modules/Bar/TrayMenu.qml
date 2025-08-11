@@ -1,8 +1,6 @@
-pragma ComponentBehavior
-
-import QtQuick 2.15
-import QtQuick.Controls 2.15
-import QtQuick.Layouts 1.15
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
 import Quickshell
 import qs.Services
 import qs.Widgets
@@ -16,8 +14,8 @@ PopupWindow {
   property real anchorX
   property real anchorY
 
-  implicitWidth: 180
-  implicitHeight: Math.max(40, listView.contentHeight + 12)
+  implicitWidth: 180 * scaling
+  implicitHeight: Math.max(40 * scaling, listView.contentHeight + (Style.spacingMedium * 2 * scaling))
   visible: false
   color: "transparent"
 
@@ -77,16 +75,16 @@ PopupWindow {
     anchors.fill: parent
     color: Colors.backgroundSecondary
     border.color: Colors.outline
-    border.width: 1
-    radius: 12
+    border.width: Math.max(1, Style.borderThin * scaling)
+    radius: Style.radiusMedium * scaling
     z: 0
   }
 
   ListView {
     id: listView
     anchors.fill: parent
-    anchors.margins: 6
-    spacing: 2
+    anchors.margins: Style.spacingMedium * scaling
+    spacing: 0
     interactive: false
     enabled: trayMenu.visible
     clip: true
@@ -100,17 +98,14 @@ PopupWindow {
       required property var modelData
 
       width: listView.width
-      height: (modelData?.isSeparator) ? 8 : 32
+      height: (modelData?.isSeparator) ? 8 * scaling : 32 * scaling
       color: "transparent"
-      radius: 12
 
       property var subMenu: null
 
-      Rectangle {
+      NDivider {
         anchors.centerIn: parent
-        width: parent.width - 20
-        height: 1
-        color: Qt.darker(Colors.backgroundPrimary, 1.4)
+        width: parent.width - (Style.marginMedium * scaling * 2)
         visible: modelData?.isSeparator ?? false
       }
 
@@ -118,19 +113,19 @@ PopupWindow {
         id: bg
         anchors.fill: parent
         color: mouseArea.containsMouse ? Colors.highlight : "transparent"
-        radius: 8
+        radius: Style.radiusSmall * scaling
         visible: !(modelData?.isSeparator ?? false)
-        property color hoverTextColor: mouseArea.containsMouse ? Colors.onAccent : Colors.textPrimary
 
         RowLayout {
           anchors.fill: parent
-          anchors.leftMargin: 12
-          anchors.rightMargin: 12
-          spacing: 8
+          anchors.leftMargin: Style.marginMedium * scaling
+          anchors.rightMargin: Style.marginMedium * scaling
+          spacing: Style.marginSmall * scaling
 
           NText {
             Layout.fillWidth: true
-            color: (modelData?.enabled ?? true) ? bg.hoverTextColor : Colors.textDisabled
+            color: (modelData?.enabled
+                    ?? true) ? (mouseArea.containsMouse ? Colors.onAccent : Colors.textPrimary) : Colors.textDisabled
             text: modelData?.text ?? ""
             font.pointSize: Colors.fontSizeSmall * scaling
             verticalAlignment: Text.AlignVCenter
@@ -138,8 +133,8 @@ PopupWindow {
           }
 
           Image {
-            Layout.preferredWidth: 16
-            Layout.preferredHeight: 16
+            Layout.preferredWidth: 16 * scaling
+            Layout.preferredHeight: 16 * scaling
             source: modelData?.icon ?? ""
             visible: (modelData?.icon ?? "") !== ""
             fillMode: Image.PreserveAspectFit
@@ -175,7 +170,7 @@ PopupWindow {
 
           onEntered: {
             if (!trayMenu.visible)
-            return
+              return
 
             if (modelData?.hasChildren) {
               // Close sibling submenus immediately
@@ -193,8 +188,8 @@ PopupWindow {
                 entry.subMenu = null
               }
               var globalPos = entry.mapToGlobal(0, 0)
-              var submenuWidth = 180
-              var gap = 12
+              var submenuWidth = 180 * scaling
+              var gap = 12 * scaling
               var openLeft = (globalPos.x + entry.width + submenuWidth > Screen.width)
               var anchorX = openLeft ? -submenuWidth - gap : entry.width + gap
 
@@ -247,12 +242,15 @@ PopupWindow {
     }
   }
 
+  // -----------------------------------------
+  // Sub Component
+  // -----------------------------------------
   Component {
     id: subMenuComponent
 
     PopupWindow {
       id: subMenu
-      implicitWidth: 180
+      implicitWidth: 180 * scaling
       implicitHeight: Math.max(40, listView.contentHeight + 12)
       visible: false
       color: "transparent"
@@ -311,16 +309,16 @@ PopupWindow {
         anchors.fill: parent
         color: Colors.backgroundPrimary
         border.color: Colors.outline
-        border.width: 1
-        radius: 12
+        border.width: Math.max(1, Style.borderThin * scaling)
+        radius: Style.radiusMedium * scaling
         z: 0
       }
 
       ListView {
         id: listView
         anchors.fill: parent
-        anchors.margins: 6
-        spacing: 2
+        anchors.margins: Style.spacingSmall * scaling
+        spacing: Style.spacingTiny * scaling
         interactive: false
         enabled: subMenu.visible
         clip: true
@@ -334,17 +332,14 @@ PopupWindow {
           required property var modelData
 
           width: listView.width
-          height: (modelData?.isSeparator) ? 8 : 32
+          height: (modelData?.isSeparator) ? 8 * scaling : 32 * scaling
           color: "transparent"
-          radius: 12
 
           property var subMenu: null
 
-          Rectangle {
+          NDivider {
             anchors.centerIn: parent
-            width: parent.width - 20
-            height: 1
-            color: Qt.darker(Colors.surfaceVariant, 1.4)
+            width: parent.width - (Style.marginMedium * scaling * 2)
             visible: modelData?.isSeparator ?? false
           }
 
@@ -352,33 +347,34 @@ PopupWindow {
             id: bg
             anchors.fill: parent
             color: mouseArea.containsMouse ? Colors.highlight : "transparent"
-            radius: 8
+            radius: Style.radiusSmall * scaling
             visible: !(modelData?.isSeparator ?? false)
             property color hoverTextColor: mouseArea.containsMouse ? Colors.onAccent : Colors.textPrimary
 
             RowLayout {
               anchors.fill: parent
-              anchors.leftMargin: 12
-              anchors.rightMargin: 12
-              spacing: 8
+              anchors.leftMargin: Style.spacingMedium * scaling
+              anchors.rightMargin: Style.spacingMedium * scaling
+              spacing: Style.spacingSmall * scaling
 
               NText {
                 Layout.fillWidth: true
                 color: (modelData?.enabled ?? true) ? bg.hoverTextColor : Colors.textDisabled
                 text: modelData?.text ?? ""
-                font.pointSize: Colors.fontSizeSmall * Colors.scale(screen)
+                font.pointSize: Colors.fontSizeSmall * scaling
                 verticalAlignment: Text.AlignVCenter
                 elide: Text.ElideRight
               }
 
               Image {
-                Layout.preferredWidth: 16
-                Layout.preferredHeight: 16
+                Layout.preferredWidth: 16 * scaling
+                Layout.preferredHeight: 16 * scaling
                 source: modelData?.icon ?? ""
                 visible: (modelData?.icon ?? "") !== ""
                 fillMode: Image.PreserveAspectFit
               }
 
+              // TBC a Square UTF-8?
               NText {
                 text: modelData?.hasChildren ? "\uE5CC" : ""
                 font.family: "Material Symbols Outlined"
@@ -405,8 +401,9 @@ PopupWindow {
               }
 
               onEntered: {
-                if (!subMenu.visible)
-                return
+                if (!subMenu.visible) {
+                  return
+                }
 
                 if (modelData?.hasChildren) {
                   for (var i = 0; i < listView.contentItem.children.length; i++) {
@@ -423,8 +420,8 @@ PopupWindow {
                     entry.subMenu = null
                   }
                   var globalPos = entry.mapToGlobal(0, 0)
-                  var submenuWidth = 180
-                  var gap = 12
+                  var submenuWidth = 180 * scaling
+                  var gap = 12 * scaling
                   var openLeft = (globalPos.x + entry.width + submenuWidth > Screen.width)
                   var anchorX = openLeft ? -submenuWidth - gap : entry.width + gap
 

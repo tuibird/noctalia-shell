@@ -94,7 +94,7 @@ Item {
                          if (modelData.hasMenu && modelData.menu && trayMenu) {
                            // Anchor the menu to the tray icon item (parent) and position it below the icon
                            const menuX = (width / 2) - (trayMenu.width / 2)
-                           const menuY = height + 20 * scaling
+                           const menuY = (Style.barHeight * scaling)
                            trayMenu.menu = modelData.menu
                            trayMenu.showAt(parent, menuX, menuY)
                          } else {

@@ -28,6 +28,7 @@ Singleton {
   property int radiusLarge: 20
   property int radiusMedium: 16
   property int radiusSmall: 12
+  property int radiusTiny: 8
 
   // Border
   property int borderThin: 1
@@ -39,6 +40,7 @@ Singleton {
   property int spacingLarge: 16
   property int spacingMedium: 12
   property int spacingSmall: 8
+  property int spacingTiny: 4
 
   // Animation duration (ms)
   property int animationFast: 150
