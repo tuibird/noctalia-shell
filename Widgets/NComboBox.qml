@@ -8,7 +8,7 @@ ComboBox {
   id: root
 
   readonly property real scaling: Scaling.scale(screen)
-  
+
   property list<string> optionsKeys: []
   property list<string> optionsLabels: []
   property string currentKey: ''

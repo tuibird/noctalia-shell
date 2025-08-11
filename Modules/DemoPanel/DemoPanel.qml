@@ -33,6 +33,13 @@ NLoader {
           anchors.fill: parent
         }
 
+        // A basic rectangle, which scale ok because out of layout
+        Rectangle {
+          width: Style.baseWidgetSize * scaling
+          height: Style.baseWidgetSize * scaling
+          color: Colors.accentTertiary
+        }
+
         ColumnLayout {
           anchors.fill: parent
           anchors.margins: Style.marginXL * scaling
@@ -156,12 +163,18 @@ NLoader {
               font.weight: Style.fontWeightBold
             }
 
-            NBusyIndicator {
-            }
+            NBusyIndicator {}
 
             NDivider {
               Layout.fillWidth: true
             }
+          }
+
+          // A basic rectangle, which does not scale right?!
+          Rectangle {
+            width: Style.baseWidgetSize * scaling
+            height: Style.baseWidgetSize * scaling
+            color: Colors.accentPrimary
           }
         }
       }
