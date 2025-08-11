@@ -76,6 +76,10 @@ Variants {
         anchors.verticalCenter: bar.verticalCenter
         spacing: Style.marginSmall * scaling
 
+        Tray {
+          anchors.verticalCenter: parent.verticalCenter
+        }
+
         Battery {
           anchors.verticalCenter: parent.verticalCenter
         }
