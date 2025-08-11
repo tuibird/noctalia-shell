@@ -39,16 +39,16 @@ RowLayout {
   Rectangle {
     id: switcher
 
-    width: root.baseSize * 1.625 * scaling
-    height: root.baseSize * scaling
+    implicitWidth: root.baseSize * 1.625 * scaling
+    implicitHeight: root.baseSize * scaling
     radius: height * 0.5
     color: value ? Colors.accentPrimary : Colors.surfaceVariant
     border.color: value ? Colors.accentPrimary : Colors.outline
     border.width: Math.max(1, Style.borderMedium * scaling)
 
     Rectangle {
-      width: (root.baseSize - 4) * scaling
-      height: (root.baseSize - 4) * scaling
+      implicitWidth: (root.baseSize - 4) * scaling
+      implicitHeight: (root.baseSize - 4) * scaling
       radius: height * 0.5
       color: Colors.surface
       border.color: hovering ? Colors.textDisabled : Colors.outline
