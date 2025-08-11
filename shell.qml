@@ -38,4 +38,9 @@ ShellRoot {
   Calendar {
     id: calendar
   }
+
+  Component.onCompleted: {
+    // On startup, check if we need to get fresh weather data
+    Location.init()
+  }
 }

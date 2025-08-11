@@ -9,13 +9,8 @@ Singleton {
   id: root
 
   property string locationFile: Quickshell.env("NOCTALIA_WEATHER_FILE") || (Settings.cacheDir + "location.json")
-
-  // Used to access via Location.data.xxx.yyy
-  property var data: adapter
-
-  function quickstart() {
-    console.log(locationFile)
-  }
+  property int weatherUpdateFrequency: 30 * 60 * 1000 // 30 minutes expressed in milliseconds
+  property var data: adapter // Used to access via Location.data.xxx.yyy
 
   FileView {
     path: locationFile
@@ -25,44 +20,70 @@ Singleton {
     Component.onCompleted: function () {
       reload()
     }
-    onLoaded: function () {}
+    onLoaded: function () {
+      updateWeather()
+    }
     onLoadFailed: function (error) {
-      if (error.toString().includes("No such file") || error === 2)
+      if (error.toString().includes("No such file") || error === 2) {
         // File doesn't exist, create it with default values
         writeAdapter()
+      }
     }
 
     JsonAdapter {
       id: adapter
 
-      // main
-      property JsonObject main
+      property string latitude: ""
+      property string longitude: ""
+      property string weatherLastFetch: ""
+      property var weather: null
+    }
+  }
 
-      main: JsonObject {
-        property string latitude: ""
-        property string longitude: ""
-        property int weatherLastFetched: 0
-      }
 
-      // weather
-      property JsonObject weather
-
-      weather: JsonObject {
-      }
+  Timer {
+    id: updateTimer
+    interval: 60 * 1000
+    repeat: true
+    onTriggered: {
+      updateWeather();
     }
   }
 
   // --------------------------------
-  function getWeather() {
-    if (data.main.latitude === "" || data.main.longitude === "") {
-      geocodeLocation(Settings.data.location.name, function (lat, lon) {
-        console.log(Settings.data.location.name + ": " + lat + " / " + lon);
-      })
+  function init() {
+    // does nothing but ensure the singleton is created
+  }
+
+
+  // --------------------------------
+  function updateWeather() {
+    var now = Date.now()
+    if ((data.weatherLastFetch === "") || (now >= data.weatherLastFetch + weatherUpdateFrequency)) {
+      getFreshWeather()
     }
   }
 
   // --------------------------------
-  function geocodeLocation(locationName, callback, errorCallback) {
+  function getFreshWeather() {
+    if (data.latitude === "" || data.longitude === "") {
+      console.log("Geocoding location")
+      _geocodeLocation(Settings.data.location.name, function (lat, lon) {
+        console.log("Geocoded " + Settings.data.location.name + " to : " + lat + " / " + lon)
+
+        // Save GPS coordinates
+        data.latitude = lat
+        data.longitude = lon
+
+        _fetchWeather(data.latitude, data.longitude, errorCallback)
+      }, errorCallback)
+    } else {
+      _fetchWeather(data.latitude, data.longitude, errorCallback)
+    }
+  }
+
+  // --------------------------------
+  function _geocodeLocation(locationName, callback, errorCallback) {
     var geoUrl = "https://geocoding-api.open-meteo.com/v1/search?name=" + encodeURIComponent(
           locationName) + "&language=en&format=json"
     var xhr = new XMLHttpRequest()
@@ -89,7 +110,7 @@ Singleton {
   }
 
   // --------------------------------
-  function fetchWeather(latitude, longitude, callback, errorCallback) {
+  function _fetchWeather(latitude, longitude, errorCallback) {
     var url = "https://api.open-meteo.com/v1/forecast?latitude=" + latitude + "&longitude=" + longitude
         + "&current_weather=true&current=relativehumidity_2m,surface_pressure&daily=temperature_2m_max,temperature_2m_min,weathercode&timezone=auto"
     var xhr = new XMLHttpRequest()
@@ -98,7 +119,11 @@ Singleton {
         if (xhr.status === 200) {
           try {
             var weatherData = JSON.parse(xhr.responseText)
-            callback(weatherData)
+
+            // Save to json
+            data.weather = weatherData
+            data.weatherLastFetch = Date.now()
+            console.log("Cached weather to disk")
           } catch (e) {
             errorCallback("Failed to parse weather data.")
           }
@@ -111,18 +136,8 @@ Singleton {
     xhr.send()
   }
 
-  
-
-  // function fetchCityWeather(city, callback, errorCallback) {
-  //   fetchCoordinates(city, function (lat, lon) {
-  //     fetchWeather(lat, lon, function (weatherData) {
-  //       callback({
-  //                  "city": city,
-  //                  "latitude": lat,
-  //                  "longitude": lon,
-  //                  "weather": weatherData
-  //                })
-  //     }, errorCallback)
-  //   }, errorCallback)
-  // }
+    // --------------------------------
+  function errorCallback(message) {
+    console.error(message)
+  }
 }
