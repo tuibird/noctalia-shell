@@ -9,6 +9,10 @@ Item {
   // Public API
   // Scaling factor provided by the parent settings window
   property real scaling: 1
+  // Tab metadata
+  readonly property string tabIcon: "tune"
+  readonly property string tabLabel: "General"
+  readonly property int tabIndex: 0
 
   anchors.fill: parent
   implicitWidth: parent ? parent.width : 0

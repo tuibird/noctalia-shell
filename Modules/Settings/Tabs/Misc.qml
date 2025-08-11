@@ -5,6 +5,9 @@ import qs.Widgets
 
 Item {
   property real scaling: 1
+  readonly property string tabIcon: "more_horiz"
+  readonly property string tabLabel: "Misc"
+  readonly property int tabIndex: 7
   anchors.fill: parent
 
   ColumnLayout {

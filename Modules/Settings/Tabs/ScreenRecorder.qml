@@ -5,6 +5,9 @@ import qs.Widgets
 
 Item {
   property real scaling: 1
+  readonly property string tabIcon: "videocam"
+  readonly property string tabLabel: "Screen Recorder"
+  readonly property int tabIndex: 3
   anchors.fill: parent
 
   ColumnLayout {

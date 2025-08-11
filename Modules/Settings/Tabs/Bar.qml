@@ -6,6 +6,10 @@ import qs.Widgets
 Item {
   // Optional scaling prop to match other tabs
   property real scaling: 1
+  // Tab metadata
+  readonly property string tabIcon: "web_asset"
+  readonly property string tabLabel: "Bar"
+  readonly property int tabIndex: 1
   anchors.fill: parent
 
   ColumnLayout {
