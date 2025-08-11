@@ -120,7 +120,8 @@ PanelWindow {
         Behavior on scale {
           NumberAnimation {
             duration: Style.animationSlow
-            easing.type: Easing.OutBack
+            easing.type: Easing.OutExpo
+            //easing.type: Easing.OutBack   looks better but notification get clipped on all sides
           }
         }
 
