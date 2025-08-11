@@ -35,7 +35,7 @@ Singleton {
 
       property string latitude: ""
       property string longitude: ""
-      property string weatherLastFetch: ""
+      property int weatherLastFetch: 0
       property var weather: null
     }
   }
@@ -51,6 +51,14 @@ Singleton {
 
   // --------------------------------
   function init() {// does nothing but ensure the singleton is created
+  }
+
+  // --------------------------------
+  function resetWeather() {
+    data.latitude = ""
+    data.longitude = ""
+    data.weatherLastFetch = 0
+    data.weather = null
   }
 
   // --------------------------------
@@ -107,6 +115,7 @@ Singleton {
 
   // --------------------------------
   function _fetchWeather(latitude, longitude, errorCallback) {
+    console.log("Getting weather")
     var url = "https://api.open-meteo.com/v1/forecast?latitude=" + latitude + "&longitude=" + longitude
         + "&current_weather=true&current=relativehumidity_2m,surface_pressure&daily=temperature_2m_max,temperature_2m_min,weathercode&timezone=auto"
     var xhr = new XMLHttpRequest()

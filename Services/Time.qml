@@ -39,7 +39,7 @@ Singleton {
   }
 
   // Returns a Unix Timestamp (in seconds)
-  readonly property string timestamp: {
+  readonly property int timestamp: {
     return Math.floor(Date.now() / 1000)
   }
 
