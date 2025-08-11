@@ -17,8 +17,8 @@ PanelWindow {
   visible: notificationService.notificationModel.count > 0
   anchors.top: true
   anchors.right: true
-  margins.top: (Style.barHeight + 10) * scaling
-  margins.right: 10 * scaling
+  margins.top: (Style.barHeight + Style.marginMedium) * scaling
+  margins.right: Style.marginMedium * scaling
   implicitWidth: 360 * scaling
   implicitHeight: Math.min(notificationStack.implicitHeight, (notificationService.maxVisible * 120) * scaling)
   WlrLayershell.layer: WlrLayer.Overlay
@@ -64,7 +64,7 @@ PanelWindow {
         clip: true
         color: Colors.backgroundSecondary
         radius: Style.radiusMedium * scaling
-        border.color: Colors.accentTertiary
+        border.color: Colors.accentPrimary
         border.width: Math.max(1, Style.borderThin * scaling)
 
         // Animation properties

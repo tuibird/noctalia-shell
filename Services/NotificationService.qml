@@ -45,7 +45,7 @@ QtObject {
 
   // Auto-hide timer
   property Timer hideTimer: Timer {
-    interval: 5000 // 5 seconds
+    interval: 8000 // 8 seconds - longer display time
     repeat: true
     running: notificationModel.count > 0
 
@@ -54,9 +54,9 @@ QtObject {
         return
       }
 
-      // Always remove the oldest notification (last in the list)
+      // Remove the oldest notification (last in the list)
       let oldestNotification = notificationModel.get(notificationModel.count - 1).rawNotification
-      if (oldestNotification && !oldestNotification.transient) {
+      if (oldestNotification) {
         // Trigger animation signal instead of direct dismiss
         animateAndRemove(oldestNotification, notificationModel.count - 1)
       }

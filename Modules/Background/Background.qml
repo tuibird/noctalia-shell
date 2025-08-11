@@ -9,6 +9,7 @@ Variants {
   delegate: PanelWindow {
     required property ShellScreen modelData
     property string wallpaperSource: Qt.resolvedUrl("../../Assets/Tests/wallpaper.png")
+    //property string wallpaperSource: Qt.resolvedUrl("/home/lysec/Pictures/wallpapers/wallhaven-6lqvql.jpg")
 
     visible: wallpaperSource !== ""
     color: "transparent"
