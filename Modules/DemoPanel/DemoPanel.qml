@@ -23,12 +23,13 @@ NLoader {
       Component.onCompleted: show()
 
       Rectangle {
+        id: bgRect
         color: Colors.backgroundPrimary
         radius: Style.radiusMedium * scaling
         border.color: Colors.backgroundTertiary
         border.width: Math.min(1, Style.borderMedium * scaling)
         width: 500 * scaling
-        height: 400
+        height: 400 * scaling
         anchors.centerIn: parent
 
         // Prevent closing when clicking in the panel bg
@@ -47,11 +48,14 @@ NLoader {
             NText {
               text: "NIconButton"
               color: Colors.accentSecondary
+              font.weight: Style.fontWeightBold
             }
 
             NIconButton {
               id: myIconButton
-              icon: "refresh"
+              icon: "celebration"
+              sizeMultiplier: 1.0
+              fontPointSize: Style.fontSizeXL * scaling
             }
 
             NDivider {
@@ -65,6 +69,7 @@ NLoader {
             NText {
               text: "NToggle"
               color: Colors.accentSecondary
+              font.weight: Style.fontWeightBold
             }
 
             NToggle {
@@ -86,6 +91,7 @@ NLoader {
             NText {
               text: "Scaling"
               color: Colors.accentSecondary
+              font.weight: Style.fontWeightBold
             }
             RowLayout {
               spacing: Style.marginSmall * scaling
@@ -99,6 +105,7 @@ NLoader {
                 to: 1.8
                 stepSize: 0.01
                 value: Scaling.overrideScale
+                implicitWidth: bgRect.width * 0.75
                 onMoved: function () {
                   Scaling.overrideScale = value
                 }
@@ -107,8 +114,9 @@ NLoader {
                 }
               }
               NIconButton {
-                icon: "restart_alt"
-                sizeMultiplier: 0.7
+                icon: "refresh"
+                sizeMultiplier: 1.0
+                fontPointSize: Style.fontSizeXL * scaling
                 onClicked: function () {
                   Scaling.overrideEnabled = false
                   Scaling.overrideScale = 1.0

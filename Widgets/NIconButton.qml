@@ -25,7 +25,7 @@ Rectangle {
 
   color: root.hovering ? Colors.accentPrimary : "transparent"
 
-  Text {
+  NText {
     anchors.centerIn: parent
     anchors.horizontalCenterOffset: 0
     anchors.verticalCenterOffset: 0

@@ -19,14 +19,14 @@ RowLayout {
     spacing: 2 * scaling
     Layout.fillWidth: true
 
-    Text {
+    NText {
       text: label
       font.pointSize: Style.fontSizeMedium * scaling
-      font.bold: true
+      font.weight: Style.fontWeightBold
       color: Colors.textPrimary
     }
 
-    Text {
+    NText {
       text: description
       font.pointSize: Style.fontSizeSmall * scaling
       color: Colors.textSecondary

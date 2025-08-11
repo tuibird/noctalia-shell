@@ -57,6 +57,7 @@ NLoader {
               Layout.fillWidth: true
               horizontalAlignment: Text.AlignHCenter
               font.pointSize: Style.fontSizeMedium * scaling
+              font.weight: Style.fontWeightBold
               color: Colors.accentPrimary
             }
 
@@ -85,6 +86,7 @@ NLoader {
               text: shortName
               color: Colors.accentSecondary
               font.pointSize: Style.fontSizeMedium * scaling
+              font.weight: Style.fontWeightBold
               horizontalAlignment: Text.AlignHCenter
               width: Style.baseWidgetSize * scaling
             }
@@ -124,7 +126,7 @@ NLoader {
                 color: model.today ? Colors.onAccent : Colors.textPrimary
                 opacity: model.month === grid.month ? Style.opacityHeavy : Style.opacityLight
                 font.pointSize: Style.fontSizeMedium * scaling
-                font.bold: model.today ? true : false
+                font.weight: model.today ? Style.fontWeightBold : Style.fontWeightRegular
               }
 
               Behavior on color {

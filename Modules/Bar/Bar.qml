@@ -51,6 +51,7 @@ Variants {
         NText {
           text: screen.name
           anchors.verticalCenter: parent.verticalCenter
+          font.weight: Style.fontWeightBold
         }
       }
 

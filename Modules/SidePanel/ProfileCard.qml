@@ -54,6 +54,7 @@ NBox {
       spacing: 2 * scaling
       NText {
         text: Quickshell.env("USER") || "user"
+        font.weight: Style.fontWeightBold
       }
       NText {
         text: "System Uptime: —"

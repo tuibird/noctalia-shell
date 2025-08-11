@@ -155,7 +155,7 @@ PanelWindow {
           NText {
             text: model.summary || "No summary"
             font.pointSize: Style.fontSizeLarge
-            font.bold: true
+            font.weight: Style.fontWeightBold
             color: Colors.textPrimary
             wrapMode: Text.Wrap
             width: 300 * scaling

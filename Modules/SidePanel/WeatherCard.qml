@@ -26,7 +26,7 @@ NBox {
       Text {
         text: "sunny"
         font.family: "Material Symbols Outlined"
-        font.pointSize: Style.fontSizeXL * scaling
+        font.pointSize: Style.fontSizeXXL * 1.25 * scaling
         color: Colors.accentSecondary
       }
       ColumnLayout {
@@ -36,6 +36,7 @@ NBox {
         NText {
           text: "26°C"
           font.pointSize: (Style.fontSizeXL + 6) * scaling
+          font.weight: Style.fontWeightBold
         }
       }
     }
@@ -55,10 +56,12 @@ NBox {
           spacing: 2 * scaling
           NText {
             text: ["Sun", "Mon", "Tue", "Wed", "Thu"][index]
+            font.weight: Style.fontWeightBold
           }
-          Text {
+          NText {
             text: index % 2 === 0 ? "wb_sunny" : "cloud"
             font.family: "Material Symbols Outlined"
+            font.weight: Style.fontWeightBold
             color: Colors.textSecondary
           }
           NText {

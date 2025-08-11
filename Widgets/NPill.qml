@@ -52,13 +52,12 @@ Item {
     bottomLeftRadius: pillHeight * 0.5
     anchors.verticalCenter: parent.verticalCenter
 
-    Text {
+    NText {
       id: textItem
       anchors.centerIn: parent
       text: root.text
       font.pointSize: Colors.fontSizeSmall * scaling
-      font.family: Settings.data.ui.fontFamily
-      font.weight: Font.Bold
+      font.weight: Style.fontWeightBold
       color: textColor
       visible: showPill
     }

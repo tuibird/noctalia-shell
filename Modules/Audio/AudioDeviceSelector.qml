@@ -32,105 +32,13 @@ NLoader {
           anchors.fill: parent
         }
 
-        ColumnLayout {
-          anchors.fill: parent
-          anchors.margins: Style.marginXL * scaling
-          spacing: Style.marginSmall * scaling
-
-          // NIconButton
-          ColumnLayout {
-            spacing: 16 * scaling
-            NText {
-              text: "NIconButton"
-              color: Colors.accentSecondary
-            }
-
-            NIconButton {
-              id: myIconButton
-              icon: "refresh"
-            }
-
-            NDivider {
-              Layout.fillWidth: true
-            }
-          }
-
-          // NToggle
-          ColumnLayout {
-            spacing: Style.marginLarge * scaling
-            NText {
-              text: "NToggle"
-              color: Colors.accentSecondary
-            }
-
-            NToggle {
-              label: "Label"
-              description: "Description"
-              onToggled: function (value) {
-                console.log("NToggle: " + value)
-              }
-            }
-
-            NDivider {
-              Layout.fillWidth: true
-            }
-          }
-
-          // NSlider
-          ColumnLayout {
-            spacing: 16 * scaling
-            NText {
-              text: "Scaling"
-              color: Colors.accentSecondary
-            }
-            RowLayout {
-              spacing: Style.marginSmall * scaling
-              NText {
-                text: `${Math.round(Scaling.overrideScale * 100)}%`
-                Layout.alignment: Qt.AlignVCenter
-              }
-              NSlider {
-                id: scaleSlider
-                from: 0.6
-                to: 1.8
-                stepSize: 0.01
-                value: Scaling.overrideScale
-                onMoved: function () {
-                  Scaling.overrideScale = value
-                }
-                onPressedChanged: function () {
-                  Scaling.overrideEnabled = true
-                }
-              }
-              NIconButton {
-                icon: "restart_alt"
-                sizeMultiplier: 0.7
-                onClicked: function () {
-                  Scaling.overrideEnabled = false
-                  Scaling.overrideScale = 1.0
-                }
-              }
-            }
-            NDivider {
-              Layout.fillWidth: true
-            }
-          }
+        NText {
+          text: "Audio Device Selector"
         }
       }
     }
   }
-} // NPanel {//   id: ioSelector
-
-// property int tabIndex: 0
-// property Item anchorItem: null
-
-// signal panelClosed()
-
-// function sinkNodes() {
-//     let nodes = Pipewire.nodes && Pipewire.nodes.values ? Pipewire.nodes.values.filter(function(n) {
-//         return n.isSink && n.audio && n.isStream === false;
-//     }) : [];
-//     if (Pipewire.defaultAudioSink)
+} // NPanel {//   id: ioSelector// property int tabIndex: 0// property Item anchorItem: null// signal panelClosed()// function sinkNodes() {//     let nodes = Pipewire.nodes && Pipewire.nodes.values ? Pipewire.nodes.values.filter(function(n) {//         return n.isSink && n.audio && n.isStream === false;//     }) : [];//     if (Pipewire.defaultAudioSink)
 //         nodes = nodes.slice().sort(function(a, b) {
 //             if (a.id === Pipewire.defaultAudioSink.id)
 //                 return -1;

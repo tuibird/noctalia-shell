@@ -9,6 +9,6 @@ Text {
 
   font.family: Settings.data.ui.fontFamily
   font.pointSize: Style.fontSizeMedium * scaling
-  font.weight: Font.Bold
+  font.weight: Style.fontWeightRegular
   color: Colors.textPrimary
 }

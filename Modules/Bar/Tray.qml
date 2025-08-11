@@ -8,31 +8,26 @@ import Quickshell.Widgets
 import qs.Services
 import qs.Widgets
 
-Row {
+Item {
   readonly property real scaling: Scaling.scale(screen)
-  property bool containsMouse: false
-  property var systemTray: SystemTray
+  readonly property real itemSize: 24 * scaling
 
-  spacing: 8
-  Layout.alignment: Qt.AlignVCenter
+  width: tray.width
+  height: itemSize
 
-  Repeater {
-    model: systemTray.items
-    delegate: Item {
-      width: 24 * scaling
-      height: 24 * scaling
+  Row {
+    id: tray
 
-      visible: modelData
-      property bool isHovered: trayMouseArea.containsMouse
+    spacing: Style.marginSmall * scaling
+    Layout.alignment: Qt.AlignVCenter
 
-      // No animations - static display
-      Rectangle {
-        anchors.centerIn: parent
-        width: 16 * scaling
-        height: 16 * scaling
-        radius: 6
-        color: "transparent"
-        clip: true
+    Repeater {
+      id: repeater
+      model: SystemTray.items
+      delegate: Item {
+        width: itemSize
+        height: itemSize
+        visible: modelData
 
         IconImage {
           id: trayIcon
@@ -50,6 +45,7 @@ Row {
 
             // Process icon path
             if (icon.includes("?path=")) {
+              // Seems qmlfmt does not support the following ES6 syntax: const[name, path] = icon.split
               const chunks = icon.split("?path=")
               const name = chunks[0]
               const path = chunks[1]
@@ -60,63 +56,68 @@ Row {
           }
           opacity: status === Image.Ready ? 1 : 0
         }
-      }
 
-      MouseArea {
-        id: trayMouseArea
-        anchors.fill: parent
-        hoverEnabled: true
-        cursorShape: Qt.PointingHandCursor
-        acceptedButtons: Qt.LeftButton | Qt.RightButton | Qt.MiddleButton
-        onClicked: mouse => {
-                     if (!modelData)
-                     return
-
-                     if (mouse.button === Qt.LeftButton) {
-                       // Close any open menu first
-                       if (trayMenu && trayMenu.visible) {
-                         trayMenu.hideMenu()
-                       }
-
-                       if (!modelData.onlyMenu) {
-                         modelData.activate()
-                       }
-                     } else if (mouse.button === Qt.MiddleButton) {
-                       // Close any open menu first
-                       if (trayMenu && trayMenu.visible) {
-                         trayMenu.hideMenu()
-                       }
-
-                       modelData.secondaryActivate && modelData.secondaryActivate()
-                     } else if (mouse.button === Qt.RightButton) {
-                       trayTooltip.tooltipVisible = false
-                       // If menu is already visible, close it
-                       if (trayMenu && trayMenu.visible) {
-                         trayMenu.hideMenu()
+        MouseArea {
+          anchors.fill: parent
+          hoverEnabled: true
+          cursorShape: Qt.PointingHandCursor
+          acceptedButtons: Qt.LeftButton | Qt.RightButton | Qt.MiddleButton
+          onClicked: mouse => {
+                       if (!modelData) {
                          return
                        }
 
-                       if (modelData.hasMenu && modelData.menu && trayMenu) {
-                         // Anchor the menu to the tray icon item (parent) and position it below the icon
-                         const menuX = (width / 2) - (trayMenu.width / 2)
-                         const menuY = height + 20 * scaling
-                         trayMenu.menu = modelData.menu
-                         trayMenu.showAt(parent, menuX, menuY)
-                       } else {
+                       if (mouse.button === Qt.LeftButton) {
+                         // Close any open menu first
+                         if (trayMenu && trayMenu.visible) {
+                           trayMenu.hideMenu()
+                         }
 
-                         console.log("Tray: no menu available for", modelData.id, "or trayMenu not set")
+                         if (!modelData.onlyMenu) {
+                           modelData.activate()
+                         }
+                       } else if (mouse.button === Qt.MiddleButton) {
+                         // Close any open menu first
+                         if (trayMenu && trayMenu.visible) {
+                           trayMenu.hideMenu()
+                         }
+
+                         modelData.secondaryActivate && modelData.secondaryActivate()
+                       } else if (mouse.button === Qt.RightButton) {
+                         trayTooltip.hide()
+                         // If menu is already visible, close it
+                         if (trayMenu && trayMenu.visible) {
+                           trayMenu.hideMenu()
+                           return
+                         }
+
+                         if (modelData.hasMenu && modelData.menu && trayMenu) {
+                           // Anchor the menu to the tray icon item (parent) and position it below the icon
+                           const menuX = (width / 2) - (trayMenu.width / 2)
+                           const menuY = height + 20 * scaling
+                           trayMenu.menu = modelData.menu
+                           trayMenu.showAt(parent, menuX, menuY)
+                         } else {
+
+                           console.log("Tray: no menu available for", modelData.id, "or trayMenu not set")
+                         }
                        }
                      }
-                   }
-        onEntered: trayTooltip.show()
-        onExited: trayTooltip.hide()
-      }
+          onEntered: trayTooltip.show()
+          onExited: trayTooltip.hide()
+        }
 
-      NTooltip {
-        id: trayTooltip
-        target: trayIcon
-        text: modelData.tooltipTitle || modelData.name || modelData.id || "Tray Item"
+        NTooltip {
+          id: trayTooltip
+          target: trayIcon
+          text: modelData.tooltipTitle || modelData.name || modelData.id || "Tray Item"
+        }
       }
     }
+  }
+
+  // Attached TrayMenu
+  TrayMenu {
+    id: trayMenu
   }
 }

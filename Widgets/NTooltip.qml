@@ -112,7 +112,6 @@ Window {
     anchors.centerIn: parent
     text: root.text
     font.pointSize: Style.fontSizeMedium * scaling
-    font.weight: Style.fontWeightRegular
     horizontalAlignment: Text.AlignHCenter
     verticalAlignment: Text.AlignVCenter
     wrapMode: Text.Wrap
