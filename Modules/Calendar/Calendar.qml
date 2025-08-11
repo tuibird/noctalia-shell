@@ -21,7 +21,7 @@ NLoader {
         border.color: Colors.backgroundTertiary
         border.width: Math.max(1, Style.borderMedium * scaling)
         width: 340 * scaling
-        height: 380 * scaling  // Scale the height and make it larger
+        height: 320 * scaling  // Reduced height to eliminate bottom space
         anchors.top: parent.top
         anchors.right: parent.right
         anchors.topMargin: Style.marginTiny * scaling
@@ -36,11 +36,13 @@ NLoader {
         ColumnLayout {
           anchors.fill: parent
           anchors.margins: Style.marginMedium * scaling
-          spacing: Style.marginMedium * scaling
+          spacing: Style.marginTiny * scaling
 
           // Header: Month/Year with navigation
           RowLayout {
             Layout.fillWidth: true
+            Layout.leftMargin: Style.marginMedium * scaling
+            Layout.rightMargin: Style.marginMedium * scaling
             spacing: Style.marginSmall * scaling
 
             NIconButton {
@@ -71,8 +73,11 @@ NLoader {
             }
           }
 
+          // Divider between header and weekdays
           NDivider {
             Layout.fillWidth: true
+            Layout.topMargin: Style.marginSmall * scaling
+            Layout.bottomMargin: Style.marginMedium * scaling
           }
 
           // Columns label (respects locale's first day of week)
@@ -107,6 +112,7 @@ NLoader {
             id: grid
 
             Layout.fillWidth: true
+            Layout.fillHeight: true  // Take remaining space
             Layout.leftMargin: Style.marginSmall * scaling
             Layout.rightMargin: Style.marginSmall * scaling
             spacing: 0
