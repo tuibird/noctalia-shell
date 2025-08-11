@@ -62,10 +62,13 @@ PanelWindow {
         width: 360 * scaling
         height: Math.max(80 * scaling, contentColumn.implicitHeight + (Style.marginMedium * 2 * scaling))
         clip: true
-        color: Colors.backgroundSecondary
         radius: Style.radiusMedium * scaling
         border.color: Colors.accentPrimary
         border.width: Math.max(1, Style.borderThin * scaling)
+        gradient: Gradient {
+        GradientStop { position: 0.0; color: Colors.backgroundTertiary }
+        GradientStop { position: 1.0; color: Colors.backgroundSecondary }
+    }
 
         // Animation properties
         property real scaleValue: 0.8
