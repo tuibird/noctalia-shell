@@ -75,20 +75,29 @@ NLoader {
             Layout.fillWidth: true
           }
 
-          // Columns label (Sunday to Saturday)
-          DayOfWeekRow {
+          // Columns label (Monday to Sunday)
+          RowLayout {
             Layout.fillWidth: true
-            spacing: 0
             Layout.leftMargin: Style.marginSmall * scaling // Align with grid
             Layout.rightMargin: Style.marginSmall * scaling
+            spacing: 0
 
-            delegate: NText {
-              text: shortName
-              color: Colors.accentSecondary
-              font.pointSize: Style.fontSizeMedium * scaling
-              font.weight: Style.fontWeightBold
-              horizontalAlignment: Text.AlignHCenter
-              width: Style.baseWidgetSize * scaling
+            Repeater {
+              model: 7
+              
+              NText {
+                text: {
+                  // Start with Monday (1) instead of Sunday (0)
+                  let dayIndex = (index + 1) % 7
+                  return Qt.locale().dayName(dayIndex, Locale.ShortFormat)
+                }
+                color: Colors.accentSecondary
+                font.pointSize: Style.fontSizeMedium * scaling
+                font.weight: Style.fontWeightBold
+                horizontalAlignment: Text.AlignHCenter
+                Layout.fillWidth: true
+                Layout.preferredWidth: Style.baseWidgetSize * scaling
+              }
             }
           }
 
@@ -102,6 +111,7 @@ NLoader {
             spacing: 0
             month: Time.date.getMonth()
             year: Time.date.getFullYear()
+            locale: Qt.locale() // Use system locale
 
             // Optionally, update when the panel becomes visible
             Connections {
