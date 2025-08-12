@@ -77,13 +77,9 @@ Singleton {
       console.warn("[Location] Why is my latitude empty")
     }
 
-    if (
-      (data.weatherLastFetch === "") || 
-      (data.weather === null) || 
-      (data.latitude === "") || 
-      (data.longitude === "") || 
-      (data.name !== Settings.data.location.name) 
-      || (Time.timestamp >= data.weatherLastFetch + weatherUpdateFrequency)) {
+    if ((data.weatherLastFetch === "") || (data.weather === null) || (data.latitude === "") || (data.longitude === "")
+        || (data.name !== Settings.data.location.name)
+        || (Time.timestamp >= data.weatherLastFetch + weatherUpdateFrequency)) {
       getFreshWeather()
     }
   }
@@ -91,22 +87,17 @@ Singleton {
   // --------------------------------
   function getFreshWeather() {
     isFetchingWeather = true
-    if (
-      (data.latitude === "") || 
-      (data.longitude === "") || 
-      (data.name !== Settings.data.location.name)) {
+    if ((data.latitude === "") || (data.longitude === "") || (data.name !== Settings.data.location.name)) {
 
       _geocodeLocation(Settings.data.location.name, function (latitude, longitude) {
         console.log("[Location] Geocoded " + Settings.data.location.name + " to: " + latitude + " / " + longitude)
 
-                           // Save location name
+        // Save location name
         data.name = Settings.data.location.name
 
         // Save GPS coordinates
         data.latitude = latitude.toString()
         data.longitude = longitude.toString()
-
-
 
         _fetchWeather(latitude, longitude, errorCallback)
       }, errorCallback)
