@@ -53,8 +53,7 @@ Singleton {
   }
 
   // --------------------------------
-  function init() {
-    // does nothing but ensure the singleton is created
+  function init() {// does nothing but ensure the singleton is created
     // do not remove
   }
 
@@ -66,7 +65,7 @@ Singleton {
     data.weather = null
 
     // Try to fetch immediately
-    updateWeather();
+    updateWeather()
   }
 
   // --------------------------------
