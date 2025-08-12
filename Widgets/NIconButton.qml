@@ -8,10 +8,11 @@ Rectangle {
 
   readonly property real scaling: Scaling.scale(screen)
   // Multiplier to control how large the button container is relative to Style.baseWidgetSize
-  property real sizeMultiplier: 0.8
+  property real sizeMultiplier: 1.0
   property real size: Style.baseWidgetSize * sizeMultiplier * scaling
   property string icon
   property string tooltipText
+  property bool showBorder: true
   property bool enabled: true
   property bool hovering: false
   property var onEntered: function () {}
@@ -20,20 +21,24 @@ Rectangle {
   property real fontPointSize: Style.fontSizeMedium
   property string fontFamily: "Material Symbols Outlined"
 
+
   implicitWidth: size
   implicitHeight: size
-  radius: width * 0.5
 
   color: root.hovering ? Colors.accentPrimary : "transparent"
+  radius: width * 0.5
+  border.color: showBorder ? Colors.accentPrimary : "transparent"
+  border.width: Math.max(1, Style.borderThin * scaling)
 
   NText {
     anchors.centerIn: parent
-    anchors.horizontalCenterOffset: 0
+    // Little hack to keep things centered at high scaling
+    anchors.horizontalCenterOffset: -1 * (scaling - 1.0)
     anchors.verticalCenterOffset: 0
     text: root.icon
     font.family: fontFamily
     font.pointSize: root.fontPointSize * scaling
-    color: root.hovering ? Colors.onAccent : Colors.textPrimary
+    color: root.hovering ? Colors.onAccent : showBorder ? Colors.accentPrimary : Colors.textPrimary
     horizontalAlignment: Text.AlignHCenter
     verticalAlignment: Text.AlignVCenter
     opacity: root.enabled ? Style.opacityFull : Style.opacityMedium
