@@ -24,18 +24,27 @@ NBox {
     RowLayout {
       spacing: Style.marginSmall * scaling
       Text {
-        text: "sunny"
+        text: Location.weatherSymbolFromCode(Location.data.weather.current_weather.weathercode) 
         font.family: "Material Symbols Outlined"
         font.pointSize: Style.fontSizeXXL * 1.25 * scaling
         color: Colors.accentSecondary
       }
       ColumnLayout {
-        NText {
-          text: "Dinslaken (GMT+2)"
+        RowLayout {
+          NText {
+            text: Settings.data.location.name 
+            font.weight: Style.fontWeightBold
+            font.pointSize: Style.fontSizeLarge * scaling
+          }
+          NText {
+            text: "(" + Location.data. weather.timezone_abbreviation + ")"
+            font.pointSize: Style.fontSizeTiny * scaling
+          }
         }
+
         NText {
           text: "26°C"
-          font.pointSize: (Style.fontSizeXL + 6) * scaling
+          font.pointSize: Style.fontSizeXL *  scaling
           font.weight: Style.fontWeightBold
         }
       }
@@ -55,17 +64,27 @@ NBox {
         delegate: ColumnLayout {
           spacing: 2 * scaling
           NText {
-            text: ["Sun", "Mon", "Tue", "Wed", "Thu"][index]
+            text: Qt.formatDateTime(new Date(Location.data.weather.daily.time[index]), "ddd")
             font.weight: Style.fontWeightBold
           }
           NText {
-            text: index % 2 === 0 ? "wb_sunny" : "cloud"
+            text: Location.weatherSymbolFromCode(Location.data.weather.daily.weathercode[index])
             font.family: "Material Symbols Outlined"
             font.weight: Style.fontWeightBold
             color: Colors.textSecondary
           }
           NText {
-            text: "26° / 14°"
+            text: {
+              var max = Location.data.weather.daily.temperature_2m_max[index]
+              var min = Location.data.weather.daily.temperature_2m_min[index]
+              if (Settings.data.location.useFahrenheit) {
+                max = Location.celsiusToFahrenheit(max)
+                min = Location.celsiusToFahrenheit(min)
+              }
+              max = Math.round(max)
+              min = Math.round(min)
+              return `${max}° / ${min}°`
+            }
             color: Colors.textSecondary
           }
         }
