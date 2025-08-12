@@ -185,7 +185,7 @@ PanelWindow {
         }
 
         NIconButton {
-                    sizeMultiplier: 0.8
+          sizeMultiplier: 0.8
           showBorder: false
           anchors.top: parent.top
           anchors.right: parent.right

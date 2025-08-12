@@ -168,18 +168,16 @@ NLoader {
               font.weight: Style.fontWeightBold
             }
 
-              NTextInput {
+            NTextInput {
               text: "Type anything"
               Layout.fillWidth: true
-              onEditingFinished: function () {
-              }
+              onEditingFinished: function () {}
 
-            NDivider {
-              Layout.fillWidth: true
+              NDivider {
+                Layout.fillWidth: true
+              }
             }
           }
-
-    }
 
           // NBusyIndicator
           ColumnLayout {

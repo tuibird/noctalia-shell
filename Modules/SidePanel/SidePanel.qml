@@ -2,7 +2,6 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import Quickshell
-import Quickshell.Wayland
 import qs.Modules.SidePanel.Cards
 import qs.Services
 import qs.Widgets
@@ -123,66 +122,10 @@ NLoader {
               Layout.bottomMargin: 0
               spacing: sidePanel.cardSpacing
 
-              // Power Profiles: performance, balanced, eco
-              NBox {
-                Layout.fillWidth: true
-                Layout.preferredWidth: 1
-                implicitHeight: powerRow.implicitHeight + Style.marginSmall * 2 * scaling
-                RowLayout {
-                  id: powerRow
-                  anchors.fill: parent
-                  anchors.margins: Style.marginSmall * scaling
-                  spacing: sidePanel.cardSpacing
-                  Item {
-                    Layout.fillWidth: true
-                  }
-                  // Performance
-                  NIconButton {
-                    icon: "speed"
-                    onClicked: function () {/* TODO: hook to power profile */ }
-                  }
-                  // Balanced
-                  NIconButton {
-                    icon: "balance"
-                    onClicked: function () {/* TODO: hook to power profile */ }
-                  }
-                  // Eco
-                  NIconButton {
-                    icon: "eco"
-                    onClicked: function () {/* TODO: hook to power profile */ }
-                  }
-                  Item {
-                    Layout.fillWidth: true
-                  }
-                }
-              }
+              PowerProfileCard {}
 
-              // Utilities: record & wallpaper
-              NBox {
-                Layout.fillWidth: true
-                Layout.preferredWidth: 1
-                implicitHeight: utilRow.implicitHeight + Style.marginSmall * 2 * scaling
-                RowLayout {
-                  id: utilRow
-                  anchors.fill: parent
-                  anchors.margins: Style.marginSmall * scaling
-                  spacing: sidePanel.cardSpacing
-                  Item {
-                    Layout.fillWidth: true
-                  }
-                  // Record
-                  NIconButton {
-                    icon: "fiber_manual_record"
-                  }
-                  // Wallpaper
-                  NIconButton {
-                    icon: "image"
-                  }
-                  Item {
-                    Layout.fillWidth: true
-                  }
-                }
-              }
+              UtilitiesCard {}
+
             }
           }
         }

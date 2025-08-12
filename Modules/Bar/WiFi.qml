@@ -11,8 +11,8 @@ NIconButton {
 
   readonly property real scaling: Scaling.scale(screen)
   readonly property bool wifiEnabled: Settings.data.network.wifiEnabled
-          sizeMultiplier: 0.8
-          showBorder: false
+  sizeMultiplier: 0.8
+  showBorder: false
   icon: {
     let connected = false
     for (const net in network.networks) {
