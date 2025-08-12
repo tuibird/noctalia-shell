@@ -25,7 +25,7 @@ echo "--- System Metrics ---"
 
     # The value is usually in millidegrees Celsius, so we divide by 1000.
     # We use 'bc' for floating-point arithmetic.
-    temp_celsius=$(echo "scale=2; $raw_temp / 1000" | bc)
+    temp_celsius=$((raw_temp / 1000))
     
     echo "CPU Temperature: ${temp_celsius}°C"
 
