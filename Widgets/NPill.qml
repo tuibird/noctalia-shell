@@ -56,7 +56,7 @@ Item {
       id: textItem
       anchors.centerIn: parent
       text: root.text
-      font.pointSize: Colors.fontSizeSmall * scaling
+      font.pointSize: Style.fontSizeSmall * scaling
       font.weight: Style.fontWeightBold
       color: textColor
       visible: showPill
@@ -97,7 +97,7 @@ Item {
     Text {
       anchors.centerIn: parent
       font.family: showPill ? "Material Symbols Rounded" : "Material Symbols Outlined"
-      font.pointSize: Colors.fontSizeSmall * scaling
+      font.pointSize: Style.fontSizeMedium * scaling
       text: root.icon
       color: showPill ? iconTextColor : collapsedIconColor
     }
