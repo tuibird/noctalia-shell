@@ -143,7 +143,7 @@ PanelWindow {
             NText {
               text: (model.appName || model.desktopEntry) || "Unknown App"
               color: Colors.accentSecondary
-              font.pointSize: Style.fontSizeSmall
+              font.pointSize: Style.fontSizeSmall * scaling
             }
             Rectangle {
               width: 6 * scaling
@@ -158,13 +158,13 @@ PanelWindow {
             NText {
               text: notificationService.formatTimestamp(model.timestamp)
               color: Colors.textSecondary
-              font.pointSize: Style.fontSizeSmall
+              font.pointSize: Style.fontSizeSmall * scaling
             }
           }
 
           NText {
             text: model.summary || "No summary"
-            font.pointSize: Style.fontSizeLarge
+            font.pointSize: Style.fontSizeLarge * scaling
             font.weight: Style.fontWeightBold
             color: Colors.textPrimary
             wrapMode: Text.Wrap
@@ -175,7 +175,7 @@ PanelWindow {
 
           NText {
             text: model.body || ""
-            font.pointSize: Style.fontSizeSmall
+            font.pointSize: Style.fontSizeSmall * scaling
             color: Colors.textSecondary
             wrapMode: Text.Wrap
             width: 300 * scaling
