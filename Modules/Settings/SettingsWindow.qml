@@ -176,7 +176,7 @@ NLoader {
                   text: settingsPanel.tabsModel[settingsPanel.currentTabIndex].label
                   font.pointSize: Style.fontSizeLarge * scaling
                   font.weight: Style.fontWeightBold
-                  color: Colors.accentPrimary
+                  color: Colors.textPrimary
                   Layout.fillWidth: true
                 }
                 NIconButton {

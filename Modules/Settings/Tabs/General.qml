@@ -36,21 +36,18 @@ Item {
 
       // Avatar preview
       Rectangle {
-        width: 40 * scaling
-        height: 40 * scaling
-        radius: 20 * scaling
-        color: Colors.surfaceVariant
+        width: 64 * scaling
+        height: 64 * scaling
+        radius: width * 0.5
+        color: Colors.accentPrimary
         border.color: Colors.outline
         border.width: Math.max(1, Style.borderThin * scaling)
-        Image {
-          anchors.fill: parent
-          anchors.margins: 2 * scaling
-          source: Settings.data.general.avatarImage
-          fillMode: Image.PreserveAspectCrop
-          asynchronous: true
+
+        NImageRounded {
+          imagePath: Settings.data.general.avatarImage
+          fallbackIcon: "person"
         }
       }
-
       ColumnLayout {
         Layout.fillWidth: true
         spacing: 2 * scaling

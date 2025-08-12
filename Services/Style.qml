@@ -53,6 +53,7 @@ Singleton {
   property int pillDelay: 500
 
   // Margins (for margins and spacing)
+  property int marginTiniest: 2
   property int marginTiny: 4
   property int marginSmall: 8
   property int marginMedium: 12
