@@ -41,10 +41,10 @@ Singleton {
     }
   }
 
-  // Every minute check if we need to fetch new weather
+  // Every 20s check if we need to fetch new weather
   Timer {
     id: updateTimer
-    interval: 60 * 1000
+    interval: 20 * 1000
     running: true
     repeat: true
     onTriggered: {
@@ -55,6 +55,7 @@ Singleton {
   // --------------------------------
   function init() {// does nothing but ensure the singleton is created
     // do not remove
+    console.log("[Location] Service started")
   }
 
   // --------------------------------
@@ -71,11 +72,11 @@ Singleton {
   // --------------------------------
   function updateWeather() {
     if (isFetchingWeather) {
-      console.warn("Weather is still fetching")
+      console.warn("[Location] Weather is still fetching")
       return
     }
 
-    if ((data.weatherLastFetch === "") || (Time.timestamp >= data.weatherLastFetch + weatherUpdateFrequency)) {
+    if ((data.weatherLastFetch === "") || (data.weather === null) || (Time.timestamp >= data.weatherLastFetch + weatherUpdateFrequency)) {
       getFreshWeather()
     }
   }
@@ -84,9 +85,9 @@ Singleton {
   function getFreshWeather() {
     isFetchingWeather = true
     if (data.latitude === "" || data.longitude === "") {
-      console.log("Geocoding location")
+
       _geocodeLocation(Settings.data.location.name, function (lat, lon) {
-        console.log("Geocoded " + Settings.data.location.name + " to: " + lat + " / " + lon)
+        console.log("[Location] Geocoded " + Settings.data.location.name + " to: " + lat + " / " + lon)
 
         // Save GPS coordinates
         data.latitude = lat
@@ -101,6 +102,7 @@ Singleton {
 
   // --------------------------------
   function _geocodeLocation(locationName, callback, errorCallback) {
+    console.log("[Location] Geocoding from api.open-meteo.com")
     var geoUrl = "https://geocoding-api.open-meteo.com/v1/search?name=" + encodeURIComponent(
           locationName) + "&language=en&format=json"
     var xhr = new XMLHttpRequest()
@@ -112,13 +114,13 @@ Singleton {
             if (geoData.results && geoData.results.length > 0) {
               callback(geoData.results[0].latitude, geoData.results[0].longitude)
             } else {
-              errorCallback("Location not found.")
+              errorCallback("[Location] could not resolve location name")
             }
           } catch (e) {
-            errorCallback("Failed to parse geocoding data.")
+            errorCallback("[Location] Failed to parse geocoding data: " + e)
           }
         } else {
-          errorCallback("Geocoding error: " + xhr.status)
+          errorCallback("[Location] Geocoding error: " + xhr.status)
         }
       }
     }
@@ -128,7 +130,7 @@ Singleton {
 
   // --------------------------------
   function _fetchWeather(latitude, longitude, errorCallback) {
-    console.log("Getting weather")
+    console.log("[Location] Fetching weather from api.open-meteo.com")
     var url = "https://api.open-meteo.com/v1/forecast?latitude=" + latitude + "&longitude=" + longitude
         + "&current_weather=true&current=relativehumidity_2m,surface_pressure&daily=temperature_2m_max,temperature_2m_min,weathercode&timezone=auto"
     var xhr = new XMLHttpRequest()
@@ -142,12 +144,12 @@ Singleton {
             data.weather = weatherData
             data.weatherLastFetch = Time.timestamp
             isFetchingWeather = false
-            console.log("Cached weather to disk")
+            console.log("[Location] Cached weather to disk")
           } catch (e) {
-            errorCallback("Failed to parse weather data.")
+            errorCallback("[Location] Failed to parse weather data")
           }
         } else {
-          errorCallback("Weather fetch error: " + xhr.status)
+          errorCallback("[Location] Weather fetch error: " + xhr.status)
         }
       }
     }

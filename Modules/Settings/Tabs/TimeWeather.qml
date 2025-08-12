@@ -64,6 +64,7 @@ Item {
       Layout.fillWidth: true
       onEditingFinished: function () {
         Settings.data.location.name = text
+        Location.resetWeather();
       }
     }
 
