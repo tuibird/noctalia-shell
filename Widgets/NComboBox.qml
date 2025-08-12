@@ -8,6 +8,7 @@ ComboBox {
   id: root
 
   readonly property real scaling: Scaling.scale(screen)
+  readonly property real preferredHeight: Style.baseWidgetSize * 1.25 * scaling
 
   property list<string> optionsKeys: []
   property list<string> optionsLabels: []
@@ -15,7 +16,7 @@ ComboBox {
   property var onSelected: function (string) {}
 
   Layout.fillWidth: true
-  Layout.preferredHeight: Style.baseWidgetSize * scaling
+  Layout.preferredHeight: height
 
   model: optionsKeys
   currentIndex: model.indexOf(currentKey)
@@ -26,7 +27,7 @@ ComboBox {
   // Rounded background
   background: Rectangle {
     implicitWidth: 120 * scaling
-    implicitHeight: Style.baseWidgetSize * scaling
+    implicitHeight: preferredHeight
     color: Colors.surfaceVariant
     border.color: root.activeFocus ? Colors.hover : Colors.outline
     border.width: Math.max(1, Style.borderThin * scaling)
