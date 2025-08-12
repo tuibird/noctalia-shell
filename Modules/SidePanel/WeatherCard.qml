@@ -33,34 +33,36 @@ NBox {
       }
 
       ColumnLayout {
+
+        NText {
+          text: Settings.data.location.name
+          font.weight: Style.fontWeightBold
+          font.pointSize: Style.fontSizeXL * scaling
+        }
+
         RowLayout {
           NText {
-            text: Settings.data.location.name
-            font.weight: Style.fontWeightBold
+            visible: weatherReady
+            text: {
+              if (!weatherReady) {
+                return ""
+              }
+              var temp = Location.data.weather.current_weather.temperature
+              if (Settings.data.location.useFahrenheit) {
+                temp = Location.celsiusToFahrenheit(temp)
+              }
+              temp = Math.round(temp)
+              return `${temp}°`
+            }
             font.pointSize: Style.fontSizeXL * scaling
+            font.weight: Style.fontWeightBold
           }
+
           NText {
             text: weatherReady ? `(${Location.data.weather.timezone_abbreviation})` : ""
             font.pointSize: Style.fontSizeSmall * scaling
             visible: Location.data.weather
           }
-        }
-
-        NText {
-          visible: weatherReady
-          text: {
-            if (!weatherReady) {
-              return ""
-            }
-            var temp = Location.data.weather.current_weather.temperature
-            if (Settings.data.location.useFahrenheit) {
-              temp = Location.celsiusToFahrenheit(temp)
-            }
-            temp = Math.round(temp)
-            return `${temp}°`
-          }
-          font.pointSize: Style.fontSizeXL * scaling
-          font.weight: Style.fontWeightBold
         }
       }
     }
