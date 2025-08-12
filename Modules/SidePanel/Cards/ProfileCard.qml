@@ -61,7 +61,7 @@ NBox {
         icon: "settings"
         onClicked: function () {
           if (!root.settingsWindow) {
-            const comp = Qt.createComponent("../Settings/SettingsWindow.qml")
+            const comp = Qt.createComponent("../../Settings/SettingsWindow.qml")
             if (comp.status === Component.Ready) {
               root.settingsWindow = comp.createObject(root)
             } else {
