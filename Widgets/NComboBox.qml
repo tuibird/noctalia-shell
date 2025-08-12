@@ -59,7 +59,7 @@ ColumnLayout {
       implicitWidth: 120 * scaling
       implicitHeight: preferredHeight
       color: Colors.surfaceVariant
-      border.color: root.activeFocus ? Colors.hover : Colors.outline
+      border.color: combo.activeFocus ? Colors.hover : Colors.outline
       border.width: Math.max(1, Style.borderThin * scaling)
       radius: Style.radiusMedium * scaling
     }
@@ -69,7 +69,6 @@ ColumnLayout {
       leftPadding: Style.marginLarge * scaling
       rightPadding: combo.indicator.width + Style.marginLarge * scaling
       font.pointSize: Style.fontSizeMedium * scaling
-      font.weight: Style.fontWeightBold
       verticalAlignment: Text.AlignVCenter
       elide: Text.ElideRight
       text: {
@@ -79,16 +78,16 @@ ColumnLayout {
 
     // Drop down indicator
     indicator: NText {
-      x: root.width - width - Style.marginMedium * scaling
-      y: root.topPadding + (root.availableHeight - height) / 2
+      x: combo.width - width - Style.marginMedium * scaling
+      y: combo.topPadding + (combo.availableHeight - height) / 2
       text: "arrow_drop_down"
       font.family: "Material Symbols Outlined"
       font.pointSize: Style.fontSizeXL * scaling
     }
 
     popup: Popup {
-      y: root.height
-      width: root.width
+      y: combo.height
+      width: combo.width
       implicitHeight: Math.min(160 * scaling, contentItem.implicitHeight + Style.marginMedium * scaling * 2)
       padding: Style.marginMedium * scaling
 
@@ -109,8 +108,8 @@ ColumnLayout {
     }
 
     delegate: ItemDelegate {
-      width: root.width
-      highlighted: root.highlightedIndex === index
+      width: combo.width
+      highlighted: combo.highlightedIndex === index
 
       contentItem: NText {
         text: {
@@ -123,7 +122,7 @@ ColumnLayout {
       }
 
       background: Rectangle {
-        width: root.width - Style.marginMedium * scaling * 3
+        width: combo.width - Style.marginMedium * scaling * 3
         color: highlighted ? Colors.hover : "transparent"
         radius: Style.radiusSmall * scaling
       }

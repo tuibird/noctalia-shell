@@ -33,7 +33,7 @@ ColumnLayout {
         Layout.fillWidth: true
 
         NText {
-          text: "Screen Recording"
+          text: "Recording"
           font.pointSize: Style.fontSizeXL * scaling
           font.weight: Style.fontWeightBold
           color: Colors.textPrimary
@@ -46,24 +46,10 @@ ColumnLayout {
           Layout.fillWidth: true
           Layout.topMargin: Style.marginSmall * scaling
 
-          ColumnLayout {
-            spacing: Style.marginTiny * scaling
-
-            NText {
-              text: "Output Directory"
-              font.weight: Style.fontWeightBold
-              color: Colors.textPrimary
-            }
-
-            NText {
-              text: "Directory where screen recordings will be saved"
-              font.pointSize: Style.fontSizeSmall * scaling
-              color: Colors.textSecondary
-              wrapMode: Text.WordWrap
-            }
-          }
-
           NTextInput {
+            label: "Output Directory"
+            description: "Directory where screen recordings will be saved"
+            placeholderText: "/home/xxx/Videos"
             text: Settings.data.screenRecorder.directory
             onEditingFinished: {
               Settings.data.screenRecorder.directory = text

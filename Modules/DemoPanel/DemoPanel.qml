@@ -146,6 +146,8 @@ NLoader {
             }
 
             NComboBox {
+              label: "Animal"
+              description: "What's your favorite"
               optionsKeys: ["cat", "dog", "bird", "monkey", "fish", "turtle", "elephant", "tiger"]
               optionsLabels: ["Cat", "Dog", "Bird", "Monkey", "Fish", "Turtle", "Elephant", "Tiger"]
               currentKey: "cat"
@@ -169,14 +171,16 @@ NLoader {
             }
 
             NTextInput {
+              label: "Input label"
+              description: "A cool description"
               text: "Type anything"
               Layout.fillWidth: true
               onEditingFinished: {
 
               }
-              NDivider {
-                Layout.fillWidth: true
-              }
+            }
+            NDivider {
+              Layout.fillWidth: true
             }
           }
 

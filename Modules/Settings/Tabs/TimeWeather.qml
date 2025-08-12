@@ -47,8 +47,10 @@ ColumnLayout {
           Layout.topMargin: Style.marginSmall * scaling
 
           NTextInput {
+            label: "Location name"
+            description: "Choose a known location near you"
             text: Settings.data.location.name
-            placeholderText: "Enter city name"
+            placeholderText: "Enter the location name"
             Layout.fillWidth: true
             onEditingFinished: {
               Settings.data.location.name = text
@@ -64,7 +66,7 @@ ColumnLayout {
 
         // Time section
         ColumnLayout {
-                    spacing: Style.marginLarge * scaling
+          spacing: Style.marginLarge * scaling
           Layout.fillWidth: true
 
           NText {

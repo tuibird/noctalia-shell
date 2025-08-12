@@ -58,26 +58,15 @@ ColumnLayout {
               borderColor: Colors.accentPrimary
               borderWidth: Math.max(1, Style.borderMedium)
             }
-            ColumnLayout {
+
+            NTextInput {
+              label: "Profile Picture"
+              description: "Your profile picture displayed in various places throughout the shell"
+              text: Settings.data.general.avatarImage
+              placeholderText: "/home/user/.face"
               Layout.fillWidth: true
-              spacing: Style.marginTiny * scaling
-              NText {
-                text: "Profile Picture"
-                color: Colors.textPrimary
-                font.weight: Style.fontWeightBold
-              }
-              NText {
-                text: "Your profile picture displayed in various places throughout the shell"
-                color: Colors.textSecondary
-                font.pointSize: Style.fontSizeSmall * scaling
-              }
-              NTextInput {
-                text: Settings.data.general.avatarImage
-                placeholderText: "/home/user/.face"
-                Layout.fillWidth: true
-                onEditingFinished: {
-                  Settings.data.general.avatarImage = text
-                }
+              onEditingFinished: {
+                Settings.data.general.avatarImage = text
               }
             }
           }
