@@ -110,7 +110,7 @@ NLoader {
               }
 
               // System monitors combined in one card
-              SystemCard {
+              SystemMonitorCard {
                 id: statsCard
               }
             }
@@ -122,8 +122,10 @@ NLoader {
               Layout.bottomMargin: 0
               spacing: sidePanel.cardSpacing
 
-              PowerProfileCard {}
+              // Power Profiles switcher
+              PowerProfilesCard {}
 
+              // Utilities buttons
               UtilitiesCard {}
             }
           }
