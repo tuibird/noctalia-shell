@@ -16,16 +16,19 @@ NLoader {
       readonly property real scaling: Scaling.scale(screen)
 
       // Ensure panel shows itself once created
-      Component.onCompleted: show()
+      Component.onCompleted: {
+        console.log("[DemoPanel] Component completed, showing panel...")
+        show()
+      }
 
       Rectangle {
         id: bgRect
         color: Colors.backgroundPrimary
         radius: Style.radiusMedium * scaling
-        border.color: Colors.backgroundTertiary
-        border.width: Math.max(1, Style.borderMedium * scaling)
-        width: 600 * scaling
-        height: 600 * scaling
+        border.color: Colors.accentPrimary
+        border.width: 2
+        width: 500 * scaling
+        height: 700 * scaling
         anchors.centerIn: parent
 
         // Prevent closing when clicking in the panel bg
@@ -33,10 +36,21 @@ NLoader {
           anchors.fill: parent
         }
 
+        // Debug: Add a simple text to see if content is visible
+        NText {
+          text: "DemoPanel is working!"
+          color: Colors.accentPrimary
+          font.pointSize: Style.fontSizeLarge * scaling
+          anchors.top: parent.top
+          anchors.horizontalCenter: parent.horizontalCenter
+          anchors.topMargin: 20 * scaling
+        }
+
         ColumnLayout {
           anchors.fill: parent
-          anchors.margins: Style.marginXL * scaling
-          spacing: Style.marginSmall * scaling
+          anchors.margins: Style.marginMedium * scaling
+          anchors.topMargin: (Style.marginMedium + 40) * scaling
+          spacing: Style.marginMedium * scaling
 
           // NSlider
           ColumnLayout {
