@@ -17,8 +17,8 @@ Item {
   signal editingFinished
 
   // Sizing
-  implicitHeight: Style.baseWidgetSize * 1.25 * scaling
   implicitWidth: 320 * scaling
+  implicitHeight: Style.baseWidgetSize * 1.25 * scaling
 
   // Container
   Rectangle {

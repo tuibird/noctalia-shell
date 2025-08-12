@@ -82,7 +82,6 @@ Singleton {
         property string avatarImage: defaultAvatar
         property bool dimDesktop: true
         property bool showScreenCorners: false
-        property bool showDock: false
       }
 
       // location

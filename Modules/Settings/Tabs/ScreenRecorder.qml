@@ -14,8 +14,7 @@ ColumnLayout {
 
     Layout.fillWidth: true
     Layout.fillHeight: true
-    padding: 16
-    rightPadding: 12
+    padding: Style.marginMedium * scaling
     clip: true
     ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
     ScrollBar.vertical.policy: ScrollBar.AsNeeded
@@ -30,22 +29,22 @@ ColumnLayout {
       }
 
       ColumnLayout {
-        spacing: 4
+        spacing: Style.marginTiny * scaling
         Layout.fillWidth: true
 
         NText {
           text: "Screen Recording"
-          font.pointSize: 18
+          font.pointSize: Style.fontSizeXL * scaling
           font.weight: Style.fontWeightBold
           color: Colors.textPrimary
-          Layout.bottomMargin: 8
+          Layout.bottomMargin: Style.marginSmall * scaling
         }
 
         // Output Directory
         ColumnLayout {
-          spacing: 8
+          spacing: Style.marginSmall * scaling
           Layout.fillWidth: true
-          Layout.topMargin: 8
+          Layout.topMargin: Style.marginSmall * scaling
 
           NText {
             text: "Output Directory"
@@ -73,8 +72,8 @@ ColumnLayout {
 
         NDivider {
           Layout.fillWidth: true
-          Layout.topMargin: 26
-          Layout.bottomMargin: 18
+          Layout.topMargin: Style.marginLarge * 2 * scaling
+          Layout.bottomMargin: Style.marginLarge * scaling
         }
 
         // Video Settings
@@ -84,17 +83,17 @@ ColumnLayout {
 
           NText {
             text: "Video Settings"
-            font.pointSize: 18
+            font.pointSize: Style.fontSizeXL * scaling
             font.weight: Style.fontWeightBold
             color: Colors.textPrimary
-            Layout.bottomMargin: 8
+            Layout.bottomMargin: Style.marginSmall * scaling
           }
 
           // Frame Rate
           ColumnLayout {
-            spacing: 8
+            spacing: Style.marginSmall * scaling
             Layout.fillWidth: true
-            Layout.topMargin: 8
+            Layout.topMargin: Style.marginSmall * scaling
 
             NText {
               text: "Frame Rate"
@@ -111,36 +110,21 @@ ColumnLayout {
               Layout.fillWidth: true
             }
 
-            RowLayout {
-              Layout.fillWidth: true
-
-              NText {
-                text: Settings.data.screenRecorder.frameRate + " FPS"
-                font.pointSize: 13
-                color: Colors.textPrimary
+            NComboBox {
+              optionsKeys: ["30", "60", "120", "240"]
+              optionsLabels: ["30 FPS", "60 FPS", "120 FPS", "240 FPS"]
+              currentKey: Settings.data.screenRecorder.frameRate
+              onSelected: function (key) {
+                Settings.data.screenRecorder.frameRate = key
               }
-
-              Item {
-                Layout.fillWidth: true
-              }
-            }
-
-            NSlider {
-              Layout.fillWidth: true
-              from: 24
-              to: 144
-              stepSize: 1
-              value: Settings.data.screenRecorder.frameRate
-              onPressedChanged: Settings.data.screenRecorder.frameRate = Math.round(value)
-              cutoutColor: Colors.backgroundPrimary
             }
           }
 
           // Video Quality
           ColumnLayout {
-            spacing: 8
+            spacing: Style.marginSmall * scaling
             Layout.fillWidth: true
-            Layout.topMargin: 8
+            Layout.topMargin: Style.marginSmall * scaling
 
             NText {
               text: "Video Quality"
@@ -171,7 +155,7 @@ ColumnLayout {
           ColumnLayout {
             spacing: 8
             Layout.fillWidth: true
-            Layout.topMargin: 8
+            Layout.topMargin: Style.marginSmall * scaling
 
             NText {
               text: "Video Codec"
@@ -200,9 +184,9 @@ ColumnLayout {
 
           // Color Range
           ColumnLayout {
-            spacing: 8
+            spacing: Style.marginSmall * scaling
             Layout.fillWidth: true
-            Layout.topMargin: 8
+            Layout.topMargin: Style.marginSmall * scaling
 
             NText {
               text: "Color Range"
@@ -232,13 +216,13 @@ ColumnLayout {
 
         NDivider {
           Layout.fillWidth: true
-          Layout.topMargin: 26
-          Layout.bottomMargin: 18
+          Layout.topMargin: Style.marginLarge * 2 * scaling
+          Layout.bottomMargin: Style.marginLarge * scaling
         }
 
         // Audio Settings
         ColumnLayout {
-          spacing: 4
+          spacing: Style.spacingTiny * scaling
           Layout.fillWidth: true
 
           NText {
@@ -246,14 +230,14 @@ ColumnLayout {
             font.pointSize: 18
             font.weight: Style.fontWeightBold
             color: Colors.textPrimary
-            Layout.bottomMargin: 8
+            Layout.bottomMargin: Style.marginSmall * scaling
           }
 
           // Audio Source
           ColumnLayout {
-            spacing: 8
+            spacing: Style.marginSmall * scaling
             Layout.fillWidth: true
-            Layout.topMargin: 8
+            Layout.topMargin: Style.marginSmall * scaling
 
             NText {
               text: "Audio Source"
@@ -282,9 +266,9 @@ ColumnLayout {
 
           // Audio Codec
           ColumnLayout {
-            spacing: 8
+            spacing: Style.marginSmall * scaling
             Layout.fillWidth: true
-            Layout.topMargin: 8
+            Layout.topMargin: Style.marginSmall * scaling
 
             NText {
               text: "Audio Codec"
