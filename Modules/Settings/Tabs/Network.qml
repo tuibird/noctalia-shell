@@ -16,7 +16,11 @@ Item {
     anchors.fill: parent
     spacing: Style.marginMedium * scaling
 
-    NText { text: "Wi‑Fi"; font.weight: Style.fontWeightBold; color: Colors.accentSecondary }
+    NText {
+      text: "Wi‑Fi"
+      font.weight: Style.fontWeightBold
+      color: Colors.accentSecondary
+    }
 
     NToggle {
       label: "Enable Wi‑Fi"
@@ -24,12 +28,19 @@ Item {
       value: Settings.data.network.wifiEnabled
       onToggled: function (newValue) {
         Settings.data.network.wifiEnabled = newValue
-        Quickshell.execDetached(["nmcli", "radio", "wifi", newValue ? "on" : "off"]) }
+        Quickshell.execDetached(["nmcli", "radio", "wifi", newValue ? "on" : "off"])
+      }
     }
 
-    NDivider { Layout.fillWidth: true }
+    NDivider {
+      Layout.fillWidth: true
+    }
 
-    NText { text: "Bluetooth"; font.weight: Style.fontWeightBold; color: Colors.accentSecondary }
+    NText {
+      text: "Bluetooth"
+      font.weight: Style.fontWeightBold
+      color: Colors.accentSecondary
+    }
 
     NToggle {
       label: "Enable Bluetooth"
@@ -39,11 +50,14 @@ Item {
         Settings.data.network.bluetoothEnabled = newValue
         if (Bluetooth.defaultAdapter) {
           Bluetooth.defaultAdapter.enabled = newValue
-          if (Bluetooth.defaultAdapter.enabled) Bluetooth.defaultAdapter.discovering = true
+          if (Bluetooth.defaultAdapter.enabled)
+            Bluetooth.defaultAdapter.discovering = true
         }
       }
     }
 
-    Item { Layout.fillHeight: true }
+    Item {
+      Layout.fillHeight: true
+    }
   }
 }

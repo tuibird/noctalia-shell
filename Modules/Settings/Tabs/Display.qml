@@ -13,17 +13,26 @@ Item {
 
   // Helper functions to update arrays immutably
   function addMonitor(list, name) {
-    const arr = (list || []).slice(); if (!arr.includes(name)) arr.push(name); return arr
+    const arr = (list || []).slice()
+    if (!arr.includes(name))
+      arr.push(name)
+    return arr
   }
   function removeMonitor(list, name) {
-    return (list || []).filter(function (n) { return n !== name })
+    return (list || []).filter(function (n) {
+      return n !== name
+    })
   }
 
   ColumnLayout {
     anchors.fill: parent
     spacing: Style.marginMedium * scaling
 
-    NText { text: "Per‑monitor configuration"; font.weight: Style.fontWeightBold; color: Colors.accentSecondary }
+    NText {
+      text: "Per‑monitor configuration"
+      font.weight: Style.fontWeightBold
+      color: Colors.accentSecondary
+    }
 
     Repeater {
       model: Quickshell.screens || []
@@ -41,12 +50,22 @@ Item {
           anchors.margins: Style.marginMedium * scaling
           spacing: Style.marginSmall * scaling
 
-          NText { text: (modelData.name || "Unknown"); font.weight: Style.fontWeightBold; color: Colors.accentPrimary }
+          NText {
+            text: (modelData.name || "Unknown")
+            font.weight: Style.fontWeightBold
+            color: Colors.accentPrimary
+          }
 
           RowLayout {
             spacing: Style.marginMedium * scaling
-            NText { text: `Resolution: ${modelData.width}x${modelData.height}`; color: Colors.textSecondary }
-            NText { text: `Position: (${modelData.x}, ${modelData.y})`; color: Colors.textSecondary }
+            NText {
+              text: `Resolution: ${modelData.width}x${modelData.height}`
+              color: Colors.textSecondary
+            }
+            NText {
+              text: `Position: (${modelData.x}, ${modelData.y})`
+              color: Colors.textSecondary
+            }
           }
 
           NToggle {
@@ -83,7 +102,8 @@ Item {
               if (newValue) {
                 Settings.data.notifications.monitors = addMonitor(Settings.data.notifications.monitors, modelData.name)
               } else {
-                Settings.data.notifications.monitors = removeMonitor(Settings.data.notifications.monitors, modelData.name)
+                Settings.data.notifications.monitors = removeMonitor(Settings.data.notifications.monitors,
+                                                                     modelData.name)
               }
             }
           }
@@ -91,6 +111,8 @@ Item {
       }
     }
 
-    Item { Layout.fillHeight: true }
+    Item {
+      Layout.fillHeight: true
+    }
   }
 }
