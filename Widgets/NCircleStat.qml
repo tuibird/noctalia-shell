@@ -78,6 +78,7 @@ Rectangle {
         anchors.centerIn: parent
         text: `${root.value}${root.suffix}`
         font.pointSize: Style.fontSizeMedium * scaling * contentScale
+        font.weight: Style.fontWeightBold
         color: Colors.textPrimary
         horizontalAlignment: Text.AlignHCenter
       }
@@ -85,23 +86,23 @@ Rectangle {
       // Tiny circular badge for the icon, inside the right-side gap
       Rectangle {
         id: iconBadge
-        width: 22 * scaling * contentScale
+        width: 28 * scaling * contentScale
         height: width
         radius: width / 2
-        color: Colors.backgroundPrimary
-        border.color: Colors.accentPrimary
-        border.width: Math.max(1, Style.borderThin * scaling)
+        color: Colors.backgroundSecondary
+        // border.color: Colors.accentPrimary
+        // border.width: Math.max(1, Style.borderThin * scaling)
         anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        anchors.rightMargin: 4 * scaling * contentScale
-        anchors.bottomMargin: 4 * scaling * contentScale
+        anchors.top: parent.top
+        anchors.rightMargin: -6 * scaling * contentScale
+        anchors.topMargin: 4 * scaling * contentScale
 
         Text {
           anchors.centerIn: parent
           text: root.icon
           font.family: "Material Symbols Outlined"
-          font.pointSize: Style.fontSizeLarge * scaling * contentScale
-          color: Colors.accentPrimary
+          font.pointSize: Style.fontSizeLargeXL * scaling * contentScale
+          color: Colors.textSecondary
           horizontalAlignment: Text.AlignHCenter
           verticalAlignment: Text.AlignVCenter
         }

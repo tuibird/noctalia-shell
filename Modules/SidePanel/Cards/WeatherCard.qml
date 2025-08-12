@@ -28,12 +28,12 @@ NBox {
       NText {
         text: weatherReady ? Location.weatherSymbolFromCode(Location.data.weather.current_weather.weathercode) : ""
         font.family: "Material Symbols Outlined"
-        font.pointSize: Style.fontSizeXXL * 1.25 * scaling
+        font.pointSize: Style.fontSizeXXL * 1.5 * scaling
         color: Colors.accentSecondary
       }
 
       ColumnLayout {
-
+        spacing: -Style.marginTiny * scaling
         NText {
           text: Settings.data.location.name
           font.weight: Style.fontWeightBold

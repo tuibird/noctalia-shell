@@ -55,7 +55,7 @@ NBox {
     }
     NCircleStat {
       value: SystemStats.diskUsage
-      icon: "data_usage"
+      icon: "hard_drive"
       flat: true
       contentScale: 0.8
       width: 72 * scaling
