@@ -8,7 +8,8 @@ Item {
   readonly property string tabIcon: "image"
   readonly property string tabLabel: "Wallpaper"
   readonly property int tabIndex: 6
-  anchors.fill: parent
+  Layout.fillWidth: true
+  Layout.fillHeight: true
 
   ColumnLayout {
     anchors.fill: parent

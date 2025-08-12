@@ -119,9 +119,9 @@ Singleton {
         property bool generateTheme: false
         property JsonObject swww
 
-        onDirectoryChanged: WallpaperManager.loadWallpapers()
-        onIsRandomChanged: WallpaperManager.toggleRandomWallpaper()
-        onRandomIntervalChanged: WallpaperManager.restartRandomWallpaperTimer()
+        onDirectoryChanged: Wallpapers.loadWallpapers()
+        onIsRandomChanged: Wallpapers.toggleRandomWallpaper()
+        onRandomIntervalChanged: Wallpapers.restartRandomWallpaperTimer()
 
         swww: JsonObject {
           property bool enabled: false

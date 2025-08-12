@@ -8,7 +8,8 @@ Item {
   readonly property string tabIcon: "schedule"
   readonly property string tabLabel: "Time & Weather"
   readonly property int tabIndex: 2
-  anchors.fill: parent
+  Layout.fillWidth: true
+  Layout.fillHeight: true
 
   ColumnLayout {
     anchors.fill: parent
@@ -64,30 +65,22 @@ Item {
       onEditingFinished: Settings.data.location.name = text
     }
 
-    RowLayout {
-      Layout.fillWidth: true
-      spacing: Style.marginSmall * scaling
-      ColumnLayout {
-        Layout.fillWidth: true
-        spacing: 2 * scaling
-        NText {
-          text: "Temperature Unit"
-          color: Colors.textPrimary
-          font.weight: Style.fontWeightBold
-        }
-        NText {
-          text: "Choose between Celsius and Fahrenheit"
-          color: Colors.textSecondary
-          wrapMode: Text.WordWrap
-        }
-      }
-      NComboBox {
-        optionsKeys: ["c", "f"]
-        optionsLabels: ["Celsius", "Fahrenheit"]
-        currentKey: Settings.data.location.useFahrenheit ? "f" : "c"
-        onSelected: function (key) {
-          Settings.data.location.useFahrenheit = (key === "f")
-        }
+    NText {
+      text: "Temperature Unit"
+      color: Colors.textPrimary
+      font.weight: Style.fontWeightBold
+    }
+    NText {
+      text: "Choose between Celsius and Fahrenheit"
+      color: Colors.textSecondary
+      font.pointSize: Style.fontSizeSmall * scaling
+    }
+    NComboBox {
+      optionsKeys: ["c", "f"]
+      optionsLabels: ["Celsius", "Fahrenheit"]
+      currentKey: Settings.data.location.useFahrenheit ? "f" : "c"
+      onSelected: function (key) {
+        Settings.data.location.useFahrenheit = (key === "f")
       }
     }
 

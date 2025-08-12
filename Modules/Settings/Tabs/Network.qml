@@ -10,7 +10,8 @@ Item {
   readonly property string tabIcon: "wifi"
   readonly property string tabLabel: "Network"
   readonly property int tabIndex: 4
-  anchors.fill: parent
+  Layout.fillWidth: true
+  Layout.fillHeight: true
 
   ColumnLayout {
     anchors.fill: parent

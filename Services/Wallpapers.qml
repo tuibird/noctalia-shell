@@ -22,10 +22,11 @@ Singleton {
   property string transitionType: Settings.data.wallpaper.swww.transitionType
   property var randomChoices: ["fade", "left", "right", "top", "bottom", "wipe", "wave", "grow", "center", "any", "outer"]
 
+
+
   function loadWallpapers() {
     scanning = true
     wallpaperList = []
-    folderModel.folder = ""
     folderModel.folder = "file://" + (Settings.data.wallpaper.directory !== undefined ? Settings.data.wallpaper.directory : "")
   }
 
@@ -38,11 +39,11 @@ Singleton {
     if (!isInitial) {
       Settings.data.wallpaper.current = path
     }
-    if (Settings.data.swww.enabled) {
-      if (Settings.data.swww.transitionType === "random") {
+    if (Settings.data.wallpaper.swww.enabled) {
+      if (Settings.data.wallpaper.swww.transitionType === "random") {
         transitionType = randomChoices[Math.floor(Math.random() * randomChoices.length)]
       } else {
-        transitionType = Settings.data.swww.transitionType
+        transitionType = Settings.data.wallpaper.swww.transitionType
       }
       changeWallpaperProcess.running = true
     }
@@ -105,7 +106,7 @@ Singleton {
         var files = []
         var filesSwww = []
         for (var i = 0; i < count; i++) {
-          var filepath = (Settings.data.wallpaper.folder !== undefined ? Settings.data.wallpaper.folder : "") + "/" + get(
+          var filepath = (Settings.data.wallpaper.directory !== undefined ? Settings.data.wallpaper.directory : "") + "/" + get(
             i, "fileName")
           files.push(filepath)
         }
@@ -118,7 +119,7 @@ Singleton {
   Process {
     id: changeWallpaperProcess
     command: ["swww", "img", "--resize", Settings.data.wallpaper.swww.resizeMethod, "--transition-fps", Settings.data.wallpaper.swww.transitionFps.toString(
-        ), "--transition-type", transitionType, "--transition-duration", Settings.data.wallpaper.transitionDuration.toString(
+        ), "--transition-type", transitionType, "--transition-duration", Settings.data.wallpaper.swww.transitionDuration.toString(
         ), currentWallpaper]
     running: false
   }

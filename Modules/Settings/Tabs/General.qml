@@ -14,9 +14,8 @@ Item {
   readonly property string tabLabel: "General"
   readonly property int tabIndex: 0
 
-  anchors.fill: parent
-  implicitWidth: parent ? parent.width : 0
-  implicitHeight: parent ? parent.height : 0
+  Layout.fillWidth: true
+  Layout.fillHeight: true
 
   ColumnLayout {
     anchors.fill: parent

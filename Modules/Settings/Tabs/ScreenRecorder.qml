@@ -8,7 +8,8 @@ Item {
   readonly property string tabIcon: "videocam"
   readonly property string tabLabel: "Screen Recorder"
   readonly property int tabIndex: 3
-  anchors.fill: parent
+  Layout.fillWidth: true
+  Layout.fillHeight: true
 
   ColumnLayout {
     anchors.fill: parent

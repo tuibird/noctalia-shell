@@ -9,7 +9,8 @@ Item {
   readonly property string tabIcon: "monitor"
   readonly property string tabLabel: "Display"
   readonly property int tabIndex: 5
-  anchors.fill: parent
+  Layout.fillWidth: true
+  Layout.fillHeight: true
 
   // Helper functions to update arrays immutably
   function addMonitor(list, name) {

@@ -8,7 +8,8 @@ Item {
   readonly property string tabIcon: "more_horiz"
   readonly property string tabLabel: "Misc"
   readonly property int tabIndex: 7
-  anchors.fill: parent
+  Layout.fillWidth: true
+  Layout.fillHeight: true
 
   ColumnLayout {
     anchors.fill: parent

@@ -10,7 +10,8 @@ Item {
   readonly property string tabIcon: "web_asset"
   readonly property string tabLabel: "Bar"
   readonly property int tabIndex: 1
-  anchors.fill: parent
+  Layout.fillWidth: true
+  Layout.fillHeight: true
 
   ColumnLayout {
     anchors.fill: parent

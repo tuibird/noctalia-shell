@@ -70,8 +70,8 @@ NLoader {
         border.color: Colors.backgroundTertiary
         border.width: Math.max(1, Style.borderMedium * scaling)
         layer.enabled: true
-        width: 1040 * scaling
-        height: 640 * scaling
+        width: (screen.width/2) * scaling
+        height: (screen.height/2) * scaling
         anchors.centerIn: parent
 
         MouseArea {
@@ -151,7 +151,7 @@ NLoader {
             }
           }
 
-          // Content (unchanged)
+          // Content
           Rectangle {
             id: contentPane
             Layout.fillWidth: true
@@ -200,14 +200,15 @@ NLoader {
                 Layout.fillHeight: true
                 currentIndex: settingsPanel.currentTabIndex
 
-                Repeater {
-                  model: settingsPanel.tabsModel
-                  delegate: Loader {
-                    active: index === settingsPanel.currentTabIndex
-                    visible: active
-                    source: modelData.source
-                  }
-                }
+                Tabs.General {}
+                Tabs.Bar {}
+                Tabs.TimeWeather {}
+                Tabs.ScreenRecorder {}
+                Tabs.Network {}
+                Tabs.Display {}
+                Tabs.Wallpaper {}
+                Tabs.Misc {}
+                Tabs.About {}
               }
             }
           }
