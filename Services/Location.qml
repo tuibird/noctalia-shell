@@ -11,6 +11,7 @@ Singleton {
   property string locationFile: Quickshell.env("NOCTALIA_WEATHER_FILE") || (Settings.cacheDir + "location.json")
   property int weatherUpdateFrequency: 30 * 60 // 30 minutes expressed in seconds
   property var data: adapter // Used to access via Location.data.xxx.yyy
+  property bool isFetchingWeather: false
 
   FileView {
     path: locationFile
@@ -63,6 +64,10 @@ Singleton {
 
   // --------------------------------
   function updateWeather() {
+    if (isFetchingWeather) {
+      return
+    }
+
     if ((data.weatherLastFetch === "") || (Time.timestamp >= data.weatherLastFetch + weatherUpdateFrequency)) {
       getFreshWeather()
     }
@@ -70,10 +75,11 @@ Singleton {
 
   // --------------------------------
   function getFreshWeather() {
+    isFetchingWeather = true
     if (data.latitude === "" || data.longitude === "") {
       console.log("Geocoding location")
       _geocodeLocation(Settings.data.location.name, function (lat, lon) {
-        console.log("Geocoded " + Settings.data.location.name + " to : " + lat + " / " + lon)
+        console.log("Geocoded " + Settings.data.location.name + " to: " + lat + " / " + lon)
 
         // Save GPS coordinates
         data.latitude = lat
@@ -128,6 +134,7 @@ Singleton {
             // Save to json
             data.weather = weatherData
             data.weatherLastFetch = Time.timestamp
+            isFetchingWeather = false
             console.log("Cached weather to disk")
           } catch (e) {
             errorCallback("Failed to parse weather data.")
@@ -144,9 +151,10 @@ Singleton {
   // --------------------------------
   function errorCallback(message) {
     console.error(message)
+    isFetchingWeather = false
   }
 
-    // --------------------------------
+  // --------------------------------
   function weatherSymbolFromCode(code) {
     if (code === 0)
       return "sunny"

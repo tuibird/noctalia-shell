@@ -21,9 +21,10 @@ NBox {
     anchors.margins: Style.marginMedium * scaling
     spacing: Style.marginMedium * scaling
 
+
     RowLayout {
       spacing: Style.marginSmall * scaling
-      Text {
+      NText {
         text: Location.weatherSymbolFromCode(Location.data.weather.current_weather.weathercode) 
         font.family: "Material Symbols Outlined"
         font.pointSize: Style.fontSizeXXL * 1.25 * scaling
@@ -37,13 +38,21 @@ NBox {
             font.pointSize: Style.fontSizeLarge * scaling
           }
           NText {
-            text: "(" + Location.data. weather.timezone_abbreviation + ")"
+            text: `(${Location.data.weather.timezone_abbreviation})`
             font.pointSize: Style.fontSizeTiny * scaling
+            visible: Location.data.weather
           }
         }
 
         NText {
-          text: "26°C"
+          text: {
+            var temp = Location.data.weather.current_weather.temperature
+            if (Settings.data.location.useFahrenheit) {
+                temp = Location.celsiusToFahrenheit(temp)
+            }
+            temp = Math.round(temp)
+            return `${temp}°` 
+          }
           font.pointSize: Style.fontSizeXL *  scaling
           font.weight: Style.fontWeightBold
         }
@@ -60,9 +69,9 @@ NBox {
       Layout.fillWidth: true
       spacing: Style.marginMedium * scaling
       Repeater {
-        model: 5
+        model: Location.data.weather.daily.time
         delegate: ColumnLayout {
-          spacing: 2 * scaling
+          spacing: Style.spacingSmall * scaling
           NText {
             text: Qt.formatDateTime(new Date(Location.data.weather.daily.time[index]), "ddd")
             font.weight: Style.fontWeightBold
@@ -70,6 +79,7 @@ NBox {
           NText {
             text: Location.weatherSymbolFromCode(Location.data.weather.daily.weathercode[index])
             font.family: "Material Symbols Outlined"
+            font.pointSize: Style.fontSizeLarge * scaling
             font.weight: Style.fontWeightBold
             color: Colors.textSecondary
           }
@@ -83,8 +93,9 @@ NBox {
               }
               max = Math.round(max)
               min = Math.round(min)
-              return `${max}° / ${min}°`
+              return `${max}°/${min}°`
             }
+            font.pointSize: Style.fontSizeSmall * scaling
             color: Colors.textSecondary
           }
         }
