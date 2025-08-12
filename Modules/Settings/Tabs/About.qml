@@ -10,39 +10,13 @@ import qs.Widgets
 ColumnLayout {
     id: root
 
-    property string latestVersion: "Unknown"
+    property string latestVersion: Github.latestVersion
     property string currentVersion: "v1.2.1" // Fallback version
-    property var contributors: []
-    property string githubDataPath: Settings.configDir + "github_data.json"
+    property var contributors: Github.contributors
 
-    function loadFromFile() {
-        const now = Date.now();
-        const data = githubData;
-        if (!data.timestamp || (now - data.timestamp > 3.6e+06)) {
-            console.log("[About] Cache expired or missing, fetching new data from GitHub...");
-            fetchFromGitHub();
-            return ;
-        }
-        console.log("[About] Loading cached GitHub data (age: " + Math.round((now - data.timestamp) / 60000) + " minutes)");
-        if (data.version)
-            root.latestVersion = data.version;
-
-        if (data.contributors) {
-            root.contributors = data.contributors;
-        }
-
-    }
-
-    function fetchFromGitHub() {
-        versionProcess.running = true;
-        contributorsProcess.running = true;
-    }
-
-    function saveData() {
-        githubData.timestamp = Date.now();
-        Qt.callLater(() => {
-            githubDataFile.writeAdapter();
-        });
+    Component.onCompleted: {
+        // Initialize the Github service
+        Github.init();
     }
 
     spacing: 0
@@ -65,86 +39,6 @@ ColumnLayout {
                 } else {
                     currentVersionProcess.command = ["sh", "-c", "cd " + Quickshell.shellDir + " && cat package.json 2>/dev/null | grep '\"version\"' | cut -d'\"' -f4 || echo 'Unknown'"];
                     currentVersionProcess.running = true;
-                }
-            }
-        }
-
-    }
-
-    FileView {
-        id: githubDataFile
-
-        path: root.githubDataPath
-        blockLoading: true
-        printErrors: true
-        watchChanges: true
-        onFileChanged: githubDataFile.reload()
-        onLoaded: loadFromFile()
-        onLoadFailed: function(error) {
-            console.log("GitHub data file doesn't exist yet, creating it...");
-            githubData.version = "Unknown";
-            githubData.contributors = [];
-            githubData.timestamp = 0;
-            githubDataFile.writeAdapter();
-            fetchFromGitHub();
-        }
-        Component.onCompleted: {
-            if (path)
-                reload();
-
-        }
-
-        JsonAdapter {
-            id: githubData
-
-            property string version: "Unknown"
-            property var contributors: []
-            property double timestamp: 0
-        }
-
-    }
-
-    Process {
-        id: versionProcess
-
-        command: ["curl", "-s", "https://api.github.com/repos/Ly-sec/Noctalia/releases/latest"]
-
-        stdout: StdioCollector {
-            onStreamFinished: {
-                try {
-                    const data = JSON.parse(text);
-                    if (data.tag_name) {
-                        const version = data.tag_name;
-                        githubData.version = version;
-                        root.latestVersion = version;
-                        console.log("[About] Latest version fetched from GitHub:", version);
-                    } else {
-                        console.log("No tag_name in GitHub response");
-                    }
-                    saveData();
-                } catch (e) {
-                    console.error("Failed to parse version:", e);
-                }
-            }
-        }
-
-    }
-
-    Process {
-        id: contributorsProcess
-
-        command: ["curl", "-s", "https://api.github.com/repos/Ly-sec/Noctalia/contributors?per_page=100"]
-
-        stdout: StdioCollector {
-            onStreamFinished: {
-                try {
-                    const data = JSON.parse(text);
-                    githubData.contributors = data || [];
-                    root.contributors = githubData.contributors;
-                    saveData();
-                } catch (e) {
-                    console.error("Failed to parse contributors:", e);
-                    root.contributors = [];
                 }
             }
         }
