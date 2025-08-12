@@ -46,26 +46,42 @@ ColumnLayout {
           Layout.fillWidth: true
           Layout.topMargin: Style.marginSmall * scaling
 
-          NText {
-            text: "Output Directory"
-            font.pointSize: 13
-            font.weight: Style.fontWeightBold
-            color: Colors.textPrimary
-          }
+          ColumnLayout {
+            spacing: Style.marginTiny * scaling
 
-          NText {
-            text: "Directory where screen recordings will be saved"
-            font.pointSize: 12
-            color: Colors.textSecondary
-            wrapMode: Text.WordWrap
-            Layout.fillWidth: true
+            NText {
+              text: "Output Directory"
+              font.weight: Style.fontWeightBold
+              color: Colors.textPrimary
+            }
+
+            NText {
+              text: "Directory where screen recordings will be saved"
+              font.pointSize: Style.fontSizeSmall * scaling
+              color: Colors.textSecondary
+              wrapMode: Text.WordWrap
+            }
           }
 
           NTextInput {
             text: Settings.data.screenRecorder.directory
-            Layout.fillWidth: true
             onEditingFinished: {
               Settings.data.screenRecorder.directory = text
+            }
+          }
+
+          ColumnLayout {
+            spacing: Style.marginSmall * scaling
+            Layout.fillWidth: true
+            Layout.topMargin: Style.marginMedium * scaling
+            // Show Cursor
+            NToggle {
+              label: "Show Cursor"
+              description: "Record mouse cursor in the video"
+              value: Settings.data.screenRecorder.showCursor
+              onToggled: function (newValue) {
+                Settings.data.screenRecorder.showCursor = newValue
+              }
             }
           }
         }
@@ -78,7 +94,7 @@ ColumnLayout {
 
         // Video Settings
         ColumnLayout {
-          spacing: 4
+          spacing: Style.marginTiny * scaling
           Layout.fillWidth: true
 
           NText {
@@ -95,24 +111,24 @@ ColumnLayout {
             Layout.fillWidth: true
             Layout.topMargin: Style.marginSmall * scaling
 
-            NText {
-              text: "Frame Rate"
-              font.pointSize: 13
-              font.weight: Style.fontWeightBold
-              color: Colors.textPrimary
-            }
+            ColumnLayout {
+              spacing: Style.marginTiny * scaling
+              NText {
+                text: "Frame Rate"
+                font.weight: Style.fontWeightBold
+                color: Colors.textPrimary
+              }
 
-            NText {
-              text: "Target frame rate for screen recordings (default: 60)"
-              font.pointSize: 12
-              color: Colors.textSecondary
-              wrapMode: Text.WordWrap
-              Layout.fillWidth: true
+              NText {
+                text: "Target frame rate for screen recordings (default: 60)"
+                font.pointSize: Style.fontSizeSmall * scaling
+                color: Colors.textSecondary
+                wrapMode: Text.WordWrap
+              }
             }
-
             NComboBox {
-              optionsKeys: ["30", "60", "120", "240"]
-              optionsLabels: ["30 FPS", "60 FPS", "120 FPS", "240 FPS"]
+              optionsKeys: ["30", "60", "120", "2Style.marginLarge * scaling0"]
+              optionsLabels: ["30 FPS", "60 FPS", "120 FPS", "2Style.marginLarge * scaling0 FPS"]
               currentKey: Settings.data.screenRecorder.frameRate
               onSelected: function (key) {
                 Settings.data.screenRecorder.frameRate = key
@@ -153,20 +169,19 @@ ColumnLayout {
 
           // Video Codec
           ColumnLayout {
-            spacing: 8
+            spacing: Style.marginTiny * scaling
             Layout.fillWidth: true
             Layout.topMargin: Style.marginSmall * scaling
 
             NText {
               text: "Video Codec"
-              font.pointSize: 13
               font.weight: Style.fontWeightBold
               color: Colors.textPrimary
             }
 
             NText {
               text: "Different codecs offer different compression and compatibility"
-              font.pointSize: 12
+              font.pointSize: Style.fontSizeSmall * scaling
               color: Colors.textSecondary
               wrapMode: Text.WordWrap
               Layout.fillWidth: true
@@ -190,14 +205,14 @@ ColumnLayout {
 
             NText {
               text: "Color Range"
-              font.pointSize: 13
+
               font.weight: Style.fontWeightBold
               color: Colors.textPrimary
             }
 
             NText {
               text: "Limited is recommended for better compatibility"
-              font.pointSize: 12
+              font.pointSize: Style.fontSizeSmall * scaling
               color: Colors.textSecondary
               wrapMode: Text.WordWrap
               Layout.fillWidth: true
@@ -227,7 +242,7 @@ ColumnLayout {
 
           NText {
             text: "Audio Settings"
-            font.pointSize: 18
+            font.pointSize: Style.fontSizeXL * scaling
             font.weight: Style.fontWeightBold
             color: Colors.textPrimary
             Layout.bottomMargin: Style.marginSmall * scaling
@@ -241,14 +256,14 @@ ColumnLayout {
 
             NText {
               text: "Audio Source"
-              font.pointSize: 13
+
               font.weight: Style.fontWeightBold
               color: Colors.textPrimary
             }
 
             NText {
               text: "Audio source to capture during recording"
-              font.pointSize: 12
+              font.pointSize: Style.fontSizeSmall * scaling
               color: Colors.textSecondary
               wrapMode: Text.WordWrap
               Layout.fillWidth: true
@@ -292,16 +307,6 @@ ColumnLayout {
               onSelected: function (key) {
                 Settings.data.screenRecorder.audioCodec = key
               }
-            }
-          }
-
-          // Show Cursor
-          NToggle {
-            label: "Show Cursor"
-            description: "Record mouse cursor in the video"
-            value: Settings.data.screenRecorder.showCursor
-            onToggled: function (newValue) {
-              Settings.data.screenRecorder.showCursor = newValue
             }
           }
         }

@@ -18,7 +18,7 @@ RowLayout {
   Layout.fillWidth: true
 
   ColumnLayout {
-    spacing: 2 * scaling
+    spacing: Style.marginTiniest * scaling
     Layout.fillWidth: true
 
     NText {
