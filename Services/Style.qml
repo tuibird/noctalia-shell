@@ -16,7 +16,7 @@ Singleton {
   property real fontSizeTiny: 7
   property real fontSizeSmall: 9
   property real fontSizeMedium: 11
-  property real fontSizeMediumLarge: 12
+  property real fontSizeInter: 12
   property real fontSizeLarge: 13
   property real fontSizeXL: 18
   property real fontSizeXXL: 24
@@ -27,22 +27,15 @@ Singleton {
   property int fontWeightBold: 700
 
   // Radii
-  property int radiusLarge: 20
-  property int radiusMedium: 16
-  property int radiusSmall: 12
   property int radiusTiny: 8
+  property int radiusSmall: 12
+  property int radiusMedium: 16
+  property int radiusLarge: 20
 
   // Border
   property int borderThin: 1
   property int borderMedium: 2
   property int borderThick: 3
-
-  // Spacing
-  property int spacingExtraLarge: 20
-  property int spacingLarge: 16
-  property int spacingMedium: 12
-  property int spacingSmall: 8
-  property int spacingTiny: 4
 
   // Animation duration (ms)
   property int animationFast: 150
@@ -59,12 +52,12 @@ Singleton {
   property int tooltipDelayLong: 1200
   property int pillDelay: 500
 
-  // Margins and spacing
+  // Margins (for margins and spacing)
   property int marginTiny: 4
   property int marginSmall: 8
   property int marginMedium: 12
   property int marginLarge: 16
-  property int marginXL: 20
+  property int marginExtraLarge: 20
 
   // Opacity
   property real opacityNone: 0.0

@@ -36,8 +36,8 @@ ComboBox {
 
   // Label (currently selected)
   contentItem: NText {
-    leftPadding: Style.spacingLarge * scaling
-    rightPadding: root.indicator.width + Style.spacingLarge * scaling
+    leftPadding: Style.marginLarge * scaling
+    rightPadding: root.indicator.width + Style.marginLarge * scaling
     font.pointSize: Style.fontSizeMedium * scaling
     font.weight: Style.fontWeightBold
     verticalAlignment: Text.AlignVCenter
@@ -49,7 +49,7 @@ ComboBox {
 
   // Drop down indicator
   indicator: NText {
-    x: root.width - width - Style.spacingMedium * scaling
+    x: root.width - width - Style.marginMedium * scaling
     y: root.topPadding + (root.availableHeight - height) / 2
     text: "arrow_drop_down"
     font.family: "Material Symbols Outlined"
@@ -59,8 +59,8 @@ ComboBox {
   popup: Popup {
     y: root.height
     width: root.width
-    implicitHeight: Math.min(160 * scaling, contentItem.implicitHeight + Style.spacingMedium * scaling * 2)
-    padding: Style.spacingMedium * scaling
+    implicitHeight: Math.min(160 * scaling, contentItem.implicitHeight + Style.marginMedium * scaling * 2)
+    padding: Style.marginMedium * scaling
 
     contentItem: ListView {
       clip: true
@@ -93,7 +93,7 @@ ComboBox {
     }
 
     background: Rectangle {
-      width: root.width - Style.spacingMedium * scaling * 3
+      width: root.width - Style.marginMedium * scaling * 3
       color: highlighted ? Colors.hover : "transparent"
       radius: Style.radiusSmall * scaling
     }

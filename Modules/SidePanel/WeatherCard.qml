@@ -79,7 +79,7 @@ NBox {
         model: weatherReady ? Location.data.weather.daily.time : []
         delegate: ColumnLayout {
           Layout.alignment: Qt.AlignHCenter
-          spacing: Style.spacingSmall * scaling
+          spacing: Style.marginSmall * scaling
           NText {
             text: Qt.formatDateTime(new Date(Location.data.weather.daily.time[index]), "ddd")
             color: Colors.textPrimary

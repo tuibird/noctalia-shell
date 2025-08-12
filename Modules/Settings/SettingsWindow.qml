@@ -96,7 +96,7 @@ NLoader {
             Column {
               anchors.fill: parent
               anchors.margins: Style.marginSmall * scaling
-              spacing: Style.spacingTiny * 1.5 * scaling // Minimal spacing between tabs
+              spacing: Style.marginTiny * 1.5 * scaling // Minimal spacing between tabs
 
               Repeater {
                 id: sections
@@ -132,7 +132,7 @@ NLoader {
                     NText {
                       text: modelData.label
                       color: selected ? Colors.onAccent : (tabItem.hovering ? Colors.onAccent : Colors.textPrimary)
-                      font.pointSize: Style.fontSizeMediumLarge * scaling
+                      font.pointSize: Style.fontSizeInter * scaling
                       font.weight: Style.fontWeightBold
                       Layout.fillWidth: true
                     }

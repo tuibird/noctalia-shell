@@ -15,7 +15,7 @@ PopupWindow {
   property real anchorY
 
   implicitWidth: 180 * scaling
-  implicitHeight: Math.max(40 * scaling, listView.contentHeight + (Style.spacingMedium * 2 * scaling))
+  implicitHeight: Math.max(40 * scaling, listView.contentHeight + (Style.marginMedium * 2 * scaling))
   visible: false
   color: "transparent"
 
@@ -83,7 +83,7 @@ PopupWindow {
   ListView {
     id: listView
     anchors.fill: parent
-    anchors.margins: Style.spacingMedium * scaling
+    anchors.margins: Style.marginMedium * scaling
     spacing: 0
     interactive: false
     enabled: trayMenu.visible
@@ -318,8 +318,8 @@ PopupWindow {
       ListView {
         id: listView
         anchors.fill: parent
-        anchors.margins: Style.spacingSmall * scaling
-        spacing: Style.spacingTiny * scaling
+        anchors.margins: Style.marginSmall * scaling
+        spacing: Style.marginTiny * scaling
         interactive: false
         enabled: subMenu.visible
         clip: true
@@ -354,9 +354,9 @@ PopupWindow {
 
             RowLayout {
               anchors.fill: parent
-              anchors.leftMargin: Style.spacingMedium * scaling
-              anchors.rightMargin: Style.spacingMedium * scaling
-              spacing: Style.spacingSmall * scaling
+              anchors.leftMargin: Style.marginMedium * scaling
+              anchors.rightMargin: Style.marginMedium * scaling
+              spacing: Style.marginSmall * scaling
 
               NText {
                 id: subText

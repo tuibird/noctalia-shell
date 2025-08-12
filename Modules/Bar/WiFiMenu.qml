@@ -237,8 +237,8 @@ NLoader {
 
                   RowLayout {
                     anchors.fill: parent
-                    anchors.margins: Style.spacingSmall * scaling
-                    spacing: Style.spacingSmall * scaling
+                    anchors.margins: Style.marginSmall * scaling
+                    spacing: Style.marginSmall * scaling
 
                     Item {
                       Layout.fillWidth: true
@@ -254,7 +254,7 @@ NLoader {
                         TextInput {
                           id: passwordInputField
                           anchors.fill: parent
-                          anchors.margins: Style.spacingMedium * scaling
+                          anchors.margins: Style.marginMedium * scaling
                           text: passwordInput
                           font.pointSize: Style.fontSizeMedium * scaling
                           color: Colors.textPrimary
