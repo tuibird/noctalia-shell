@@ -5,8 +5,10 @@ import Quickshell.Widgets
 import qs.Services
 
 Rectangle {
+  id: root
   color: "transparent"
-  radius: width * 0.5
+  property real imageRadius: width * 0.5
+  radius: imageRadius
 
   readonly property real scaling: Scaling.scale(screen)
   property string imagePath: ""
@@ -52,7 +54,7 @@ Rectangle {
     visible: false
     Rectangle {
       anchors.fill: parent
-      radius: img.width * 0.5
+      radius: root.imageRadius
     }
   }
 

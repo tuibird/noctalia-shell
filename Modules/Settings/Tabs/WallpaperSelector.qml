@@ -53,42 +53,15 @@ Item {
         border.width: Math.max(1, Style.borderThin * scaling)
         clip: true
 
-        Image {
+        NImageRounded {
           id: currentWallpaperImage
           anchors.fill: parent
           anchors.margins: Style.marginSmall * scaling
-          source: Wallpapers.currentWallpaper
-          fillMode: Image.PreserveAspectCrop
-          asynchronous: true
-          cache: true
-        }
-
-        // Fallback if no image
-        Rectangle {
-          anchors.fill: parent
-          anchors.margins: Style.marginSmall * scaling
-          color: Colors.backgroundTertiary
-          radius: Style.radiusSmall * scaling
-          visible: currentWallpaperImage.status !== Image.Ready
-
-          ColumnLayout {
-            anchors.centerIn: parent
-            spacing: Style.marginSmall * scaling
-
-            NText {
-              text: "image"
-              font.family: "Material Symbols Outlined"
-              font.pointSize: Style.fontSizeLarge * scaling
-              color: Colors.textSecondary
-              Layout.alignment: Qt.AlignHCenter
-            }
-
-            NText {
-              text: "No wallpaper selected"
-              color: Colors.textSecondary
-              Layout.alignment: Qt.AlignHCenter
-            }
-          }
+          imagePath: Wallpapers.currentWallpaper
+          fallbackIcon: "image"
+          borderColor: Colors.outline
+          borderWidth: Math.max(1, Style.borderThin * scaling)
+          imageRadius: Style.radiusMedium * scaling
         }
       }
 
@@ -180,14 +153,14 @@ Item {
             border.width: Math.max(1, Style.borderThin * scaling)
             clip: true
 
-            Image {
+            NImageRounded {
               anchors.fill: parent
               anchors.margins: Style.marginTiny * scaling
-              source: wallpaperPath
-              fillMode: Image.PreserveAspectCrop
-              asynchronous: true
-              cache: true
-              smooth: true
+              imagePath: wallpaperPath
+              fallbackIcon: "image"
+              borderColor: "transparent"
+              borderWidth: 0
+              imageRadius: Style.radiusMedium * scaling
             }
 
             // Selection indicator
