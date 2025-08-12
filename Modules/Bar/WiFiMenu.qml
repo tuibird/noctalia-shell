@@ -6,7 +6,7 @@ import Quickshell.Wayland
 import qs.Services
 import qs.Widgets
 
-// LazyLoader for WiFi menu
+// Loader for WiFi menu
 NLoader {
   id: root
 

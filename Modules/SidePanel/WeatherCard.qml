@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
+import Quickshell
 import qs.Services
 import qs.Widgets
 
@@ -8,6 +9,7 @@ NBox {
   id: root
 
   readonly property real scaling: Scaling.scale(screen)
+  readonly property bool weatherReady: (Location.data.weather !== null)
 
   Layout.fillWidth: true
   // Height driven by content
@@ -24,11 +26,12 @@ NBox {
     RowLayout {
       spacing: Style.marginSmall * scaling
       NText {
-        text: Location.weatherSymbolFromCode(Location.data.weather.current_weather.weathercode)
+        text: weatherReady ? Location.weatherSymbolFromCode(Location.data.weather.current_weather.weathercode) : ""
         font.family: "Material Symbols Outlined"
         font.pointSize: Style.fontSizeXXL * 1.25 * scaling
         color: Colors.accentSecondary
       }
+
       ColumnLayout {
         RowLayout {
           NText {
@@ -37,14 +40,18 @@ NBox {
             font.pointSize: Style.fontSizeXL * scaling
           }
           NText {
-            text: `(${Location.data.weather.timezone_abbreviation})`
+            text: weatherReady ? `(${Location.data.weather.timezone_abbreviation})` : ""
             font.pointSize: Style.fontSizeSmall * scaling
             visible: Location.data.weather
           }
         }
 
         NText {
+          visible: weatherReady
           text: {
+            if (!weatherReady) {
+              return ""
+            }
             var temp = Location.data.weather.current_weather.temperature
             if (Settings.data.location.useFahrenheit) {
               temp = Location.celsiusToFahrenheit(temp)
@@ -59,15 +66,17 @@ NBox {
     }
 
     NDivider {
+      visible: weatherReady
       Layout.fillWidth: true
     }
 
     RowLayout {
+      visible: weatherReady
       Layout.fillWidth: true
       Layout.alignment: Qt.AlignHCenter
-      spacing: Style.marginLarge* scaling
+      spacing: Style.marginLarge * scaling
       Repeater {
-        model: Location.data.weather.daily.time
+        model: weatherReady ? Location.data.weather.daily.time : []
         delegate: ColumnLayout {
           Layout.alignment: Qt.AlignHCenter
           spacing: Style.spacingSmall * scaling
@@ -98,6 +107,13 @@ NBox {
           }
         }
       }
+    }
+
+    RowLayout {
+      visible: !weatherReady
+      Layout.fillWidth: true
+      Layout.alignment: Qt.AlignHCenter
+      NBusyIndicator {}
     }
   }
 }

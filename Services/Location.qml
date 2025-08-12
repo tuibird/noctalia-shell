@@ -41,9 +41,11 @@ Singleton {
     }
   }
 
+  // Every minute check if we need to fetch new weather
   Timer {
     id: updateTimer
     interval: 60 * 1000
+    running: true
     repeat: true
     onTriggered: {
       updateWeather()
@@ -51,7 +53,9 @@ Singleton {
   }
 
   // --------------------------------
-  function init() {// does nothing but ensure the singleton is created
+  function init() {
+    // does nothing but ensure the singleton is created
+    // do not remove
   }
 
   // --------------------------------
@@ -60,11 +64,15 @@ Singleton {
     data.longitude = ""
     data.weatherLastFetch = 0
     data.weather = null
+
+    // Try to fetch immediately
+    updateWeather();
   }
 
   // --------------------------------
   function updateWeather() {
     if (isFetchingWeather) {
+      console.warn("Weather is still fetching")
       return
     }
 
