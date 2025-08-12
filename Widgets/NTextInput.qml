@@ -54,7 +54,7 @@ Item {
         color: Colors.textPrimary
         placeholderTextColor: Colors.textSecondary
         background: null
-        font.pointSize: Colors.fontSizeSmall * scaling
+        font.pointSize: Style.fontSizeSmall * scaling
         onEditingFinished: root.onEditingFinished()
         // Text changes are observable via the aliased 'text' property (root.text) and its 'textChanged' signal.
         // No additional callback is invoked here to avoid conflicts with QML's onTextChanged handler semantics.

@@ -128,7 +128,7 @@ PopupWindow {
             color: (modelData?.enabled
                     ?? true) ? (mouseArea.containsMouse ? Colors.onAccent : Colors.textPrimary) : Colors.textDisabled
             text: modelData?.text ?? ""
-            font.pointSize: Colors.fontSizeSmall * scaling
+            font.pointSize: Style.fontSizeSmall * scaling
             verticalAlignment: Text.AlignVCenter
             elide: Text.ElideRight
           }
@@ -145,7 +145,7 @@ PopupWindow {
           Text {
             text: modelData?.hasChildren ? "menu" : ""
             font.family: "Material Symbols Outlined"
-            font.pointSize: Colors.fontSizeSmall * scaling
+            font.pointSize: Style.fontSizeSmall * scaling
             verticalAlignment: Text.AlignVCenter
             visible: modelData?.hasChildren ?? false
             color: Colors.textPrimary
@@ -363,7 +363,7 @@ PopupWindow {
                 Layout.fillWidth: true
                 color: (modelData?.enabled ?? true) ? bg.hoverTextColor : Colors.textDisabled
                 text: modelData?.text ?? ""
-                font.pointSize: Colors.fontSizeSmall * scaling
+                font.pointSize: Style.fontSizeSmall * scaling
                 verticalAlignment: Text.AlignVCenter
                 elide: Text.ElideRight
               }
@@ -380,7 +380,7 @@ PopupWindow {
               NText {
                 text: modelData?.hasChildren ? "\uE5CC" : ""
                 font.family: "Material Symbols Outlined"
-                font.pointSize: Colors.fontSizeSmall * scaling
+                font.pointSize: Style.fontSizeSmall * scaling
                 verticalAlignment: Text.AlignVCenter
                 visible: modelData?.hasChildren ?? false
               }
