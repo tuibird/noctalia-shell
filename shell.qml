@@ -12,6 +12,7 @@ import qs.Modules.DemoPanel
 import qs.Modules.Background
 import qs.Modules.SidePanel
 import qs.Modules.Notification
+import qs.Modules.Settings
 import qs.Services
 
 ShellRoot {
@@ -38,9 +39,17 @@ ShellRoot {
     id: calendar
   }
 
+  SettingsWindow {
+    id: settingsWindow
+  }
+
   Component.onCompleted: {
+    PanelManager.settingsWindow = settingsWindow
+
     // Ensure our singleton is created as soon as possible
     // so we start fetching weather asap if necessary
     Location.init()
+
+
   }
 }

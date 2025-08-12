@@ -60,21 +60,7 @@ NBox {
       NIconButton {
         icon: "settings"
         onClicked: {
-          if (!root.settingsWindow) {
-            const comp = Qt.createComponent("../../Settings/SettingsWindow.qml")
-            if (comp.status === Component.Ready) {
-              root.settingsWindow = comp.createObject(root)
-            } else {
-              comp.statusChanged.connect(function () {
-                if (comp.status === Component.Ready) {
-                  root.settingsWindow = comp.createObject(root)
-                }
-              })
-            }
-          }
-          if (root.settingsWindow) {
-            root.settingsWindow.isLoaded = !root.settingsWindow.isLoaded
-          }
+          PanelManager.settingsWindow.isLoaded = !PanelManager.settingsWindow.isLoaded
         }
       }
       NIconButton {

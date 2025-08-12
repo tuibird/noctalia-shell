@@ -3,9 +3,10 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Wayland
+import qs.Modules.Settings.Tabs as Tabs
 import qs.Services
 import qs.Widgets
-import "Tabs" as Tabs
+
 
 NLoader {
   id: root
