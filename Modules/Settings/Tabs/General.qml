@@ -55,7 +55,7 @@ Item {
           color: Colors.textSecondary
           font.pointSize: Style.fontSizeSmall * scaling
         }
-        NTextBox {
+        NTextInput {
           text: Settings.data.general.avatarImage
           placeholderText: "/home/user/.face"
           Layout.fillWidth: true

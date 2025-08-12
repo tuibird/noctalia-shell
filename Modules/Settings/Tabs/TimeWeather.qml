@@ -59,7 +59,7 @@ Item {
       color: Colors.textSecondary
       font.pointSize: Style.fontSizeSmall * scaling
     }
-    NTextBox {
+    NTextInput {
       text: Settings.data.location.name
       Layout.fillWidth: true
       onEditingFinished: Settings.data.location.name = text

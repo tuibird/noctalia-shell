@@ -32,7 +32,7 @@ Item {
       color: Colors.textSecondary
       wrapMode: Text.WordWrap
     }
-    NTextBox {
+    NTextInput {
       text: Settings.data.wallpaper.directory
       Layout.fillWidth: true
       onEditingFinished: Settings.data.wallpaper.directory = text

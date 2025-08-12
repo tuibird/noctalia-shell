@@ -31,7 +31,7 @@ Item {
       text: "Directory where screen recordings will be saved"
       color: Colors.textSecondary
     }
-    NTextBox {
+    NTextInput {
       text: Settings.data.screenRecorder.directory
       Layout.fillWidth: true
       onEditingFinished: Settings.data.screenRecorder.directory = text
