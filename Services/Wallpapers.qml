@@ -39,7 +39,7 @@ Singleton {
   }
 
   function setCurrentWallpaper(path, isInitial) {
-    console.log("Wallpapers: Setting wallpaper to:", path, "isInitial:", isInitial)
+
     currentWallpaper = path
     if (!isInitial) {
       Settings.data.wallpaper.current = path
@@ -50,7 +50,7 @@ Singleton {
       } else {
         transitionType = Settings.data.wallpaper.swww.transitionType
       }
-      console.log("SWWW: Changing wallpaper with transition type:", transitionType)
+  
       changeWallpaperProcess.running = true
     } else {
       // Fallback: update the settings directly for non-SWWW mode
@@ -140,11 +140,11 @@ Singleton {
     running: false
     
     onStarted: {
-      console.log("SWWW: Process started with command:", command.join(" "))
+      
     }
     
     onExited: function(exitCode, exitStatus) {
-      console.log("SWWW: Process finished with exit code:", exitCode, "status:", exitStatus)
+      
       if (exitCode !== 0) {
         console.log("SWWW: Process failed. Make sure swww-daemon is running with: swww-daemon")
         console.log("SWWW: You can start it with: swww-daemon --format xrgb")
@@ -154,7 +154,7 @@ Singleton {
 
   Process {
     id: generateThemeProcess
-    command: ["wallust", "run", currentWallpaper, "-u", "-k", "-d", "Templates"]
+    command: ["wallust", "run", currentWallpaper, "-u", "-k", "-d", "Assets/Wallust"]
     workingDirectory: Quickshell.shellDir
     running: false
   }

@@ -15,9 +15,9 @@ Variants {
     // Force update when SWWW setting changes
     onVisibleChanged: {
       if (visible) {
-        console.log("Background: Showing wallpaper:", wallpaperSource)
+
       } else {
-        console.log("Background: Hiding wallpaper (SWWW enabled)")
+
       }
     }
     color: "transparent"

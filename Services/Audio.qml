@@ -49,7 +49,7 @@ Singleton {
         vol = 0
       }
       root._volume = vol
-      console.log("[Audio] onVolumeChanged: " + root._volume.toFixed(2))
+  
     }
 
     function onMutedChanged() {

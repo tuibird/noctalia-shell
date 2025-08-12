@@ -1,0 +1,26 @@
+{
+  "backgroundPrimary": "{{ background }}",
+  "backgroundSecondary": "{{ background | lighten(0.03) }}",
+  "backgroundTertiary": "{{ background | lighten(0.06) }}",
+  
+  "surface": "{{ background | lighten(0.04) }}",
+  "surfaceVariant": "{{ background | lighten(0.08) }}",
+  
+  "textPrimary": "{{ foreground | darken(0.1) }}",
+  "textSecondary": "{{ foreground | darken(0.3) }}",
+  "textDisabled": "{{ foreground | darken(0.5) }}",
+  
+  "accentPrimary": "{{ color4 | darken(0.3) | saturate(0.4) }}",
+  "accentSecondary": "{{ color1 | darken(0.4) | saturate(0.3) }}",
+  "accentTertiary": "{{ color3 | darken(0.35) | saturate(0.35) }}",
+  
+  "error": "{{ color5 | darken(0.25) | saturate(0.5) }}",
+  "warning": "{{ color6 | darken(0.3) | saturate(0.4) }}",
+  
+  "hover": "{{ color4 | darken(0.2) | saturate(0.3) }}",
+  "onAccent": "{{ background }}",
+  "outline": "{{ background | lighten(0.15) }}",
+  
+  "shadow": "{{ background }}",
+  "overlay": "{{ background }}"
+}
