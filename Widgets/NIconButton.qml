@@ -21,7 +21,6 @@ Rectangle {
   property real fontPointSize: Style.fontSizeMedium
   property string fontFamily: "Material Symbols Outlined"
 
-
   implicitWidth: size
   implicitHeight: size
 
