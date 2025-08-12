@@ -37,10 +37,14 @@ Rectangle {
     text: root.icon
     font.family: fontFamily
     font.pointSize: root.fontPointSize * scaling
+                        font.variableAxes: {
+                        "wght": (Font.Normal + Font.Bold) / 2.0
+                      }
     color: root.hovering ? Colors.onAccent : showBorder ? Colors.accentPrimary : Colors.textPrimary
     horizontalAlignment: Text.AlignHCenter
     verticalAlignment: Text.AlignVCenter
     opacity: root.enabled ? Style.opacityFull : Style.opacityMedium
+
   }
 
   NTooltip {
