@@ -26,8 +26,6 @@ Singleton {
   // Used to access via Settings.data.xxx.yyy
   property var data: adapter
 
-  // Needed to only have one NPanel loaded at a time. <--- VERY BROKEN
-  //property var openPanel: null
   Item {
     Component.onCompleted: {
 

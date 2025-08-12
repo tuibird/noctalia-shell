@@ -21,10 +21,10 @@ PanelWindow {
   function show() {
     // Ensure only one panel is visible at a time using Settings as ephemeral store
     try {
-      if (Settings.openPanel && Settings.openPanel !== root && Settings.openPanel.hide) {
-        Settings.openPanel.hide()
+      if (PanelManager.openedPanel && PanelManager.openedPanel !== root && PanelManager.openedPanel.hide) {
+        PanelManager.openedPanel.hide()
       }
-      Settings.openPanel = root
+      PanelManager.openedPanel = root
     } catch (e) {
 
       // ignore
