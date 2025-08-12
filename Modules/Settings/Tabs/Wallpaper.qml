@@ -94,7 +94,7 @@ Item {
       to: 900
       stepSize: 10
       value: Settings.data.wallpaper.randomInterval
-      onMoved: Settings.data.wallpaper.randomInterval = Math.round(value)
+      onPressedChanged: Settings.data.wallpaper.randomInterval = Math.round(value)
       cutoutColor: Colors.backgroundPrimary
     }
 
@@ -178,7 +178,7 @@ Item {
         to: 500
         stepSize: 5
         value: Settings.data.wallpaper.swww.transitionFps
-        onMoved: Settings.data.wallpaper.swww.transitionFps = Math.round(value)
+        onPressedChanged: Settings.data.wallpaper.swww.transitionFps = Math.round(value)
         cutoutColor: Colors.backgroundPrimary
       }
 
@@ -203,7 +203,7 @@ Item {
         to: 10
         stepSize: 0.05
         value: Settings.data.wallpaper.swww.transitionDuration
-        onMoved: Settings.data.wallpaper.swww.transitionDuration = value
+        onPressedChanged: Settings.data.wallpaper.swww.transitionDuration = value
         cutoutColor: Colors.backgroundPrimary
       }
     }
