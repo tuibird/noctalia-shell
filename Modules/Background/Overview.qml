@@ -9,9 +9,9 @@ Variants {
 
   delegate: PanelWindow {
     required property ShellScreen modelData
-    property string wallpaperSource: Qt.resolvedUrl("../../Assets/Tests/wallpaper.png")
+    property string wallpaperSource: Wallpapers.currentWallpaper !== "" && !Settings.data.wallpaper.swww.enabled ? Wallpapers.currentWallpaper : ""
 
-    visible: wallpaperSource !== ""
+    visible: wallpaperSource !== "" && !Settings.data.wallpaper.swww.enabled
     color: "transparent"
     screen: modelData
     WlrLayershell.layer: WlrLayer.Background

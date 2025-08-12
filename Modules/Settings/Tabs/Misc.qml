@@ -1,48 +1,69 @@
 import QtQuick
+import QtQuick.Controls
 import QtQuick.Layouts
 import qs.Services
 import qs.Widgets
 
-Item {
-  property real scaling: 1
-  readonly property string tabIcon: "more_horiz"
-  readonly property string tabLabel: "Misc"
-  readonly property int tabIndex: 7
-  Layout.fillWidth: true
-  Layout.fillHeight: true
+ColumnLayout {
+  id: root
 
-  ColumnLayout {
-    anchors.fill: parent
-    spacing: Style.marginMedium * scaling
+  spacing: 0
 
-    NText {
-      text: "Media"
-      font.weight: Style.fontWeightBold
-      color: Colors.accentSecondary
-    }
+  ScrollView {
+    id: scrollView
 
-    NText {
-      text: "Visualizer Type"
-      color: Colors.textPrimary
-      font.weight: Style.fontWeightBold
-    }
-    NText {
-      text: "Choose the style of the audio visualizer"
-      color: Colors.textSecondary
-    }
+    Layout.fillWidth: true
+    Layout.fillHeight: true
+    padding: 16
+    rightPadding: 12
+    clip: true
+    ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+    ScrollBar.vertical.policy: ScrollBar.AsNeeded
 
-    NComboBox {
-      id: visualizerTypeComboBox
-      optionsKeys: ["radial", "fire", "diamond"]
-      optionsLabels: ["Radial", "Fire", "Diamond"]
-      currentKey: Settings.data.audioVisualizer.type
-      onSelected: function (key) {
-        Settings.data.audioVisualizer.type = key
+    ColumnLayout {
+      width: scrollView.availableWidth
+      spacing: 0
+
+      Item {
+        Layout.fillWidth: true
+        Layout.preferredHeight: 0
       }
-    }
 
-    Item {
-      Layout.fillHeight: true
+      ColumnLayout {
+        spacing: 4
+        Layout.fillWidth: true
+
+        NText {
+          text: "Miscellaneous Settings"
+          font.pointSize: 18
+          font.weight: Style.fontWeightBold
+          color: Colors.textPrimary
+          Layout.bottomMargin: 8
+        }
+
+        // Audio Visualizer section
+        ColumnLayout {
+          spacing: 8
+          Layout.fillWidth: true
+          Layout.topMargin: 8
+
+          NText {
+            text: "Audio Visualizer"
+            font.pointSize: 13
+            font.weight: Style.fontWeightBold
+            color: Colors.textPrimary
+          }
+
+          NComboBox {
+            optionsKeys: ["radial", "bars", "wave"]
+            optionsLabels: ["Radial", "Bars", "Wave"]
+            currentKey: Settings.data.audioVisualizer.type
+            onSelected: function (key) {
+              Settings.data.audioVisualizer.type = key
+            }
+          }
+        }
+      }
     }
   }
 }

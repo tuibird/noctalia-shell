@@ -8,9 +8,18 @@ Variants {
 
   delegate: PanelWindow {
     required property ShellScreen modelData
-    property string wallpaperSource: Settings.data.wallpaper.current
+    property string wallpaperSource: Wallpapers.currentWallpaper !== "" && !Settings.data.wallpaper.swww.enabled ? Wallpapers.currentWallpaper : ""
 
-    visible: wallpaperSource !== ""
+    visible: wallpaperSource !== "" && !Settings.data.wallpaper.swww.enabled
+    
+    // Force update when SWWW setting changes
+    onVisibleChanged: {
+      if (visible) {
+        console.log("Background: Showing wallpaper:", wallpaperSource)
+      } else {
+        console.log("Background: Hiding wallpaper (SWWW enabled)")
+      }
+    }
     color: "transparent"
     screen: modelData
     WlrLayershell.layer: WlrLayer.Background
