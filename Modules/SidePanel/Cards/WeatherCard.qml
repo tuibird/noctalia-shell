@@ -35,7 +35,11 @@ NBox {
       ColumnLayout {
         spacing: -Style.marginTiny * scaling
         NText {
-          text: Settings.data.location.name
+          text: {
+            // Ensure the name is not too long if one had to specify the country
+            const chunks = Settings.data.location.name.split(",")
+            return chunks[0]
+          }
           font.weight: Style.fontWeightBold
           font.pointSize: Style.fontSizeXL * scaling
         }
