@@ -29,7 +29,7 @@ ColumnLayout {
       }
 
       ColumnLayout {
-        spacing: Style.marginMedium * scaling
+        spacing: Style.marginLarge * scaling
         Layout.fillWidth: true
 
         NText {
@@ -37,58 +37,50 @@ ColumnLayout {
           font.pointSize: Style.fontSizeXL * scaling
           font.weight: Style.fontWeightBold
           color: Colors.textPrimary
-          Layout.bottomMargin: Style.marginSmall * scaling
         }
 
-        // Elements section
-        ColumnLayout {
-          spacing: Style.marginSmall * scaling
-          Layout.fillWidth: true
-          Layout.topMargin: Style.marginSmall * scaling
-
-          NToggle {
-            label: "Show Active Window"
-            description: "Display the title of the currently focused window below the bar"
-            value: Settings.data.bar.showActiveWindow
-            onToggled: function (newValue) {
-              Settings.data.bar.showActiveWindow = newValue
-            }
+        NToggle {
+          label: "Show Active Window"
+          description: "Display the title of the currently focused window below the bar"
+          value: Settings.data.bar.showActiveWindow
+          onToggled: function (newValue) {
+            Settings.data.bar.showActiveWindow = newValue
           }
+        }
 
-          NToggle {
-            label: "Show Active Window Icon"
-            description: "Display the icon of the currently focused window"
-            value: Settings.data.bar.showActiveWindowIcon
-            onToggled: function (newValue) {
-              Settings.data.bar.showActiveWindowIcon = newValue
-            }
+        NToggle {
+          label: "Show Active Window Icon"
+          description: "Display the icon of the currently focused window"
+          value: Settings.data.bar.showActiveWindowIcon
+          onToggled: function (newValue) {
+            Settings.data.bar.showActiveWindowIcon = newValue
           }
+        }
 
-          NToggle {
-            label: "Show System Info"
-            description: "Display system information (CPU, RAM, Temperature)"
-            value: Settings.data.bar.showSystemInfo
-            onToggled: function (newValue) {
-              Settings.data.bar.showSystemInfo = newValue
-            }
+        NToggle {
+          label: "Show System Info"
+          description: "Display system information (CPU, RAM, Temperature)"
+          value: Settings.data.bar.showSystemInfo
+          onToggled: function (newValue) {
+            Settings.data.bar.showSystemInfo = newValue
           }
+        }
 
-          NToggle {
-            label: "Show Taskbar"
-            description: "Display a taskbar showing currently open windows"
-            value: Settings.data.bar.showTaskbar
-            onToggled: function (newValue) {
-              Settings.data.bar.showTaskbar = newValue
-            }
+        NToggle {
+          label: "Show Taskbar"
+          description: "Display a taskbar showing currently open windows"
+          value: Settings.data.bar.showTaskbar
+          onToggled: function (newValue) {
+            Settings.data.bar.showTaskbar = newValue
           }
+        }
 
-          NToggle {
-            label: "Show Media"
-            description: "Display media controls and information"
-            value: Settings.data.bar.showMedia
-            onToggled: function (newValue) {
-              Settings.data.bar.showMedia = newValue
-            }
+        NToggle {
+          label: "Show Media"
+          description: "Display media controls and information"
+          value: Settings.data.bar.showMedia
+          onToggled: function (newValue) {
+            Settings.data.bar.showMedia = newValue
           }
         }
       }

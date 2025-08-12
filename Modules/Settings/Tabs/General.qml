@@ -29,7 +29,7 @@ ColumnLayout {
       }
 
       ColumnLayout {
-        spacing: Style.marginTiny * scaling
+        spacing: Style.marginLarge * scaling
         Layout.fillWidth: true
 
         NText {
@@ -37,7 +37,6 @@ ColumnLayout {
           font.pointSize: Style.fontSizeXL * scaling
           font.weight: Style.fontWeightBold
           color: Colors.textPrimary
-          Layout.bottomMargin: Style.marginSmall * scaling
         }
 
         // Profile section
@@ -92,7 +91,7 @@ ColumnLayout {
       }
 
       ColumnLayout {
-        spacing: Style.marginMedium * scaling
+        spacing: Style.marginLarge * scaling
         Layout.fillWidth: true
 
         NText {

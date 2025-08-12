@@ -64,7 +64,7 @@ ColumnLayout {
 
         // Time section
         ColumnLayout {
-          spacing: Style.marginMedium * scaling
+                    spacing: Style.marginLarge * scaling
           Layout.fillWidth: true
 
           NText {

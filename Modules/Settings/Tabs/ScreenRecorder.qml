@@ -94,7 +94,7 @@ ColumnLayout {
 
         // Video Settings
         ColumnLayout {
-          spacing: Style.marginTiny * scaling
+          spacing: Style.marginLarge * scaling
           Layout.fillWidth: true
 
           NText {
@@ -106,125 +106,50 @@ ColumnLayout {
           }
 
           // Frame Rate
-          ColumnLayout {
-            spacing: Style.marginSmall * scaling
-            Layout.fillWidth: true
-            Layout.topMargin: Style.marginSmall * scaling
-
-            ColumnLayout {
-              spacing: Style.marginTiny * scaling
-              NText {
-                text: "Frame Rate"
-                font.weight: Style.fontWeightBold
-                color: Colors.textPrimary
-              }
-
-              NText {
-                text: "Target frame rate for screen recordings (default: 60)"
-                font.pointSize: Style.fontSizeSmall * scaling
-                color: Colors.textSecondary
-                wrapMode: Text.WordWrap
-              }
-            }
-            NComboBox {
-              optionsKeys: ["30", "60", "120", "2Style.marginLarge * scaling0"]
-              optionsLabels: ["30 FPS", "60 FPS", "120 FPS", "2Style.marginLarge * scaling0 FPS"]
-              currentKey: Settings.data.screenRecorder.frameRate
-              onSelected: function (key) {
-                Settings.data.screenRecorder.frameRate = key
-              }
+          NComboBox {
+            label: "Frame Rate"
+            description: "Target frame rate for screen recordings (default: 60)"
+            optionsKeys: ["30", "60", "120", "240"]
+            optionsLabels: ["30 FPS", "60 FPS", "120 FPS", "240 FPS"]
+            currentKey: Settings.data.screenRecorder.frameRate
+            onSelected: function (key) {
+              Settings.data.screenRecorder.frameRate = key
             }
           }
 
           // Video Quality
-          ColumnLayout {
-            spacing: Style.marginSmall * scaling
-            Layout.fillWidth: true
-            Layout.topMargin: Style.marginSmall * scaling
-
-            NText {
-              text: "Video Quality"
-              font.pointSize: 13
-              font.weight: Style.fontWeightBold
-              color: Colors.textPrimary
-            }
-
-            NText {
-              text: "Higher quality results in larger file sizes"
-              font.pointSize: 12
-              color: Colors.textSecondary
-              wrapMode: Text.WordWrap
-              Layout.fillWidth: true
-            }
-
-            NComboBox {
-              optionsKeys: ["medium", "high", "very_high", "ultra"]
-              optionsLabels: ["Medium", "High", "Very High", "Ultra"]
-              currentKey: Settings.data.screenRecorder.quality
-              onSelected: function (key) {
-                Settings.data.screenRecorder.quality = key
-              }
+          NComboBox {
+            label: "Video Quality"
+            description: "Higher quality results in larger file sizes"
+            optionsKeys: ["medium", "high", "very_high", "ultra"]
+            optionsLabels: ["Medium", "High", "Very High", "Ultra"]
+            currentKey: Settings.data.screenRecorder.quality
+            onSelected: function (key) {
+              Settings.data.screenRecorder.quality = key
             }
           }
 
           // Video Codec
-          ColumnLayout {
-            spacing: Style.marginTiny * scaling
-            Layout.fillWidth: true
-            Layout.topMargin: Style.marginSmall * scaling
-
-            NText {
-              text: "Video Codec"
-              font.weight: Style.fontWeightBold
-              color: Colors.textPrimary
-            }
-
-            NText {
-              text: "Different codecs offer different compression and compatibility"
-              font.pointSize: Style.fontSizeSmall * scaling
-              color: Colors.textSecondary
-              wrapMode: Text.WordWrap
-              Layout.fillWidth: true
-            }
-
-            NComboBox {
-              optionsKeys: ["h264", "hevc", "av1", "vp8", "vp9"]
-              optionsLabels: ["H264", "HEVC", "AV1", "VP8", "VP9"]
-              currentKey: Settings.data.screenRecorder.videoCodec
-              onSelected: function (key) {
-                Settings.data.screenRecorder.videoCodec = key
-              }
+          NComboBox {
+            label: "Video Codec"
+            description: "Different codecs offer different compression and compatibility"
+            optionsKeys: ["h264", "hevc", "av1", "vp8", "vp9"]
+            optionsLabels: ["H264", "HEVC", "AV1", "VP8", "VP9"]
+            currentKey: Settings.data.screenRecorder.videoCodec
+            onSelected: function (key) {
+              Settings.data.screenRecorder.videoCodec = key
             }
           }
 
           // Color Range
-          ColumnLayout {
-            spacing: Style.marginSmall * scaling
-            Layout.fillWidth: true
-            Layout.topMargin: Style.marginSmall * scaling
-
-            NText {
-              text: "Color Range"
-
-              font.weight: Style.fontWeightBold
-              color: Colors.textPrimary
-            }
-
-            NText {
-              text: "Limited is recommended for better compatibility"
-              font.pointSize: Style.fontSizeSmall * scaling
-              color: Colors.textSecondary
-              wrapMode: Text.WordWrap
-              Layout.fillWidth: true
-            }
-
-            NComboBox {
-              optionsKeys: ["limited", "full"]
-              optionsLabels: ["Limited", "Full"]
-              currentKey: Settings.data.screenRecorder.colorRange
-              onSelected: function (key) {
-                Settings.data.screenRecorder.colorRange = key
-              }
+          NComboBox {
+            label: "Color Range"
+            description: "Limited is recommended for better compatibility"
+            optionsKeys: ["limited", "full"]
+            optionsLabels: ["Limited", "Full"]
+            currentKey: Settings.data.screenRecorder.colorRange
+            onSelected: function (key) {
+              Settings.data.screenRecorder.colorRange = key
             }
           }
         }
@@ -237,7 +162,7 @@ ColumnLayout {
 
         // Audio Settings
         ColumnLayout {
-          spacing: Style.spacingTiny * scaling
+          spacing: Style.marginLarge * scaling
           Layout.fillWidth: true
 
           NText {
@@ -249,64 +174,26 @@ ColumnLayout {
           }
 
           // Audio Source
-          ColumnLayout {
-            spacing: Style.marginSmall * scaling
-            Layout.fillWidth: true
-            Layout.topMargin: Style.marginSmall * scaling
-
-            NText {
-              text: "Audio Source"
-
-              font.weight: Style.fontWeightBold
-              color: Colors.textPrimary
-            }
-
-            NText {
-              text: "Audio source to capture during recording"
-              font.pointSize: Style.fontSizeSmall * scaling
-              color: Colors.textSecondary
-              wrapMode: Text.WordWrap
-              Layout.fillWidth: true
-            }
-
-            NComboBox {
-              optionsKeys: ["default_output", "default_input", "both"]
-              optionsLabels: ["System Audio", "Microphone", "System Audio + Microphone"]
-              currentKey: Settings.data.screenRecorder.audioSource
-              onSelected: function (key) {
-                Settings.data.screenRecorder.audioSource = key
-              }
+          NComboBox {
+            label: "Audio Source"
+            description: "Audio source to capture during recording"
+            optionsKeys: ["default_output", "default_input", "both"]
+            optionsLabels: ["System Audio", "Microphone", "System Audio + Microphone"]
+            currentKey: Settings.data.screenRecorder.audioSource
+            onSelected: function (key) {
+              Settings.data.screenRecorder.audioSource = key
             }
           }
 
           // Audio Codec
-          ColumnLayout {
-            spacing: Style.marginSmall * scaling
-            Layout.fillWidth: true
-            Layout.topMargin: Style.marginSmall * scaling
-
-            NText {
-              text: "Audio Codec"
-              font.pointSize: 13
-              font.weight: Style.fontWeightBold
-              color: Colors.textPrimary
-            }
-
-            NText {
-              text: "Opus is recommended for best performance and smallest audio size"
-              font.pointSize: 12
-              color: Colors.textSecondary
-              wrapMode: Text.WordWrap
-              Layout.fillWidth: true
-            }
-
-            NComboBox {
-              optionsKeys: ["opus", "aac"]
-              optionsLabels: ["OPUS", "AAC"]
-              currentKey: Settings.data.screenRecorder.audioCodec
-              onSelected: function (key) {
-                Settings.data.screenRecorder.audioCodec = key
-              }
+          NComboBox {
+            label: "Audio Codec"
+            description: "Opus is recommended for best performance and smallest audio size"
+            optionsKeys: ["opus", "aac"]
+            optionsLabels: ["OPUS", "AAC"]
+            currentKey: Settings.data.screenRecorder.audioCodec
+            onSelected: function (key) {
+              Settings.data.screenRecorder.audioCodec = key
             }
           }
         }
