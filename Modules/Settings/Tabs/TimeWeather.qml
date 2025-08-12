@@ -49,13 +49,14 @@ Item {
     }
 
     NText {
-      text: "City"
+      text: "Location"
       color: Colors.textPrimary
       font.weight: Style.fontWeightBold
     }
     NText {
       text: "Your city name for weather information"
       color: Colors.textSecondary
+      font.pointSize: Style.fontSizeSmall * scaling
     }
     NTextBox {
       text: Settings.data.location.name

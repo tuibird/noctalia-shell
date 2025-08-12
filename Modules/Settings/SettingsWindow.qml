@@ -19,40 +19,40 @@ NLoader {
       readonly property real scaling: Scaling.scale(screen)
       property int currentTabIndex: 0
       property var tabsModel: [{
-          "icon": "tune",
           "label": "General",
+          "icon": "tune",
           "source": "Tabs/General.qml"
         }, {
-          "icon": "web_asset",
           "label": "Bar",
+          "icon": "web_asset",
           "source": "Tabs/Bar.qml"
         }, {
-          "icon": "schedule",
           "label": "Time & Weather",
+          "icon": "schedule",
           "source": "Tabs/TimeWeather.qml"
         }, {
-          "icon": "videocam",
           "label": "Screen Recorder",
+          "icon": "videocam",
           "source": "Tabs/ScreenRecorder.qml"
         }, {
-          "icon": "wifi",
           "label": "Network",
+          "icon": "wifi",
           "source": "Tabs/Network.qml"
         }, {
-          "icon": "monitor",
           "label": "Display",
+          "icon": "monitor",
           "source": "Tabs/Display.qml"
         }, {
-          "icon": "image",
           "label": "Wallpaper",
+          "icon": "image",
           "source": "Tabs/Wallpaper.qml"
         }, {
-          "icon": "more_horiz",
           "label": "Misc",
+          "icon": "more_horiz",
           "source": "Tabs/Misc.qml"
         }, {
-          "icon": "info",
           "label": "About",
+          "icon": "info",
           "source": "Tabs/About.qml"
         }]
 
@@ -96,7 +96,7 @@ NLoader {
             Column {
               anchors.fill: parent
               anchors.margins: Style.marginSmall * scaling
-              spacing: 2 * scaling // Minimal spacing between tabs
+              spacing: Style.spacingTiny * 1.5 * scaling // Minimal spacing between tabs
 
               Repeater {
                 id: sections
@@ -119,18 +119,20 @@ NLoader {
                     anchors.fill: parent
                     anchors.leftMargin: Style.marginSmall * scaling
                     anchors.rightMargin: Style.marginSmall * scaling
-                    spacing: Style.marginTiny * scaling
+                    spacing: Style.marginSmall * scaling
                     NText {
                       text: modelData.icon
                       font.family: "Material Symbols Outlined"
                       font.variableAxes: {
                         "wght": (Font.Normal + Font.Bold) / 2.0
                       }
+                      font.pointSize: Style.fontSizeLarge * scaling
                       color: selected ? Colors.onAccent : (tabItem.hovering ? Colors.onAccent : Colors.textSecondary)
                     }
                     NText {
                       text: modelData.label
                       color: selected ? Colors.onAccent : (tabItem.hovering ? Colors.onAccent : Colors.textPrimary)
+                      font.pointSize: Style.fontSizeMediumLarge * scaling
                       font.weight: Style.fontWeightBold
                       Layout.fillWidth: true
                     }
@@ -172,8 +174,9 @@ NLoader {
                 spacing: Style.marginSmall * scaling
                 NText {
                   text: settingsPanel.tabsModel[settingsPanel.currentTabIndex].label
+                  font.pointSize: Style.fontSizeLarge * scaling
                   font.weight: Style.fontWeightBold
-                  color: Colors.textPrimary
+                  color: Colors.accentPrimary
                   Layout.fillWidth: true
                 }
                 NIconButton {

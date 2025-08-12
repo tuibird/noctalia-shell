@@ -62,6 +62,7 @@ Item {
         NText {
           text: "Your profile picture displayed in various places throughout the shell"
           color: Colors.textSecondary
+          font.pointSize: Style.fontSizeSmall * scaling
         }
         NTextBox {
           text: Settings.data.general.avatarImage
