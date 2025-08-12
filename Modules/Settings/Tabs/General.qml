@@ -59,7 +59,9 @@ Item {
           text: Settings.data.general.avatarImage
           placeholderText: "/home/user/.face"
           Layout.fillWidth: true
-          onEditingFinished: Settings.data.general.avatarImage = text
+          onEditingFinished: function () {
+            Settings.data.general.avatarImage = text
+          }
         }
       }
     }

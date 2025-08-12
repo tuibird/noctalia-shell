@@ -34,7 +34,9 @@ Item {
     NTextInput {
       text: Settings.data.screenRecorder.directory
       Layout.fillWidth: true
-      onEditingFinished: Settings.data.screenRecorder.directory = text
+      onEditingFinished: function () {
+        Settings.data.screenRecorder.directory = text
+      }
     }
 
     // Frame Rate

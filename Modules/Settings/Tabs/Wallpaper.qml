@@ -35,7 +35,9 @@ Item {
     NTextInput {
       text: Settings.data.wallpaper.directory
       Layout.fillWidth: true
-      onEditingFinished: Settings.data.wallpaper.directory = text
+      onEditingFinished: function () {
+        Settings.data.wallpaper.directory = text
+      }
     }
 
     NDivider {

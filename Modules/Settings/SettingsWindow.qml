@@ -70,8 +70,8 @@ NLoader {
         border.color: Colors.backgroundTertiary
         border.width: Math.max(1, Style.borderMedium * scaling)
         layer.enabled: true
-        width: (screen.width/2) * scaling
-        height: (screen.height/2) * scaling
+        width: (screen.width / 2) * scaling
+        height: (screen.height / 2) * scaling
         anchors.centerIn: parent
 
         MouseArea {

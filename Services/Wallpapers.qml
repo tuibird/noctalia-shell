@@ -22,8 +22,6 @@ Singleton {
   property string transitionType: Settings.data.wallpaper.swww.transitionType
   property var randomChoices: ["fade", "left", "right", "top", "bottom", "wipe", "wave", "grow", "center", "any", "outer"]
 
-
-
   function loadWallpapers() {
     scanning = true
     wallpaperList = []
