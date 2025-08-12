@@ -109,7 +109,7 @@ Variants {
           sizeMultiplier: 0.8
           showBorder: false
           anchors.verticalCenter: parent.verticalCenter
-          onClicked: function () {
+          onClicked: {
             demoPanel.isLoaded = !demoPanel.isLoaded
           }
         }
@@ -121,7 +121,7 @@ Variants {
           sizeMultiplier: 0.8
           showBorder: false
           anchors.verticalCenter: parent.verticalCenter
-          onClicked: function () {
+          onClicked: {
             // Map this button's center to the screen and open the side panel below it
             const localCenterX = width / 2
             const localCenterY = height / 2

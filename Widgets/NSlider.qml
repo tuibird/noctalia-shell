@@ -35,14 +35,6 @@ Slider {
       height: parent.height
       color: Colors.accentPrimary
       radius: parent.radius
-
-      // Feels more responsive without animation
-      //   Behavior on width {
-      //     NumberAnimation {
-      //       duration: 50
-      //       easing.type: Easing.OutQuad
-      //     }
-      //   }
     }
 
     // Circular cutout
@@ -84,6 +76,7 @@ Slider {
       color: root.pressed ? Colors.surfaceVariant : Colors.surface
       border.color: Colors.accentPrimary
       border.width: Math.max(1, Style.borderThick * scaling)
+
       // Press feedback halo (using accent color, low opacity)
       Rectangle {
         anchors.centerIn: parent

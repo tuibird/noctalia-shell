@@ -60,7 +60,7 @@ NLoader {
           "source": "Tabs/About.qml"
         }]
 
-      onVisibleChanged: function () {
+      onVisibleChanged: {
         if (visible)
           currentTabIndex = 0
       }
@@ -188,7 +188,7 @@ NLoader {
                   icon: "close"
                   tooltipText: "Close settings panel"
                   Layout.alignment: Qt.AlignVCenter
-                  onClicked: function () {
+                  onClicked: {
                     settingsWindow.isLoaded = !settingsWindow.isLoaded
                   }
                 }

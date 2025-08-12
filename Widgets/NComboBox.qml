@@ -13,7 +13,8 @@ ComboBox {
   property list<string> optionsKeys: []
   property list<string> optionsLabels: []
   property string currentKey: ''
-  property var onSelected: function (string) {}
+
+  signal selected(string key)
 
   Layout.fillWidth: true
   Layout.preferredHeight: height
@@ -21,7 +22,7 @@ ComboBox {
   model: optionsKeys
   currentIndex: model.indexOf(currentKey)
   onActivated: {
-    root.onSelected(model[currentIndex])
+    root.selected(model[currentIndex])
   }
 
   // Rounded background

@@ -191,7 +191,7 @@ PanelWindow {
           anchors.right: parent.right
           anchors.margins: Style.marginSmall * scaling
           icon: "close"
-          onClicked: function () {
+          onClicked: {
             animateOut()
           }
         }

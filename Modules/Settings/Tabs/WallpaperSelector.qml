@@ -83,9 +83,8 @@ Item {
       }
 
       NText {
-        text: Settings.data.wallpaper.swww.enabled ? 
-          "Wallpapers will change with " + Settings.data.wallpaper.swww.transitionType + " transition" :
-          "Wallpapers will change instantly"
+        text: Settings.data.wallpaper.swww.enabled ? "Wallpapers will change with " + Settings.data.wallpaper.swww.transitionType
+                                                     + " transition" : "Wallpapers will change instantly"
         color: Colors.textSecondary
         font.pointSize: Style.fontSizeSmall * scaling
         visible: Settings.data.wallpaper.swww.enabled
@@ -128,13 +127,13 @@ Item {
           anchors.fill: parent
           clip: true
           model: folderModel
-          
+
           // Fixed 5 items per row - more aggressive sizing
           property int itemSize: Math.floor((width - leftMargin - rightMargin - (4 * Style.marginSmall * scaling)) / 5)
-          
+
           cellWidth: Math.floor((width - leftMargin - rightMargin) / 5)
           cellHeight: Math.floor(itemSize * 0.67) + Style.marginSmall * scaling
-          
+
           leftMargin: Style.marginSmall * scaling
           rightMargin: Style.marginSmall * scaling
           topMargin: Style.marginSmall * scaling
@@ -191,9 +190,11 @@ Item {
               color: Colors.textPrimary
               opacity: mouseArea.containsMouse ? 0.1 : 0
               radius: parent.radius
-              
+
               Behavior on opacity {
-                NumberAnimation { duration: 150 }
+                NumberAnimation {
+                  duration: 150
+                }
               }
             }
 

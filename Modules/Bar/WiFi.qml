@@ -24,7 +24,7 @@ NIconButton {
     return connected ? network.signalIcon(parent.currentSignal) : "wifi_off"
   }
   tooltipText: "WiFi Networks"
-  onClicked: function () {
+  onClicked: {
     if (!wifiMenuLoader.active) {
       wifiMenuLoader.isLoaded = true
     }

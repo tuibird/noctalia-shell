@@ -47,7 +47,7 @@ NLoader {
 
             NIconButton {
               icon: "chevron_left"
-              onClicked: function () {
+              onClicked: {
                 let newDate = new Date(grid.year, grid.month - 1, 1)
                 grid.year = newDate.getFullYear()
                 grid.month = newDate.getMonth()
@@ -65,7 +65,7 @@ NLoader {
 
             NIconButton {
               icon: "chevron_right"
-              onClicked: function () {
+              onClicked: {
                 let newDate = new Date(grid.year, grid.month + 1, 1)
                 grid.year = newDate.getFullYear()
                 grid.month = newDate.getMonth()

@@ -65,7 +65,7 @@ ColumnLayout {
           NTextInput {
             text: Settings.data.screenRecorder.directory
             Layout.fillWidth: true
-            onEditingFinished: function () {
+            onEditingFinished: {
               Settings.data.screenRecorder.directory = text
             }
           }

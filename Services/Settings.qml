@@ -47,10 +47,10 @@ Singleton {
     watchChanges: true
     onFileChanged: reload()
     onAdapterUpdated: writeAdapter()
-    Component.onCompleted: function () {
+    Component.onCompleted: {
       reload()
     }
-    onLoaded: function () {
+    onLoaded: {
       Qt.callLater(function () {
         if (adapter.wallpaper.current !== "") {
           console.log("Settings: Initializing wallpaper to:", adapter.wallpaper.current)

@@ -12,7 +12,8 @@ RowLayout {
   property bool value: false
   property bool hovering: false
   property int baseSize: Style.baseWidgetSize
-  property var onToggled: function (value) {}
+
+  signal toggled(bool balue)
 
   Layout.fillWidth: true
 
@@ -72,7 +73,7 @@ RowLayout {
       onExited: hovering = false
       onClicked: {
         value = !value
-        root.onToggled(value)
+        root.toggled(value)
       }
     }
   }

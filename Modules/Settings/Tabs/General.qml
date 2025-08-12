@@ -84,7 +84,7 @@ ColumnLayout {
                 text: Settings.data.general.avatarImage
                 placeholderText: "/home/user/.face"
                 Layout.fillWidth: true
-                onEditingFinished: function () {
+                onEditingFinished: {
                   Settings.data.general.avatarImage = text
                 }
               }
