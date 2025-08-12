@@ -10,6 +10,7 @@ NBox {
 
   readonly property real scaling: Scaling.scale(screen)
   readonly property bool weatherReady: (Location.data.weather !== null)
+  // TBC weatherReady is not turning to false when we reset weather...
 
   Layout.fillWidth: true
   // Height driven by content
