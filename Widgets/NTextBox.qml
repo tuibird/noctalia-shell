@@ -33,8 +33,8 @@ Item {
       anchors.fill: parent
       radius: frame.radius
       color: "transparent"
-      border.color: input.activeFocus ? Colors.accentPrimary : "transparent"
-      border.width: input.activeFocus ? Math.max(1, Style.borderMedium * scaling) : 0
+      border.color: input.activeFocus ? Colors.hover : "transparent"
+      border.width: input.activeFocus ? Math.max(1, Style.borderThin * scaling) : 0
     }
 
     RowLayout {
