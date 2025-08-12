@@ -10,7 +10,7 @@ Singleton {
 
   property string locationFile: Quickshell.env("NOCTALIA_WEATHER_FILE") || (Settings.cacheDir + "location.json")
   property int weatherUpdateFrequency: 30 * 60 // 30 minutes expressed in seconds
-  property var data: adapter // Used to access via Location.data.xxx.yyy
+  property var data: adapter // Used to access via Location.data.xxx
   property bool isFetchingWeather: false
 
   FileView {
@@ -26,9 +26,9 @@ Singleton {
     JsonAdapter {
       id: adapter
 
-      property string lastLocationName: ""
-      property real latitude: 0
-      property real longitude: 0
+      property string latitude: ""
+      property string longitude: ""
+      property string name: ""
       property int weatherLastFetch: 0
       property var weather: null
     }
@@ -56,9 +56,9 @@ Singleton {
   function resetWeather() {
     console.log("[Location] Resetting weather data")
 
-    data.lastLocationName = ""
-    data.latitude = 0
-    data.longitude = 0
+    data.latitude = ""
+    data.longitude = ""
+    data.name = ""
     data.weatherLastFetch = 0
     data.weather = null
 
@@ -73,13 +73,17 @@ Singleton {
       return
     }
 
-    if (data.latitude === 0) {
-      console.warn("[Location] Why is my latitude zero")
+    if (data.latitude === "") {
+      console.warn("[Location] Why is my latitude empty")
     }
 
-    if ((data.weatherLastFetch === "") || (data.weather === null) || data.latitude === 0 || data.longitude === 0
-        || (data.lastLocationName !== Settings.data.location.name)
-        || (Time.timestamp >= data.weatherLastFetch + weatherUpdateFrequency)) {
+    if (
+      (data.weatherLastFetch === "") || 
+      (data.weather === null) || 
+      (data.latitude === "") || 
+      (data.longitude === "") || 
+      (data.name !== Settings.data.location.name) 
+      || (Time.timestamp >= data.weatherLastFetch + weatherUpdateFrequency)) {
       getFreshWeather()
     }
   }
@@ -87,17 +91,22 @@ Singleton {
   // --------------------------------
   function getFreshWeather() {
     isFetchingWeather = true
-    if (data.latitude === 0 || data.longitude === 0 || (data.lastLocationName !== Settings.data.location.name)) {
+    if (
+      (data.latitude === "") || 
+      (data.longitude === "") || 
+      (data.name !== Settings.data.location.name)) {
 
       _geocodeLocation(Settings.data.location.name, function (latitude, longitude) {
         console.log("[Location] Geocoded " + Settings.data.location.name + " to: " + latitude + " / " + longitude)
 
-        // Save location name
-        data.lastLocationName = Settings.data.location.name
+                           // Save location name
+        data.name = Settings.data.location.name
 
         // Save GPS coordinates
-        data.latitude = latitude
-        data.longitude = longitude
+        data.latitude = latitude.toString()
+        data.longitude = longitude.toString()
+
+
 
         _fetchWeather(latitude, longitude, errorCallback)
       }, errorCallback)
@@ -150,8 +159,8 @@ Singleton {
             // Save data
             data.weather = weatherData
             data.weatherLastFetch = Time.timestamp
-            data.latitude = weatherData.latitude
-            data.longitude = weatherData.longitude
+            data.latitude = weatherData.latitude.toString()
+            data.longitude = weatherData.longitude.toString()
 
             isFetchingWeather = false
             console.log("[Location] Cached weather to disk")
