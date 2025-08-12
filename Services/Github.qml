@@ -32,12 +32,12 @@ Singleton {
     onLoadFailed: function (error) {
       if (error.toString().includes("No such file") || error === 2) {
         // File doesn't exist, create it with default values
-        console.log("[Github] Creating new cache file...");
+        console.log("[Github] Creating new cache file...")
         writeAdapter()
         // Fetch data after a short delay to ensure file is created
         Qt.callLater(() => {
-          fetchFromGitHub()
-        })
+                       fetchFromGitHub()
+                     })
       }
     }
 
@@ -51,26 +51,25 @@ Singleton {
   }
 
   // --------------------------------
-  function init() {
-    // does nothing but ensure the singleton is created
+  function init() {// does nothing but ensure the singleton is created
     // do not remove
   }
 
   // --------------------------------
   function loadFromCache() {
-    const now = Date.now();
+    const now = Date.now()
     if (!data.timestamp || (now - data.timestamp > githubUpdateFrequency * 1000)) {
-      console.log("[Github] Cache expired or missing, fetching new data from GitHub...");
-      fetchFromGitHub();
-      return;
+      console.log("[Github] Cache expired or missing, fetching new data from GitHub...")
+      fetchFromGitHub()
+      return
     }
-    console.log("[Github] Loading cached GitHub data (age: " + Math.round((now - data.timestamp) / 60000) + " minutes)");
-    
+    console.log("[Github] Loading cached GitHub data (age: " + Math.round((now - data.timestamp) / 60000) + " minutes)")
+
     if (data.version) {
-      root.latestVersion = data.version;
+      root.latestVersion = data.version
     }
     if (data.contributors) {
-      root.contributors = data.contributors;
+      root.contributors = data.contributors
     }
   }
 
@@ -82,20 +81,20 @@ Singleton {
     }
 
     isFetchingData = true
-    versionProcess.running = true;
-    contributorsProcess.running = true;
+    versionProcess.running = true
+    contributorsProcess.running = true
   }
 
   // --------------------------------
   function saveData() {
-    data.timestamp = Date.now();
+    data.timestamp = Date.now()
     Qt.callLater(() => {
-      // Access the FileView's writeAdapter method
-      var fileView = root.children.find(child => child.objectName === "githubDataFileView");
-      if (fileView) {
-        fileView.writeAdapter();
-      }
-    });
+                   // Access the FileView's writeAdapter method
+                   var fileView = root.children.find(child => child.objectName === "githubDataFileView")
+                   if (fileView) {
+                     fileView.writeAdapter()
+                   }
+                 })
   }
 
   // --------------------------------
@@ -116,26 +115,26 @@ Singleton {
     stdout: StdioCollector {
       onStreamFinished: {
         try {
-          const response = text;
+          const response = text
           if (response && response.trim()) {
-            const data = JSON.parse(response);
+            const data = JSON.parse(response)
             if (data.tag_name) {
-              const version = data.tag_name;
-              root.data.version = version;
-              root.latestVersion = version;
-              console.log("[Github] Latest version fetched from GitHub:", version);
+              const version = data.tag_name
+              root.data.version = version
+              root.latestVersion = version
+              console.log("[Github] Latest version fetched from GitHub:", version)
             } else {
-              console.log("[Github] No tag_name in GitHub response");
+              console.log("[Github] No tag_name in GitHub response")
             }
           } else {
-            console.log("[Github] Empty response from GitHub API");
+            console.log("[Github] Empty response from GitHub API")
           }
         } catch (e) {
-          console.error("[Github] Failed to parse version:", e);
+          console.error("[Github] Failed to parse version:", e)
         }
-        
+
         // Check if both processes are done
-        checkAndSaveData();
+        checkAndSaveData()
       }
     }
   }
@@ -148,25 +147,25 @@ Singleton {
     stdout: StdioCollector {
       onStreamFinished: {
         try {
-          const response = text;
+          const response = text
           if (response && response.trim()) {
-            const data = JSON.parse(response);
-            root.data.contributors = data || [];
-            root.contributors = root.data.contributors;
-            console.log("[Github] Contributors fetched from GitHub:", root.contributors.length);
+            const data = JSON.parse(response)
+            root.data.contributors = data || []
+            root.contributors = root.data.contributors
+            console.log("[Github] Contributors fetched from GitHub:", root.contributors.length)
           } else {
-            console.log("[Github] Empty response from GitHub API for contributors");
-            root.data.contributors = [];
-            root.contributors = [];
+            console.log("[Github] Empty response from GitHub API for contributors")
+            root.data.contributors = []
+            root.contributors = []
           }
         } catch (e) {
-          console.error("[Github] Failed to parse contributors:", e);
-          root.data.contributors = [];
-          root.contributors = [];
+          console.error("[Github] Failed to parse contributors:", e)
+          root.data.contributors = []
+          root.contributors = []
         }
-        
+
         // Check if both processes are done
-        checkAndSaveData();
+        checkAndSaveData()
       }
     }
   }
@@ -175,8 +174,8 @@ Singleton {
   function checkAndSaveData() {
     // Only save when both processes are finished
     if (!versionProcess.running && !contributorsProcess.running) {
-      root.isFetchingData = false;
-      root.saveData();
+      root.isFetchingData = false
+      root.saveData()
     }
   }
-} 
+}
