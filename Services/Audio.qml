@@ -54,7 +54,7 @@ Singleton {
 
     function onMutedChanged() {
       root._muted = (sink?.audio.muted ?? true)
-      console.log("[Audio] onMuteChanged " + root._muted)
+      console.log("[Audio] onMuteChanged:", root._muted)
     }
   }
 }

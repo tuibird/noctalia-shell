@@ -90,7 +90,7 @@ Singleton {
     if ((data.latitude === "") || (data.longitude === "") || (data.name !== Settings.data.location.name)) {
 
       _geocodeLocation(Settings.data.location.name, function (latitude, longitude) {
-        console.log("[Location] Geocoded " + Settings.data.location.name + " to: " + latitude + " / " + longitude)
+        console.log("[Location] Geocoded", Settings.data.location.name, "to:", latitude, "/", longitude)
 
         // Save location name
         data.name = Settings.data.location.name

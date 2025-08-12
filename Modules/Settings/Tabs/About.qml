@@ -10,13 +10,13 @@ import qs.Widgets
 ColumnLayout {
   id: root
 
-  property string latestVersion: Github.latestVersion
+  property string latestVersion: GitHub.latestVersion
   property string currentVersion: "v1.2.1" // Fallback version
-  property var contributors: Github.contributors
+  property var contributors: GitHub.contributors
 
   Component.onCompleted: {
-    // Initialize the Github service
-    Github.init()
+    // Initialize the GitHub service
+    GitHub.init()
   }
 
   spacing: 0

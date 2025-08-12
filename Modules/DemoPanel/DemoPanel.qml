@@ -17,7 +17,7 @@ NLoader {
 
       // Ensure panel shows itself once created
       Component.onCompleted: {
-        console.log("[DemoPanel] Component completed, showing panel...")
+        console.log("[DemoPanel] Component completed, showing panel")
         show()
       }
 
@@ -127,7 +127,7 @@ NLoader {
               label: "Label"
               description: "Description"
               onToggled: function (value) {
-                console.log("NToggle: " + value)
+                console.log("[DemoPanel] NToggle:", value)
               }
             }
 
@@ -150,7 +150,7 @@ NLoader {
               optionsLabels: ["Cat", "Dog", "Bird", "Monkey", "Fish", "Turtle", "Elephant", "Tiger"]
               currentKey: "cat"
               onSelected: function (value) {
-                console.log("NComboBox: selected " + value)
+                console.log("[DemoPanel] NComboBox: selected ", value)
               }
             }
 

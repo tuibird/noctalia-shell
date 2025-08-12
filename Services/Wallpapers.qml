@@ -13,7 +13,7 @@ Singleton {
       loadWallpapers()
       // Only set initial wallpaper if it's not empty
       if (currentWallpaper !== "") {
-        console.log("Wallpapers: Initializing with wallpaper:", currentWallpaper)
+        console.log("[WP] initializing with:", currentWallpaper)
         setCurrentWallpaper(currentWallpaper, true)
       }
       // Don't start random wallpaper during initialization
@@ -34,7 +34,7 @@ Singleton {
   }
 
   function changeWallpaper(path) {
-    console.log("Wallpapers: changeWallpaper called with:", path)
+    console.log("[WP] changing to:", path)
     setCurrentWallpaper(path, false)
   }
 
@@ -54,7 +54,7 @@ Singleton {
       changeWallpaperProcess.running = true
     } else {
       // Fallback: update the settings directly for non-SWWW mode
-      console.log("Non-SWWW mode: Setting wallpaper directly")
+      //console.log("[WP] Not using Swww, setting wallpaper directly")
     }
 
     if (randomWallpaperTimer.running) {
@@ -97,7 +97,7 @@ Singleton {
 
   function startSWWWDaemon() {
     if (Settings.data.wallpaper.swww.enabled) {
-      console.log("SWWW: Attempting to start swww-daemon...")
+      console.log("[SWWW] Requesting swww-daemon")
       startDaemonProcess.running = true
     }
   }
@@ -144,10 +144,10 @@ Singleton {
     }
 
     onExited: function (exitCode, exitStatus) {
-      console.log("SWWW: Process finished with exit code:", exitCode, "status:", exitStatus)
+      console.log("[SWWW] Process finished with exit code:", exitCode, "status:", exitStatus)
       if (exitCode !== 0) {
-        console.log("SWWW: Process failed. Make sure swww-daemon is running with: swww-daemon")
-        console.log("SWWW: You can start it with: swww-daemon --format xrgb")
+        console.log("[SWWW] Process failed. Make sure swww-daemon is running with: swww-daemon")
+        console.log("[SWWW] You can start it with: swww-daemon --format xrgb")
       }
     }
   }
@@ -157,6 +157,11 @@ Singleton {
     command: ["wallust", "run", currentWallpaper, "-u", "-k", "-d", "Assets/Wallust"]
     workingDirectory: Quickshell.shellDir
     running: false
+    stdout: StdioCollector {
+      onStreamFinished: {
+        // console.log(this.text)
+      }
+    }
   }
 
   Process {
@@ -165,15 +170,15 @@ Singleton {
     running: false
 
     onStarted: {
-      console.log("SWWW: Daemon start process initiated")
+      console.log("[SWWW] Daemon start process initiated")
     }
 
     onExited: function (exitCode, exitStatus) {
-      console.log("SWWW: Daemon start process finished with exit code:", exitCode)
+      console.log("[SWWW] Daemon start process finished with exit code:", exitCode)
       if (exitCode === 0) {
-        console.log("SWWW: Daemon started successfully")
+        console.log("[SWWW] Daemon started successfully")
       } else {
-        console.log("SWWW: Failed to start daemon. It might already be running.")
+        console.log("[SWWW] Failed to start daemon, may already be running")
       }
     }
   }

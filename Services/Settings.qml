@@ -38,11 +38,6 @@ Singleton {
   }
 
   FileView {
-
-    // TBC ? needed for SWWW only ?
-    // Qt.callLater(function () {
-    //     WallpaperManager.setCurrentWallpaper(settings.currentWallpaper, true);
-    // })
     path: settingsFile
     watchChanges: true
     onFileChanged: reload()

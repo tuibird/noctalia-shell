@@ -10,7 +10,7 @@ Singleton {
 
   property string githubDataFile: Quickshell.env("NOCTALIA_GITHUB_FILE") || (Settings.cacheDir + "github.json")
   property int githubUpdateFrequency: 60 * 60 // 1 hour expressed in seconds
-  property var data: adapter // Used to access via Github.data.xxx.yyy
+  property var data: adapter // Used to access via GitHub.data.xxx.yyy
   property bool isFetchingData: false
 
   // Public properties for easy access
@@ -32,7 +32,7 @@ Singleton {
     onLoadFailed: function (error) {
       if (error.toString().includes("No such file") || error === 2) {
         // File doesn't exist, create it with default values
-        console.log("[Github] Creating new cache file...")
+        console.log("[GitHub] Creating new cache file")
         writeAdapter()
         // Fetch data after a short delay to ensure file is created
         Qt.callLater(() => {
@@ -59,11 +59,11 @@ Singleton {
   function loadFromCache() {
     const now = Date.now()
     if (!data.timestamp || (now - data.timestamp > githubUpdateFrequency * 1000)) {
-      console.log("[Github] Cache expired or missing, fetching new data from GitHub...")
+      console.log("[GitHub] Cache expired or missing, fetching new data from GitHub...")
       fetchFromGitHub()
       return
     }
-    console.log("[Github] Loading cached GitHub data (age: " + Math.round((now - data.timestamp) / 60000) + " minutes)")
+    console.log("[GitHub] Loading cached GitHub data (age:", Math.round((now - data.timestamp) / 60000),"minutes)")
 
     if (data.version) {
       root.latestVersion = data.version
@@ -76,7 +76,7 @@ Singleton {
   // --------------------------------
   function fetchFromGitHub() {
     if (isFetchingData) {
-      console.warn("[Github] GitHub data is still fetching")
+      console.warn("[GitHub] GitHub data is still fetching")
       return
     }
 
@@ -122,15 +122,15 @@ Singleton {
               const version = data.tag_name
               root.data.version = version
               root.latestVersion = version
-              console.log("[Github] Latest version fetched from GitHub:", version)
+              console.log("[GitHub] Latest version fetched from GitHub:", version)
             } else {
-              console.log("[Github] No tag_name in GitHub response")
+              console.log("[GitHub] No tag_name in GitHub response")
             }
           } else {
-            console.log("[Github] Empty response from GitHub API")
+            console.log("[GitHub] Empty response from GitHub API")
           }
         } catch (e) {
-          console.error("[Github] Failed to parse version:", e)
+          console.error("[GitHub] Failed to parse version:", e)
         }
 
         // Check if both processes are done
@@ -152,14 +152,14 @@ Singleton {
             const data = JSON.parse(response)
             root.data.contributors = data || []
             root.contributors = root.data.contributors
-            console.log("[Github] Contributors fetched from GitHub:", root.contributors.length)
+            console.log("[GitHub] Contributors fetched from GitHub:", root.contributors.length)
           } else {
-            console.log("[Github] Empty response from GitHub API for contributors")
+            console.log("[GitHub] Empty response from GitHub API for contributors")
             root.data.contributors = []
             root.contributors = []
           }
         } catch (e) {
-          console.error("[Github] Failed to parse contributors:", e)
+          console.error("[GitHub] Failed to parse contributors:", e)
           root.data.contributors = []
           root.contributors = []
         }

@@ -18,7 +18,7 @@ Loader {
   sourceComponent: content
 
   // onLoaded: {
-  //   console.log("NLoader onLoaded: " + item.toString());
+  //   console.log("[NLoader] onLoaded:", item.toString());
   // }
   onActiveChanged: {
     if (active && item && item.show) {
