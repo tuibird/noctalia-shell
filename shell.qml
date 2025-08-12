@@ -39,7 +39,8 @@ ShellRoot {
   }
 
   Component.onCompleted: {
-    // On startup, check if we need to get fresh weather data
+    // Ensure our singleton is created as soon as possible
+    // so we start fetching weather asap if necessary
     Location.init()
   }
 }

@@ -14,11 +14,6 @@ ColumnLayout {
   property string currentVersion: "v1.2.1" // Fallback version
   property var contributors: GitHub.contributors
 
-  Component.onCompleted: {
-    // Initialize the GitHub service
-    GitHub.init()
-  }
-
   spacing: 0
   Layout.fillWidth: true
   Layout.fillHeight: true

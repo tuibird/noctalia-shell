@@ -31,9 +31,6 @@ Singleton {
     }
     onLoadFailed: function (error) {
       if (error.toString().includes("No such file") || error === 2) {
-        // File doesn't exist, create it with default values
-        console.log("[GitHub] Creating new cache file")
-        writeAdapter()
         // Fetch data after a short delay to ensure file is created
         Qt.callLater(() => {
                        fetchFromGitHub()
@@ -48,11 +45,6 @@ Singleton {
       property var contributors: []
       property double timestamp: 0
     }
-  }
-
-  // --------------------------------
-  function init() {// does nothing but ensure the singleton is created
-    // do not remove
   }
 
   // --------------------------------
