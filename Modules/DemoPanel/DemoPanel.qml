@@ -159,6 +159,28 @@ NLoader {
             }
           }
 
+          // NTextInput
+          ColumnLayout {
+            spacing: Style.marginMedium * scaling
+            NText {
+              text: "NTextInput"
+              color: Colors.accentSecondary
+              font.weight: Style.fontWeightBold
+            }
+
+              NTextInput {
+              text: "Type anything"
+              Layout.fillWidth: true
+              onEditingFinished: function () {
+              }
+
+            NDivider {
+              Layout.fillWidth: true
+            }
+          }
+
+    }
+
           // NBusyIndicator
           ColumnLayout {
             spacing: Style.marginMedium * scaling
