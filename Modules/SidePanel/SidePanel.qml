@@ -125,7 +125,6 @@ NLoader {
               PowerProfileCard {}
 
               UtilitiesCard {}
-
             }
           }
         }
