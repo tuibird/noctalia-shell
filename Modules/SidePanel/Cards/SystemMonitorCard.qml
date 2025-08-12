@@ -28,13 +28,8 @@ NBox {
       height: Style.marginTiny * scaling
     }
 
-    NSystemMonitor {
-      id: sysMon
-      intervalSeconds: 1
-    }
-
     NCircleStat {
-      value: sysMon.cpuUsage || SysInfo.cpuUsage
+      value: SystemStats.cpuUsage
       icon: "speed"
       flat: true
       contentScale: 0.8
@@ -42,7 +37,7 @@ NBox {
       height: 68 * scaling
     }
     NCircleStat {
-      value: sysMon.cpuTemp || SysInfo.cpuTemp
+      value: SystemStats.cpuTemp
       suffix: "°C"
       icon: "device_thermostat"
       flat: true
@@ -51,7 +46,7 @@ NBox {
       height: 68 * scaling
     }
     NCircleStat {
-      value: sysMon.memoryUsagePer || SysInfo.memoryUsagePer
+      value: SystemStats.memoryUsagePer
       icon: "memory"
       flat: true
       contentScale: 0.8
@@ -59,7 +54,7 @@ NBox {
       height: 68 * scaling
     }
     NCircleStat {
-      value: sysMon.diskUsage || SysInfo.diskUsage
+      value: SystemStats.diskUsage
       icon: "data_usage"
       flat: true
       contentScale: 0.8

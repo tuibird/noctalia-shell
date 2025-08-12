@@ -76,7 +76,7 @@ Rectangle {
       Text {
         id: valueLabel
         anchors.centerIn: parent
-        text: `${Math.round(root.value)}${root.suffix}`
+        text: `${root.value}${root.suffix}`
         font.pointSize: Style.fontSizeMedium * scaling * contentScale
         color: Colors.textPrimary
         horizontalAlignment: Text.AlignHCenter
