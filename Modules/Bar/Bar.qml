@@ -106,6 +106,8 @@ Variants {
           id: demoPanelToggle
           icon: "experiment"
           tooltipText: "Open demo panel"
+          sizeMultiplier: 0.8
+          showBorder: false
           anchors.verticalCenter: parent.verticalCenter
           onClicked: function () {
             demoPanel.isLoaded = !demoPanel.isLoaded
@@ -116,6 +118,8 @@ Variants {
           id: sidePanelToggle
           icon: "widgets"
           tooltipText: "Open side panel"
+          sizeMultiplier: 0.8
+          showBorder: false
           anchors.verticalCenter: parent.verticalCenter
           onClicked: function () {
             // Map this button's center to the screen and open the side panel below it

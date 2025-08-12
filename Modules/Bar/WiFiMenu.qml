@@ -77,6 +77,7 @@ NLoader {
 
             NIconButton {
               icon: "refresh"
+              sizeMultiplier: 0.8
               onClicked: function () {
                 network.refreshNetworks()
               }
@@ -84,6 +85,7 @@ NLoader {
 
             NIconButton {
               icon: "close"
+              sizeMultiplier: 0.8
               onClicked: function () {
                 wifiPanel.visible = false
                 network.onMenuClosed()

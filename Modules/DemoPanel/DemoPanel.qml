@@ -82,7 +82,6 @@ NLoader {
               }
               NIconButton {
                 icon: "refresh"
-                sizeMultiplier: 1.0
                 fontPointSize: Style.fontSizeXL * scaling
                 onClicked: function () {
                   Scaling.overrideEnabled = false
@@ -107,7 +106,6 @@ NLoader {
             NIconButton {
               id: myIconButton
               icon: "celebration"
-              sizeMultiplier: 1.0
               fontPointSize: Style.fontSizeXL * scaling
             }
 

@@ -138,19 +138,16 @@ NLoader {
                   // Performance
                   NIconButton {
                     icon: "speed"
-                    sizeMultiplier: 1.0
                     onClicked: function () {/* TODO: hook to power profile */ }
                   }
                   // Balanced
                   NIconButton {
                     icon: "balance"
-                    sizeMultiplier: 1.0
                     onClicked: function () {/* TODO: hook to power profile */ }
                   }
                   // Eco
                   NIconButton {
                     icon: "eco"
-                    sizeMultiplier: 1.0
                     onClicked: function () {/* TODO: hook to power profile */ }
                   }
                   Item {
@@ -175,12 +172,10 @@ NLoader {
                   // Record
                   NIconButton {
                     icon: "fiber_manual_record"
-                    sizeMultiplier: 1.0
                   }
                   // Wallpaper
                   NIconButton {
                     icon: "image"
-                    sizeMultiplier: 1.0
                   }
                   Item {
                     Layout.fillWidth: true

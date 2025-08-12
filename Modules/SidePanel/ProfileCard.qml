@@ -59,7 +59,6 @@ NBox {
       }
       NIconButton {
         icon: "settings"
-        sizeMultiplier: 0.9
         onClicked: function () {
           if (!root.settingsWindow) {
             const comp = Qt.createComponent("../Settings/SettingsWindow.qml")
@@ -80,17 +79,15 @@ NBox {
       }
       NIconButton {
         icon: "power_settings_new"
-        sizeMultiplier: 0.9
       }
     }
   }
 
-
   Timer {
-      interval: 60000
-      repeat: true
-      running: true
-      onTriggered: uptimeProcess.running = true
+    interval: 60000
+    repeat: true
+    running: true
+    onTriggered: uptimeProcess.running = true
   }
 
   Process {
@@ -101,7 +98,6 @@ NBox {
     stdout: StdioCollector {
       onStreamFinished: {
         var uptimeSeconds = parseFloat(this.text.trim().split(' ')[0])
-
         var minutes = Math.floor(uptimeSeconds / 60) % 60
         var hours = Math.floor(uptimeSeconds / 3600) % 24
         var days = Math.floor(uptimeSeconds / 86400)
