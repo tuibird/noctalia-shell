@@ -5,13 +5,26 @@ import Quickshell.Widgets
 import qs.Services
 
 Rectangle {
+  color: "transparent"
+  radius: width * 0.5
 
   readonly property real scaling: Scaling.scale(screen)
   property string imagePath: ""
   property string fallbackIcon: ""
+  property color borderColor: "transparent"
+  property real borderWidth: 0
 
-  anchors.fill: parent
   anchors.margins: Style.marginTiniest * scaling
+
+  // Border
+  Rectangle {
+    anchors.fill: parent
+    radius: parent.radius
+    color: "transparent"
+    border.color: parent.borderColor
+    border.width: parent.borderWidth
+    z: 10
+  }
 
   Image {
     id: img

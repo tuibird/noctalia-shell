@@ -35,18 +35,13 @@ Item {
       spacing: Style.marginMedium * scaling
 
       // Avatar preview
-      Rectangle {
+      NImageRounded {
         width: 64 * scaling
         height: 64 * scaling
-        radius: width * 0.5
-        color: Colors.accentPrimary
-        border.color: Colors.outline
-        border.width: Math.max(1, Style.borderThin * scaling)
-
-        NImageRounded {
-          imagePath: Settings.data.general.avatarImage
-          fallbackIcon: "person"
-        }
+        imagePath: Settings.data.general.avatarImage
+        fallbackIcon: "person"
+        borderColor: Colors.accentPrimary
+        borderWidth: Math.max(1, Style.borderMedium * scaling)
       }
       ColumnLayout {
         Layout.fillWidth: true

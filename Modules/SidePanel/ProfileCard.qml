@@ -25,30 +25,13 @@ NBox {
     anchors.margins: Style.marginMedium * scaling
     spacing: Style.marginMedium * scaling
 
-    Item {
-      id: avatarBox
+    NImageRounded {
       width: Style.baseWidgetSize * 1.25 * scaling
       height: Style.baseWidgetSize * 1.25 * scaling
-
-      Image {
-        id: avatarImage
-        anchors.fill: parent
-        source: Settings.data.general.avatarImage
-        fillMode: Image.PreserveAspectCrop
-        asynchronous: true
-      }
-
-      // Ensure rounded corners consistently across renderers
-      MultiEffect {
-        anchors.fill: avatarImage
-        source: avatarImage
-        maskEnabled: true
-        maskSource: Rectangle {
-          anchors.fill: parent
-          color: "white"
-          radius: Style.radiusMedium * scaling
-        }
-      }
+      imagePath: Settings.data.general.avatarImage
+      fallbackIcon: "person"
+      borderColor: Colors.accentPrimary
+      borderWidth: Math.max(1, Style.borderMedium * scaling)
     }
 
     ColumnLayout {
