@@ -20,7 +20,7 @@ NBox {
     }
     // Record
     NIconButton {
-      icon: "fiber_manual_record"
+      icon: "videocam"
     }
     // Wallpaper
     NIconButton {
