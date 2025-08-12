@@ -131,7 +131,7 @@ ColumnLayout {
               to: 144
               stepSize: 1
               value: Settings.data.screenRecorder.frameRate
-              onMoved: Settings.data.screenRecorder.frameRate = Math.round(value)
+              onPressedChanged: Settings.data.screenRecorder.frameRate = Math.round(value)
               cutoutColor: Colors.backgroundPrimary
             }
           }
