@@ -46,13 +46,11 @@ NLoader {
           "label": "Wallpaper",
           "icon": "image",
           "source": "Tabs/Wallpaper.qml"
-        },
-        {
+        }, {
           "label": "Wallpaper Selector",
           "icon": "wallpaper_slideshow",
           "source": "Tabs/WallpaperSelector.qml"
-        },        
-        {
+        }, {
           "label": "Misc",
           "icon": "more_horiz",
           "source": "Tabs/Misc.qml"

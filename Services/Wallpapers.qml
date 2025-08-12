@@ -138,12 +138,12 @@ Singleton {
         ), "--transition-type", transitionType, "--transition-duration", Settings.data.wallpaper.swww.transitionDuration.toString(
         ), currentWallpaper]
     running: false
-    
+
     onStarted: {
       console.log("SWWW: Process started with command:", command.join(" "))
     }
-    
-    onExited: function(exitCode, exitStatus) {
+
+    onExited: function (exitCode, exitStatus) {
       console.log("SWWW: Process finished with exit code:", exitCode, "status:", exitStatus)
       if (exitCode !== 0) {
         console.log("SWWW: Process failed. Make sure swww-daemon is running with: swww-daemon")
@@ -163,12 +163,12 @@ Singleton {
     id: startDaemonProcess
     command: ["swww-daemon", "--format", "xrgb"]
     running: false
-    
+
     onStarted: {
       console.log("SWWW: Daemon start process initiated")
     }
-    
-    onExited: function(exitCode, exitStatus) {
+
+    onExited: function (exitCode, exitStatus) {
       console.log("SWWW: Daemon start process finished with exit code:", exitCode)
       if (exitCode === 0) {
         console.log("SWWW: Daemon started successfully")

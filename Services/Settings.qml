@@ -188,8 +188,14 @@ Singleton {
 
   Connections {
     target: adapter.wallpaper
-    function onIsRandomChanged() { Wallpapers.toggleRandomWallpaper() }
-    function onRandomIntervalChanged() { Wallpapers.restartRandomWallpaperTimer() }
-    function onDirectoryChanged() { Wallpapers.loadWallpapers() }
+    function onIsRandomChanged() {
+      Wallpapers.toggleRandomWallpaper()
+    }
+    function onRandomIntervalChanged() {
+      Wallpapers.restartRandomWallpaperTimer()
+    }
+    function onDirectoryChanged() {
+      Wallpapers.loadWallpapers()
+    }
   }
 }
