@@ -15,11 +15,12 @@ Rectangle {
   property bool showBorder: true
   property bool enabled: true
   property bool hovering: false
-  property var onEntered: function () {}
-  property var onExited: function () {}
-  property var onClicked: function () {}
   property real fontPointSize: Style.fontSizeMedium
   property string fontFamily: "Material Symbols Outlined"
+
+  signal entered
+  signal exited
+  signal clicked
 
   implicitWidth: size
   implicitHeight: size
@@ -62,20 +63,20 @@ Rectangle {
       if (tooltipText) {
         tooltip.show()
       }
-      root.onEntered()
+      root.entered()
     }
     onExited: {
       hovering = false
       if (tooltipText) {
         tooltip.hide()
       }
-      root.onExited()
+      root.exited()
     }
     onClicked: {
       if (tooltipText) {
         tooltip.hide()
       }
-      root.onClicked()
+      root.clicked()
     }
   }
 }

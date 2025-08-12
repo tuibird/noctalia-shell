@@ -18,10 +18,12 @@ Item {
   property real sizeMultiplier: 0.8
   property bool autoHide: false
 
-  property var onEntered: function () {}
-  property var onExited: function () {}
-  property var onClicked: function () {}
-  property var onWheel: function (delta) {}
+  signal shown
+  signal hidden
+  signal entered
+  signal exited
+  signal clicked
+  signal wheel(int delta)
 
   // Internal state
   property bool showPill: false
@@ -33,10 +35,6 @@ Item {
   readonly property int pillPaddingHorizontal: Style.marginMedium * scaling
   readonly property int pillOverlap: iconSize * 0.5
   readonly property int maxPillWidth: Math.max(1, textItem.implicitWidth + pillPaddingHorizontal * 2 + pillOverlap)
-
-  // TBC, do we use those ?
-  signal shown
-  signal hidden
 
   width: iconSize + (showPill ? maxPillWidth - pillOverlap : 0)
   height: pillHeight
@@ -127,7 +125,7 @@ Item {
     }
     onStopped: {
       delayedHideAnim.start()
-      shown()
+      root.shown()
     }
   }
 
@@ -166,7 +164,7 @@ Item {
     onStopped: {
       showPill = false
       shouldAnimateHide = false
-      hidden()
+      root.hidden()
     }
   }
 
@@ -194,18 +192,18 @@ Item {
     onEntered: {
       showDelayed()
       tooltip.show()
-      root.onEntered()
+      root.entered()
     }
     onExited: {
       hide()
       tooltip.hide()
-      root.onExited()
+      root.exited()
     }
     onClicked: {
-      root.onClicked()
+      root.clicked()
     }
     onWheel: wheel => {
-               root.onWheel(wheel.angleDelta.y)
+               root.wheel(wheel.angleDelta.y)
              }
   }
 

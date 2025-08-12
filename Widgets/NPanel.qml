@@ -4,26 +4,27 @@ import Quickshell.Wayland
 import qs.Services
 
 PanelWindow {
-  id: outerPanel
+  id: root
 
   readonly property real scaling: Scaling.scale(screen)
   property bool showOverlay: Settings.data.general.dimDesktop
   property int topMargin: Style.barHeight * scaling
   property color overlayColor: showOverlay ? Colors.overlay : "transparent"
+
   signal dismissed
 
   function hide() {
     //visible = false
-    dismissed()
+    root.dismissed()
   }
 
   function show() {
     // Ensure only one panel is visible at a time using Settings as ephemeral store
     try {
-      if (Settings.openPanel && Settings.openPanel !== outerPanel && Settings.openPanel.hide) {
+      if (Settings.openPanel && Settings.openPanel !== root && Settings.openPanel.hide) {
         Settings.openPanel.hide()
       }
-      Settings.openPanel = outerPanel
+      Settings.openPanel = root
     } catch (e) {
 
       // ignore
@@ -45,7 +46,7 @@ PanelWindow {
 
   MouseArea {
     anchors.fill: parent
-    onClicked: outerPanel.hide()
+    onClicked: root.hide()
   }
 
   Behavior on color {
@@ -57,16 +58,16 @@ PanelWindow {
 
   Component.onDestruction: {
     try {
-      if (visible && Settings.openPanel === outerPanel)
+      if (visible && Settings.openPanel === root)
         Settings.openPanel = null
     } catch (e) {
 
     }
   }
 
-  onVisibleChanged: function () {
+  onVisibleChanged: {
     try {
-      if (!visible && Settings.openPanel === outerPanel)
+      if (!visible && Settings.openPanel === root)
         Settings.openPanel = null
     } catch (e) {
 

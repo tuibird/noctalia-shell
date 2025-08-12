@@ -47,10 +47,10 @@ Singleton {
     watchChanges: true
     onFileChanged: reload()
     onAdapterUpdated: writeAdapter()
-    Component.onCompleted: function () {
+    Component.onCompleted: {
       reload()
     }
-    onLoaded: function () {
+    onLoaded: {
       Qt.callLater(function () {
         if (adapter.wallpaper.current !== "") {
 
@@ -188,8 +188,14 @@ Singleton {
 
   Connections {
     target: adapter.wallpaper
-    function onIsRandomChanged() { Wallpapers.toggleRandomWallpaper() }
-    function onRandomIntervalChanged() { Wallpapers.restartRandomWallpaperTimer() }
-    function onDirectoryChanged() { Wallpapers.loadWallpapers() }
+    function onIsRandomChanged() {
+      Wallpapers.toggleRandomWallpaper()
+    }
+    function onRandomIntervalChanged() {
+      Wallpapers.restartRandomWallpaperTimer()
+    }
+    function onDirectoryChanged() {
+      Wallpapers.loadWallpapers()
+    }
   }
 }

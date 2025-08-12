@@ -6,9 +6,10 @@ Rectangle {
   id: root
 
   readonly property real scaling: Scaling.scale(screen)
-  property var onEntered: function () {}
-  property var onExited: function () {}
-  property var onClicked: function () {}
+
+  signal entered
+  signal exited
+  signal clicked
 
   width: textItem.paintedWidth
   height: textItem.paintedHeight
@@ -26,8 +27,8 @@ Rectangle {
     anchors.fill: parent
     cursorShape: Qt.PointingHandCursor
     hoverEnabled: true
-    onEntered: root.onEntered()
-    onExited: root.onExited()
-    onClicked: root.onClicked()
+    onEntered: root.entered()
+    onExited: root.exited()
+    onClicked: root.clicked()
   }
 }

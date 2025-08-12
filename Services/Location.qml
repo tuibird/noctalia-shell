@@ -16,7 +16,7 @@ Singleton {
   FileView {
     path: locationFile
     onAdapterUpdated: writeAdapter()
-    onLoaded: function () {
+    onLoaded: {
       updateWeather()
     }
     onLoadFailed: function (error) {

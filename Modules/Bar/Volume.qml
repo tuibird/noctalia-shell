@@ -70,7 +70,7 @@ Item {
         Audio.volumeDecrement()
       }
     }
-    onClicked: function () {
+    onClicked: {
       audioDeviceSelector.isLoaded = !audioDeviceSelector.isLoaded
     }
   }

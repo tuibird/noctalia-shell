@@ -73,17 +73,17 @@ NLoader {
                 stepSize: 0.01
                 value: Scaling.overrideScale
                 implicitWidth: bgRect.width * 0.75
-                onMoved: function () {
+                onMoved: {
                   Scaling.overrideScale = value
                 }
-                onPressedChanged: function () {
+                onPressedChanged: {
                   Scaling.overrideEnabled = true
                 }
               }
               NIconButton {
                 icon: "refresh"
                 fontPointSize: Style.fontSizeXL * scaling
-                onClicked: function () {
+                onClicked: {
                   Scaling.overrideEnabled = false
                   Scaling.overrideScale = 1.0
                 }
@@ -171,8 +171,9 @@ NLoader {
             NTextInput {
               text: "Type anything"
               Layout.fillWidth: true
-              onEditingFinished: function () {}
+              onEditingFinished: {
 
+              }
               NDivider {
                 Layout.fillWidth: true
               }

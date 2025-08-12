@@ -23,10 +23,10 @@ Singleton {
     watchChanges: true
     onFileChanged: reload()
     onAdapterUpdated: writeAdapter()
-    Component.onCompleted: function () {
+    Component.onCompleted: {
       reload()
     }
-    onLoaded: function () {
+    onLoaded: {
       loadFromCache()
     }
     onLoadFailed: function (error) {

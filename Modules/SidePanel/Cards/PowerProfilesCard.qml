@@ -21,17 +21,23 @@ NBox {
     // Performance
     NIconButton {
       icon: "speed"
-      onClicked: function () {/* TODO: hook to power profile */ }
+      onClicked: {
+
+        /* TODO: hook to power profile */ }
     }
     // Balanced
     NIconButton {
       icon: "balance"
-      onClicked: function () {/* TODO: hook to power profile */ }
+      onClicked: {
+
+        /* TODO: hook to power profile */ }
     }
     // Eco
     NIconButton {
       icon: "eco"
-      onClicked: function () {/* TODO: hook to power profile */ }
+      onClicked: {
+
+        /* TODO: hook to power profile */ }
     }
     Item {
       Layout.fillWidth: true

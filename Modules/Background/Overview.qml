@@ -9,7 +9,8 @@ Variants {
 
   delegate: PanelWindow {
     required property ShellScreen modelData
-    property string wallpaperSource: Wallpapers.currentWallpaper !== "" && !Settings.data.wallpaper.swww.enabled ? Wallpapers.currentWallpaper : ""
+    property string wallpaperSource: Wallpapers.currentWallpaper !== ""
+                                     && !Settings.data.wallpaper.swww.enabled ? Wallpapers.currentWallpaper : ""
 
     visible: wallpaperSource !== "" && !Settings.data.wallpaper.swww.enabled
     color: "transparent"

@@ -59,7 +59,7 @@ NBox {
       }
       NIconButton {
         icon: "settings"
-        onClicked: function () {
+        onClicked: {
           if (!root.settingsWindow) {
             const comp = Qt.createComponent("../../Settings/SettingsWindow.qml")
             if (comp.status === Component.Ready) {

@@ -13,7 +13,8 @@ Item {
   property alias placeholderText: input.placeholderText
   property bool readOnly: false
   property bool enabled: true
-  property var onEditingFinished: function () {}
+
+  signal editingFinished
 
   // Sizing
   implicitHeight: Style.baseWidgetSize * 1.25 * scaling
@@ -55,7 +56,7 @@ Item {
         placeholderTextColor: Colors.textSecondary
         background: null
         font.pointSize: Style.fontSizeSmall * scaling
-        onEditingFinished: root.onEditingFinished()
+        onEditingFinished: root.editingFinished()
         // Text changes are observable via the aliased 'text' property (root.text) and its 'textChanged' signal.
         // No additional callback is invoked here to avoid conflicts with QML's onTextChanged handler semantics.
       }

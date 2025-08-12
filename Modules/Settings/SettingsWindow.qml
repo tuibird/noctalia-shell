@@ -46,13 +46,11 @@ NLoader {
           "label": "Wallpaper",
           "icon": "image",
           "source": "Tabs/Wallpaper.qml"
-        },
-        {
+        }, {
           "label": "Wallpaper Selector",
           "icon": "wallpaper_slideshow",
           "source": "Tabs/WallpaperSelector.qml"
-        },        
-        {
+        }, {
           "label": "Misc",
           "icon": "more_horiz",
           "source": "Tabs/Misc.qml"
@@ -62,7 +60,7 @@ NLoader {
           "source": "Tabs/About.qml"
         }]
 
-      onVisibleChanged: function () {
+      onVisibleChanged: {
         if (visible)
           currentTabIndex = 0
       }
@@ -190,7 +188,7 @@ NLoader {
                   icon: "close"
                   tooltipText: "Close settings panel"
                   Layout.alignment: Qt.AlignVCenter
-                  onClicked: function () {
+                  onClicked: {
                     settingsWindow.isLoaded = !settingsWindow.isLoaded
                   }
                 }

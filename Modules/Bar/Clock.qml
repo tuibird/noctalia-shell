@@ -12,15 +12,15 @@ NClock {
     target: root
   }
 
-  onEntered: function () {
+  onEntered: {
     if (!calendar.isLoaded) {
       tooltip.show()
     }
   }
-  onExited: function () {
+  onExited: {
     tooltip.hide()
   }
-  onClicked: function () {
+  onClicked: {
     tooltip.hide()
     calendar.isLoaded = !calendar.isLoaded
   }

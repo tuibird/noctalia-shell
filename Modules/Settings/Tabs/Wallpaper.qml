@@ -70,7 +70,7 @@ ColumnLayout {
             NTextInput {
               text: Settings.data.wallpaper.directory
               Layout.fillWidth: true
-              onEditingFinished: function () {
+              onEditingFinished: {
                 Settings.data.wallpaper.directory = text
               }
             }

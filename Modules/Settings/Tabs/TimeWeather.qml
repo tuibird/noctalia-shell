@@ -58,7 +58,7 @@ ColumnLayout {
             text: Settings.data.location.name
             placeholderText: "Enter city name"
             Layout.fillWidth: true
-            onEditingFinished: function () {
+            onEditingFinished: {
               Settings.data.location.name = text
             }
           }
