@@ -24,7 +24,6 @@ echo "--- System Metrics ---"
     raw_temp=$(cat "$temp_file")
 
     # The value is usually in millidegrees Celsius, so we divide by 1000.
-    # We use 'bc' for floating-point arithmetic.
     temp_celsius=$((raw_temp / 1000))
     
     echo "CPU Temperature: ${temp_celsius}°C"
@@ -39,7 +38,7 @@ echo "CPU Usage: ${cpu_usage}%"
 # 'free' provides information about memory usage.
 mem_total=$(free | grep Mem | awk '{print $2}')
 mem_used=$(free | grep Mem | awk '{print $3}')
-mem_usage=$(echo "scale=2; ($mem_used/$mem_total)*100" | bc)
+mem_usage=$((100 * mem_used / mem_total))
 echo "Memory Usage: ${mem_usage}%"
 
 # Get Disk Usage
