@@ -21,11 +21,10 @@ NBox {
     anchors.margins: Style.marginMedium * scaling
     spacing: Style.marginMedium * scaling
 
-
     RowLayout {
       spacing: Style.marginSmall * scaling
       NText {
-        text: Location.weatherSymbolFromCode(Location.data.weather.current_weather.weathercode) 
+        text: Location.weatherSymbolFromCode(Location.data.weather.current_weather.weathercode)
         font.family: "Material Symbols Outlined"
         font.pointSize: Style.fontSizeXXL * 1.25 * scaling
         color: Colors.accentSecondary
@@ -33,13 +32,13 @@ NBox {
       ColumnLayout {
         RowLayout {
           NText {
-            text: Settings.data.location.name 
+            text: Settings.data.location.name
             font.weight: Style.fontWeightBold
-            font.pointSize: Style.fontSizeLarge * scaling
+            font.pointSize: Style.fontSizeXL * scaling
           }
           NText {
             text: `(${Location.data.weather.timezone_abbreviation})`
-            font.pointSize: Style.fontSizeTiny * scaling
+            font.pointSize: Style.fontSizeSmall * scaling
             visible: Location.data.weather
           }
         }
@@ -48,39 +47,38 @@ NBox {
           text: {
             var temp = Location.data.weather.current_weather.temperature
             if (Settings.data.location.useFahrenheit) {
-                temp = Location.celsiusToFahrenheit(temp)
+              temp = Location.celsiusToFahrenheit(temp)
             }
             temp = Math.round(temp)
-            return `${temp}°` 
+            return `${temp}°`
           }
-          font.pointSize: Style.fontSizeXL *  scaling
+          font.pointSize: Style.fontSizeXL * scaling
           font.weight: Style.fontWeightBold
         }
       }
     }
 
-    Rectangle {
-      height: 1
-      width: parent.width
-      color: Colors.backgroundTertiary
+    NDivider {
+      Layout.fillWidth: true
     }
 
     RowLayout {
       Layout.fillWidth: true
-      spacing: Style.marginMedium * scaling
+      Layout.alignment: Qt.AlignHCenter
+      spacing: Style.marginLarge* scaling
       Repeater {
         model: Location.data.weather.daily.time
         delegate: ColumnLayout {
+          Layout.alignment: Qt.AlignHCenter
           spacing: Style.spacingSmall * scaling
           NText {
             text: Qt.formatDateTime(new Date(Location.data.weather.daily.time[index]), "ddd")
-            font.weight: Style.fontWeightBold
+            color: Colors.textPrimary
           }
           NText {
             text: Location.weatherSymbolFromCode(Location.data.weather.daily.weathercode[index])
             font.family: "Material Symbols Outlined"
-            font.pointSize: Style.fontSizeLarge * scaling
-            font.weight: Style.fontWeightBold
+            font.pointSize: Style.fontSizeXL * scaling
             color: Colors.textSecondary
           }
           NText {
