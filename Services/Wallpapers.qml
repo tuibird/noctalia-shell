@@ -50,9 +50,10 @@ Singleton {
       } else {
         transitionType = Settings.data.wallpaper.swww.transitionType
       }
-  
+
       changeWallpaperProcess.running = true
     } else {
+
       // Fallback: update the settings directly for non-SWWW mode
       //console.log("[WP] Not using Swww, setting wallpaper directly")
     }
@@ -140,7 +141,7 @@ Singleton {
     running: false
 
     onStarted: {
-      
+
     }
 
     onExited: function (exitCode, exitStatus) {
@@ -159,6 +160,7 @@ Singleton {
     running: false
     stdout: StdioCollector {
       onStreamFinished: {
+
         // console.log(this.text)
       }
     }

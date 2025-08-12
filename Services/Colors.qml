@@ -53,30 +53,30 @@ Singleton {
   // Default theme colors
   QtObject {
     id: defaultTheme
-    
+
     property color backgroundPrimary: "#191724"
     property color backgroundSecondary: "#1f1d2e"
     property color backgroundTertiary: "#26233a"
-    
+
     property color surface: "#1f1d2e"
     property color surfaceVariant: "#37354c"
-    
+
     property color textPrimary: "#e0def4"
     property color textSecondary: "#908caa"
     property color textDisabled: "#6e6a86"
-    
+
     property color accentPrimary: "#ebbcba"
     property color accentSecondary: "#31748f"
     property color accentTertiary: "#9ccfd8"
-    
+
     property color error: "#eb6f92"
     property color warning: "#f6c177"
-    
+
     property color hover: "#c4a7e7"
-    
+
     property color onAccent: "#191724"
     property color outline: "#44415a"
-    
+
     property color shadow: "#191724"
     property color overlay: "#191724"
   }
@@ -84,30 +84,30 @@ Singleton {
   // Wallust theme colors (loaded from Theme.json)
   QtObject {
     id: wallustTheme
-    
+
     property color backgroundPrimary: wallustData.backgroundPrimary
     property color backgroundSecondary: wallustData.backgroundSecondary
     property color backgroundTertiary: wallustData.backgroundTertiary
-    
+
     property color surface: wallustData.surface
     property color surfaceVariant: wallustData.surfaceVariant
-    
+
     property color textPrimary: wallustData.textPrimary
     property color textSecondary: wallustData.textSecondary
     property color textDisabled: wallustData.textDisabled
-    
+
     property color accentPrimary: wallustData.accentPrimary
     property color accentSecondary: wallustData.accentSecondary
     property color accentTertiary: wallustData.accentTertiary
-    
+
     property color error: wallustData.error
     property color warning: wallustData.warning
-    
+
     property color hover: wallustData.hover
-    
+
     property color onAccent: wallustData.onAccent
     property color outline: wallustData.outline
-    
+
     property color shadow: wallustData.shadow
     property color overlay: wallustData.overlay
   }

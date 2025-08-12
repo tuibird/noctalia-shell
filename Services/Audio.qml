@@ -49,7 +49,6 @@ Singleton {
         vol = 0
       }
       root._volume = vol
-  
     }
 
     function onMutedChanged() {

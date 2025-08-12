@@ -18,14 +18,20 @@ NBox {
     Item {
       Layout.fillWidth: true
     }
-    // Record
+    // Screen Recorder
     NIconButton {
       icon: "videocam"
+      showFilled: ScreenRecorder.isRecording
+      onClicked: {
+        ScreenRecorder.toggleRecording()
+      }
     }
+
     // Wallpaper
     NIconButton {
       icon: "image"
     }
+
     Item {
       Layout.fillWidth: true
     }

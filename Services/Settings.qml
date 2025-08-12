@@ -105,9 +105,8 @@ Singleton {
         property string videoCodec: "h264"
         property string quality: "very_high"
         property string colorRange: "limited"
-        property bool showCursor: true
-        // New: optional audio source selection (default: system output)
         property string audioSource: "default_output"
+        property bool showCursor: true
       }
 
       // wallpaper

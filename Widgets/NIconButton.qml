@@ -13,6 +13,7 @@ Rectangle {
   property string icon
   property string tooltipText
   property bool showBorder: true
+  property bool showFilled: false
   property bool enabled: true
   property bool hovering: false
   property real fontPointSize: Style.fontSizeMedium
@@ -25,7 +26,7 @@ Rectangle {
   implicitWidth: size
   implicitHeight: size
 
-  color: root.hovering ? Colors.accentPrimary : "transparent"
+  color: (root.hovering || showFilled) ? Colors.accentPrimary : "transparent"
   radius: width * 0.5
   border.color: showBorder ? Colors.accentPrimary : "transparent"
   border.width: Math.max(1, Style.borderThin * scaling)
@@ -41,7 +42,7 @@ Rectangle {
     font.variableAxes: {
       "wght": (Font.Normal + Font.Bold) / 2.0
     }
-    color: root.hovering ? Colors.onAccent : showBorder ? Colors.accentPrimary : Colors.textPrimary
+    color: (root.hovering || showFilled) ? Colors.onAccent : showBorder ? Colors.accentPrimary : Colors.textPrimary
     horizontalAlignment: Text.AlignHCenter
     verticalAlignment: Text.AlignVCenter
     opacity: root.enabled ? Style.opacityFull : Style.opacityMedium

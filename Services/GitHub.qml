@@ -49,7 +49,7 @@ Singleton {
 
   // --------------------------------
   function loadFromCache() {
-    const now = Time.timestamp 
+    const now = Time.timestamp
     if (!data.timestamp || (now >= data.timestamp + githubUpdateFrequency)) {
       console.log("[GitHub] Cache expired or missing, fetching new data from GitHub...")
       fetchFromGitHub()
@@ -79,7 +79,7 @@ Singleton {
 
   // --------------------------------
   function saveData() {
-    data.timestamp = Time.timestamp 
+    data.timestamp = Time.timestamp
     Qt.callLater(() => {
                    // Access the FileView's writeAdapter method
                    var fileView = root.children.find(child => child.objectName === "githubDataFileView")

@@ -43,31 +43,51 @@ Singleton {
     return Math.floor(Date.now() / 1000)
   }
 
-  // Format an easy to read approximate duration ex: 4h32m
-  // Used to display the time remaining on the Battery widget
-  function formatVagueHumanReadableDuration(totalSeconds) {
-    const hours = Math.floor(totalSeconds / 3600)
-    const minutes = Math.floor((totalSeconds - (hours * 3600)) / 60)
-    const seconds = totalSeconds - (hours * 3600) - (minutes * 60)
 
-    var str = ""
-    if (hours) {
-      str += hours.toString() + "h"
-    }
-    if (minutes) {
-      str += minutes.toString() + "m"
-    }
-    if (!hours && !minutes) {
-      str += seconds.toString() + "s"
-    }
-    return str
+  /**
+ * Formats a Date object into a YYYYMMDD-HHMMSS string.
+ * @param {Date} [date=new Date()] - The date to format. Defaults to the current date and time.
+ * @returns {string} The formatted date string.
+ */
+  function getFormattedTimestamp(date = new Date()) {
+  const year = date.getFullYear()
+
+  // getMonth() is zero-based, so we add 1
+  const month = String(date.getMonth() + 1).padStart(2, '0')
+  const day = String(date.getDate()).padStart(2, '0')
+
+  const hours = String(date.getHours()).padStart(2, '0')
+  const minutes = String(date.getMinutes()).padStart(2, '0')
+  const seconds = String(date.getSeconds()).padStart(2, '0')
+
+  return `${year}${month}${day}-${hours}${minutes}${seconds}`
+}
+
+// Format an easy to read approximate duration ex: 4h32m
+// Used to display the time remaining on the Battery widget
+function formatVagueHumanReadableDuration(totalSeconds) {
+  const hours = Math.floor(totalSeconds / 3600)
+  const minutes = Math.floor((totalSeconds - (hours * 3600)) / 60)
+  const seconds = totalSeconds - (hours * 3600) - (minutes * 60)
+
+  var str = ""
+  if (hours) {
+    str += hours.toString() + "h"
   }
-
-  Timer {
-    interval: 1000
-    repeat: true
-    running: true
-
-    onTriggered: root.date = new Date()
+  if (minutes) {
+    str += minutes.toString() + "m"
   }
+  if (!hours && !minutes) {
+    str += seconds.toString() + "s"
+  }
+  return str
+}
+
+Timer {
+  interval: 1000
+  repeat: true
+  running: true
+
+  onTriggered: root.date = new Date()
+}
 }
