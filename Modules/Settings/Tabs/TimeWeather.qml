@@ -1,94 +1,136 @@
 import QtQuick
+import QtQuick.Controls
 import QtQuick.Layouts
 import qs.Services
 import qs.Widgets
 
-Item {
-  property real scaling: 1
-  readonly property string tabIcon: "schedule"
-  readonly property string tabLabel: "Time & Weather"
-  readonly property int tabIndex: 2
-  Layout.fillWidth: true
-  Layout.fillHeight: true
+ColumnLayout {
+  id: root
 
-  ColumnLayout {
-    anchors.fill: parent
-    spacing: Style.marginMedium * scaling
+  spacing: 0
 
-    NText {
-      text: "Time"
-      font.weight: Style.fontWeightBold
-      color: Colors.accentSecondary
-    }
+  ScrollView {
+    id: scrollView
 
-    NToggle {
-      label: "Use 12 Hour Clock"
-      description: "Display time in 12-hour format (e.g., 2:30 PM) instead of 24-hour format"
-      value: Settings.data.location.use12HourClock
-      onToggled: function (newValue) {
-        Settings.data.location.use12HourClock = newValue
+    Layout.fillWidth: true
+    Layout.fillHeight: true
+    padding: 16
+    rightPadding: 12
+    clip: true
+    ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+    ScrollBar.vertical.policy: ScrollBar.AsNeeded
+
+    ColumnLayout {
+      width: scrollView.availableWidth
+      spacing: 0
+
+      Item {
+        Layout.fillWidth: true
+        Layout.preferredHeight: 0
       }
-    }
 
-    NToggle {
-      label: "US Style Date"
-      description: "Display dates in MM/DD/YYYY format instead of DD/MM/YYYY"
-      value: Settings.data.location.reverseDayMonth
-      onToggled: function (newValue) {
-        Settings.data.location.reverseDayMonth = newValue
+      ColumnLayout {
+        spacing: 4
+        Layout.fillWidth: true
+
+        NText {
+          text: "Time & Weather Settings"
+          font.pointSize: 18
+          font.weight: Style.fontWeightBold
+          color: Colors.textPrimary
+          Layout.bottomMargin: 8
+        }
+
+        // Location section
+        ColumnLayout {
+          spacing: 8
+          Layout.fillWidth: true
+          Layout.topMargin: 8
+
+          NText {
+            text: "Location"
+            font.pointSize: 13
+            font.weight: Style.fontWeightBold
+            color: Colors.textPrimary
+          }
+
+          NTextInput {
+            text: Settings.data.location.name
+            placeholderText: "Enter city name"
+            Layout.fillWidth: true
+            onEditingFinished: function () {
+              Settings.data.location.name = text
+            }
+          }
+        }
+
+        NDivider {
+          Layout.fillWidth: true
+          Layout.topMargin: 26
+          Layout.bottomMargin: 18
+        }
+
+        // Time section
+        ColumnLayout {
+          spacing: 4
+          Layout.fillWidth: true
+
+          NText {
+            text: "Time Format"
+            font.pointSize: 18
+            font.weight: Style.fontWeightBold
+            color: Colors.textPrimary
+            Layout.bottomMargin: 8
+          }
+
+          NToggle {
+            label: "Use 12-Hour Clock"
+            description: "Display time in 12-hour format (AM/PM) instead of 24-hour"
+            value: Settings.data.location.use12HourClock
+            onToggled: function (newValue) {
+              Settings.data.location.use12HourClock = newValue
+            }
+          }
+
+          NToggle {
+            label: "Reverse Day/Month"
+            description: "Display date as DD/MM instead of MM/DD"
+            value: Settings.data.location.reverseDayMonth
+            onToggled: function (newValue) {
+              Settings.data.location.reverseDayMonth = newValue
+            }
+          }
+        }
+
+        NDivider {
+          Layout.fillWidth: true
+          Layout.topMargin: 26
+          Layout.bottomMargin: 18
+        }
+
+        // Weather section
+        ColumnLayout {
+          spacing: 4
+          Layout.fillWidth: true
+
+          NText {
+            text: "Weather"
+            font.pointSize: 18
+            font.weight: Style.fontWeightBold
+            color: Colors.textPrimary
+            Layout.bottomMargin: 8
+          }
+
+          NToggle {
+            label: "Use Fahrenheit"
+            description: "Display temperature in Fahrenheit instead of Celsius"
+            value: Settings.data.location.useFahrenheit
+            onToggled: function (newValue) {
+              Settings.data.location.useFahrenheit = newValue
+            }
+          }
+        }
       }
-    }
-
-    NDivider {
-      Layout.fillWidth: true
-    }
-
-    NText {
-      text: "Weather"
-      font.weight: Style.fontWeightBold
-      color: Colors.accentSecondary
-    }
-
-    NText {
-      text: "Location"
-      color: Colors.textPrimary
-      font.weight: Style.fontWeightBold
-    }
-    NText {
-      text: "Your city name for weather information"
-      color: Colors.textSecondary
-      font.pointSize: Style.fontSizeSmall * scaling
-    }
-    NTextInput {
-      text: Settings.data.location.name
-      Layout.fillWidth: true
-      onEditingFinished: function () {
-        Settings.data.location.name = text
-        Location.resetWeather()
-      }
-    }
-
-    NText {
-      text: "Temperature Unit"
-      color: Colors.textPrimary
-      font.weight: Style.fontWeightBold
-    }
-    NText {
-      text: "Choose between Celsius and Fahrenheit"
-      color: Colors.textSecondary
-      font.pointSize: Style.fontSizeSmall * scaling
-    }
-    NComboBox {
-      optionsKeys: ["c", "f"]
-      optionsLabels: ["Celsius", "Fahrenheit"]
-      currentKey: Settings.data.location.useFahrenheit ? "f" : "c"
-      onSelected: function (key) {
-        Settings.data.location.useFahrenheit = (key === "f")
-      }
-    }
-
-    Item {
-      Layout.fillHeight: true
     }
   }
 }

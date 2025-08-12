@@ -50,7 +50,14 @@ Singleton {
     Component.onCompleted: function () {
       reload()
     }
-    onLoaded: function () {}
+    onLoaded: function () {
+      Qt.callLater(function () {
+        if (adapter.wallpaper.current !== "") {
+          console.log("Settings: Initializing wallpaper to:", adapter.wallpaper.current)
+          Wallpapers.setCurrentWallpaper(adapter.wallpaper.current, true)
+        }
+      })
+    }
     onLoadFailed: function (error) {
       if (error.toString().includes("No such file") || error === 2)
         // File doesn't exist, create it with default values
@@ -113,7 +120,7 @@ Singleton {
 
       wallpaper: JsonObject {
         property string directory: "/usr/share/wallpapers"
-        property string current: defaultWallpaper
+        property string current: ""
         property bool isRandom: false
         property int randomInterval: 300
         property bool generateTheme: false
@@ -177,5 +184,12 @@ Singleton {
         property list<string> monitorsScale: []
       }
     }
+  }
+
+  Connections {
+    target: adapter.wallpaper
+    function onIsRandomChanged() { Wallpapers.toggleRandomWallpaper() }
+    function onRandomIntervalChanged() { Wallpapers.restartRandomWallpaperTimer() }
+    function onDirectoryChanged() { Wallpapers.loadWallpapers() }
   }
 }
