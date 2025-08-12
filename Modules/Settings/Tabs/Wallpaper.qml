@@ -61,7 +61,7 @@ ColumnLayout {
 
             NText {
               text: "Path to your wallpaper folder"
-              font.pointSize: 12
+              font.pointSize: Style.fontSizeSmall * scaling
               color: Colors.textSecondary
               wrapMode: Text.WordWrap
               Layout.fillWidth: true
