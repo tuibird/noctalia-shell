@@ -4,6 +4,7 @@ import QtQuick.Layouts
 import Quickshell
 import qs.Services
 import qs.Widgets
+import qs.Modules.Notification
 
 Variants {
   model: Quickshell.screens
@@ -83,6 +84,10 @@ Variants {
         }
 
         // TODO: Notification Icon
+        NotificationHistory {
+          anchors.verticalCenter: parent.verticalCenter
+        }
+
         WiFi {
           anchors.verticalCenter: parent.verticalCenter
         }

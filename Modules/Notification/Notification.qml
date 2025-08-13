@@ -24,8 +24,8 @@ PanelWindow {
   WlrLayershell.layer: WlrLayer.Overlay
   WlrLayershell.exclusionMode: ExclusionMode.Ignore
 
-  // Use the notification service
-  property var notificationService: NotificationService {}
+  // Use the notification service singleton
+  property var notificationService: NotificationService
 
   // Access the notification model from the service
   property ListModel notificationModel: notificationService.notificationModel

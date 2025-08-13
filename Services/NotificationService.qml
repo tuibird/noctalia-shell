@@ -1,6 +1,9 @@
 import QtQuick
+import Quickshell
+import Quickshell.Io
 import qs.Services
 import Quickshell.Services.Notifications
+pragma Singleton
 
 QtObject {
   id: root
@@ -34,11 +37,44 @@ QtObject {
 
       // Add to our model
       root.addNotification(notification)
+      // Also add to history
+      root.addToHistory(notification)
     }
   }
 
   // List model to hold notifications
   property ListModel notificationModel: ListModel {}
+
+  // Persistent history of notifications (most recent first)
+  property ListModel historyModel: ListModel {}
+  property int maxHistory: 100
+
+  // Cached history file path
+  property string historyFile: Quickshell.env("NOCTALIA_NOTIF_HISTORY_FILE") || (Settings.cacheDir + "notifications.json")
+
+  // Persisted storage for history
+  property FileView historyFileView: FileView {
+    id: historyFileView
+    objectName: "notificationHistoryFileView"
+    path: historyFile
+    watchChanges: true
+    onFileChanged: reload()
+    onAdapterUpdated: writeAdapter()
+    Component.onCompleted: reload()
+    onLoaded: loadFromHistory()
+    onLoadFailed: function (error) {
+      // Create file on first use
+      if (error.toString().includes("No such file") || error === 2) {
+        writeAdapter()
+      }
+    }
+
+    JsonAdapter {
+      id: historyAdapter
+      property var history: []
+      property double timestamp: 0
+    }
+  }
 
   // Maximum visible notifications
   property int maxVisible: 5
@@ -81,6 +117,71 @@ QtObject {
         oldestNotification.dismiss()
       }
       notificationModel.remove(notificationModel.count - 1)
+    }
+  }
+
+  // Add a simplified copy into persistent history
+  function addToHistory(notification) {
+    historyModel.insert(0, {
+                           "summary": notification.summary,
+                           "body": notification.body,
+                           "appName": notification.appName,
+                           "urgency": notification.urgency,
+                           "timestamp": new Date()
+                         })
+    while (historyModel.count > maxHistory) {
+      historyModel.remove(historyModel.count - 1)
+    }
+    saveHistory()
+  }
+
+  function clearHistory() {
+    historyModel.clear()
+    saveHistory()
+  }
+
+  function loadFromHistory() {
+    // Populate in-memory model from adapter
+    try {
+      historyModel.clear()
+      const items = historyAdapter.history || []
+      for (var i = 0; i < items.length; i++) {
+        const it = items[i]
+        historyModel.append({
+                               "summary": it.summary || "",
+                               "body": it.body || "",
+                               "appName": it.appName || "",
+                               "urgency": it.urgency,
+                               "timestamp": it.timestamp ? new Date(it.timestamp) : new Date()
+                             })
+      }
+    } catch (e) {
+      console.error("[Notifications] Failed to load history:", e)
+    }
+  }
+
+  function saveHistory() {
+    try {
+      // Serialize model back to adapter
+      var arr = []
+      for (var i = 0; i < historyModel.count; i++) {
+        const n = historyModel.get(i)
+        arr.push({
+                   summary: n.summary,
+                   body: n.body,
+                   appName: n.appName,
+                   urgency: n.urgency,
+                   timestamp: (n.timestamp instanceof Date) ? n.timestamp.getTime() : n.timestamp
+                 })
+      }
+      historyAdapter.history = arr
+      historyAdapter.timestamp = Time.timestamp
+
+      Qt.callLater(function () {
+        historyFileView.writeAdapter()
+      })
+    } catch (e) {
+      console.error("[Notifications] Failed to save history:", e)
     }
   }
 
