@@ -22,7 +22,6 @@ ColumnLayout {
   Layout.fillWidth: true
 
   ColumnLayout {
-    id: mainColumn
     spacing: Style.marginTiniest * scaling
     Layout.fillWidth: true
 
@@ -38,7 +37,6 @@ ColumnLayout {
       font.pointSize: Style.fontSizeSmall * scaling
       color: Colors.textSecondary
       wrapMode: Text.WordWrap
-      Layout.fillWidth: true
     }
   }
 

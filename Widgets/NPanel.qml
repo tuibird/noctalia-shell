@@ -19,7 +19,7 @@ PanelWindow {
   }
 
   function show() {
-    // Ensure only one panel is visible at a time using Settings as ephemeral store
+    // Ensure only one panel is visible at a time using PanelManager as ephemeral storage
     try {
       if (PanelManager.openedPanel && PanelManager.openedPanel !== root && PanelManager.openedPanel.hide) {
         PanelManager.openedPanel.hide()

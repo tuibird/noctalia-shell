@@ -14,6 +14,8 @@ RowLayout {
   property int baseSize: Style.baseWidgetSize
 
   signal toggled(bool balue)
+  signal entered
+  signal exited
 
   Layout.fillWidth: true
 
@@ -69,8 +71,14 @@ RowLayout {
       anchors.fill: parent
       cursorShape: Qt.PointingHandCursor
       hoverEnabled: true
-      onEntered: hovering = true
-      onExited: hovering = false
+      onEntered: {
+        hovering = true
+        root.entered()
+      }
+      onExited: {
+        hovering = false
+        root.exited()
+      }
       onClicked: {
         value = !value
         root.toggled(value)

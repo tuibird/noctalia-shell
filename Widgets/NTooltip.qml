@@ -101,15 +101,15 @@ Window {
     anchors.fill: parent
     radius: Style.radiusMedium * scaling
     gradient: Gradient {
-          GradientStop {
-            position: 0.0
-            color: Colors.backgroundTertiary
-          }
-          GradientStop {
-            position: 1.0
-            color: Colors.backgroundSecondary
-          }
-        }
+      GradientStop {
+        position: 0.0
+        color: Colors.backgroundTertiary
+      }
+      GradientStop {
+        position: 1.0
+        color: Colors.backgroundSecondary
+      }
+    }
     border.color: Colors.outline
     border.width: Math.max(1, Style.borderThin * scaling)
     z: 1
