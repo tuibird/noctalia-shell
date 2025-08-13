@@ -10,6 +10,8 @@ import qs.Widgets
 NLoader {
   id: root
 
+  property int currentTabIndex: 0
+
   content: Component {
     NPanel {
       id: panel
@@ -18,7 +20,6 @@ NLoader {
 
       WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
 
-      property int currentTabIndex: 0
       property var tabsModel: [{
           "label": "General",
           "icon": "tune",
@@ -65,11 +66,6 @@ NLoader {
           "source": "Tabs/About.qml"
         }]
 
-      onVisibleChanged: {
-        if (visible)
-          currentTabIndex = 0
-      }
-
       Component.onCompleted: show()
 
       Rectangle {
@@ -113,7 +109,7 @@ NLoader {
 
                 delegate: Rectangle {
                   id: tabItem
-                  readonly property bool selected: index === panel.currentTabIndex
+                  readonly property bool selected: index === currentTabIndex
                   width: parent.width
                   height: 32 * scaling // Back to original height
                   radius: Style.radiusSmall * scaling
@@ -154,7 +150,7 @@ NLoader {
                     onEntered: tabItem.hovering = true
                     onExited: tabItem.hovering = false
                     onCanceled: tabItem.hovering = false
-                    onClicked: panel.currentTabIndex = index
+                    onClicked: currentTabIndex = index
                   }
                 }
               }
@@ -185,7 +181,7 @@ NLoader {
 
                 // Tab label on the main right
                 NText {
-                  text: panel.tabsModel[panel.currentTabIndex].label
+                  text: panel.tabsModel[currentTabIndex].label
                   font.pointSize: Style.fontSizeLarge * scaling
                   font.weight: Style.fontWeightBold
                   color: Colors.accentPrimary
@@ -209,7 +205,7 @@ NLoader {
                 id: stack
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                currentIndex: panel.currentTabIndex
+                currentIndex: currentTabIndex
 
                 Tabs.General {}
                 Tabs.Bar {}

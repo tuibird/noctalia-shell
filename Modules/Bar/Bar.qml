@@ -15,8 +15,6 @@ Variants {
     required property ShellScreen modelData
     readonly property real scaling: Scaling.scale(screen)
 
-    property var settingsPanel: null
-
     screen: modelData
     implicitHeight: Style.barHeight * scaling
     color: "transparent"
