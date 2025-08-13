@@ -88,14 +88,14 @@ ColumnLayout {
               }
             }
 
-                         NToggle {
-               id: allowOverdrive
-               label: "Allow Volume Overdrive"
-               description: "Enable volume levels above 100% (up to 200%)"
-               value: Settings.data.audio ? Settings.data.audio.volumeOverdrive : false
-               onToggled: function (checked) {
-                 Settings.data.audio.volumeOverdrive = checked
-                
+            NToggle {
+              id: allowOverdrive
+              label: "Allow Volume Overdrive"
+              description: "Enable volume levels above 100% (up to 200%)"
+              value: Settings.data.audio ? Settings.data.audio.volumeOverdrive : false
+              onToggled: function (checked) {
+                Settings.data.audio.volumeOverdrive = checked
+
                 // If overdrive is disabled and current volume is above 100%, cap it
                 if (!checked && Audio.volume > 1.0) {
                   Audio.volumeSet(1.0)
@@ -140,57 +140,55 @@ ColumnLayout {
             font.weight: Style.fontWeightBold
             color: Colors.textPrimary
             Layout.bottomMargin: Style.marginSmall * scaling
-                      }
-
-            // Output Device
-            NComboBox {
-              id: outputDeviceCombo
-              label: "Output Device"
-              description: "Default audio output device"
-              optionsKeys: outputDeviceKeys
-              optionsLabels: outputDeviceLabels
-              currentKey: Audio.sink ? Audio.sink.id.toString() : ""
-              onSelected: function (key) {
-                // Find the node by ID and set it as preferred
-                for (let i = 0; i < Pipewire.nodes.count; i++) {
-                  let node = Pipewire.nodes.get(i)
-                  if (node.id.toString() === key && node.isSink) {
-                    Pipewire.preferredDefaultAudioSink = node
-                    break
-                  }
-                }
-              }
-            }
-
-            // Input Device
-            NComboBox {
-              id: inputDeviceCombo
-              label: "Input Device"
-              description: "Default audio input device"
-              optionsKeys: inputDeviceKeys
-              optionsLabels: inputDeviceLabels
-              currentKey: Audio.source ? Audio.source.id.toString() : ""
-              onSelected: function (key) {
-                // Find the node by ID and set it as preferred
-                for (let i = 0; i < Pipewire.nodes.count; i++) {
-                  let node = Pipewire.nodes.get(i)
-                  if (node.id.toString() === key && !node.isSink) {
-                    Pipewire.preferredDefaultAudioSource = node
-                    break
-                  }
-                }
-              }
-            }
-
-
-                  }
-
-          // Divider
-          NDivider {
-            Layout.fillWidth: true
-            Layout.topMargin: Style.marginLarge * scaling
-            Layout.bottomMargin: Style.marginMedium * scaling
           }
+
+          // Output Device
+          NComboBox {
+            id: outputDeviceCombo
+            label: "Output Device"
+            description: "Default audio output device"
+            optionsKeys: outputDeviceKeys
+            optionsLabels: outputDeviceLabels
+            currentKey: Audio.sink ? Audio.sink.id.toString() : ""
+            onSelected: function (key) {
+              // Find the node by ID and set it as preferred
+              for (var i = 0; i < Pipewire.nodes.count; i++) {
+                let node = Pipewire.nodes.get(i)
+                if (node.id.toString() === key && node.isSink) {
+                  Pipewire.preferredDefaultAudioSink = node
+                  break
+                }
+              }
+            }
+          }
+
+          // Input Device
+          NComboBox {
+            id: inputDeviceCombo
+            label: "Input Device"
+            description: "Default audio input device"
+            optionsKeys: inputDeviceKeys
+            optionsLabels: inputDeviceLabels
+            currentKey: Audio.source ? Audio.source.id.toString() : ""
+            onSelected: function (key) {
+              // Find the node by ID and set it as preferred
+              for (var i = 0; i < Pipewire.nodes.count; i++) {
+                let node = Pipewire.nodes.get(i)
+                if (node.id.toString() === key && !node.isSink) {
+                  Pipewire.preferredDefaultAudioSource = node
+                  break
+                }
+              }
+            }
+          }
+        }
+
+        // Divider
+        NDivider {
+          Layout.fillWidth: true
+          Layout.topMargin: Style.marginLarge * scaling
+          Layout.bottomMargin: Style.marginMedium * scaling
+        }
 
         // Audio Visualizer Category
         ColumnLayout {
@@ -298,7 +296,7 @@ ColumnLayout {
         outputDeviceCombo.optionsKeys = outputDeviceKeys
         outputDeviceCombo.optionsLabels = outputDeviceLabels
       }
-      
+
       if (inputDeviceCombo) {
         inputDeviceCombo.optionsKeys = inputDeviceKeys
         inputDeviceCombo.optionsLabels = inputDeviceLabels

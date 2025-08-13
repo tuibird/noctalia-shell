@@ -53,7 +53,7 @@ Singleton {
     onLoaded: function () {
       Qt.callLater(function () {
         if (adapter.wallpaper.current !== "") {
-          console.log("Settings: Initializing wallpaper to:", adapter.wallpaper.current)
+          console.log("[Settings] Set current wallpaper")
           Wallpapers.setCurrentWallpaper(adapter.wallpaper.current, true)
         }
       })
@@ -193,8 +193,14 @@ Singleton {
 
   Connections {
     target: adapter.wallpaper
-    function onIsRandomChanged() { Wallpapers.toggleRandomWallpaper() }
-    function onRandomIntervalChanged() { Wallpapers.restartRandomWallpaperTimer() }
-    function onDirectoryChanged() { Wallpapers.loadWallpapers() }
+    function onIsRandomChanged() {
+      Wallpapers.toggleRandomWallpaper()
+    }
+    function onRandomIntervalChanged() {
+      Wallpapers.restartRandomWallpaperTimer()
+    }
+    function onDirectoryChanged() {
+      Wallpapers.loadWallpapers()
+    }
   }
 }

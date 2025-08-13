@@ -15,8 +15,6 @@ Variants {
     required property ShellScreen modelData
     readonly property real scaling: Scaling.scale(screen)
 
-    property var settingsPanel: null
-
     screen: modelData
     implicitHeight: Style.barHeight * scaling
     color: "transparent"
@@ -52,11 +50,13 @@ Variants {
         anchors.verticalCenter: parent.verticalCenter
         spacing: Style.marginSmall * scaling
 
-        NText {
-          text: screen.name
-          anchors.verticalCenter: parent.verticalCenter
-          font.weight: Style.fontWeightBold
-        }
+        // Debug show monitor name
+        // NText {
+        //   text: screen.name
+        //   anchors.verticalCenter: parent.verticalCenter
+        //   font.weight: Style.fontWeightBold
+        // }
+        SystemMonitor {}
       }
 
       // Center
