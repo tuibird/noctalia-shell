@@ -100,6 +100,10 @@ Variants {
           anchors.verticalCenter: parent.verticalCenter
         }
 
+        NotificationHistory {
+          anchors.verticalCenter: parent.verticalCenter
+        }
+
         WiFi {
           anchors.verticalCenter: parent.verticalCenter
         }
