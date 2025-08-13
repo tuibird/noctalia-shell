@@ -30,6 +30,7 @@ Item {
         // Current wallpaper display
         NText {
           text: "Current Wallpaper"
+          font.pointSize: Style.fontSizeXL * scaling
           font.weight: Style.fontWeightBold
           color: Colors.textPrimary
         }
@@ -55,12 +56,11 @@ Item {
           }
         }
 
-      NDivider {
-        Layout.fillWidth: true
-        Layout.topMargin: Style.marginLarge * scaling
-        Layout.bottomMargin: Style.marginLarge * scaling
-      }
-
+        NDivider {
+          Layout.fillWidth: true
+          Layout.topMargin: Style.marginLarge * scaling
+          Layout.bottomMargin: Style.marginLarge * scaling
+        }
 
         RowLayout {
           Layout.fillWidth: true
@@ -71,6 +71,7 @@ Item {
             // Wallpaper grid
             NText {
               text: "Wallpaper Selector"
+              font.pointSize: Style.fontSizeXL * scaling
               font.weight: Style.fontWeightBold
               color: Colors.textPrimary
             }
