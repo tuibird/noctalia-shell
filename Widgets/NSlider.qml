@@ -72,7 +72,6 @@ ColumnLayout {
       font.weight: Style.fontWeightBold
       color: Colors.textPrimary
       Layout.alignment: Qt.AlignBottom | Qt.AlignRight
-      
     }
   }
 

@@ -36,164 +36,164 @@ NLoader {
           anchors.fill: parent
         }
 
-        // Debug: Add a simple text to see if content is visible
-        NText {
-          text: "DemoPanel is working!"
-          color: Colors.accentPrimary
-          font.pointSize: Style.fontSizeLarge * scaling
-          anchors.top: parent.top
-          anchors.horizontalCenter: parent.horizontalCenter
-          anchors.topMargin: 20 * scaling
-        }
-
         ColumnLayout {
           anchors.fill: parent
-          anchors.margins: Style.marginMedium * scaling
-          anchors.topMargin: (Style.marginMedium + 40) * scaling
-          spacing: Style.marginMedium * scaling
+          anchors.margins: Style.marginXL * scaling
 
-          // NSlider
+          NText {
+            text: "DemoPanel"
+            color: Colors.accentPrimary
+            font.pointSize: Style.fontSizeXL* scaling
+            font.weight: Style.fontWeightBold
+            Layout.alignment: Qt.AlignHCenter
+          }
+
           ColumnLayout {
-            spacing: 16 * scaling
-            NText {
-              text: "Scaling"
-              color: Colors.accentSecondary
-              font.weight: Style.fontWeightBold
-            }
-            RowLayout {
-              spacing: Style.marginSmall * scaling
-              NSlider {
-                label: "Scaling"
-                description: "Scaling goes brrrr"
-                valueSuffix: "%"
-                from: 60
-                to: 180
-                stepSize: 1
-                value: Scaling.overrideScale * 100
-                implicitWidth: bgRect.width * 0.75
-                onPressedChanged: function (pressed, value) {
-                  Scaling.overrideEnabled = true
-                  Scaling.overrideScale = value / 100
+
+            spacing: Style.marginMedium * scaling
+
+            // NSlider
+            ColumnLayout {
+              spacing: 16 * scaling
+              NText {
+                text: "Scaling"
+                color: Colors.accentSecondary
+                font.weight: Style.fontWeightBold
+              }
+              RowLayout {
+                spacing: Style.marginSmall * scaling
+                NSlider {
+                  label: "Scaling"
+                  description: "Scaling goes brrrr"
+                  valueSuffix: "%"
+                  from: 60
+                  to: 180
+                  stepSize: 1
+                  value: Scaling.overrideScale * 100
+                  implicitWidth: bgRect.width * 0.75
+                  onPressedChanged: function (pressed, value) {
+                    Scaling.overrideEnabled = true
+                    Scaling.overrideScale = value / 100
+                  }
+                }
+                NIconButton {
+                  icon: "refresh"
+                  fontPointSize: Style.fontSizeLarge * scaling
+                  onClicked: {
+                    Scaling.overrideEnabled = false
+                    Scaling.overrideScale = 1.0
+                  }
                 }
               }
+              NDivider {
+                Layout.fillWidth: true
+              }
+            }
+
+            // NIconButton
+            ColumnLayout {
+              spacing: 16 * scaling
+              NText {
+                text: "NIconButton"
+                color: Colors.accentSecondary
+                font.weight: Style.fontWeightBold
+              }
+
               NIconButton {
-                icon: "refresh"
-                fontPointSize: Style.fontSizeXL * scaling
-                onClicked: {
-                  Scaling.overrideEnabled = false
-                  Scaling.overrideScale = 1.0
-                  console.log("Reset!")
+                id: myIconButton
+                icon: "celebration"
+                fontPointSize: Style.fontSizeLarge * scaling
+              }
+
+              NDivider {
+                Layout.fillWidth: true
+              }
+            }
+
+            // NToggle
+            ColumnLayout {
+              spacing: Style.marginMedium * scaling
+              NText {
+                text: "NToggle"
+                color: Colors.accentSecondary
+                font.weight: Style.fontWeightBold
+              }
+
+              NToggle {
+                label: "Label"
+                description: "Description"
+                onToggled: function (value) {
+                  console.log("[DemoPanel] NToggle:", value)
                 }
               }
-            }
-            NDivider {
-              Layout.fillWidth: true
-            }
-          }
 
-          // NIconButton
-          ColumnLayout {
-            spacing: 16 * scaling
-            NText {
-              text: "NIconButton"
-              color: Colors.accentSecondary
-              font.weight: Style.fontWeightBold
-            }
-
-            NIconButton {
-              id: myIconButton
-              icon: "celebration"
-              fontPointSize: Style.fontSizeXL * scaling
-            }
-
-            NDivider {
-              Layout.fillWidth: true
-            }
-          }
-
-          // NToggle
-          ColumnLayout {
-            spacing: Style.marginMedium * scaling
-            NText {
-              text: "NToggle"
-              color: Colors.accentSecondary
-              font.weight: Style.fontWeightBold
-            }
-
-            NToggle {
-              label: "Label"
-              description: "Description"
-              onToggled: function (value) {
-                console.log("[DemoPanel] NToggle:", value)
+              NDivider {
+                Layout.fillWidth: true
               }
             }
 
-            NDivider {
-              Layout.fillWidth: true
-            }
-          }
+            // NComboBox
+            ColumnLayout {
+              spacing: Style.marginMedium * scaling
+              NText {
+                text: "NComboBox"
+                color: Colors.accentSecondary
+                font.weight: Style.fontWeightBold
+              }
 
-          // NComboBox
-          ColumnLayout {
-            spacing: Style.marginMedium * scaling
-            NText {
-              text: "NComboBox"
-              color: Colors.accentSecondary
-              font.weight: Style.fontWeightBold
-            }
+              NComboBox {
+                label: "Animal"
+                description: "What's your favorite"
+                optionsKeys: ["cat", "dog", "bird", "monkey", "fish", "turtle", "elephant", "tiger"]
+                optionsLabels: ["Cat", "Dog", "Bird", "Monkey", "Fish", "Turtle", "Elephant", "Tiger"]
+                currentKey: "cat"
+                onSelected: function (value) {
+                  console.log("[DemoPanel] NComboBox: selected ", value)
+                }
+              }
 
-            NComboBox {
-              label: "Animal"
-              description: "What's your favorite"
-              optionsKeys: ["cat", "dog", "bird", "monkey", "fish", "turtle", "elephant", "tiger"]
-              optionsLabels: ["Cat", "Dog", "Bird", "Monkey", "Fish", "Turtle", "Elephant", "Tiger"]
-              currentKey: "cat"
-              onSelected: function (value) {
-                console.log("[DemoPanel] NComboBox: selected ", value)
+              NDivider {
+                Layout.fillWidth: true
               }
             }
 
-            NDivider {
-              Layout.fillWidth: true
-            }
-          }
+            // NTextInput
+            ColumnLayout {
+              spacing: Style.marginMedium * scaling
+              NText {
+                text: "NTextInput"
+                color: Colors.accentSecondary
+                font.weight: Style.fontWeightBold
+              }
 
-          // NTextInput
-          ColumnLayout {
-            spacing: Style.marginMedium * scaling
-            NText {
-              text: "NTextInput"
-              color: Colors.accentSecondary
-              font.weight: Style.fontWeightBold
-            }
+              NTextInput {
+                label: "Input label"
+                description: "A cool description"
+                text: "Type anything"
+                Layout.fillWidth: true
+                onEditingFinished: {
 
-            NTextInput {
-              label: "Input label"
-              description: "A cool description"
-              text: "Type anything"
-              Layout.fillWidth: true
-              onEditingFinished: {
-
+                }
+              }
+              NDivider {
+                Layout.fillWidth: true
               }
             }
-            NDivider {
-              Layout.fillWidth: true
-            }
-          }
 
-          // NBusyIndicator
-          ColumnLayout {
-            spacing: Style.marginMedium * scaling
-            NText {
-              text: "NBusyIndicator"
-              color: Colors.accentSecondary
-              font.weight: Style.fontWeightBold
-            }
+            // NBusyIndicator
+            ColumnLayout {
+              spacing: Style.marginMedium * scaling
+              NText {
+                text: "NBusyIndicator"
+                color: Colors.accentSecondary
+                font.weight: Style.fontWeightBold
+              }
 
-            NBusyIndicator {}
+              NBusyIndicator {}
 
-            NDivider {
-              Layout.fillWidth: true
+              NDivider {
+                Layout.fillWidth: true
+              }
             }
           }
         }
