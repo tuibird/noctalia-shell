@@ -69,9 +69,7 @@ ColumnLayout {
       font.pointSize: Style.fontSizeMedium * scaling
       verticalAlignment: Text.AlignVCenter
       elide: Text.ElideRight
-      text: {
-        return root.optionsLabels[combo.currentIndex]
-      }
+      text: (combo.currentIndex < root.optionsLabels.length) ? root.optionsLabels[combo.currentIndex] : "";
     }
 
     // Drop down indicator
@@ -110,9 +108,7 @@ ColumnLayout {
       highlighted: combo.highlightedIndex === index
 
       contentItem: NText {
-        text: {
-          return root.optionsLabels[combo.model.indexOf(modelData)]
-        }
+        text: (combo.model.indexOf(modelData)< root.optionsLabels.length) ? root.optionsLabels[combo.model.indexOf(modelData)] : ""
         font.pointSize: Style.fontSizeMedium * scaling
         color: highlighted ? Colors.backgroundPrimary : Colors.textPrimary
         verticalAlignment: Text.AlignVCenter
