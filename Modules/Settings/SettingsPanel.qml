@@ -7,7 +7,6 @@ import qs.Modules.Settings.Tabs as Tabs
 import qs.Services
 import qs.Widgets
 
-
 NLoader {
   id: root
 

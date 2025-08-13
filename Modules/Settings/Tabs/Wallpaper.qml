@@ -116,49 +116,19 @@ ColumnLayout {
         }
 
         // Wallpaper Interval
-        ColumnLayout {
-          spacing: 8
+        NSlider {
+          label: "Wallpaper Interval"
+          description: "How often to change wallpapers automatically (in seconds)"
+          valueSuffix: "s"
+          from: 10
+          to: 900
+          stepSize: 10
+          value: Settings.data.wallpaper.randomInterval
+          onPressedChanged: function (pressed, value) {
+            Settings.data.wallpaper.randomInterval = Math.round(value)
+          }
+          cutoutColor: Colors.backgroundPrimary
           Layout.fillWidth: true
-          Layout.topMargin: 8
-
-          NText {
-            text: "Wallpaper Interval"
-            font.pointSize: 13
-            font.weight: Style.fontWeightBold
-            color: Colors.textPrimary
-          }
-
-          NText {
-            text: "How often to change wallpapers automatically (in seconds)"
-            font.pointSize: 12
-            color: Colors.textSecondary
-            wrapMode: Text.WordWrap
-            Layout.fillWidth: true
-          }
-
-          RowLayout {
-            Layout.fillWidth: true
-
-            NText {
-              text: Settings.data.wallpaper.randomInterval + " seconds"
-              font.pointSize: 13
-              color: Colors.textPrimary
-            }
-
-            Item {
-              Layout.fillWidth: true
-            }
-          }
-
-          NSlider {
-            Layout.fillWidth: true
-            from: 10
-            to: 900
-            stepSize: 10
-            value: Settings.data.wallpaper.randomInterval
-            onPressedChanged: Settings.data.wallpaper.randomInterval = Math.round(value)
-            cutoutColor: Colors.backgroundPrimary
-          }
         }
       }
 
@@ -259,95 +229,35 @@ ColumnLayout {
           }
 
           // Transition FPS
-          ColumnLayout {
-            spacing: 8
+          NSlider {
+            label: "Transition FPS"
+            description: "Frames per second for transition animations"
+            valueSuffix: " FPS"
+            from: 30
+            to: 500
+            stepSize: 5
+            value: Settings.data.wallpaper.swww.transitionFps
+            onPressedChanged: function (pressed, value) {
+              Settings.data.wallpaper.swww.transitionFps = Math.round(value)
+            }
+            cutoutColor: Colors.backgroundPrimary
             Layout.fillWidth: true
-            Layout.topMargin: 8
-
-            NText {
-              text: "Transition FPS"
-              font.pointSize: 13
-              font.weight: Style.fontWeightBold
-              color: Colors.textPrimary
-            }
-
-            NText {
-              text: "Frames per second for transition animations"
-              font.pointSize: 12
-              color: Colors.textSecondary
-              wrapMode: Text.WordWrap
-              Layout.fillWidth: true
-            }
-
-            RowLayout {
-              Layout.fillWidth: true
-
-              NText {
-                text: Settings.data.wallpaper.swww.transitionFps + " FPS"
-                font.pointSize: 13
-                color: Colors.textPrimary
-              }
-
-              Item {
-                Layout.fillWidth: true
-              }
-            }
-
-            NSlider {
-              Layout.fillWidth: true
-              from: 30
-              to: 500
-              stepSize: 5
-              value: Settings.data.wallpaper.swww.transitionFps
-              onPressedChanged: Settings.data.wallpaper.swww.transitionFps = Math.round(value)
-              cutoutColor: Colors.backgroundPrimary
-            }
           }
 
           // Transition Duration
-          ColumnLayout {
-            spacing: 8
+          NSlider {
+            label: "Transition Duration"
+            description: "Duration of transition animations in seconds"
+            valueSuffix: "s"
+            from: 0.25
+            to: 10
+            stepSize: 0.05
+            value: Settings.data.wallpaper.swww.transitionDuration
+            onPressedChanged: function (pressed, value) {
+              Settings.data.wallpaper.swww.transitionDuration = value
+            }
+            cutoutColor: Colors.backgroundPrimary
             Layout.fillWidth: true
-            Layout.topMargin: 8
-
-            NText {
-              text: "Transition Duration"
-              font.pointSize: 13
-              font.weight: Style.fontWeightBold
-              color: Colors.textPrimary
-            }
-
-            NText {
-              text: "Duration of transition animations in seconds"
-              font.pointSize: 12
-              color: Colors.textSecondary
-              wrapMode: Text.WordWrap
-              Layout.fillWidth: true
-            }
-
-            RowLayout {
-              Layout.fillWidth: true
-
-              NText {
-                text: Settings.data.wallpaper.swww.transitionDuration.toFixed(3) + " seconds"
-                font.pointSize: 13
-                color: Colors.textPrimary
-              }
-
-              Item {
-                Layout.fillWidth: true
-              }
-            }
-
-            NSlider {
-              Layout.fillWidth: true
-              from: 0.25
-              to: 10
-              stepSize: 0.05
-              value: Settings.data.wallpaper.swww.transitionDuration
-              onPressedChanged: Settings.data.wallpaper.swww.transitionDuration = value
-              cutoutColor: Colors.backgroundPrimary
-            }
           }
         }
       }

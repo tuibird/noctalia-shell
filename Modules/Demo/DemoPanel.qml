@@ -62,22 +62,18 @@ NLoader {
             }
             RowLayout {
               spacing: Style.marginSmall * scaling
-              NText {
-                text: `${Math.round(Scaling.overrideScale * 100)}%`
-                Layout.alignment: Qt.AlignVCenter
-              }
               NSlider {
-                id: scaleSlider
-                from: 0.6
-                to: 1.8
-                stepSize: 0.01
-                value: Scaling.overrideScale
+                label: "Scaling"
+                description: "Scaling goes brrrr"
+                valueSuffix: "%"
+                from: 60
+                to: 180
+                stepSize: 1
+                value: Scaling.overrideScale * 100
                 implicitWidth: bgRect.width * 0.75
-                onMoved: {
-                  Scaling.overrideScale = value
-                }
-                onPressedChanged: {
+                onPressedChanged: function (pressed, value) {
                   Scaling.overrideEnabled = true
+                  Scaling.overrideScale = value / 100
                 }
               }
               NIconButton {
@@ -86,6 +82,7 @@ NLoader {
                 onClicked: {
                   Scaling.overrideEnabled = false
                   Scaling.overrideScale = 1.0
+                  console.log("Reset!")
                 }
               }
             }
