@@ -3,11 +3,23 @@ import QtQuick.Effects
 import Quickshell
 import Quickshell.Wayland
 import qs.Services
+import qs.Widgets
 
-Variants {
-  model: Quickshell.screens
+NLoader {
+  active: Workspaces.isNiri
+  
+  Component.onCompleted: {
+    if (Workspaces.isNiri) {
+      console.log("[Overview] Loading Overview component (Niri detected)")
+    } else {
+      console.log("[Overview] Skipping Overview component (Niri not detected)")
+    }
+  }
+  
+  sourceComponent: Variants {
+    model: Quickshell.screens
 
-  delegate: PanelWindow {
+    delegate: PanelWindow {
     required property ShellScreen modelData
     property string wallpaperSource: Wallpapers.currentWallpaper !== ""
                                      && !Settings.data.wallpaper.swww.enabled ? Wallpapers.currentWallpaper : ""
@@ -52,5 +64,6 @@ Variants {
       anchors.fill: parent
       color: Qt.rgba(Colors.backgroundPrimary.r, Colors.backgroundPrimary.g, Colors.backgroundPrimary.b, 0.5)
     }
+  }
   }
 }
