@@ -100,10 +100,18 @@ Window {
   Rectangle {
     anchors.fill: parent
     radius: Style.radiusMedium * scaling
-    color: Colors.backgroundTertiary
+    gradient: Gradient {
+          GradientStop {
+            position: 0.0
+            color: Colors.backgroundTertiary
+          }
+          GradientStop {
+            position: 1.0
+            color: Colors.backgroundSecondary
+          }
+        }
     border.color: Colors.outline
     border.width: Math.max(1, Style.borderThin * scaling)
-    opacity: Style.opacityFull
     z: 1
   }
 
