@@ -127,7 +127,7 @@ NLoader {
 
             // NSlider
             ColumnLayout {
-              spacing: 16 * scaling
+              spacing: Style.marginLarge * scaling
               NText {
                 text: "Scaling"
                 color: Colors.accentSecondary
@@ -170,7 +170,7 @@ NLoader {
 
             // NIconButton
             ColumnLayout {
-              spacing: 16 * scaling
+              spacing: Style.marginLarge * scaling
               NText {
                 text: "NIconButton"
                 color: Colors.accentSecondary

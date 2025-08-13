@@ -134,8 +134,8 @@ PopupWindow {
           }
 
           Image {
-            Layout.preferredWidth: 16 * scaling
-            Layout.preferredHeight: 16 * scaling
+            Layout.preferredWidth: Style.marginLarge * scaling
+            Layout.preferredHeight: Style.marginLarge * scaling
             source: modelData?.icon ?? ""
             visible: (modelData?.icon ?? "") !== ""
             fillMode: Image.PreserveAspectFit
@@ -369,8 +369,8 @@ PopupWindow {
               }
 
               Image {
-                Layout.preferredWidth: 16 * scaling
-                Layout.preferredHeight: 16 * scaling
+                Layout.preferredWidth: Style.marginLarge * scaling
+                Layout.preferredHeight: Style.marginLarge * scaling
                 source: modelData?.icon ?? ""
                 visible: (modelData?.icon ?? "") !== ""
                 fillMode: Image.PreserveAspectFit

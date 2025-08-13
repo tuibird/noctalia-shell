@@ -32,8 +32,8 @@ Item {
         IconImage {
           id: trayIcon
           anchors.centerIn: parent
-          width: 16 * scaling
-          height: 16 * scaling
+          width: Style.marginLarge * scaling
+          height: Style.marginLarge * scaling
           smooth: false
           asynchronous: true
           backer.fillMode: Image.PreserveAspectFit

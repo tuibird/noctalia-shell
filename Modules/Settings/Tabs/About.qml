@@ -69,7 +69,7 @@ ColumnLayout {
         font.pointSize: 14 * Scaling.scale(screen)
         color: Colors.textSecondary
         Layout.alignment: Qt.AlignCenter
-        Layout.bottomMargin: 16 * Scaling.scale(screen)
+        Layout.bottomMargin: Style.marginLarge * scaling.scale(screen)
       }
 
       GridLayout {
@@ -80,28 +80,28 @@ ColumnLayout {
 
         NText {
           text: "Latest Version:"
-          font.pointSize: 16 * Scaling.scale(screen)
+          font.pointSize: Style.marginLarge * scaling.scale(screen)
           color: Colors.textSecondary
           Layout.alignment: Qt.AlignRight
         }
 
         NText {
           text: root.latestVersion
-          font.pointSize: 16 * Scaling.scale(screen)
+          font.pointSize: Style.marginLarge * scaling.scale(screen)
           color: Colors.textPrimary
           font.weight: Style.fontWeightBold
         }
 
         NText {
           text: "Installed Version:"
-          font.pointSize: 16 * Scaling.scale(screen)
+          font.pointSize: Style.marginLarge * scaling.scale(screen)
           color: Colors.textSecondary
           Layout.alignment: Qt.AlignRight
         }
 
         NText {
           text: root.currentVersion
-          font.pointSize: 16 * Scaling.scale(screen)
+          font.pointSize: Style.marginLarge * scaling.scale(screen)
           color: Colors.textPrimary
           font.weight: Style.fontWeightBold
         }
