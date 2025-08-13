@@ -28,7 +28,7 @@ TEMP_SENSOR_TYPE=""
 # --- Data Collection Functions ---
 
 #
-# Gets memory usage in GB and as a percentage.
+# Gets memory usage in GB, MB, and as a percentage.
 #
 get_memory_info() {
   awk '
@@ -39,11 +39,10 @@ get_memory_info() {
         usage_kb = total - available
         usage_gb = usage_kb / 1000000
         usage_percent = (usage_kb / total) * 100
-        # MODIFIED: Round the memory percentage to the nearest integer.
         printf "%.1f %.0f\n", usage_gb, usage_percent
       } else {
         # Fallback if /proc/meminfo is unreadable or empty.
-        print "0.0 0.0"
+        print "0.0 0 0"
       }
     }
   ' /proc/meminfo
@@ -95,10 +94,8 @@ get_cpu_usage() {
       if (total > 0) {
         # Formula: 100 * (Total - Idle) / Total
         usage = 100 * (total - idle) / total
-        # MODIFIED: Changed format from "%.2f" back to "%.1f" for one decimal place.
         printf "%.1f\n", usage
       } else {
-        # MODIFIED: Changed output back to "0.0" to match the precision.
         print "0.0"
       }
     }'
@@ -171,7 +168,7 @@ get_cpu_temp() {
 # This loop runs indefinitely, gathering and printing stats.
 while true; do
   # Call the functions to gather all the data.
-  # 'read' is used to capture the two output values from get_memory_info.
+  # get_memory_info
   read -r mem_gb mem_per <<< "$(get_memory_info)"
   
   # Command substitution captures the single output from the other functions.
@@ -179,11 +176,11 @@ while true; do
   cpu_usage=$(get_cpu_usage)
   cpu_temp=$(get_cpu_temp)
 
-  # Use printf to format the final JSON output string, matching the Zig program.
-  printf '{"mem":"%s", "cpu": "%s", "cputemp": "%s", "memper": "%s", "diskper": "%s"}\n' \
-    "$mem_gb" \
+  # Use printf to format the final JSON output string, adding the mem_mb key.
+  printf '{"cpu": "%s", "cputemp": "%s", "memgb":"%s", "memper": "%s", "diskper": "%s"}\n' \
     "$cpu_usage" \
     "$cpu_temp" \
+    "$mem_gb" \
     "$mem_per" \
     "$disk_per"
 

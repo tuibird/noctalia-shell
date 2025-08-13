@@ -11,6 +11,7 @@ Singleton {
   // Public values
   property real cpuUsage: 0
   property real cpuTemp: 0
+  property real memoryUsageGb: 0
   property real memoryUsagePer: 0
   property real diskUsage: 0
 
@@ -25,6 +26,7 @@ Singleton {
           const data = JSON.parse(line)
           root.cpuUsage = data.cpu
           root.cpuTemp = data.cputemp
+          root.memoryUsageGb = data.memgb
           root.memoryUsagePer = data.memper
           root.diskUsage = data.diskper
         } catch (e) {

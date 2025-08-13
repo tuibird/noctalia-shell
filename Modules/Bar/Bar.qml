@@ -50,11 +50,14 @@ Variants {
         anchors.verticalCenter: parent.verticalCenter
         spacing: Style.marginSmall * scaling
 
-        NText {
-          text: screen.name
-          anchors.verticalCenter: parent.verticalCenter
-          font.weight: Style.fontWeightBold
-        }
+        // Debug show monitor name
+        // NText {
+        //   text: screen.name
+        //   anchors.verticalCenter: parent.verticalCenter
+        //   font.weight: Style.fontWeightBold
+        // }
+
+        SystemMonitor {}
       }
 
       // Center
