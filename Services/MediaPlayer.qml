@@ -12,9 +12,9 @@ Singleton {
   property real currentPosition: 0
   property int selectedPlayerIndex: 0
   property bool isPlaying: currentPlayer ? currentPlayer.isPlaying : false
-  property string trackTitle: currentPlayer ? (currentPlayer.trackTitle || "Unknown Track") : ""
-  property string trackArtist: currentPlayer ? (currentPlayer.trackArtist || "Unknown Artist") : ""
-  property string trackAlbum: currentPlayer ? (currentPlayer.trackAlbum || "Unknown Album") : ""
+  property string trackTitle: currentPlayer ? (currentPlayer.trackTitle || "") : ""
+  property string trackArtist: currentPlayer ? (currentPlayer.trackArtist || "") : ""
+  property string trackAlbum: currentPlayer ? (currentPlayer.trackAlbum || "") : ""
   property string trackArtUrl: currentPlayer ? (currentPlayer.trackArtUrl || "") : ""
   property real trackLength: currentPlayer ? currentPlayer.length : 0
   property bool canPlay: currentPlayer ? currentPlayer.canPlay : false
@@ -24,13 +24,8 @@ Singleton {
   property bool canSeek: currentPlayer ? currentPlayer.canSeek : false
   property bool hasPlayer: getAvailablePlayers().length > 0
 
-  // Expose cava values
-  property alias cavaValues: cava.values
-
-  Item {
-    Component.onCompleted: {
-      updateCurrentPlayer()
-    }
+  Component.onCompleted: {
+    updateCurrentPlayer()
   }
 
   function getAvailablePlayers() {
@@ -153,9 +148,5 @@ Singleton {
     function onValuesChanged() {
       updateCurrentPlayer()
     }
-  }
-
-  Cava {
-    id: cava
   }
 }

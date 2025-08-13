@@ -1,7 +1,8 @@
+pragma Singleton
+
 import QtQuick
 import Quickshell
 import Quickshell.Io
-import qs.Services
 
 Singleton {
   id: root
@@ -59,19 +60,19 @@ Singleton {
     stdout: SplitParser {
       splitMarker: ""
       onRead: data => {
-                const newValues = Array(count).fill(0)
-                for (var i = 0; i < values.length; i++) {
-                  newValues[i] = values[i]
-                }
-                if (process.index + data.length > count) {
-                  process.index = 0
-                }
-                for (var i = 0; i < data.length; i += 1) {
-                  newValues[process.index] = Math.min(data.charCodeAt(i), 128) / 128
-                  process.index = (process.index + 1) % count
-                }
-                values = newValues
-              }
+        const newValues = Array(count).fill(0)
+        for (var i = 0; i < values.length; i++) {
+          newValues[i] = values[i]
+        }
+        if (process.index + data.length > count) {
+          process.index = 0
+        }
+        for (var i = 0; i < data.length; i += 1) {
+          newValues[process.index] = Math.min(data.charCodeAt(i), 128) / 128
+          process.index = (process.index + 1) % count
+        }
+        values = newValues
+      }
     }
   }
 }
