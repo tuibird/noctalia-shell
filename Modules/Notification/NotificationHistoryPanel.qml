@@ -152,12 +152,12 @@ NLoader {
             Layout.fillHeight: true
             model: NotificationService.historyModel
             spacing: Style.marginMedium * scaling
-            clip: true
+            clip: false
             boundsBehavior: Flickable.StopAtBounds
 
             delegate: Rectangle {
               width: notificationList ? (notificationList.width - 20) : 380 * scaling
-              height: 80
+              height: Math.max(80, notificationContent.height + 30)
               radius: Style.radiusMedium * scaling
               color: notificationMouseArea.containsMouse ? Colors.accentPrimary : "transparent"
 
@@ -170,6 +170,7 @@ NLoader {
 
                 // Notification content
                 Column {
+                  id: notificationContent
                   Layout.fillWidth: true
                   Layout.alignment: Qt.AlignVCenter
                   spacing: 5
