@@ -34,34 +34,7 @@ Singleton {
   readonly property alias muted: root._muted
   property bool _muted: !!sink?.audio?.muted
 
-  readonly property real step: 0.05
-
-  function volumeIncrement() {
-    volumeSet(volume + step)
-  }
-
-  function volumeDecrement() {
-    volumeSet(volume - step)
-  }
-
-  function volumeSet(newVolume) {
-    if (sink?.ready && sink?.audio) {
-      // Clamp it accordingly
-      sink.audio.muted = false
-      sink.audio.volume = Math.max(0, Math.min(1, newVolume))
-      //console.log("[Audio] volumeSet", sink.audio.volume);
-    } else {
-      console.warn("[Audio] No sink available")
-    }
-  }
-
-  function setAudioSink(newSink: PwNode): void {
-    Pipewire.preferredDefaultAudioSink = newSink
-  }
-
-  function setAudioSource(newSource: PwNode): void {
-    Pipewire.preferredDefaultAudioSource = newSource
-  }
+  readonly property real stepVolume: 0.05
 
   PwObjectTracker {
     objects: [...root.sinks, ...root.sources]
@@ -82,5 +55,40 @@ Singleton {
       root._muted = (sink?.audio.muted ?? true)
       console.log("[Audio] onMuteChanged:", root._muted)
     }
+  }
+
+  function increaseVolume() {
+    setVolume(volume + stepVolume)
+  }
+
+  function decreaseVolume() {
+    setVolume(volume - stepVolume)
+  }
+
+  function setVolume(newVolume: real) {
+    if (sink?.ready && sink?.audio) {
+      // Clamp it accordingly
+      sink.audio.muted = false
+      sink.audio.volume = Math.max(0, Math.min(1, newVolume))
+      //console.log("[Audio] setVolume", sink.audio.volume);
+    } else {
+      console.warn("[Audio] No sink available")
+    }
+  }
+
+  function setMuted(muted: bool) {
+    if (sink?.ready && sink?.audio) {
+      sink.audio.muted = muted
+    } else {
+      console.warn("[Audio] No sink available")
+    }
+  }
+
+  function setAudioSink(newSink: PwNode): void {
+    Pipewire.preferredDefaultAudioSink = newSink
+  }
+
+  function setAudioSource(newSource: PwNode): void {
+    Pipewire.preferredDefaultAudioSource = newSource
   }
 }

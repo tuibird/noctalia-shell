@@ -10,10 +10,6 @@ Item {
   width: pill.width
   height: pill.height
 
-  Component.onCompleted: {
-    console.log("[Volume] settingsPanel received:", !!settingsPanel)
-  }
-
   // Used to avoid opening the pill on Quickshell startup
   property bool firstVolumeReceived: false
 
@@ -50,9 +46,9 @@ Item {
 
     onWheel: function (angle) {
       if (angle > 0) {
-        Audio.volumeIncrement()
+        Audio.increaseVolume()
       } else if (angle < 0) {
-        Audio.volumeDecrement()
+        Audio.decreaseVolume()
       }
     }
     onClicked: {

@@ -91,7 +91,7 @@ ColumnLayout {
                 repeat: true
                 onTriggered: {
                   if (Math.abs(localVolume - Audio.volume) >= 0.01) {
-                    Audio.volumeSet(localVolume)
+                    Audio.setVolume(localVolume)
                   }
                 }
               }
