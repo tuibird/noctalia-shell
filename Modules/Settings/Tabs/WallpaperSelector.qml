@@ -106,7 +106,7 @@ Item {
         Item {
           Layout.fillWidth: true
           Layout.preferredHeight: {
-            return folderModel.count / wallpaperGridView.columns * wallpaperGridView.cellHeight
+            return Math.ceil(folderModel.count / wallpaperGridView.columns) * wallpaperGridView.cellHeight
           }
 
           FolderListModel {
