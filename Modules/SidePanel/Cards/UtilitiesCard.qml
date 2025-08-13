@@ -30,6 +30,10 @@ NBox {
     // Wallpaper
     NIconButton {
       icon: "image"
+      onClicked: {
+        settingsPanel.currentTabIndex = 8 // Audio tab index
+        settingsPanel.isLoaded = true
+      }
     }
 
     Item {
