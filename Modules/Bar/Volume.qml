@@ -10,6 +10,13 @@ Item {
   width: pill.width
   height: pill.height
 
+  // Reference to settings panel
+  property var settingsPanel: null
+
+  Component.onCompleted: {
+    console.log("[Volume] settingsPanel received:", !!settingsPanel)
+  }
+
   // Used to avoid opening the pill on Quickshell startup
   property bool firstVolumeReceived: false
 
@@ -71,7 +78,15 @@ Item {
       }
     }
     onClicked: {
-      audioDeviceSelector.isLoaded = !audioDeviceSelector.isLoaded
+      // Open settings panel and navigate to Audio tab
+      console.log("[Volume] Attempting to open settings panel...")
+      try {
+        settingsPanel.isLoaded = true
+        settingsPanel.content.currentTabIndex = 5 // Audio tab index
+        console.log("[Volume] Settings panel opened successfully")
+      } catch (error) {
+        console.log("[Volume] Error opening settings panel:", error)
+      }
     }
   }
 }

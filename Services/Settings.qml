@@ -26,6 +26,8 @@ Singleton {
   // Used to access via Settings.data.xxx.yyy
   property var data: adapter
 
+  // Needed to only have one NPanel loaded at a time. <--- VERY BROKEN
+  //property var openPanel: null
   Item {
     Component.onCompleted: {
 
@@ -36,17 +38,22 @@ Singleton {
   }
 
   FileView {
+
+    // TBC ? needed for SWWW only ?
+    // Qt.callLater(function () {
+    //     WallpaperManager.setCurrentWallpaper(settings.currentWallpaper, true);
+    // })
     path: settingsFile
     watchChanges: true
     onFileChanged: reload()
     onAdapterUpdated: writeAdapter()
-    Component.onCompleted: {
+    Component.onCompleted: function () {
       reload()
     }
-    onLoaded: {
+    onLoaded: function () {
       Qt.callLater(function () {
         if (adapter.wallpaper.current !== "") {
-
+          console.log("Settings: Initializing wallpaper to:", adapter.wallpaper.current)
           Wallpapers.setCurrentWallpaper(adapter.wallpaper.current, true)
         }
       })
@@ -80,6 +87,7 @@ Singleton {
         property string avatarImage: defaultAvatar
         property bool dimDesktop: true
         property bool showScreenCorners: false
+        property bool showDock: false
       }
 
       // location
@@ -102,8 +110,9 @@ Singleton {
         property string videoCodec: "h264"
         property string quality: "very_high"
         property string colorRange: "limited"
-        property string audioSource: "default_output"
         property bool showCursor: true
+        // New: optional audio source selection (default: system output)
+        property string audioSource: "default_output"
       }
 
       // wallpaper
@@ -160,11 +169,16 @@ Singleton {
         property list<string> monitors: []
       }
 
-      // audioVisualizer
-      property JsonObject audioVisualizer
+      // audio
+      property JsonObject audio
 
-      audioVisualizer: JsonObject {
-        property string type: "radial"
+      audio: JsonObject {
+        property bool volumeOverdrive: false
+        property JsonObject audioVisualizer
+
+        audioVisualizer: JsonObject {
+          property string type: "radial"
+        }
       }
 
       // ui
@@ -179,14 +193,8 @@ Singleton {
 
   Connections {
     target: adapter.wallpaper
-    function onIsRandomChanged() {
-      Wallpapers.toggleRandomWallpaper()
-    }
-    function onRandomIntervalChanged() {
-      Wallpapers.restartRandomWallpaperTimer()
-    }
-    function onDirectoryChanged() {
-      Wallpapers.loadWallpapers()
-    }
+    function onIsRandomChanged() { Wallpapers.toggleRandomWallpaper() }
+    function onRandomIntervalChanged() { Wallpapers.restartRandomWallpaperTimer() }
+    function onDirectoryChanged() { Wallpapers.loadWallpapers() }
   }
 }
