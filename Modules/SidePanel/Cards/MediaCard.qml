@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Controls
 import QtQuick.Layouts
 import qs.Services
 import qs.Widgets
@@ -50,6 +51,90 @@ NBox {
 
       visible: MediaPlayer.currentPlayer
       spacing: Style.marginMedium * scaling
+
+      // Player selector
+      ComboBox {
+        id: playerSelector
+        Layout.fillWidth: true
+        Layout.preferredHeight: 30 * scaling
+        visible: MediaPlayer.getAvailablePlayers().length > 1
+        model: MediaPlayer.getAvailablePlayers()
+        textRole: "identity"
+        currentIndex: MediaPlayer.selectedPlayerIndex
+
+        background: Rectangle {
+          // implicitWidth: 120 * scaling
+          // implicitHeight: 30 * scaling
+          color: "transparent"
+          border.color: playerSelector.activeFocus ? Colors.hover : Colors.outline
+          border.width: Math.max(1, Style.borderThin * scaling)
+          radius: Style.radiusMedium * scaling
+        }
+
+        contentItem: NText {
+          leftPadding: Style.marginMedium * scaling
+          rightPadding: playerSelector.indicator.width + playerSelector.spacing
+          text: playerSelector.displayText
+          font.pointSize: Style.fontSizeSmall * scaling
+          color: Colors.textPrimary
+          verticalAlignment: Text.AlignVCenter
+          elide: Text.ElideRight
+        }
+
+        indicator: Text {
+          x: playerSelector.width - width - Style.marginMedium * scaling
+          y: playerSelector.topPadding + (playerSelector.availableHeight - height) / 2
+          text: "arrow_drop_down"
+          font.family: "Material Symbols Outlined"
+          font.pointSize: Style.marginXL * scaling
+          color: Colors.textPrimary
+        }
+
+        popup: Popup {
+          y: playerSelector.height
+          width: playerSelector.width
+          implicitHeight: Math.min(160 * scaling, contentItem.implicitHeight + Style.marginMedium * scaling * 2)
+          padding: Style.marginSmall * scaling
+
+          contentItem: ListView {
+            clip: true
+            implicitHeight: contentHeight
+            model: playerSelector.popup.visible ? playerSelector.delegateModel : null
+            currentIndex: playerSelector.highlightedIndex
+            ScrollIndicator.vertical: ScrollIndicator {}
+          }
+
+          background: Rectangle {
+            color: Colors.backgroundSecondary
+            border.color: Colors.outline
+            border.width: Math.max(1, Style.borderThin * scaling)
+            radius: Style.radiusMedium * scaling
+          }
+        }
+
+        delegate: ItemDelegate {
+          width: playerSelector.width
+          contentItem: NText {
+            text: modelData.identity
+            font.pointSize: Style.fontSizeSmall * scaling
+            color: highlighted ? Colors.backgroundPrimary : Colors.textPrimary
+            verticalAlignment: Text.AlignVCenter
+            elide: Text.ElideRight
+          }
+          highlighted: playerSelector.highlightedIndex === index
+
+          background: Rectangle {
+            width: playerSelector.width - Style.marginSmall * scaling * 2
+            color: highlighted ? Colors.hover : "transparent"
+            radius: Style.radiusSmall * scaling
+          }
+        }
+
+        onActivated: {
+          MediaPlayer.selectedPlayerIndex = currentIndex
+          MediaPlayer.updateCurrentPlayer()
+        }
+      }
 
       RowLayout {
         spacing: Style.marginMedium * scaling
@@ -228,8 +313,7 @@ NBox {
       }
     }
   }
-}// import QtQuick// import QtQuick.Controls// import QtQuick.Layouts// import QtQuick.Effects// import qs.Settings// import qs.Components// import qs.Services
-
+} // import QtQuick// import QtQuick.Controls// import QtQuick.Layouts// import QtQuick.Effects// import qs.Settings// import qs.Components// import qs.Services
 // Rectangle {
 //     id: musicCard
 //     color: "transparent"
@@ -244,7 +328,7 @@ NBox {
 //         Item {
 //             width: parent.width
 //             height: parent.height
-//             visible: !MusicManager.currentPlayer
+//             visible: !MediaPlayer.currentPlayer
 
 //             ColumnLayout {
 //                 anchors.centerIn: parent
@@ -259,7 +343,7 @@ NBox {
 //                 }
 
 //                 Text {
-//                     text: MusicManager.hasPlayer ? "No controllable player selected" : "No music player detected"
+//                     text: MediaPlayer.hasPlayer ? "No controllable player selected" : "No music player detected"
 //                     color: Qt.rgba(Theme.textPrimary.r, Theme.textPrimary.g, Theme.textPrimary.b, 0.6)
 //                     font.family: Theme.fontFamily
 //                     font.pixelSize: Theme.fontSizeSmall * scaling
@@ -273,17 +357,17 @@ NBox {
 //             anchors.fill: parent
 //             anchors.margins: 18 * scaling
 //             spacing: 12 * scaling
-//             visible: !!MusicManager.currentPlayer
+//             visible: !!MediaPlayer.currentPlayer
 
 //             // Player selector
 //             ComboBox {
 //                 id: playerSelector
 //                 Layout.fillWidth: true
 //                 Layout.preferredHeight: 40 * scaling
-//                 visible: MusicManager.getAvailablePlayers().length > 1
-//                 model: MusicManager.getAvailablePlayers()
+//                 visible: MediaPlayer.getAvailablePlayers().length > 1
+//                 model: MediaPlayer.getAvailablePlayers()
 //                 textRole: "identity"
-//                 currentIndex: MusicManager.selectedPlayerIndex
+//                 currentIndex: MediaPlayer.selectedPlayerIndex
 
 //                 background: Rectangle {
 //                     implicitWidth: 120 * scaling
@@ -353,8 +437,8 @@ NBox {
 //                 }
 
 //                 onActivated: {
-//                     MusicManager.selectedPlayerIndex = index;
-//                     MusicManager.updateCurrentPlayer();
+//                     MediaPlayer.selectedPlayerIndex = index;
+//                     MediaPlayer.updateCurrentPlayer();
 //                 }
 //             }
 
@@ -373,7 +457,7 @@ NBox {
 //                     // Circular spectrum visualizer around album art
 //                     CircularSpectrum {
 //                         id: spectrum
-//                         values: MusicManager.cavaValues
+//                         values: MediaPlayer.cavaValues
 //                         anchors.centerIn: parent
 //                         innerRadius: 30 * scaling // Position just outside 60x60 album art
 //                         outerRadius: 48 * scaling // Extend bars outward from album art
@@ -405,7 +489,7 @@ NBox {
 //                             asynchronous: true
 //                             sourceSize.width: 60 * scaling
 //                             sourceSize.height: 60 * scaling
-//                             source: MusicManager.trackArtUrl
+//                             source: MediaPlayer.trackArtUrl
 //                             visible: source.toString() !== ""
 
 //                         // Apply circular mask for rounded corners
@@ -452,10 +536,10 @@ NBox {
 //                 Layout.fillWidth: true
 
 //                 property real progressRatio: {
-//                     if (!MusicManager.currentPlayer || !MusicManager.isPlaying || MusicManager.trackLength <= 0) {
+//                     if (!MediaPlayer.currentPlayer || !MediaPlayer.isPlaying || MediaPlayer.trackLength <= 0) {
 //                         return 0;
 //                     }
-//                     return Math.min(1, MusicManager.currentPosition / MusicManager.trackLength);
+//                     return Math.min(1, MediaPlayer.currentPosition / MediaPlayer.trackLength);
 //                 }
 
 //                 Rectangle {
@@ -485,7 +569,7 @@ NBox {
 //                     x: Math.max(0, Math.min(parent.width - width, progressFill.width - width / 2))
 //                     anchors.verticalCenter: parent.verticalCenter
 
-//                     visible: MusicManager.trackLength > 0
+//                     visible: MediaPlayer.trackLength > 0
 //                     scale: progressMouseArea.containsMouse || progressMouseArea.pressed ? 1.2 : 1.0
 
 //                     Behavior on scale {
@@ -501,17 +585,17 @@ NBox {
 //                     anchors.fill: parent
 //                     hoverEnabled: true
 //                     cursorShape: Qt.PointingHandCursor
-//                     enabled: MusicManager.trackLength > 0 && MusicManager.canSeek
+//                     enabled: MediaPlayer.trackLength > 0 && MediaPlayer.canSeek
 
 //                     onClicked: function (mouse) {
 //                         let ratio = mouse.x / width;
-//                         MusicManager.seekByRatio(ratio);
+//                         MediaPlayer.seekByRatio(ratio);
 //                     }
 
 //                     onPositionChanged: function (mouse) {
 //                         if (pressed) {
 //                             let ratio = Math.max(0, Math.min(1, mouse.x / width));
-//                             MusicManager.seekByRatio(ratio);
+//                             MediaPlayer.seekByRatio(ratio);
 //                         }
 //                     }
 //                 }
@@ -537,8 +621,8 @@ NBox {
 //                         anchors.fill: parent
 //                         hoverEnabled: true
 //                         cursorShape: Qt.PointingHandCursor
-//                         enabled: MusicManager.canGoPrevious
-//                         onClicked: MusicManager.previous()
+//                         enabled: MediaPlayer.canGoPrevious
+//                         onClicked: MediaPlayer.previous()
 //                     }
 
 //                     Text {
@@ -564,13 +648,13 @@ NBox {
 //                         anchors.fill: parent
 //                         hoverEnabled: true
 //                         cursorShape: Qt.PointingHandCursor
-//                         enabled: MusicManager.canPlay || MusicManager.canPause
-//                         onClicked: MusicManager.playPause()
+//                         enabled: MediaPlayer.canPlay || MediaPlayer.canPause
+//                         onClicked: MediaPlayer.playPause()
 //                     }
 
 //                     Text {
 //                         anchors.centerIn: parent
-//                         text: MusicManager.isPlaying ? "pause" : "play_arrow"
+//                         text: MediaPlayer.isPlaying ? "pause" : "play_arrow"
 //                         font.family: "Material Symbols Outlined"
 //                         font.pixelSize: Theme.fontSizeBody * scaling
 //                         color: playButton.enabled ? Theme.accentPrimary : Qt.rgba(Theme.textPrimary.r, Theme.textPrimary.g, Theme.textPrimary.b, 0.3)
@@ -591,8 +675,8 @@ NBox {
 //                         anchors.fill: parent
 //                         hoverEnabled: true
 //                         cursorShape: Qt.PointingHandCursor
-//                         enabled: MusicManager.canGoNext
-//                         onClicked: MusicManager.next()
+//                         enabled: MediaPlayer.canGoNext
+//                         onClicked: MediaPlayer.next()
 //                     }
 
 //                     Text {
