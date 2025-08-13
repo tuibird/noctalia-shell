@@ -15,7 +15,6 @@ NLoader {
   // Target screen to open on
   property var targetScreen: null
 
-  // Public API to open the panel aligned under a given x coordinate.
   function openAt(x, screen) {
     anchorX = x
     targetScreen = screen

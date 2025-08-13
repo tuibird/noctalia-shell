@@ -81,12 +81,22 @@ Variants {
         anchors.verticalCenter: bar.verticalCenter
         spacing: Style.marginSmall * scaling
 
-        Tray {
+        // Screen Recording Indicator
+        NIconButton {
+          id: screenRecordingIndicator
+          icon: "videocam"
+          tooltipText: "Screen Recording Active"
+          sizeMultiplier: 0.8
+          showBorder: false
+          showFilled: ScreenRecorder.isRecording
+          visible: ScreenRecorder.isRecording
           anchors.verticalCenter: parent.verticalCenter
+          onClicked: {
+            ScreenRecorder.toggleRecording()
+          }
         }
 
-        // TODO: Notification Icon
-        NotificationHistory {
+        Tray {
           anchors.verticalCenter: parent.verticalCenter
         }
 
