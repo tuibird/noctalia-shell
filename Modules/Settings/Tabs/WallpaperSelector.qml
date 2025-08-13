@@ -22,235 +22,222 @@ Item {
 
     ColumnLayout {
       width: parent.width
-      spacing: Style.marginMedium * scaling
-      Layout.fillWidth: true
-
-      NText {
-        text: "Wallpaper Selector"
-        font.weight: Style.fontWeightBold
-        color: Colors.accentSecondary
-      }
-
-      NText {
-        text: "Select a wallpaper from your configured directory"
-        color: Colors.textSecondary
-        wrapMode: Text.WordWrap
-      }
-
-      // Current wallpaper display
-      NText {
-        text: "Current Wallpaper"
-        font.weight: Style.fontWeightBold
-        color: Colors.textPrimary
-      }
-
-      Rectangle {
+      ColumnLayout {
+        spacing: Style.marginLarge * scaling
+        Layout.margins: Style.marginLarge * scaling
         Layout.fillWidth: true
-        Layout.preferredHeight: 120 * scaling
-        radius: Style.radiusMedium * scaling
-        color: Colors.backgroundSecondary
-        border.color: Colors.outline
-        border.width: Math.max(1, Style.borderThin * scaling)
-        clip: true
 
-        NImageRounded {
-          id: currentWallpaperImage
-          anchors.fill: parent
-          anchors.margins: Style.marginSmall * scaling
-          imagePath: Wallpapers.currentWallpaper
-          fallbackIcon: "image"
-          borderColor: Colors.outline
-          borderWidth: Math.max(1, Style.borderThin * scaling)
-          imageRadius: Style.radiusMedium * scaling
+        // Current wallpaper display
+        NText {
+          text: "Current Wallpaper"
+          font.weight: Style.fontWeightBold
+          color: Colors.textPrimary
         }
-      }
+
+        Rectangle {
+          Layout.fillWidth: true
+          Layout.preferredHeight: 120 * scaling
+          radius: Style.radiusMedium * scaling
+          color: Colors.backgroundSecondary
+          border.color: Colors.outline
+          border.width: Math.max(1, Style.borderThin * scaling)
+          clip: true
+
+          NImageRounded {
+            id: currentWallpaperImage
+            anchors.fill: parent
+            anchors.margins: Style.marginSmall * scaling
+            imagePath: Wallpapers.currentWallpaper
+            fallbackIcon: "image"
+            borderColor: Colors.outline
+            borderWidth: Math.max(1, Style.borderThin * scaling)
+            imageRadius: Style.radiusMedium * scaling
+          }
+        }
 
       NDivider {
         Layout.fillWidth: true
+        Layout.topMargin: Style.marginLarge * scaling
+        Layout.bottomMargin: Style.marginLarge * scaling
       }
 
-      RowLayout {
-        Layout.fillWidth: true
 
-        ColumnLayout {
+        RowLayout {
           Layout.fillWidth: true
 
-          // Wallpaper grid
-          NText {
-            text: "Available Wallpapers"
-            font.weight: Style.fontWeightBold
-            color: Colors.textPrimary
-          }
-
-          NText {
-            text: "Click on a wallpaper to set it as your current wallpaper"
-            color: Colors.textSecondary
-            wrapMode: Text.WordWrap
+          ColumnLayout {
             Layout.fillWidth: true
-          }
 
-          NText {
-            text: Settings.data.wallpaper.swww.enabled ? "Wallpapers will change with " + Settings.data.wallpaper.swww.transitionType
-                                                        + " transition" : "Wallpapers will change instantly"
-            color: Colors.textSecondary
-            font.pointSize: Style.fontSizeSmall * scaling
-            visible: Settings.data.wallpaper.swww.enabled
-          }
-        }
-
-        NIconButton {
-          icon: "refresh"
-          tooltipText: "Refresh wallpaper list"
-          onClicked: {
-            Wallpapers.loadWallpapers()
-          }
-          Layout.alignment: Qt.AlignTop | Qt.AlignRight
-        }
-      }
-
-      // Refresh button and status
-      RowLayout {
-        Layout.fillWidth: true
-        spacing: Style.marginSmall * scaling
-
-
-      }
-
-      // Wallpaper grid container
-      Item {
-        Layout.fillWidth: true
-        Layout.preferredHeight: 400 * scaling
-
-        FolderListModel {
-          id: folderModel
-          folder: "file://" + (Settings.data.wallpaper.directory !== undefined ? Settings.data.wallpaper.directory : "")
-          nameFilters: ["*.jpg", "*.jpeg", "*.png", "*.gif", "*.pnm", "*.bmp"]
-          showDirs: false
-          sortField: FolderListModel.Name
-        }
-
-        GridView {
-          id: wallpaperGridView
-          anchors.fill: parent
-          clip: true
-          model: folderModel
-
-          // Fixed 5 items per row - more aggressive sizing
-          property int itemSize: Math.floor((width - leftMargin - rightMargin - (4 * Style.marginSmall * scaling)) / 5)
-
-          cellWidth: Math.floor((width - leftMargin - rightMargin) / 5)
-          cellHeight: Math.floor(itemSize * 0.67) + Style.marginSmall * scaling
-
-          leftMargin: Style.marginSmall * scaling
-          rightMargin: Style.marginSmall * scaling
-          topMargin: Style.marginSmall * scaling
-          bottomMargin: Style.marginSmall * scaling
-
-          delegate: Rectangle {
-            id: wallpaperItem
-            property string wallpaperPath: Settings.data.wallpaper.directory + "/" + fileName
-            property bool isSelected: wallpaperPath === Wallpapers.currentWallpaper
-
-            width: wallpaperGridView.itemSize
-            height: Math.floor(wallpaperGridView.itemSize * 0.67)
-            radius: Style.radiusMedium * scaling
-            color: isSelected ? Colors.accentPrimary : Colors.backgroundSecondary
-            border.color: isSelected ? Colors.accentSecondary : Colors.outline
-            border.width: Math.max(1, Style.borderThin * scaling)
-            clip: true
-
-            NImageRounded {
-              anchors.fill: parent
-              anchors.margins: Style.marginTiny * scaling
-              imagePath: wallpaperPath
-              fallbackIcon: "image"
-              borderColor: "transparent"
-              borderWidth: 0
-              imageRadius: Style.radiusMedium * scaling
-            }
-
-            // Selection indicator
-            Rectangle {
-              anchors.top: parent.top
-              anchors.right: parent.right
-              anchors.margins: Style.marginTiny * scaling
-              width: 20 * scaling
-              height: 20 * scaling
-              radius: width / 2
-              color: Colors.accentPrimary
-              border.color: Colors.onAccent
-              border.width: Math.max(1, Style.borderThin * scaling)
-              visible: isSelected
-
-              NText {
-                anchors.centerIn: parent
-                text: "check"
-                font.family: "Material Symbols Outlined"
-                font.pointSize: Style.fontSizeSmall * scaling
-                color: Colors.onAccent
-              }
-            }
-
-            // Hover effect
-            Rectangle {
-              anchors.fill: parent
+            // Wallpaper grid
+            NText {
+              text: "Wallpaper Selector"
+              font.weight: Style.fontWeightBold
               color: Colors.textPrimary
-              opacity: mouseArea.containsMouse ? 0.1 : 0
-              radius: parent.radius
+            }
 
-              Behavior on opacity {
-                NumberAnimation {
-                  duration: 150
+            NText {
+              text: "Click on a wallpaper to set it as your current wallpaper"
+              color: Colors.textSecondary
+              wrapMode: Text.WordWrap
+              Layout.fillWidth: true
+            }
+
+            NText {
+              text: Settings.data.wallpaper.swww.enabled ? "Wallpapers will change with " + Settings.data.wallpaper.swww.transitionType
+                                                           + " transition" : "Wallpapers will change instantly"
+              color: Colors.textSecondary
+              font.pointSize: Style.fontSizeSmall * scaling
+              visible: Settings.data.wallpaper.swww.enabled
+            }
+          }
+
+          NIconButton {
+            icon: "refresh"
+            tooltipText: "Refresh wallpaper list"
+            onClicked: {
+              Wallpapers.loadWallpapers()
+            }
+            Layout.alignment: Qt.AlignTop | Qt.AlignRight
+          }
+        }
+
+        // Wallpaper grid container
+        Item {
+          Layout.fillWidth: true
+          Layout.preferredHeight: 400 * scaling
+
+          FolderListModel {
+            id: folderModel
+            folder: "file://" + (Settings.data.wallpaper.directory !== undefined ? Settings.data.wallpaper.directory : "")
+            nameFilters: ["*.jpg", "*.jpeg", "*.png", "*.gif", "*.pnm", "*.bmp"]
+            showDirs: false
+            sortField: FolderListModel.Name
+          }
+
+          GridView {
+            id: wallpaperGridView
+            anchors.fill: parent
+            clip: true
+            model: folderModel
+
+            // Fixed 5 items per row - more aggressive sizing
+            property int itemSize: Math.floor(
+                                     (width - leftMargin - rightMargin - (4 * Style.marginSmall * scaling)) / 5)
+
+            cellWidth: Math.floor((width - leftMargin - rightMargin) / 5)
+            cellHeight: Math.floor(itemSize * 0.67) + Style.marginSmall * scaling
+
+            leftMargin: Style.marginSmall * scaling
+            rightMargin: Style.marginSmall * scaling
+            topMargin: Style.marginSmall * scaling
+            bottomMargin: Style.marginSmall * scaling
+
+            delegate: Rectangle {
+              id: wallpaperItem
+              property string wallpaperPath: Settings.data.wallpaper.directory + "/" + fileName
+              property bool isSelected: wallpaperPath === Wallpapers.currentWallpaper
+
+              width: wallpaperGridView.itemSize
+              height: Math.floor(wallpaperGridView.itemSize * 0.67)
+              radius: Style.radiusMedium * scaling
+              color: isSelected ? Colors.accentPrimary : Colors.backgroundSecondary
+              border.color: isSelected ? Colors.accentSecondary : Colors.outline
+              border.width: Math.max(1, Style.borderThin * scaling)
+              clip: true
+
+              NImageRounded {
+                anchors.fill: parent
+                anchors.margins: Style.marginTiny * scaling
+                imagePath: wallpaperPath
+                fallbackIcon: "image"
+                borderColor: "transparent"
+                borderWidth: 0
+                imageRadius: Style.radiusMedium * scaling
+              }
+
+              // Selection indicator
+              Rectangle {
+                anchors.top: parent.top
+                anchors.right: parent.right
+                anchors.margins: Style.marginTiny * scaling
+                width: 20 * scaling
+                height: 20 * scaling
+                radius: width / 2
+                color: Colors.accentPrimary
+                border.color: Colors.onAccent
+                border.width: Math.max(1, Style.borderThin * scaling)
+                visible: isSelected
+
+                NText {
+                  anchors.centerIn: parent
+                  text: "check"
+                  font.family: "Material Symbols Outlined"
+                  font.pointSize: Style.fontSizeSmall * scaling
+                  color: Colors.onAccent
+                }
+              }
+
+              // Hover effect
+              Rectangle {
+                anchors.fill: parent
+                color: Colors.textPrimary
+                opacity: mouseArea.containsMouse ? 0.1 : 0
+                radius: parent.radius
+
+                Behavior on opacity {
+                  NumberAnimation {
+                    duration: 150
+                  }
+                }
+              }
+
+              MouseArea {
+                id: mouseArea
+                anchors.fill: parent
+                acceptedButtons: Qt.LeftButton
+                hoverEnabled: true
+                onClicked: {
+                  Wallpapers.changeWallpaper(wallpaperPath)
                 }
               }
             }
-
-            MouseArea {
-              id: mouseArea
-              anchors.fill: parent
-              acceptedButtons: Qt.LeftButton
-              hoverEnabled: true
-              onClicked: {
-                Wallpapers.changeWallpaper(wallpaperPath)
-              }
-            }
           }
-        }
 
-        // Empty state
-        Rectangle {
-          anchors.fill: parent
-          color: Colors.backgroundSecondary
-          radius: Style.radiusMedium * scaling
-          border.color: Colors.outline
-          border.width: Math.max(1, Style.borderThin * scaling)
-          visible: folderModel.count === 0 && !Wallpapers.scanning
+          // Empty state
+          Rectangle {
+            anchors.fill: parent
+            color: Colors.backgroundSecondary
+            radius: Style.radiusMedium * scaling
+            border.color: Colors.outline
+            border.width: Math.max(1, Style.borderThin * scaling)
+            visible: folderModel.count === 0 && !Wallpapers.scanning
 
-          ColumnLayout {
-            anchors.centerIn: parent
-            spacing: Style.marginMedium * scaling
+            ColumnLayout {
+              anchors.centerIn: parent
+              spacing: Style.marginMedium * scaling
 
-            NText {
-              text: "folder_open"
-              font.family: "Material Symbols Outlined"
-              font.pointSize: Style.fontSizeLarge * scaling
-              color: Colors.textSecondary
-              Layout.alignment: Qt.AlignHCenter
-            }
+              NText {
+                text: "folder_open"
+                font.family: "Material Symbols Outlined"
+                font.pointSize: Style.fontSizeLarge * scaling
+                color: Colors.textSecondary
+                Layout.alignment: Qt.AlignHCenter
+              }
 
-            NText {
-              text: "No wallpapers found"
-              color: Colors.textSecondary
-              font.weight: Style.fontWeightBold
-              Layout.alignment: Qt.AlignHCenter
-            }
+              NText {
+                text: "No wallpapers found"
+                color: Colors.textSecondary
+                font.weight: Style.fontWeightBold
+                Layout.alignment: Qt.AlignHCenter
+              }
 
-            NText {
-              text: "Make sure your wallpaper directory is configured and contains image files"
-              color: Colors.textSecondary
-              wrapMode: Text.WordWrap
-              horizontalAlignment: Text.AlignHCenter
-              Layout.preferredWidth: 300 * scaling
+              NText {
+                text: "Make sure your wallpaper directory is configured and contains image files"
+                color: Colors.textSecondary
+                wrapMode: Text.WordWrap
+                horizontalAlignment: Text.AlignHCenter
+                Layout.preferredWidth: 300 * scaling
+              }
             }
           }
         }

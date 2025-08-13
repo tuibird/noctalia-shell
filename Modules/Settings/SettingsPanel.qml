@@ -13,7 +13,7 @@ NLoader {
   content: Component {
     NPanel {
       id: panel
-      
+
       readonly property real scaling: Scaling.scale(screen)
 
       WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
@@ -134,10 +134,11 @@ NLoader {
                       font.pointSize: Style.fontSizeLarge * scaling
                       color: selected ? Colors.onAccent : (tabItem.hovering ? Colors.onAccent : Colors.textSecondary)
                     }
+                    // Tab label on the left side
                     NText {
                       text: modelData.label
                       color: selected ? Colors.onAccent : (tabItem.hovering ? Colors.onAccent : Colors.textPrimary)
-                      font.pointSize: Style.fontSizeInter * scaling
+                      font.pointSize: Style.fontSizeLarge * scaling
                       font.weight: Style.fontWeightBold
                       Layout.fillWidth: true
                     }
@@ -177,11 +178,13 @@ NLoader {
                 id: headerRow
                 Layout.fillWidth: true
                 spacing: Style.marginSmall * scaling
+
+                // Tab label on the main right
                 NText {
                   text: panel.tabsModel[panel.currentTabIndex].label
                   font.pointSize: Style.fontSizeLarge * scaling
                   font.weight: Style.fontWeightBold
-                  color: Colors.textPrimary
+                  color: Colors.accentPrimary
                   Layout.fillWidth: true
                 }
                 NIconButton {
