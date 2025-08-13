@@ -31,7 +31,7 @@ NBox {
     NIconButton {
       icon: "image"
       onClicked: {
-        settingsPanel.currentTabIndex = 8 // Audio tab index
+        settingsPanel.requestedTab = settingsPanel.tabsIds.WALLPAPER_SELECTOR
         settingsPanel.isLoaded = true
       }
     }

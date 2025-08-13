@@ -84,7 +84,7 @@ Item {
       }
     }
     onClicked: {
-      settingsPanel.currentTabIndex = 5 // Audio tab index
+      settingsPanel.requestedTab = settingsPanel.tabsIds.AUDIO
       settingsPanel.isLoaded = true
     }
   }

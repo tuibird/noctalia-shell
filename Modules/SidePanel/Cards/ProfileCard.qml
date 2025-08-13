@@ -58,6 +58,7 @@ NBox {
         icon: "settings"
         tooltipText: "Open settings"
         onClicked: {
+          settingsPanel.requestedTab = settingsPanel.tabsIds.GENERAL
           settingsPanel.isLoaded = !settingsPanel.isLoaded
         }
       }
@@ -134,7 +135,6 @@ NBox {
   function updateSystemInfo() {
     uptimeProcess.running = true
   }
-
 
   Process {
     id: shutdownProcess

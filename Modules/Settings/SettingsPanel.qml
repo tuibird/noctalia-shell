@@ -10,20 +10,39 @@ import qs.Widgets
 NLoader {
   id: root
 
-  property int currentTabIndex: 0
+  property var tabsIds: null
+  property var requestedTab: null
+
+  Component.onCompleted: {
+    // Fill up our ideads
+    tabsIds = Object.freeze({
+                              "GENERAL": 0,
+                              "BAR": 1,
+                              "TIME_WEATHER": 2,
+                              "SCREEN_RECORDER": 3,
+                              "NETWORK": 4,
+                              "AUDIO": 5,
+                              "DISPLAY": 6,
+                              "WALLPAPER": 7,
+                              "WALLPAPER_SELECTOR": 8,
+                              "MISC": 9,
+                              "ABOUT": 10
+                            })
+  }
 
   content: Component {
     NPanel {
       id: panel
 
       readonly property real scaling: Scaling.scale(screen)
+      property int currentTabIndex: 0
 
       // Override hide function to animate first
       function hide() {
         // Start hide animation
         bgRect.scaleValue = 0.8
         bgRect.opacityValue = 0.0
-        
+
         // Hide after animation completes
         hideTimer.start()
       }
@@ -35,7 +54,7 @@ NLoader {
           // Start hide animation
           bgRect.scaleValue = 0.8
           bgRect.opacityValue = 0.0
-          
+
           // Hide after animation completes
           hideTimer.start()
         }
@@ -55,47 +74,58 @@ NLoader {
       WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
 
       property var tabsModel: [{
+          "id": root.tabsIds.GENERAL,
           "label": "General",
           "icon": "tune",
           "source": "Tabs/General.qml"
         }, {
+          "id": root.tabsIds.BAR,
           "label": "Bar",
           "icon": "web_asset",
           "source": "Tabs/Bar.qml"
         }, {
+          "id": root.tabsIds.TIME_WEATHER,
           "label": "Time & Weather",
           "icon": "schedule",
           "source": "Tabs/TimeWeather.qml"
         }, {
+          "id": root.tabsIds.SCREEN_RECORDER,
           "label": "Screen Recorder",
           "icon": "videocam",
           "source": "Tabs/ScreenRecorder.qml"
         }, {
+          "id": root.tabsIds.NETWORK,
           "label": "Network",
           "icon": "wifi",
           "source": "Tabs/Network.qml"
         }, {
+          "id": root.tabsIds.AUDIO,
           "label": "Audio",
           "icon": "volume_up",
           "source": "Tabs/Audio.qml"
         }, {
+          "id": root.tabsIds.DISPLAY,
           "label": "Display",
           "icon": "monitor",
           "source": "Tabs/Display.qml"
         }, {
+          "id": root.tabsIds.WALLPAPER,
           "label": "Wallpaper",
           "icon": "image",
           "source": "Tabs/Wallpaper.qml"
         }, {
+          "id": root.tabsIds.WALLPAPER_SELECTOR,
           "label": "Wallpaper Selector",
           "icon": "wallpaper_slideshow",
           "source": "Tabs/WallpaperSelector.qml"
         }, // {
+        //   "id": root.tabsIds.MISC,
         //   "label": "Misc",
         //   "icon": "more_horiz",
         //   "source": "Tabs/Misc.qml"
         // },
         {
+          "id": root.tabsIds.ABOUT,
           "label": "About",
           "icon": "info",
           "source": "Tabs/About.qml"
@@ -104,12 +134,23 @@ NLoader {
       // Combined visibility change handler
       onVisibleChanged: {
         if (visible) {
+          // Default to first tab
           currentTabIndex = 0
+
+          // Find the request tab if necessary
+          if (requestedTab != null) {
+            for (var i = 0; i < tabsModel.length; i++) {
+              if (tabsModel[i].id == requestedTab) {
+                currentTabIndex = i
+                break
+              }
+            }
+          }
         } else if (bgRect.opacityValue > 0) {
           // Start hide animation
           bgRect.scaleValue = 0.8
           bgRect.opacityValue = 0.0
-          
+
           // Hide after animation completes
           hideTimer.start()
         }
@@ -150,7 +191,6 @@ NLoader {
           NumberAnimation {
             duration: Style.animationSlow
             easing.type: Easing.OutExpo
-
           }
         }
 
@@ -158,7 +198,6 @@ NLoader {
           NumberAnimation {
             duration: Style.animationNormal
             easing.type: Easing.OutQuad
-
           }
         }
 
