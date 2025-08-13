@@ -55,12 +55,12 @@ Window {
       x = pos.x - width / 2 + target.width / 2
       y = pos.y + 12 // 12 px margin below
     }
-    
+
     // Start with animation values
     tooltipRect.scaleValue = 0.8
     tooltipRect.opacityValue = 0.0
     visible = true
-    
+
     // Use a timer to trigger the animation after the component is visible
     showTimer.start()
   }
@@ -69,7 +69,7 @@ Window {
     // Start hide animation
     tooltipRect.scaleValue = 0.8
     tooltipRect.opacityValue = 0.0
-    
+
     // Hide after animation completes
     hideTimer.start()
   }

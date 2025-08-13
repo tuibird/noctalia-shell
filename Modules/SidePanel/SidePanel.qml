@@ -46,7 +46,7 @@ NLoader {
         // Start hide animation
         panelBackground.scaleValue = 0.8
         panelBackground.opacityValue = 0.0
-        
+
         // Hide after animation completes
         hideTimer.start()
       }
@@ -58,7 +58,7 @@ NLoader {
           // Start hide animation
           panelBackground.scaleValue = 0.8
           panelBackground.opacityValue = 0.0
-          
+
           // Hide after animation completes
           hideTimer.start()
         }
@@ -70,7 +70,7 @@ NLoader {
           // Start hide animation
           panelBackground.scaleValue = 0.8
           panelBackground.opacityValue = 0.0
-          
+
           // Hide after animation completes
           hideTimer.start()
         }
@@ -110,8 +110,6 @@ NLoader {
           opacityValue = 1.0
         }
 
-
-
         // Timer to hide panel after animation
         Timer {
           id: hideTimer
@@ -133,7 +131,6 @@ NLoader {
           NumberAnimation {
             duration: Style.animationSlow
             easing.type: Easing.OutExpo
-
           }
         }
 
@@ -141,7 +138,6 @@ NLoader {
           NumberAnimation {
             duration: Style.animationNormal
             easing.type: Easing.OutQuad
-
           }
         }
 

@@ -21,7 +21,7 @@ NLoader {
       function hide() {
         wifiMenuRect.scaleValue = 0.8
         wifiMenuRect.opacityValue = 0.0
-        
+
         hideTimer.start()
       }
 
@@ -33,7 +33,7 @@ NLoader {
           // Start hide animation
           wifiMenuRect.scaleValue = 0.8
           wifiMenuRect.opacityValue = 0.0
-          
+
           // Hide after animation completes
           hideTimer.start()
         }
@@ -45,7 +45,7 @@ NLoader {
           // Start hide animation
           wifiMenuRect.scaleValue = 0.8
           wifiMenuRect.opacityValue = 0.0
-          
+
           // Hide after animation completes
           hideTimer.start()
         }

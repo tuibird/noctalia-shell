@@ -20,7 +20,7 @@ NLoader {
         // Start hide animation
         bgRect.scaleValue = 0.8
         bgRect.opacityValue = 0.0
-        
+
         // Hide after animation completes
         hideTimer.start()
       }
@@ -32,7 +32,7 @@ NLoader {
           // Start hide animation
           bgRect.scaleValue = 0.8
           bgRect.opacityValue = 0.0
-          
+
           // Hide after animation completes
           hideTimer.start()
         }
@@ -44,7 +44,7 @@ NLoader {
           // Start hide animation
           bgRect.scaleValue = 0.8
           bgRect.opacityValue = 0.0
-          
+
           // Hide after animation completes
           hideTimer.start()
         }
@@ -99,7 +99,6 @@ NLoader {
           NumberAnimation {
             duration: Style.animationSlow
             easing.type: Easing.OutExpo
-
           }
         }
 
@@ -107,7 +106,6 @@ NLoader {
           NumberAnimation {
             duration: Style.animationNormal
             easing.type: Easing.OutQuad
-
           }
         }
 
