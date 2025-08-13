@@ -122,8 +122,11 @@ Item {
             anchors.fill: parent
             clip: true
             model: folderModel
+            
+            boundsBehavior: Flickable.StopAtBounds
+            flickableDirection: Flickable.AutoFlickDirection
+            interactive: false
 
-            // Fixed 5 items per row - more aggressive sizing
             property int columns: 5
             property int itemSize: Math.floor(
                                      (width - leftMargin - rightMargin - (4 * Style.marginSmall * scaling)) / columns)
