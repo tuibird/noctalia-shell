@@ -40,6 +40,10 @@ NLoader {
           "icon": "wifi",
           "source": "Tabs/Network.qml"
         }, {
+          "label": "Audio",
+          "icon": "volume_up",
+          "source": "Tabs/Audio.qml"
+        }, {
           "label": "Display",
           "icon": "monitor",
           "source": "Tabs/Display.qml"
@@ -212,6 +216,7 @@ NLoader {
                 Tabs.TimeWeather {}
                 Tabs.ScreenRecorder {}
                 Tabs.Network {}
+                Tabs.Audio {}
                 Tabs.Display {}
                 Tabs.Wallpaper {}
                 Tabs.WallpaperSelector {}

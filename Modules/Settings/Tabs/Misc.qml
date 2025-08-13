@@ -40,17 +40,7 @@ ColumnLayout {
           Layout.bottomMargin: Style.marginSmall * scaling
         }
 
-        // Audio Visualizer section
-        NComboBox {
-          label: "Audio Visualizer"
-          description: "Choose a visualization type"
-          optionsKeys: ["radial", "bars", "wave"]
-          optionsLabels: ["Radial", "Bars", "Wave"]
-          currentKey: Settings.data.audioVisualizer.type
-          onSelected: function (key) {
-            Settings.data.audioVisualizer.type = key
-          }
-        }
+
       }
     }
   }
