@@ -26,4 +26,4 @@ NIconButton {
   NotificationHistoryPanel {
     id: notificationHistoryPanelLoader
   }
-} 
+}

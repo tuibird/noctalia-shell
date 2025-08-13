@@ -58,7 +58,6 @@ Variants {
         //   anchors.verticalCenter: parent.verticalCenter
         //   font.weight: Style.fontWeightBold
         // }
-
         SystemMonitor {}
       }
 

@@ -39,8 +39,6 @@ ColumnLayout {
           color: Colors.textPrimary
           Layout.bottomMargin: Style.marginSmall * scaling
         }
-
-
       }
     }
   }
