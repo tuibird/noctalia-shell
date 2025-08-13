@@ -15,7 +15,7 @@ PopupWindow {
   property real anchorY
 
   implicitWidth: 180 * scaling
-  implicitHeight: Math.max(40 * scaling, listView.contentHeight + (Style.marginMedium * 2 * scaling))
+  implicitHeight: Math.max(60 * scaling, listView.contentHeight + (Style.marginMedium * 2 * scaling))
   visible: false
   color: "transparent"
 
