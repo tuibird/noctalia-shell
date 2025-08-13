@@ -10,14 +10,13 @@ import qs.Widgets
 NLoader {
   id: root
 
-        readonly property real scaling: Scaling.scale(screen)
+  readonly property real scaling: Scaling.scale(screen)
 
   content: Component {
     NPanel {
       id: panel
 
       WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
-
 
       property int currentTabIndex: 0
       property var tabsModel: [{

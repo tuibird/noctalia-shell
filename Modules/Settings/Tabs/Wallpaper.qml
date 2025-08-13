@@ -29,44 +29,31 @@ ColumnLayout {
       }
 
       ColumnLayout {
-        spacing: 4
+        spacing: Style.marginTiny * scaling
         Layout.fillWidth: true
 
         NText {
-          text: "Wallpaper Settings"
-          font.pointSize: 18
+          text: "Directory"
+          font.pointSize: Style.fontSizeXL * scaling
           font.weight: Style.fontWeightBold
           color: Colors.textPrimary
-          Layout.bottomMargin: 8
+          Layout.bottomMargin: Style.marginSmall * scaling
         }
 
         // Wallpaper Settings Category
         ColumnLayout {
           spacing: 8
           Layout.fillWidth: true
-          Layout.topMargin: 8
+          Layout.topMargin: Style.marginSmall * scaling
 
           // Wallpaper Folder
           ColumnLayout {
-            spacing: 8
+            spacing: Style.marginSmall * scaling
             Layout.fillWidth: true
 
-            NText {
-              text: "Wallpaper Folder"
-              font.pointSize: 13
-              font.weight: Style.fontWeightBold
-              color: Colors.textPrimary
-            }
-
-            NText {
-              text: "Path to your wallpaper folder"
-              font.pointSize: 12
-              color: Colors.textSecondary
-              wrapMode: Text.WordWrap
-              Layout.fillWidth: true
-            }
-
             NTextInput {
+              label: "Wallpaper Directory"
+              description: "Path to your wallpaper directory"
               text: Settings.data.wallpaper.directory
               Layout.fillWidth: true
               onEditingFinished: {
@@ -79,12 +66,12 @@ ColumnLayout {
 
       NDivider {
         Layout.fillWidth: true
-        Layout.topMargin: 26
-        Layout.bottomMargin: 18
+        Layout.topMargin: Style.marginLarge * 2 * scaling
+        Layout.bottomMargin: Style.marginLarge * scaling
       }
 
       ColumnLayout {
-        spacing: 4
+        spacing: Style.marginLarge * scaling
         Layout.fillWidth: true
 
         NText {
@@ -115,29 +102,54 @@ ColumnLayout {
           }
         }
 
-        // Wallpaper Interval
-        // NSlider {
-        //   label: "Wallpaper Interval"
-        //   description: "How often to change wallpapers automatically (in seconds)"
-        //   valueSuffix: "s"
-        //   from: 10
-        //   to: 900
-        //   stepSize: 10
-        //   value: Settings.data.wallpaper.randomInterval
-        //   onPressedChanged: function (pressed, value) {
-        //     Settings.data.wallpaper.randomInterval = Math.round(value)
-        //   }
-        //   cutoutColor: Colors.backgroundPrimary
-        //   Layout.fillWidth: true
-        // }
+        // Interval
+        ColumnLayout {
+          RowLayout {
+            Layout.fillWidth: true
+
+            ColumnLayout {
+              NText {
+                text: "Wallpaper Interval"
+                font.weight: Style.fontWeightBold
+                color: Colors.textPrimary
+              }
+
+              NText {
+                text: "How often to change wallpapers automatically (in seconds)"
+                font.pointSize: Style.fontSizeSmall * scaling
+                color: Colors.textSecondary
+                wrapMode: Text.WordWrap
+                Layout.fillWidth: true
+              }
+            }
+
+            NText {
+              text: sliderWpInterval.value + " seconds"
+              Layout.alignment: Qt.AlignBottom | Qt.AlignRight
+            }
+          }
+
+          NSlider {
+            id: sliderWpInterval
+            Layout.fillWidth: true
+            from: 10
+            to: 900
+            stepSize: 10
+            value: Settings.data.wallpaper.randomInterval
+            onPressedChanged: Settings.data.wallpaper.randomInterval = Math.round(value)
+            cutoutColor: Colors.backgroundPrimary
+          }
+        }
       }
 
       NDivider {
         Layout.fillWidth: true
-        Layout.topMargin: 26
-        Layout.bottomMargin: 18
+        Layout.topMargin: Style.marginLarge * 2 * scaling
+        Layout.bottomMargin: Style.marginLarge * scaling
       }
 
+      // -------------------------------
+      // SWWW
       ColumnLayout {
         spacing: 4
         Layout.fillWidth: true
@@ -168,97 +180,106 @@ ColumnLayout {
           visible: Settings.data.wallpaper.swww.enabled
 
           // Resize Mode
-          ColumnLayout {
-            spacing: 8
-            Layout.fillWidth: true
-
-            NText {
-              text: "Resize Mode"
-              font.pointSize: 13
-              font.weight: Style.fontWeightBold
-              color: Colors.textPrimary
-            }
-
-            NText {
-              text: "How SWWW should resize wallpapers to fit the screen"
-              font.pointSize: 12
-              color: Colors.textSecondary
-              wrapMode: Text.WordWrap
-              Layout.fillWidth: true
-            }
-
-            NComboBox {
-              optionsKeys: ["no", "crop", "fit", "stretch"]
-              optionsLabels: ["No", "Crop", "Fit", "Stretch"]
-              currentKey: Settings.data.wallpaper.swww.resizeMethod
-              onSelected: function (key) {
-                Settings.data.wallpaper.swww.resizeMethod = key
-              }
+          NComboBox {
+            label: "Resize Mode"
+            description: "How SWWW should resize wallpapers to fit the screen"
+            optionsKeys: ["no", "crop", "fit", "stretch"]
+            optionsLabels: ["No", "Crop", "Fit", "Stretch"]
+            currentKey: Settings.data.wallpaper.swww.resizeMethod
+            onSelected: function (key) {
+              Settings.data.wallpaper.swww.resizeMethod = key
             }
           }
 
           // Transition Type
-          ColumnLayout {
-            spacing: 8
-            Layout.fillWidth: true
-            Layout.topMargin: 8
-
-            NText {
-              text: "Transition Type"
-              font.pointSize: 13
-              font.weight: Style.fontWeightBold
-              color: Colors.textPrimary
-            }
-
-            NText {
-              text: "Animation type when switching between wallpapers"
-              font.pointSize: 12
-              color: Colors.textSecondary
-              wrapMode: Text.WordWrap
-              Layout.fillWidth: true
-            }
-
-            NComboBox {
-              optionsKeys: ["none", "simple", "fade", "left", "right", "top", "bottom", "wipe", "wave", "grow", "center", "any", "outer", "random"]
-              optionsLabels: ["None", "Simple", "Fade", "Left", "Right", "Top", "Bottom", "Wipe", "Wave", "Grow", "Center", "Any", "Outer", "Random"]
-              currentKey: Settings.data.wallpaper.swww.transitionType
-              onSelected: function (key) {
-                Settings.data.wallpaper.swww.transitionType = key
-              }
+          NComboBox {
+            label: "Transition Type"
+            description: "Animation type when switching between wallpapers"
+            optionsKeys: ["none", "simple", "fade", "left", "right", "top", "bottom", "wipe", "wave", "grow", "center", "any", "outer", "random"]
+            optionsLabels: ["None", "Simple", "Fade", "Left", "Right", "Top", "Bottom", "Wipe", "Wave", "Grow", "Center", "Any", "Outer", "Random"]
+            currentKey: Settings.data.wallpaper.swww.transitionType
+            onSelected: function (key) {
+              Settings.data.wallpaper.swww.transitionType = key
             }
           }
 
           // Transition FPS
-          // NSlider {
-          //   label: "Transition FPS"
-          //   description: "Frames per second for transition animations"
-          //   valueSuffix: " FPS"
-          //   from: 30
-          //   to: 500
-          //   stepSize: 5
-          //   value: Settings.data.wallpaper.swww.transitionFps
-          //   onPressedChanged: function (pressed, value) {
-          //     Settings.data.wallpaper.swww.transitionFps = Math.round(value)
-          //   }
-          //   cutoutColor: Colors.backgroundPrimary
-          //   Layout.fillWidth: true
-          // }
+          ColumnLayout {
+            RowLayout {
+              Layout.fillWidth: true
+
+              ColumnLayout {
+                NText {
+                  text: "Transition FPS"
+                  font.weight: Style.fontWeightBold
+                  color: Colors.textPrimary
+                }
+
+                NText {
+                  text: "Frames per second for transition animations"
+                  font.pointSize: Style.fontSizeSmall * scaling
+                  color: Colors.textSecondary
+                  wrapMode: Text.WordWrap
+                  Layout.fillWidth: true
+                }
+              }
+
+              NText {
+                text: sliderWpTransitionFps.value + " FPS"
+                Layout.alignment: Qt.AlignBottom | Qt.AlignRight
+              }
+            }
+
+            NSlider {
+              id: sliderWpTransitionFps
+              Layout.fillWidth: true
+              from: 30
+              to: 500
+              stepSize: 5
+              value: Settings.data.wallpaper.swww.transitionFps
+              onPressedChanged: Settings.data.wallpaper.swww.transitionFps = Math.round(value)
+              cutoutColor: Colors.backgroundPrimary
+            }
+          }
 
           // Transition Duration
-          // NSlider {
-          //   label: "Transition Duration"
-          //   description: "Duration of transition animations in seconds"
-          //   valueSuffix: "s"
-          //   from: 0.25
-          //   to: 10
-          //   stepSize: 0.05
-          //   value: Settings.data.wallpaper.swww.transitionDuration
-          //   onPressedChanged: function (pressed, value) {
-          //     Settings.data.wallpaper.swww.transitionDuration = value
-          //   }
-          //   cutoutColor: Colors.backgroundPrimary
-          //   Layout.fillWidth: true
-          // }
+          ColumnLayout {
+            RowLayout {
+              Layout.fillWidth: true
+
+              ColumnLayout {
+                NText {
+                  text: "Transition Duration"
+                  font.weight: Style.fontWeightBold
+                  color: Colors.textPrimary
+                }
+
+                NText {
+                  text: "Duration of transition animations in seconds"
+                  font.pointSize: Style.fontSizeSmall * scaling
+                  color: Colors.textSecondary
+                  wrapMode: Text.WordWrap
+                  Layout.fillWidth: true
+                }
+              }
+
+              NText {
+                text: sliderWpTransitionDuration.value.toFixed(2) + "s"
+                Layout.alignment: Qt.AlignBottom | Qt.AlignRight
+              }
+            }
+
+            NSlider {
+              id: sliderWpTransitionDuration
+              Layout.fillWidth: true
+              from: 0.25
+              to: 10
+              stepSize: 0.05
+              value: Settings.data.wallpaper.swww.transitionDuration
+              onPressedChanged: Settings.data.wallpaper.swww.transitionDuration = value
+              cutoutColor: Colors.backgroundPrimary
+            }
+          }
         }
       }
     }

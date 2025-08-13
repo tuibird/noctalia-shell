@@ -67,20 +67,20 @@ NLoader {
               RowLayout {
                 spacing: Style.marginSmall * scaling
                 NSlider {
-                id: scaleSlider
-                from: 0.6
-                to: 1.8
-                stepSize: 0.01
-                value: Scaling.overrideScale
-                implicitWidth: bgRect.width * 0.75
-                onMoved: {
-                  
+                  id: scaleSlider
+                  from: 0.6
+                  to: 1.8
+                  stepSize: 0.01
+                  value: Scaling.overrideScale
+                  implicitWidth: bgRect.width * 0.75
+                  onMoved: {
+
+                  }
+                  onPressedChanged: {
+                    Scaling.overrideScale = value
+                    Scaling.overrideEnabled = true
+                  }
                 }
-                onPressedChanged: {
-                  Scaling.overrideScale = value
-                  Scaling.overrideEnabled = true
-                }
-              }
                 NIconButton {
                   icon: "refresh"
                   fontPointSize: Style.fontSizeLarge * scaling
