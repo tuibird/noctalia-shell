@@ -15,25 +15,21 @@ NIconButton {
   icon: "notifications"
   tooltipText: "Notification History"
   onClicked: {
-    if (!notificationHistoryPanelLoader.active) {
-      notificationHistoryPanelLoader.isLoaded = true
+    if (!notificationHistoryPanel.active) {
+      notificationHistoryPanel.isLoaded = true
     }
-    if (notificationHistoryPanelLoader.item) {
-      if (notificationHistoryPanelLoader.item.visible) {
+    if (notificationHistoryPanel.item) {
+      if (notificationHistoryPanel.item.visible) {
         // Panel is visible, hide it with animation
-        if (notificationHistoryPanelLoader.item.hide) {
-          notificationHistoryPanelLoader.item.hide()
+        if (notificationHistoryPanel.item.hide) {
+          notificationHistoryPanel.item.hide()
         } else {
-          notificationHistoryPanelLoader.item.visible = false
+          notificationHistoryPanel.item.visible = false
         }
       } else {
         // Panel is hidden, show it
-        notificationHistoryPanelLoader.item.visible = true
+        notificationHistoryPanel.item.visible = true
       }
     }
-  }
-
-  NotificationHistoryPanel {
-    id: notificationHistoryPanelLoader
   }
 }

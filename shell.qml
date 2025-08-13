@@ -43,6 +43,10 @@ ShellRoot {
     id: notification
   }
 
+  NotificationHistoryPanel {
+    id: notificationHistoryPanel
+  }
+
   Component.onCompleted: {
     // Ensure our singleton is created as soon as possible so we start fetching weather asap
     Location.init()
