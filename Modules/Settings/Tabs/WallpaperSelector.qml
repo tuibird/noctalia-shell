@@ -69,31 +69,34 @@ Item {
         Layout.fillWidth: true
       }
 
-      // Wallpaper grid
-      NText {
-        text: "Available Wallpapers"
-        font.weight: Style.fontWeightBold
-        color: Colors.textPrimary
-      }
-
-      NText {
-        text: "Click on a wallpaper to set it as your current wallpaper"
-        color: Colors.textSecondary
-        wrapMode: Text.WordWrap
-      }
-
-      NText {
-        text: Settings.data.wallpaper.swww.enabled ? "Wallpapers will change with " + Settings.data.wallpaper.swww.transitionType
-                                                     + " transition" : "Wallpapers will change instantly"
-        color: Colors.textSecondary
-        font.pointSize: Style.fontSizeSmall * scaling
-        visible: Settings.data.wallpaper.swww.enabled
-      }
-
-      // Refresh button and status
       RowLayout {
         Layout.fillWidth: true
-        spacing: Style.marginSmall * scaling
+
+        ColumnLayout {
+          Layout.fillWidth: true
+
+          // Wallpaper grid
+          NText {
+            text: "Available Wallpapers"
+            font.weight: Style.fontWeightBold
+            color: Colors.textPrimary
+          }
+
+          NText {
+            text: "Click on a wallpaper to set it as your current wallpaper"
+            color: Colors.textSecondary
+            wrapMode: Text.WordWrap
+            Layout.fillWidth: true
+          }
+
+          NText {
+            text: Settings.data.wallpaper.swww.enabled ? "Wallpapers will change with " + Settings.data.wallpaper.swww.transitionType
+                                                        + " transition" : "Wallpapers will change instantly"
+            color: Colors.textSecondary
+            font.pointSize: Style.fontSizeSmall * scaling
+            visible: Settings.data.wallpaper.swww.enabled
+          }
+        }
 
         NIconButton {
           icon: "refresh"
@@ -101,12 +104,16 @@ Item {
           onClicked: {
             Wallpapers.loadWallpapers()
           }
+          Layout.alignment: Qt.AlignTop | Qt.AlignRight
         }
+      }
 
-        NText {
-          text: "Refresh"
-          color: Colors.textSecondary
-        }
+      // Refresh button and status
+      RowLayout {
+        Layout.fillWidth: true
+        spacing: Style.marginSmall * scaling
+
+
       }
 
       // Wallpaper grid container

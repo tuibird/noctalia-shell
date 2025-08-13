@@ -10,11 +10,11 @@ import qs.Widgets
 NLoader {
   id: root
 
-  readonly property real scaling: Scaling.scale(screen)
-
   content: Component {
     NPanel {
       id: panel
+      
+      readonly property real scaling: Scaling.scale(screen)
 
       WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
 

@@ -29,7 +29,7 @@ ColumnLayout {
       }
 
       ColumnLayout {
-        spacing: Style.marginTiny * scaling
+        spacing: Style.marginLarge * scaling
         Layout.fillWidth: true
 
         NText {
@@ -42,7 +42,7 @@ ColumnLayout {
 
         // Wallpaper Settings Category
         ColumnLayout {
-          spacing: 8
+          spacing: Style.marginSmall * scaling
           Layout.fillWidth: true
           Layout.topMargin: Style.marginSmall * scaling
 
@@ -76,10 +76,10 @@ ColumnLayout {
 
         NText {
           text: "Automation"
-          font.pointSize: 18
+          font.pointSize: Style.fontSizeXL * scaling
           font.weight: Style.fontWeightBold
           color: Colors.textPrimary
-          Layout.bottomMargin: 8
+          Layout.bottomMargin: Style.marginSmall * scaling
         }
 
         // Random Wallpaper
@@ -151,12 +151,12 @@ ColumnLayout {
       // -------------------------------
       // SWWW
       ColumnLayout {
-        spacing: 4
+        spacing: Style.marginLarge * scaling
         Layout.fillWidth: true
 
         NText {
           text: "SWWW"
-          font.pointSize: 18
+          font.pointSize: Style.fontSizeXL * scaling
           font.weight: Style.fontWeightBold
           color: Colors.textPrimary
           Layout.bottomMargin: 8
@@ -174,9 +174,9 @@ ColumnLayout {
 
         // SWWW Settings (only visible when useSWWW is enabled)
         ColumnLayout {
-          spacing: 8
+          spacing: Style.marginSmall * scaling
           Layout.fillWidth: true
-          Layout.topMargin: 8
+          Layout.topMargin: Style.marginSmall * scaling
           visible: Settings.data.wallpaper.swww.enabled
 
           // Resize Mode
