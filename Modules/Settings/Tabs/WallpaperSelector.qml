@@ -122,7 +122,7 @@ Item {
             anchors.fill: parent
             clip: true
             model: folderModel
-            
+
             boundsBehavior: Flickable.StopAtBounds
             flickableDirection: Flickable.AutoFlickDirection
             interactive: false
