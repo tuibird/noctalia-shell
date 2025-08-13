@@ -11,10 +11,10 @@ NBox {
   Layout.fillWidth: true
   Layout.preferredWidth: 1
   implicitHeight: powerRow.implicitHeight + Style.marginMedium * 2 * scaling
-  
+
   // PowerProfiles service
   property var powerProfiles: PowerProfiles
-  
+
   RowLayout {
     id: powerRow
     anchors.fill: parent

@@ -8,8 +8,24 @@ import Quickshell.Services.Pipewire
 Singleton {
   id: root
 
+  readonly property var nodes: Pipewire.nodes.values.reduce((acc, node) => {
+                                                              if (!node.isStream) {
+                                                                if (node.isSink) {
+                                                                  acc.sinks.push(node)
+                                                                } else if (node.audio) {
+                                                                  acc.sources.push(node)
+                                                                }
+                                                              }
+                                                              return acc
+                                                            }, {
+                                                              "sources": [],
+                                                              "sinks": []
+                                                            })
+
   readonly property PwNode sink: Pipewire.defaultAudioSink
   readonly property PwNode source: Pipewire.defaultAudioSource
+  readonly property list<PwNode> sinks: nodes.sinks
+  readonly property list<PwNode> sources: nodes.sources
 
   // Volume [0..1] is readonly from outside
   readonly property alias volume: root._volume
@@ -29,15 +45,26 @@ Singleton {
   }
 
   function volumeSet(newVolume) {
-    // Clamp volume to 200%
     if (sink?.ready && sink?.audio) {
+      // Clamp it accordingly
       sink.audio.muted = false
-      sink.audio.volume = Math.max(0, Math.min(2, newVolume))
+      sink.audio.volume = Math.max(0, Math.min(1, newVolume))
+      //console.log("[Audio] volumeSet", sink.audio.volume);
+    } else {
+      console.warn("[Audio] No sink available")
     }
   }
 
+  function setAudioSink(newSink: PwNode): void {
+    Pipewire.preferredDefaultAudioSink = newSink
+  }
+
+  function setAudioSource(newSource: PwNode): void {
+    Pipewire.preferredDefaultAudioSource = newSource
+  }
+
   PwObjectTracker {
-    objects: [Pipewire.defaultAudioSink, Pipewire.nodes]
+    objects: [...root.sinks, ...root.sources]
   }
 
   Connections {

@@ -173,7 +173,6 @@ Singleton {
       property JsonObject audio
 
       audio: JsonObject {
-        property bool volumeOverdrive: false
         property JsonObject audioVisualizer
 
         audioVisualizer: JsonObject {

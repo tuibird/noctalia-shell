@@ -10,6 +10,16 @@ import qs.Services
 ColumnLayout {
   id: root
 
+  property real localVolume: Audio.volume
+
+  // Connection used to open the pill when volume changes
+  Connections {
+    target: Audio.sink?.audio ? Audio.sink?.audio : null
+    function onVolumeChanged() {
+      localVolume = Audio.volume
+    }
+  }
+
   spacing: 0
 
   ScrollView {
@@ -54,52 +64,53 @@ ColumnLayout {
             spacing: Style.marginSmall * scaling
             Layout.fillWidth: true
 
-            NText {
-              text: "Master Volume"
-              font.weight: Style.fontWeightBold
-              color: Colors.textPrimary
-            }
+            ColumnLayout {
+              spacing: Style.marginTiniest * scaling
 
-            NText {
-              text: "System-wide volume level"
-              font.pointSize: Style.fontSizeSmall * scaling
-              color: Colors.textSecondary
-              wrapMode: Text.WordWrap
-              Layout.fillWidth: true
-            }
+              NText {
+                text: "Master Volume"
+                font.weight: Style.fontWeightBold
+                color: Colors.textPrimary
+              }
 
+              NText {
+                text: "System-wide volume level"
+                font.pointSize: Style.fontSizeSmall * scaling
+                color: Colors.textSecondary
+                wrapMode: Text.WordWrap
+                Layout.fillWidth: true
+              }
+            }
             RowLayout {
+              // Pipewire seems a bit finicky, if we spam too many volume changes it breaks easily
+              // Probably because they have some quick fades in and out to avoid clipping
+              // We use a timer to space out the updates, to avoid lock up
+              Timer {
+                interval: 100
+                running: true
+                repeat: true
+                onTriggered: {
+                  if (Math.abs(localVolume - Audio.volume) >= 0.01) {
+                    Audio.volumeSet(localVolume)
+                  }
+                }
+              }
+
               NSlider {
-                id: masterVolumeSlider
                 Layout.fillWidth: true
                 from: 0
-                to: allowOverdrive.value ? 200 : 100
-                value: (Audio.volume || 0) * 100
-                stepSize: 5
-                onValueChanged: {
-                  Audio.volumeSet(value / 100)
+                to: Settings.data.audio.volumeOverdrive ? 2.0 : 1.0
+                value: localVolume
+                stepSize: 0.01
+                onMoved: {
+                  localVolume = value
                 }
               }
 
               NText {
-                text: Math.round(masterVolumeSlider.value) + "%"
+                text: Math.floor(Audio.volume * 100) + "%"
                 Layout.alignment: Qt.AlignVCenter
                 color: Colors.textSecondary
-              }
-            }
-
-            NToggle {
-              id: allowOverdrive
-              label: "Allow Volume Overdrive"
-              description: "Enable volume levels above 100% (up to 200%)"
-              value: Settings.data.audio ? Settings.data.audio.volumeOverdrive : false
-              onToggled: function (checked) {
-                Settings.data.audio.volumeOverdrive = checked
-
-                // If overdrive is disabled and current volume is above 100%, cap it
-                if (!checked && Audio.volume > 1.0) {
-                  Audio.volumeSet(1.0)
-                }
               }
             }
           }
@@ -142,164 +153,122 @@ ColumnLayout {
             Layout.bottomMargin: Style.marginSmall * scaling
           }
 
-          // Output Device
-          NComboBox {
-            id: outputDeviceCombo
-            label: "Output Device"
-            description: "Default audio output device"
-            optionsKeys: outputDeviceKeys
-            optionsLabels: outputDeviceLabels
-            currentKey: Audio.sink ? Audio.sink.id.toString() : ""
-            onSelected: function (key) {
-              // Find the node by ID and set it as preferred
-              for (var i = 0; i < Pipewire.nodes.count; i++) {
-                let node = Pipewire.nodes.get(i)
-                if (node.id.toString() === key && node.isSink) {
-                  Pipewire.preferredDefaultAudioSink = node
-                  break
-                }
-              }
-            }
+          // -------------------------------
+          // Output Devices
+          ButtonGroup {
+            id: sinks
           }
 
-          // Input Device
-          NComboBox {
-            id: inputDeviceCombo
-            label: "Input Device"
-            description: "Default audio input device"
-            optionsKeys: inputDeviceKeys
-            optionsLabels: inputDeviceLabels
-            currentKey: Audio.source ? Audio.source.id.toString() : ""
-            onSelected: function (key) {
-              // Find the node by ID and set it as preferred
-              for (var i = 0; i < Pipewire.nodes.count; i++) {
-                let node = Pipewire.nodes.get(i)
-                if (node.id.toString() === key && !node.isSink) {
-                  Pipewire.preferredDefaultAudioSource = node
-                  break
-                }
+          ColumnLayout {
+            spacing: Style.marginTiniest * scaling
+            Layout.fillWidth: true
+            Layout.bottomMargin: Style.marginLarge * scaling
+
+            NText {
+              text: "Output Device"
+              font.pointSize: Style.fontSizeMedium * scaling
+              font.weight: Style.fontWeightBold
+              color: Colors.textPrimary
+            }
+
+            NText {
+              text: "Select the desired audio output device"
+              font.pointSize: Style.fontSizeSmall * scaling
+              color: Colors.textSecondary
+              wrapMode: Text.WordWrap
+              Layout.fillWidth: true
+            }
+
+            Repeater {
+              model: Audio.sinks
+              NRadioButton {
+                required property PwNode modelData
+                ButtonGroup.group: sinks
+                checked: Audio.sink?.id === modelData.id
+                onClicked: Audio.setAudioSink(modelData)
+                text: modelData.description
               }
             }
           }
         }
 
-        // Divider
-        NDivider {
-          Layout.fillWidth: true
-          Layout.topMargin: Style.marginLarge * scaling
-          Layout.bottomMargin: Style.marginMedium * scaling
+        // -------------------------------
+        // Input Devices
+        ButtonGroup {
+          id: sources
         }
 
-        // Audio Visualizer Category
         ColumnLayout {
-          spacing: Style.marginSmall * scaling
+          spacing: Style.marginTiniest * scaling
           Layout.fillWidth: true
+          Layout.bottomMargin: Style.marginLarge * scaling
 
           NText {
-            text: "Audio Visualizer"
-            font.pointSize: Style.fontSizeXL * scaling
+            text: "Input Device"
+            font.pointSize: Style.fontSizeMedium * scaling
             font.weight: Style.fontWeightBold
             color: Colors.textPrimary
-            Layout.bottomMargin: Style.marginSmall * scaling
           }
 
-          // Audio Visualizer section
-          NComboBox {
-            id: audioVisualizerCombo
-            label: "Visualization Type"
-            description: "Choose a visualization type for media playback"
-            optionsKeys: ["radial", "bars", "wave"]
-            optionsLabels: ["Radial", "Bars", "Wave"]
-            currentKey: Settings.data.audio ? Settings.data.audio.audioVisualizer.type : "radial"
-            onSelected: function (key) {
-              if (!Settings.data.audio) {
-                Settings.data.audio = {}
-              }
-              if (!Settings.data.audio.audioVisualizer) {
-                Settings.data.audio.audioVisualizer = {}
-              }
-              Settings.data.audio.audioVisualizer.type = key
+          NText {
+            text: "Select desired audio input device"
+            font.pointSize: Style.fontSizeSmall * scaling
+            color: Colors.textSecondary
+            wrapMode: Text.WordWrap
+            Layout.fillWidth: true
+          }
+
+          Repeater {
+            model: Audio.sources
+            NRadioButton {
+              required property PwNode modelData
+              ButtonGroup.group: sources
+              checked: Audio.source?.id === modelData.id
+              onClicked: Audio.setAudioSource(modelData)
+              text: modelData.description
             }
           }
         }
       }
-    }
-  }
 
-  // Device list properties
-  property var outputDeviceKeys: ["default"]
-  property var outputDeviceLabels: ["Default Output"]
-  property var inputDeviceKeys: ["default"]
-  property var inputDeviceLabels: ["Default Input"]
-
-  // Bind Pipewire nodes
-  PwObjectTracker {
-    id: nodeTracker
-    objects: [Pipewire.nodes]
-  }
-
-  // Update device lists when component is completed
-  Component.onCompleted: {
-    updateDeviceLists()
-  }
-
-  // Timer to check if pipewire is ready and update device lists
-  Timer {
-    id: deviceUpdateTimer
-    interval: 100
-    repeat: true
-    running: !(Pipewire && Pipewire.ready)
-    onTriggered: {
-      if (Pipewire && Pipewire.ready) {
-        updateDeviceLists()
-        running = false
+      // Divider
+      NDivider {
+        Layout.fillWidth: true
+        Layout.topMargin: Style.marginLarge * scaling
+        Layout.bottomMargin: Style.marginMedium * scaling
       }
-    }
-  }
 
-  // Update device lists when nodes change
-  Connections {
-    target: nodeTracker
-    function onObjectsChanged() {
-      updateDeviceLists()
-    }
-  }
+      // Audio Visualizer Category
+      ColumnLayout {
+        spacing: Style.marginSmall * scaling
+        Layout.fillWidth: true
 
-  Repeater {
-    id: nodesRepeater
-    model: Pipewire.nodes
-    delegate: Item {
-      Component.onCompleted: {
-        if (modelData && modelData.isSink && modelData.audio) {
-          // Add to output devices
-          let key = modelData.id.toString()
-          if (!outputDeviceKeys.includes(key)) {
-            outputDeviceKeys.push(key)
-            outputDeviceLabels.push(modelData.description || modelData.name || "Unknown Device")
-          }
-        } else if (modelData && !modelData.isSink && modelData.audio) {
-          // Add to input devices
-          let key = modelData.id.toString()
-          if (!inputDeviceKeys.includes(key)) {
-            inputDeviceKeys.push(key)
-            inputDeviceLabels.push(modelData.description || modelData.name || "Unknown Device")
+        NText {
+          text: "Audio Visualizer"
+          font.pointSize: Style.fontSizeXL * scaling
+          font.weight: Style.fontWeightBold
+          color: Colors.textPrimary
+          Layout.bottomMargin: Style.marginSmall * scaling
+        }
+
+        // Audio Visualizer section
+        NComboBox {
+          id: audioVisualizerCombo
+          label: "Visualization Type"
+          description: "Choose a visualization type for media playback"
+          optionsKeys: ["radial", "bars", "wave"]
+          optionsLabels: ["Radial", "Bars", "Wave"]
+          currentKey: Settings.data.audio ? Settings.data.audio.audioVisualizer.type : "radial"
+          onSelected: function (key) {
+            if (!Settings.data.audio) {
+              Settings.data.audio = {}
+            }
+            if (!Settings.data.audio.audioVisualizer) {
+              Settings.data.audio.audioVisualizer = {}
+            }
+            Settings.data.audio.audioVisualizer.type = key
           }
         }
-      }
-    }
-  }
-
-  function updateDeviceLists() {
-    if (Pipewire && Pipewire.ready) {
-      // Update comboboxes
-      if (outputDeviceCombo) {
-        outputDeviceCombo.optionsKeys = outputDeviceKeys
-        outputDeviceCombo.optionsLabels = outputDeviceLabels
-      }
-
-      if (inputDeviceCombo) {
-        inputDeviceCombo.optionsKeys = inputDeviceKeys
-        inputDeviceCombo.optionsLabels = inputDeviceLabels
       }
     }
   }
