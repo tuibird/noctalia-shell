@@ -96,7 +96,7 @@ NLoader {
         }, {
           "id": root.tabsIds.NETWORK,
           "label": "Network",
-          "icon": "wifi",
+          "icon": "lan",
           "source": "Tabs/Network.qml"
         }, {
           "id": root.tabsIds.AUDIO,
@@ -258,7 +258,7 @@ NLoader {
                     NText {
                       text: modelData.label
                       color: selected ? Colors.onAccent : (tabItem.hovering ? Colors.onAccent : Colors.textPrimary)
-                      font.pointSize: Style.fontSizeLarge * scaling
+                      font.pointSize: Style.fontSizeMedium * scaling
                       font.weight: Style.fontWeightBold
                       Layout.fillWidth: true
                     }
@@ -336,7 +336,7 @@ NLoader {
                 Tabs.Display {}
                 Tabs.Wallpaper {}
                 Tabs.WallpaperSelector {}
-                Tabs.Misc {}
+                //Tabs.Misc {}
                 Tabs.About {}
               }
             }
