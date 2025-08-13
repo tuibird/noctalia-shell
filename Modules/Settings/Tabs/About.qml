@@ -11,7 +11,7 @@ ColumnLayout {
   id: root
 
   property string latestVersion: GitHub.latestVersion
-  property string currentVersion: "v1.2.1" // Fallback version
+  property string currentVersion: "v2.0.0" // Fallback version
   property var contributors: GitHub.contributors
 
   spacing: 0
@@ -45,8 +45,8 @@ ColumnLayout {
 
     Layout.fillWidth: true
     Layout.fillHeight: true
-    padding: 16
-    rightPadding: 12
+    padding: Style.marginLarge * scaling
+    rightPadding: Style.marginMedium * scaling
     clip: true
     ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
     ScrollBar.vertical.policy: ScrollBar.AsNeeded
@@ -57,51 +57,47 @@ ColumnLayout {
 
       NText {
         text: "Noctalia: quiet by design"
-        font.pointSize: 24 * Scaling.scale(screen)
+        font.pointSize: Style.fontSizeXXL * scaling
         font.weight: Style.fontWeightBold
         color: Colors.textPrimary
         Layout.alignment: Qt.AlignCenter
-        Layout.bottomMargin: 8 * Scaling.scale(screen)
+        Layout.bottomMargin: Style.marginSmall * scaling
       }
 
       NText {
         text: "It may just be another quickshell setup but it won't get in your way."
-        font.pointSize: 14 * Scaling.scale(screen)
+        font.pointSize: Style.fontSizeMedium * scaling
         color: Colors.textSecondary
         Layout.alignment: Qt.AlignCenter
-        Layout.bottomMargin: Style.marginLarge * scaling.scale(screen)
+        Layout.bottomMargin: Style.marginLarge * scaling
       }
 
       GridLayout {
         Layout.alignment: Qt.AlignCenter
         columns: 2
-        rowSpacing: 4
-        columnSpacing: 8
+        rowSpacing: Style.marginTiny * scaling
+        columnSpacing: Style.marginSmall * scaling
 
         NText {
           text: "Latest Version:"
-          font.pointSize: Style.marginLarge * scaling.scale(screen)
           color: Colors.textSecondary
           Layout.alignment: Qt.AlignRight
         }
 
         NText {
           text: root.latestVersion
-          font.pointSize: Style.marginLarge * scaling.scale(screen)
           color: Colors.textPrimary
           font.weight: Style.fontWeightBold
         }
 
         NText {
           text: "Installed Version:"
-          font.pointSize: Style.marginLarge * scaling.scale(screen)
           color: Colors.textSecondary
           Layout.alignment: Qt.AlignRight
         }
 
         NText {
           text: root.currentVersion
-          font.pointSize: Style.marginLarge * scaling.scale(screen)
           color: Colors.textPrimary
           font.weight: Style.fontWeightBold
         }
@@ -109,10 +105,10 @@ ColumnLayout {
 
       Rectangle {
         Layout.alignment: Qt.AlignCenter
-        Layout.topMargin: 8
-        Layout.preferredWidth: updateText.implicitWidth + 46
-        Layout.preferredHeight: 32
-        radius: 20
+        Layout.topMargin: Style.marginSmall * scaling
+        Layout.preferredWidth: updateText.implicitWidth + 46 * scaling
+        Layout.preferredHeight: 32 * scaling
+        radius: Style.radiusLarge * scaling
         color: updateArea.containsMouse ? Colors.accentPrimary : "transparent"
         border.color: Colors.accentPrimary
         border.width: 1
@@ -141,15 +137,14 @@ ColumnLayout {
           NText {
             text: "system_update"
             font.family: "Material Symbols Outlined"
-            font.pointSize: 18 * Scaling.scale(screen)
+            font.pointSize: 18 * scaling
             color: updateArea.containsMouse ? Colors.backgroundPrimary : Colors.accentPrimary
           }
 
           NText {
             id: updateText
-
             text: "Download latest release"
-            font.pointSize: 14 * Scaling.scale(screen)
+            font.pointSize: 14 * scaling
             color: updateArea.containsMouse ? Colors.backgroundPrimary : Colors.accentPrimary
           }
         }
@@ -166,38 +161,26 @@ ColumnLayout {
         }
       }
 
-      // Separator
-      Rectangle {
+      NDivider {
         Layout.fillWidth: true
-        Layout.topMargin: 26
-        Layout.bottomMargin: 18
-        height: 1
-        color: Colors.outline
-        opacity: 0.3
+        Layout.topMargin: Style.marginLarge * 2 * scaling
+        Layout.bottomMargin: Style.marginLarge * scaling
       }
 
       NText {
-        text: "Contributors"
-        font.pointSize: 18 * Scaling.scale(screen)
+        text: `Contributors: ${root.contributors.length}`
+        font.pointSize: Style.fontSizeLarge * scaling
         font.weight: Style.fontWeightBold
         color: Colors.textPrimary
         Layout.alignment: Qt.AlignCenter
-        Layout.topMargin: 32
-      }
-
-      NText {
-        text: "(" + root.contributors.length + ")"
-        font.pointSize: 14 * Scaling.scale(screen)
-        color: Colors.textSecondary
-        Layout.alignment: Qt.AlignCenter
-        Layout.topMargin: 4
+        Layout.topMargin: Style.marginLarge * 2
       }
 
       ScrollView {
         Layout.alignment: Qt.AlignCenter
-        Layout.preferredWidth: 200 * 4
+        Layout.preferredWidth: 200 * Style.marginTiny * scaling
         Layout.fillHeight: true
-        Layout.topMargin: 16
+        Layout.topMargin: Style.marginLarge * scaling
         clip: true
         ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
         ScrollBar.vertical.policy: ScrollBar.AsNeeded
@@ -206,86 +189,47 @@ ColumnLayout {
           id: contributorsGrid
 
           anchors.fill: parent
-          width: 200 * 4
+          width: 200 * 4 * scaling
           height: Math.ceil(root.contributors.length / 4) * 100
-          cellWidth: 200
-          cellHeight: 100
+          cellWidth: 200 * scaling
+          cellHeight: 100 * scaling
           model: root.contributors
 
           delegate: Rectangle {
-            width: contributorsGrid.cellWidth - 16
-            height: contributorsGrid.cellHeight - 4
-            radius: 20
+            width: contributorsGrid.cellWidth - Style.marginLarge * scaling
+            height: contributorsGrid.cellHeight - Style.marginTiny * scaling
+            radius: Style.radiusLarge * scaling
             color: contributorArea.containsMouse ? Colors.hover : "transparent"
 
             RowLayout {
               anchors.fill: parent
-              anchors.margins: 8
-              spacing: 12
+              anchors.margins: Style.marginSmall * scaling
+              spacing: Style.marginMedium * scaling
 
               Item {
                 Layout.alignment: Qt.AlignVCenter
-                Layout.preferredWidth: 40
-                Layout.preferredHeight: 40
+                Layout.preferredWidth: 64 * scaling
+                Layout.preferredHeight: 64 * scaling
 
-                Image {
-                  id: avatarImage
-
+                NImageRounded {
+                  imagePath: modelData.avatar_url || ""
                   anchors.fill: parent
-                  source: modelData.avatar_url || ""
-                  sourceSize: Qt.size(80, 80)
-                  visible: false
-                  mipmap: true
-                  smooth: true
-                  asynchronous: true
-                  fillMode: Image.PreserveAspectCrop
-                  cache: true
-
-                  onStatusChanged: {
-                    if (status === Image.Error) {
-                      console.log("[About] Failed to load avatar for", modelData.login, "URL:", modelData.avatar_url)
-                    }
-                  }
-                }
-
-                MultiEffect {
-                  anchors.fill: parent
-                  source: avatarImage
-                  maskEnabled: true
-                  maskSource: mask
-                }
-
-                Item {
-                  id: mask
-
-                  anchors.fill: parent
-                  layer.enabled: true
-                  visible: false
-
-                  Rectangle {
-                    anchors.fill: parent
-                    radius: parent.width / 2
-                  }
-                }
-
-                NText {
-                  anchors.centerIn: parent
-                  text: "person"
-                  font.family: "Material Symbols Outlined"
-                  font.pointSize: 24 * Scaling.scale(screen)
-                  color: contributorArea.containsMouse ? Colors.backgroundPrimary : Colors.textPrimary
-                  visible: !avatarImage.source || avatarImage.status !== Image.Ready
+                  anchors.margins: Style.marginTiny * scaling
+                  fallbackIcon: "person"
+                  borderColor: Colors.accentPrimary
+                  borderWidth: Math.max(1, Style.borderMedium * scaling)
+                  imageRadius: width * 0.5
                 }
               }
 
               ColumnLayout {
-                spacing: 4
+                spacing: Style.marginTiny * scaling
                 Layout.alignment: Qt.AlignVCenter
                 Layout.fillWidth: true
 
                 NText {
                   text: modelData.login || "Unknown"
-                  font.pointSize: 13 * Scaling.scale(screen)
+                  font.weight: Style.fontWeightBold
                   color: contributorArea.containsMouse ? Colors.backgroundPrimary : Colors.textPrimary
                   elide: Text.ElideRight
                   Layout.fillWidth: true
@@ -293,7 +237,7 @@ ColumnLayout {
 
                 NText {
                   text: (modelData.contributions || 0) + " commits"
-                  font.pointSize: 11 * Scaling.scale(screen)
+                  font.pointSize: Style.fontSizeSmall * scaling
                   color: contributorArea.containsMouse ? Colors.backgroundPrimary : Colors.textSecondary
                 }
               }
