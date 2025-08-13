@@ -50,7 +50,6 @@ NPanel {
       anchors.fill: parent
       onClicked: {
 
-        // Prevent event bubbling
       }
     }
 
