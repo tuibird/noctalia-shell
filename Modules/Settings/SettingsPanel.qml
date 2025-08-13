@@ -20,8 +20,7 @@ NLoader {
 
       WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
 
-      property var tabsModel: [
-        {
+      property var tabsModel: [{
           "label": "General",
           "icon": "tune",
           "source": "Tabs/General.qml"
@@ -57,8 +56,7 @@ NLoader {
           "label": "Wallpaper Selector",
           "icon": "wallpaper_slideshow",
           "source": "Tabs/WallpaperSelector.qml"
-        },
-        // {
+        }, // {
         //   "label": "Misc",
         //   "icon": "more_horiz",
         //   "source": "Tabs/Misc.qml"
@@ -112,7 +110,7 @@ NLoader {
 
                 delegate: Rectangle {
                   id: tabItem
-  
+
                   width: parent.width
                   height: 32 * scaling // Back to original height
                   radius: Style.radiusSmall * scaling
@@ -120,7 +118,7 @@ NLoader {
                   border.color: "transparent"
                   border.width: 0
 
-                readonly property bool selected: index === currentTabIndex
+                  readonly property bool selected: index === currentTabIndex
 
                   // Subtle hover effect: only icon/text color tint on hover
                   property bool hovering: false
