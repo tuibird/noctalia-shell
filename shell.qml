@@ -4,8 +4,6 @@ import Quickshell
 import Quickshell.Io
 import Quickshell.Widgets
 import Quickshell.Services.Pipewire
-import qs.Widgets
-import qs.Modules.Audio
 import qs.Modules.Bar
 import qs.Modules.Calendar
 import qs.Modules.Demo
@@ -14,6 +12,7 @@ import qs.Modules.SidePanel
 import qs.Modules.Notification
 import qs.Modules.Settings
 import qs.Services
+import qs.Widgets
 
 ShellRoot {
   id: shellRoot

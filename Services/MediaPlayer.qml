@@ -4,7 +4,6 @@ import QtQuick
 import Quickshell
 import Quickshell.Services.Mpris
 import qs.Services
-import qs.Modules.Audio
 
 Singleton {
   id: root

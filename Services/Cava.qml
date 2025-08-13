@@ -3,8 +3,10 @@ import Quickshell
 import Quickshell.Io
 import qs.Services
 
-Scope {
+Singleton {
   id: root
+  
+  property var values: Array(count).fill(0)
   property int count: 44
   property int noiseReduction: 60
   property string channels: "mono"
@@ -29,7 +31,7 @@ Scope {
                           }
                         })
 
-  property var values: Array(count).fill(0)
+  
 
   Process {
     id: process
