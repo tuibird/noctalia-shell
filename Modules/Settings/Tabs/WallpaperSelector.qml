@@ -105,7 +105,9 @@ Item {
         // Wallpaper grid container
         Item {
           Layout.fillWidth: true
-          Layout.preferredHeight: 400 * scaling
+          Layout.preferredHeight: {
+            return folderModel.count / wallpaperGridView.columns * wallpaperGridView.cellHeight
+          }
 
           FolderListModel {
             id: folderModel
@@ -122,10 +124,11 @@ Item {
             model: folderModel
 
             // Fixed 5 items per row - more aggressive sizing
+            property int columns: 5
             property int itemSize: Math.floor(
-                                     (width - leftMargin - rightMargin - (4 * Style.marginSmall * scaling)) / 5)
+                                     (width - leftMargin - rightMargin - (4 * Style.marginSmall * scaling)) / columns)
 
-            cellWidth: Math.floor((width - leftMargin - rightMargin) / 5)
+            cellWidth: Math.floor((width - leftMargin - rightMargin) / columns)
             cellHeight: Math.floor(itemSize * 0.67) + Style.marginSmall * scaling
 
             leftMargin: Style.marginSmall * scaling
