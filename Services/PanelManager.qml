@@ -7,5 +7,4 @@ Singleton {
   id: root
 
   property var openedPanel: null
-  property SettingsWindow settingsWindow: null
 }

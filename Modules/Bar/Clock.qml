@@ -13,7 +13,7 @@ NClock {
   }
 
   onEntered: {
-    if (!calendar.isLoaded) {
+    if (!calendarPanel.isLoaded) {
       tooltip.show()
     }
   }
@@ -22,6 +22,6 @@ NClock {
   }
   onClicked: {
     tooltip.hide()
-    calendar.isLoaded = !calendar.isLoaded
+    calendarPanel.isLoaded = !calendarPanel.isLoaded
   }
 }

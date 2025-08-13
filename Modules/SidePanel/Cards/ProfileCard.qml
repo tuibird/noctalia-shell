@@ -12,9 +12,6 @@ NBox {
   id: root
 
   readonly property real scaling: Scaling.scale(screen)
-  // Hold a single instance of the Settings window (root is NLoader)
-  property var settingsWindow: null
-
   property string uptimeText: "--"
 
   Layout.fillWidth: true
@@ -59,8 +56,9 @@ NBox {
       }
       NIconButton {
         icon: "settings"
+        tooltipText: "Open settings"
         onClicked: {
-          PanelManager.settingsWindow.isLoaded = !PanelManager.settingsWindow.isLoaded
+          settingsPanel.isLoaded = !settingsPanel.isLoaded
         }
       }
       NIconButton {

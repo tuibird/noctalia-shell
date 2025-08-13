@@ -13,7 +13,7 @@ NLoader {
 
   content: Component {
     NPanel {
-      id: settingsPanel
+      id: panel
 
       WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
 
@@ -105,11 +105,11 @@ NLoader {
 
               Repeater {
                 id: sections
-                model: settingsPanel.tabsModel
+                model: panel.tabsModel
 
                 delegate: Rectangle {
                   id: tabItem
-                  readonly property bool selected: index === settingsPanel.currentTabIndex
+                  readonly property bool selected: index === panel.currentTabIndex
                   width: parent.width
                   height: 32 * scaling // Back to original height
                   radius: Style.radiusSmall * scaling
@@ -149,7 +149,7 @@ NLoader {
                     onEntered: tabItem.hovering = true
                     onExited: tabItem.hovering = false
                     onCanceled: tabItem.hovering = false
-                    onClicked: settingsPanel.currentTabIndex = index
+                    onClicked: panel.currentTabIndex = index
                   }
                 }
               }
@@ -178,19 +178,18 @@ NLoader {
                 Layout.fillWidth: true
                 spacing: Style.marginSmall * scaling
                 NText {
-                  text: settingsPanel.tabsModel[settingsPanel.currentTabIndex].label
+                  text: panel.tabsModel[panel.currentTabIndex].label
                   font.pointSize: Style.fontSizeLarge * scaling
                   font.weight: Style.fontWeightBold
                   color: Colors.textPrimary
                   Layout.fillWidth: true
                 }
                 NIconButton {
-                  id: demoPanelToggle
                   icon: "close"
-                  tooltipText: "Close settings panel"
+                  tooltipText: "Close"
                   Layout.alignment: Qt.AlignVCenter
                   onClicked: {
-                    settingsWindow.isLoaded = !settingsWindow.isLoaded
+                    settingsPanel.isLoaded = !settingsPanel.isLoaded
                   }
                 }
               }
@@ -203,7 +202,7 @@ NLoader {
                 id: stack
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                currentIndex: settingsPanel.currentTabIndex
+                currentIndex: panel.currentTabIndex
 
                 Tabs.General {}
                 Tabs.Bar {}

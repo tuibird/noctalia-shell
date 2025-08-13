@@ -8,7 +8,7 @@ import qs.Widgets
 import qs.Modules.Audio
 import qs.Modules.Bar
 import qs.Modules.Calendar
-import qs.Modules.DemoPanel
+import qs.Modules.Demo
 import qs.Modules.Background
 import qs.Modules.SidePanel
 import qs.Modules.Notification
@@ -31,25 +31,20 @@ ShellRoot {
     id: sidePanel
   }
 
+  Calendar {
+    id: calendarPanel
+  }
+
+  SettingsPanel {
+    id: settingsPanel
+  }
+
   Notification {
     id: notification
   }
 
-  Calendar {
-    id: calendar
-  }
-
-  SettingsWindow {
-    id: settingsWindow
-  }
-
   Component.onCompleted: {
-    PanelManager.settingsWindow = settingsWindow
-
-    // Ensure our singleton is created as soon as possible
-    // so we start fetching weather asap if necessary
+    // Ensure our singleton is created as soon as possible so we start fetching weather asap
     Location.init()
-
-
   }
 }
