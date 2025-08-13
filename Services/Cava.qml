@@ -5,7 +5,7 @@ import qs.Services
 
 Singleton {
   id: root
-  
+
   property var values: Array(count).fill(0)
   property int count: 44
   property int noiseReduction: 60
@@ -30,8 +30,6 @@ Singleton {
                             "mono_option": monoOption
                           }
                         })
-
-  
 
   Process {
     id: process

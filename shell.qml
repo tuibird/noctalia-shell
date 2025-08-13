@@ -46,6 +46,8 @@ ShellRoot {
     id: notificationHistoryPanel
   }
 
+  IPCManager {}
+
   Component.onCompleted: {
     // Ensure our singleton is created as soon as possible so we start fetching weather asap
     Location.init()
