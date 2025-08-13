@@ -43,7 +43,7 @@ NLoader {
           NText {
             text: "DemoPanel"
             color: Colors.accentPrimary
-            font.pointSize: Style.fontSizeXL* scaling
+            font.pointSize: Style.fontSizeXL * scaling
             font.weight: Style.fontWeightBold
             Layout.alignment: Qt.AlignHCenter
           }
@@ -60,22 +60,27 @@ NLoader {
                 color: Colors.accentSecondary
                 font.weight: Style.fontWeightBold
               }
+              NText {
+                text: `${Math.round(Scaling.overrideScale * 100)}%`
+                Layout.alignment: Qt.AlignVCenter
+              }
               RowLayout {
                 spacing: Style.marginSmall * scaling
                 NSlider {
-                  label: "Scaling"
-                  description: "Scaling goes brrrr"
-                  valueSuffix: "%"
-                  from: 60
-                  to: 180
-                  stepSize: 1
-                  value: Scaling.overrideScale * 100
-                  implicitWidth: bgRect.width * 0.75
-                  onPressedChanged: function (pressed, value) {
-                    Scaling.overrideEnabled = true
-                    Scaling.overrideScale = value / 100
-                  }
+                id: scaleSlider
+                from: 0.6
+                to: 1.8
+                stepSize: 0.01
+                value: Scaling.overrideScale
+                implicitWidth: bgRect.width * 0.75
+                onMoved: {
+                  
                 }
+                onPressedChanged: {
+                  Scaling.overrideScale = value
+                  Scaling.overrideEnabled = true
+                }
+              }
                 NIconButton {
                   icon: "refresh"
                   fontPointSize: Style.fontSizeLarge * scaling

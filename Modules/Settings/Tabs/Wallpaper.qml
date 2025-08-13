@@ -116,20 +116,20 @@ ColumnLayout {
         }
 
         // Wallpaper Interval
-        NSlider {
-          label: "Wallpaper Interval"
-          description: "How often to change wallpapers automatically (in seconds)"
-          valueSuffix: "s"
-          from: 10
-          to: 900
-          stepSize: 10
-          value: Settings.data.wallpaper.randomInterval
-          onPressedChanged: function (pressed, value) {
-            Settings.data.wallpaper.randomInterval = Math.round(value)
-          }
-          cutoutColor: Colors.backgroundPrimary
-          Layout.fillWidth: true
-        }
+        // NSlider {
+        //   label: "Wallpaper Interval"
+        //   description: "How often to change wallpapers automatically (in seconds)"
+        //   valueSuffix: "s"
+        //   from: 10
+        //   to: 900
+        //   stepSize: 10
+        //   value: Settings.data.wallpaper.randomInterval
+        //   onPressedChanged: function (pressed, value) {
+        //     Settings.data.wallpaper.randomInterval = Math.round(value)
+        //   }
+        //   cutoutColor: Colors.backgroundPrimary
+        //   Layout.fillWidth: true
+        // }
       }
 
       NDivider {
@@ -229,36 +229,36 @@ ColumnLayout {
           }
 
           // Transition FPS
-          NSlider {
-            label: "Transition FPS"
-            description: "Frames per second for transition animations"
-            valueSuffix: " FPS"
-            from: 30
-            to: 500
-            stepSize: 5
-            value: Settings.data.wallpaper.swww.transitionFps
-            onPressedChanged: function (pressed, value) {
-              Settings.data.wallpaper.swww.transitionFps = Math.round(value)
-            }
-            cutoutColor: Colors.backgroundPrimary
-            Layout.fillWidth: true
-          }
+          // NSlider {
+          //   label: "Transition FPS"
+          //   description: "Frames per second for transition animations"
+          //   valueSuffix: " FPS"
+          //   from: 30
+          //   to: 500
+          //   stepSize: 5
+          //   value: Settings.data.wallpaper.swww.transitionFps
+          //   onPressedChanged: function (pressed, value) {
+          //     Settings.data.wallpaper.swww.transitionFps = Math.round(value)
+          //   }
+          //   cutoutColor: Colors.backgroundPrimary
+          //   Layout.fillWidth: true
+          // }
 
           // Transition Duration
-          NSlider {
-            label: "Transition Duration"
-            description: "Duration of transition animations in seconds"
-            valueSuffix: "s"
-            from: 0.25
-            to: 10
-            stepSize: 0.05
-            value: Settings.data.wallpaper.swww.transitionDuration
-            onPressedChanged: function (pressed, value) {
-              Settings.data.wallpaper.swww.transitionDuration = value
-            }
-            cutoutColor: Colors.backgroundPrimary
-            Layout.fillWidth: true
-          }
+          // NSlider {
+          //   label: "Transition Duration"
+          //   description: "Duration of transition animations in seconds"
+          //   valueSuffix: "s"
+          //   from: 0.25
+          //   to: 10
+          //   stepSize: 0.05
+          //   value: Settings.data.wallpaper.swww.transitionDuration
+          //   onPressedChanged: function (pressed, value) {
+          //     Settings.data.wallpaper.swww.transitionDuration = value
+          //   }
+          //   cutoutColor: Colors.backgroundPrimary
+          //   Layout.fillWidth: true
+          // }
         }
       }
     }

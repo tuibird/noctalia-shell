@@ -10,13 +10,15 @@ import qs.Widgets
 NLoader {
   id: root
 
+        readonly property real scaling: Scaling.scale(screen)
+
   content: Component {
     NPanel {
       id: panel
 
       WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
 
-      readonly property real scaling: Scaling.scale(screen)
+
       property int currentTabIndex: 0
       property var tabsModel: [{
           "label": "General",
@@ -74,8 +76,8 @@ NLoader {
         border.color: Colors.backgroundTertiary
         border.width: Math.max(1, Style.borderMedium * scaling)
         layer.enabled: true
-        width: (screen.width / 2) * scaling
-        height: (screen.height / 2) * scaling
+        width: (screen.width * 0.5) * scaling
+        height: (screen.height * 0.5) * scaling
         anchors.centerIn: parent
 
         MouseArea {
