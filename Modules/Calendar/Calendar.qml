@@ -15,7 +15,54 @@ NLoader {
 
       readonly property real scaling: Scaling.scale(screen)
 
+      // Override hide function to animate first
+      function hide() {
+        // Start hide animation
+        calendarRect.scaleValue = 0.8
+        calendarRect.opacityValue = 0.0
+        
+        // Hide after animation completes
+        hideTimer.start()
+      }
+
+      // Connect to NPanel's dismissed signal to handle external close events
+      Connections {
+        target: calendarPanel
+        function onDismissed() {
+          // Start hide animation
+          calendarRect.scaleValue = 0.8
+          calendarRect.opacityValue = 0.0
+          
+          // Hide after animation completes
+          hideTimer.start()
+        }
+      }
+
+      // Also handle visibility changes from external sources
+      onVisibleChanged: {
+        if (!visible && calendarRect.opacityValue > 0) {
+          // Start hide animation
+          calendarRect.scaleValue = 0.8
+          calendarRect.opacityValue = 0.0
+          
+          // Hide after animation completes
+          hideTimer.start()
+        }
+      }
+
+      // Timer to hide panel after animation
+      Timer {
+        id: hideTimer
+        interval: Style.animationSlow
+        repeat: false
+        onTriggered: {
+          calendarPanel.visible = false
+          calendarPanel.dismissed()
+        }
+      }
+
       Rectangle {
+        id: calendarRect
         color: Colors.backgroundSecondary
         radius: Style.radiusMedium * scaling
         border.color: Colors.backgroundTertiary
@@ -27,9 +74,39 @@ NLoader {
         anchors.topMargin: Style.marginTiny * scaling
         anchors.rightMargin: Style.marginTiny * scaling
 
+        // Animation properties
+        property real scaleValue: 0.8
+        property real opacityValue: 0.0
+
+        scale: scaleValue
+        opacity: opacityValue
+
+        // Animate in when component is completed
+        Component.onCompleted: {
+          scaleValue = 1.0
+          opacityValue = 1.0
+        }
+
         // Prevent closing when clicking in the panel bg
         MouseArea {
           anchors.fill: parent
+        }
+
+        // Animation behaviors
+        Behavior on scale {
+          NumberAnimation {
+            duration: Style.animationSlow
+            easing.type: Easing.OutExpo
+
+          }
+        }
+
+        Behavior on opacity {
+          NumberAnimation {
+            duration: Style.animationNormal
+            easing.type: Easing.OutQuad
+
+          }
         }
 
         // Main Column

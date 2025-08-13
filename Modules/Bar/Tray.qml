@@ -122,16 +122,91 @@ Item {
   NPanel {
     id: trayPanel
     showOverlay: false // no colors overlay even if activated in settings
+    
+    // Override hide function to animate first
+          function hide() {
+        // Start hide animation
+      trayMenuRect.scaleValue = 0.8
+      trayMenuRect.opacityValue = 0.0
+      
+      // Hide after animation completes
+      hideTimer.start()
+    }
+
     Connections {
       target: trayPanel
       ignoreUnknownSignals: true
-      function onDismissed() {
+              function onDismissed() {
+          // Start hide animation
+        trayMenuRect.scaleValue = 0.8
+        trayMenuRect.opacityValue = 0.0
+        
+        // Hide after animation completes
+        hideTimer.start()
+      }
+    }
+
+    // Also handle visibility changes from external sources
+    onVisibleChanged: {
+              if (!visible && trayMenuRect.opacityValue > 0) {
+          // Start hide animation
+        trayMenuRect.scaleValue = 0.8
+        trayMenuRect.opacityValue = 0.0
+        
+        // Hide after animation completes
+        hideTimer.start()
+      }
+    }
+
+    // Timer to hide panel after animation
+    Timer {
+      id: hideTimer
+      interval: Style.animationSlow
+      repeat: false
+      onTriggered: {
         trayPanel.visible = false
         trayMenu.hideMenu()
       }
     }
-    TrayMenu {
-      id: trayMenu
+
+    Rectangle {
+      id: trayMenuRect
+      color: "transparent"
+      anchors.fill: parent
+
+      // Animation properties
+      property real scaleValue: 0.8
+      property real opacityValue: 0.0
+
+      scale: scaleValue
+      opacity: opacityValue
+
+      // Animate in when component is completed
+      Component.onCompleted: {
+        scaleValue = 1.0
+        opacityValue = 1.0
+      }
+
+      // Animation behaviors
+      Behavior on scale {
+        NumberAnimation {
+          duration: Style.animationSlow
+          easing.type: Easing.OutExpo
+
+        }
+      }
+
+      Behavior on opacity {
+        NumberAnimation {
+          duration: Style.animationNormal
+          easing.type: Easing.OutQuad
+
+        }
+      }
+
+      TrayMenu {
+        id: trayMenu
+      }
     }
   }
 }

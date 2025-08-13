@@ -16,6 +16,40 @@ NLoader {
 
       readonly property real scaling: Scaling.scale(screen)
 
+      // Override hide function to animate first
+      function hide() {
+        // Start hide animation
+        bgRect.scaleValue = 0.8
+        bgRect.opacityValue = 0.0
+        
+        // Hide after animation completes
+        hideTimer.start()
+      }
+
+      // Connect to NPanel's dismissed signal to handle external close events
+      Connections {
+        target: panel
+        function onDismissed() {
+          // Start hide animation
+          bgRect.scaleValue = 0.8
+          bgRect.opacityValue = 0.0
+          
+          // Hide after animation completes
+          hideTimer.start()
+        }
+      }
+
+      // Timer to hide panel after animation
+      Timer {
+        id: hideTimer
+        interval: Style.animationSlow
+        repeat: false
+        onTriggered: {
+          panel.visible = false
+          panel.dismissed()
+        }
+      }
+
       WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
 
       property int currentTabIndex: 0
@@ -65,9 +99,18 @@ NLoader {
           "source": "Tabs/About.qml"
         }]
 
+      // Combined visibility change handler
       onVisibleChanged: {
-        if (visible)
+        if (visible) {
           currentTabIndex = 0
+        } else if (bgRect.opacityValue > 0) {
+          // Start hide animation
+          bgRect.scaleValue = 0.8
+          bgRect.opacityValue = 0.0
+          
+          // Hide after animation completes
+          hideTimer.start()
+        }
       }
 
       Component.onCompleted: show()
@@ -83,8 +126,38 @@ NLoader {
         height: (screen.height * 0.5) * scaling
         anchors.centerIn: parent
 
+        // Animation properties
+        property real scaleValue: 0.8
+        property real opacityValue: 0.0
+
+        scale: scaleValue
+        opacity: opacityValue
+
+        // Animate in when component is completed
+        Component.onCompleted: {
+          scaleValue = 1.0
+          opacityValue = 1.0
+        }
+
         MouseArea {
           anchors.fill: parent
+        }
+
+        // Animation behaviors
+        Behavior on scale {
+          NumberAnimation {
+            duration: Style.animationSlow
+            easing.type: Easing.OutExpo
+
+          }
+        }
+
+        Behavior on opacity {
+          NumberAnimation {
+            duration: Style.animationNormal
+            easing.type: Easing.OutQuad
+
+          }
         }
 
         RowLayout {
@@ -196,7 +269,7 @@ NLoader {
                   tooltipText: "Close"
                   Layout.alignment: Qt.AlignVCenter
                   onClicked: {
-                    settingsPanel.isLoaded = !settingsPanel.isLoaded
+                    panel.hide()
                   }
                 }
               }

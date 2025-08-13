@@ -15,9 +15,54 @@ NLoader {
 
       readonly property real scaling: Scaling.scale(screen)
 
+      // Override hide function to animate first
+      function hide() {
+        // Start hide animation
+        bgRect.scaleValue = 0.8
+        bgRect.opacityValue = 0.0
+        
+        // Hide after animation completes
+        hideTimer.start()
+      }
+
+      // Connect to NPanel's dismissed signal to handle external close events
+      Connections {
+        target: demoPanel
+        function onDismissed() {
+          // Start hide animation
+          bgRect.scaleValue = 0.8
+          bgRect.opacityValue = 0.0
+          
+          // Hide after animation completes
+          hideTimer.start()
+        }
+      }
+
+      // Also handle visibility changes from external sources
+      onVisibleChanged: {
+        if (!visible && bgRect.opacityValue > 0) {
+          // Start hide animation
+          bgRect.scaleValue = 0.8
+          bgRect.opacityValue = 0.0
+          
+          // Hide after animation completes
+          hideTimer.start()
+        }
+      }
+
+      // Timer to hide panel after animation
+      Timer {
+        id: hideTimer
+        interval: Style.animationSlow
+        repeat: false
+        onTriggered: {
+          demoPanel.visible = false
+          demoPanel.dismissed()
+        }
+      }
+
       // Ensure panel shows itself once created
       Component.onCompleted: {
-        console.log("[DemoPanel] Component completed, showing panel")
         show()
       }
 
@@ -31,9 +76,39 @@ NLoader {
         height: 700 * scaling
         anchors.centerIn: parent
 
+        // Animation properties
+        property real scaleValue: 0.8
+        property real opacityValue: 0.0
+
+        scale: scaleValue
+        opacity: opacityValue
+
+        // Animate in when component is completed
+        Component.onCompleted: {
+          scaleValue = 1.0
+          opacityValue = 1.0
+        }
+
         // Prevent closing when clicking in the panel bg
         MouseArea {
           anchors.fill: parent
+        }
+
+        // Animation behaviors
+        Behavior on scale {
+          NumberAnimation {
+            duration: Style.animationSlow
+            easing.type: Easing.OutExpo
+
+          }
+        }
+
+        Behavior on opacity {
+          NumberAnimation {
+            duration: Style.animationNormal
+            easing.type: Easing.OutQuad
+
+          }
         }
 
         ColumnLayout {

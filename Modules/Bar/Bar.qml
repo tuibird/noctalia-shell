@@ -133,13 +133,19 @@ Variants {
             const localCenterX = width / 2
             const localCenterY = height / 2
             const globalPoint = mapToItem(null, localCenterX, localCenterY)
-            if (sidePanel.isLoaded)
-              sidePanel.isLoaded = false
-            else if (sidePanel.openAt)
+            if (sidePanel.isLoaded) {
+              // Call hide() instead of directly setting isLoaded to false
+              if (sidePanel.item && sidePanel.item.hide) {
+                sidePanel.item.hide()
+              } else {
+                sidePanel.isLoaded = false
+              }
+            } else if (sidePanel.openAt) {
               sidePanel.openAt(globalPoint.x, screen)
-            else
+            } else {
               // Fallback: toggle if API unavailable
               sidePanel.isLoaded = true
+            }
           }
         }
       }

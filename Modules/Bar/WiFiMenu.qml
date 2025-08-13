@@ -18,11 +18,47 @@ NLoader {
       property string passwordInput: ""
       property bool showPasswordPrompt: false
 
+      function hide() {
+        wifiMenuRect.scaleValue = 0.8
+        wifiMenuRect.opacityValue = 0.0
+        
+        hideTimer.start()
+      }
+
+      // Connect to NPanel's dismissed signal to handle external close events
       Connections {
         target: wifiPanel
         ignoreUnknownSignals: true
         function onDismissed() {
+          // Start hide animation
+          wifiMenuRect.scaleValue = 0.8
+          wifiMenuRect.opacityValue = 0.0
+          
+          // Hide after animation completes
+          hideTimer.start()
+        }
+      }
+
+      // Also handle visibility changes from external sources
+      onVisibleChanged: {
+        if (!visible && wifiMenuRect.opacityValue > 0) {
+          // Start hide animation
+          wifiMenuRect.scaleValue = 0.8
+          wifiMenuRect.opacityValue = 0.0
+          
+          // Hide after animation completes
+          hideTimer.start()
+        }
+      }
+
+      // Timer to hide panel after animation
+      Timer {
+        id: hideTimer
+        interval: Style.animationSlow
+        repeat: false
+        onTriggered: {
           wifiPanel.visible = false
+          wifiPanel.dismissed()
           network.onMenuClosed()
         }
       }
@@ -30,6 +66,7 @@ NLoader {
       WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
 
       Rectangle {
+        id: wifiMenuRect
         color: Colors.backgroundSecondary
         radius: Style.radiusMedium * scaling
         border.color: Colors.backgroundTertiary
@@ -40,6 +77,34 @@ NLoader {
         anchors.right: parent.right
         anchors.topMargin: Style.marginTiny * scaling
         anchors.rightMargin: Style.marginTiny * scaling
+
+        // Animation properties
+        property real scaleValue: 0.8
+        property real opacityValue: 0.0
+
+        scale: scaleValue
+        opacity: opacityValue
+
+        // Animate in when component is completed
+        Component.onCompleted: {
+          scaleValue = 1.0
+          opacityValue = 1.0
+        }
+
+        // Animation behaviors
+        Behavior on scale {
+          NumberAnimation {
+            duration: Style.animationSlow
+            easing.type: Easing.OutExpo
+          }
+        }
+
+        Behavior on opacity {
+          NumberAnimation {
+            duration: Style.animationNormal
+            easing.type: Easing.OutQuad
+          }
+        }
 
         ColumnLayout {
           anchors.fill: parent
@@ -87,8 +152,7 @@ NLoader {
               icon: "close"
               sizeMultiplier: 0.8
               onClicked: {
-                wifiPanel.visible = false
-                network.onMenuClosed()
+                wifiPanel.hide()
               }
             }
           }

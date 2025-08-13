@@ -41,6 +41,41 @@ NLoader {
       // Ensure this panel attaches to the intended screen
       screen: root.targetScreen
 
+      // Override hide function to animate first
+      function hide() {
+        // Start hide animation
+        panelBackground.scaleValue = 0.8
+        panelBackground.opacityValue = 0.0
+        
+        // Hide after animation completes
+        hideTimer.start()
+      }
+
+      // Connect to NPanel's dismissed signal to handle external close events
+      Connections {
+        target: sidePanel
+        function onDismissed() {
+          // Start hide animation
+          panelBackground.scaleValue = 0.8
+          panelBackground.opacityValue = 0.0
+          
+          // Hide after animation completes
+          hideTimer.start()
+        }
+      }
+
+      // Also handle visibility changes from external sources
+      onVisibleChanged: {
+        if (!visible && panelBackground.opacityValue > 0) {
+          // Start hide animation
+          panelBackground.scaleValue = 0.8
+          panelBackground.opacityValue = 0.0
+          
+          // Hide after animation completes
+          hideTimer.start()
+        }
+      }
+
       // Ensure panel shows itself once created
       Component.onCompleted: show()
 
@@ -62,9 +97,52 @@ NLoader {
         x: Math.max(Style.marginSmall * scaling, Math.min(parent.width - width - Style.marginSmall * scaling,
                                                           Math.round(anchorX - width / 2)))
 
+        // Animation properties
+        property real scaleValue: 0.8
+        property real opacityValue: 0.0
+
+        scale: scaleValue
+        opacity: opacityValue
+
+        // Animate in when component is completed
+        Component.onCompleted: {
+          scaleValue = 1.0
+          opacityValue = 1.0
+        }
+
+
+
+        // Timer to hide panel after animation
+        Timer {
+          id: hideTimer
+          interval: Style.animationSlow
+          repeat: false
+          onTriggered: {
+            sidePanel.visible = false
+            sidePanel.dismissed()
+          }
+        }
+
         // Prevent closing when clicking in the panel bg
         MouseArea {
           anchors.fill: parent
+        }
+
+        // Animation behaviors
+        Behavior on scale {
+          NumberAnimation {
+            duration: Style.animationSlow
+            easing.type: Easing.OutExpo
+
+          }
+        }
+
+        Behavior on opacity {
+          NumberAnimation {
+            duration: Style.animationNormal
+            easing.type: Easing.OutQuad
+
+          }
         }
 
         // Content wrapper to ensure childrenRect drives implicit height

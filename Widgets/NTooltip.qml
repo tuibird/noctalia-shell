@@ -55,11 +55,23 @@ Window {
       x = pos.x - width / 2 + target.width / 2
       y = pos.y + 12 // 12 px margin below
     }
+    
+    // Start with animation values
+    tooltipRect.scaleValue = 0.8
+    tooltipRect.opacityValue = 0.0
     visible = true
+    
+    // Use a timer to trigger the animation after the component is visible
+    showTimer.start()
   }
 
   function _hideNow() {
-    visible = false
+    // Start hide animation
+    tooltipRect.scaleValue = 0.8
+    tooltipRect.opacityValue = 0.0
+    
+    // Hide after animation completes
+    hideTimer.start()
   }
 
   Connections {
@@ -97,7 +109,30 @@ Window {
     }
   }
 
+  // Timer to hide tooltip after animation
+  Timer {
+    id: hideTimer
+    interval: Style.animationNormal
+    repeat: false
+    onTriggered: {
+      visible = false
+    }
+  }
+
+  // Timer to trigger show animation
+  Timer {
+    id: showTimer
+    interval: 10 // Very short delay to ensure component is visible
+    repeat: false
+    onTriggered: {
+      // Animate to final values
+      tooltipRect.scaleValue = 1.0
+      tooltipRect.opacityValue = 1.0
+    }
+  }
+
   Rectangle {
+    id: tooltipRect
     anchors.fill: parent
     radius: Style.radiusMedium * scaling
     gradient: Gradient {
@@ -113,16 +148,37 @@ Window {
     border.color: Colors.outline
     border.width: Math.max(1, Style.borderThin * scaling)
     z: 1
-  }
 
-  NText {
-    id: tooltipText
-    anchors.centerIn: parent
-    text: root.text
-    font.pointSize: Style.fontSizeMedium * scaling
-    horizontalAlignment: Text.AlignHCenter
-    verticalAlignment: Text.AlignVCenter
-    wrapMode: Text.Wrap
-    z: 1
+    // Animation properties
+    property real scaleValue: 1.0
+    property real opacityValue: 1.0
+
+    scale: scaleValue
+    opacity: opacityValue
+
+    // Animation behaviors
+    Behavior on scale {
+      NumberAnimation {
+        duration: Style.animationNormal
+        easing.type: Easing.OutExpo
+      }
+    }
+
+    Behavior on opacity {
+      NumberAnimation {
+        duration: Style.animationNormal
+        easing.type: Easing.OutQuad
+      }
+    }
+
+    NText {
+      id: tooltipText
+      anchors.centerIn: parent
+      text: root.text
+      font.pointSize: Style.fontSizeMedium * scaling
+      horizontalAlignment: Text.AlignHCenter
+      verticalAlignment: Text.AlignVCenter
+      wrapMode: Text.Wrap
+    }
   }
 }

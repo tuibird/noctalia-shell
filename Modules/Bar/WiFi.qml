@@ -29,11 +29,18 @@ NIconButton {
       wifiMenuLoader.isLoaded = true
     }
     if (wifiMenuLoader.item) {
-      wifiMenuLoader.item.visible = !wifiMenuLoader.item.visible
       if (wifiMenuLoader.item.visible) {
-        network.onMenuOpened()
+        // Panel is visible, hide it with animation
+        if (wifiMenuLoader.item.hide) {
+          wifiMenuLoader.item.hide()
+        } else {
+          wifiMenuLoader.item.visible = false
+          network.onMenuClosed()
+        }
       } else {
-        network.onMenuClosed()
+        // Panel is hidden, show it
+        wifiMenuLoader.item.visible = true
+        network.onMenuOpened()
       }
     }
   }

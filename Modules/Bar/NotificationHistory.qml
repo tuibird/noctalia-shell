@@ -19,7 +19,17 @@ NIconButton {
       notificationHistoryPanelLoader.isLoaded = true
     }
     if (notificationHistoryPanelLoader.item) {
-      notificationHistoryPanelLoader.item.visible = !notificationHistoryPanelLoader.item.visible
+      if (notificationHistoryPanelLoader.item.visible) {
+        // Panel is visible, hide it with animation
+        if (notificationHistoryPanelLoader.item.hide) {
+          notificationHistoryPanelLoader.item.hide()
+        } else {
+          notificationHistoryPanelLoader.item.visible = false
+        }
+      } else {
+        // Panel is hidden, show it
+        notificationHistoryPanelLoader.item.visible = true
+      }
     }
   }
 
