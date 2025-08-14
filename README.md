@@ -196,7 +196,7 @@ You will need to install a few things to get everything working:
 - `xdg-desktop-portal-gnome` or any other xdg-desktop-portal (for `gpu-screen-recorder`)
 - `material-symbols-git` so the icons properly show up
 - `swww` to add fancy wallpaper animations (optional)
-- `wallust` to theme the setup based on wallpaper (optional)
+- `matugen` to theme the setup based on wallpaper (optional)
 
 ## zigstat and zigbrightness
 

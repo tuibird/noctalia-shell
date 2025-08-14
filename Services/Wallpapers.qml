@@ -155,12 +155,11 @@ Singleton {
 
   Process {
     id: generateThemeProcess
-    command: ["wallust", "run", currentWallpaper, "-u", "-k", "-d", "Assets/Wallust"]
+    command: [Quickshell.shellDir + "/Bin/matugen-theme.sh", currentWallpaper]
     workingDirectory: Quickshell.shellDir
     running: false
     stdout: StdioCollector {
       onStreamFinished: {
-
         // console.log(this.text)
       }
     }

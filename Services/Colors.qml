@@ -9,41 +9,41 @@ Singleton {
   id: root
 
   // Backgrounds
-  property color backgroundPrimary: useWallust ? wallustTheme.backgroundPrimary : defaultTheme.backgroundPrimary
-  property color backgroundSecondary: useWallust ? wallustTheme.backgroundSecondary : defaultTheme.backgroundSecondary
-  property color backgroundTertiary: useWallust ? wallustTheme.backgroundTertiary : defaultTheme.backgroundTertiary
+  property color backgroundPrimary: useMatugen ? matugenTheme.backgroundPrimary : defaultTheme.backgroundPrimary
+  property color backgroundSecondary: useMatugen ? matugenTheme.backgroundSecondary : defaultTheme.backgroundSecondary
+  property color backgroundTertiary: useMatugen ? matugenTheme.backgroundTertiary : defaultTheme.backgroundTertiary
 
   // Surfaces & Elevation
-  property color surface: useWallust ? wallustTheme.surface : defaultTheme.surface
-  property color surfaceVariant: useWallust ? wallustTheme.surfaceVariant : defaultTheme.surfaceVariant
+  property color surface: useMatugen ? matugenTheme.surface : defaultTheme.surface
+  property color surfaceVariant: useMatugen ? matugenTheme.surfaceVariant : defaultTheme.surfaceVariant
 
   // Text Colors
-  property color textPrimary: useWallust ? wallustTheme.textPrimary : defaultTheme.textPrimary
-  property color textSecondary: useWallust ? wallustTheme.textSecondary : defaultTheme.textSecondary
-  property color textDisabled: useWallust ? wallustTheme.textDisabled : defaultTheme.textDisabled
+  property color textPrimary: useMatugen ? matugenTheme.textPrimary : defaultTheme.textPrimary
+  property color textSecondary: useMatugen ? matugenTheme.textSecondary : defaultTheme.textSecondary
+  property color textDisabled: useMatugen ? matugenTheme.textDisabled : defaultTheme.textDisabled
 
   // Accent Colors
-  property color accentPrimary: useWallust ? wallustTheme.accentPrimary : defaultTheme.accentPrimary
-  property color accentSecondary: useWallust ? wallustTheme.accentSecondary : defaultTheme.accentSecondary
-  property color accentTertiary: useWallust ? wallustTheme.accentTertiary : defaultTheme.accentTertiary
+  property color accentPrimary: useMatugen ? matugenTheme.accentPrimary : defaultTheme.accentPrimary
+  property color accentSecondary: useMatugen ? matugenTheme.accentSecondary : defaultTheme.accentSecondary
+  property color accentTertiary: useMatugen ? matugenTheme.accentTertiary : defaultTheme.accentTertiary
 
   // Error/Warning
-  property color error: useWallust ? wallustTheme.error : defaultTheme.error
-  property color warning: useWallust ? wallustTheme.warning : defaultTheme.warning
+  property color error: useMatugen ? matugenTheme.error : defaultTheme.error
+  property color warning: useMatugen ? matugenTheme.warning : defaultTheme.warning
 
   // Hover
-  property color hover: useWallust ? wallustTheme.hover : defaultTheme.hover
+  property color hover: useMatugen ? matugenTheme.hover : defaultTheme.hover
 
   // Additional Theme Properties
-  property color onAccent: useWallust ? wallustTheme.onAccent : defaultTheme.onAccent
-  property color outline: useWallust ? wallustTheme.outline : defaultTheme.outline
+  property color onAccent: useMatugen ? matugenTheme.onAccent : defaultTheme.onAccent
+  property color outline: useMatugen ? matugenTheme.outline : defaultTheme.outline
 
   // Shadows & Overlays
-  property color shadow: applyOpacity(useWallust ? wallustTheme.shadow : defaultTheme.shadow, "B3")
-  property color overlay: applyOpacity(useWallust ? wallustTheme.overlay : defaultTheme.overlay, "66")
+  property color shadow: applyOpacity(useMatugen ? matugenTheme.shadow : defaultTheme.shadow, "B3")
+  property color overlay: applyOpacity(useMatugen ? matugenTheme.overlay : defaultTheme.overlay, "66")
 
-  // Check if we should use Wallust theme
-  property bool useWallust: Settings.data.wallpaper.generateTheme && wallustFile.loaded
+  // Check if we should use Matugen theme
+  property bool useMatugen: Settings.data.wallpaper.generateTheme && matugenFile.loaded
 
   function applyOpacity(color, opacity) {
     // Convert color to string and apply opacity
@@ -81,40 +81,40 @@ Singleton {
     property color overlay: "#191724"
   }
 
-  // Wallust theme colors (loaded from theme.json)
+  // Matugen theme colors (loaded from theme.json)
   QtObject {
-    id: wallustTheme
+    id: matugenTheme
 
-    property color backgroundPrimary: wallustData.backgroundPrimary
-    property color backgroundSecondary: wallustData.backgroundSecondary
-    property color backgroundTertiary: wallustData.backgroundTertiary
+    property color backgroundPrimary: matugenData.backgroundPrimary
+    property color backgroundSecondary: matugenData.backgroundSecondary
+    property color backgroundTertiary: matugenData.backgroundTertiary
 
-    property color surface: wallustData.surface
-    property color surfaceVariant: wallustData.surfaceVariant
+    property color surface: matugenData.surface
+    property color surfaceVariant: matugenData.surfaceVariant
 
-    property color textPrimary: wallustData.textPrimary
-    property color textSecondary: wallustData.textSecondary
-    property color textDisabled: wallustData.textDisabled
+    property color textPrimary: matugenData.textPrimary
+    property color textSecondary: matugenData.textSecondary
+    property color textDisabled: matugenData.textDisabled
 
-    property color accentPrimary: wallustData.accentPrimary
-    property color accentSecondary: wallustData.accentSecondary
-    property color accentTertiary: wallustData.accentTertiary
+    property color accentPrimary: matugenData.accentPrimary
+    property color accentSecondary: matugenData.accentSecondary
+    property color accentTertiary: matugenData.accentTertiary
 
-    property color error: wallustData.error
-    property color warning: wallustData.warning
+    property color error: matugenData.error
+    property color warning: matugenData.warning
 
-    property color hover: wallustData.hover
+    property color hover: matugenData.hover
 
-    property color onAccent: wallustData.onAccent
-    property color outline: wallustData.outline
+    property color onAccent: matugenData.onAccent
+    property color outline: matugenData.outline
 
-    property color shadow: wallustData.shadow
-    property color overlay: wallustData.overlay
+    property color shadow: matugenData.shadow
+    property color overlay: matugenData.overlay
   }
 
-  // FileView to load Wallust theme data from Theme.json
+  // FileView to load Matugen theme data from Theme.json
   FileView {
-    id: wallustFile
+    id: matugenFile
     path: Settings.configDir + "theme.json"
     watchChanges: true
     onFileChanged: reload()
@@ -126,7 +126,7 @@ Singleton {
       }
     }
     JsonAdapter {
-      id: wallustData
+      id: matugenData
 
       // Backgrounds
       property string backgroundPrimary: "#191724"
