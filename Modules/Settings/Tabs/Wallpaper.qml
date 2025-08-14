@@ -94,11 +94,11 @@ ColumnLayout {
 
         // Use Wallpaper Theme
         NToggle {
-          label: "Use Wallpaper Theme"
-          description: "Automatically adjust theme colors based on wallpaper using Matugen"
-          value: Settings.data.wallpaper.generateTheme
+          label: "Use Wallpaper Colors"
+          description: "Automatically adjust UI colors based on wallpaper using Matugen"
+          value: Settings.data.wallpaper.generateColors
           onToggled: function (newValue) {
-            Settings.data.wallpaper.generateTheme = newValue
+            Settings.data.wallpaper.generateColors = newValue
           }
         }
 

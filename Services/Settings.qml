@@ -123,7 +123,7 @@ Singleton {
         property string current: ""
         property bool isRandom: false
         property int randomInterval: 300
-        property bool generateTheme: false
+        property bool generateColors: false
         property JsonObject swww
 
         onDirectoryChanged: Wallpapers.loadWallpapers()

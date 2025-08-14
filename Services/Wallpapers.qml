@@ -62,7 +62,7 @@ Singleton {
       randomWallpaperTimer.restart()
     }
 
-    generateTheme()
+    generateColors()
   }
 
   function setRandomWallpaper() {
@@ -90,8 +90,8 @@ Singleton {
     }
   }
 
-  function generateTheme() {
-    if (Settings.data.wallpaper.generateTheme) {
+  function generateColors() {
+    if (Settings.data.wallpaper.generateColors) {
       generateThemeProcess.running = true
     }
   }

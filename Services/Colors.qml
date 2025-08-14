@@ -11,41 +11,33 @@ import qs.Services
 Singleton {
   id: root
 
+  // -----------
+  // Check if we should use custom colors
+  property bool useCustom: Settings.data.wallpaper.generateColors && customColorsFile.loaded
+
   // --- Key Colors
-  property color colorPrimary: useMatugen ? matugenTheme.colorPrimary : defaultTheme.colorPrimary
-  property color colorOnPrimary: useMatugen ? matugenTheme.colorOnPrimary : defaultTheme.colorOnPrimary
-  property color colorPrimaryContainer: useMatugen ? matugenTheme.colorPrimaryContainer : defaultTheme.colorPrimaryContainer
-  property color colorOnPrimaryContainer: useMatugen ? matugenTheme.colorOnPrimaryContainer : defaultTheme.colorOnPrimaryContainer
+  property color colorPrimary: useCustom ? customColors.colorPrimary : defaultTheme.colorPrimary
+  property color colorOnPrimary: useCustom ? customColors.colorOnPrimary : defaultTheme.colorOnPrimary
 
-  property color colorSecondary: useMatugen ? matugenTheme.colorSecondary : defaultTheme.colorSecondary
-  property color colorOnSecondary: useMatugen ? matugenTheme.colorOnSecondary : defaultTheme.colorOnSecondary
-  property color colorSecondaryContainer: useMatugen ? matugenTheme.colorSecondaryContainer : defaultTheme.colorSecondaryContainer
-  property color colorOnSecondaryContainer: useMatugen ? matugenTheme.colorOnSecondaryContainer : defaultTheme.colorOnSecondaryContainer
+  property color colorSecondary: useCustom ? customColors.colorSecondary : defaultTheme.colorSecondary
+  property color colorOnSecondary: useCustom ? customColors.colorOnSecondary : defaultTheme.colorOnSecondary
 
-  property color colorTertiary: useMatugen ? matugenTheme.colorTertiary : defaultTheme.colorTertiary
-  property color colorOnTertiary: useMatugen ? matugenTheme.colorOnTertiary : defaultTheme.colorOnTertiary
-  property color colorTertiaryContainer: useMatugen ? matugenTheme.colorTertiaryContainer : defaultTheme.colorTertiaryContainer
-  property color colorOnTertiaryContainer: useMatugen ? matugenTheme.colorOnTertiaryContainer : defaultTheme.colorOnTertiaryContainer
+  property color colorTertiary: useCustom ? customColors.colorTertiary : defaultTheme.colorTertiary
+  property color colorOnTertiary: useCustom ? customColors.colorOnTertiary : defaultTheme.colorOnTertiary
 
   // --- Utility Colors
-  property color colorError: useMatugen ? matugenTheme.colorError : defaultTheme.colorError
-  property color colorOnError: useMatugen ? matugenTheme.colorOnError : defaultTheme.colorOnError
-  property color colorErrorContainer: useMatugen ? matugenTheme.colorErrorContainer : defaultTheme.colorErrorContainer
-  property color colorOnErrorContainer: useMatugen ? matugenTheme.colorOnErrorContainer : defaultTheme.colorOnErrorContainer
+  property color colorError: useCustom ? customColors.colorError : defaultTheme.colorError
+  property color colorOnError: useCustom ? customColors.colorOnError : defaultTheme.colorOnError
 
   // --- Surface and Variant Colors
-  property color colorSurface: useMatugen ? matugenTheme.colorSurface : defaultTheme.colorSurface
-  property color colorOnSurface: useMatugen ? matugenTheme.colorOnSurface : defaultTheme.colorOnSurface
-  property color colorSurfaceVariant: useMatugen ? matugenTheme.colorSurfaceVariant : defaultTheme.colorSurfaceVariant
-  property color colorOnSurfaceVariant: useMatugen ? matugenTheme.colorOnSurfaceVariant : defaultTheme.colorOnSurfaceVariant
-  property color colorInversePrimary: useMatugen ? matugenTheme.colorInversePrimary : defaultTheme.colorInversePrimary
-  property color colorOutline: useMatugen ? matugenTheme.colorOutline : defaultTheme.colorOutline
-  property color colorOutlineVariant: useMatugen ? matugenTheme.colorOutlineVariant : defaultTheme.colorOutlineVariant
-  property color colorShadow: useMatugen ? matugenTheme.colorShadow : defaultTheme.colorShadow
+  property color colorSurface: useCustom ? customColors.colorSurface : defaultTheme.colorSurface
+  property color colorOnSurface: useCustom ? customColors.colorOnSurface : defaultTheme.colorOnSurface
+  property color colorSurfaceVariant: useCustom ? customColors.colorSurfaceVariant : defaultTheme.colorSurfaceVariant
+  property color colorOnSurfaceVariant: useCustom ? customColors.colorOnSurfaceVariant : defaultTheme.colorOnSurfaceVariant
+  property color colorOutline: useCustom ? customColors.colorOutline : defaultTheme.colorOutline
+  property color colorOutlineVariant: useCustom ? customColors.colorOutlineVariant : defaultTheme.colorOutlineVariant
+  property color colorShadow: useCustom ? customColors.colorShadow : defaultTheme.colorShadow
 
-  // -----------
-  // Check if we should use Matugen theme
-  property bool useMatugen: Settings.data.wallpaper.generateTheme && matugenFile.loaded
 
   // -----------
   function applyOpacity(color, opacity) {
@@ -61,103 +53,61 @@ Singleton {
     // // --- Key Colors: These are the main accent colors that define your app's theme.
     property color colorPrimary: "#ebbcba" // The main brand color, used most frequently.
     property color colorOnPrimary: "#191724" // Color for text/icons on a Primary background.
-    property color colorPrimaryContainer: "#000000" // A lighter/subtler tone of Primary, used for component backgrounds.
-    property color colorOnPrimaryContainer: "#000000" // Color for text/icons on a Primary Container background.
 
     property color colorSecondary: "#31748f" // An accent color for less prominent components.
     property color colorOnSecondary: "#e0def4" // Color for text/icons on a Secondary background.
-    property color colorSecondaryContainer: "#000000" // A lighter/subtler tone of Secondary.
-    property color colorOnSecondaryContainer: "#000000" // olor for text/icons on a Secondary Container background.
 
     property color colorTertiary: "#9ccfd8" // A contrasting accent color used for things like highlights or special actions.
     property color colorOnTertiary: "#191724" // Color for text/icons on a Tertiary background.
-    property color colorTertiaryContainer: "#000000" // A lighter/subtler tone of Tertiary.
-    property color colorOnTertiaryContainer: "#000000" // Color for text/icons on a Tertiary Container background.
 
     // --- Utility colorColors: These colors serve specific, universal purposes like indicating errors or providing neutral backgrounds.
     property color colorError: "#eb6f92" // Indicates an error state.
     property color colorOnError: "#191724" // Color for text/icons on an Error background.
-    property color colorErrorContainer: "#000000" // A lighter/subtler tone of Error.
-    property color colorOnErrorContainer: "#000000" // Color for text/icons on an Error Container background.
 
     // --- Surface colorand Variant Colors: These provide additional options for surfaces and their contents, creating visual hierarchy.
     property color colorSurface: "#191724" // The color for component surfaces like cards, sheets, and menus.
     property color colorOnSurface: "#e0def4" // The primary color for text/icons on a Surface background.
     property color colorSurfaceVariant: "#26233a" // A surface color with a slightly different tint for differentiation.
     property color colorOnSurfaceVariant: "#908caa" // The color for less prominent text/icons on a Surface.
-    property color colorInversePrimary: "#000000" // A primary color legible on an Inverse Surface, often used for call-to-action buttons.
     property color colorOutline: "#44415a" // The color for component outlines, like text fields or buttons.
     property color colorOutlineVariant: "#514e6c" // A subtler outline color for decorative elements or dividers.
     property color colorShadow: "#191724" // The color used for shadows to create elevation.
 
-    //   // property color colorBackground: "#191724"
-    //   // property color colorSurface: "#1f1d2e"
-    //   // property color colorSurfaceVariant: "#26233a"
-
-    //   // property color surface: "#1b1927"
-    //   // property color surfaceVariant: "#262337"
-
-    //   // property color colorOnBackground: "#e0def4"
-    //   // property color textSecondary: "#908caa"
-    //   // property color textDisabled: "#6e6a86"
-
-    //   // property color colorPrimary: "#ebbcba"
-    //   // property color accentSecondary: "#31748f"
-    //   // property color accentTertiary: "#9ccfd8"
-
-    //   // property color error: "#eb6f92"
-    //   // property color warning: "#f6c177"
-
-    //   // property color hover: "#c4a7e7"
-
-    //   // property color onAccent: "#191724"
-    //   // property color outline: "#44415a"
-
-    //   // property color shadow: "#191724"
-    //   // property color overlay: "#191724"
   }
 
   // ----------------------------------------------------------------
-  // Matugen theme colors (loaded from theme.json)
+  // Custom colors (loaded from colors.json)
+  // These can be generated by matugen or simply come from a well know color scheme (Dracula, Gruvbox, Nord, ...)
   QtObject {
-    id: matugenTheme
+    id: customColors
 
     // --- Key Colors
-    property color colorPrimary: matugenData.colorPrimary
-    property color colorOnPrimary: matugenData.colorOnPrimary
-    property color colorPrimaryContainer: matugenData.colorPrimaryContainer
-    property color colorOnPrimaryContainer: matugenData.colorOnPrimaryContainer
+    property color colorPrimary: customColorsData.colorPrimary
+    property color colorOnPrimary: customColorsData.colorOnPrimary
 
-    property color colorSecondary: matugenData.colorSecondary
-    property color colorOnSecondary: matugenData.colorOnSecondary
-    property color colorSecondaryContainer: matugenData.colorSecondaryContainer
-    property color colorOnSecondaryContainer: matugenData.colorOnSecondaryContainer
+    property color colorSecondary: customColorsData.colorSecondary
+    property color colorOnSecondary: customColorsData.colorOnSecondary
 
-    property color colorTertiary: matugenData.colorTertiary
-    property color colorOnTertiary: matugenData.colorOnTertiary
-    property color colorTertiaryContainer: matugenData.colorTertiaryContainer
-    property color colorOnTertiaryContainer: matugenData.colorOnTertiaryContainer
+    property color colorTertiary: customColorsData.colorTertiary
+    property color colorOnTertiary: customColorsData.colorOnTertiary
 
     // --- Utility Colors
-    property color colorError: matugenData.colorError
-    property color colorOnError: matugenData.colorOnError
-    property color colorErrorContainer: matugenData.colorErrorContainer
-    property color colorOnErrorContainer: matugenData.colorOnErrorContainer
+    property color colorError: customColorsData.colorError
+    property color colorOnError: customColorsData.colorOnError
 
     // --- Surface and Variant Colors
-    property color colorSurface: matugenData.colorSurface
-    property color colorOnSurface: matugenData.colorOnSurface
-    property color colorSurfaceVariant: matugenData.colorSurfaceVariant
-    property color colorOnSurfaceVariant: matugenData.colorOnSurfaceVariant
-    property color colorInversePrimary: matugenData.colorInversePrimary
-    property color colorOutline: matugenData.colorOutline
-    property color colorOutlineVariant: matugenData.colorOutlineVariant
-    property color colorShadow: matugenData.colorShadow
+    property color colorSurface: customColorsData.colorSurface
+    property color colorOnSurface: customColorsData.colorOnSurface
+    property color colorSurfaceVariant: customColorsData.colorSurfaceVariant
+    property color colorOnSurfaceVariant: customColorsData.colorOnSurfaceVariant
+    property color colorOutline: customColorsData.colorOutline
+    property color colorOutlineVariant: customColorsData.colorOutlineVariant
+    property color colorShadow: customColorsData.colorShadow
   }
 
-  // FileView to load Matugen theme data from colors.json
+  // FileView to load custom colors data from colors.json
   FileView {
-    id: matugenFile
+    id: customColorsFile
     path: Settings.configDir + "colors.json"
     watchChanges: true
     onFileChanged: reload()
@@ -169,36 +119,27 @@ Singleton {
       }
     }
     JsonAdapter {
-      id: matugenData
+      id: customColorsData
 
       // --- Key Colors
       property color colorPrimary: defaultTheme.colorPrimary
       property color colorOnPrimary: defaultTheme.colorOnPrimary
-      property color colorPrimaryContainer: defaultTheme.colorPrimaryContainer
-      property color colorOnPrimaryContainer: defaultTheme.colorOnPrimaryContainer
 
       property color colorSecondary: defaultTheme.colorSecondary
       property color colorOnSecondary: defaultTheme.colorOnSecondary
-      property color colorSecondaryContainer: defaultTheme.colorSecondaryContainer
-      property color colorOnSecondaryContainer: defaultTheme.colorOnSecondaryContainer
 
       property color colorTertiary: defaultTheme.colorTertiary
       property color colorOnTertiary: defaultTheme.colorOnTertiary
-      property color colorTertiaryContainer: defaultTheme.colorTertiaryContainer
-      property color colorOnTertiaryContainer: defaultTheme.colorOnTertiaryContainer
 
       // --- Utility Colors
       property color colorError: defaultTheme.colorError
       property color colorOnError: defaultTheme.colorOnError
-      property color colorErrorContainer: defaultTheme.colorErrorContainer
-      property color colorOnErrorContainer: defaultTheme.colorOnErrorContainer
 
       // --- Surface and Variant Colors
       property color colorSurface: defaultTheme.colorSurface
       property color colorOnSurface: defaultTheme.colorOnSurface
       property color colorSurfaceVariant: defaultTheme.colorSurfaceVariant
       property color colorOnSurfaceVariant: defaultTheme.colorOnSurfaceVariant
-      property color colorInversePrimary: defaultTheme.colorInversePrimary
       property color colorOutline: defaultTheme.colorOutline
       property color colorOutlineVariant: defaultTheme.colorOutlineVariant
       property color colorShadow: defaultTheme.colorShadow
