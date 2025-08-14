@@ -59,7 +59,7 @@ ColumnLayout {
         text: "Noctalia: quiet by design"
         font.pointSize: Style.fontSizeXXL * scaling
         font.weight: Style.fontWeightBold
-        color: Colors.textPrimary
+        color: Colors.colorOnSurface
         Layout.alignment: Qt.AlignCenter
         Layout.bottomMargin: Style.marginSmall * scaling
       }
@@ -67,7 +67,7 @@ ColumnLayout {
       NText {
         text: "It may just be another quickshell setup but it won't get in your way."
         font.pointSize: Style.fontSizeMedium * scaling
-        color: Colors.textSecondary
+        color: Colors.colorOnSurface
         Layout.alignment: Qt.AlignCenter
         Layout.bottomMargin: Style.marginLarge * scaling
       }
@@ -80,25 +80,25 @@ ColumnLayout {
 
         NText {
           text: "Latest Version:"
-          color: Colors.textSecondary
+          color: Colors.colorOnSurface
           Layout.alignment: Qt.AlignRight
         }
 
         NText {
           text: root.latestVersion
-          color: Colors.textPrimary
+          color: Colors.colorOnSurface
           font.weight: Style.fontWeightBold
         }
 
         NText {
           text: "Installed Version:"
-          color: Colors.textSecondary
+          color: Colors.colorOnSurface
           Layout.alignment: Qt.AlignRight
         }
 
         NText {
           text: root.currentVersion
-          color: Colors.textPrimary
+          color: Colors.colorOnSurface
           font.weight: Style.fontWeightBold
         }
       }
@@ -109,8 +109,8 @@ ColumnLayout {
         Layout.preferredWidth: updateText.implicitWidth + 46 * scaling
         Layout.preferredHeight: 32 * scaling
         radius: Style.radiusLarge * scaling
-        color: updateArea.containsMouse ? Colors.accentPrimary : "transparent"
-        border.color: Colors.accentPrimary
+        color: updateArea.containsMouse ? Colors.colorPrimary : "transparent"
+        border.color: Colors.colorPrimary
         border.width: 1
         visible: {
           if (root.currentVersion === "Unknown" || root.latestVersion === "Unknown")
@@ -138,14 +138,14 @@ ColumnLayout {
             text: "system_update"
             font.family: "Material Symbols Outlined"
             font.pointSize: 18 * scaling
-            color: updateArea.containsMouse ? Colors.backgroundPrimary : Colors.accentPrimary
+            color: updateArea.containsMouse ? Colors.colorSurface : Colors.colorPrimary
           }
 
           NText {
             id: updateText
             text: "Download latest release"
             font.pointSize: 14 * scaling
-            color: updateArea.containsMouse ? Colors.backgroundPrimary : Colors.accentPrimary
+            color: updateArea.containsMouse ? Colors.colorSurface : Colors.colorPrimary
           }
         }
 
@@ -171,7 +171,7 @@ ColumnLayout {
         text: `Shout-out to our ${root.contributors.length} awesome contributors!`
         font.pointSize: Style.fontSizeLarge * scaling
         font.weight: Style.fontWeightBold
-        color: Colors.textSecondary
+        color: Colors.colorOnSurface
         Layout.alignment: Qt.AlignCenter
         Layout.topMargin: Style.marginLarge * 2
       }
@@ -199,7 +199,7 @@ ColumnLayout {
             width: contributorsGrid.cellWidth - Style.marginLarge * scaling
             height: contributorsGrid.cellHeight - Style.marginTiny * scaling
             radius: Style.radiusLarge * scaling
-            color: contributorArea.containsMouse ? Colors.hover : "transparent"
+            color: contributorArea.containsMouse ? Colors.colorTertiary : "transparent"
 
             RowLayout {
               anchors.fill: parent
@@ -216,7 +216,7 @@ ColumnLayout {
                   anchors.fill: parent
                   anchors.margins: Style.marginTiny * scaling
                   fallbackIcon: "person"
-                  borderColor: Colors.accentPrimary
+                  borderColor: Colors.colorPrimary
                   borderWidth: Math.max(1, Style.borderMedium * scaling)
                   imageRadius: width * 0.5
                 }
@@ -230,7 +230,7 @@ ColumnLayout {
                 NText {
                   text: modelData.login || "Unknown"
                   font.weight: Style.fontWeightBold
-                  color: contributorArea.containsMouse ? Colors.backgroundPrimary : Colors.textPrimary
+                  color: contributorArea.containsMouse ? Colors.colorSurface : Colors.colorOnSurface
                   elide: Text.ElideRight
                   Layout.fillWidth: true
                 }
@@ -239,7 +239,7 @@ ColumnLayout {
                   text: (modelData.contributions || 0) + " " + ((modelData.contributions
                                                                  || 0) === 1 ? "commit" : "commits")
                   font.pointSize: Style.fontSizeSmall * scaling
-                  color: contributorArea.containsMouse ? Colors.backgroundPrimary : Colors.textSecondary
+                  color: contributorArea.containsMouse ? Colors.colorSurface : Colors.colorOnSurface
                 }
               }
             }

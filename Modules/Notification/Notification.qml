@@ -63,18 +63,9 @@ PanelWindow {
         height: Math.max(80 * scaling, contentColumn.implicitHeight + (Style.marginMedium * 2 * scaling))
         clip: true
         radius: Style.radiusMedium * scaling
-        border.color: Colors.accentPrimary
+        border.color: Colors.colorPrimary
         border.width: Math.max(1, Style.borderThin * scaling)
-        gradient: Gradient {
-          GradientStop {
-            position: 0.0
-            color: Colors.backgroundSecondary
-          }
-          GradientStop {
-            position: 1.0
-            color: Colors.backgroundTertiary
-          }
-        }
+        color: Colors.colorSurface
 
         // Animation properties
         property real scaleValue: 0.8
@@ -142,14 +133,14 @@ PanelWindow {
             spacing: Style.marginSmall * scaling
             NText {
               text: (model.appName || model.desktopEntry) || "Unknown App"
-              color: Colors.accentSecondary
+              color: Colors.colorSecondary
               font.pointSize: Style.fontSizeSmall * scaling
             }
             Rectangle {
               width: 6 * scaling
               height: 6 * scaling
               radius: 3 * scaling
-              color: (model.urgency === NotificationUrgency.Critical) ? Colors.error : (model.urgency === NotificationUrgency.Low) ? Colors.textSecondary : Colors.accentPrimary
+              color: (model.urgency === NotificationUrgency.Critical) ? Colors.colorError : (model.urgency === NotificationUrgency.Low) ? Colors.colorOnSurface : Colors.colorPrimary
               Layout.alignment: Qt.AlignVCenter
             }
             Item {
@@ -157,7 +148,7 @@ PanelWindow {
             }
             NText {
               text: notificationService.formatTimestamp(model.timestamp)
-              color: Colors.textSecondary
+              color: Colors.colorOnSurface
               font.pointSize: Style.fontSizeSmall * scaling
             }
           }
@@ -166,7 +157,7 @@ PanelWindow {
             text: model.summary || "No summary"
             font.pointSize: Style.fontSizeLarge * scaling
             font.weight: Style.fontWeightBold
-            color: Colors.textPrimary
+            color: Colors.colorOnSurface
             wrapMode: Text.Wrap
             width: 300 * scaling
             maximumLineCount: 3
@@ -176,7 +167,7 @@ PanelWindow {
           NText {
             text: model.body || ""
             font.pointSize: Style.fontSizeSmall * scaling
-            color: Colors.textSecondary
+            color: Colors.colorOnSurface
             wrapMode: Text.Wrap
             width: 300 * scaling
             maximumLineCount: 5

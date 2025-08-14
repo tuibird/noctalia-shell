@@ -36,7 +36,7 @@ ColumnLayout {
           text: "Directory"
           font.pointSize: Style.fontSizeXL * scaling
           font.weight: Style.fontWeightBold
-          color: Colors.textPrimary
+          color: Colors.colorOnSurface
           Layout.bottomMargin: Style.marginSmall * scaling
         }
 
@@ -78,7 +78,7 @@ ColumnLayout {
           text: "Automation"
           font.pointSize: Style.fontSizeXL * scaling
           font.weight: Style.fontWeightBold
-          color: Colors.textPrimary
+          color: Colors.colorOnSurface
           Layout.bottomMargin: Style.marginSmall * scaling
         }
 
@@ -111,13 +111,13 @@ ColumnLayout {
               NText {
                 text: "Wallpaper Interval"
                 font.weight: Style.fontWeightBold
-                color: Colors.textPrimary
+                color: Colors.colorOnSurface
               }
 
               NText {
                 text: "How often to change wallpapers automatically (in seconds)"
                 font.pointSize: Style.fontSizeSmall * scaling
-                color: Colors.textSecondary
+                color: Colors.colorOnSurface
                 wrapMode: Text.WordWrap
                 Layout.fillWidth: true
               }
@@ -137,7 +137,7 @@ ColumnLayout {
             stepSize: 10
             value: Settings.data.wallpaper.randomInterval
             onPressedChanged: Settings.data.wallpaper.randomInterval = Math.round(value)
-            cutoutColor: Colors.backgroundPrimary
+            cutoutColor: Colors.colorSurface
           }
         }
       }
@@ -158,7 +158,7 @@ ColumnLayout {
           text: "SWWW"
           font.pointSize: Style.fontSizeXL * scaling
           font.weight: Style.fontWeightBold
-          color: Colors.textPrimary
+          color: Colors.colorOnSurface
           Layout.bottomMargin: 8
         }
 
@@ -212,13 +212,13 @@ ColumnLayout {
                 NText {
                   text: "Transition FPS"
                   font.weight: Style.fontWeightBold
-                  color: Colors.textPrimary
+                  color: Colors.colorOnSurface
                 }
 
                 NText {
                   text: "Frames per second for transition animations"
                   font.pointSize: Style.fontSizeSmall * scaling
-                  color: Colors.textSecondary
+                  color: Colors.colorOnSurface
                   wrapMode: Text.WordWrap
                   Layout.fillWidth: true
                 }
@@ -238,7 +238,7 @@ ColumnLayout {
               stepSize: 5
               value: Settings.data.wallpaper.swww.transitionFps
               onPressedChanged: Settings.data.wallpaper.swww.transitionFps = Math.round(value)
-              cutoutColor: Colors.backgroundPrimary
+              cutoutColor: Colors.colorSurface
             }
           }
 
@@ -251,13 +251,13 @@ ColumnLayout {
                 NText {
                   text: "Transition Duration"
                   font.weight: Style.fontWeightBold
-                  color: Colors.textPrimary
+                  color: Colors.colorOnSurface
                 }
 
                 NText {
                   text: "Duration of transition animations in seconds"
                   font.pointSize: Style.fontSizeSmall * scaling
-                  color: Colors.textSecondary
+                  color: Colors.colorOnSurface
                   wrapMode: Text.WordWrap
                   Layout.fillWidth: true
                 }
@@ -277,7 +277,7 @@ ColumnLayout {
               stepSize: 0.05
               value: Settings.data.wallpaper.swww.transitionDuration
               onPressedChanged: Settings.data.wallpaper.swww.transitionDuration = value
-              cutoutColor: Colors.backgroundPrimary
+              cutoutColor: Colors.colorSurface
             }
           }
         }

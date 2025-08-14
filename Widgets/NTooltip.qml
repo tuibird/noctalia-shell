@@ -135,17 +135,8 @@ Window {
     id: tooltipRect
     anchors.fill: parent
     radius: Style.radiusMedium * scaling
-    gradient: Gradient {
-      GradientStop {
-        position: 0.0
-        color: Colors.backgroundSecondary
-      }
-      GradientStop {
-        position: 1.0
-        color: Colors.backgroundTertiary
-      }
-    }
-    border.color: Colors.outline
+    color: Colors.colorSurface
+    border.color: Colors.colorOutline
     border.width: Math.max(1, Style.borderThin * scaling)
     z: 1
 

@@ -10,11 +10,11 @@ Item {
   property string icon: ""
   property string text: ""
   property string tooltipText: ""
-  property color pillColor: Colors.surfaceVariant
-  property color textColor: Colors.textPrimary
-  property color iconCircleColor: Colors.accentPrimary
-  property color iconTextColor: Colors.backgroundPrimary
-  property color collapsedIconColor: Colors.textPrimary
+  property color pillColor: Colors.colorSurfaceVariant
+  property color textColor: Colors.colorOnSurface
+  property color iconCircleColor: Colors.colorPrimary
+  property color iconTextColor: Colors.colorSurface
+  property color collapsedIconColor: Colors.colorOnSurface
   property real sizeMultiplier: 0.8
   property bool autoHide: false
 

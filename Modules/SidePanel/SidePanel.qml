@@ -81,20 +81,9 @@ NLoader {
       // Inline helpers moved to dedicated widgets: NCard and NCircleStat
       Rectangle {
         id: panelBackground
-        color: "transparent"
-        gradient: Gradient {
-          GradientStop {
-            position: 0.0
-            color: Colors.backgroundSecondary
-          }
-          GradientStop {
-            position: 1.0
-            color: Colors.backgroundTertiary
-          }
-        }
-
+        color: Colors.colorSurface
         radius: Style.radiusLarge * scaling
-        border.color: Colors.backgroundTertiary
+        border.color: Colors.colorOutline
         border.width: Math.max(1, Style.borderMedium * scaling)
         layer.enabled: true
         width: 460 * scaling

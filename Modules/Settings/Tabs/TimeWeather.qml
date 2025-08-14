@@ -36,7 +36,7 @@ ColumnLayout {
           text: "Location"
           font.pointSize: Style.fontSizeXL * scaling
           font.weight: Style.fontWeightBold
-          color: Colors.textPrimary
+          color: Colors.colorOnSurface
           Layout.bottomMargin: Style.marginSmall * scaling
         }
 
@@ -73,7 +73,7 @@ ColumnLayout {
             text: "Time Format"
             font.pointSize: Style.fontSizeXL * scaling
             font.weight: Style.fontWeightBold
-            color: Colors.textPrimary
+            color: Colors.colorOnSurface
             Layout.bottomMargin: 8
           }
 
@@ -111,7 +111,7 @@ ColumnLayout {
             text: "Weather"
             font.pointSize: Style.fontSizeXL * scaling
             font.weight: Style.fontWeightBold
-            color: Colors.textPrimary
+            color: Colors.colorOnSurface
             Layout.bottomMargin: Style.marginSmall * scaling
           }
 

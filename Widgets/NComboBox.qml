@@ -29,13 +29,13 @@ ColumnLayout {
       text: label
       font.pointSize: Style.fontSizeMedium * scaling
       font.weight: Style.fontWeightBold
-      color: Colors.textPrimary
+      color: Colors.colorOnSurface
     }
 
     NText {
       text: description
       font.pointSize: Style.fontSizeSmall * scaling
-      color: Colors.textSecondary
+      color: Colors.colorOnSurface
       wrapMode: Text.WordWrap
     }
   }
@@ -56,8 +56,8 @@ ColumnLayout {
     background: Rectangle {
       implicitWidth: 120 * scaling
       implicitHeight: preferredHeight
-      color: Colors.surfaceVariant
-      border.color: combo.activeFocus ? Colors.hover : Colors.outline
+      color: Colors.colorSurfaceVariant
+      border.color: combo.activeFocus ? Colors.colorTertiary : Colors.colorOutline
       border.width: Math.max(1, Style.borderThin * scaling)
       radius: Style.radiusMedium * scaling
     }
@@ -97,8 +97,8 @@ ColumnLayout {
       }
 
       background: Rectangle {
-        color: Colors.surfaceVariant
-        border.color: Colors.outline
+        color: Colors.colorSurfaceVariant
+        border.color: Colors.colorOutline
         border.width: Math.max(1, Style.borderThin * scaling)
         radius: Style.radiusMedium * scaling
       }
@@ -112,14 +112,14 @@ ColumnLayout {
         text: (combo.model.indexOf(modelData) >= 0 && combo.model.indexOf(
                  modelData) < root.optionsLabels.length) ? root.optionsLabels[combo.model.indexOf(modelData)] : ""
         font.pointSize: Style.fontSizeMedium * scaling
-        color: highlighted ? Colors.backgroundPrimary : Colors.textPrimary
+        color: highlighted ? Colors.colorSurface : Colors.colorOnSurface
         verticalAlignment: Text.AlignVCenter
         elide: Text.ElideRight
       }
 
       background: Rectangle {
         width: combo.width - Style.marginMedium * scaling * 3
-        color: highlighted ? Colors.hover : "transparent"
+        color: highlighted ? Colors.colorTertiary : "transparent"
         radius: Style.radiusSmall * scaling
       }
     }

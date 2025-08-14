@@ -5,8 +5,8 @@ Item {
   id: root
   property int innerRadius: 32 * scaling
   property int outerRadius: 64 * scaling
-  property color fillColor: Colors.accentPrimary
-  property color strokeColor: Colors.textPrimary
+  property color fillColor: Colors.colorPrimary
+  property color strokeColor: Colors.colorOnSurface
   property int strokeWidth: 0 * scaling
   property var values: []
   property int usableOuter: 64

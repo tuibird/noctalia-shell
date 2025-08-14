@@ -104,7 +104,7 @@ NLoader {
             id: dockContainer
             width: dock.width + 40
             height: 50
-            color: Colors.backgroundSecondary
+            color: Colors.colorSurface
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottom: parent.bottom
             topLeftRadius: 20
@@ -203,7 +203,7 @@ NLoader {
                       text: appButton.appId ? appButton.appId.charAt(0).toUpperCase() : "?"
                       font.pixelSize: 14
                       font.bold: true
-                      color: appButton.isActive ? Colors.accentPrimary : Colors.textPrimary
+                      color: appButton.isActive ? Colors.colorPrimary : Colors.colorOnSurface
                     }
 
                     MouseArea {
@@ -253,7 +253,7 @@ NLoader {
                       visible: isActive
                       width: 20
                       height: 3
-                      color: Colors.accentPrimary
+                      color: Colors.colorPrimary
                       radius: 1.5
                       anchors.bottom: parent.bottom
                       anchors.horizontalCenter: parent.horizontalCenter
@@ -292,8 +292,8 @@ NLoader {
               width: 80
               height: 32
               radius: 8
-              color: closeMouseArea.containsMouse ? Colors.hover : Colors.backgroundPrimary
-              border.color: Colors.outline
+              color: closeMouseArea.containsMouse ? Colors.colorTertiary : Colors.colorSurface
+              border.color: Colors.colorOutline
               border.width: 1
 
               x: {
@@ -315,7 +315,7 @@ NLoader {
                 anchors.centerIn: parent
                 text: "Close"
                 font.pixelSize: 14
-                color: Colors.textPrimary
+                color: Colors.colorOnSurface
               }
 
               MouseArea {

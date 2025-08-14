@@ -1,28 +1,7 @@
-# matugen configuration for Noctalia
-# This file configures how matugen generates colors from wallpapers
-
+# This file configures how matugen generates colors from wallpapers for Noctalia
 [config]
-# Color scheme type for generation
-scheme = "dark"
 
-# Color space for color extraction
-color_space = "oklch"
-
-# Algorithm for color extraction
-algorithm = "kmeans"
-
-# Number of colors to extract
-color_count = 16
-
-# Use source image colors
-use_source_colors = true
-
-# Generate dark theme variant
-generate_dark = true
-
-# Generate light theme variant
-generate_light = false
 
 [templates.noctalia]
 input_path = "templates/noctalia.json"
-output_path = "~/.config/noctalia/theme.json"
+output_path = "~/.config/noctalia/colors.json"

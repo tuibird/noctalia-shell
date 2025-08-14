@@ -18,7 +18,7 @@ Item {
   property ListModel localWorkspaces: ListModel {}
   property real masterProgress: 0.0
   property bool effectsActive: false
-  property color effectColor: Colors.accentPrimary
+  property color effectColor: Colors.colorPrimary
 
   property int horizontalPadding: Math.round(16 * s)
   property int spacingBetweenPills: Math.round(8 * s)
@@ -72,7 +72,7 @@ Item {
   }
 
   function triggerUnifiedWave() {
-    effectColor = Colors.accentPrimary
+    effectColor = Colors.colorPrimary
     masterAnimation.restart()
   }
 
@@ -108,7 +108,7 @@ Item {
       const ws = localWorkspaces.get(i)
       if (ws.isFocused === true) {
         root.triggerUnifiedWave()
-        root.workspaceChanged(ws.id, Colors.accentPrimary)
+        root.workspaceChanged(ws.id, Colors.colorPrimary)
         break
       }
     }
@@ -121,14 +121,12 @@ Item {
     anchors.horizontalCenter: parent.horizontalCenter
     anchors.verticalCenter: parent.verticalCenter
     radius: Math.round(12 * s)
-    color: Colors.surfaceVariant
-    border.color: Qt.rgba(Colors.textPrimary.r, Colors.textPrimary.g, Colors.textPrimary.b, 0.1)
+    color: Colors.colorSurfaceVariant
+    border.color: Colors.colorOutlineVariant
     border.width: Math.max(1, Math.round(1 * s))
     layer.enabled: true
     layer.effect: MultiEffect {
-      shadowColor: "black"
-
-      // radius: 12
+      shadowColor: Colors.colorShadow
       shadowVerticalOffset: 0
       shadowHorizontalOffset: 0
       shadowOpacity: 0.10
@@ -168,15 +166,15 @@ Item {
           }
           color: {
             if (model.isFocused)
-              return Colors.accentPrimary
+              return Colors.colorPrimary
             if (model.isUrgent)
-              return Colors.error
+              return Colors.colorError
             if (model.isActive || model.isOccupied)
-              return Colors.accentTertiary
+              return Colors.colorSecondary
             if (model.isUrgent)
-              return Colors.error
+              return Colors.colorError
 
-            return Colors.outline
+            return Colors.colorOutline
           }
           scale: model.isFocused ? 1.0 : 0.9
           z: 0

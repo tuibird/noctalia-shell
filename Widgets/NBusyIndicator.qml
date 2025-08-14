@@ -7,7 +7,7 @@ Item {
   readonly property real scaling: Scaling.scale(screen)
 
   property bool running: true
-  property color color: Colors.accentPrimary
+  property color color: Colors.colorPrimary
   property int size: Style.baseWidgetSize * scaling
   property int strokeWidth: Style.borderThick * scaling
   property int duration: 1000

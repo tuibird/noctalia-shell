@@ -39,13 +39,13 @@ NBox {
       NText {
         text: "album"
         font.family: "Material Symbols Outlined"
-        font.pointSize: 28 * scaling
-        color: Colors.textSecondary
+        font.pointSize: Style.fontSizeXXL * 2.5 * scaling
+        color: Colors.colorOnSurfaceVariant
         Layout.alignment: Qt.AlignHCenter
       }
       NText {
         text: "No media player detected"
-        color: Colors.textDisabled
+        color: Colors.colorOnSurfaceVariant
         Layout.alignment: Qt.AlignHCenter
       }
 
@@ -76,7 +76,7 @@ NBox {
           // implicitWidth: 120 * scaling
           // implicitHeight: 30 * scaling
           color: "transparent"
-          border.color: playerSelector.activeFocus ? Colors.hover : Colors.outline
+          border.color: playerSelector.activeFocus ? Colors.colorTertiary : Colors.colorOutline
           border.width: Math.max(1, Style.borderThin * scaling)
           radius: Style.radiusMedium * scaling
         }
@@ -87,7 +87,7 @@ NBox {
           rightPadding: playerSelector.indicator.width + playerSelector.spacing
           text: playerSelector.displayText
           font.pointSize: Style.fontSizeSmall * scaling
-          color: Colors.textPrimary
+          color: Colors.colorOnSurface
           verticalAlignment: Text.AlignVCenter
           elide: Text.ElideRight
         }
@@ -98,7 +98,7 @@ NBox {
           text: "arrow_drop_down"
           font.family: "Material Symbols Outlined"
           font.pointSize: Style.fontSizeXL * scaling
-          color: Colors.textPrimary
+          color: Colors.colorOnSurface
           horizontalAlignment: Text.AlignRight
         }
 
@@ -122,14 +122,14 @@ NBox {
             gradient: Gradient {
               GradientStop {
                 position: 0.0
-                color: Colors.backgroundSecondary
+                color: Colors.colorSurface
               }
               GradientStop {
                 position: 1.0
-                color: Colors.backgroundTertiary
+                color: Colors.colorSurfaceVariant
               }
             }
-            border.color: Colors.outline
+            border.color: Colors.colorOutline
             border.width: Math.max(1, Style.borderThin * scaling)
             radius: Style.radiusTiny * scaling
           }
@@ -140,7 +140,7 @@ NBox {
           contentItem: NText {
             text: modelData.identity
             font.pointSize: Style.fontSizeSmall * scaling
-            color: highlighted ? Colors.backgroundPrimary : Colors.textPrimary
+            color: highlighted ? Colors.colorSurface : Colors.colorOnSurface
             verticalAlignment: Text.AlignVCenter
             elide: Text.ElideRight
           }
@@ -148,7 +148,7 @@ NBox {
 
           background: Rectangle {
             width: popup.width - Style.marginSmall * scaling * 2
-            color: highlighted ? Colors.hover : "transparent"
+            color: highlighted ? Colors.colorTertiary : "transparent"
             radius: Style.radiusTiny * scaling
           }
         }
@@ -169,8 +169,8 @@ NBox {
           width: 90 * scaling
           height: 90 * scaling
           radius: width * 0.5
-          color: trackArt.visible ? Colors.accentPrimary : "transparent"
-          border.color: trackArt.visible ? Colors.outline : "transparent"
+          color: trackArt.visible ? Colors.colorPrimary : "transparent"
+          border.color: trackArt.visible ? Colors.colorOutline : "transparent"
           border.width: Math.max(1, Style.borderThin * scaling)
           clip: true
 
@@ -182,7 +182,7 @@ NBox {
             anchors.margins: Style.marginTiny * scaling
             imagePath: MediaPlayer.trackArtUrl
             fallbackIcon: "image"
-            borderColor: Colors.outline
+            borderColor: Colors.colorOutline
             borderWidth: Math.max(1, Style.borderThin * scaling)
             imageRadius: width * 0.5
           }
@@ -217,7 +217,7 @@ NBox {
           NText {
             visible: MediaPlayer.trackArtist !== ""
             text: MediaPlayer.trackArtist
-            color: Colors.textSecondary
+            color: Colors.colorOnSurface
             font.pointSize: Style.fontSizeSmall * scaling
             elide: Text.ElideRight
             Layout.fillWidth: true
@@ -226,7 +226,7 @@ NBox {
           NText {
             visible: MediaPlayer.trackAlbum !== ""
             text: MediaPlayer.trackAlbum
-            color: Colors.textSecondary
+            color: Colors.colorOnSurface
             font.pointSize: Style.fontSizeSmall * scaling
             elide: Text.ElideRight
             Layout.fillWidth: true
@@ -241,7 +241,7 @@ NBox {
         width: parent.width
         height: 4 * scaling
         radius: Style.radiusSmall * scaling
-        color: Colors.backgroundTertiary
+        color: Colors.colorSurfaceVariant
         Layout.fillWidth: true
 
         property real progressRatio: {
@@ -256,7 +256,7 @@ NBox {
           width: progressBarBackground.progressRatio * parent.width
           height: parent.height
           radius: parent.radius
-          color: Colors.accentPrimary
+          color: Colors.colorPrimary
 
           Behavior on width {
             NumberAnimation {
@@ -271,8 +271,8 @@ NBox {
           width: 16 * scaling
           height: 16 * scaling
           radius: width * 0.5
-          color: Colors.accentPrimary
-          border.color: Colors.backgroundPrimary
+          color: Colors.colorPrimary
+          border.color: Colors.colorSurface
           border.width: Math.max(1 * Style.borderMedium * scaling)
 
           x: Math.max(0, Math.min(parent.width - width, progressFill.width - width / 2))
@@ -345,7 +345,7 @@ NBox {
         width: 300 * scaling
         height: 80 * scaling
         values: Cava.values
-        fillColor: Colors.textPrimary
+        fillColor: Colors.colorOnSurface
         Layout.alignment: Qt.AlignHCenter
       }
     }
@@ -355,8 +355,8 @@ NBox {
     //   values: Cava.values
     //   innerRadius: 30 * scaling // Position just outside 60x60 album art
     //   outerRadius: 48 * scaling // Extend bars outward from album art
-    //   fillColor: Colors.accentPrimary
-    //   strokeColor: Colors.accentPrimary
+    //   fillColor: Colors.colorPrimary
+    //   strokeColor: Colors.colorPrimary
     //   strokeWidth: 0 * scaling
     // }
   }

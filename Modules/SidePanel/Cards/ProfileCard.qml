@@ -33,7 +33,7 @@ NBox {
       height: Style.baseWidgetSize * 1.25 * scaling
       imagePath: Settings.data.general.avatarImage
       fallbackIcon: "person"
-      borderColor: Colors.accentPrimary
+      borderColor: Colors.colorPrimary
       borderWidth: Math.max(1, Style.borderMedium * scaling)
     }
 
@@ -46,7 +46,7 @@ NBox {
       }
       NText {
         text: `System Uptime: ${uptimeText}`
-        color: Colors.textSecondary
+        color: Colors.colorOnSurface
       }
     }
 

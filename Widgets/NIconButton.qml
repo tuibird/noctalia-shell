@@ -26,9 +26,9 @@ Rectangle {
   implicitWidth: size
   implicitHeight: size
 
-  color: (root.hovering || showFilled) ? Colors.accentPrimary : "transparent"
+  color: (root.hovering || showFilled) ? Colors.colorPrimary : "transparent"
   radius: width * 0.5
-  border.color: showBorder ? Colors.accentPrimary : "transparent"
+  border.color: showBorder ? Colors.colorPrimary : "transparent"
   border.width: Math.max(1, Style.borderThin * scaling)
 
   NText {
@@ -42,7 +42,7 @@ Rectangle {
     font.variableAxes: {
       "wght": (Font.Normal + Font.Bold) / 2.0
     }
-    color: (root.hovering || showFilled) ? Colors.onAccent : showBorder ? Colors.accentPrimary : Colors.textPrimary
+    color: (root.hovering || showFilled) ? Colors.colorOnPrimary : showBorder ? Colors.colorPrimary : Colors.colorOnSurface
     horizontalAlignment: Text.AlignHCenter
     verticalAlignment: Text.AlignVCenter
     opacity: root.enabled ? Style.opacityFull : Style.opacityMedium

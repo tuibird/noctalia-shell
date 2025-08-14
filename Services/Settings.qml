@@ -18,7 +18,6 @@ Singleton {
                                                                        "HOME") + "/.cache") + "/" + shellName + "/"
 
   property string settingsFile: Quickshell.env("NOCTALIA_SETTINGS_FILE") || (configDir + "settings.json")
-  property string colorsFile: Quickshell.env("NOCTALIA_COLORS_FILE") || (configDir + "colors.json")
 
   property string defaultWallpaper: Qt.resolvedUrl("../Assets/Tests/wallpaper.png")
   property string defaultAvatar: Quickshell.env("HOME") + "/.face"

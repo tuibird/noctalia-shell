@@ -254,19 +254,19 @@ NLoader {
                     width: Math.min(700 * scaling, parent.width * 0.75)
                     height: Math.min(550 * scaling, parent.height * 0.8)
                     radius: 32 * scaling
-                    color: Colors.backgroundPrimary
-                    border.color: Colors.outline
+                    color: Colors.colorSurface
+                    border.color: Colors.colorOutline
                     border.width: Style.borderThin * scaling
 
                     // Subtle gradient background
                     gradient: Gradient {
                       GradientStop {
                         position: 0.0
-                        color: Qt.lighter(Colors.backgroundPrimary, 1.02)
+                        color: Qt.lighter(Colors.colorSurface, 1.02)
                       }
                       GradientStop {
                         position: 1.0
-                        color: Qt.darker(Colors.backgroundPrimary, 1.1)
+                        color: Qt.darker(Colors.colorSurface, 1.1)
                       }
                     }
 
@@ -281,8 +281,8 @@ NLoader {
                         Layout.preferredHeight: 40 * scaling
                         Layout.bottomMargin: Style.marginMedium * scaling
                         radius: 20 * scaling
-                        color: Colors.backgroundSecondary
-                        border.color: searchInput.activeFocus ? Colors.accentPrimary : Colors.outline
+                        color: Colors.colorSurface
+                        border.color: searchInput.activeFocus ? Colors.colorPrimary : Colors.colorOutline
                         border.width: searchInput.activeFocus ? 2 : 1
 
                         Row {
@@ -294,14 +294,14 @@ NLoader {
                             text: "search"
                             font.family: "Material Symbols Outlined"
                             font.pointSize: 16 * scaling
-                            color: searchInput.activeFocus ? Colors.accentPrimary : Colors.textSecondary
+                            color: searchInput.activeFocus ? Colors.colorPrimary : Colors.colorOnSurface
                           }
 
                           TextField {
                             id: searchInput
                             placeholderText: "Search applications..."
-                            color: Colors.textPrimary
-                            placeholderTextColor: Colors.textSecondary
+                            color: Colors.colorOnSurface
+                            placeholderTextColor: Colors.colorOnSurface
                             background: null
                             font.pointSize: 13 * scaling
                             Layout.fillWidth: true
@@ -309,8 +309,8 @@ NLoader {
                               searchText = text
                               selectedIndex = 0 // Reset selection when search changes
                             }
-                            selectedTextColor: Colors.textPrimary
-                            selectionColor: Colors.accentPrimary
+                            selectedTextColor: Colors.colorOnSurface
+                            selectionColor: Colors.colorPrimary
                             padding: 0
                             verticalAlignment: TextInput.AlignVCenter
                             leftPadding: 0
@@ -319,14 +319,14 @@ NLoader {
                             bottomPadding: 0
                             font.bold: true
                             Component.onCompleted: {
-                              contentItem.cursorColor = Colors.textPrimary
+                              contentItem.cursorColor = Colors.colorOnSurface
                               contentItem.verticalAlignment = TextInput.AlignVCenter
                               // Focus the search bar by default
                               Qt.callLater(() => {
                                              searchInput.forceActiveFocus()
                                            })
                             }
-                            onActiveFocusChanged: contentItem.cursorColor = Colors.textPrimary
+                            onActiveFocusChanged: contentItem.cursorColor = Colors.colorOnSurface
 
                             Keys.onDownPressed: selectNext()
                             Keys.onUpPressed: selectPrev()
@@ -370,10 +370,10 @@ NLoader {
                             radius: 16 * scaling
                             property bool isSelected: index === selectedIndex
                             color: (appCardArea.containsMouse || isSelected) ? Qt.darker(
-                                                                                 Colors.accentPrimary,
-                                                                                 1.1) : Colors.backgroundSecondary
+                                                                                 Colors.colorPrimary,
+                                                                                 1.1) : Colors.colorSurface
                             border.color: (appCardArea.containsMouse
-                                           || isSelected) ? Colors.accentPrimary : "transparent"
+                                           || isSelected) ? Colors.colorPrimary : "transparent"
                             border.width: (appCardArea.containsMouse || isSelected) ? 2 : 0
 
                             Behavior on color {
@@ -404,8 +404,8 @@ NLoader {
                                 Layout.preferredWidth: 40 * scaling
                                 Layout.preferredHeight: 40 * scaling
                                 radius: 14 * scaling
-                                color: appCardArea.containsMouse ? Qt.darker(Colors.accentPrimary,
-                                                                             1.1) : Colors.backgroundTertiary
+                                color: appCardArea.containsMouse ? Qt.darker(Colors.colorPrimary,
+                                                                             1.1) : Colors.colorSurfaceVariant
                                 property bool iconLoaded: (modelData.isCalculator || modelData.isClipboard
                                                            || modelData.isCommand) || (iconImg.status === Image.Ready
                                                                                        && iconImg.source !== ""
@@ -440,7 +440,7 @@ NLoader {
                                   anchors.fill: parent
                                   anchors.margins: 6 * scaling
                                   radius: 10 * scaling
-                                  color: Colors.accentPrimary
+                                  color: Colors.colorPrimary
                                   opacity: 0.3
                                   visible: !parent.iconLoaded
                                 }
@@ -452,7 +452,7 @@ NLoader {
                                   text: modelData.name ? modelData.name.charAt(0).toUpperCase() : "?"
                                   font.pointSize: 18 * scaling
                                   font.weight: Font.Bold
-                                  color: Colors.accentPrimary
+                                  color: Colors.colorPrimary
                                 }
 
                                 Behavior on color {
@@ -471,7 +471,7 @@ NLoader {
                                   text: modelData.name || "Unknown"
                                   font.pointSize: 14 * scaling
                                   font.weight: Font.Bold
-                                  color: Colors.textPrimary
+                                  color: Colors.colorOnSurface
                                   elide: Text.ElideRight
                                   Layout.fillWidth: true
                                 }
@@ -480,7 +480,7 @@ NLoader {
                                   text: modelData.isCalculator ? (modelData.expr + " = " + modelData.result) : modelData.isClipboard ? modelData.content : modelData.isCommand ? modelData.content : (modelData.genericName || modelData.comment || "")
                                   font.pointSize: 11 * scaling
                                   color: (appCardArea.containsMouse
-                                          || isSelected) ? Colors.textPrimary : Colors.textSecondary
+                                          || isSelected) ? Colors.colorOnSurface : Colors.colorOnSurface
                                   elide: Text.ElideRight
                                   Layout.fillWidth: true
                                   visible: text !== ""
@@ -507,7 +507,7 @@ NLoader {
                       NText {
                         text: searchText.trim() !== "" ? "No applications found" : "No applications available"
                         font.pointSize: Style.fontSizeLarge * scaling
-                        color: Colors.textSecondary
+                        color: Colors.colorOnSurface
                         horizontalAlignment: Text.AlignHCenter
                         Layout.fillWidth: true
                         visible: filteredEntries.length === 0
@@ -521,7 +521,7 @@ NLoader {
                                                      ">calc") ? `${filteredEntries.length} result${filteredEntries.length
                                                                 !== 1 ? 's' : ''}` : `${filteredEntries.length} application${filteredEntries.length !== 1 ? 's' : ''}`
                         font.pointSize: Style.fontSizeSmall * scaling
-                        color: Colors.textSecondary
+                        color: Colors.colorOnSurface
                         horizontalAlignment: Text.AlignHCenter
                         Layout.fillWidth: true
                         visible: searchText.trim() !== ""

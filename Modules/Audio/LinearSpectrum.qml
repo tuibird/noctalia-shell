@@ -3,8 +3,8 @@ import qs.Services
 
 Item {
   id: root
-  property color fillColor: Colors.accentPrimary
-  property color strokeColor: Colors.textPrimary
+  property color fillColor: Colors.colorPrimary
+  property color strokeColor: Colors.colorOnSurface
   property int strokeWidth: 0
   property var values: []
 

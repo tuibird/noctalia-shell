@@ -36,7 +36,7 @@ Variants {
         id: bar
 
         anchors.fill: parent
-        color: Colors.backgroundPrimary
+        color: Colors.colorSurface
         layer.enabled: true
       }
 

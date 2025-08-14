@@ -36,7 +36,7 @@ ColumnLayout {
           text: "Components"
           font.pointSize: Style.fontSizeXL * scaling
           font.weight: Style.fontWeightBold
-          color: Colors.textPrimary
+          color: Colors.colorOnSurface
         }
 
         NToggle {

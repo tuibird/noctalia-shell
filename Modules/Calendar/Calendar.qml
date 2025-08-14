@@ -63,9 +63,9 @@ NLoader {
 
       Rectangle {
         id: calendarRect
-        color: Colors.backgroundSecondary
+        color: Colors.colorSurface
         radius: Style.radiusMedium * scaling
-        border.color: Colors.backgroundTertiary
+        border.color: Colors.colorSurfaceVariant
         border.width: Math.max(1, Style.borderMedium * scaling)
         width: 340 * scaling
         height: 320 * scaling // Reduced height to eliminate bottom space
@@ -135,7 +135,7 @@ NLoader {
               horizontalAlignment: Text.AlignHCenter
               font.pointSize: Style.fontSizeMedium * scaling
               font.weight: Style.fontWeightBold
-              color: Colors.accentPrimary
+              color: Colors.colorPrimary
             }
 
             NIconButton {
@@ -172,7 +172,7 @@ NLoader {
                   let dayIndex = (firstDay + index) % 7
                   return Qt.locale().dayName(dayIndex, Locale.ShortFormat)
                 }
-                color: Colors.accentSecondary
+                color: Colors.colorSecondary
                 font.pointSize: Style.fontSizeMedium * scaling
                 font.weight: Style.fontWeightBold
                 horizontalAlignment: Text.AlignHCenter
@@ -210,12 +210,12 @@ NLoader {
               width: (Style.baseWidgetSize * scaling)
               height: (Style.baseWidgetSize * scaling)
               radius: Style.radiusSmall * scaling
-              color: model.today ? Colors.accentPrimary : "transparent"
+              color: model.today ? Colors.colorPrimary : "transparent"
 
               NText {
                 anchors.centerIn: parent
                 text: model.day
-                color: model.today ? Colors.onAccent : Colors.textPrimary
+                color: model.today ? Colors.onAccent : Colors.colorOnSurface
                 opacity: model.month === grid.month ? Style.opacityHeavy : Style.opacityLight
                 font.pointSize: (Style.fontSizeMedium * scaling)
                 font.weight: model.today ? Style.fontWeightBold : Style.fontWeightRegular

@@ -158,9 +158,9 @@ NLoader {
 
       Rectangle {
         id: bgRect
-        color: Colors.backgroundPrimary
+        color: Colors.colorSurface
         radius: Style.radiusLarge * scaling
-        border.color: Colors.backgroundTertiary
+        border.color: Colors.colorOutlineVariant
         border.width: Math.max(1, Style.borderMedium * scaling)
         layer.enabled: true
         width: (screen.width * 0.5) * scaling
@@ -209,10 +209,10 @@ NLoader {
             id: sidebar
             Layout.preferredWidth: 260 * scaling
             Layout.fillHeight: true
-            radius: Style.radiusMedium * scaling
-            color: Colors.backgroundSecondary
-            border.color: Colors.outline
+            color: Colors.colorSurfaceVariant
+            border.color: Colors.colorOutlineVariant
             border.width: Math.max(1, Style.borderThin * scaling)
+            radius: Style.radiusMedium * scaling
 
             Column {
               anchors.fill: parent
@@ -229,7 +229,7 @@ NLoader {
                   width: parent.width
                   height: 32 * scaling // Back to original height
                   radius: Style.radiusSmall * scaling
-                  color: selected ? Colors.accentPrimary : (tabItem.hovering ? Colors.hover : "transparent")
+                  color: selected ? Colors.colorPrimary : (tabItem.hovering ? Colors.colorTertiary : "transparent")
                   border.color: "transparent"
                   border.width: 0
 
@@ -238,24 +238,28 @@ NLoader {
                   // Subtle hover effect: only icon/text color tint on hover
                   property bool hovering: false
 
+                  property color tabTextColor: selected ? Colors.colorOnPrimary : (tabItem.hovering ? Colors.colorOnTertiary : Colors.colorOnSurface)
+
                   RowLayout {
                     anchors.fill: parent
                     anchors.leftMargin: Style.marginSmall * scaling
                     anchors.rightMargin: Style.marginSmall * scaling
                     spacing: Style.marginSmall * scaling
+                    // Tab icon on the left side
                     NText {
                       text: modelData.icon
+                      color: tabTextColor
                       font.family: "Material Symbols Outlined"
                       font.variableAxes: {
                         "wght": (Font.Normal + Font.Bold) / 2.0
                       }
                       font.pointSize: Style.fontSizeLarge * scaling
-                      color: selected ? Colors.onAccent : (tabItem.hovering ? Colors.onAccent : Colors.textSecondary)
+                      
                     }
                     // Tab label on the left side
                     NText {
                       text: modelData.label
-                      color: selected ? Colors.onAccent : (tabItem.hovering ? Colors.onAccent : Colors.textPrimary)
+                      color: tabTextColor
                       font.pointSize: Style.fontSizeMedium * scaling
                       font.weight: Style.fontWeightBold
                       Layout.fillWidth: true
@@ -281,8 +285,8 @@ NLoader {
             Layout.fillWidth: true
             Layout.fillHeight: true
             radius: Style.radiusMedium * scaling
-            color: Colors.surfaceVariant
-            border.color: Colors.outline
+            color: Colors.colorSurfaceVariant
+            border.color: Colors.colorOutlineVariant
             border.width: Math.max(1, Style.borderThin * scaling)
             clip: true
 
@@ -302,7 +306,7 @@ NLoader {
                   text: panel.tabsModel[currentTabIndex].label
                   font.pointSize: Style.fontSizeLarge * scaling
                   font.weight: Style.fontWeightBold
-                  color: Colors.accentPrimary
+                  color: Colors.colorPrimary
                   Layout.fillWidth: true
                 }
                 NIconButton {
