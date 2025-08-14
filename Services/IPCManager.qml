@@ -49,8 +49,8 @@ Item {
     }
   }
 
-      // LockScreen instance
-    LockScreen {
-        id: lockScreen
+  // LockScreen instance
+  LockScreen {
+    id: lockScreen
   }
 }
