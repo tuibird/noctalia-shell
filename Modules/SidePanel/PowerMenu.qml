@@ -30,11 +30,11 @@ NPanel {
     gradient: Gradient {
       GradientStop {
         position: 0.0
-        color: Colors.backgroundTertiary
+        color: Colors.backgroundSecondary
       }
       GradientStop {
         position: 1.0
-        color: Colors.backgroundSecondary
+        color: Colors.backgroundTertiary
       }
     }
 

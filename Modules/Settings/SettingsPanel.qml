@@ -281,7 +281,7 @@ NLoader {
             Layout.fillWidth: true
             Layout.fillHeight: true
             radius: Style.radiusMedium * scaling
-            color: Colors.surface
+            color: Colors.surfaceVariant
             border.color: Colors.outline
             border.width: Math.max(1, Style.borderThin * scaling)
             clip: true

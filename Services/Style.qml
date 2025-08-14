@@ -18,6 +18,7 @@ Singleton {
   property real fontSizeMedium: 11
   property real fontSizeInter: 12
   property real fontSizeLarge: 13
+  property real fontSizeLarger: 16
   property real fontSizeXL: 18
   property real fontSizeXXL: 24
 

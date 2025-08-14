@@ -11,7 +11,7 @@ Rectangle {
   implicitWidth: childrenRect.width
   implicitHeight: childrenRect.height
 
-  color: Colors.surfaceVariant
+  color: Colors.surface
   radius: Style.radiusMedium * scaling
   border.color: Colors.backgroundTertiary
   border.width: Math.max(1, Style.borderThin * scaling)

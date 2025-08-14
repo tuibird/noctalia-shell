@@ -168,10 +168,10 @@ ColumnLayout {
       }
 
       NText {
-        text: `Contributors: ${root.contributors.length}`
+        text: `Shout-out to our ${root.contributors.length} awesome contributors!`
         font.pointSize: Style.fontSizeLarge * scaling
         font.weight: Style.fontWeightBold
-        color: Colors.textPrimary
+        color: Colors.textSecondary
         Layout.alignment: Qt.AlignCenter
         Layout.topMargin: Style.marginLarge * 2
       }

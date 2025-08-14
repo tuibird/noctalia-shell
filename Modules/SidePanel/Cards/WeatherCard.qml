@@ -30,7 +30,7 @@ NBox {
         text: weatherReady ? Location.weatherSymbolFromCode(Location.data.weather.current_weather.weathercode) : ""
         font.family: "Material Symbols Outlined"
         font.pointSize: Style.fontSizeXXL * 1.5 * scaling
-        color: Colors.accentSecondary
+        color: Colors.accentPrimary
       }
 
       ColumnLayout {
@@ -41,8 +41,8 @@ NBox {
             const chunks = Settings.data.location.name.split(",")
             return chunks[0]
           }
+          font.pointSize: Style.fontSizeLarger * scaling
           font.weight: Style.fontWeightBold
-          font.pointSize: Style.fontSizeXL * scaling
         }
 
         RowLayout {
@@ -53,11 +53,13 @@ NBox {
                 return ""
               }
               var temp = Location.data.weather.current_weather.temperature
+              var suffix = "C"
               if (Settings.data.location.useFahrenheit) {
                 temp = Location.celsiusToFahrenheit(temp)
+                var suffix = "F"
               }
               temp = Math.round(temp)
-              return `${temp}°`
+              return `${temp}°${suffix}`
             }
             font.pointSize: Style.fontSizeXL * scaling
             font.weight: Style.fontWeightBold
@@ -95,7 +97,7 @@ NBox {
             text: Location.weatherSymbolFromCode(Location.data.weather.daily.weathercode[index])
             font.family: "Material Symbols Outlined"
             font.pointSize: Style.fontSizeXL * scaling
-            color: Colors.textSecondary
+            color: Colors.accentPrimary
           }
           NText {
             text: {

@@ -57,8 +57,8 @@ Rectangle {
           const endBg = Math.PI * 5 / 3
           ctx.reset()
           ctx.lineWidth = 6 * root.scaling * contentScale
-          // Track uses backgroundPrimary for stronger contrast
-          ctx.strokeStyle = Colors.backgroundPrimary
+          // Track uses surfaceVariant for stronger contrast
+          ctx.strokeStyle = Colors.surfaceVariant
           ctx.beginPath()
           ctx.arc(cx, cy, r, start, endBg)
           ctx.stroke()
@@ -89,7 +89,7 @@ Rectangle {
         width: 28 * scaling * contentScale
         height: width
         radius: width / 2
-        color: Colors.backgroundSecondary
+        color: Colors.surfaceVariant
         // border.color: Colors.accentPrimary
         // border.width: Math.max(1, Style.borderThin * scaling)
         anchors.right: parent.right

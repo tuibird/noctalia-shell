@@ -21,19 +21,23 @@ NBox {
   // }
   ColumnLayout {
     anchors.fill: parent
+    Layout.fillHeight: true
     anchors.margins: Style.marginLarge * scaling
 
     // Fallback
     ColumnLayout {
       id: fallback
+
       visible: !main.visible
-      spacing: Style.marginMedium * scaling
+      spacing: Style.marginSmall * scaling
 
       Item {
         Layout.fillWidth: true
+        Layout.fillHeight: true
       }
+
       NText {
-        text: "music_note"
+        text: "album"
         font.family: "Material Symbols Outlined"
         font.pointSize: 28 * scaling
         color: Colors.textSecondary
@@ -44,6 +48,7 @@ NBox {
         color: Colors.textDisabled
         Layout.alignment: Qt.AlignHCenter
       }
+
       Item {
         Layout.fillWidth: true
       }
@@ -117,11 +122,11 @@ NBox {
             gradient: Gradient {
               GradientStop {
                 position: 0.0
-                color: Colors.backgroundTertiary
+                color: Colors.backgroundSecondary
               }
               GradientStop {
                 position: 1.0
-                color: Colors.backgroundSecondary
+                color: Colors.backgroundTertiary
               }
             }
             border.color: Colors.outline

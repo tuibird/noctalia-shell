@@ -58,8 +58,8 @@ Singleton {
     property color backgroundSecondary: "#1f1d2e"
     property color backgroundTertiary: "#26233a"
 
-    property color surface: "#1f1d2e"
-    property color surfaceVariant: "#37354c"
+    property color surface: "#1b1927"
+    property color surfaceVariant: "#262337"
 
     property color textPrimary: "#e0def4"
     property color textSecondary: "#908caa"
@@ -134,8 +134,8 @@ Singleton {
       property string backgroundTertiary: "#26233a"
 
       // Surfaces & Elevation
-      property string surface: "#1f1d2e"
-      property string surfaceVariant: "#37354c"
+      property string surface: "#1b1927"
+      property string surfaceVariant: "#262337"
 
       // Text Colors
       property string textPrimary: "#e0def4"
