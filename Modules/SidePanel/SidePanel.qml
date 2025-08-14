@@ -83,8 +83,8 @@ NLoader {
         id: panelBackground
         color: Colors.colorSurface
         radius: Style.radiusLarge * scaling
-        border.color: Colors.colorOutline
-        border.width: Math.max(1, Style.borderMedium * scaling)
+        border.color: Colors.colorOutlineVariant
+        border.width: Math.max(1, Style.borderThin * scaling)
         layer.enabled: true
         width: 460 * scaling
         property real innerMargin: sidePanel.cardSpacing

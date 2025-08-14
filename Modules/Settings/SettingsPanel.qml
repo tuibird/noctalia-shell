@@ -161,7 +161,7 @@ NLoader {
         color: Colors.colorSurface
         radius: Style.radiusLarge * scaling
         border.color: Colors.colorOutlineVariant
-        border.width: Math.max(1, Style.borderMedium * scaling)
+        border.width: Math.max(1, Style.borderThin * scaling)
         layer.enabled: true
         width: (screen.width * 0.5) * scaling
         height: (screen.height * 0.5) * scaling

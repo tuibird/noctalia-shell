@@ -56,7 +56,7 @@ ColumnLayout {
     background: Rectangle {
       implicitWidth: 120 * scaling
       implicitHeight: preferredHeight
-      color: Colors.colorSurfaceVariant
+      color: Colors.colorSurface
       border.color: combo.activeFocus ? Colors.colorTertiary : Colors.colorOutline
       border.width: Math.max(1, Style.borderThin * scaling)
       radius: Style.radiusMedium * scaling

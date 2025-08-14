@@ -47,7 +47,7 @@ Item {
       implicitWidth: root.width
       implicitHeight: Style.baseWidgetSize * 1.35 * scaling
       radius: Style.radiusMedium * scaling
-      color: Colors.colorSurfaceVariant
+      color: Colors.colorSurface
       border.color: Colors.colorOutline
       border.width: Math.max(1, Style.borderThin * scaling)
 

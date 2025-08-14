@@ -27,7 +27,7 @@ Slider {
     width: root.availableWidth
     height: implicitHeight
     radius: height / 2
-    color: Colors.colorSurfaceVariant
+    color: Colors.colorSurface
 
     Rectangle {
       id: activeTrack

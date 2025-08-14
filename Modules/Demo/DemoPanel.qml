@@ -68,7 +68,7 @@ NLoader {
 
       Rectangle {
         id: bgRect
-        color: Colors.colorSurface
+        color: Colors.colorSurfaceVariant
         radius: Style.radiusMedium * scaling
         border.color: Colors.colorOutlineVariant
         border.width: Math.max(1, Style.borderThin * scaling)
