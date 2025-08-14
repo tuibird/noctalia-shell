@@ -14,6 +14,7 @@ NBox {
 
   // PowerProfiles service
   property var powerProfiles: PowerProfiles
+  readonly property bool hasPP: powerProfiles.hasPerformanceProfile
 
   RowLayout {
     id: powerRow
@@ -26,12 +27,12 @@ NBox {
     // Performance
     NIconButton {
       icon: "speed"
-      enabled: powerProfiles.hasPerformanceProfile
-      opacity: enabled ? 1.0 : 0.3
-      showFilled: powerProfiles.profile === PowerProfile.Performance
-      showBorder: powerProfiles.profile !== PowerProfile.Performance
+      enabled: hasPP
+      opacity: enabled ? Style.opacityFull : Style.opacityMedium
+      showFilled: enabled && powerProfiles.profile === PowerProfile.Performance
+      showBorder: !enabled || powerProfiles.profile !== PowerProfile.Performance
       onClicked: {
-        if (powerProfiles.hasPerformanceProfile) {
+        if (enabled) {
           powerProfiles.profile = PowerProfile.Performance
         }
       }
@@ -39,19 +40,27 @@ NBox {
     // Balanced
     NIconButton {
       icon: "balance"
-      showFilled: powerProfiles.profile === PowerProfile.Balanced
-      showBorder: powerProfiles.profile !== PowerProfile.Balanced
+      enabled: hasPP
+      opacity: enabled ? Style.opacityFull : Style.opacityMedium
+      showFilled:  enabled && powerProfiles.profile === PowerProfile.Balanced
+      showBorder: !enabled || powerProfiles.profile !== PowerProfile.Balanced
       onClicked: {
-        powerProfiles.profile = PowerProfile.Balanced
+        if (enabled) {
+          powerProfiles.profile = PowerProfile.Balanced
+        }
       }
     }
     // Eco
     NIconButton {
       icon: "eco"
-      showFilled: powerProfiles.profile === PowerProfile.PowerSaver
-      showBorder: powerProfiles.profile !== PowerProfile.PowerSaver
+      enabled: hasPP
+      opacity: enabled ? Style.opacityFull : Style.opacityMedium
+      showFilled: enabled && powerProfiles.profile === PowerProfile.PowerSaver
+      showBorder: !enabled || powerProfiles.profile !== PowerProfile.PowerSaver
       onClicked: {
-        powerProfiles.profile = PowerProfile.PowerSaver
+        if (enabled) {
+          powerProfiles.profile = PowerProfile.PowerSaver
+        }
       }
     }
     Item {
