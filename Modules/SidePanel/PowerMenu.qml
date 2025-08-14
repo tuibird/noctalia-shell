@@ -419,8 +419,8 @@ NPanel {
     running: false
   }
 
-      // LockScreen instance
-    LockScreen {
-        id: lockScreen
+  // LockScreen instance
+  LockScreen {
+    id: lockScreen
   }
 }
