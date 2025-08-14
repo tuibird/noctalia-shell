@@ -236,7 +236,7 @@ ColumnLayout {
                 }
 
                 NText {
-                  text: (modelData.contributions || 0) + " commits"
+                  text: (modelData.contributions || 0) + " " + ((modelData.contributions || 0) === 1 ? "commit" : "commits")
                   font.pointSize: Style.fontSizeSmall * scaling
                   color: contributorArea.containsMouse ? Colors.backgroundPrimary : Colors.textSecondary
                 }
