@@ -455,7 +455,7 @@ NLoader {
                                             text: modelData.name || "Unknown"
                                             font.pointSize: 14 * scaling
                                             font.weight: Font.Bold
-                                            color: (appCardArea.containsMouse || isSelected) ? Colors.backgroundPrimary : Colors.textPrimary
+                                            color: Colors.textPrimary
                                             elide: Text.ElideRight
                                             Layout.fillWidth: true
                                         }
@@ -466,7 +466,7 @@ NLoader {
                                                   modelData.isCommand ? modelData.content :
                                                   (modelData.genericName || modelData.comment || "")
                                             font.pointSize: 11 * scaling
-                                            color: (appCardArea.containsMouse || isSelected) ? Colors.backgroundPrimary : Colors.textSecondary
+                                            color: (appCardArea.containsMouse || isSelected) ? Colors.textPrimary : Colors.textSecondary
                                             elide: Text.ElideRight
                                             Layout.fillWidth: true
                                             visible: text !== ""

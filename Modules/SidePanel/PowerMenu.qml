@@ -88,7 +88,7 @@ NPanel {
               font.variableAxes: {
                 "wght": (Font.Normal + Font.Bold) / 2.0
               }
-              color: lockButtonArea.containsMouse ? Colors.onAccent : Colors.textPrimary
+              color: lockButtonArea.containsMouse ? Colors.textPrimary : Colors.textPrimary
               verticalAlignment: Text.AlignVCenter
               anchors.verticalCenter: parent.verticalCenter
               anchors.verticalCenterOffset: 1 * scaling
@@ -96,7 +96,7 @@ NPanel {
 
             Text {
               text: "Lock Screen"
-              color: lockButtonArea.containsMouse ? Colors.onAccent : Colors.textPrimary
+              color: lockButtonArea.containsMouse ? Colors.textPrimary : Colors.textPrimary
               verticalAlignment: Text.AlignVCenter
               anchors.verticalCenter: parent.verticalCenter
               anchors.verticalCenterOffset: 1 * scaling
@@ -148,7 +148,7 @@ NPanel {
               font.variableAxes: {
                 "wght": (Font.Normal + Font.Bold) / 2.0
               }
-              color: suspendButtonArea.containsMouse ? Colors.onAccent : Colors.textPrimary
+              color: suspendButtonArea.containsMouse ? Colors.textPrimary : Colors.textPrimary
               verticalAlignment: Text.AlignVCenter
               anchors.verticalCenter: parent.verticalCenter
               anchors.verticalCenterOffset: 1 * scaling
@@ -156,7 +156,7 @@ NPanel {
 
             Text {
               text: "Suspend"
-              color: suspendButtonArea.containsMouse ? Colors.onAccent : Colors.textPrimary
+              color: suspendButtonArea.containsMouse ? Colors.textPrimary : Colors.textPrimary
               verticalAlignment: Text.AlignVCenter
               anchors.verticalCenter: parent.verticalCenter
               anchors.verticalCenterOffset: 1 * scaling
@@ -206,7 +206,7 @@ NPanel {
               font.variableAxes: {
                 "wght": (Font.Normal + Font.Bold) / 2.0
               }
-              color: rebootButtonArea.containsMouse ? Colors.onAccent : Colors.textPrimary
+              color: rebootButtonArea.containsMouse ? Colors.textPrimary : Colors.textPrimary
               verticalAlignment: Text.AlignVCenter
               anchors.verticalCenter: parent.verticalCenter
               anchors.verticalCenterOffset: 1 * scaling
@@ -214,7 +214,7 @@ NPanel {
 
             Text {
               text: "Reboot"
-              color: rebootButtonArea.containsMouse ? Colors.onAccent : Colors.textPrimary
+              color: rebootButtonArea.containsMouse ? Colors.textPrimary : Colors.textPrimary
               verticalAlignment: Text.AlignVCenter
               anchors.verticalCenter: parent.verticalCenter
               anchors.verticalCenterOffset: 1 * scaling
@@ -264,7 +264,7 @@ NPanel {
               font.variableAxes: {
                 "wght": (Font.Normal + Font.Bold) / 2.0
               }
-              color: logoutButtonArea.containsMouse ? Colors.onAccent : Colors.textPrimary
+              color: logoutButtonArea.containsMouse ? Colors.textPrimary : Colors.textPrimary
               verticalAlignment: Text.AlignVCenter
               anchors.verticalCenter: parent.verticalCenter
               anchors.verticalCenterOffset: 1 * scaling
@@ -272,7 +272,7 @@ NPanel {
 
             Text {
               text: "Logout"
-              color: logoutButtonArea.containsMouse ? Colors.onAccent : Colors.textPrimary
+              color: logoutButtonArea.containsMouse ? Colors.textPrimary : Colors.textPrimary
               verticalAlignment: Text.AlignVCenter
               anchors.verticalCenter: parent.verticalCenter
               anchors.verticalCenterOffset: 1 * scaling
@@ -322,7 +322,7 @@ NPanel {
               font.variableAxes: {
                 "wght": (Font.Normal + Font.Bold) / 2.0
               }
-              color: shutdownButtonArea.containsMouse ? Colors.onAccent : Colors.textPrimary
+              color: shutdownButtonArea.containsMouse ? Colors.textPrimary : Colors.textPrimary
               verticalAlignment: Text.AlignVCenter
               anchors.verticalCenter: parent.verticalCenter
               anchors.verticalCenterOffset: 1 * scaling
@@ -330,7 +330,7 @@ NPanel {
 
             Text {
               text: "Shutdown"
-              color: shutdownButtonArea.containsMouse ? Colors.onAccent : Colors.textPrimary
+              color: shutdownButtonArea.containsMouse ? Colors.textPrimary : Colors.textPrimary
               verticalAlignment: Text.AlignVCenter
               anchors.verticalCenter: parent.verticalCenter
               anchors.verticalCenterOffset: 1 * scaling
