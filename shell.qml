@@ -5,6 +5,7 @@ import Quickshell.Io
 import Quickshell.Widgets
 import Quickshell.Services.Pipewire
 import qs.Modules.Bar
+import qs.Modules.Dock
 import qs.Modules.Calendar
 import qs.Modules.Demo
 import qs.Modules.Background
@@ -21,6 +22,7 @@ ShellRoot {
   Overview {}
   ScreenCorners {}
   Bar {}
+  Dock {}
 
   DemoPanel {
     id: demoPanel

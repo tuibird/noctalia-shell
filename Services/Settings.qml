@@ -88,6 +88,7 @@ Singleton {
         property bool dimDesktop: true
         property bool showScreenCorners: false
         property bool showDock: false
+        property bool dockAutoHide: false
       }
 
       // location
