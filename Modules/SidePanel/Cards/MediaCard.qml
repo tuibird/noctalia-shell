@@ -67,6 +67,7 @@ NBox {
         currentIndex: MediaPlayer.selectedPlayerIndex
 
         background: Rectangle {
+          visible: false
           // implicitWidth: 120 * scaling
           // implicitHeight: 30 * scaling
           color: "transparent"
@@ -76,6 +77,7 @@ NBox {
         }
 
         contentItem: NText {
+          visible: false
           leftPadding: Style.marginMedium * scaling
           rightPadding: playerSelector.indicator.width + playerSelector.spacing
           text: playerSelector.displayText
@@ -86,18 +88,21 @@ NBox {
         }
 
         indicator: Text {
-          x: playerSelector.width - width - Style.marginMedium * scaling
+          x: playerSelector.width - width
           y: playerSelector.topPadding + (playerSelector.availableHeight - height) / 2
           text: "arrow_drop_down"
           font.family: "Material Symbols Outlined"
-          font.pointSize: Style.marginXL * scaling
+          font.pointSize: Style.fontSizeXL * scaling
           color: Colors.textPrimary
+          horizontalAlignment: Text.AlignRight
         }
 
         popup: Popup {
-          y: playerSelector.height
-          width: playerSelector.width
-          implicitHeight: Math.min(160 * scaling, contentItem.implicitHeight + Style.marginMedium * scaling * 2)
+          id: popup
+          x: playerSelector.width * 0.5
+          y: playerSelector.height * 0.75
+          width: playerSelector.width * 0.5
+          implicitHeight: Math.min(160 * scaling, contentItem.implicitHeight + Style.marginMedium * scaling)
           padding: Style.marginSmall * scaling
 
           contentItem: ListView {
@@ -109,10 +114,19 @@ NBox {
           }
 
           background: Rectangle {
-            color: Colors.backgroundSecondary
+            gradient: Gradient {
+              GradientStop {
+                position: 0.0
+                color: Colors.backgroundTertiary
+              }
+              GradientStop {
+                position: 1.0
+                color: Colors.backgroundSecondary
+              }
+            }
             border.color: Colors.outline
             border.width: Math.max(1, Style.borderThin * scaling)
-            radius: Style.radiusMedium * scaling
+            radius: Style.radiusTiny * scaling
           }
         }
 
@@ -128,9 +142,9 @@ NBox {
           highlighted: playerSelector.highlightedIndex === index
 
           background: Rectangle {
-            width: playerSelector.width - Style.marginSmall * scaling * 2
+            width: popup.width - Style.marginSmall * scaling * 2
             color: highlighted ? Colors.hover : "transparent"
-            radius: Style.radiusSmall * scaling
+            radius: Style.radiusTiny * scaling
           }
         }
 
@@ -143,6 +157,7 @@ NBox {
       RowLayout {
         spacing: Style.marginMedium * scaling
 
+        // -------------------------
         // Rounded thumbnail image
         Rectangle {
 

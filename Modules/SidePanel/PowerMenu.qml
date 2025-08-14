@@ -64,7 +64,7 @@ NPanel {
         Layout.fillWidth: true
         Layout.preferredHeight: 36 * scaling
         radius: Style.radiusSmall * scaling
-        color: lockButtonArea.containsMouse ? Colors.accentPrimary : "transparent"
+        color: lockButtonArea.containsMouse ? Colors.hover : "transparent"
 
         Item {
           anchors.left: parent.left
@@ -123,7 +123,7 @@ NPanel {
         Layout.fillWidth: true
         Layout.preferredHeight: 36 * scaling
         radius: Style.radiusSmall * scaling
-        color: suspendButtonArea.containsMouse ? Colors.accentPrimary : "transparent"
+        color: suspendButtonArea.containsMouse ? Colors.hover : "transparent"
 
         Item {
           anchors.left: parent.left
@@ -181,7 +181,7 @@ NPanel {
         Layout.fillWidth: true
         Layout.preferredHeight: 36 * scaling
         radius: Style.radiusSmall * scaling
-        color: rebootButtonArea.containsMouse ? Colors.accentPrimary : "transparent"
+        color: rebootButtonArea.containsMouse ? Colors.hover : "transparent"
 
         Item {
           anchors.left: parent.left
@@ -239,7 +239,7 @@ NPanel {
         Layout.fillWidth: true
         Layout.preferredHeight: 36 * scaling
         radius: Style.radiusSmall * scaling
-        color: logoutButtonArea.containsMouse ? Colors.accentPrimary : "transparent"
+        color: logoutButtonArea.containsMouse ? Colors.hover : "transparent"
 
         Item {
           anchors.left: parent.left
@@ -297,7 +297,7 @@ NPanel {
         Layout.fillWidth: true
         Layout.preferredHeight: 36 * scaling
         radius: Style.radiusSmall * scaling
-        color: shutdownButtonArea.containsMouse ? Colors.accentPrimary : "transparent"
+        color: shutdownButtonArea.containsMouse ? Colors.hover : "transparent"
 
         Item {
           anchors.left: parent.left
