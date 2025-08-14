@@ -256,17 +256,11 @@ ColumnLayout {
           id: audioVisualizerCombo
           label: "Visualization Type"
           description: "Choose a visualization type for media playback"
-          optionsKeys: ["radial", "bars", "wave"]
-          optionsLabels: ["Radial", "Bars", "Wave"]
-          currentKey: Settings.data.audio ? Settings.data.audio.audioVisualizer.type : "radial"
+          optionsKeys: ["none", "linear"]
+          optionsLabels: ["None", "Linear"]
+          currentKey: Settings.data.audio.visualizerType
           onSelected: function (key) {
-            if (!Settings.data.audio) {
-              Settings.data.audio = {}
-            }
-            if (!Settings.data.audio.audioVisualizer) {
-              Settings.data.audio.audioVisualizer = {}
-            }
-            Settings.data.audio.audioVisualizer.type = key
+            Settings.data.audio.visualizerType = key
           }
         }
       }

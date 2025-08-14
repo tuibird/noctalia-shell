@@ -51,7 +51,7 @@ Singleton {
   function loadFromCache() {
     const now = Time.timestamp
     if (!data.timestamp || (now >= data.timestamp + githubUpdateFrequency)) {
-      console.log("[GitHub] Cache expired or missing, fetching new data from GitHub...")
+      console.log("[GitHub] Cache expired or missing, fetching new data")
       fetchFromGitHub()
       return
     }

@@ -173,11 +173,7 @@ Singleton {
       property JsonObject audio
 
       audio: JsonObject {
-        property JsonObject audioVisualizer
-
-        audioVisualizer: JsonObject {
-          property string type: "radial"
-        }
+        property string visualizerType: "linear"
       }
 
       // ui
