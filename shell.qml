@@ -2,17 +2,18 @@
 import QtQuick
 import Quickshell
 import Quickshell.Io
-import Quickshell.Widgets
 import Quickshell.Services.Pipewire
+import Quickshell.Widgets
+import qs.Modules.AppLauncher
+import qs.Modules.Background
 import qs.Modules.Bar
-import qs.Modules.Dock
 import qs.Modules.Calendar
 import qs.Modules.Demo
-import qs.Modules.Background
-import qs.Modules.SidePanel
-import qs.Modules.AppLauncher
+import qs.Modules.Dock
+import qs.Modules.LockScreen
 import qs.Modules.Notification
 import qs.Modules.Settings
+import qs.Modules.SidePanel
 import qs.Services
 import qs.Widgets
 
@@ -28,8 +29,6 @@ ShellRoot {
   AppLauncher {
     id: appLauncherPanel
   }
-
-
 
   DemoPanel {
     id: demoPanel
@@ -53,6 +52,10 @@ ShellRoot {
 
   NotificationHistoryPanel {
     id: notificationHistoryPanel
+  }
+
+  LockScreen {
+    id: lockScreen
   }
 
   IPCManager {}

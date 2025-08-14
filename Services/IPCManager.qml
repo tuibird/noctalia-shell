@@ -1,6 +1,5 @@
 import QtQuick
 import Quickshell.Io
-import qs.Modules.LockScreen
 
 Item {
   id: root
@@ -48,10 +47,5 @@ Item {
     function toggle() {
       lockScreen.locked = !lockScreen.locked
     }
-  }
-
-  // LockScreen instance
-  LockScreen {
-    id: lockScreen
   }
 }
