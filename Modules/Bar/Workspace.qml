@@ -18,7 +18,7 @@ Item {
   property ListModel localWorkspaces: ListModel {}
   property real masterProgress: 0.0
   property bool effectsActive: false
-  property color effectColor: Colors.colorPrimary
+  property color effectColor: Colors.mPrimary
 
   property int horizontalPadding: Math.round(16 * s)
   property int spacingBetweenPills: Math.round(8 * s)
@@ -72,7 +72,7 @@ Item {
   }
 
   function triggerUnifiedWave() {
-    effectColor = Colors.colorPrimary
+    effectColor = Colors.mPrimary
     masterAnimation.restart()
   }
 
@@ -108,7 +108,7 @@ Item {
       const ws = localWorkspaces.get(i)
       if (ws.isFocused === true) {
         root.triggerUnifiedWave()
-        root.workspaceChanged(ws.id, Colors.colorPrimary)
+        root.workspaceChanged(ws.id, Colors.mPrimary)
         break
       }
     }
@@ -121,12 +121,12 @@ Item {
     anchors.horizontalCenter: parent.horizontalCenter
     anchors.verticalCenter: parent.verticalCenter
     radius: Math.round(12 * s)
-    color: Colors.colorSurfaceVariant
-    border.color: Colors.colorOutlineVariant
+    color: Colors.mSurfaceVariant
+    border.color: Colors.mOutlineVariant
     border.width: Math.max(1, Math.round(1 * s))
     layer.enabled: true
     layer.effect: MultiEffect {
-      shadowColor: Colors.colorShadow
+      shadowColor: Colors.mShadow
       shadowVerticalOffset: 0
       shadowHorizontalOffset: 0
       shadowOpacity: 0.10
@@ -166,15 +166,15 @@ Item {
           }
           color: {
             if (model.isFocused)
-              return Colors.colorPrimary
+              return Colors.mPrimary
             if (model.isUrgent)
-              return Colors.colorError
+              return Colors.mError
             if (model.isActive || model.isOccupied)
-              return Colors.colorSecondary
+              return Colors.mSecondary
             if (model.isUrgent)
-              return Colors.colorError
+              return Colors.mError
 
-            return Colors.colorOutline
+            return Colors.mOutline
           }
           scale: model.isFocused ? 1.0 : 0.9
           z: 0

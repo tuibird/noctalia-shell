@@ -138,7 +138,7 @@ WlSessionLock {
           width: Math.random() * 4 + 2
           height: width
           radius: width * 0.5
-          color: Qt.rgba(Colors.colorPrimary.r, Colors.colorPrimary.g, Colors.colorPrimary.b, 0.3)
+          color: Qt.rgba(Colors.mPrimary.r, Colors.mPrimary.g, Colors.mPrimary.b, 0.3)
           x: Math.random() * parent.width
           y: Math.random() * parent.height
 
@@ -181,7 +181,7 @@ WlSessionLock {
             font.pointSize: Style.fontSizeXXL * 6
             font.weight: Font.Bold
             font.letterSpacing: -2
-            color: Colors.colorOnSurface
+            color: Colors.mOnSurface
             horizontalAlignment: Text.AlignHCenter
 
             SequentialAnimation on scale {
@@ -205,7 +205,7 @@ WlSessionLock {
             font.family: "Inter"
             font.pointSize: Style.fontSizeXL
             font.weight: Font.Light
-            color: Colors.colorOnSurface
+            color: Colors.mOnSurface
             horizontalAlignment: Text.AlignHCenter
             width: timeText.width
           }
@@ -222,7 +222,7 @@ WlSessionLock {
             height: 120 * Scaling.scale(screen)
             radius: width * 0.5
             color: "transparent"
-            border.color: Colors.colorPrimary
+            border.color: Colors.mPrimary
             border.width: 3 * Scaling.scale(screen)
             anchors.horizontalCenter: parent.horizontalCenter
 
@@ -233,7 +233,7 @@ WlSessionLock {
               height: parent.height + 24 * Scaling.scale(screen)
               radius: width * 0.5
               color: "transparent"
-              border.color: Qt.rgba(Colors.colorPrimary.r, Colors.colorPrimary.g, Colors.colorPrimary.b, 0.3)
+              border.color: Qt.rgba(Colors.mPrimary.r, Colors.mPrimary.g, Colors.mPrimary.b, 0.3)
               border.width: 2 * Scaling.scale(screen)
               z: -1
 
@@ -301,8 +301,8 @@ WlSessionLock {
               id: terminalBackground
               anchors.fill: parent
               radius: 16
-              color: Colors.applyOpacity(Colors.colorSurface, "E6")
-              border.color: Colors.colorPrimary
+              color: Colors.applyOpacity(Colors.mSurface, "E6")
+              border.color: Colors.mPrimary
               border.width: 2 * Scaling.scale(screen)
 
               // Scanline effect
@@ -311,7 +311,7 @@ WlSessionLock {
                 Rectangle {
                   width: parent.width
                   height: 1
-                  color: Colors.applyOpacity(Colors.colorPrimary, "1A")
+                  color: Colors.applyOpacity(Colors.mPrimary, "1A")
                   y: index * 10
                   opacity: 0.3
 
@@ -333,7 +333,7 @@ WlSessionLock {
               Rectangle {
                 width: parent.width
                 height: 40 * Scaling.scale(screen)
-                color: Colors.applyOpacity(Colors.colorPrimary, "33")
+                color: Colors.applyOpacity(Colors.mPrimary, "33")
                 topLeftRadius: 14
                 topRightRadius: 14
 
@@ -344,7 +344,7 @@ WlSessionLock {
 
                   Text {
                     text: "SECURE TERMINAL"
-                    color: Colors.colorOnSurface
+                    color: Colors.mOnSurface
                     font.family: "DejaVu Sans Mono"
                     font.pointSize: Style.fontSizeLarge
                     font.weight: Font.Bold
@@ -370,7 +370,7 @@ WlSessionLock {
 
                   Text {
                     text: "root@noctalia:~$"
-                    color: Colors.colorPrimary
+                    color: Colors.mPrimary
                     font.family: "DejaVu Sans Mono"
                     font.pointSize: Style.fontSizeLarge
                     font.weight: Font.Bold
@@ -379,7 +379,7 @@ WlSessionLock {
                   Text {
                     id: welcomeText
                     text: ""
-                    color: Colors.colorOnSurface
+                    color: Colors.mOnSurface
                     font.family: "DejaVu Sans Mono"
                     font.pointSize: Style.fontSizeLarge
                     property int currentIndex: 0
@@ -408,7 +408,7 @@ WlSessionLock {
 
                   Text {
                     text: "root@noctalia:~$"
-                    color: Colors.colorPrimary
+                    color: Colors.mPrimary
                     font.family: "DejaVu Sans Mono"
                     font.pointSize: Style.fontSizeLarge
                     font.weight: Font.Bold
@@ -416,7 +416,7 @@ WlSessionLock {
 
                   Text {
                     text: "sudo unlock_session"
-                    color: Colors.colorOnSurface
+                    color: Colors.mOnSurface
                     font.family: "DejaVu Sans Mono"
                     font.pointSize: Style.fontSizeLarge
                   }
@@ -429,7 +429,7 @@ WlSessionLock {
                     visible: false
                     font.family: "DejaVu Sans Mono"
                     font.pointSize: Style.fontSizeLarge
-                    color: Colors.colorOnSurface
+                    color: Colors.mOnSurface
                     echoMode: TextInput.Password
                     passwordCharacter: "*"
                     passwordMaskDelay: 0
@@ -456,7 +456,7 @@ WlSessionLock {
                   Text {
                     id: asterisksText
                     text: "*".repeat(passwordInput.text.length)
-                    color: Colors.colorOnSurface
+                    color: Colors.mOnSurface
                     font.family: "DejaVu Sans Mono"
                     font.pointSize: Style.fontSizeLarge
                     visible: passwordInput.activeFocus
@@ -483,7 +483,7 @@ WlSessionLock {
                   Rectangle {
                     width: 8 * Scaling.scale(screen)
                     height: 20 * Scaling.scale(screen)
-                    color: Colors.colorPrimary
+                    color: Colors.mPrimary
                     visible: passwordInput.activeFocus
                     anchors.left: asterisksText.right
                     anchors.leftMargin: 2 * Scaling.scale(screen)
@@ -506,7 +506,7 @@ WlSessionLock {
                 // Status messages
                 Text {
                   text: lock.authenticating ? "Authenticating..." : (lock.errorMessage !== "" ? "Authentication failed." : "")
-                  color: lock.authenticating ? Colors.colorPrimary : (lock.errorMessage !== "" ? Colors.colorError : "transparent")
+                  color: lock.authenticating ? Colors.mPrimary : (lock.errorMessage !== "" ? Colors.mError : "transparent")
                   font.family: "DejaVu Sans Mono"
                   font.pointSize: Style.fontSizeLarge
                   Layout.fillWidth: true
@@ -530,9 +530,9 @@ WlSessionLock {
                   width: 120 * Scaling.scale(screen)
                   height: 40 * Scaling.scale(screen)
                   radius: 12
-                  color: executeButtonArea.containsMouse ? Colors.colorPrimary : Colors.applyOpacity(
-                                                             Colors.colorPrimary, "33")
-                  border.color: Colors.colorPrimary
+                  color: executeButtonArea.containsMouse ? Colors.mPrimary : Colors.applyOpacity(
+                                                             Colors.mPrimary, "33")
+                  border.color: Colors.mPrimary
                   border.width: 1
                   enabled: !lock.authenticating
                   Layout.alignment: Qt.AlignRight
@@ -541,7 +541,7 @@ WlSessionLock {
                   Text {
                     anchors.centerIn: parent
                     text: lock.authenticating ? "EXECUTING" : "EXECUTE"
-                    color: executeButtonArea.containsMouse ? Colors.onAccent : Colors.colorPrimary
+                    color: executeButtonArea.containsMouse ? Colors.onAccent : Colors.mPrimary
                     font.family: "DejaVu Sans Mono"
                     font.pointSize: Style.fontSizeMedium
                     font.weight: Font.Bold
@@ -595,7 +595,7 @@ WlSessionLock {
                 anchors.fill: parent
                 radius: parent.radius
                 color: "transparent"
-                border.color: Colors.applyOpacity(Colors.colorPrimary, "4D")
+                border.color: Colors.applyOpacity(Colors.mPrimary, "4D")
                 border.width: 1
                 z: -1
 
@@ -631,9 +631,9 @@ WlSessionLock {
         width: 64 * Scaling.scale(screen)
         height: 64 * Scaling.scale(screen)
         radius: 32
-        color: Qt.rgba(Colors.colorError.r, Colors.colorError.g, Colors.colorError.b,
+        color: Qt.rgba(Colors.mError.r, Colors.mError.g, Colors.mError.b,
                        shutdownArea.containsMouse ? 0.9 : 0.2)
-        border.color: Colors.colorError
+        border.color: Colors.mError
         border.width: 2 * Scaling.scale(screen)
 
         // Glow effect
@@ -643,7 +643,7 @@ WlSessionLock {
           height: parent.height + 10 * Scaling.scale(screen)
           radius: width * 0.5
           color: "transparent"
-          border.color: Qt.rgba(Colors.colorError.r, Colors.colorError.g, Colors.colorError.b, 0.3)
+          border.color: Qt.rgba(Colors.mError.r, Colors.mError.g, Colors.mError.b, 0.3)
           border.width: 2 * Scaling.scale(screen)
           opacity: shutdownArea.containsMouse ? 1 : 0
           z: -1
@@ -672,7 +672,7 @@ WlSessionLock {
           text: "power_settings_new"
           font.family: "Material Symbols Outlined"
           font.pixelSize: 28 * Scaling.scale(screen)
-          color: shutdownArea.containsMouse ? Colors.onAccent : Colors.colorError
+          color: shutdownArea.containsMouse ? Colors.onAccent : Colors.mError
         }
 
         Behavior on color {
@@ -689,9 +689,9 @@ WlSessionLock {
         width: 64 * Scaling.scale(screen)
         height: 64 * Scaling.scale(screen)
         radius: 32
-        color: Qt.rgba(Colors.colorPrimary.r, Colors.colorPrimary.g, Colors.colorPrimary.b,
+        color: Qt.rgba(Colors.mPrimary.r, Colors.mPrimary.g, Colors.mPrimary.b,
                        rebootArea.containsMouse ? 0.9 : 0.2)
-        border.color: Colors.colorPrimary
+        border.color: Colors.mPrimary
         border.width: 2 * Scaling.scale(screen)
 
         // Glow effect
@@ -701,7 +701,7 @@ WlSessionLock {
           height: parent.height + 10 * Scaling.scale(screen)
           radius: width * 0.5
           color: "transparent"
-          border.color: Qt.rgba(Colors.colorPrimary.r, Colors.colorPrimary.g, Colors.colorPrimary.b, 0.3)
+          border.color: Qt.rgba(Colors.mPrimary.r, Colors.mPrimary.g, Colors.mPrimary.b, 0.3)
           border.width: 2 * Scaling.scale(screen)
           opacity: rebootArea.containsMouse ? 1 : 0
           z: -1
@@ -729,7 +729,7 @@ WlSessionLock {
           text: "refresh"
           font.family: "Material Symbols Outlined"
           font.pixelSize: 28 * Scaling.scale(screen)
-          color: rebootArea.containsMouse ? Colors.onAccent : Colors.colorPrimary
+          color: rebootArea.containsMouse ? Colors.onAccent : Colors.mPrimary
         }
 
         Behavior on color {
@@ -746,9 +746,9 @@ WlSessionLock {
         width: 64 * Scaling.scale(screen)
         height: 64 * Scaling.scale(screen)
         radius: 32
-        color: Qt.rgba(Colors.colorSecondary.r, Colors.colorSecondary.g, Colors.colorSecondary.b,
+        color: Qt.rgba(Colors.mSecondary.r, Colors.mSecondary.g, Colors.mSecondary.b,
                        logoutArea.containsMouse ? 0.9 : 0.2)
-        border.color: Colors.colorSecondary
+        border.color: Colors.mSecondary
         border.width: 2 * Scaling.scale(screen)
 
         // Glow effect
@@ -758,7 +758,7 @@ WlSessionLock {
           height: parent.height + 10 * Scaling.scale(screen)
           radius: width * 0.5
           color: "transparent"
-          border.color: Qt.rgba(Colors.colorSecondary.r, Colors.colorSecondary.g, Colors.colorSecondary.b, 0.3)
+          border.color: Qt.rgba(Colors.mSecondary.r, Colors.mSecondary.g, Colors.mSecondary.b, 0.3)
           border.width: 2 * Scaling.scale(screen)
           opacity: logoutArea.containsMouse ? 1 : 0
           z: -1
@@ -788,7 +788,7 @@ WlSessionLock {
           text: "exit_to_app"
           font.family: "Material Symbols Outlined"
           font.pixelSize: 28 * Scaling.scale(screen)
-          color: logoutArea.containsMouse ? Colors.onAccent : Colors.colorSecondary
+          color: logoutArea.containsMouse ? Colors.onAccent : Colors.mSecondary
         }
 
         Behavior on color {

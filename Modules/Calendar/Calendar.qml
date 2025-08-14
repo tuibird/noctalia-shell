@@ -63,9 +63,9 @@ NLoader {
 
       Rectangle {
         id: calendarRect
-        color: Colors.colorSurface
+        color: Colors.mSurface
         radius: Style.radiusMedium * scaling
-        border.color: Colors.colorSurfaceVariant
+        border.color: Colors.mSurfaceVariant
         border.width: Math.max(1, Style.borderMedium * scaling)
         width: 340 * scaling
         height: 320 * scaling // Reduced height to eliminate bottom space
@@ -135,7 +135,7 @@ NLoader {
               horizontalAlignment: Text.AlignHCenter
               font.pointSize: Style.fontSizeMedium * scaling
               font.weight: Style.fontWeightBold
-              color: Colors.colorPrimary
+              color: Colors.mPrimary
             }
 
             NIconButton {
@@ -172,7 +172,7 @@ NLoader {
                   let dayIndex = (firstDay + index) % 7
                   return Qt.locale().dayName(dayIndex, Locale.ShortFormat)
                 }
-                color: Colors.colorSecondary
+                color: Colors.mSecondary
                 font.pointSize: Style.fontSizeMedium * scaling
                 font.weight: Style.fontWeightBold
                 horizontalAlignment: Text.AlignHCenter
@@ -210,12 +210,12 @@ NLoader {
               width: (Style.baseWidgetSize * scaling)
               height: (Style.baseWidgetSize * scaling)
               radius: Style.radiusSmall * scaling
-              color: model.today ? Colors.colorPrimary : "transparent"
+              color: model.today ? Colors.mPrimary : "transparent"
 
               NText {
                 anchors.centerIn: parent
                 text: model.day
-                color: model.today ? Colors.onAccent : Colors.colorOnSurface
+                color: model.today ? Colors.onAccent : Colors.mOnSurface
                 opacity: model.month === grid.month ? Style.opacityHeavy : Style.opacityLight
                 font.pointSize: (Style.fontSizeMedium * scaling)
                 font.weight: model.today ? Style.fontWeightBold : Style.fontWeightRegular

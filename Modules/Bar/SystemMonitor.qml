@@ -23,7 +23,7 @@ Row {
       font.pointSize: Style.fontSizeLarge * scaling
       verticalAlignment: Text.AlignVCenter
       anchors.verticalCenter: parent.verticalCenter
-      color: Colors.colorPrimary
+      color: Colors.mPrimary
     }
 
     NText {
@@ -45,7 +45,7 @@ Row {
       text: "thermometer"
       font.family: "Material Symbols Outlined"
       font.pointSize: Style.fontSizeLarge * scaling
-      color: Colors.colorPrimary
+      color: Colors.mPrimary
       verticalAlignment: Text.AlignVCenter
       anchors.verticalCenter: parent.verticalCenter
     }
@@ -68,7 +68,7 @@ Row {
       text: "memory"
       font.family: "Material Symbols Outlined"
       font.pointSize: Style.fontSizeLarge * scaling
-      color: Colors.colorPrimary
+      color: Colors.mPrimary
       verticalAlignment: Text.AlignVCenter
       anchors.verticalCenter: parent.verticalCenter
     }

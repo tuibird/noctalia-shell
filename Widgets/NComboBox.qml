@@ -29,13 +29,13 @@ ColumnLayout {
       text: label
       font.pointSize: Style.fontSizeMedium * scaling
       font.weight: Style.fontWeightBold
-      color: Colors.colorOnSurface
+      color: Colors.mOnSurface
     }
 
     NText {
       text: description
       font.pointSize: Style.fontSizeSmall * scaling
-      color: Colors.colorOnSurface
+      color: Colors.mOnSurface
       wrapMode: Text.WordWrap
     }
   }
@@ -56,8 +56,8 @@ ColumnLayout {
     background: Rectangle {
       implicitWidth: 120 * scaling
       implicitHeight: preferredHeight
-      color: Colors.colorSurface
-      border.color: combo.activeFocus ? Colors.colorTertiary : Colors.colorOutline
+      color: Colors.mSurface
+      border.color: combo.activeFocus ? Colors.mTertiary : Colors.mOutline
       border.width: Math.max(1, Style.borderThin * scaling)
       radius: Style.radiusMedium * scaling
     }
@@ -97,8 +97,8 @@ ColumnLayout {
       }
 
       background: Rectangle {
-        color: Colors.colorSurfaceVariant
-        border.color: Colors.colorOutline
+        color: Colors.mSurfaceVariant
+        border.color: Colors.mOutline
         border.width: Math.max(1, Style.borderThin * scaling)
         radius: Style.radiusMedium * scaling
       }
@@ -112,14 +112,14 @@ ColumnLayout {
         text: (combo.model.indexOf(modelData) >= 0 && combo.model.indexOf(
                  modelData) < root.optionsLabels.length) ? root.optionsLabels[combo.model.indexOf(modelData)] : ""
         font.pointSize: Style.fontSizeMedium * scaling
-        color: highlighted ? Colors.colorSurface : Colors.colorOnSurface
+        color: highlighted ? Colors.mSurface : Colors.mOnSurface
         verticalAlignment: Text.AlignVCenter
         elide: Text.ElideRight
       }
 
       background: Rectangle {
         width: combo.width - Style.marginMedium * scaling * 3
-        color: highlighted ? Colors.colorTertiary : "transparent"
+        color: highlighted ? Colors.mTertiary : "transparent"
         radius: Style.radiusSmall * scaling
       }
     }

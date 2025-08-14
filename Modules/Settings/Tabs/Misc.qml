@@ -36,7 +36,7 @@ ColumnLayout {
           text: "Miscellaneous Settings"
           font.pointSize: Style.fontSizeXL * scaling
           font.weight: Style.fontWeightBold
-          color: Colors.colorOnSurface
+          color: Colors.mOnSurface
           Layout.bottomMargin: Style.marginSmall * scaling
         }
       }

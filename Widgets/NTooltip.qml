@@ -135,8 +135,8 @@ Window {
     id: tooltipRect
     anchors.fill: parent
     radius: Style.radiusMedium * scaling
-    color: Colors.colorSurface
-    border.color: Colors.colorOutline
+    color: Colors.mSurface
+    border.color: Colors.mOutline
     border.width: Math.max(1, Style.borderThin * scaling)
     z: 1
 

@@ -65,9 +65,9 @@ NLoader {
 
       Rectangle {
         id: notificationRect
-        color: Colors.colorSurface
+        color: Colors.mSurface
         radius: Style.radiusMedium * scaling
-        border.color: Colors.colorSurfaceVariant
+        border.color: Colors.mSurfaceVariant
         border.width: Math.max(1, Style.borderMedium * scaling)
         width: 400 * scaling
         height: 500 * scaling
@@ -117,14 +117,14 @@ NLoader {
               text: "notifications"
               font.family: "Material Symbols Outlined"
               font.pointSize: Style.fontSizeXL * scaling
-              color: Colors.colorPrimary
+              color: Colors.mPrimary
             }
 
             NText {
               text: "Notification History"
               font.pointSize: Style.fontSizeLarge * scaling
               font.bold: true
-              color: Colors.colorOnSurface
+              color: Colors.mOnSurface
               Layout.fillWidth: true
             }
 
@@ -159,7 +159,7 @@ NLoader {
               width: notificationList ? (notificationList.width - 20) : 380 * scaling
               height: Math.max(80, notificationContent.height + 30)
               radius: Style.radiusMedium * scaling
-              color: notificationMouseArea.containsMouse ? Colors.colorPrimary : "transparent"
+              color: notificationMouseArea.containsMouse ? Colors.mPrimary : "transparent"
 
               RowLayout {
                 anchors {
@@ -179,7 +179,7 @@ NLoader {
                     text: (summary || "No summary").substring(0, 100)
                     font.pointSize: Style.fontSizeMedium * scaling
                     font.weight: Font.Medium
-                    color: notificationMouseArea.containsMouse ? Colors.colorSurface : Colors.colorOnSurface
+                    color: notificationMouseArea.containsMouse ? Colors.mSurface : Colors.mOnSurface
                     wrapMode: Text.Wrap
                     width: parent.width - 30
                     maximumLineCount: 2
@@ -189,7 +189,7 @@ NLoader {
                   NText {
                     text: (body || "").substring(0, 150)
                     font.pointSize: Style.fontSizeSmall * scaling
-                    color: notificationMouseArea.containsMouse ? Colors.colorSurface : Colors.colorOnSurface
+                    color: notificationMouseArea.containsMouse ? Colors.mSurface : Colors.mOnSurface
                     wrapMode: Text.Wrap
                     width: parent.width - 30
                     maximumLineCount: 3
@@ -199,7 +199,7 @@ NLoader {
                   NText {
                     text: NotificationService.formatTimestamp(timestamp)
                     font.pointSize: Style.fontSizeSmall * scaling
-                    color: notificationMouseArea.containsMouse ? Colors.colorSurface : Colors.colorOnSurface
+                    color: notificationMouseArea.containsMouse ? Colors.mSurface : Colors.mOnSurface
                   }
                 }
               }

@@ -67,9 +67,9 @@ NLoader {
 
       Rectangle {
         id: wifiMenuRect
-        color: Colors.colorSurface
+        color: Colors.mSurface
         radius: Style.radiusMedium * scaling
-        border.color: Colors.colorSurfaceVariant
+        border.color: Colors.mSurfaceVariant
         border.width: Math.max(1, Style.borderMedium * scaling)
         width: 340 * scaling
         height: 320 * scaling
@@ -119,14 +119,14 @@ NLoader {
               text: "wifi"
               font.family: "Material Symbols Outlined"
               font.pointSize: Style.fontSizeXL * scaling
-              color: Colors.colorPrimary
+              color: Colors.mPrimary
             }
 
             NText {
               text: "WiFi"
               font.pointSize: Style.fontSizeLarge * scaling
               font.bold: true
-              color: Colors.colorOnSurface
+              color: Colors.mOnSurface
               Layout.fillWidth: true
             }
 
@@ -180,7 +180,7 @@ NLoader {
                   Layout.fillWidth: true
                   Layout.preferredHeight: Style.baseWidgetSize * 1.5 * scaling
                   radius: Style.radiusMedium * scaling
-                  color: modelData.connected ? Colors.colorPrimary : (networkMouseArea.containsMouse ? Colors.colorTertiary : "transparent")
+                  color: modelData.connected ? Colors.mPrimary : (networkMouseArea.containsMouse ? Colors.mTertiary : "transparent")
 
                   RowLayout {
                     anchors.fill: parent
@@ -191,7 +191,7 @@ NLoader {
                       text: network.signalIcon(modelData.signal)
                       font.family: "Material Symbols Outlined"
                       font.pointSize: Style.fontSizeXL * scaling
-                      color: modelData.connected ? Colors.colorSurface : (networkMouseArea.containsMouse ? Colors.colorSurface : Colors.colorOnSurface)
+                      color: modelData.connected ? Colors.mSurface : (networkMouseArea.containsMouse ? Colors.mSurface : Colors.mOnSurface)
                     }
 
                     ColumnLayout {
@@ -204,7 +204,7 @@ NLoader {
                         font.pointSize: Style.fontSizeNormal * scaling
                         elide: Text.ElideRight
                         Layout.fillWidth: true
-                        color: modelData.connected ? Colors.colorSurface : (networkMouseArea.containsMouse ? Colors.colorSurface : Colors.colorOnSurface)
+                        color: modelData.connected ? Colors.mSurface : (networkMouseArea.containsMouse ? Colors.mSurface : Colors.mOnSurface)
                       }
 
                       // Security Protocol
@@ -213,14 +213,14 @@ NLoader {
                         font.pointSize: Style.fontSizeTiny * scaling
                         elide: Text.ElideRight
                         Layout.fillWidth: true
-                        color: modelData.connected ? Colors.colorSurface : (networkMouseArea.containsMouse ? Colors.colorSurface : Colors.colorOnSurface)
+                        color: modelData.connected ? Colors.mSurface : (networkMouseArea.containsMouse ? Colors.mSurface : Colors.mOnSurface)
                       }
 
                       NText {
                         visible: network.connectStatusSsid === modelData.ssid && network.connectStatus === "error"
                                  && network.connectError.length > 0
                         text: network.connectError
-                        color: Colors.colorError
+                        color: Colors.mError
                         font.pointSize: Style.fontSizeSmall * scaling
                         elide: Text.ElideRight
                         Layout.fillWidth: true
@@ -236,7 +236,7 @@ NLoader {
                       NBusyIndicator {
                         visible: network.connectingSsid === modelData.ssid
                         running: network.connectingSsid === modelData.ssid
-                        color: Colors.colorPrimary
+                        color: Colors.mPrimary
                         anchors.centerIn: parent
                         size: Style.baseWidgetSize * 0.7 * scaling
                       }
@@ -257,7 +257,7 @@ NLoader {
                         text: "error"
                         font.family: "Material Symbols Outlined"
                         font.pointSize: Style.fontSizeSmall * scaling
-                        color: Colors.colorError
+                        color: Colors.mError
                         anchors.centerIn: parent
                       }
                     }
@@ -266,7 +266,7 @@ NLoader {
                       visible: modelData.connected
                       text: "connected"
                       font.pointSize: Style.fontSizeSmall * scaling
-                      color: modelData.connected ? Colors.colorSurface : (networkMouseArea.containsMouse ? Colors.colorSurface : Colors.colorOnSurface)
+                      color: modelData.connected ? Colors.mSurface : (networkMouseArea.containsMouse ? Colors.mSurface : Colors.mOnSurface)
                     }
                   }
 
@@ -298,7 +298,7 @@ NLoader {
                   Layout.preferredHeight: modelData.ssid === passwordPromptSsid && showPasswordPrompt ? 60 : 0
                   Layout.margins: 8
                   visible: modelData.ssid === passwordPromptSsid && showPasswordPrompt
-                  color: Colors.colorSurfaceVariant
+                  color: Colors.mSurfaceVariant
                   radius: Style.radiusSmall * scaling
 
                   RowLayout {
@@ -314,7 +314,7 @@ NLoader {
                         anchors.fill: parent
                         radius: 8
                         color: "transparent"
-                        border.color: passwordInputField.activeFocus ? Colors.colorPrimary : Colors.colorOutline
+                        border.color: passwordInputField.activeFocus ? Colors.mPrimary : Colors.mOutline
                         border.width: 1
 
                         TextInput {
@@ -323,7 +323,7 @@ NLoader {
                           anchors.margins: Style.marginMedium * scaling
                           text: passwordInput
                           font.pointSize: Style.fontSizeMedium * scaling
-                          color: Colors.colorOnSurface
+                          color: Colors.mOnSurface
                           verticalAlignment: TextInput.AlignVCenter
                           clip: true
                           focus: true
@@ -350,8 +350,8 @@ NLoader {
                       Layout.preferredWidth: 80
                       Layout.preferredHeight: 36
                       radius: Style.radiusMedium * scaling
-                      color: Colors.colorPrimary
-                      border.color: Colors.colorPrimary
+                      color: Colors.mPrimary
+                      border.color: Colors.mPrimary
                       border.width: 0
 
                       Behavior on color {
@@ -363,7 +363,7 @@ NLoader {
                       NText {
                         anchors.centerIn: parent
                         text: "Connect"
-                        color: Colors.colorSurface
+                        color: Colors.mSurface
                         font.pointSize: Style.fontSizeSmall * scaling
                       }
 
@@ -375,8 +375,8 @@ NLoader {
                         }
                         cursorShape: Qt.PointingHandCursor
                         hoverEnabled: true
-                        onEntered: parent.color = Qt.darker(Colors.colorPrimary, 1.1)
-                        onExited: parent.color = Colors.colorPrimary
+                        onEntered: parent.color = Qt.darker(Colors.mPrimary, 1.1)
+                        onExited: parent.color = Colors.mPrimary
                       }
                     }
                   }

@@ -63,9 +63,9 @@ PanelWindow {
         height: Math.max(80 * scaling, contentColumn.implicitHeight + (Style.marginMedium * 2 * scaling))
         clip: true
         radius: Style.radiusMedium * scaling
-        border.color: Colors.colorPrimary
+        border.color: Colors.mPrimary
         border.width: Math.max(1, Style.borderThin * scaling)
-        color: Colors.colorSurface
+        color: Colors.mSurface
 
         // Animation properties
         property real scaleValue: 0.8
@@ -133,14 +133,14 @@ PanelWindow {
             spacing: Style.marginSmall * scaling
             NText {
               text: (model.appName || model.desktopEntry) || "Unknown App"
-              color: Colors.colorSecondary
+              color: Colors.mSecondary
               font.pointSize: Style.fontSizeSmall * scaling
             }
             Rectangle {
               width: 6 * scaling
               height: 6 * scaling
               radius: 3 * scaling
-              color: (model.urgency === NotificationUrgency.Critical) ? Colors.colorError : (model.urgency === NotificationUrgency.Low) ? Colors.colorOnSurface : Colors.colorPrimary
+              color: (model.urgency === NotificationUrgency.Critical) ? Colors.mError : (model.urgency === NotificationUrgency.Low) ? Colors.mOnSurface : Colors.mPrimary
               Layout.alignment: Qt.AlignVCenter
             }
             Item {
@@ -148,7 +148,7 @@ PanelWindow {
             }
             NText {
               text: notificationService.formatTimestamp(model.timestamp)
-              color: Colors.colorOnSurface
+              color: Colors.mOnSurface
               font.pointSize: Style.fontSizeSmall * scaling
             }
           }
@@ -157,7 +157,7 @@ PanelWindow {
             text: model.summary || "No summary"
             font.pointSize: Style.fontSizeLarge * scaling
             font.weight: Style.fontWeightBold
-            color: Colors.colorOnSurface
+            color: Colors.mOnSurface
             wrapMode: Text.Wrap
             width: 300 * scaling
             maximumLineCount: 3
@@ -167,7 +167,7 @@ PanelWindow {
           NText {
             text: model.body || ""
             font.pointSize: Style.fontSizeSmall * scaling
-            color: Colors.colorOnSurface
+            color: Colors.mOnSurface
             wrapMode: Text.Wrap
             width: 300 * scaling
             maximumLineCount: 5

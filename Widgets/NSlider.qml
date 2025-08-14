@@ -27,13 +27,13 @@ Slider {
     width: root.availableWidth
     height: implicitHeight
     radius: height / 2
-    color: Colors.colorSurface
+    color: Colors.mSurface
 
     Rectangle {
       id: activeTrack
       width: root.visualPosition * parent.width
       height: parent.height
-      color: Colors.colorPrimary
+      color: Colors.mPrimary
       radius: parent.radius
     }
 
@@ -43,7 +43,7 @@ Slider {
       width: knobDiameter + cutoutExtra
       height: knobDiameter + cutoutExtra
       radius: width / 2
-      color: root.cutoutColor !== undefined ? root.cutoutColor : Colors.colorSurface
+      color: root.cutoutColor !== undefined ? root.cutoutColor : Colors.mSurface
       x: Math.max(0, Math.min(parent.width - width,
                               root.visualPosition * (parent.width - root.knobDiameter) - cutoutExtra / 2))
       y: (parent.height - height) / 2
@@ -56,12 +56,12 @@ Slider {
     x: root.leftPadding + root.visualPosition * (root.availableWidth - width)
     y: root.topPadding + root.availableHeight / 2 - height / 2
 
-    // Subtle shadow for a more polished look (keeps theme colors)
+    // Subtle shadow for a more polished look
     MultiEffect {
       anchors.fill: knob
       source: knob
       shadowEnabled: true
-      shadowColor: Colors.colorShadow
+      shadowColor: Colors.mShadow
       shadowOpacity: 0.25
       shadowHorizontalOffset: 0
       shadowVerticalOffset: 1
@@ -73,8 +73,8 @@ Slider {
       implicitWidth: knobDiameter
       implicitHeight: knobDiameter
       radius: width * 0.5
-      color: root.pressed ? Colors.colorSurfaceVariant : Colors.colorSurface
-      border.color: Colors.colorPrimary
+      color: root.pressed ? Colors.mSurfaceVariant : Colors.mSurface
+      border.color: Colors.mPrimary
       border.width: Math.max(1, Style.borderThick * scaling)
 
       // Press feedback halo (using accent color, low opacity)
@@ -83,7 +83,7 @@ Slider {
         width: parent.width + 8 * scaling
         height: parent.height + 8 * scaling
         radius: width / 2
-        color: Colors.colorPrimary
+        color: Colors.mPrimary
         opacity: root.pressed ? 0.16 : 0.0
       }
     }

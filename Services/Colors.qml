@@ -6,38 +6,36 @@ import Quickshell.Io
 import qs.Services
 
 // --------------------------------
-// Material3 Colors
-// We only use a subset of all materials colors to avoid complexity
+// Noctalia Colors - Material Design 3 
+// We only use a very small subset of all available m3 colors to avoid complexity
+
 Singleton {
   id: root
 
+  // --- Key Colors: These are the main accent colors that define your app's theme
+  property color mPrimary: useCustom ? customColors.mPrimary : defaultColors.mPrimary
+  property color mOnPrimary: useCustom ? customColors.mOnPrimary : defaultColors.mOnPrimary
+  property color mSecondary: useCustom ? customColors.mSecondary : defaultColors.mSecondary
+  property color mOnSecondary: useCustom ? customColors.mOnSecondary : defaultColors.mOnSecondary
+  property color mTertiary: useCustom ? customColors.mTertiary : defaultColors.mTertiary
+  property color mOnTertiary: useCustom ? customColors.mOnTertiary : defaultColors.mOnTertiary
+
+  // --- Utility Colors: These colors serve specific, universal purposes like indicating errors
+  property color mError: useCustom ? customColors.mError : defaultColors.mError
+  property color mOnError: useCustom ? customColors.mOnError : defaultColors.mOnError
+
+  // --- Surface and Variant Colors: These provide additional options for surfaces and their contents, creating visual hierarchy
+  property color mSurface: useCustom ? customColors.mSurface : defaultColors.mSurface
+  property color mOnSurface: useCustom ? customColors.mOnSurface : defaultColors.mOnSurface
+  property color mSurfaceVariant: useCustom ? customColors.mSurfaceVariant : defaultColors.mSurfaceVariant
+  property color mOnSurfaceVariant: useCustom ? customColors.mOnSurfaceVariant : defaultColors.mOnSurfaceVariant
+  property color mOutline: useCustom ? customColors.mOutline : defaultColors.mOutline
+  property color mOutlineVariant: useCustom ? customColors.mOutlineVariant : defaultColors.mOutlineVariant
+  property color mShadow: useCustom ? customColors.mShadow : defaultColors.mShadow
+
   // -----------
   // Check if we should use custom colors
-  property bool useCustom: Settings.data.wallpaper.generateColors && customColorsFile.loaded
-
-  // --- Key Colors
-  property color colorPrimary: useCustom ? customColors.colorPrimary : defaultTheme.colorPrimary
-  property color colorOnPrimary: useCustom ? customColors.colorOnPrimary : defaultTheme.colorOnPrimary
-
-  property color colorSecondary: useCustom ? customColors.colorSecondary : defaultTheme.colorSecondary
-  property color colorOnSecondary: useCustom ? customColors.colorOnSecondary : defaultTheme.colorOnSecondary
-
-  property color colorTertiary: useCustom ? customColors.colorTertiary : defaultTheme.colorTertiary
-  property color colorOnTertiary: useCustom ? customColors.colorOnTertiary : defaultTheme.colorOnTertiary
-
-  // --- Utility Colors
-  property color colorError: useCustom ? customColors.colorError : defaultTheme.colorError
-  property color colorOnError: useCustom ? customColors.colorOnError : defaultTheme.colorOnError
-
-  // --- Surface and Variant Colors
-  property color colorSurface: useCustom ? customColors.colorSurface : defaultTheme.colorSurface
-  property color colorOnSurface: useCustom ? customColors.colorOnSurface : defaultTheme.colorOnSurface
-  property color colorSurfaceVariant: useCustom ? customColors.colorSurfaceVariant : defaultTheme.colorSurfaceVariant
-  property color colorOnSurfaceVariant: useCustom ? customColors.colorOnSurfaceVariant : defaultTheme.colorOnSurfaceVariant
-  property color colorOutline: useCustom ? customColors.colorOutline : defaultTheme.colorOutline
-  property color colorOutlineVariant: useCustom ? customColors.colorOutlineVariant : defaultTheme.colorOutlineVariant
-  property color colorShadow: useCustom ? customColors.colorShadow : defaultTheme.colorShadow
-
+  property bool useCustom: (Settings.data.wallpaper.generateColors && customColorsFile.loaded)
 
   // -----------
   function applyOpacity(color, opacity) {
@@ -46,63 +44,53 @@ Singleton {
   }
 
   // --------------------------------
-  // Default theme colors - RosePine
+  // Default colors: RosePine
   QtObject {
-    id: defaultTheme
+    id: defaultColors
 
-    // // --- Key Colors: These are the main accent colors that define your app's theme.
-    property color colorPrimary: "#ebbcba" // The main brand color, used most frequently.
-    property color colorOnPrimary: "#191724" // Color for text/icons on a Primary background.
+    property color mPrimary: "#ebbcba"
+    property color mOnPrimary: "#191724"
+    property color mSecondary: "#31748f"
+    property color mOnSecondary: "#e0def4"
+    property color mTertiary: "#9ccfd8"
+    property color mOnTertiary: "#191724"
 
-    property color colorSecondary: "#31748f" // An accent color for less prominent components.
-    property color colorOnSecondary: "#e0def4" // Color for text/icons on a Secondary background.
-
-    property color colorTertiary: "#9ccfd8" // A contrasting accent color used for things like highlights or special actions.
-    property color colorOnTertiary: "#191724" // Color for text/icons on a Tertiary background.
-
-    // --- Utility colorColors: These colors serve specific, universal purposes like indicating errors or providing neutral backgrounds.
-    property color colorError: "#eb6f92" // Indicates an error state.
-    property color colorOnError: "#191724" // Color for text/icons on an Error background.
-
-    // --- Surface colorand Variant Colors: These provide additional options for surfaces and their contents, creating visual hierarchy.
-    property color colorSurface: "#191724" // The color for component surfaces like cards, sheets, and menus.
-    property color colorOnSurface: "#e0def4" // The primary color for text/icons on a Surface background.
-    property color colorSurfaceVariant: "#26233a" // A surface color with a slightly different tint for differentiation.
-    property color colorOnSurfaceVariant: "#908caa" // The color for less prominent text/icons on a Surface.
-    property color colorOutline: "#44415a" // The color for component outlines, like text fields or buttons.
-    property color colorOutlineVariant: "#514e6c" // A subtler outline color for decorative elements or dividers.
-    property color colorShadow: "#191724" // The color used for shadows to create elevation.
+    property color mError: "#eb6f92"
+    property color mOnError: "#191724"
+    
+    property color mSurface: "#191724"
+    property color mOnSurface: "#e0def4"
+    property color mSurfaceVariant: "#26233a"
+    property color mOnSurfaceVariant: "#908caa"
+    property color mOutline: "#44415a"
+    property color mOutlineVariant: "#514e6c"
+    property color mShadow: "#191724"
 
   }
 
   // ----------------------------------------------------------------
-  // Custom colors (loaded from colors.json)
+  // Custom colors loaded from colors.json
   // These can be generated by matugen or simply come from a well know color scheme (Dracula, Gruvbox, Nord, ...)
   QtObject {
     id: customColors
 
-    // --- Key Colors
-    property color colorPrimary: customColorsData.colorPrimary
-    property color colorOnPrimary: customColorsData.colorOnPrimary
+    property color mPrimary: customColorsData.mPrimary
+    property color mOnPrimary: customColorsData.mOnPrimary
+    property color mSecondary: customColorsData.mSecondary
+    property color mOnSecondary: customColorsData.mOnSecondary
+    property color mTertiary: customColorsData.mTertiary
+    property color mOnTertiary: customColorsData.mOnTertiary
 
-    property color colorSecondary: customColorsData.colorSecondary
-    property color colorOnSecondary: customColorsData.colorOnSecondary
+    property color mError: customColorsData.mError
+    property color mOnError: customColorsData.mOnError
 
-    property color colorTertiary: customColorsData.colorTertiary
-    property color colorOnTertiary: customColorsData.colorOnTertiary
-
-    // --- Utility Colors
-    property color colorError: customColorsData.colorError
-    property color colorOnError: customColorsData.colorOnError
-
-    // --- Surface and Variant Colors
-    property color colorSurface: customColorsData.colorSurface
-    property color colorOnSurface: customColorsData.colorOnSurface
-    property color colorSurfaceVariant: customColorsData.colorSurfaceVariant
-    property color colorOnSurfaceVariant: customColorsData.colorOnSurfaceVariant
-    property color colorOutline: customColorsData.colorOutline
-    property color colorOutlineVariant: customColorsData.colorOutlineVariant
-    property color colorShadow: customColorsData.colorShadow
+    property color mSurface: customColorsData.mSurface
+    property color mOnSurface: customColorsData.mOnSurface
+    property color mSurfaceVariant: customColorsData.mSurfaceVariant
+    property color mOnSurfaceVariant: customColorsData.mOnSurfaceVariant
+    property color mOutline: customColorsData.mOutline
+    property color mOutlineVariant: customColorsData.mOutlineVariant
+    property color mShadow: customColorsData.mShadow
   }
 
   // FileView to load custom colors data from colors.json
@@ -121,28 +109,23 @@ Singleton {
     JsonAdapter {
       id: customColorsData
 
-      // --- Key Colors
-      property color colorPrimary: defaultTheme.colorPrimary
-      property color colorOnPrimary: defaultTheme.colorOnPrimary
+      property color mPrimary: defaultColors.mPrimary
+      property color mOnPrimary: defaultColors.mOnPrimary
+      property color mSecondary: defaultColors.mSecondary
+      property color mOnSecondary: defaultColors.mOnSecondary
+      property color mTertiary: defaultColors.mTertiary
+      property color mOnTertiary: defaultColors.mOnTertiary
 
-      property color colorSecondary: defaultTheme.colorSecondary
-      property color colorOnSecondary: defaultTheme.colorOnSecondary
+      property color mError: defaultColors.mError
+      property color mOnError: defaultColors.mOnError
 
-      property color colorTertiary: defaultTheme.colorTertiary
-      property color colorOnTertiary: defaultTheme.colorOnTertiary
-
-      // --- Utility Colors
-      property color colorError: defaultTheme.colorError
-      property color colorOnError: defaultTheme.colorOnError
-
-      // --- Surface and Variant Colors
-      property color colorSurface: defaultTheme.colorSurface
-      property color colorOnSurface: defaultTheme.colorOnSurface
-      property color colorSurfaceVariant: defaultTheme.colorSurfaceVariant
-      property color colorOnSurfaceVariant: defaultTheme.colorOnSurfaceVariant
-      property color colorOutline: defaultTheme.colorOutline
-      property color colorOutlineVariant: defaultTheme.colorOutlineVariant
-      property color colorShadow: defaultTheme.colorShadow
+      property color mSurface: defaultColors.mSurface
+      property color mOnSurface: defaultColors.mOnSurface
+      property color mSurfaceVariant: defaultColors.mSurfaceVariant
+      property color mOnSurfaceVariant: defaultColors.mOnSurfaceVariant
+      property color mOutline: defaultColors.mOutline
+      property color mOutlineVariant: defaultColors.mOutlineVariant
+      property color mShadow: defaultColors.mShadow
     }
   }
 }

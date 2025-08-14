@@ -38,8 +38,8 @@ Item {
   NPill {
     id: pill
     icon: getIcon()
-    iconCircleColor: Colors.colorPrimary
-    collapsedIconColor: Colors.colorOnSurface
+    iconCircleColor: Colors.mPrimary
+    collapsedIconColor: Colors.mOnSurface
     autoHide: true
     text: Math.floor(Audio.volume * 100) + "%"
     tooltipText: "Volume: " + Math.round(

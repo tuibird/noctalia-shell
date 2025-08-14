@@ -44,7 +44,7 @@ Item {
           text: "Per‑monitor configuration"
           font.pointSize: Style.fontSizeXL * scaling
           font.weight: Style.fontWeightBold
-          color: Colors.colorOnSurface
+          color: Colors.mOnSurface
         }
 
         Repeater {
@@ -52,8 +52,8 @@ Item {
           delegate: Rectangle {
             Layout.fillWidth: true
             radius: Style.radiusMedium * scaling
-            color: Colors.colorSurface
-            border.color: Colors.colorOutline
+            color: Colors.mSurface
+            border.color: Colors.mOutline
             border.width: Math.max(1, Style.borderThin * scaling)
             implicitHeight: contentCol.implicitHeight + Style.marginXL * 2 * scaling
 
@@ -67,13 +67,13 @@ Item {
                 text: (modelData.name || "Unknown")
                 font.pointSize: Style.fontSizeLarge * scaling
                 font.weight: Style.fontWeightBold
-                color: Colors.colorSecondary
+                color: Colors.mSecondary
               }
 
               NText {
                 text: `Resolution: ${modelData.width}x${modelData.height} - Position: (${modelData.x}, ${modelData.y})`
                 font.pointSize: Style.fontSizeSmall * scaling
-                color: Colors.colorOnSurface
+                color: Colors.mOnSurface
               }
 
               ColumnLayout {

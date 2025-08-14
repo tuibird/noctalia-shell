@@ -68,9 +68,9 @@ NLoader {
 
       Rectangle {
         id: bgRect
-        color: Colors.colorSurfaceVariant
+        color: Colors.mSurfaceVariant
         radius: Style.radiusMedium * scaling
-        border.color: Colors.colorOutlineVariant
+        border.color: Colors.mOutlineVariant
         border.width: Math.max(1, Style.borderThin * scaling)
         width: 500 * scaling
         height: 700 * scaling
@@ -115,7 +115,7 @@ NLoader {
 
           NText {
             text: "DemoPanel"
-            color: Colors.colorPrimary
+            color: Colors.mPrimary
             font.pointSize: Style.fontSizeXL * scaling
             font.weight: Style.fontWeightBold
             Layout.alignment: Qt.AlignHCenter
@@ -130,7 +130,7 @@ NLoader {
               spacing: Style.marginLarge * scaling
               NText {
                 text: "Scaling"
-                color: Colors.colorSecondary
+                color: Colors.mSecondary
                 font.weight: Style.fontWeightBold
               }
               NText {
@@ -173,7 +173,7 @@ NLoader {
               spacing: Style.marginLarge * scaling
               NText {
                 text: "NIconButton"
-                color: Colors.colorSecondary
+                color: Colors.mSecondary
                 font.weight: Style.fontWeightBold
               }
 
@@ -193,7 +193,7 @@ NLoader {
               spacing: Style.marginMedium * scaling
               NText {
                 text: "NToggle"
-                color: Colors.colorSecondary
+                color: Colors.mSecondary
                 font.weight: Style.fontWeightBold
               }
 
@@ -215,7 +215,7 @@ NLoader {
               spacing: Style.marginMedium * scaling
               NText {
                 text: "NComboBox"
-                color: Colors.colorSecondary
+                color: Colors.mSecondary
                 font.weight: Style.fontWeightBold
               }
 
@@ -240,7 +240,7 @@ NLoader {
               spacing: Style.marginMedium * scaling
               NText {
                 text: "NTextInput"
-                color: Colors.colorSecondary
+                color: Colors.mSecondary
                 font.weight: Style.fontWeightBold
               }
 
@@ -263,7 +263,7 @@ NLoader {
               spacing: Style.marginMedium * scaling
               NText {
                 text: "NBusyIndicator"
-                color: Colors.colorSecondary
+                color: Colors.mSecondary
                 font.weight: Style.fontWeightBold
               }
 

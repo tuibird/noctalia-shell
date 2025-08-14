@@ -29,13 +29,13 @@ Item {
       text: label
       font.pointSize: Style.fontSizeMedium * scaling
       font.weight: Style.fontWeightBold
-      color: Colors.colorOnSurface
+      color: Colors.mOnSurface
     }
 
     NText {
       text: description
       font.pointSize: Style.fontSizeSmall * scaling
-      color: Colors.colorOnSurface
+      color: Colors.mOnSurface
       wrapMode: Text.WordWrap
       Layout.fillWidth: true
     }
@@ -47,8 +47,8 @@ Item {
       implicitWidth: root.width
       implicitHeight: Style.baseWidgetSize * 1.35 * scaling
       radius: Style.radiusMedium * scaling
-      color: Colors.colorSurface
-      border.color: Colors.colorOutline
+      color: Colors.mSurface
+      border.color: Colors.mOutline
       border.width: Math.max(1, Style.borderThin * scaling)
 
       // Focus ring
@@ -56,7 +56,7 @@ Item {
         anchors.fill: parent
         radius: frame.radius
         color: "transparent"
-        border.color: input.activeFocus ? Colors.colorTertiary : "transparent"
+        border.color: input.activeFocus ? Colors.mTertiary : "transparent"
         border.width: input.activeFocus ? Math.max(1, Style.borderThin * scaling) : 0
       }
 
@@ -74,8 +74,8 @@ Item {
           echoMode: TextInput.Normal
           readOnly: root.readOnly
           enabled: root.enabled
-          color: Colors.colorOnSurface
-          placeholderTextColor: Colors.colorOnSurface
+          color: Colors.mOnSurface
+          placeholderTextColor: Colors.mOnSurface
           background: null
           font.pointSize: Style.fontSizeSmall * scaling
           onEditingFinished: root.editingFinished()

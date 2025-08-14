@@ -36,7 +36,7 @@ ColumnLayout {
           text: "General Settings"
           font.pointSize: Style.fontSizeXL * scaling
           font.weight: Style.fontWeightBold
-          color: Colors.colorOnSurface
+          color: Colors.mOnSurface
         }
 
         // Profile section
@@ -55,7 +55,7 @@ ColumnLayout {
               height: 64 * scaling
               imagePath: Settings.data.general.avatarImage
               fallbackIcon: "person"
-              borderColor: Colors.colorPrimary
+              borderColor: Colors.mPrimary
               borderWidth: Math.max(1, Style.borderMedium)
             }
 
@@ -87,7 +87,7 @@ ColumnLayout {
           text: "User Interface"
           font.pointSize: Style.fontSizeXL * scaling
           font.weight: Style.fontWeightBold
-          color: Colors.colorOnSurface
+          color: Colors.mOnSurface
           Layout.bottomMargin: Style.marginSmall * scaling
         }
 

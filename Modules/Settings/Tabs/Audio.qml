@@ -49,7 +49,7 @@ ColumnLayout {
           text: "Audio"
           font.pointSize: Style.fontSizeXL * scaling
           font.weight: Style.fontWeightBold
-          color: Colors.colorOnSurface
+          color: Colors.mOnSurface
           Layout.bottomMargin: Style.marginSmall * scaling
         }
 
@@ -70,13 +70,13 @@ ColumnLayout {
               NText {
                 text: "Master Volume"
                 font.weight: Style.fontWeightBold
-                color: Colors.colorOnSurface
+                color: Colors.mOnSurface
               }
 
               NText {
                 text: "System-wide volume level"
                 font.pointSize: Style.fontSizeSmall * scaling
-                color: Colors.colorOnSurface
+                color: Colors.mOnSurface
                 wrapMode: Text.WordWrap
                 Layout.fillWidth: true
               }
@@ -110,7 +110,7 @@ ColumnLayout {
               NText {
                 text: Math.floor(Audio.volume * 100) + "%"
                 Layout.alignment: Qt.AlignVCenter
-                color: Colors.colorOnSurface
+                color: Colors.mOnSurface
               }
             }
           }
@@ -149,7 +149,7 @@ ColumnLayout {
             text: "Audio Devices"
             font.pointSize: Style.fontSizeXL * scaling
             font.weight: Style.fontWeightBold
-            color: Colors.colorOnSurface
+            color: Colors.mOnSurface
             Layout.bottomMargin: Style.marginSmall * scaling
           }
 
@@ -168,13 +168,13 @@ ColumnLayout {
               text: "Output Device"
               font.pointSize: Style.fontSizeMedium * scaling
               font.weight: Style.fontWeightBold
-              color: Colors.colorOnSurface
+              color: Colors.mOnSurface
             }
 
             NText {
               text: "Select the desired audio output device"
               font.pointSize: Style.fontSizeSmall * scaling
-              color: Colors.colorOnSurface
+              color: Colors.mOnSurface
               wrapMode: Text.WordWrap
               Layout.fillWidth: true
             }
@@ -207,13 +207,13 @@ ColumnLayout {
             text: "Input Device"
             font.pointSize: Style.fontSizeMedium * scaling
             font.weight: Style.fontWeightBold
-            color: Colors.colorOnSurface
+            color: Colors.mOnSurface
           }
 
           NText {
             text: "Select desired audio input device"
             font.pointSize: Style.fontSizeSmall * scaling
-            color: Colors.colorOnSurface
+            color: Colors.mOnSurface
             wrapMode: Text.WordWrap
             Layout.fillWidth: true
           }
@@ -247,7 +247,7 @@ ColumnLayout {
           text: "Audio Visualizer"
           font.pointSize: Style.fontSizeXL * scaling
           font.weight: Style.fontWeightBold
-          color: Colors.colorOnSurface
+          color: Colors.mOnSurface
           Layout.bottomMargin: Style.marginSmall * scaling
         }
 

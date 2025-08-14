@@ -10,8 +10,8 @@ Rectangle {
   implicitWidth: childrenRect.width
   implicitHeight: childrenRect.height
 
-  color: Colors.colorSurface
+  color: Colors.mSurface
   radius: Style.radiusMedium * scaling
-  border.color: Colors.colorSurfaceVariant
+  border.color: Colors.mSurfaceVariant
   border.width: Math.max(1, Style.borderThin * scaling)
 }

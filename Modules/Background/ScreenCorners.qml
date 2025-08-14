@@ -17,7 +17,7 @@ NLoader {
       required property ShellScreen modelData
 
       // Visible ring color
-      property color ringColor: Colors.colorSurface
+      property color ringColor: Colors.mSurface
       // The amount subtracted from full size for the inner cutout
       // Inner size = full size - borderWidth (per axis)
       property int borderWidth: Style.borderMedium

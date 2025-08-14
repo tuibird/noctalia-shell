@@ -13,7 +13,7 @@ RadioButton {
     implicitHeight: 20 * scaling
     radius: width * 0.5
     color: "transparent"
-    border.color: root.checked ? Colors.colorPrimary : Colors.colorOnSurface
+    border.color: root.checked ? Colors.mPrimary : Colors.mOnSurface
     border.width: 2
     anchors.verticalCenter: parent.verticalCenter
 
@@ -23,7 +23,7 @@ RadioButton {
       implicitHeight: Style.marginSmall * scaling
 
       radius: width * 0.5
-      color: Qt.alpha(Colors.colorPrimary, root.checked ? 1 : 0)
+      color: Qt.alpha(Colors.mPrimary, root.checked ? 1 : 0)
     }
 
     Behavior on border.color {

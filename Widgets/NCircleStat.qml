@@ -18,9 +18,9 @@ Rectangle {
 
   width: 68 * scaling
   height: 92 * scaling
-  color: flat ? "transparent" : Colors.colorSurface
+  color: flat ? "transparent" : Colors.mSurface
   radius: Style.radiusSmall * scaling
-  border.color: flat ? "transparent" : Colors.colorSurfaceVariant
+  border.color: flat ? "transparent" : Colors.mSurfaceVariant
   border.width: flat ? 0 : Math.max(1, Style.borderThin * scaling)
   clip: true
 
@@ -58,14 +58,14 @@ Rectangle {
           ctx.reset()
           ctx.lineWidth = 6 * root.scaling * contentScale
           // Track uses surfaceVariant for stronger contrast
-          ctx.strokeStyle = Colors.colorSurface
+          ctx.strokeStyle = Colors.mSurface
           ctx.beginPath()
           ctx.arc(cx, cy, r, start, endBg)
           ctx.stroke()
           // Value arc
           const ratio = Math.max(0, Math.min(1, root.value / 100))
           const end = start + (endBg - start) * ratio
-          ctx.strokeStyle = Colors.colorPrimary
+          ctx.strokeStyle = Colors.mPrimary
           ctx.beginPath()
           ctx.arc(cx, cy, r, start, end)
           ctx.stroke()
@@ -79,7 +79,7 @@ Rectangle {
         text: `${root.value}${root.suffix}`
         font.pointSize: Style.fontSizeMedium * scaling * contentScale
         font.weight: Style.fontWeightBold
-        color: Colors.colorOnSurface
+        color: Colors.mOnSurface
         horizontalAlignment: Text.AlignHCenter
       }
 
@@ -89,8 +89,8 @@ Rectangle {
         width: 28 * scaling * contentScale
         height: width
         radius: width / 2
-        color: Colors.colorSurface
-        // border.color: Colors.colorPrimary
+        color: Colors.mSurface
+        // border.color: Colors.mPrimary
         // border.width: Math.max(1, Style.borderThin * scaling)
         anchors.right: parent.right
         anchors.top: parent.top
@@ -102,7 +102,7 @@ Rectangle {
           text: root.icon
           font.family: "Material Symbols Outlined"
           font.pointSize: Style.fontSizeLargeXL * scaling * contentScale
-          color: Colors.colorOnSurface
+          color: Colors.mOnSurface
           horizontalAlignment: Text.AlignHCenter
           verticalAlignment: Text.AlignVCenter
         }
