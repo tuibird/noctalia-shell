@@ -119,16 +119,7 @@ NBox {
           }
 
           background: Rectangle {
-            gradient: Gradient {
-              GradientStop {
-                position: 0.0
-                color: Colors.colorSurface
-              }
-              GradientStop {
-                position: 1.0
-                color: Colors.colorSurfaceVariant
-              }
-            }
+            color: Colors.colorSurface
             border.color: Colors.colorOutline
             border.width: Math.max(1, Style.borderThin * scaling)
             radius: Style.radiusTiny * scaling
