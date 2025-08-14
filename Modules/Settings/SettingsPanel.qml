@@ -10,7 +10,21 @@ import qs.Widgets
 NLoader {
   id: root
 
-  property int requestedTab: Settings.Tab.General
+  enum Tab {
+    General,
+    Bar,
+    TimeWeather,
+    ScreenRecorder,
+    Network,
+    Audio,
+    Display,
+    Wallpaper,
+    WallpaperSelector,
+    //Misc,
+    About
+  }
+
+  property int requestedTab: SettingsPanel.Tab.General
 
   content: Component {
     NPanel {
@@ -56,58 +70,58 @@ NLoader {
       WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
 
       property var tabsModel: [{
-          "id": Settings.Tab.General,
+          "id": SettingsPanel.Tab.General,
           "label": "General",
           "icon": "tune",
           "source": "Tabs/General.qml"
         }, {
-          "id": Settings.Tab.Bar,
+          "id": SettingsPanel.Tab.Bar,
           "label": "Bar",
           "icon": "web_asset",
           "source": "Tabs/Bar.qml"
         }, {
-          "id": Settings.Tab.TimeWeather,
+          "id": SettingsPanel.Tab.TimeWeather,
           "label": "Time & Weather",
           "icon": "schedule",
           "source": "Tabs/TimeWeather.qml"
         }, {
-          "id": Settings.Tab.ScreenRecorder,
+          "id": SettingsPanel.Tab.ScreenRecorder,
           "label": "Screen Recorder",
           "icon": "videocam",
           "source": "Tabs/ScreenRecorder.qml"
         }, {
-          "id": Settings.Tab.Network,
+          "id": SettingsPanel.Tab.Network,
           "label": "Network",
           "icon": "lan",
           "source": "Tabs/Network.qml"
         }, {
-          "id": Settings.Tab.Audio,
+          "id": SettingsPanel.Tab.Audio,
           "label": "Audio",
           "icon": "volume_up",
           "source": "Tabs/Audio.qml"
         }, {
-          "id": Settings.Tab.Display,
+          "id": SettingsPanel.Tab.Display,
           "label": "Display",
           "icon": "monitor",
           "source": "Tabs/Display.qml"
         }, {
-          "id": Settings.Tab.Wallpaper,
+          "id": SettingsPanel.Tab.Wallpaper,
           "label": "Wallpaper",
           "icon": "image",
           "source": "Tabs/Wallpaper.qml"
         }, {
-          "id": Settings.Tab.WallpaperSelector,
+          "id": SettingsPanel.Tab.WallpaperSelector,
           "label": "Wallpaper Selector",
           "icon": "wallpaper_slideshow",
           "source": "Tabs/WallpaperSelector.qml"
         }, // {
-        //   "id": TabId.Misc,
+        //   "id":  SettingsPanel.Tab.Misc,
         //   "label": "Misc",
         //   "icon": "more_horiz",
         //   "source": "Tabs/Misc.qml"
         // },
         {
-          "id": Settings.Tab.About,
+          "id": SettingsPanel.Tab.About,
           "label": "About",
           "icon": "info",
           "source": "Tabs/About.qml"
