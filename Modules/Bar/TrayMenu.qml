@@ -126,7 +126,7 @@ PopupWindow {
             id: text
             Layout.fillWidth: true
             color: (modelData?.enabled
-                    ?? true) ? (mouseArea.containsMouse ? Colors.onAccent : Colors.textPrimary) : Colors.textDisabled
+                    ?? true) ? (mouseArea.containsMouse ? Colors.textPrimary : Colors.textPrimary) : Colors.textDisabled
             text: modelData?.text ?? ""
             font.pointSize: Style.fontSizeSmall * scaling
             verticalAlignment: Text.AlignVCenter
@@ -350,7 +350,7 @@ PopupWindow {
             color: mouseArea.containsMouse ? Colors.hover : "transparent"
             radius: Style.radiusSmall * scaling
             visible: !(modelData?.isSeparator ?? false)
-            property color hoverTextColor: mouseArea.containsMouse ? Colors.onAccent : Colors.textPrimary
+            property color hoverTextColor: mouseArea.containsMouse ? Colors.textPrimary : Colors.textPrimary
 
             RowLayout {
               anchors.fill: parent
