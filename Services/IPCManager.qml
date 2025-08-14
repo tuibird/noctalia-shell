@@ -37,7 +37,8 @@ Item {
   IpcHandler {
     target: "appLauncher"
 
-    function toggle() {// TODO
+    function toggle() {
+      appLauncherPanel.isLoaded = !appLauncherPanel.isLoaded
     }
   }
 

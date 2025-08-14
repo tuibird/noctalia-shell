@@ -10,6 +10,7 @@ import qs.Modules.Calendar
 import qs.Modules.Demo
 import qs.Modules.Background
 import qs.Modules.SidePanel
+import qs.Modules.AppLauncher
 import qs.Modules.Notification
 import qs.Modules.Settings
 import qs.Services
@@ -23,6 +24,12 @@ ShellRoot {
   ScreenCorners {}
   Bar {}
   Dock {}
+
+  AppLauncher {
+    id: appLauncherPanel
+  }
+
+
 
   DemoPanel {
     id: demoPanel

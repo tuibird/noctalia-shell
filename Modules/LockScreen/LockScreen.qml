@@ -343,24 +343,6 @@ WlSessionLock {
                   spacing: 12 * Scaling.scale(screen)
 
                   Text {
-                    text: "●"
-                    color: Colors.error
-                    font.pixelSize: 16 * Scaling.scale(screen)
-                  }
-
-                  Text {
-                    text: "●"
-                    color: Colors.warning
-                    font.pixelSize: 16 * Scaling.scale(screen)
-                  }
-
-                  Text {
-                    text: "●"
-                    color: Colors.accentPrimary
-                    font.pixelSize: 16 * Scaling.scale(screen)
-                  }
-
-                  Text {
                     text: "SECURE TERMINAL"
                     color: Colors.textPrimary
                     font.family: "DejaVu Sans Mono"
@@ -554,6 +536,7 @@ WlSessionLock {
                   border.width: 1
                   enabled: !lock.authenticating
                   Layout.alignment: Qt.AlignRight
+                  Layout.bottomMargin: -12 * Scaling.scale(screen)
 
                   Text {
                     anchors.centerIn: parent
