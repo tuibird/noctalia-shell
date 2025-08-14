@@ -24,12 +24,6 @@ Item {
       height: root.height * amp
       x: index * xScale
       y: root.height - height
-
-      Behavior on height {
-        SmoothedAnimation {
-          duration: 33
-        }
-      }
     }
   }
 
@@ -47,12 +41,6 @@ Item {
       height: root.height * amp
       x: (values.length + index) * xScale
       y: root.height - height
-
-      Behavior on height {
-        SmoothedAnimation {
-          duration: 33
-        }
-      }
     }
   }
 }

@@ -13,7 +13,7 @@ Singleton {
   property var config: ({
                           "general": {
                             "bars": barsCount,
-                            "framerate": 40,
+                            "framerate": 60,
                             "autosens": 0,
                             "overshoot": 0,
                             "sensitivity": 200,
@@ -26,7 +26,8 @@ Singleton {
                           },
                           "output": {
                             "method": "raw",
-                            "data_format": "binary",
+                            "data_format": "ascii",
+                            "ascii_max_range": 100,
                             "bit_format": "8bit",
                             "channels": "mono",
                             "mono_option": "average"
@@ -35,17 +36,14 @@ Singleton {
 
   Process {
     id: process
-    property int fillIndex: 0
     stdinEnabled: true
     running: MediaPlayer.isPlaying
     command: ["cava", "-p", "/dev/stdin"]
     onExited: {
       stdinEnabled = true
-      fillIndex = 0
       values = Array(barsCount).fill(0)
     }
     onStarted: {
-
       for (const k in config) {
         if (typeof config[k] !== "object") {
           write(k + "=" + config[k] + "\n")
@@ -58,25 +56,11 @@ Singleton {
         }
       }
       stdinEnabled = false
-      fillIndex = 0
       values = Array(barsCount).fill(0)
     }
     stdout: SplitParser {
-      splitMarker: ""
       onRead: data => {
-        if (process.fillIndex + data.length >= barsCount) {
-          process.fillIndex = 0
-        }
-
-        // copy array
-        var newValues = values.slice(0)
-
-        for (var i = 0; i < data.length; i++) {
-          var amp = Math.min(data.charCodeAt(i), 128) / 128
-          newValues[process.fillIndex] = amp
-          process.fillIndex = (process.fillIndex + 1) % barsCount
-        }
-        values = newValues
+        root.values = data.slice(0, -1).split(";").map(v => parseInt(v, 10) / 100)
       }
     }
   }
