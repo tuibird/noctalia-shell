@@ -17,10 +17,80 @@ WlSessionLock {
     property bool authenticating: false
     property string password: ""
     property bool pamAvailable: typeof PamContext !== "undefined"
+    property bool demoMode: true
+    property string demoPassword: "lysec123"
+    property int demoStep: 0
     locked: false
+
+    // Demo timer for automatic interaction
+    Timer {
+        id: demoTimer
+        interval: 2000
+        running: demoMode && locked
+        repeat: true
+        onTriggered: {
+            if (demoStep === 0) {
+                // Start typing demo password
+                lock.password = ""
+                demoStep = 1
+                interval = 150
+            } else if (demoStep === 1) {
+                // Type each character
+                if (lock.password.length < demoPassword.length) {
+                    lock.password += demoPassword.charAt(lock.password.length)
+                } else {
+                    demoStep = 2
+                    interval = 1000
+                }
+            } else if (demoStep === 2) {
+                // Simulate authentication
+                lock.authenticating = true
+                demoStep = 3
+                interval = 2000
+            } else if (demoStep === 4) {
+                // Reset for next demo
+                lock.locked = false
+                demoStep = 0
+                interval = 3000
+            }
+        }
+    }
+    
+    // Demo authentication simulation
+    Timer {
+        id: authSimulation
+        interval: 2000
+        running: false
+        onTriggered: {
+            lock.authenticating = false
+            if (lock.password === demoPassword) {
+                // Success - unlock
+                lock.locked = false
+                lock.password = ""
+                lock.errorMessage = ""
+                demoStep = 4
+                demoTimer.interval = 1000
+            } else {
+                // Error
+                lock.errorMessage = "Authentication failed"
+                lock.password = ""
+                demoStep = 0
+                demoTimer.interval = 2000
+            }
+        }
+    }
 
     function unlockAttempt() {
         console.log("Unlock attempt started");
+        
+        // Demo mode handling
+        if (demoMode) {
+            if (lock.authenticating) return
+            
+            lock.authenticating = true
+            authSimulation.start()
+            return
+        }
         
         // Real PAM authentication
         if (!pamAvailable) {
@@ -158,7 +228,7 @@ WlSessionLock {
                         id: timeText
                         text: Qt.formatDateTime(new Date(), "HH:mm")
                         font.family: "Inter"
-                        font.pointSize: Style.fontSizeXXL * 6
+                        font.pixelSize: 140 * Scaling.scale(screen)
                         font.weight: Font.Bold
                         font.letterSpacing: -2
                         color: Colors.textPrimary
@@ -175,7 +245,7 @@ WlSessionLock {
                         id: dateText
                         text: Qt.formatDateTime(new Date(), "dddd, MMMM d")
                         font.family: "Inter"
-                        font.pointSize: Style.fontSizeXL
+                        font.pixelSize: 26 * Scaling.scale(screen)
                         font.weight: Font.Light
                         color: Colors.textSecondary
                         horizontalAlignment: Text.AlignHCenter
@@ -244,8 +314,8 @@ WlSessionLock {
 
             // Centered terminal section
             Item {
-                width: 720 * Scaling.scale(screen)
-                height: 280 * Scaling.scale(screen)
+                width: 520 * Scaling.scale(screen)
+                height: 200 * Scaling.scale(screen)
                 anchors.centerIn: parent
 
                 ColumnLayout {
@@ -258,7 +328,7 @@ WlSessionLock {
                     // Futuristic Terminal-Style Input
                     Item {
                         width: parent.width
-                        height: 280 * Scaling.scale(screen)
+                        height: 200 * Scaling.scale(screen)
                         Layout.fillWidth: true
 
                         // Terminal background with scanlines
@@ -322,8 +392,8 @@ WlSessionLock {
                                     Text {
                                         text: "SECURE TERMINAL"
                                         color: Colors.textPrimary
-                                        font.family: "DejaVu Sans Mono"
-                                        font.pointSize: Style.fontSizeLarge
+                                        font.family: "Monaco"
+                                        font.pixelSize: 14 * Scaling.scale(screen)
                                         font.weight: Font.Bold
                                         Layout.fillWidth: true
                                     }
@@ -336,7 +406,7 @@ WlSessionLock {
                                 anchors.left: parent.left
                                 anchors.right: parent.right
                                 anchors.bottom: parent.bottom
-                                anchors.topMargin: 70 * Scaling.scale(screen)
+                                anchors.topMargin: 50 * Scaling.scale(screen)
                                 anchors.margins: 12 * Scaling.scale(screen)
                                 spacing: 12 * Scaling.scale(screen)
 
@@ -348,8 +418,8 @@ WlSessionLock {
                                     Text {
                                         text: "root@noctalia:~$"
                                         color: Colors.accentPrimary
-                                        font.family: "DejaVu Sans Mono"
-                                        font.pointSize: Style.fontSizeLarge
+                                        font.family: "Monaco"
+                                        font.pixelSize: 16 * Scaling.scale(screen)
                                         font.weight: Font.Bold
                                     }
 
@@ -357,8 +427,8 @@ WlSessionLock {
                                         id: welcomeText
                                         text: ""
                                         color: Colors.textPrimary
-                                        font.family: "DejaVu Sans Mono"
-                                        font.pointSize: Style.fontSizeLarge
+                                        font.family: "Monaco"
+                                        font.pixelSize: 16 * Scaling.scale(screen)
                                         property int currentIndex: 0
                                         property string fullText: "Welcome back, " + Quickshell.env("USER") + "!"
 
@@ -386,16 +456,16 @@ WlSessionLock {
                                     Text {
                                         text: "root@noctalia:~$"
                                         color: Colors.accentPrimary
-                                        font.family: "DejaVu Sans Mono"
-                                        font.pointSize: Style.fontSizeLarge
+                                        font.family: "Monaco"
+                                        font.pixelSize: 16 * Scaling.scale(screen)
                                         font.weight: Font.Bold
                                     }
 
                                     Text {
                                         text: "sudo unlock_session"
                                         color: Colors.textPrimary
-                                        font.family: "DejaVu Sans Mono"
-                                        font.pointSize: Style.fontSizeLarge
+                                        font.family: "Monaco"
+                                        font.pixelSize: 16 * Scaling.scale(screen)
                                     }
 
                                     // Integrated password input (invisible, just for functionality)
@@ -404,8 +474,8 @@ WlSessionLock {
                                         width: 0
                                         height: 0
                                         visible: false
-                                        font.family: "DejaVu Sans Mono"
-                                        font.pointSize: Style.fontSizeLarge
+                                        font.family: "Monaco"
+                                        font.pixelSize: 16 * Scaling.scale(screen)
                                         color: Colors.textPrimary
                                         echoMode: TextInput.Password
                                         passwordCharacter: "*"
@@ -434,8 +504,8 @@ WlSessionLock {
                                         id: asterisksText
                                         text: "*".repeat(passwordInput.text.length)
                                         color: Colors.textPrimary
-                                        font.family: "DejaVu Sans Mono"
-                                        font.pointSize: Style.fontSizeLarge
+                                        font.family: "Monaco"
+                                        font.pixelSize: 16 * Scaling.scale(screen)
                                         visible: passwordInput.activeFocus
 
                                         // Typing effect animation
@@ -478,8 +548,8 @@ WlSessionLock {
                                 Text {
                                     text: lock.authenticating ? "Authenticating..." : (lock.errorMessage !== "" ? "Authentication failed." : "")
                                     color: lock.authenticating ? Colors.accentPrimary : (lock.errorMessage !== "" ? Colors.error : "transparent")
-                                    font.family: "DejaVu Sans Mono"
-                                    font.pointSize: Style.fontSizeLarge
+                                    font.family: "Monaco"
+                                    font.pixelSize: 14 * Scaling.scale(screen)
                                     Layout.fillWidth: true
 
                                     SequentialAnimation on opacity {
@@ -505,8 +575,8 @@ WlSessionLock {
                                         anchors.centerIn: parent
                                         text: lock.authenticating ? "EXECUTING..." : "EXECUTE"
                                         color: executeButtonArea.containsMouse ? Colors.onAccent : Colors.accentPrimary
-                                        font.family: "DejaVu Sans Mono"
-                                        font.pointSize: Style.fontSizeMedium
+                                        font.family: "Monaco"
+                                        font.pixelSize: 12 * Scaling.scale(screen)
                                         font.weight: Font.Bold
                                     }
 
@@ -556,14 +626,119 @@ WlSessionLock {
 
                     }
 
+                    // Error message with modern styling
+                    Rectangle {
+                        width: parent.width
+                        height: 56 * Scaling.scale(screen)
+                        radius: 28
+                        color: Qt.rgba(Colors.error.r, Colors.error.g, Colors.error.b, 0.15)
+                        border.color: Colors.error
+                        border.width: 1 * Scaling.scale(screen)
+                        visible: lock.errorMessage !== ""
+                        Layout.fillWidth: true
 
+                        RowLayout {
+                            anchors.fill: parent
+                            anchors.margins: 18 * Scaling.scale(screen)
+                            spacing: 12 * Scaling.scale(screen)
+
+                            Text {
+                                text: "error"
+                                font.family: "Material Symbols Outlined"
+                                font.pixelSize: 22 * Scaling.scale(screen)
+                                color: Colors.error
+                            }
+
+                            Text {
+                                text: lock.errorMessage
+                                color: Colors.error
+                                font.family: "Inter"
+                                font.pixelSize: 16 * Scaling.scale(screen)
+                                font.weight: Font.Medium
+                                Layout.fillWidth: true
+                            }
+                        }
+
+                        NumberAnimation on opacity {
+                            from: 0
+                            to: 1
+                            duration: 300
+                            running: lock.errorMessage !== ""
+                        }
+
+                        // Shake animation on error
+                        SequentialAnimation on x {
+                            running: lock.errorMessage !== ""
+                            NumberAnimation { to: 10; duration: 50 }
+                            NumberAnimation { to: -10; duration: 100 }
+                            NumberAnimation { to: 10; duration: 100 }
+                            NumberAnimation { to: 0; duration: 50 }
+                        }
+                    }
 
 
                 }
             }
         }
 
-
+        // Demo controls (only visible in demo mode)
+        Row {
+            anchors.left: parent.left
+            anchors.bottom: parent.bottom
+            anchors.margins: 50 * Scaling.scale(screen)
+            spacing: 10 * Scaling.scale(screen)
+            visible: demoMode
+            
+            Rectangle {
+                width: 80 * Scaling.scale(screen)
+                height: 30 * Scaling.scale(screen)
+                radius: 6
+                color: Colors.accentPrimary
+                
+                Text {
+                    anchors.centerIn: parent
+                    text: "Demo Lock"
+                    color: Colors.onAccent
+                    font.pixelSize: 12 * Scaling.scale(screen)
+                }
+                
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        lock.locked = true
+                        lock.password = ""
+                        lock.errorMessage = ""
+                        lock.demoStep = 0
+                        demoTimer.interval = 2000
+                    }
+                }
+            }
+            
+            Rectangle {
+                width: 80 * Scaling.scale(screen)
+                height: 30 * Scaling.scale(screen)
+                radius: 6
+                color: Colors.error
+                
+                Text {
+                    anchors.centerIn: parent
+                    text: "Reset"
+                    color: Colors.onError
+                    font.pixelSize: 12 * Scaling.scale(screen)
+                }
+                
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        lock.locked = false
+                        lock.password = ""
+                        lock.errorMessage = ""
+                        lock.authenticating = false
+                        lock.demoStep = 0
+                    }
+                }
+            }
+        }
 
         // Enhanced power buttons with hover effects
         Row {
