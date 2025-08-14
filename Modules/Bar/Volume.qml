@@ -1,6 +1,7 @@
 import QtQuick
 import Quickshell
 import Quickshell.Services.Pipewire
+import qs.Modules.Settings
 import qs.Services
 import qs.Widgets
 
@@ -52,7 +53,7 @@ Item {
       }
     }
     onClicked: {
-      settingsPanel.requestedTab = settingsPanel.tabsIds.AUDIO
+      settingsPanel.requestedTab = SettingsPanel.Tab.Audio
       settingsPanel.isLoaded = true
     }
   }

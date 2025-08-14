@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import Quickshell
+import qs.Modules.Settings
 import qs.Services
 import qs.Widgets
 
@@ -31,7 +32,7 @@ NBox {
     NIconButton {
       icon: "image"
       onClicked: {
-        settingsPanel.requestedTab = settingsPanel.tabsIds.WALLPAPER_SELECTOR
+        settingsPanel.requestedTab = SettingsPanel.Tab.WallpaperSelector
         settingsPanel.isLoaded = true
       }
     }

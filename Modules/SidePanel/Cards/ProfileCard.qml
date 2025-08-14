@@ -4,9 +4,10 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Io
 import Quickshell.Widgets
+import qs.Modules.Settings
+import qs.Modules.SidePanel
 import qs.Services
 import qs.Widgets
-import qs.Modules.SidePanel
 
 // Header card with avatar, user and quick actions
 NBox {
@@ -14,8 +15,6 @@ NBox {
 
   readonly property real scaling: Scaling.scale(screen)
   property string uptimeText: "--"
-  
-
 
   Layout.fillWidth: true
   // Height driven by content
@@ -61,7 +60,7 @@ NBox {
         icon: "settings"
         tooltipText: "Open settings"
         onClicked: {
-          settingsPanel.requestedTab = settingsPanel.tabsIds.GENERAL
+          settingsPanel.requestedTab = SettingsPanel.Tab.General
           settingsPanel.isLoaded = !settingsPanel.isLoaded
         }
       }
