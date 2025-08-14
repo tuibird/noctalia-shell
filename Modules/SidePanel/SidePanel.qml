@@ -15,6 +15,7 @@ NLoader {
   // Target screen to open on
   property var targetScreen: null
 
+
   function openAt(x, screen) {
     anchorX = x
     targetScreen = screen

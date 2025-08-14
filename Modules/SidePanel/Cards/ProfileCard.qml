@@ -14,6 +14,8 @@ NBox {
 
   readonly property real scaling: Scaling.scale(screen)
   property string uptimeText: "--"
+  
+
 
   Layout.fillWidth: true
   // Height driven by content

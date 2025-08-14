@@ -1,8 +1,12 @@
 import QtQuick
 import Quickshell.Io
+import qs.Modules.Lockscreen
 
 Item {
   id: root
+  
+  // Reference to the lockscreen component
+  property var lockscreen: null
 
   IpcHandler {
     target: "settings"
@@ -40,7 +44,13 @@ Item {
   IpcHandler {
     target: "lockScreen"
 
-    function toggle() {// TODO
+    function toggle() {
+      lockScreen.locked = !lockScreen.locked
     }
+  }
+
+  // Lockscreen instance
+  Lockscreen {
+    id: lockScreen
   }
 }

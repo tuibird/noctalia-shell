@@ -6,10 +6,13 @@ import Quickshell.Io
 import Quickshell.Widgets
 import qs.Services
 import qs.Widgets
+import qs.Modules.Lockscreen
 
 NPanel {
   id: powerMenu
   visible: false
+  
+
 
   // Anchors will be set by the parent component
   function show() {
@@ -110,8 +113,9 @@ NPanel {
           hoverEnabled: true
           cursorShape: Qt.PointingHandCursor
           onClicked: {
-            // TODO: Implement lock screen functionality
             console.log("Lock screen requested")
+            // Lock the screen
+            lockScreen.locked = true
             powerMenu.visible = false
           }
         }
@@ -415,5 +419,10 @@ NPanel {
 
     command: ["loginctl", "terminate-user", Quickshell.env("USER")]
     running: false
+  }
+
+  // Lockscreen instance
+  Lockscreen {
+    id: lockScreen
   }
 }
