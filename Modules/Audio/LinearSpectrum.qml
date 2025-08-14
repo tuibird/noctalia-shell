@@ -8,7 +8,7 @@ Item {
   property int strokeWidth: 0
   property var values: []
 
-  property real xScale: width / (values.length * 2)
+  readonly property real xScale: width / (values.length * 2)
 
   Repeater {
     model: values.length
@@ -20,15 +20,14 @@ Item {
       border.width: strokeWidth
       antialiasing: true
 
+      width: xScale * 0.5
+      height: root.height * amp
       x: index * xScale
       y: root.height - height
 
-      width: xScale * 0.5
-      height: root.height * amp
-
       Behavior on height {
         SmoothedAnimation {
-          duration: 5
+          duration: 33
         }
       }
     }
@@ -44,18 +43,16 @@ Item {
       border.width: strokeWidth
       antialiasing: true
 
+      width: xScale * 0.5
+      height: root.height * amp
       x: (values.length + index) * xScale
       y: root.height - height
 
-      width: xScale * 0.5
-      height: root.height * amp
-
       Behavior on height {
         SmoothedAnimation {
-          duration: 5
+          duration: 33
         }
       }
     }
   }
-
 }

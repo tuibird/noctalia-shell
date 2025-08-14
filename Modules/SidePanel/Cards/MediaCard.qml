@@ -321,8 +321,7 @@ NBox {
       active: Settings.data.audio.visualizerType == "linear"
       Layout.alignment: Qt.AlignHCenter
 
-      sourceComponent: 
-      LinearSpectrum {
+      sourceComponent: LinearSpectrum {
         width: 300 * scaling
         height: 80 * scaling
         values: Cava.values

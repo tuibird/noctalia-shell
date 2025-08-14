@@ -13,8 +13,7 @@ Singleton {
   property var config: ({
                           "general": {
                             "bars": barsCount,
-                            "mode": "normal",
-                            "framerate": 60,
+                            "framerate": 40,
                             "autosens": 0,
                             "overshoot": 0,
                             "sensitivity": 200,
@@ -22,13 +21,13 @@ Singleton {
                             "higher_cutoff_freq": 12000
                           },
                           "smoothing": {
-                            "monstercat": 1,
-                            "gravity": 100,
+                            "monstercat": 0,
                             "noise_reduction": 77
                           },
                           "output": {
                             "method": "raw",
-                            "bit_format": 8,
+                            "data_format": "binary",
+                            "bit_format": "8bit",
                             "channels": "mono",
                             "mono_option": "average"
                           }
@@ -74,7 +73,7 @@ Singleton {
 
         for (var i = 0; i < data.length; i++) {
           var amp = Math.min(data.charCodeAt(i), 128) / 128
-          newValues[process.fillIndex] = amp * amp
+          newValues[process.fillIndex] = amp
           process.fillIndex = (process.fillIndex + 1) % barsCount
         }
         values = newValues
