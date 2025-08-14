@@ -3,8 +3,8 @@
   "backgroundSecondary": "{{ background | lighten(0.03) }}",
   "backgroundTertiary": "{{ background | lighten(0.06) }}",
   
-  "surface": "{{ background | lighten(0.04) }}",
-  "surfaceVariant": "{{ background | lighten(0.08) }}",
+  "surface": "{{ background | lighten(0.01) }}",
+  "surfaceVariant": "{{ background | lighten(0.07) }}",
   
   "textPrimary": "{{ foreground }}",
   "textSecondary": "{{ foreground | darken(0.25) }}",
