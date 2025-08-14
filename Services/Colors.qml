@@ -81,7 +81,7 @@ Singleton {
     property color overlay: "#191724"
   }
 
-  // Wallust theme colors (loaded from Theme.json)
+  // Wallust theme colors (loaded from theme.json)
   QtObject {
     id: wallustTheme
 
@@ -115,7 +115,7 @@ Singleton {
   // FileView to load Wallust theme data from Theme.json
   FileView {
     id: wallustFile
-    path: Settings.configDir + "Theme.json"
+    path: Settings.configDir + "theme.json"
     watchChanges: true
     onFileChanged: reload()
     onAdapterUpdated: writeAdapter()
