@@ -369,9 +369,8 @@ NLoader {
                             height: 56 * scaling
                             radius: 16 * scaling
                             property bool isSelected: index === selectedIndex
-                            color: (appCardArea.containsMouse || isSelected) ? Qt.darker(
-                                                                                 Colors.colorPrimary,
-                                                                                 1.1) : Colors.colorSurface
+                            color: (appCardArea.containsMouse || isSelected) ? Qt.darker(Colors.colorPrimary,
+                                                                                         1.1) : Colors.colorSurface
                             border.color: (appCardArea.containsMouse
                                            || isSelected) ? Colors.colorPrimary : "transparent"
                             border.width: (appCardArea.containsMouse || isSelected) ? 2 : 0

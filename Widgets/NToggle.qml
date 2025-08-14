@@ -53,8 +53,8 @@ RowLayout {
       implicitWidth: (root.baseSize - 5) * scaling
       implicitHeight: (root.baseSize - 5) * scaling
       radius: height * 0.5
-      color: value ? Colors.colorOnSurface  : Colors.colorPrimary //Colors.onBackground : Colors.colorSecondary
-      border.color: value ? Colors.colorSurface: Colors.colorSurface
+      color: value ? Colors.colorOnSurface : Colors.colorPrimary //Colors.onBackground : Colors.colorSecondary
+      border.color: value ? Colors.colorSurface : Colors.colorSurface
       border.width: Math.max(1, Style.borderMedium * scaling)
       y: 2 * scaling
       x: value ? switcher.width - width - 2 * scaling : 2 * scaling

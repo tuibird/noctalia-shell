@@ -631,7 +631,8 @@ WlSessionLock {
         width: 64 * Scaling.scale(screen)
         height: 64 * Scaling.scale(screen)
         radius: 32
-        color: Qt.rgba(Colors.colorError.r, Colors.colorError.g, Colors.colorError.b, shutdownArea.containsMouse ? 0.9 : 0.2)
+        color: Qt.rgba(Colors.colorError.r, Colors.colorError.g, Colors.colorError.b,
+                       shutdownArea.containsMouse ? 0.9 : 0.2)
         border.color: Colors.colorError
         border.width: 2 * Scaling.scale(screen)
 

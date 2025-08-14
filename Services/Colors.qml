@@ -43,7 +43,6 @@ Singleton {
   property color colorOutlineVariant: useMatugen ? matugenTheme.colorOutlineVariant : defaultTheme.colorOutlineVariant
   property color colorShadow: useMatugen ? matugenTheme.colorShadow : defaultTheme.colorShadow
 
-
   // -----------
   // Check if we should use Matugen theme
   property bool useMatugen: Settings.data.wallpaper.generateTheme && matugenFile.loaded
@@ -90,7 +89,6 @@ Singleton {
     property color colorOutline: "#000000" // The color for component outlines, like text fields or buttons.
     property color colorOutlineVariant: "#000000" // A subtler outline color for decorative elements or dividers.
     property color colorShadow: "#000000" // The color used for shadows to create elevation.
-
 
     //   // property color colorBackground: "#191724"
     //   // property color colorSurface: "#1f1d2e"

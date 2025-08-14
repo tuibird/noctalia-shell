@@ -160,6 +160,7 @@ Singleton {
     running: false
     stdout: StdioCollector {
       onStreamFinished: {
+
         //console.log(this.text)
       }
     }

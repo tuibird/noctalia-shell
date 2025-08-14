@@ -112,7 +112,7 @@ NBox {
               return `${max}°/${min}°`
             }
             font.pointSize: Style.fontSizeSmall * scaling
-            color: Colors.colorOnSurfaceVariant 
+            color: Colors.colorOnSurfaceVariant
           }
         }
       }
