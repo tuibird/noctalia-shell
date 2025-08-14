@@ -6,7 +6,7 @@ import Quickshell.Io
 import Quickshell.Widgets
 import qs.Services
 import qs.Widgets
-import qs.Modules.Lockscreen
+import qs.Modules.LockScreen
 
 NPanel {
   id: powerMenu
@@ -421,8 +421,8 @@ NPanel {
     running: false
   }
 
-  // Lockscreen instance
-  Lockscreen {
-    id: lockScreen
+      // LockScreen instance
+    LockScreen {
+        id: lockScreen
   }
 }

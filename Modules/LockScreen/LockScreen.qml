@@ -21,6 +21,8 @@ WlSessionLock {
 
     function unlockAttempt() {
         console.log("Unlock attempt started");
+        
+        // Real PAM authentication
         if (!pamAvailable) {
             lock.errorMessage = "PAM authentication not available.";
             console.log("PAM not available");
@@ -156,8 +158,9 @@ WlSessionLock {
                         id: timeText
                         text: Qt.formatDateTime(new Date(), "HH:mm")
                         font.family: "Inter"
-                        font.pixelSize: 140 * Scaling.scale(screen)
+                        font.pointSize: Style.fontSizeXXL * 6
                         font.weight: Font.Bold
+                        font.letterSpacing: -2
                         color: Colors.textPrimary
                         horizontalAlignment: Text.AlignHCenter
 
@@ -172,7 +175,7 @@ WlSessionLock {
                         id: dateText
                         text: Qt.formatDateTime(new Date(), "dddd, MMMM d")
                         font.family: "Inter"
-                        font.pixelSize: 26 * Scaling.scale(screen)
+                        font.pointSize: Style.fontSizeXL
                         font.weight: Font.Light
                         color: Colors.textSecondary
                         horizontalAlignment: Text.AlignHCenter
@@ -241,8 +244,8 @@ WlSessionLock {
 
             // Centered terminal section
             Item {
-                width: 520 * Scaling.scale(screen)
-                height: 200 * Scaling.scale(screen)
+                width: 720 * Scaling.scale(screen)
+                height: 280 * Scaling.scale(screen)
                 anchors.centerIn: parent
 
                 ColumnLayout {
@@ -255,7 +258,7 @@ WlSessionLock {
                     // Futuristic Terminal-Style Input
                     Item {
                         width: parent.width
-                        height: 200 * Scaling.scale(screen)
+                        height: 280 * Scaling.scale(screen)
                         Layout.fillWidth: true
 
                         // Terminal background with scanlines
@@ -319,8 +322,8 @@ WlSessionLock {
                                     Text {
                                         text: "SECURE TERMINAL"
                                         color: Colors.textPrimary
-                                        font.family: "Monaco"
-                                        font.pixelSize: 14 * Scaling.scale(screen)
+                                        font.family: "DejaVu Sans Mono"
+                                        font.pointSize: Style.fontSizeLarge
                                         font.weight: Font.Bold
                                         Layout.fillWidth: true
                                     }
@@ -333,7 +336,7 @@ WlSessionLock {
                                 anchors.left: parent.left
                                 anchors.right: parent.right
                                 anchors.bottom: parent.bottom
-                                anchors.topMargin: 50 * Scaling.scale(screen)
+                                anchors.topMargin: 70 * Scaling.scale(screen)
                                 anchors.margins: 12 * Scaling.scale(screen)
                                 spacing: 12 * Scaling.scale(screen)
 
@@ -345,8 +348,8 @@ WlSessionLock {
                                     Text {
                                         text: "root@noctalia:~$"
                                         color: Colors.accentPrimary
-                                        font.family: "Monaco"
-                                        font.pixelSize: 16 * Scaling.scale(screen)
+                                        font.family: "DejaVu Sans Mono"
+                                        font.pointSize: Style.fontSizeLarge
                                         font.weight: Font.Bold
                                     }
 
@@ -354,10 +357,10 @@ WlSessionLock {
                                         id: welcomeText
                                         text: ""
                                         color: Colors.textPrimary
-                                        font.family: "Monaco"
-                                        font.pixelSize: 16 * Scaling.scale(screen)
+                                        font.family: "DejaVu Sans Mono"
+                                        font.pointSize: Style.fontSizeLarge
                                         property int currentIndex: 0
-                                        property string fullText: "echo 'Welcome back, " + Quickshell.env("USER") + "!'"
+                                        property string fullText: "Welcome back, " + Quickshell.env("USER") + "!"
 
                                         Timer {
                                             interval: 100
@@ -383,16 +386,16 @@ WlSessionLock {
                                     Text {
                                         text: "root@noctalia:~$"
                                         color: Colors.accentPrimary
-                                        font.family: "Monaco"
-                                        font.pixelSize: 16 * Scaling.scale(screen)
+                                        font.family: "DejaVu Sans Mono"
+                                        font.pointSize: Style.fontSizeLarge
                                         font.weight: Font.Bold
                                     }
 
                                     Text {
                                         text: "sudo unlock_session"
                                         color: Colors.textPrimary
-                                        font.family: "Monaco"
-                                        font.pixelSize: 16 * Scaling.scale(screen)
+                                        font.family: "DejaVu Sans Mono"
+                                        font.pointSize: Style.fontSizeLarge
                                     }
 
                                     // Integrated password input (invisible, just for functionality)
@@ -401,8 +404,8 @@ WlSessionLock {
                                         width: 0
                                         height: 0
                                         visible: false
-                                        font.family: "Monaco"
-                                        font.pixelSize: 16 * Scaling.scale(screen)
+                                        font.family: "DejaVu Sans Mono"
+                                        font.pointSize: Style.fontSizeLarge
                                         color: Colors.textPrimary
                                         echoMode: TextInput.Password
                                         passwordCharacter: "*"
@@ -431,8 +434,8 @@ WlSessionLock {
                                         id: asterisksText
                                         text: "*".repeat(passwordInput.text.length)
                                         color: Colors.textPrimary
-                                        font.family: "Monaco"
-                                        font.pixelSize: 16 * Scaling.scale(screen)
+                                        font.family: "DejaVu Sans Mono"
+                                        font.pointSize: Style.fontSizeLarge
                                         visible: passwordInput.activeFocus
 
                                         // Typing effect animation
@@ -475,8 +478,8 @@ WlSessionLock {
                                 Text {
                                     text: lock.authenticating ? "Authenticating..." : (lock.errorMessage !== "" ? "Authentication failed." : "")
                                     color: lock.authenticating ? Colors.accentPrimary : (lock.errorMessage !== "" ? Colors.error : "transparent")
-                                    font.family: "Monaco"
-                                    font.pixelSize: 14 * Scaling.scale(screen)
+                                    font.family: "DejaVu Sans Mono"
+                                    font.pointSize: Style.fontSizeLarge
                                     Layout.fillWidth: true
 
                                     SequentialAnimation on opacity {
@@ -502,8 +505,8 @@ WlSessionLock {
                                         anchors.centerIn: parent
                                         text: lock.authenticating ? "EXECUTING..." : "EXECUTE"
                                         color: executeButtonArea.containsMouse ? Colors.onAccent : Colors.accentPrimary
-                                        font.family: "Monaco"
-                                        font.pixelSize: 12 * Scaling.scale(screen)
+                                        font.family: "DejaVu Sans Mono"
+                                        font.pointSize: Style.fontSizeMedium
                                         font.weight: Font.Bold
                                     }
 
@@ -607,6 +610,8 @@ WlSessionLock {
                 }
             }
         }
+
+
 
         // Enhanced power buttons with hover effects
         Row {

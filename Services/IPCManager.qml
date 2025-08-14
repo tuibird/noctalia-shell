@@ -1,6 +1,6 @@
 import QtQuick
 import Quickshell.Io
-import qs.Modules.Lockscreen
+import qs.Modules.LockScreen
 
 Item {
   id: root
@@ -49,8 +49,8 @@ Item {
     }
   }
 
-  // Lockscreen instance
-  Lockscreen {
-    id: lockScreen
+      // LockScreen instance
+    LockScreen {
+        id: lockScreen
   }
 }
