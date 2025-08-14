@@ -11,8 +11,6 @@ import qs.Modules.Lockscreen
 NPanel {
   id: powerMenu
   visible: false
-  
-
 
   // Anchors will be set by the parent component
   function show() {

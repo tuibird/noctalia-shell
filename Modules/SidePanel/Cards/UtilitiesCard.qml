@@ -31,7 +31,7 @@ NBox {
     NIconButton {
       icon: "image"
       onClicked: {
-        settingsPanel.requestedTab = settingsPanel.tabsIds.WALLPAPER_SELECTOR
+        settingsPanel.requestedTab = Settings.Tab.WallpaperSelector
         settingsPanel.isLoaded = true
       }
     }

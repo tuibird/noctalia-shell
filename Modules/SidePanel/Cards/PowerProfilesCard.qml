@@ -42,7 +42,7 @@ NBox {
       icon: "balance"
       enabled: hasPP
       opacity: enabled ? Style.opacityFull : Style.opacityMedium
-      showFilled:  enabled && powerProfiles.profile === PowerProfile.Balanced
+      showFilled: enabled && powerProfiles.profile === PowerProfile.Balanced
       showBorder: !enabled || powerProfiles.profile !== PowerProfile.Balanced
       onClicked: {
         if (enabled) {

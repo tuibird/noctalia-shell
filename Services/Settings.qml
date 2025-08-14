@@ -7,6 +7,21 @@ pragma Singleton
 Singleton {
   id: root
 
+  // Our tabs used in the UI, needs to be defined in a Singleton so they can be accessed anywhere
+  enum Tab {
+    General,
+    Bar,
+    TimeWeather,
+    ScreenRecorder,
+    Network,
+    Audio,
+    Display,
+    Wallpaper,
+    WallpaperSelector,
+    //Misc,
+    About
+  }
+
   // Define our app directories
   // Default config directory: ~/.config/noctalia
   // Default cache directory: ~/.cache/noctalia

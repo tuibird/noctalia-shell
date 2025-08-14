@@ -14,8 +14,6 @@ NBox {
 
   readonly property real scaling: Scaling.scale(screen)
   property string uptimeText: "--"
-  
-
 
   Layout.fillWidth: true
   // Height driven by content
@@ -61,7 +59,7 @@ NBox {
         icon: "settings"
         tooltipText: "Open settings"
         onClicked: {
-          settingsPanel.requestedTab = settingsPanel.tabsIds.GENERAL
+          settingsPanel.requestedTab = Settings.Tab.General
           settingsPanel.isLoaded = !settingsPanel.isLoaded
         }
       }

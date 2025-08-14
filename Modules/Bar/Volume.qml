@@ -52,7 +52,7 @@ Item {
       }
     }
     onClicked: {
-      settingsPanel.requestedTab = settingsPanel.tabsIds.AUDIO
+      settingsPanel.requestedTab = Settings.Tab.Audio
       settingsPanel.isLoaded = true
     }
   }

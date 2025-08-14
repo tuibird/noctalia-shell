@@ -4,7 +4,7 @@ import qs.Modules.Lockscreen
 
 Item {
   id: root
-  
+
   // Reference to the lockscreen component
   property var lockscreen: null
 

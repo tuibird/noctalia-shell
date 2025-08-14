@@ -10,25 +10,7 @@ import qs.Widgets
 NLoader {
   id: root
 
-  property var tabsIds: null
-  property var requestedTab: null
-
-  Component.onCompleted: {
-    // Fill up our ideads
-    tabsIds = Object.freeze({
-                              "GENERAL": 0,
-                              "BAR": 1,
-                              "TIME_WEATHER": 2,
-                              "SCREEN_RECORDER": 3,
-                              "NETWORK": 4,
-                              "AUDIO": 5,
-                              "DISPLAY": 6,
-                              "WALLPAPER": 7,
-                              "WALLPAPER_SELECTOR": 8,
-                              "MISC": 9,
-                              "ABOUT": 10
-                            })
-  }
+  property int requestedTab: Settings.Tab.General
 
   content: Component {
     NPanel {
@@ -74,62 +56,66 @@ NLoader {
       WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
 
       property var tabsModel: [{
-          "id": root.tabsIds.GENERAL,
+          "id": Settings.Tab.General,
           "label": "General",
           "icon": "tune",
           "source": "Tabs/General.qml"
         }, {
-          "id": root.tabsIds.BAR,
+          "id": Settings.Tab.Bar,
           "label": "Bar",
           "icon": "web_asset",
           "source": "Tabs/Bar.qml"
         }, {
-          "id": root.tabsIds.TIME_WEATHER,
+          "id": Settings.Tab.TimeWeather,
           "label": "Time & Weather",
           "icon": "schedule",
           "source": "Tabs/TimeWeather.qml"
         }, {
-          "id": root.tabsIds.SCREEN_RECORDER,
+          "id": Settings.Tab.ScreenRecorder,
           "label": "Screen Recorder",
           "icon": "videocam",
           "source": "Tabs/ScreenRecorder.qml"
         }, {
-          "id": root.tabsIds.NETWORK,
+          "id": Settings.Tab.Network,
           "label": "Network",
           "icon": "lan",
           "source": "Tabs/Network.qml"
         }, {
-          "id": root.tabsIds.AUDIO,
+          "id": Settings.Tab.Audio,
           "label": "Audio",
           "icon": "volume_up",
           "source": "Tabs/Audio.qml"
         }, {
-          "id": root.tabsIds.DISPLAY,
+          "id": Settings.Tab.Display,
           "label": "Display",
           "icon": "monitor",
           "source": "Tabs/Display.qml"
         }, {
-          "id": root.tabsIds.WALLPAPER,
+          "id": Settings.Tab.Wallpaper,
           "label": "Wallpaper",
           "icon": "image",
           "source": "Tabs/Wallpaper.qml"
         }, {
-          "id": root.tabsIds.WALLPAPER_SELECTOR,
+          "id": Settings.Tab.WallpaperSelector,
           "label": "Wallpaper Selector",
           "icon": "wallpaper_slideshow",
           "source": "Tabs/WallpaperSelector.qml"
         }, // {
-        //   "id": root.tabsIds.MISC,
+        //   "id": TabId.Misc,
         //   "label": "Misc",
         //   "icon": "more_horiz",
         //   "source": "Tabs/Misc.qml"
         // },
         {
-          "id": root.tabsIds.ABOUT,
+          "id": Settings.Tab.About,
           "label": "About",
           "icon": "info",
           "source": "Tabs/About.qml"
         }]
+
+      Component.onCompleted: {
+        show()
+      }
 
       // Combined visibility change handler
       onVisibleChanged: {
@@ -155,8 +141,6 @@ NLoader {
           hideTimer.start()
         }
       }
-
-      Component.onCompleted: show()
 
       Rectangle {
         id: bgRect
