@@ -540,7 +540,7 @@ WlSessionLock {
 
                   Text {
                     anchors.centerIn: parent
-                    text: lock.authenticating ? "EXECUTING..." : "EXECUTE"
+                    text: lock.authenticating ? "EXECUTING" : "EXECUTE"
                     color: executeButtonArea.containsMouse ? Colors.onAccent : Colors.accentPrimary
                     font.family: "DejaVu Sans Mono"
                     font.pointSize: Style.fontSizeMedium
