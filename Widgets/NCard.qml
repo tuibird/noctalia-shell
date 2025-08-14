@@ -1,7 +1,7 @@
 import QtQuick
 import qs.Services
 
-// Generic themed card container
+// Generic card container
 Rectangle {
   id: root
 

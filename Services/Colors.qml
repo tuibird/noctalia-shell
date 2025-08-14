@@ -8,11 +8,12 @@ import qs.Services
 // --------------------------------
 // Noctalia Colors - Material Design 3 
 // We only use a very small subset of all available m3 colors to avoid complexity
+// All color names start with a 'm' to avoid QML assuming some of them are signals (ex: onPrimary)
 
 Singleton {
   id: root
 
-  // --- Key Colors: These are the main accent colors that define your app's theme
+  // --- Key Colors: These are the main accent colors that define your app's style
   property color mPrimary: useCustom ? customColors.mPrimary : defaultColors.mPrimary
   property color mOnPrimary: useCustom ? customColors.mOnPrimary : defaultColors.mOnPrimary
   property color mSecondary: useCustom ? customColors.mSecondary : defaultColors.mSecondary
