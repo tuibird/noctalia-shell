@@ -18,7 +18,7 @@ Singleton {
   property var contributors: []
 
   FileView {
-    objectName: "githubDataFileView"
+    id: githubDataFileView
     path: githubDataFile
     watchChanges: true
     onFileChanged: reload()
@@ -80,12 +80,16 @@ Singleton {
   // --------------------------------
   function saveData() {
     data.timestamp = Time.timestamp
+    console.log("[GitHub] Saving data to cache file:", githubDataFile)
+    console.log("[GitHub] Data to save - version:", data.version, "contributors:", data.contributors.length)
+    
+    // Ensure cache directory exists
+    Quickshell.execDetached(["mkdir", "-p", Settings.cacheDir])
+    
     Qt.callLater(() => {
-                   // Access the FileView's writeAdapter method
-                   var fileView = root.children.find(child => child.objectName === "githubDataFileView")
-                   if (fileView) {
-                     fileView.writeAdapter()
-                   }
+                   // Use direct ID reference to the FileView
+                   githubDataFileView.writeAdapter()
+                   console.log("[GitHub] Cache file written successfully")
                  })
   }
 
@@ -140,8 +144,10 @@ Singleton {
       onStreamFinished: {
         try {
           const response = text
+          console.log("[GitHub] Raw contributors response length:", response ? response.length : 0)
           if (response && response.trim()) {
             const data = JSON.parse(response)
+            console.log("[GitHub] Parsed contributors data type:", typeof data, "length:", Array.isArray(data) ? data.length : "not array")
             root.data.contributors = data || []
             root.contributors = root.data.contributors
             console.log("[GitHub] Contributors fetched from GitHub:", root.contributors.length)

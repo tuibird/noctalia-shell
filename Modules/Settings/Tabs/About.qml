@@ -11,7 +11,7 @@ ColumnLayout {
   id: root
 
   property string latestVersion: GitHub.latestVersion
-  property string currentVersion: "v2.0.0" // Fallback version
+  property string currentVersion: "Unknown" // Fallback version
   property var contributors: GitHub.contributors
 
   spacing: 0
