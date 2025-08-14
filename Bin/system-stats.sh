@@ -113,7 +113,7 @@ get_cpu_temp() {
       if [[ -f "$dir/name" ]]; then
         local name
         name=$(<"$dir/name")
-        # Check for supported sensor types (matches Zig code).
+        # Check for supported sensor types.
         if [[ "$name" == "coretemp" || "$name" == "k10temp" ]]; then
           TEMP_SENSOR_PATH=$dir
           TEMP_SENSOR_TYPE=$name
@@ -131,15 +131,29 @@ get_cpu_temp() {
 
   # --- Get temp based on sensor type ---
   if [[ "$TEMP_SENSOR_TYPE" == "coretemp" ]]; then
-    # For Intel 'coretemp', average all core temperatures.
-    # find gets all temp inputs, cat reads them, and awk calculates the average.
-    # The value is in millidegrees Celsius, so we divide by 1000.
-    find "$TEMP_SENSOR_PATH" -type f -name 'temp*_input' -print0 | xargs -0 cat | awk '
-      { total += $1; count++ }
-      END {
-        if (count > 0) print int(total / count / 1000);
-        else print 0;
-      }'
+    # For Intel 'coretemp', average all available temperature sensors.
+    local total_temp=0
+    local sensor_count=0
+
+    # Use a for loop with a glob to iterate over all temp input files.
+    # This is more efficient than 'find' for this simple case.
+    for temp_file in "$TEMP_SENSOR_PATH"/temp*_input; do
+      # The glob returns the pattern itself if no files match,
+      # so we must check if the file actually exists.
+      if [[ -f "$temp_file" ]]; then
+        total_temp=$((total_temp + $(<"$temp_file")))
+        sensor_count=$((sensor_count + 1))
+      fi
+    done
+
+    if (( sensor_count > 0 )); then
+      # Use awk for the final division to handle potential floating point numbers
+      # and convert from millidegrees to integer degrees Celsius.
+      awk -v total="$total_temp" -v count="$sensor_count" 'BEGIN { print int(total / count / 1000) }'
+    else
+      # If no sensor files were found, return 0.
+      echo 0
+    fi
 
   elif [[ "$TEMP_SENSOR_TYPE" == "k10temp" ]]; then
     # For AMD 'k10temp', find the 'Tctl' sensor, which is the control temperature.
@@ -151,7 +165,7 @@ get_cpu_temp() {
         break
       fi
     done
-    
+
     if [[ -f "$tctl_input" ]]; then
       # Read the temperature and convert from millidegrees to degrees.
       echo "$(( $(<"$tctl_input") / 1000 ))"
@@ -162,7 +176,6 @@ get_cpu_temp() {
     echo 0 # Should not happen if cache logic is correct.
   fi
 }
-
 
 # --- Main Loop ---
 # This loop runs indefinitely, gathering and printing stats.
