@@ -172,7 +172,7 @@ NBox {
             anchors.fill: parent
             anchors.margins: Style.marginTiny * scaling
             imagePath: MediaPlayer.trackArtUrl
-            fallbackIcon: "image"
+            fallbackIcon: "music_note"
             borderColor: Colors.mOutline
             borderWidth: Math.max(1, Style.borderThin * scaling)
             imageRadius: width * 0.5

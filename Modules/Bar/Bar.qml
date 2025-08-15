@@ -52,13 +52,9 @@ Variants {
         anchors.verticalCenter: parent.verticalCenter
         spacing: Style.marginSmall * scaling
 
-        // Debug show monitor name
-        // NText {
-        //   text: screen.name
-        //   anchors.verticalCenter: parent.verticalCenter
-        //   font.weight: Style.fontWeightBold
-        // }
         SystemMonitor {}
+
+        MediaMini {}
       }
 
       // Center
