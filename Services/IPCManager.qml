@@ -48,4 +48,16 @@ Item {
       lockScreen.locked = !lockScreen.locked
     }
   }
+
+  IpcHandler {
+    target: "brightness"
+
+    function increase() {
+      BrightnessService.increaseBrightness()
+    }
+
+    function decrease() {
+      BrightnessService.decreaseBrightness()
+    }
+  }
 }

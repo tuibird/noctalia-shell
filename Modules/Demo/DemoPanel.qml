@@ -294,7 +294,7 @@ NLoader {
                   icon: "brightness_low"
                   fontPointSize: Style.fontSizeLarge * scaling
                   onClicked: {
-                    Brightness.decreaseBrightness(1)
+                    Brightness.decreaseBrightness()
                   }
                 }
                 NSlider {
@@ -311,7 +311,7 @@ NLoader {
                   icon: "brightness_high"
                   fontPointSize: Style.fontSizeLarge * scaling
                   onClicked: {
-                    Brightness.increaseBrightness(1)
+                    Brightness.increaseBrightness()
                   }
                 }
               }

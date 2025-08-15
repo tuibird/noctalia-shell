@@ -12,6 +12,7 @@ Item {
 
   // Used to avoid opening the pill on Quickshell startup
   property bool firstBrightnessReceived: false
+  property real lastBrightness: -1
 
   function getIcon() {
     if (!BrightnessService.available) {
@@ -25,17 +26,27 @@ Item {
 
   // Connection used to open the pill when brightness changes
   Connections {
-    target: Brightness
+    target: BrightnessService.focusedMonitor
     function onBrightnessUpdated() {
-      // console.log("[Bar:Brightness] onBrightnessUpdated")
+      var currentBrightness = BrightnessService.brightness
+      
+      // Ignore if this is the first time or if brightness hasn't actually changed
       if (!firstBrightnessReceived) {
-        // Ignore the first brightness change
         firstBrightnessReceived = true
-      } else {
+        lastBrightness = currentBrightness
+        return
+      }
+      
+      // Only show pill if brightness actually changed (not just loaded from settings)
+      if (Math.abs(currentBrightness - lastBrightness) > 0.1) {
         pill.show()
       }
+      
+      lastBrightness = currentBrightness
     }
   }
+
+
 
   NPill {
     id: pill
@@ -44,15 +55,15 @@ Item {
     collapsedIconColor: Colors.mOnSurface
     autoHide: true
     text: Math.round(BrightnessService.brightness) + "%"
-    tooltipText: "Brightness: " + Math.round(BrightnessService.brightness) + "%\nMethod: " + BrightnessService.currentMethod + "\nLeft click for advanced settings.\nScroll up/down to change BrightnessService."
+    tooltipText: "Brightness: " + Math.round(BrightnessService.brightness) + "%\nMethod: " + BrightnessService.currentMethod + "\nLeft click for advanced settings.\nScroll up/down to change brightness."
 
     onWheel: function (angle) {
       if (!BrightnessService.available) return
       
       if (angle > 0) {
-        BrightnessService.increaseBrightness(1)
+        BrightnessService.increaseBrightness()
       } else if (angle < 0) {
-        BrightnessService.decreaseBrightness(1)
+        BrightnessService.decreaseBrightness()
       }
     }
     onClicked: {
