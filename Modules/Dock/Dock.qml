@@ -30,6 +30,7 @@ NLoader {
         property int showAnimationDuration: 150
         property int peekHeight: 2
         property int fullHeight: dockContainer.height
+        property int iconSize: 48
 
         // Track hover state
         property bool dockHovered: false
@@ -44,19 +45,24 @@ NLoader {
         visible: modelData ? Settings.data.dock.monitors.includes(modelData.name) : false
 
         exclusionMode: ExclusionMode.Ignore
+
         anchors.bottom: true
         anchors.left: true
         anchors.right: true
         focusable: false
         color: "transparent"
-        implicitHeight: 60
+        implicitHeight: iconSize * 1.5 * scaling
 
         // Timer for auto-hide delay
         Timer {
           id: hideTimer
           interval: hideDelay
-          onTriggered: if (autoHide && !dockHovered && !anyAppHovered)
-                         hidden = true
+          onTriggered: {
+            if (autoHide && !dockHovered && !anyAppHovered) {
+              hidden = true
+            }
+          }
+                         
         }
 
         // Timer for show delay
@@ -80,7 +86,7 @@ NLoader {
           anchors.left: parent.left
           anchors.right: parent.right
           anchors.bottom: parent.bottom
-          height: 10
+          height: 10 * scaling
           hoverEnabled: true
           propagateComposedEvents: true
 
@@ -104,13 +110,13 @@ NLoader {
 
         Rectangle {
           id: dockContainer
-          width: dock.width + 40
-          height: 50
-          color: Colors.mSurface
+          width: dock.width + 48 * scaling
+          height: iconSize * 1.5 * scaling
+          color: Colors.mSurfaceVariant
           anchors.horizontalCenter: parent.horizontalCenter
           anchors.bottom: parent.bottom
-          topLeftRadius: 20
-          topRightRadius: 20
+          topLeftRadius: Style.radiusLarge * scaling
+          topRightRadius: Style.radiusLarge * scaling
 
           MouseArea {
             id: dockMouseArea
@@ -136,7 +142,7 @@ NLoader {
           Item {
             id: dock
             width: runningAppsRow.width
-            height: parent.height - 10
+            height: parent.height - (20 * scaling)
             anchors.centerIn: parent
 
             NTooltip {
@@ -160,7 +166,7 @@ NLoader {
 
             Row {
               id: runningAppsRow
-              spacing: 8
+              spacing: Style.marginLarge * scaling
               height: parent.height
               anchors.centerIn: parent
 
@@ -169,9 +175,8 @@ NLoader {
 
                 delegate: Rectangle {
                   id: appButton
-                  width: 36
-                  height: 36
-                  radius: 18
+                  width: iconSize * scaling
+                  height: iconSize * scaling
                   color: "transparent"
 
                   property bool isActive: ToplevelManager.activeToplevel && ToplevelManager.activeToplevel === modelData
@@ -179,32 +184,28 @@ NLoader {
                   property string appId: modelData ? modelData.appId : ""
                   property string appTitle: modelData ? modelData.title : ""
 
-                  Behavior on color {
-                    ColorAnimation {
-                      duration: 150
-                    }
-                  }
-
+                  // The icon
                   Image {
                     id: appIcon
-                    width: 28
-                    height: 28
+                    width: iconSize * scaling
+                    height:  iconSize * scaling
                     anchors.centerIn: parent
                     source: dock.getAppIcon(modelData)
                     visible: source.toString() !== ""
-                    smooth: false
+                    smooth: true
                     mipmap: false
                     antialiasing: false
                     fillMode: Image.PreserveAspectFit
                   }
 
-                  Text {
+                  // Fall back if no icon
+                  NText {
                     anchors.centerIn: parent
                     visible: !appIcon.visible
-                    text: appButton.appId ? appButton.appId.charAt(0).toUpperCase() : "?"
-                    font.pixelSize: 14
-                    font.bold: true
-                    color: appButton.isActive ? Colors.mPrimary : Colors.mOnSurface
+                    text: "question_mark"
+                    font.family: "Material Symbols Rounded"
+                    font.pointSize: iconSize * 0.7 * scaling
+                    color: appButton.isActive ? Colors.mPrimary : Colors.mOnSurfaceVariant
                   }
 
                   MouseArea {
@@ -252,13 +253,13 @@ NLoader {
 
                   Rectangle {
                     visible: isActive
-                    width: 20
-                    height: 3
+                    width: iconSize * 0.75
+                    height: 4 * scaling
                     color: Colors.mPrimary
-                    radius: 1.5
-                    anchors.bottom: parent.bottom
+                    radius: Style.radiusTiny
+                    anchors.top: parent.bottom
                     anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.bottomMargin: 2
+                    anchors.topMargin: 2* scaling
                   }
                 }
               }
