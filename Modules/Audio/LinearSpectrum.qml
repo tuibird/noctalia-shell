@@ -21,7 +21,7 @@ Item {
       antialiasing: true
 
       width: xScale * 0.5
-      height: root.height * amp
+      height: Math.max(1, root.height * amp)
       x: index * xScale
       y: root.height - height
     }
@@ -38,7 +38,7 @@ Item {
       antialiasing: true
 
       width: xScale * 0.5
-      height: root.height * amp
+      height: Math.max(1, root.height * amp)
       x: (values.length + index) * xScale
       y: root.height - height
     }
