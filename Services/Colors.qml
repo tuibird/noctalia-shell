@@ -45,16 +45,16 @@ Singleton {
     id: defaultColors
 
     property color mPrimary: "#ebbcba"
-    property color mOnPrimary: "#191724"
+    property color mOnPrimary: "#1f1d2e"
     property color mSecondary: "#31748f"
     property color mOnSecondary: "#e0def4"
     property color mTertiary: "#9ccfd8"
     property color mOnTertiary: "#191724"
 
     property color mError: "#eb6f92"
-    property color mOnError: "#191724"
+    property color mOnError: "#1f1d2e"
 
-    property color mSurface: "#191724"
+    property color mSurface: "#1f1d2e"
     property color mOnSurface: "#e0def4"
     property color mSurfaceVariant: "#26233a"
     property color mOnSurfaceVariant: "#908caa"

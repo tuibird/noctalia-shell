@@ -45,26 +45,31 @@ ColumnLayout {
           }
         }
 
-        ButtonGroup {
-          id: schemesGroup
-        }
+        ColumnLayout {
+          spacing: Style.marginTiny * scaling
+          Layout.fillWidth: true
 
-        Repeater {
-          model: ColorSchemes.schemes
-          NRadioButton {
-            property string schemePath: modelData
-            ButtonGroup.group: schemesGroup
-            text: {
-              // Remove json and the full path
-              var chunks = schemePath.replace(".json", "").split("/")
-              return chunks[chunks.length - 1]
-            }
-            checked: Settings.data.colorSchemes.predefinedScheme == schemePath
-            onClicked: {
-              // Disable useWallpaperColors when picking a predefined color scheme
-              Settings.data.colorSchemes.useWallpaperColors = false
-              Settings.data.colorSchemes.predefinedScheme = schemePath
-              ColorSchemes.applyScheme(schemePath)
+          ButtonGroup {
+            id: schemesGroup
+          }
+
+          Repeater {
+            model: ColorSchemes.schemes
+            NRadioButton {
+              property string schemePath: modelData
+              ButtonGroup.group: schemesGroup
+              text: {
+                // Remove json and the full path
+                var chunks = schemePath.replace(".json", "").split("/")
+                return chunks[chunks.length - 1]
+              }
+              checked: Settings.data.colorSchemes.predefinedScheme == schemePath
+              onClicked: {
+                // Disable useWallpaperColors when picking a predefined color scheme
+                Settings.data.colorSchemes.useWallpaperColors = false
+                Settings.data.colorSchemes.predefinedScheme = schemePath
+                ColorSchemes.applyScheme(schemePath)
+              }
             }
           }
         }
