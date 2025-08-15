@@ -257,7 +257,6 @@ ColumnLayout {
                 name: "AAC"
               }
             }
-
             currentKey: Settings.data.screenRecorder.audioCodec
             onSelected: function (key) {
               Settings.data.screenRecorder.audioCodec = key

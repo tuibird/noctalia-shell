@@ -39,7 +39,6 @@ NLoader {
         // Start hide animation
         bgRect.scaleValue = 0.8
         bgRect.opacityValue = 0.0
-
         // Hide after animation completes
         hideTimer.start()
       }
@@ -48,12 +47,7 @@ NLoader {
       Connections {
         target: panel
         function onDismissed() {
-          // Start hide animation
-          bgRect.scaleValue = 0.8
-          bgRect.opacityValue = 0.0
-
-          // Hide after animation completes
-          hideTimer.start()
+          hide()
         }
       }
 
@@ -70,79 +64,126 @@ NLoader {
 
       WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
 
-      // Order is NOT relevant, and should match the Tabs.xxxx {} in the StackLayout
+      Component {
+        id: generalTab
+        Tabs.GeneralTab {}
+      }
+      Component {
+        id: barTab
+        Tabs.BarTab {}
+      }
+      Component {
+        id: audioTab
+        Tabs.AudioTab {}
+      }
+      Component {
+        id: displayTab
+        Tabs.DisplayTab {}
+      }
+      Component {
+        id: networkTab
+        Tabs.NetworkTab {}
+      }
+      Component {
+        id: timeWeatherTab
+        Tabs.TimeWeatherTab {}
+      }
+      Component {
+        id: colorSchemeTab
+        Tabs.ColorSchemeTab {}
+      }
+      Component {
+        id: wallpaperTab
+        Tabs.WallpaperTab {}
+      }
+      Component {
+        id: wallpaperSelectorTab
+        Tabs.WallpaperSelectorTab {}
+      }
+      Component {
+        id: screenRecorderTab
+        Tabs.ScreenRecorderTab {}
+      }
+      Component {
+        id: aboutTab
+        Tabs.AboutTab {}
+      }
+
       property var tabsModel: [{
           "id": SettingsPanel.Tab.General,
           "label": "General",
-          "icon": "tune"
+          "icon": "tune",
+          "source": generalTab
         }, {
           "id": SettingsPanel.Tab.Bar,
           "label": "Bar",
-          "icon": "web_asset"
+          "icon": "web_asset",
+          "source": barTab
         }, {
           "id": SettingsPanel.Tab.Audio,
           "label": "Audio",
-          "icon": "volume_up"
+          "icon": "volume_up",
+          "source": audioTab
         }, {
           "id": SettingsPanel.Tab.Display,
           "label": "Display",
-          "icon": "monitor"
+          "icon": "monitor",
+          "source": displayTab
         }, {
           "id": SettingsPanel.Tab.Network,
           "label": "Network",
-          "icon": "lan"
+          "icon": "lan",
+          "source": networkTab
         }, {
           "id": SettingsPanel.Tab.TimeWeather,
           "label": "Time & Weather",
-          "icon": "schedule"
+          "icon": "schedule",
+          "source": timeWeatherTab
         }, {
           "id": SettingsPanel.Tab.ColorScheme,
           "label": "Color Scheme",
-          "icon": "palette"
+          "icon": "palette",
+          "source": colorSchemeTab
         }, {
           "id": SettingsPanel.Tab.Wallpaper,
           "label": "Wallpaper",
-          "icon": "image"
+          "icon": "image",
+          "source": wallpaperTab
         }, {
           "id": SettingsPanel.Tab.WallpaperSelector,
           "label": "Wallpaper Selector",
-          "icon": "wallpaper_slideshow"
+          "icon": "wallpaper_slideshow",
+          "source": wallpaperSelectorTab
         }, {
           "id": SettingsPanel.Tab.ScreenRecorder,
           "label": "Screen Recorder",
-          "icon": "videocam"
+          "icon": "videocam",
+          "source": screenRecorderTab
         }, {
           "id": SettingsPanel.Tab.About,
           "label": "About",
-          "icon": "info"
+          "icon": "info",
+          "source": aboutTab
         }]
 
       Component.onCompleted: {
+        var initialIndex = 0
+        if (root.requestedTab !== null) {
+          for (var i = 0; i < panel.tabsModel.length; i++) {
+            if (panel.tabsModel[i].id === root.requestedTab) {
+              initialIndex = i
+              break
+            }
+          }
+        }
+        // Now that the UI is settled, set the current tab index.
+        panel.currentTabIndex = initialIndex
         show()
       }
 
-      // Combined visibility change handler
       onVisibleChanged: {
-        if (visible) {
-          // Default to first tab
-          currentTabIndex = 0
-
-          // Find the request tab if necessary
-          if (requestedTab != null) {
-            for (var i = 0; i < tabsModel.length; i++) {
-              if (tabsModel[i].id == requestedTab) {
-                currentTabIndex = i
-                break
-              }
-            }
-          }
-        } else if (bgRect.opacityValue > 0) {
-          // Start hide animation
-          bgRect.scaleValue = 0.8
-          bgRect.opacityValue = 0.0
-
-          // Hide after animation completes
-          hideTimer.start()
+        if (!visible && (bgRect.opacityValue > 0)) {
+          hide()
         }
       }
 
@@ -174,14 +215,12 @@ NLoader {
           anchors.fill: parent
         }
 
-        // Animation behaviors
         Behavior on scale {
           NumberAnimation {
             duration: Style.animationSlow
             easing.type: Easing.OutExpo
           }
         }
-
         Behavior on opacity {
           NumberAnimation {
             duration: Style.animationNormal
@@ -194,7 +233,6 @@ NLoader {
           anchors.margins: Style.marginLarge * scaling
           spacing: Style.marginLarge * scaling
 
-          // Sidebar with tighter spacing
           Rectangle {
             id: sidebar
             Layout.preferredWidth: 260 * scaling
@@ -207,29 +245,20 @@ NLoader {
             Column {
               anchors.fill: parent
               anchors.margins: Style.marginSmall * scaling
-              spacing: Style.marginTiny * 1.5 * scaling // Minimal spacing between tabs
+              spacing: Style.marginTiny * 1.5 * scaling
 
               Repeater {
                 id: sections
                 model: panel.tabsModel
-
                 delegate: Rectangle {
                   id: tabItem
-
                   width: parent.width
-                  height: 32 * scaling // Back to original height
+                  height: 32 * scaling
                   radius: Style.radiusSmall * scaling
                   color: selected ? Colors.mPrimary : (tabItem.hovering ? Colors.mTertiary : "transparent")
-                  border.color: "transparent"
-                  border.width: 0
-
                   readonly property bool selected: index === currentTabIndex
-
-                  // Subtle hover effect: only icon/text color tint on hover
                   property bool hovering: false
-
                   property color tabTextColor: selected ? Colors.mOnPrimary : (tabItem.hovering ? Colors.mOnTertiary : Colors.mOnSurface)
-
                   RowLayout {
                     anchors.fill: parent
                     anchors.leftMargin: Style.marginSmall * scaling
@@ -290,7 +319,7 @@ NLoader {
                 Layout.fillWidth: true
                 spacing: Style.marginSmall * scaling
 
-                // Tab label on the main right
+                // Tab label on the main right side
                 NText {
                   text: panel.tabsModel[currentTabIndex].label
                   font.pointSize: Style.fontSizeLarge * scaling
@@ -302,9 +331,7 @@ NLoader {
                   icon: "close"
                   tooltipText: "Close"
                   Layout.alignment: Qt.AlignVCenter
-                  onClicked: {
-                    panel.hide()
-                  }
+                  onClicked: panel.hide()
                 }
               }
 
@@ -312,23 +339,26 @@ NLoader {
                 Layout.fillWidth: true
               }
 
-              StackLayout {
-                id: stack
+              Item {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                currentIndex: currentTabIndex
+                clip: true
 
-                Tabs.GeneralTab {}
-                Tabs.BarTab {}
-                Tabs.AudioTab {}
-                Tabs.DisplayTab {}
-                Tabs.NetworkTab {}
-                Tabs.TimeWeatherTab {}
-                Tabs.ColorSchemeTab {}
-                Tabs.WallpaperTab {}
-                Tabs.WallpaperSelectorTab {}
-                Tabs.ScreenRecorderTab {}
-                Tabs.AboutTab {}
+                Repeater {
+                  model: panel.tabsModel
+
+                  onItemAdded: function (index, item) {
+                    item.sourceComponent = panel.tabsModel[index].source
+                  }
+
+                  delegate: Loader {
+                    // All loaders will occupy the same space, stacked on top of each other.
+                    anchors.fill: parent
+                    visible: index === panel.currentTabIndex
+                    // The loader is only active (and uses memory) when its page is visible.
+                    active: visible
+                  }
+                }
               }
             }
           }
