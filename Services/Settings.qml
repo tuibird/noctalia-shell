@@ -37,11 +37,6 @@ Singleton {
   }
 
   FileView {
-
-    // TBC ? needed for SWWW only ?
-    // Qt.callLater(function () {
-    //     WallpaperManager.setCurrentWallpaper(settings.currentWallpaper, true);
-    // })
     path: settingsFile
     watchChanges: true
     onFileChanged: reload()
@@ -50,6 +45,7 @@ Singleton {
       reload()
     }
     onLoaded: function () {
+      console.log("[Settings] loaded")
       Qt.callLater(function () {
         if (adapter.wallpaper.current !== "") {
           console.log("[Settings] Set current wallpaper")

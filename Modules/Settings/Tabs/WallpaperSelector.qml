@@ -106,22 +106,14 @@ Item {
         Item {
           Layout.fillWidth: true
           Layout.preferredHeight: {
-            return Math.ceil(folderModel.count / wallpaperGridView.columns) * wallpaperGridView.cellHeight
-          }
-
-          FolderListModel {
-            id: folderModel
-            folder: "file://" + (Settings.data.wallpaper.directory !== undefined ? Settings.data.wallpaper.directory : "")
-            nameFilters: ["*.jpg", "*.jpeg", "*.png", "*.gif", "*.pnm", "*.bmp"]
-            showDirs: false
-            sortField: FolderListModel.Name
+            return Math.ceil(Wallpapers.wallpaperList.length / wallpaperGridView.columns) * wallpaperGridView.cellHeight
           }
 
           GridView {
             id: wallpaperGridView
             anchors.fill: parent
             clip: true
-            model: folderModel
+            model: Wallpapers.wallpaperList
 
             boundsBehavior: Flickable.StopAtBounds
             flickableDirection: Flickable.AutoFlickDirection
@@ -141,7 +133,7 @@ Item {
 
             delegate: Rectangle {
               id: wallpaperItem
-              property string wallpaperPath: Settings.data.wallpaper.directory + "/" + fileName
+              property string wallpaperPath: modelData
               property bool isSelected: wallpaperPath === Wallpapers.currentWallpaper
 
               width: wallpaperGridView.itemSize
@@ -217,7 +209,7 @@ Item {
             radius: Style.radiusMedium * scaling
             border.color: Colors.mOutline
             border.width: Math.max(1, Style.borderThin * scaling)
-            visible: folderModel.count === 0 && !Wallpapers.scanning
+            visible: Wallpapers.wallpaperList.length === 0 && !Wallpapers.scanning
 
             ColumnLayout {
               anchors.centerIn: parent

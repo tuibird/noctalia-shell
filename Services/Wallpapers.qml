@@ -8,17 +8,12 @@ import Quickshell.Io
 Singleton {
   id: root
 
-  Item {
-    Component.onCompleted: {
-      loadWallpapers()
-      // Only set initial wallpaper if it's not empty
-      if (currentWallpaper !== "") {
-        console.log("[WP] initializing with:", currentWallpaper)
-        setCurrentWallpaper(currentWallpaper, true)
-      }
-      // Don't start random wallpaper during initialization
-      // toggleRandomWallpaper()
-    }
+  Component.onCompleted: {
+    console.log("[WP] Service initialized")
+    loadWallpapers()
+
+    // Wallpaper is set when the settings are loaded.
+    // Don't start random wallpaper during initialization
   }
 
   property var wallpaperList: []
@@ -28,8 +23,11 @@ Singleton {
   property var randomChoices: ["simple", "fade", "left", "right", "top", "bottom", "wipe", "wave", "grow", "center", "any", "outer"]
 
   function loadWallpapers() {
+    console.log("[WP] Load Wallpapers")
     scanning = true
     wallpaperList = []
+    // Unsetting, then setting the folder will re-trigger the parsing!
+    folderModel.folder = "";
     folderModel.folder = "file://" + (Settings.data.wallpaper.directory !== undefined ? Settings.data.wallpaper.directory : "")
   }
 
@@ -128,6 +126,7 @@ Singleton {
         }
         wallpaperList = files
         scanning = false
+        console.log("[WP] List refreshed, count:",  wallpaperList.length)
       }
     }
   }
