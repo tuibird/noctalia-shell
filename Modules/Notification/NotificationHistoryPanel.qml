@@ -65,9 +65,9 @@ NLoader {
 
       Rectangle {
         id: notificationRect
-        color: Colors.mSurface
+        color: Colors.mSurfaceVariant
         radius: Style.radiusMedium * scaling
-        border.color: Colors.mSurfaceVariant
+        border.color: Colors.mOutlineVariant
         border.width: Math.max(1, Style.borderMedium * scaling)
         width: 400 * scaling
         height: 500 * scaling
@@ -159,7 +159,7 @@ NLoader {
               width: notificationList ? (notificationList.width - 20) : 380 * scaling
               height: Math.max(80, notificationContent.height + 30)
               radius: Style.radiusMedium * scaling
-              color: notificationMouseArea.containsMouse ? Colors.mPrimary : "transparent"
+              color: notificationMouseArea.containsMouse ? Colors.mPrimary : Colors.mSurface
 
               RowLayout {
                 anchors {

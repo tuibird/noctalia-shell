@@ -265,7 +265,7 @@ NBox {
           height: 16 * scaling
           radius: width * 0.5
           color: Colors.mPrimary
-          border.color: Colors.mSurface
+          border.color: Colors.mOutline
           border.width: Math.max(1 * Style.borderMedium * scaling)
           x: Math.max(0, Math.min(parent.width - width, progressFill.width - width / 2))
           anchors.verticalCenter: parent.verticalCenter

@@ -87,7 +87,7 @@ NLoader {
         id: wifiMenuRect
         color: Colors.mSurface
         radius: Style.radiusMedium * scaling
-        border.color: Colors.mSurfaceVariant
+        border.color: Colors.mOutline
         border.width: Math.max(1, Style.borderMedium * scaling)
         width: 340 * scaling
         height: 320 * scaling
