@@ -51,7 +51,7 @@ PanelWindow {
 
   Behavior on color {
     ColorAnimation {
-      duration: Style.animationNormal
+      duration: Style.animationSlow
       easing.type: Easing.InOutCubic
     }
   }
