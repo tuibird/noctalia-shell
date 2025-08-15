@@ -27,78 +27,7 @@ ColumnLayout {
   // Cache for scheme colors
   property var schemeColorsCache: ({})
 
-  // Array to hold FileView objects
-  property var fileViews: []
-
-  // Load color scheme data when schemes are available
-  Connections {
-    target: ColorSchemes
-    function onSchemesChanged() {
-      loadSchemeColors()
-    }
-  }
-
-  function loadSchemeColors() {
-    // Clear existing cache
-    schemeColorsCache = {}
-
-    // Destroy existing FileViews
-    for (var i = 0; i < fileViews.length; i++) {
-      if (fileViews[i]) {
-        fileViews[i].destroy()
-      }
-    }
-    fileViews = []
-
-    // Create FileViews for each scheme
-    for (var i = 0; i < ColorSchemes.schemes.length; i++) {
-      var schemePath = ColorSchemes.schemes[i]
-      var schemeName = schemePath.split("/").pop().replace(".json", "")
-
-      // Create FileView component
-      var component = Qt.createComponent("SchemeFileView.qml")
-      if (component.status === Component.Ready) {
-        var fileView = component.createObject(root, {
-                                                "path": schemePath,
-                                                "schemeName": schemeName
-                                              })
-        fileViews.push(fileView)
-      } else {
-        // Fallback: create inline FileView
-        createInlineFileView(schemePath, schemeName)
-      }
-    }
-  }
-
-  function createInlineFileView(schemePath, schemeName) {
-    var fileViewQml = `
-    import QtQuick
-    import Quickshell.Io
-
-    FileView {
-    property string schemeName: "${schemeName}"
-    path: "${schemePath}"
-    blockLoading: true
-
-    onLoaded: {
-    try {
-    var jsonData = JSON.parse(text())
-    root.schemeLoaded(schemeName, jsonData)
-    } catch (e) {
-    console.warn("Failed to parse JSON for scheme:", schemeName, e)
-    }
-    }
-    }
-    `
-
-    try {
-      var fileView = Qt.createQmlObject(fileViewQml, root, "dynamicFileView_" + schemeName)
-      fileViews.push(fileView)
-    } catch (e) {
-      console.warn("Failed to create FileView for scheme:", schemeName, e)
-    }
-  }
-
+  // This function is called by the FileView Repeater when a scheme file is loaded
   function schemeLoaded(schemeName, jsonData) {
     console.log("Loading scheme colors for:", schemeName)
 
@@ -114,7 +43,7 @@ ColumnLayout {
       colors.mOnSurface = jsonData.mOnSurface || jsonData.onSurface || "#000000"
       colors.mOutline = jsonData.mOutline || jsonData.outline || "#666666"
     } else {
-      // Default colors
+      // Default colors on failure
       colors = {
         "mPrimary": "#000000",
         "mSecondary": "#000000",
@@ -126,14 +55,50 @@ ColumnLayout {
       }
     }
 
-    // Update cache
+    // Update the cache. This must be done by re-assigning the whole object to trigger updates.
     var newCache = schemeColorsCache
     newCache[schemeName] = colors
     schemeColorsCache = newCache
-
-    console.log("Cached colors for", schemeName, ":", JSON.stringify(colors))
   }
 
+  // When the list of available schemes changes, clear the cache.
+  // The Repeater below will automatically re-create the FileViews.
+  Connections {
+    target: ColorSchemes
+    function onSchemesChanged() {
+      schemeColorsCache = {}
+    }
+  }
+
+  // A non-visual Item to host the Repeater that loads the color scheme files.
+  Item {
+    visible: false
+    id: fileLoaders
+
+    Repeater {
+      model: ColorSchemes.schemes
+
+      // The delegate is a Component, which correctly wraps the non-visual FileView
+      delegate: Item {
+        FileView {
+          path: modelData
+          blockLoading: true
+          onLoaded: {
+            var schemeName = path.split("/").pop().replace(".json", "")
+            try {
+              var jsonData = JSON.parse(text())
+              root.schemeLoaded(schemeName, jsonData)
+            } catch (e) {
+              console.warn("Failed to parse JSON for scheme:", schemeName, e)
+              root.schemeLoaded(schemeName, null) // Load defaults on parse error
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // UI Code
   ScrollView {
     id: scrollView
 
@@ -212,11 +177,13 @@ ColumnLayout {
             Repeater {
               model: ColorSchemes.schemes
 
-              property real cardScaleLow: 0.95
-              property real cardScaleHigh: 1.00
-
               Rectangle {
                 id: schemeCard
+
+                property real cardScaleLow: 0.95
+                property real cardScaleHigh: 1.00
+                property string schemePath: modelData
+
                 Layout.fillWidth: true
                 Layout.preferredHeight: 120 * scaling
                 radius: Style.radiusMedium * scaling
@@ -224,8 +191,6 @@ ColumnLayout {
                 border.width: Math.max(1, Style.borderThick * scaling)
                 border.color: Settings.data.colorSchemes.predefinedScheme === modelData ? Colors.mPrimary : Colors.mOutline
                 scale: cardScaleLow
-
-                property string schemePath: modelData
 
                 // Mouse area for selection
                 MouseArea {
@@ -240,7 +205,7 @@ ColumnLayout {
                   cursorShape: Qt.PointingHandCursor
 
                   onEntered: {
-                    schemeCard.scale = cardScaleHight
+                    schemeCard.scale = cardScaleHigh
                   }
 
                   onExited: {
@@ -263,7 +228,7 @@ ColumnLayout {
                     }
                     font.pointSize: Style.fontSizeMedium * scaling
                     font.weight: Style.fontWeightBold
-                    color: Colors.mOnSurface
+                    color: getSchemeColor(modelData, "mOnSurface")
                     Layout.fillWidth: true
                     elide: Text.ElideRight
                     horizontalAlignment: Text.AlignHCenter
@@ -287,7 +252,7 @@ ColumnLayout {
                     Rectangle {
                       width: 28 * scaling
                       height: 28 * scaling
-                      radius: 14 * scaling
+                      radius: width * 0.5
                       color: getSchemeColor(modelData, "mSecondary")
                     }
 
