@@ -120,8 +120,7 @@ Singleton {
       if (status === FolderListModel.Ready) {
         var files = []
         for (var i = 0; i < count; i++) {
-          var filepath = (Settings.data.wallpaper.directory !== undefined ? Settings.data.wallpaper.directory : "") + "/" + get(
-            i, "fileName")
+          var filepath = folderModel.folder + "/" + get(i, "fileName")
           files.push(filepath)
         }
         wallpaperList = files

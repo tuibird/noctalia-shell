@@ -14,8 +14,6 @@ Singleton {
   }
 
   property var schemes: []
-  property string baseDirectory: "file://" + Quickshell.shellDir + "/Assets/ColorSchemes"
-  // //property string currentScheme: Settings.data.wallpaper.current
   property bool scanning: false
 
   function loadColorSchemes() {
@@ -24,7 +22,7 @@ Singleton {
     schemes = []
     // Unsetting, then setting the folder will re-trigger the parsing!
     folderModel.folder = ""
-    folderModel.folder = baseDirectory
+    folderModel.folder = "file://" + Quickshell.shellDir + "/Assets/ColorSchemes"
   }
 
   FolderListModel {
@@ -36,7 +34,7 @@ Singleton {
       if (status === FolderListModel.Ready) {
         var files = []
         for (var i = 0; i < count; i++) {
-          var filepath = baseDirectory + "/" + get(i, "fileName")
+          var filepath = folderModel.folder + "/" + get(i, "fileName")
           files.push(filepath)
         }
         schemes = files
