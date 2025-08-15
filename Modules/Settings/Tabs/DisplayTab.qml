@@ -77,8 +77,10 @@ Item {
               to: 50
               value: Settings.data.brightness.brightnessStep
               stepSize: 1
-              onMoved: {
-                Settings.data.brightness.brightnessStep = value
+              onPressedChanged: {
+                if (!pressed) {
+                  Settings.data.brightness.brightnessStep = value
+                }
               }
             }
 

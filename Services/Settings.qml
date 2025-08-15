@@ -24,6 +24,9 @@ Singleton {
 
   // Used to access via Settings.data.xxx.yyy
   property var data: adapter
+  
+  // Flag to prevent unnecessary wallpaper calls during reloads
+  property bool isInitialLoad: true
 
   // Needed to only have one NPanel loaded at a time. <--- VERY BROKEN
   //property var openPanel: null
@@ -47,10 +50,12 @@ Singleton {
     onLoaded: function () {
       console.log("[Settings] Loaded")
       Qt.callLater(function () {
-        if (adapter.wallpaper.current !== "") {
+        // Only set wallpaper on initial load, not on reloads
+        if (isInitialLoad && adapter.wallpaper.current !== "") {
           console.log("[Settings] Set current wallpaper", adapter.wallpaper.current)
           Wallpapers.setCurrentWallpaper(adapter.wallpaper.current, true)
         }
+        isInitialLoad = false
       })
     }
     onLoadFailed: function (error) {

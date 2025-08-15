@@ -204,6 +204,8 @@ Singleton {
       }
     }
 
+
+
         function getStoredBrightness(): real {
       // Try to get stored brightness for this specific monitor
       var stored = Settings.data.brightness.monitorBrightness.find(m => m.name === modelData.name)
@@ -282,6 +284,8 @@ Singleton {
        }
       initProc.running = true
     }
+
+
 
     onBusNumChanged: initBrightness()
     Component.onCompleted: initBrightness()
