@@ -41,7 +41,9 @@ NLoader {
 
       // Also handle visibility changes from external sources
       onVisibleChanged: {
-        if (!visible && wifiMenuRect.opacityValue > 0) {
+        if (visible && Settings.data.network.wifiEnabled) {
+          network.refreshNetworks()
+        } else if (wifiMenuRect.opacityValue > 0) {
           // Start hide animation
           wifiMenuRect.scaleValue = 0.8
           wifiMenuRect.opacityValue = 0.0
@@ -64,6 +66,22 @@ NLoader {
       }
 
       WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
+
+      Network {
+        id: network
+      }
+
+      // Timer to refresh networks when WiFi is enabled while menu is open
+      Timer {
+        id: wifiEnableRefreshTimer
+        interval: 3000 // Wait 3 seconds for WiFi to be fully ready
+        repeat: false
+        onTriggered: {
+          if (Settings.data.network.wifiEnabled && wifiPanel.visible) {
+            network.refreshNetworks()
+          }
+        }
+      }
 
       Rectangle {
         id: wifiMenuRect
@@ -135,14 +153,19 @@ NLoader {
               value: Settings.data.network.wifiEnabled
               onToggled: function (value) {
                 Settings.data.network.wifiEnabled = value
-                // TBC: This should be done in a service
-                Quickshell.execDetached(["nmcli", "radio", "wifi", Settings.data.network.wifiEnabled ? "on" : "off"])
+                network.setWifiEnabled(value)
+                
+                // If enabling WiFi while menu is open, refresh after a delay
+                if (value) {
+                  wifiEnableRefreshTimer.start()
+                }
               }
             }
 
             NIconButton {
               icon: "refresh"
               sizeMultiplier: 0.8
+              enabled: Settings.data.network.wifiEnabled && !network.isLoading
               onClicked: {
                 network.refreshNetworks()
               }
@@ -159,224 +182,280 @@ NLoader {
 
           NDivider {}
 
-          ListView {
-            id: networkList
+          Item {
             Layout.fillWidth: true
             Layout.fillHeight: true
-            model: Object.values(network.networks)
-            spacing: Style.marginMedium * scaling
-            clip: true
 
-            delegate: Item {
-              width: parent.width
-              height: modelData.ssid === passwordPromptSsid
-                      && showPasswordPrompt ? 108 * scaling : Style.baseWidgetSize * 1.5 * scaling
+            // Loading indicator
+            ColumnLayout {
+              anchors.centerIn: parent
+              visible: Settings.data.network.wifiEnabled && network.isLoading
+              spacing: Style.marginMedium * scaling
 
-              ColumnLayout {
-                anchors.fill: parent
-                spacing: 0
+              NBusyIndicator {
+                running: network.isLoading
+                color: Colors.mPrimary
+                size: Style.baseWidgetSize * scaling
+                Layout.alignment: Qt.AlignHCenter
+              }
 
-                Rectangle {
-                  Layout.fillWidth: true
-                  Layout.preferredHeight: Style.baseWidgetSize * 1.5 * scaling
-                  radius: Style.radiusMedium * scaling
-                  color: modelData.connected ? Colors.mPrimary : (networkMouseArea.containsMouse ? Colors.mTertiary : "transparent")
+              NText {
+                text: "Scanning for networks..."
+                font.pointSize: Style.fontSizeNormal * scaling
+                color: Colors.mOnSurfaceVariant
+                Layout.alignment: Qt.AlignHCenter
+              }
+            }
 
-                  RowLayout {
-                    anchors.fill: parent
-                    anchors.margins: Style.marginSmall * scaling
-                    spacing: Style.marginSmall * scaling
+            // WiFi disabled message
+            ColumnLayout {
+              anchors.centerIn: parent
+              visible: !Settings.data.network.wifiEnabled
+              spacing: Style.marginMedium * scaling
 
-                    NText {
-                      text: network.signalIcon(modelData.signal)
-                      font.family: "Material Symbols Outlined"
-                      font.pointSize: Style.fontSizeXL * scaling
-                      color: modelData.connected ? Colors.mSurface : (networkMouseArea.containsMouse ? Colors.mSurface : Colors.mOnSurface)
-                    }
+              NText {
+                text: "wifi_off"
+                font.family: "Material Symbols Outlined"
+                font.pointSize: Style.fontSizeXXL * scaling
+                color: Colors.mOnSurfaceVariant
+                Layout.alignment: Qt.AlignHCenter
+              }
 
-                    ColumnLayout {
-                      Layout.fillWidth: true
-                      spacing: Style.marginTiny * scaling
+              NText {
+                text: "WiFi is disabled"
+                font.pointSize: Style.fontSizeLarge * scaling
+                color: Colors.mOnSurfaceVariant
+                Layout.alignment: Qt.AlignHCenter
+              }
 
-                      // SSID
+              NText {
+                text: "Enable WiFi to see available networks"
+                font.pointSize: Style.fontSizeNormal * scaling
+                color: Colors.mOnSurfaceVariant
+                Layout.alignment: Qt.AlignHCenter
+              }
+            }
+
+            // Network list
+            ListView {
+              id: networkList
+              anchors.fill: parent
+              visible: Settings.data.network.wifiEnabled && !network.isLoading
+              model: Object.values(network.networks)
+              spacing: Style.marginMedium * scaling
+              clip: true
+
+              delegate: Item {
+                width: parent.width
+                height: modelData.ssid === passwordPromptSsid
+                        && showPasswordPrompt ? 108 * scaling : Style.baseWidgetSize * 1.5 * scaling
+
+                ColumnLayout {
+                  anchors.fill: parent
+                  spacing: 0
+
+                  Rectangle {
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: Style.baseWidgetSize * 1.5 * scaling
+                    radius: Style.radiusMedium * scaling
+                    color: modelData.connected ? Colors.mPrimary : (networkMouseArea.containsMouse ? Colors.mTertiary : "transparent")
+
+                    RowLayout {
+                      anchors.fill: parent
+                      anchors.margins: Style.marginSmall * scaling
+                      spacing: Style.marginSmall * scaling
+
                       NText {
-                        text: modelData.ssid || "Unknown Network"
-                        font.pointSize: Style.fontSizeNormal * scaling
-                        elide: Text.ElideRight
-                        Layout.fillWidth: true
+                        text: network.signalIcon(modelData.signal)
+                        font.family: "Material Symbols Outlined"
+                        font.pointSize: Style.fontSizeXL * scaling
                         color: modelData.connected ? Colors.mSurface : (networkMouseArea.containsMouse ? Colors.mSurface : Colors.mOnSurface)
                       }
 
-                      // Security Protocol
-                      NText {
-                        text: modelData.security && modelData.security !== "--" ? modelData.security : "Open"
-                        font.pointSize: Style.fontSizeTiny * scaling
-                        elide: Text.ElideRight
+                      ColumnLayout {
                         Layout.fillWidth: true
+                        spacing: Style.marginTiny * scaling
+
+                        // SSID
+                        NText {
+                          text: modelData.ssid || "Unknown Network"
+                          font.pointSize: Style.fontSizeNormal * scaling
+                          elide: Text.ElideRight
+                          Layout.fillWidth: true
+                          color: modelData.connected ? Colors.mSurface : (networkMouseArea.containsMouse ? Colors.mSurface : Colors.mOnSurface)
+                        }
+
+                        // Security Protocol
+                        NText {
+                          text: modelData.security && modelData.security !== "--" ? modelData.security : "Open"
+                          font.pointSize: Style.fontSizeTiny * scaling
+                          elide: Text.ElideRight
+                          Layout.fillWidth: true
+                          color: modelData.connected ? Colors.mSurface : (networkMouseArea.containsMouse ? Colors.mSurface : Colors.mOnSurface)
+                        }
+
+                        NText {
+                          visible: network.connectStatusSsid === modelData.ssid && network.connectStatus === "error"
+                                   && network.connectError.length > 0
+                          text: network.connectError
+                          color: Colors.mError
+                          font.pointSize: Style.fontSizeSmall * scaling
+                          elide: Text.ElideRight
+                          Layout.fillWidth: true
+                        }
+                      }
+
+                      Item {
+                        Layout.preferredWidth: 22
+                        Layout.preferredHeight: 22
+                        visible: network.connectStatusSsid === modelData.ssid
+                                 && (network.connectStatus !== "" || network.connectingSsid === modelData.ssid)
+
+                        NBusyIndicator {
+                          visible: network.connectingSsid === modelData.ssid
+                          running: network.connectingSsid === modelData.ssid
+                          color: Colors.mPrimary
+                          anchors.centerIn: parent
+                          size: Style.baseWidgetSize * 0.7 * scaling
+                        }
+
+                        // TBC: Does nothing on my setup
+                        NText {
+                          visible: network.connectStatus === "success" && !network.connectingSsid
+                          text: "check_circle"
+                          font.family: "Material Symbols Outlined"
+                          font.pointSize: 18 * scaling
+                          color: "#43a047" // TBC: No!
+                          anchors.centerIn: parent
+                        }
+
+                        // TBC: Does nothing on my setup
+                        NText {
+                          visible: network.connectStatus === "error" && !network.connectingSsid
+                          text: "error"
+                          font.family: "Material Symbols Outlined"
+                          font.pointSize: Style.fontSizeSmall * scaling
+                          color: Colors.mError
+                          anchors.centerIn: parent
+                        }
+                      }
+
+                      NText {
+                        visible: modelData.connected
+                        text: "connected"
+                        font.pointSize: Style.fontSizeSmall * scaling
                         color: modelData.connected ? Colors.mSurface : (networkMouseArea.containsMouse ? Colors.mSurface : Colors.mOnSurface)
                       }
+                    }
 
-                      NText {
-                        visible: network.connectStatusSsid === modelData.ssid && network.connectStatus === "error"
-                                 && network.connectError.length > 0
-                        text: network.connectError
-                        color: Colors.mError
-                        font.pointSize: Style.fontSizeSmall * scaling
-                        elide: Text.ElideRight
+                    MouseArea {
+                      id: networkMouseArea
+                      anchors.fill: parent
+                      hoverEnabled: true
+                      onClicked: {
+                        if (modelData.connected) {
+                          network.disconnectNetwork(modelData.ssid)
+                        } else if (network.isSecured(modelData.security) && !modelData.existing) {
+                          passwordPromptSsid = modelData.ssid
+                          showPasswordPrompt = true
+                          passwordInput = "" // Clear previous input
+                          Qt.callLater(function () {
+                            passwordInputField.forceActiveFocus()
+                          })
+                        } else {
+                          network.connectNetwork(modelData.ssid, modelData.security)
+                        }
+                      }
+                    }
+                  }
+
+                  // Password prompt section
+                  Rectangle {
+                    id: passwordPromptSection
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: modelData.ssid === passwordPromptSsid && showPasswordPrompt ? 60 : 0
+                    Layout.margins: 8
+                    visible: modelData.ssid === passwordPromptSsid && showPasswordPrompt
+                    color: Colors.mSurfaceVariant
+                    radius: Style.radiusSmall * scaling
+
+                    RowLayout {
+                      anchors.fill: parent
+                      anchors.margins: Style.marginSmall * scaling
+                      spacing: Style.marginSmall * scaling
+
+                      Item {
                         Layout.fillWidth: true
+                        Layout.preferredHeight: 36
+
+                        Rectangle {
+                          anchors.fill: parent
+                          radius: 8
+                          color: "transparent"
+                          border.color: passwordInputField.activeFocus ? Colors.mPrimary : Colors.mOutline
+                          border.width: 1
+
+                          TextInput {
+                            id: passwordInputField
+                            anchors.fill: parent
+                            anchors.margins: Style.marginMedium * scaling
+                            text: passwordInput
+                            font.pointSize: Style.fontSizeMedium * scaling
+                            color: Colors.mOnSurface
+                            verticalAlignment: TextInput.AlignVCenter
+                            clip: true
+                            focus: true
+                            selectByMouse: true
+                            activeFocusOnTab: true
+                            inputMethodHints: Qt.ImhNone
+                            echoMode: TextInput.Password
+                            onTextChanged: passwordInput = text
+                            onAccepted: {
+                              network.submitPassword(passwordPromptSsid, passwordInput)
+                              showPasswordPrompt = false
+                            }
+
+                            MouseArea {
+                              id: passwordInputMouseArea
+                              anchors.fill: parent
+                              onClicked: passwordInputField.forceActiveFocus()
+                            }
+                          }
+                        }
                       }
-                    }
-
-                    Item {
-                      Layout.preferredWidth: 22
-                      Layout.preferredHeight: 22
-                      visible: network.connectStatusSsid === modelData.ssid
-                               && (network.connectStatus !== "" || network.connectingSsid === modelData.ssid)
-
-                      NBusyIndicator {
-                        visible: network.connectingSsid === modelData.ssid
-                        running: network.connectingSsid === modelData.ssid
-                        color: Colors.mPrimary
-                        anchors.centerIn: parent
-                        size: Style.baseWidgetSize * 0.7 * scaling
-                      }
-
-                      // TBC: Does nothing on my setup
-                      NText {
-                        visible: network.connectStatus === "success" && !network.connectingSsid
-                        text: "check_circle"
-                        font.family: "Material Symbols Outlined"
-                        font.pointSize: 18 * scaling
-                        color: "#43a047" // TBC: No!
-                        anchors.centerIn: parent
-                      }
-
-                      // TBC: Does nothing on my setup
-                      NText {
-                        visible: network.connectStatus === "error" && !network.connectingSsid
-                        text: "error"
-                        font.family: "Material Symbols Outlined"
-                        font.pointSize: Style.fontSizeSmall * scaling
-                        color: Colors.mError
-                        anchors.centerIn: parent
-                      }
-                    }
-
-                    NText {
-                      visible: modelData.connected
-                      text: "connected"
-                      font.pointSize: Style.fontSizeSmall * scaling
-                      color: modelData.connected ? Colors.mSurface : (networkMouseArea.containsMouse ? Colors.mSurface : Colors.mOnSurface)
-                    }
-                  }
-
-                  MouseArea {
-                    id: networkMouseArea
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    onClicked: {
-                      if (modelData.connected) {
-                        network.disconnectNetwork(modelData.ssid)
-                      } else if (network.isSecured(modelData.security) && !modelData.existing) {
-                        passwordPromptSsid = modelData.ssid
-                        showPasswordPrompt = true
-                        passwordInput = "" // Clear previous input
-                        Qt.callLater(function () {
-                          passwordInputField.forceActiveFocus()
-                        })
-                      } else {
-                        network.connectNetwork(modelData.ssid, modelData.security)
-                      }
-                    }
-                  }
-                }
-
-                // Password prompt section
-                Rectangle {
-                  id: passwordPromptSection
-                  Layout.fillWidth: true
-                  Layout.preferredHeight: modelData.ssid === passwordPromptSsid && showPasswordPrompt ? 60 : 0
-                  Layout.margins: 8
-                  visible: modelData.ssid === passwordPromptSsid && showPasswordPrompt
-                  color: Colors.mSurfaceVariant
-                  radius: Style.radiusSmall * scaling
-
-                  RowLayout {
-                    anchors.fill: parent
-                    anchors.margins: Style.marginSmall * scaling
-                    spacing: Style.marginSmall * scaling
-
-                    Item {
-                      Layout.fillWidth: true
-                      Layout.preferredHeight: 36
 
                       Rectangle {
-                        anchors.fill: parent
-                        radius: 8
-                        color: "transparent"
-                        border.color: passwordInputField.activeFocus ? Colors.mPrimary : Colors.mOutline
-                        border.width: 1
+                        Layout.preferredWidth: 80
+                        Layout.preferredHeight: 36
+                        radius: Style.radiusMedium * scaling
+                        color: Colors.mPrimary
+                        border.color: Colors.mPrimary
+                        border.width: 0
 
-                        TextInput {
-                          id: passwordInputField
+                        Behavior on color {
+                          ColorAnimation {
+                            duration: Style.animationFast
+                          }
+                        }
+
+                        NText {
+                          anchors.centerIn: parent
+                          text: "Connect"
+                          color: Colors.mSurface
+                          font.pointSize: Style.fontSizeSmall * scaling
+                        }
+
+                        MouseArea {
                           anchors.fill: parent
-                          anchors.margins: Style.marginMedium * scaling
-                          text: passwordInput
-                          font.pointSize: Style.fontSizeMedium * scaling
-                          color: Colors.mOnSurface
-                          verticalAlignment: TextInput.AlignVCenter
-                          clip: true
-                          focus: true
-                          selectByMouse: true
-                          activeFocusOnTab: true
-                          inputMethodHints: Qt.ImhNone
-                          echoMode: TextInput.Password
-                          onTextChanged: passwordInput = text
-                          onAccepted: {
+                          onClicked: {
                             network.submitPassword(passwordPromptSsid, passwordInput)
                             showPasswordPrompt = false
                           }
-
-                          MouseArea {
-                            id: passwordInputMouseArea
-                            anchors.fill: parent
-                            onClicked: passwordInputField.forceActiveFocus()
-                          }
+                          cursorShape: Qt.PointingHandCursor
+                          hoverEnabled: true
+                          onEntered: parent.color = Qt.darker(Colors.mPrimary, 1.1)
+                          onExited: parent.color = Colors.mPrimary
                         }
-                      }
-                    }
-
-                    Rectangle {
-                      Layout.preferredWidth: 80
-                      Layout.preferredHeight: 36
-                      radius: Style.radiusMedium * scaling
-                      color: Colors.mPrimary
-                      border.color: Colors.mPrimary
-                      border.width: 0
-
-                      Behavior on color {
-                        ColorAnimation {
-                          duration: Style.animationFast
-                        }
-                      }
-
-                      NText {
-                        anchors.centerIn: parent
-                        text: "Connect"
-                        color: Colors.mSurface
-                        font.pointSize: Style.fontSizeSmall * scaling
-                      }
-
-                      MouseArea {
-                        anchors.fill: parent
-                        onClicked: {
-                          network.submitPassword(passwordPromptSsid, passwordInput)
-                          showPasswordPrompt = false
-                        }
-                        cursorShape: Qt.PointingHandCursor
-                        hoverEnabled: true
-                        onEntered: parent.color = Qt.darker(Colors.mPrimary, 1.1)
-                        onExited: parent.color = Colors.mPrimary
                       }
                     }
                   }
