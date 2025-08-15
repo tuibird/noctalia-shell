@@ -10,7 +10,7 @@
     "mOnError": "#11111b",
 
     "mSurface": "#1e1e2e",
-    "mOnSurface": "##cdd6f4",
+    "mOnSurface": "#cdd6f4",
     "mSurfaceVariant": "#313244",
     "mOnSurfaceVariant": "#a3b4eb",
     "mOutline": "#45475a",
