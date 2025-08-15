@@ -214,6 +214,8 @@ QtObject {
         scanProcess.existingNetwork = {}
       }
     }
+    
+
   }
 
   property Process connectProcess: Process {

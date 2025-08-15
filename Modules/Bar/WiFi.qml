@@ -15,13 +15,15 @@ NIconButton {
   showBorder: false
   icon: {
     let connected = false
+    let signalStrength = 0
     for (const net in network.networks) {
       if (network.networks[net].connected) {
         connected = true
+        signalStrength = network.networks[net].signal
         break
       }
     }
-    return connected ? network.signalIcon(parent.currentSignal) : "wifi_off"
+    return connected ? network.signalIcon(signalStrength) : "wifi_off"
   }
   tooltipText: "WiFi Networks"
   onClicked: {

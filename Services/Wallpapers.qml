@@ -39,6 +39,8 @@ Singleton {
   }
 
   function setCurrentWallpaper(path, isInitial) {
+    // Only generate colors if the wallpaper actually changed
+    var wallpaperChanged = currentWallpaper !== path
 
     currentWallpaper = path
     if (!isInitial) {
@@ -62,7 +64,10 @@ Singleton {
       randomWallpaperTimer.restart()
     }
 
-    generateColors()
+    // Only generate colors if the wallpaper actually changed
+    if (wallpaperChanged) {
+      generateColors()
+    }
   }
 
   function setRandomWallpaper() {
@@ -91,7 +96,9 @@ Singleton {
   }
 
   function generateColors() {
+    console.log("[Wallpapers] generateColors() called, generateColors setting:", Settings.data.wallpaper.generateColors)
     if (Settings.data.wallpaper.generateColors) {
+      console.log("[Wallpapers] Starting color generation process")
       generateThemeProcess.running = true
     }
   }
