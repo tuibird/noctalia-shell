@@ -10,18 +10,18 @@ import qs.Widgets
 NLoader {
   id: root
 
+  // Enumerate all the tabs, ordering is NOT relevant
   enum Tab {
-    General,
-    Bar,
-    TimeWeather,
-    ScreenRecorder,
-    Network,
+    About,
     Audio,
+    Bar,
     Display,
+    General,
+    Network,
+    ScreenRecorder,
+    TimeWeather,
     Wallpaper,
-    WallpaperSelector,
-    //Misc,
-    About
+    WallpaperSelector
   }
 
   property int requestedTab: SettingsPanel.Tab.General
@@ -33,6 +33,61 @@ NLoader {
       readonly property real scaling: Scaling.scale(screen)
       property int currentTabIndex: 0
 
+      // List of all the tabs, ordering is relevant.
+      property var tabsModel: [{
+          "id": SettingsPanel.Tab.General,
+          "label": "General",
+          "icon": "tune",
+          "source": "Tabs/General.qml"
+        }, {
+          "id": SettingsPanel.Tab.Bar,
+          "label": "Bar",
+          "icon": "web_asset",
+          "source": "Tabs/Bar.qml"
+        }, {
+          "id": SettingsPanel.Tab.Display,
+          "label": "Display",
+          "icon": "monitor",
+          "source": "Tabs/Display.qml"
+        }, {
+          "id": SettingsPanel.Tab.Audio,
+          "label": "Audio",
+          "icon": "volume_up",
+          "source": "Tabs/Audio.qml"
+        }, {
+          "id": SettingsPanel.Tab.Network,
+          "label": "Network",
+          "icon": "lan",
+          "source": "Tabs/Network.qml"
+        }, {
+          "id": SettingsPanel.Tab.TimeWeather,
+          "label": "Time & Weather",
+          "icon": "schedule",
+          "source": "Tabs/TimeWeather.qml"
+        }, {
+          "id": SettingsPanel.Tab.Wallpaper,
+          "label": "Wallpaper",
+          "icon": "image",
+          "source": "Tabs/Wallpaper.qml"
+        }, {
+          "id": SettingsPanel.Tab.WallpaperSelector,
+          "label": "Wallpaper Selector",
+          "icon": "wallpaper_slideshow",
+          "source": "Tabs/WallpaperSelector.qml"
+        }, {
+          "id": SettingsPanel.Tab.ScreenRecorder,
+          "label": "Screen Recorder",
+          "icon": "videocam",
+          "source": "Tabs/ScreenRecorder.qml"
+        }, {
+          "id": SettingsPanel.Tab.About,
+          "label": "About",
+          "icon": "info",
+          "source": "Tabs/About.qml"
+        }]
+
+      WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
+
       // Override hide function to animate first
       function hide() {
         // Start hide animation
@@ -41,6 +96,69 @@ NLoader {
 
         // Hide after animation completes
         hideTimer.start()
+      }
+
+      function getTab(tabId) {
+        switch (tabId) {
+        case SettingsPanel.Tab.About:
+          return tabAbount
+        case SettingsPanel.Tab.Audio:
+          return tabAudio
+        case SettingsPanel.Tab.Bar:
+          return tabBar
+        case SettingsPanel.Tab.General:
+          return tabGeneral
+        case SettingsPanel.Tab.Network:
+          return tabNetwork
+        case SettingsPanel.Tab.ScreenRecorder:
+          return tabScreenRecorder
+        case SettingsPanel.Tab.TimeWeather:
+          return tabTimeWeather
+        case SettingsPanel.Tab.Wallpaper:
+          return tabWallpaper
+        case SettingsPanel.Tab.WallpaperSelector:
+          return tabWallpaperSelector
+        default:
+          return tabGeneral
+        }
+      }
+
+      // Wrap each tab in a Component so we can spawn them with flexibility
+      Component {
+        id: tabAbount
+        Tabs.About {}
+      }
+      Component {
+        id: tabAudio
+        Tabs.Audio {}
+      }
+      Component {
+        id: tabBar
+        Tabs.Bar {}
+      }
+      Component {
+        id: tabGeneral
+        Tabs.General {}
+      }
+      Component {
+        id: tabNetwork
+        Tabs.Network {}
+      }
+      Component {
+        id: tabScreenRecorder
+        Tabs.ScreenRecorder {}
+      }
+      Component {
+        id: tabTimeWeather
+        Tabs.TimeWeather {}
+      }
+      Component {
+        id: tabWallpaper
+        Tabs.Wallpaper {}
+      }
+      Component {
+        id: tabWallpaperSelector
+        Tabs.WallpaperSelector {}
       }
 
       // Connect to NPanel's dismissed signal to handle external close events
@@ -66,66 +184,6 @@ NLoader {
           panel.dismissed()
         }
       }
-
-      WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
-
-      property var tabsModel: [{
-          "id": SettingsPanel.Tab.General,
-          "label": "General",
-          "icon": "tune",
-          "source": "Tabs/General.qml"
-        }, {
-          "id": SettingsPanel.Tab.Bar,
-          "label": "Bar",
-          "icon": "web_asset",
-          "source": "Tabs/Bar.qml"
-        }, {
-          "id": SettingsPanel.Tab.TimeWeather,
-          "label": "Time & Weather",
-          "icon": "schedule",
-          "source": "Tabs/TimeWeather.qml"
-        }, {
-          "id": SettingsPanel.Tab.ScreenRecorder,
-          "label": "Screen Recorder",
-          "icon": "videocam",
-          "source": "Tabs/ScreenRecorder.qml"
-        }, {
-          "id": SettingsPanel.Tab.Network,
-          "label": "Network",
-          "icon": "lan",
-          "source": "Tabs/Network.qml"
-        }, {
-          "id": SettingsPanel.Tab.Audio,
-          "label": "Audio",
-          "icon": "volume_up",
-          "source": "Tabs/Audio.qml"
-        }, {
-          "id": SettingsPanel.Tab.Display,
-          "label": "Display",
-          "icon": "monitor",
-          "source": "Tabs/Display.qml"
-        }, {
-          "id": SettingsPanel.Tab.Wallpaper,
-          "label": "Wallpaper",
-          "icon": "image",
-          "source": "Tabs/Wallpaper.qml"
-        }, {
-          "id": SettingsPanel.Tab.WallpaperSelector,
-          "label": "Wallpaper Selector",
-          "icon": "wallpaper_slideshow",
-          "source": "Tabs/WallpaperSelector.qml"
-        }, // {
-        //   "id":  SettingsPanel.Tab.Misc,
-        //   "label": "Misc",
-        //   "icon": "more_horiz",
-        //   "source": "Tabs/Misc.qml"
-        // },
-        {
-          "id": SettingsPanel.Tab.About,
-          "label": "About",
-          "icon": "info",
-          "source": "Tabs/About.qml"
-        }]
 
       Component.onCompleted: {
         show()
@@ -220,7 +278,6 @@ NLoader {
               spacing: Style.marginTiny * 1.5 * scaling // Minimal spacing between tabs
 
               Repeater {
-                id: sections
                 model: panel.tabsModel
 
                 delegate: Rectangle {
@@ -328,17 +385,12 @@ NLoader {
                 Layout.fillHeight: true
                 currentIndex: currentTabIndex
 
-                Tabs.General {}
-                Tabs.Bar {}
-                Tabs.TimeWeather {}
-                Tabs.ScreenRecorder {}
-                Tabs.Network {}
-                Tabs.Audio {}
-                Tabs.Display {}
-                Tabs.Wallpaper {}
-                Tabs.WallpaperSelector {}
-                //Tabs.Misc {}
-                Tabs.About {}
+                Repeater {
+                  model: panel.tabsModel
+                  delegate: Loader {
+                    sourceComponent: getTab(modelData.id)
+                  }
+                }
               }
             }
           }

@@ -42,8 +42,7 @@ Rectangle {
     font.variableAxes: {
       "wght": (Font.Normal + Font.Bold) / 2.0
     }
-    color: (root.hovering
-            || showFilled) ? Colors.mOnPrimary : showBorder ? Colors.mPrimary : Colors.mOnSurface
+    color: (root.hovering || showFilled) ? Colors.mOnPrimary : showBorder ? Colors.mPrimary : Colors.mOnSurface
     horizontalAlignment: Text.AlignHCenter
     verticalAlignment: Text.AlignVCenter
     opacity: root.enabled ? Style.opacityFull : Style.opacityMedium

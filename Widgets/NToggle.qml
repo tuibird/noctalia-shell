@@ -53,7 +53,7 @@ RowLayout {
       implicitWidth: (root.baseSize - 5) * scaling
       implicitHeight: (root.baseSize - 5) * scaling
       radius: height * 0.5
-      color: value ? Colors.mOnPrimary: Colors.mPrimary
+      color: value ? Colors.mOnPrimary : Colors.mPrimary
       border.color: value ? Colors.mSurface : Colors.mSurface
       border.width: Math.max(1, Style.borderMedium * scaling)
       y: 2 * scaling

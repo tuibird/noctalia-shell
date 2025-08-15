@@ -371,8 +371,7 @@ NLoader {
                             property bool isSelected: index === selectedIndex
                             color: (appCardArea.containsMouse || isSelected) ? Qt.darker(Colors.mPrimary,
                                                                                          1.1) : Colors.mSurface
-                            border.color: (appCardArea.containsMouse
-                                           || isSelected) ? Colors.mPrimary : "transparent"
+                            border.color: (appCardArea.containsMouse || isSelected) ? Colors.mPrimary : "transparent"
                             border.width: (appCardArea.containsMouse || isSelected) ? 2 : 0
 
                             Behavior on color {

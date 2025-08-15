@@ -6,10 +6,9 @@ import Quickshell.Io
 import qs.Services
 
 // --------------------------------
-// Noctalia Colors - Material Design 3 
+// Noctalia Colors - Material Design 3
 // We only use a very small subset of all available m3 colors to avoid complexity
 // All color names start with a 'm' to avoid QML assuming some of them are signals (ex: onPrimary)
-
 Singleton {
   id: root
 
@@ -58,7 +57,7 @@ Singleton {
 
     property color mError: "#eb6f92"
     property color mOnError: "#191724"
-    
+
     property color mSurface: "#191724"
     property color mOnSurface: "#e0def4"
     property color mSurfaceVariant: "#26233a"
@@ -66,7 +65,6 @@ Singleton {
     property color mOutline: "#44415a"
     property color mOutlineVariant: "#514e6c"
     property color mShadow: "#191724"
-
   }
 
   // ----------------------------------------------------------------

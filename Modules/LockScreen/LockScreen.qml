@@ -530,8 +530,7 @@ WlSessionLock {
                   width: 120 * Scaling.scale(screen)
                   height: 40 * Scaling.scale(screen)
                   radius: 12
-                  color: executeButtonArea.containsMouse ? Colors.mPrimary : Colors.applyOpacity(
-                                                             Colors.mPrimary, "33")
+                  color: executeButtonArea.containsMouse ? Colors.mPrimary : Colors.applyOpacity(Colors.mPrimary, "33")
                   border.color: Colors.mPrimary
                   border.width: 1
                   enabled: !lock.authenticating
@@ -631,8 +630,7 @@ WlSessionLock {
         width: 64 * Scaling.scale(screen)
         height: 64 * Scaling.scale(screen)
         radius: 32
-        color: Qt.rgba(Colors.mError.r, Colors.mError.g, Colors.mError.b,
-                       shutdownArea.containsMouse ? 0.9 : 0.2)
+        color: Qt.rgba(Colors.mError.r, Colors.mError.g, Colors.mError.b, shutdownArea.containsMouse ? 0.9 : 0.2)
         border.color: Colors.mError
         border.width: 2 * Scaling.scale(screen)
 
@@ -689,8 +687,7 @@ WlSessionLock {
         width: 64 * Scaling.scale(screen)
         height: 64 * Scaling.scale(screen)
         radius: 32
-        color: Qt.rgba(Colors.mPrimary.r, Colors.mPrimary.g, Colors.mPrimary.b,
-                       rebootArea.containsMouse ? 0.9 : 0.2)
+        color: Qt.rgba(Colors.mPrimary.r, Colors.mPrimary.g, Colors.mPrimary.b, rebootArea.containsMouse ? 0.9 : 0.2)
         border.color: Colors.mPrimary
         border.width: 2 * Scaling.scale(screen)
 
