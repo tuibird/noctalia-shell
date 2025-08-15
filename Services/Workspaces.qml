@@ -30,6 +30,7 @@ Singleton {
           return
         }
       } catch (e) {
+
       }
 
       if (typeof Niri !== "undefined") {
