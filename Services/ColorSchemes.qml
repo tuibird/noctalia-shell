@@ -54,6 +54,7 @@ Singleton {
         }
         schemes = files
         scanning = false
+        console.log("[ColorSchemes] Loaded", schemes.length, "schemes")
       }
     }
   }

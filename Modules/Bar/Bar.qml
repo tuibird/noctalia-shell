@@ -55,6 +55,8 @@ Variants {
         SystemMonitor {}
 
         MediaMini {}
+
+        ActiveWindow {}
       }
 
       // Center
