@@ -45,7 +45,7 @@ Singleton {
       reload()
     }
     onLoaded: function () {
-      console.log("[Settings] loaded")
+      console.log("[Settings] Loaded")
       Qt.callLater(function () {
         if (adapter.wallpaper.current !== "") {
           console.log("[Settings] Set current wallpaper")
@@ -179,19 +179,6 @@ Singleton {
         property string fontFamily: "Roboto" // Family for all text
         property list<string> monitorsScale: []
       }
-    }
-  }
-
-  Connections {
-    target: adapter.wallpaper
-    function onIsRandomChanged() {
-      Wallpapers.toggleRandomWallpaper()
-    }
-    function onRandomIntervalChanged() {
-      Wallpapers.restartRandomWallpaperTimer()
-    }
-    function onDirectoryChanged() {
-      Wallpapers.loadWallpapers()
     }
   }
 }

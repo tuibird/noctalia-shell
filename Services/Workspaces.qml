@@ -17,7 +17,7 @@ Singleton {
   property var hlWorkspaces: Hyprland.workspaces.values
   // Detect which compositor we're using
   Component.onCompleted: {
-    console.log("[WS] Initializing workspaces service")
+    console.log("[Workspaces] Initializing workspaces service")
     detectCompositor()
   }
 
@@ -25,27 +25,27 @@ Singleton {
     try {
       try {
         if (Hyprland.eventSocketPath) {
-          console.log("[WS] Detected Hyprland compositor")
+          console.log("[Workspaces] Detected Hyprland compositor")
           isHyprland = true
           isNiri = false
           initHyprland()
           return
         }
       } catch (e) {
-        console.log("[WS] Hyprland not available:", e)
+        console.log("[Workspaces] Hyprland not available:", e)
       }
 
       if (typeof Niri !== "undefined") {
-        console.log("[WS] Detected Niri service")
+        console.log("[Workspaces] Detected Niri service")
         isHyprland = false
         isNiri = true
         initNiri()
         return
       }
 
-      console.log("[WS] Could not detect any supported compositor")
+      console.log("[Workspaces] Could not detect any supported compositor")
     } catch (e) {
-      console.error("[WS] Error detecting compositor:", e)
+      console.error("[Workspaces] Error detecting compositor:", e)
     }
   }
 
@@ -102,7 +102,7 @@ Singleton {
       }
       workspacesChanged()
     } catch (e) {
-      console.error("[WS] Error updating Hyprland workspaces:", e)
+      console.error("[Workspaces] Error updating Hyprland workspaces:", e)
     }
   }
 

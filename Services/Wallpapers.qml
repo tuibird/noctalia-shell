@@ -9,7 +9,7 @@ Singleton {
   id: root
 
   Component.onCompleted: {
-    console.log("[WP] Service initialized")
+    console.log("[Wallpapers] Service initialized")
     loadWallpapers()
 
     // Wallpaper is set when the settings are loaded.
@@ -23,7 +23,7 @@ Singleton {
   property var randomChoices: ["simple", "fade", "left", "right", "top", "bottom", "wipe", "wave", "grow", "center", "any", "outer"]
 
   function loadWallpapers() {
-    console.log("[WP] Load Wallpapers")
+    console.log("[Wallpapers] Load Wallpapers")
     scanning = true
     wallpaperList = []
     // Unsetting, then setting the folder will re-trigger the parsing!
@@ -32,7 +32,7 @@ Singleton {
   }
 
   function changeWallpaper(path) {
-    console.log("[WP] changing to:", path)
+    console.log("[Wallpapers] Changing to:", path)
     setCurrentWallpaper(path, false)
   }
 
@@ -53,7 +53,7 @@ Singleton {
     } else {
 
       // Fallback: update the settings directly for non-SWWW mode
-      //console.log("[WP] Not using Swww, setting wallpaper directly")
+      //console.log("[Wallpapers] Not using Swww, setting wallpaper directly")
     }
 
     if (randomWallpaperTimer.running) {
@@ -126,7 +126,7 @@ Singleton {
         }
         wallpaperList = files
         scanning = false
-        console.log("[WP] List refreshed, count:",  wallpaperList.length)
+        console.log("[Wallpapers] List refreshed, count:",  wallpaperList.length)
       }
     }
   }
