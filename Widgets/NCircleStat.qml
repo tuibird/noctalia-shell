@@ -49,13 +49,13 @@ Rectangle {
           const ctx = getContext("2d")
           const w = width, h = height
           const cx = w / 2, cy = h / 2
-          const r = Math.min(w, h) / 2 - 5 * root.scaling * contentScale
+          const r = Math.min(w, h) / 2 - 5 * scaling * contentScale
           // 240° arc with a 120° gap centered on the right side
           // Start at 60° and end at 300° → balanced right-side opening
           const start = Math.PI / 3
           const endBg = Math.PI * 5 / 3
           ctx.reset()
-          ctx.lineWidth = 6 * root.scaling * contentScale
+          ctx.lineWidth = 6 * scaling * contentScale
           // Track uses surfaceVariant for stronger contrast
           ctx.strokeStyle = Colors.mSurface
           ctx.beginPath()
