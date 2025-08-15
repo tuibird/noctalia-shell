@@ -63,18 +63,19 @@ NLoader {
 
       WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
 
-      Rectangle {
-        id: notificationRect
-        color: Colors.mSurfaceVariant
-        radius: Style.radiusMedium * scaling
-        border.color: Colors.mOutlineVariant
-        border.width: Math.max(1, Style.borderMedium * scaling)
-        width: 400 * scaling
-        height: 500 * scaling
-        anchors.top: parent.top
-        anchors.right: parent.right
-        anchors.topMargin: Style.marginTiny * scaling
-        anchors.rightMargin: Style.marginTiny * scaling
+              Rectangle {
+          id: notificationRect
+          color: Colors.mSurfaceVariant
+          radius: Style.radiusMedium * scaling
+          border.color: Colors.mOutlineVariant
+          border.width: Math.max(1, Style.borderMedium * scaling)
+          width: 400 * scaling
+          height: 500 * scaling
+          anchors.top: parent.top
+          anchors.right: parent.right
+          anchors.topMargin: Style.marginTiny * scaling
+          anchors.rightMargin: Style.marginTiny * scaling
+          clip: true
 
         // Animation properties
         property real scaleValue: 0.8
@@ -152,7 +153,7 @@ NLoader {
             Layout.fillHeight: true
             model: NotificationService.historyModel
             spacing: Style.marginMedium * scaling
-            clip: false
+            clip: true
             boundsBehavior: Flickable.StopAtBounds
 
             delegate: Rectangle {
@@ -181,7 +182,7 @@ NLoader {
                     font.weight: Font.Medium
                     color: notificationMouseArea.containsMouse ? Colors.mSurface : Colors.mOnSurface
                     wrapMode: Text.Wrap
-                    width: parent.width - 30
+                    width: parent.width - 60
                     maximumLineCount: 2
                     elide: Text.ElideRight
                   }
@@ -191,7 +192,7 @@ NLoader {
                     font.pointSize: Style.fontSizeSmall * scaling
                     color: notificationMouseArea.containsMouse ? Colors.mSurface : Colors.mOnSurface
                     wrapMode: Text.Wrap
-                    width: parent.width - 30
+                    width: parent.width - 60
                     maximumLineCount: 3
                     elide: Text.ElideRight
                   }
@@ -202,17 +203,27 @@ NLoader {
                     color: notificationMouseArea.containsMouse ? Colors.mSurface : Colors.mOnSurface
                   }
                 }
+
+                // Trash icon button
+                NIconButton {
+                  icon: "delete"
+                  sizeMultiplier: 0.7
+                  tooltipText: "Delete notification"
+                  color: notificationMouseArea.containsMouse ? Colors.mSurface : Colors.mOnSurfaceVariant
+                  onClicked: {
+                    console.log("[NotificationHistory] Removing notification:", summary)
+                    NotificationService.historyModel.remove(index)
+                    NotificationService.saveHistory()
+                  }
+                }
               }
 
               MouseArea {
                 id: notificationMouseArea
                 anchors.fill: parent
+                anchors.rightMargin: 50 * scaling
                 hoverEnabled: true
-                onClicked: {
-                  console.log("[NotificationHistory] Removing notification:", summary)
-                  NotificationService.historyModel.remove(index)
-                  NotificationService.saveHistory()
-                }
+                // Remove the onClicked handler since we now have a dedicated delete button
               }
             }
 
