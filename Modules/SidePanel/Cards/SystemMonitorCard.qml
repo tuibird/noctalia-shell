@@ -7,7 +7,7 @@ import qs.Widgets
 NBox {
   id: root
 
-  Layout.preferredWidth: 84 * scaling
+  Layout.preferredWidth: Style.baseWidgetSize * 2.625 * scaling
   implicitHeight: content.implicitHeight + Style.marginTiny * 2 * scaling
 
   Column {

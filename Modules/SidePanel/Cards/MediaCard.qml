@@ -65,7 +65,7 @@ NBox {
       ComboBox {
         id: playerSelector
         Layout.fillWidth: true
-        Layout.preferredHeight: 30 * scaling
+        Layout.preferredHeight: Style.barHeight * 0.83 * scaling
         visible: MediaPlayer.getAvailablePlayers().length > 1
         model: MediaPlayer.getAvailablePlayers()
         textRole: "identity"
@@ -252,7 +252,7 @@ NBox {
 
           Behavior on width {
             NumberAnimation {
-              duration: 200
+              duration: Style.animationFast
             }
           }
         }
@@ -273,7 +273,7 @@ NBox {
 
           Behavior on scale {
             NumberAnimation {
-              duration: 150
+              duration: Style.animationFast
             }
           }
         }

@@ -58,7 +58,7 @@ Variants {
       id: notificationStack
       anchors.top: parent.top
       anchors.right: parent.right
-      spacing: 8 * scaling
+                  spacing: Style.marginSmall * scaling
       width: 360 * scaling
       visible: true
 
@@ -146,7 +146,7 @@ Variants {
               Rectangle {
                 width: 6 * scaling
                 height: 6 * scaling
-                radius: 3 * scaling
+                radius: Style.radiusTiny * scaling
                 color: (model.urgency === NotificationUrgency.Critical) ? Colors.mError : (model.urgency === NotificationUrgency.Low) ? Colors.mOnSurface : Colors.mPrimary
                 Layout.alignment: Qt.AlignVCenter
               }

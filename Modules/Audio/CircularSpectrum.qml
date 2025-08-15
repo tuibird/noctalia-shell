@@ -45,7 +45,7 @@ Item {
 
       Behavior on height {
         SmoothedAnimation {
-          duration: 120
+                          duration: Style.animationFast
         }
       }
     }

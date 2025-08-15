@@ -107,11 +107,11 @@ ColumnLayout {
         Layout.alignment: Qt.AlignCenter
         Layout.topMargin: Style.marginSmall * scaling
         Layout.preferredWidth: updateText.implicitWidth + 46 * scaling
-        Layout.preferredHeight: 32 * scaling
+        Layout.preferredHeight: Style.barHeight * scaling
         radius: Style.radiusLarge * scaling
         color: updateArea.containsMouse ? Colors.mPrimary : "transparent"
         border.color: Colors.mPrimary
-        border.width: 1
+        border.width: Math.max(1, Style.borderThin * scaling)
         visible: {
           if (root.currentVersion === "Unknown" || root.latestVersion === "Unknown")
             return false
@@ -132,19 +132,19 @@ ColumnLayout {
 
         RowLayout {
           anchors.centerIn: parent
-          spacing: 8
+          spacing: Style.marginSmall * scaling
 
           NText {
             text: "system_update"
             font.family: "Material Symbols Outlined"
-            font.pointSize: 18 * scaling
+            font.pointSize: Style.fontSizeXL * scaling
             color: updateArea.containsMouse ? Colors.mSurface : Colors.mPrimary
           }
 
           NText {
             id: updateText
             text: "Download latest release"
-            font.pointSize: 14 * scaling
+            font.pointSize: Style.fontSizeLarge * scaling
             color: updateArea.containsMouse ? Colors.mSurface : Colors.mPrimary
           }
         }
@@ -191,8 +191,8 @@ ColumnLayout {
           anchors.fill: parent
           width: 200 * 4 * scaling
           height: Math.ceil(root.contributors.length / 4) * 100
-          cellWidth: 200 * scaling
-          cellHeight: 100 * scaling
+          cellWidth: Style.baseWidgetSize * 6.25 * scaling
+          cellHeight: Style.baseWidgetSize * 3.125 * scaling
           model: root.contributors
 
           delegate: Rectangle {
@@ -208,8 +208,8 @@ ColumnLayout {
 
               Item {
                 Layout.alignment: Qt.AlignVCenter
-                Layout.preferredWidth: 64 * scaling
-                Layout.preferredHeight: 64 * scaling
+                Layout.preferredWidth: Style.baseWidgetSize * 2 * scaling
+                Layout.preferredHeight: Style.baseWidgetSize * 2 * scaling
 
                 NImageRounded {
                   imagePath: modelData.avatar_url || ""

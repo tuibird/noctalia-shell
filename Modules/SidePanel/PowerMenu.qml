@@ -54,7 +54,7 @@ NPanel {
       // Lock
       Rectangle {
         Layout.fillWidth: true
-        Layout.preferredHeight: 36 * scaling
+        Layout.preferredHeight: Style.barHeight * scaling
         radius: Style.radiusSmall * scaling
         color: lockButtonArea.containsMouse ? Colors.mTertiary : "transparent"
 
@@ -114,7 +114,7 @@ NPanel {
       // Suspend
       Rectangle {
         Layout.fillWidth: true
-        Layout.preferredHeight: 36 * scaling
+        Layout.preferredHeight: Style.barHeight * scaling
         radius: Style.radiusSmall * scaling
         color: suspendButtonArea.containsMouse ? Colors.mTertiary : "transparent"
 
@@ -172,7 +172,7 @@ NPanel {
       // Reboot
       Rectangle {
         Layout.fillWidth: true
-        Layout.preferredHeight: 36 * scaling
+        Layout.preferredHeight: Style.barHeight * scaling
         radius: Style.radiusSmall * scaling
         color: rebootButtonArea.containsMouse ? Colors.mTertiary : "transparent"
 
@@ -230,7 +230,7 @@ NPanel {
       // Logout
       Rectangle {
         Layout.fillWidth: true
-        Layout.preferredHeight: 36 * scaling
+        Layout.preferredHeight: Style.barHeight * scaling
         radius: Style.radiusSmall * scaling
         color: logoutButtonArea.containsMouse ? Colors.mTertiary : "transparent"
 
@@ -288,7 +288,7 @@ NPanel {
       // Shutdown
       Rectangle {
         Layout.fillWidth: true
-        Layout.preferredHeight: 36 * scaling
+        Layout.preferredHeight: Style.barHeight * scaling
         radius: Style.radiusSmall * scaling
         color: shutdownButtonArea.containsMouse ? Colors.mTertiary : "transparent"
 

@@ -17,7 +17,7 @@ Item {
   signal editingFinished
 
   // Sizing
-  implicitWidth: 320 * scaling
+  implicitWidth: Style.sliderWidth * 1.6 * scaling
   implicitHeight: Style.baseWidgetSize * 2.75 * scaling
 
   ColumnLayout {

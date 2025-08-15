@@ -16,7 +16,7 @@ Row {
   // Timer to hide full title after window switch
   Timer {
     id: fullTitleTimer
-    interval: 2000 // Show full title for 2 seconds
+            interval: Style.animationSlow * 4 // Show full title for 2 seconds
     repeat: false
     onTriggered: {
       showingFullTitle = false
@@ -59,7 +59,7 @@ Row {
 
     Behavior on width {
       NumberAnimation {
-        duration: 300
+                    duration: Style.animationNormal
         easing.type: Easing.OutCubic
       }
     }

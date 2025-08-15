@@ -65,10 +65,10 @@ NLoader {
 
               Rectangle {
           id: notificationRect
-          color: Colors.mSurfaceVariant
-          radius: Style.radiusMedium * scaling
+          color: Colors.mSurface
+          radius: Style.radiusLarge * scaling
           border.color: Colors.mOutlineVariant
-          border.width: Math.max(1, Style.borderMedium * scaling)
+          border.width: Math.max(1, Style.borderThin * scaling)
           width: 400 * scaling
           height: 500 * scaling
           anchors.top: parent.top
@@ -165,16 +165,16 @@ NLoader {
               RowLayout {
                 anchors {
                   fill: parent
-                  margins: 15
+                  margins: Style.marginMedium * scaling
                 }
-                spacing: 15
+                spacing: Style.marginMedium * scaling
 
                 // Notification content
                 Column {
                   id: notificationContent
                   Layout.fillWidth: true
                   Layout.alignment: Qt.AlignVCenter
-                  spacing: 5
+                  spacing: Style.marginTiniest * scaling
 
                   NText {
                     text: (summary || "No summary").substring(0, 100)
@@ -220,7 +220,7 @@ NLoader {
               MouseArea {
                 id: notificationMouseArea
                 anchors.fill: parent
-                anchors.rightMargin: 50 * scaling
+                anchors.rightMargin: Style.marginLarge * 3 * scaling
                 hoverEnabled: true
                 // Remove the onClicked handler since we now have a dedicated delete button
               }

@@ -30,6 +30,10 @@ ColumnLayout {
   // Array to hold FileView objects
   property var fileViews: []
 
+  // Scale properties for card animations
+  property real cardScaleLow: 0.95
+  property real cardScaleHigh: 1.0
+
   // Load color scheme data when schemes are available
   Connections {
     target: ColorSchemes
@@ -100,8 +104,6 @@ ColumnLayout {
   }
 
   function schemeLoaded(schemeName, jsonData) {
-    console.log("Loading scheme colors for:", schemeName)
-
     var colors = {}
 
     // Extract colors from JSON data
@@ -130,8 +132,6 @@ ColumnLayout {
     var newCache = schemeColorsCache
     newCache[schemeName] = colors
     schemeColorsCache = newCache
-
-    console.log("Cached colors for", schemeName, ":", JSON.stringify(colors))
   }
 
   ScrollView {
@@ -212,9 +212,6 @@ ColumnLayout {
             Repeater {
               model: ColorSchemes.schemes
 
-              property real cardScaleLow: 0.95
-              property real cardScaleHigh: 1.00
-
               Rectangle {
                 id: schemeCard
                 Layout.fillWidth: true
@@ -223,7 +220,7 @@ ColumnLayout {
                 color: getSchemeColor(modelData, "mSurface")
                 border.width: Math.max(1, Style.borderThick * scaling)
                 border.color: Settings.data.colorSchemes.predefinedScheme === modelData ? Colors.mPrimary : Colors.mOutline
-                scale: cardScaleLow
+                scale: root.cardScaleLow
 
                 property string schemePath: modelData
 
@@ -240,11 +237,11 @@ ColumnLayout {
                   cursorShape: Qt.PointingHandCursor
 
                   onEntered: {
-                    schemeCard.scale = cardScaleHight
+                    schemeCard.scale = root.cardScaleHigh
                   }
 
                   onExited: {
-                    schemeCard.scale = cardScaleLow
+                    schemeCard.scale = root.cardScaleLow
                   }
                 }
 
@@ -287,7 +284,7 @@ ColumnLayout {
                     Rectangle {
                       width: 28 * scaling
                       height: 28 * scaling
-                      radius: 14 * scaling
+                      radius: Style.radiusSmall * scaling
                       color: getSchemeColor(modelData, "mSecondary")
                     }
 

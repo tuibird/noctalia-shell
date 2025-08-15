@@ -60,7 +60,7 @@ RowLayout {
 
       Behavior on x {
         NumberAnimation {
-          duration: 200
+                      duration: Style.animationFast
           easing.type: Easing.OutCubic
         }
       }

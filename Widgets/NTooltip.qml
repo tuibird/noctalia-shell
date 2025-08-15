@@ -121,7 +121,7 @@ Window {
   // Timer to trigger show animation
   Timer {
     id: showTimer
-    interval: 10 // Very short delay to ensure component is visible
+            interval: Style.animationFast / 15 // Very short delay to ensure component is visible
     repeat: false
     onTriggered: {
       // Animate to final values

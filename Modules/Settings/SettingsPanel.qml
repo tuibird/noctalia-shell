@@ -234,7 +234,7 @@ NLoader {
 
           Rectangle {
             id: sidebar
-            Layout.preferredWidth: 260 * scaling
+            Layout.preferredWidth: Style.sliderWidth * 1.3 * scaling
             Layout.fillHeight: true
             color: Colors.mSurfaceVariant
             border.color: Colors.mOutlineVariant

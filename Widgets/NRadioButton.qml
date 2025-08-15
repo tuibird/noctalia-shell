@@ -9,12 +9,12 @@ RadioButton {
   indicator: Rectangle {
     id: outerCircle
 
-    implicitWidth: 20 * scaling
-    implicitHeight: 20 * scaling
+    implicitWidth: Style.baseWidgetSize * 0.625 * scaling
+    implicitHeight: Style.baseWidgetSize * 0.625 * scaling
     radius: width * 0.5
     color: "transparent"
     border.color: root.checked ? Colors.mPrimary : Colors.mOnSurface
-    border.width: 2
+    border.width: Math.max(1, Style.borderMedium * scaling)
     anchors.verticalCenter: parent.verticalCenter
 
     Rectangle {

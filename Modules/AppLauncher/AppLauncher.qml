@@ -253,7 +253,7 @@ NLoader {
                     anchors.centerIn: parent
                     width: Math.min(700 * scaling, parent.width * 0.75)
                     height: Math.min(550 * scaling, parent.height * 0.8)
-                    radius: 32 * scaling
+                    radius: Style.radiusLarge * scaling
                     color: Colors.mSurface
                     border.color: Colors.mOutline
                     border.width: Style.borderThin * scaling
@@ -278,22 +278,22 @@ NLoader {
                       // Search bar
                       Rectangle {
                         Layout.fillWidth: true
-                        Layout.preferredHeight: 40 * scaling
+                        Layout.preferredHeight: Style.barHeight * scaling
                         Layout.bottomMargin: Style.marginMedium * scaling
-                        radius: 20 * scaling
+                        radius: Style.radiusMedium * scaling
                         color: Colors.mSurface
                         border.color: searchInput.activeFocus ? Colors.mPrimary : Colors.mOutline
-                        border.width: searchInput.activeFocus ? 2 : 1
+                        border.width: Math.max(1, searchInput.activeFocus ? Style.borderMedium * scaling : Style.borderThin * scaling)
 
                         Row {
                           anchors.fill: parent
-                          anchors.margins: 12 * scaling
-                          spacing: 10 * scaling
+                          anchors.margins: Style.marginMedium * scaling
+                          spacing: Style.marginSmall * scaling
 
                           Text {
                             text: "search"
                             font.family: "Material Symbols Outlined"
-                            font.pointSize: 16 * scaling
+                            font.pointSize: Style.fontSizeLarger * scaling
                             color: searchInput.activeFocus ? Colors.mPrimary : Colors.mOnSurface
                           }
 
@@ -303,7 +303,7 @@ NLoader {
                             color: Colors.mOnSurface
                             placeholderTextColor: Colors.mOnSurface
                             background: null
-                            font.pointSize: 13 * scaling
+                            font.pointSize: Style.fontSizeLarge * scaling
                             Layout.fillWidth: true
                             onTextChanged: {
                               searchText = text
@@ -338,13 +338,13 @@ NLoader {
 
                         Behavior on border.color {
                           ColorAnimation {
-                            duration: 120
+                            duration: Style.animationFast
                           }
                         }
 
                         Behavior on border.width {
                           NumberAnimation {
-                            duration: 120
+                            duration: Style.animationFast
                           }
                         }
                       }
@@ -360,35 +360,35 @@ NLoader {
                         ListView {
                           id: appsList
                           anchors.fill: parent
-                          spacing: 4 * scaling
+                          spacing: Style.marginTiniest * scaling
                           model: filteredEntries
                           currentIndex: selectedIndex
 
                           delegate: Rectangle {
                             width: appsList.width - Style.marginSmall * scaling
                             height: 65 * scaling
-                            radius: 16 * scaling
+                            radius: Style.radiusMedium * scaling
                             property bool isSelected: index === selectedIndex
                             color: (appCardArea.containsMouse || isSelected) ? Qt.darker(Colors.mPrimary,
                                                                                          1.1) : Colors.mSurface
                             border.color: (appCardArea.containsMouse || isSelected) ? Colors.mPrimary : "transparent"
-                            border.width: (appCardArea.containsMouse || isSelected) ? 2 : 0
+                            border.width: Math.max(1, (appCardArea.containsMouse || isSelected) ? Style.borderMedium * scaling : 0)
 
                             Behavior on color {
                               ColorAnimation {
-                                duration: 150
+                                duration: Style.animationFast
                               }
                             }
 
                             Behavior on border.color {
                               ColorAnimation {
-                                duration: 150
+                                duration: Style.animationFast
                               }
                             }
 
                             Behavior on border.width {
                               NumberAnimation {
-                                duration: 150
+                                duration: Style.animationFast
                               }
                             }
 
@@ -399,9 +399,9 @@ NLoader {
 
                               // App icon with background
                               Rectangle {
-                                Layout.preferredWidth: 40 * scaling
-                                Layout.preferredHeight: 40 * scaling
-                                radius: 14 * scaling
+                                Layout.preferredWidth: Style.baseWidgetSize * 1.25 * scaling
+                                Layout.preferredHeight: Style.baseWidgetSize * 1.25 * scaling
+                                radius: Style.radiusSmall * scaling
                                 color: appCardArea.containsMouse ? Qt.darker(Colors.mPrimary,
                                                                              1.1) : Colors.mSurfaceVariant
                                 property bool iconLoaded: (modelData.isCalculator || modelData.isClipboard
@@ -414,9 +414,9 @@ NLoader {
                                 // Clipboard image display
                                 Image {
                                   id: clipboardImage
-                                  anchors.fill: parent
-                                  anchors.margins: 6 * scaling
-                                  visible: modelData.type === 'image'
+                                                                  anchors.fill: parent
+                                anchors.margins: Style.marginTiny * scaling
+                                visible: modelData.type === 'image'
                                   source: modelData.data || ""
                                   fillMode: Image.PreserveAspectCrop
                                   asynchronous: true
@@ -426,7 +426,7 @@ NLoader {
                                 IconImage {
                                   id: iconImg
                                   anchors.fill: parent
-                                  anchors.margins: 6 * scaling
+                                  anchors.margins: Style.marginTiny * scaling
                                   asynchronous: true
                                   source: modelData.isCalculator ? "calculate" : modelData.isClipboard ? (modelData.type === 'image' ? "" : "content_paste") : modelData.isCommand ? modelData.icon : (modelData.icon ? Quickshell.iconPath(modelData.icon, "application-x-executable") : "")
                                   visible: (modelData.isCalculator || modelData.isClipboard || modelData.isCommand
@@ -436,10 +436,10 @@ NLoader {
                                 // Fallback icon container
                                 Rectangle {
                                   anchors.fill: parent
-                                  anchors.margins: 6 * scaling
-                                  radius: 10 * scaling
+                                  anchors.margins: Style.marginTiny * scaling
+                                  radius: Style.radiusTiny * scaling
                                   color: Colors.mPrimary
-                                  opacity: 0.3
+                                  opacity: Style.opacityMedium
                                   visible: !parent.iconLoaded
                                 }
 
@@ -448,14 +448,14 @@ NLoader {
                                   visible: !parent.iconLoaded && !(modelData.isCalculator || modelData.isClipboard
                                                                    || modelData.isCommand)
                                   text: modelData.name ? modelData.name.charAt(0).toUpperCase() : "?"
-                                  font.pointSize: 18 * scaling
+                                  font.pointSize: Style.fontSizeXL * scaling
                                   font.weight: Font.Bold
                                   color: Colors.mPrimary
                                 }
 
                                 Behavior on color {
                                   ColorAnimation {
-                                    duration: 150
+                                    duration: Style.animationFast
                                   }
                                 }
                               }
@@ -463,11 +463,11 @@ NLoader {
                               // App info
                               ColumnLayout {
                                 Layout.fillWidth: true
-                                spacing: 2 * scaling
+                                spacing: Style.marginTiniest * scaling
 
                                 NText {
                                   text: modelData.name || "Unknown"
-                                  font.pointSize: 14 * scaling
+                                  font.pointSize: Style.fontSizeLarge * scaling
                                   font.weight: Font.Bold
                                   color: Colors.mOnSurface
                                   elide: Text.ElideRight
@@ -476,7 +476,7 @@ NLoader {
 
                                 NText {
                                   text: modelData.isCalculator ? (modelData.expr + " = " + modelData.result) : modelData.isClipboard ? modelData.content : modelData.isCommand ? modelData.content : (modelData.genericName || modelData.comment || "")
-                                  font.pointSize: 11 * scaling
+                                  font.pointSize: Style.fontSizeMedium * scaling
                                   color: (appCardArea.containsMouse
                                           || isSelected) ? Colors.mOnSurface : Colors.mOnSurface
                                   elide: Text.ElideRight

@@ -94,7 +94,7 @@ Rectangle {
         anchors.right: parent.right
         anchors.top: parent.top
         anchors.rightMargin: -6 * scaling * contentScale
-        anchors.topMargin: 4 * scaling * contentScale
+                        anchors.topMargin: Style.marginTiniest * scaling * contentScale
 
         Text {
           anchors.centerIn: parent

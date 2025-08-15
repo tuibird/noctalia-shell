@@ -174,7 +174,7 @@ WlSessionLock {
 
         // Time display - Large and prominent with pulse animation
         Column {
-          spacing: 8 * scaling
+          spacing: Style.marginSmall * scaling
           Layout.alignment: Qt.AlignHCenter
 
           Text {
@@ -216,7 +216,7 @@ WlSessionLock {
 
         // User section with animated avatar
         Column {
-          spacing: 16 * scaling
+          spacing: Style.marginMedium * scaling
           Layout.alignment: Qt.AlignHCenter
 
           // Animated avatar with glow effect
@@ -226,7 +226,7 @@ WlSessionLock {
             radius: width * 0.5
             color: "transparent"
             border.color: Colors.mPrimary
-            border.width: 3 * scaling
+            border.width: Math.max(1, Style.borderThick * scaling)
             anchors.horizontalCenter: parent.horizontalCenter
 
             // Glow effect
@@ -237,7 +237,7 @@ WlSessionLock {
               radius: width * 0.5
               color: "transparent"
               border.color: Qt.rgba(Colors.mPrimary.r, Colors.mPrimary.g, Colors.mPrimary.b, 0.3)
-              border.width: 2 * scaling
+              border.width: Math.max(1, Style.borderMedium * scaling)
               z: -1
 
               SequentialAnimation on scale {
@@ -274,7 +274,7 @@ WlSessionLock {
 
             Behavior on scale {
               NumberAnimation {
-                duration: 200
+                duration: Style.animationFast
                 easing.type: Easing.OutBack
               }
             }
@@ -303,10 +303,10 @@ WlSessionLock {
             Rectangle {
               id: terminalBackground
               anchors.fill: parent
-              radius: 16
+              radius: Style.radiusMedium * scaling
               color: Colors.applyOpacity(Colors.mSurface, "E6")
               border.color: Colors.mPrimary
-              border.width: 2 * scaling
+              border.width: Math.max(1, Style.borderMedium * scaling)
 
               // Scanline effect
               Repeater {
@@ -316,7 +316,7 @@ WlSessionLock {
                   height: 1
                   color: Colors.applyOpacity(Colors.mPrimary, "1A")
                   y: index * 10
-                  opacity: 0.3
+                  opacity: Style.opacityMedium
 
                   SequentialAnimation on opacity {
                     loops: Animation.Infinite
@@ -337,13 +337,13 @@ WlSessionLock {
                 width: parent.width
                 height: 40 * scaling
                 color: Colors.applyOpacity(Colors.mPrimary, "33")
-                topLeftRadius: 14
-                topRightRadius: 14
+                topLeftRadius: Style.radiusSmall * scaling
+                topRightRadius: Style.radiusSmall * scaling
 
                 RowLayout {
                   anchors.fill: parent
-                  anchors.margins: 12 * scaling
-                  spacing: 12 * scaling
+                  anchors.margins: Style.marginMedium * scaling
+                  spacing: Style.marginMedium * scaling
 
                   Text {
                     text: "SECURE TERMINAL"
@@ -363,13 +363,13 @@ WlSessionLock {
                 anchors.right: parent.right
                 anchors.bottom: parent.bottom
                 anchors.topMargin: 70 * scaling
-                anchors.margins: 12 * scaling
-                spacing: 12 * scaling
+                anchors.margins: Style.marginMedium * scaling
+                spacing: Style.marginMedium * scaling
 
                 // Welcome back typing effect
                 RowLayout {
                   Layout.fillWidth: true
-                  spacing: 12 * scaling
+                  spacing: Style.marginMedium * scaling
 
                   Text {
                     text: "root@noctalia:~$"
@@ -389,7 +389,7 @@ WlSessionLock {
                     property string fullText: "Welcome back, " + Quickshell.env("USER") + "!"
 
                     Timer {
-                      interval: 100
+                      interval: Style.animationFast
                       running: true
                       repeat: true
                       onTriggered: {
@@ -407,7 +407,7 @@ WlSessionLock {
                 // Command line with integrated password input
                 RowLayout {
                   Layout.fillWidth: true
-                  spacing: 12 * scaling
+                  spacing: Style.marginMedium * scaling
 
                   Text {
                     text: "root@noctalia:~$"
@@ -489,7 +489,7 @@ WlSessionLock {
                     color: Colors.mPrimary
                     visible: passwordInput.activeFocus
                     anchors.left: asterisksText.right
-                    anchors.leftMargin: 2 * scaling
+                    anchors.leftMargin: Style.marginTiniest * scaling
                     anchors.verticalCenter: asterisksText.verticalCenter
 
                     SequentialAnimation on opacity {
@@ -532,10 +532,10 @@ WlSessionLock {
                 Rectangle {
                   width: 120 * scaling
                   height: 40 * scaling
-                  radius: 12
+                  radius: Style.radiusSmall * scaling
                   color: executeButtonArea.containsMouse ? Colors.mPrimary : Colors.applyOpacity(Colors.mPrimary, "33")
                   border.color: Colors.mPrimary
-                  border.width: 1
+                  border.width: Math.max(1, Style.borderThin * scaling)
                   enabled: !lock.authenticating
                   Layout.alignment: Qt.AlignRight
                   Layout.bottomMargin: -12 * scaling
@@ -559,7 +559,7 @@ WlSessionLock {
                       running: containsMouse
                       NumberAnimation {
                         to: 1.05
-                        duration: 150
+                        duration: Style.animationFast
                         easing.type: Easing.OutCubic
                       }
                     }
@@ -568,7 +568,7 @@ WlSessionLock {
                       running: !containsMouse
                       NumberAnimation {
                         to: 1.0
-                        duration: 150
+                        duration: Style.animationFast
                         easing.type: Easing.OutCubic
                       }
                     }
@@ -598,7 +598,7 @@ WlSessionLock {
                 radius: parent.radius
                 color: "transparent"
                 border.color: Colors.applyOpacity(Colors.mPrimary, "4D")
-                border.width: 1
+                border.width: Math.max(1, Style.borderThin * scaling)
                 z: -1
 
                 SequentialAnimation on opacity {
@@ -632,10 +632,10 @@ WlSessionLock {
       Rectangle {
         width: 64 * scaling
         height: 64 * scaling
-        radius: 32
+        radius: Style.radiusLarge * scaling
         color: Qt.rgba(Colors.mError.r, Colors.mError.g, Colors.mError.b, shutdownArea.containsMouse ? 0.9 : 0.2)
         border.color: Colors.mError
-        border.width: 2 * scaling
+        border.width: Math.max(1, Style.borderMedium * scaling)
 
         // Glow effect
         Rectangle {
@@ -645,13 +645,13 @@ WlSessionLock {
           radius: width * 0.5
           color: "transparent"
           border.color: Qt.rgba(Colors.mError.r, Colors.mError.g, Colors.mError.b, 0.3)
-          border.width: 2 * scaling
+          border.width: Math.max(1, Style.borderMedium * scaling)
           opacity: shutdownArea.containsMouse ? 1 : 0
           z: -1
 
           Behavior on opacity {
             NumberAnimation {
-              duration: 200
+              duration: Style.animationFast
               easing.type: Easing.OutCubic
             }
           }
@@ -672,13 +672,13 @@ WlSessionLock {
           anchors.centerIn: parent
           text: "power_settings_new"
           font.family: "Material Symbols Outlined"
-          font.pixelSize: 28 * scaling
+          font.pointSize: Style.fontSizeXXL * scaling
           color: shutdownArea.containsMouse ? Colors.onAccent : Colors.mError
         }
 
         Behavior on color {
           ColorAnimation {
-            duration: 200
+            duration: Style.animationFast
             easing.type: Easing.OutCubic
           }
         }
@@ -689,10 +689,10 @@ WlSessionLock {
       Rectangle {
         width: 64 * scaling
         height: 64 * scaling
-        radius: 32
+        radius: Style.radiusLarge * scaling
         color: Qt.rgba(Colors.mPrimary.r, Colors.mPrimary.g, Colors.mPrimary.b, rebootArea.containsMouse ? 0.9 : 0.2)
         border.color: Colors.mPrimary
-        border.width: 2 * scaling
+        border.width: Math.max(1, Style.borderMedium * scaling)
 
         // Glow effect
         Rectangle {
@@ -702,13 +702,13 @@ WlSessionLock {
           radius: width * 0.5
           color: "transparent"
           border.color: Qt.rgba(Colors.mPrimary.r, Colors.mPrimary.g, Colors.mPrimary.b, 0.3)
-          border.width: 2 * scaling
+          border.width: Math.max(1, Style.borderMedium * scaling)
           opacity: rebootArea.containsMouse ? 1 : 0
           z: -1
 
           Behavior on opacity {
             NumberAnimation {
-              duration: 200
+              duration: Style.animationFast
               easing.type: Easing.OutCubic
             }
           }
@@ -728,13 +728,13 @@ WlSessionLock {
           anchors.centerIn: parent
           text: "refresh"
           font.family: "Material Symbols Outlined"
-          font.pixelSize: 28 * scaling
+          font.pointSize: Style.fontSizeXXL * scaling
           color: rebootArea.containsMouse ? Colors.onAccent : Colors.mPrimary
         }
 
         Behavior on color {
           ColorAnimation {
-            duration: 200
+            duration: Style.animationFast
             easing.type: Easing.OutCubic
           }
         }
@@ -745,11 +745,11 @@ WlSessionLock {
       Rectangle {
         width: 64 * scaling
         height: 64 * scaling
-        radius: 32
+        radius: Style.radiusLarge * scaling
         color: Qt.rgba(Colors.mSecondary.r, Colors.mSecondary.g, Colors.mSecondary.b,
                        logoutArea.containsMouse ? 0.9 : 0.2)
         border.color: Colors.mSecondary
-        border.width: 2 * scaling
+        border.width: Math.max(1, Style.borderMedium * scaling)
 
         // Glow effect
         Rectangle {
@@ -759,13 +759,13 @@ WlSessionLock {
           radius: width * 0.5
           color: "transparent"
           border.color: Qt.rgba(Colors.mSecondary.r, Colors.mSecondary.g, Colors.mSecondary.b, 0.3)
-          border.width: 2 * scaling
+          border.width: Math.max(1, Style.borderMedium * scaling)
           opacity: logoutArea.containsMouse ? 1 : 0
           z: -1
 
           Behavior on opacity {
             NumberAnimation {
-              duration: 200
+              duration: Style.animationFast
               easing.type: Easing.OutCubic
             }
           }
@@ -787,13 +787,13 @@ WlSessionLock {
           anchors.centerIn: parent
           text: "exit_to_app"
           font.family: "Material Symbols Outlined"
-          font.pixelSize: 28 * scaling
+          font.pointSize: Style.fontSizeXXL * scaling
           color: logoutArea.containsMouse ? Colors.onAccent : Colors.mSecondary
         }
 
         Behavior on color {
           ColorAnimation {
-            duration: 200
+            duration: Style.animationFast
             easing.type: Easing.OutCubic
           }
         }

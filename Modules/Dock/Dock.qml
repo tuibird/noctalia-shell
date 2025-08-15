@@ -26,11 +26,11 @@ NLoader {
         property bool hidden: autoHide // Start hidden only if auto-hide is enabled
         property int hideDelay: 500
         property int showDelay: 100
-        property int hideAnimationDuration: 200
-        property int showAnimationDuration: 150
+        property int hideAnimationDuration: Style.animationFast
+        property int showAnimationDuration: Style.animationFast
         property int peekHeight: 2
         property int fullHeight: dockContainer.height
-        property int iconSize: 48
+        property int iconSize: 36
 
         // Track hover state
         property bool dockHovered: false
@@ -51,7 +51,7 @@ NLoader {
         anchors.right: true
         focusable: false
         color: "transparent"
-        implicitHeight: iconSize * 1.5 * scaling
+        implicitHeight: iconSize * 1.4 * scaling
 
         // Timer for auto-hide delay
         Timer {
@@ -110,8 +110,8 @@ NLoader {
         Rectangle {
           id: dockContainer
           width: dock.width + 48 * scaling
-          height: iconSize * 1.5 * scaling
-          color: Colors.mSurfaceVariant
+          height: iconSize * 1.4 * scaling
+          color: Colors.mSurface
           anchors.horizontalCenter: parent.horizontalCenter
           anchors.bottom: parent.bottom
           topLeftRadius: Style.radiusLarge * scaling
@@ -258,7 +258,7 @@ NLoader {
                     radius: Style.radiusTiny
                     anchors.top: parent.bottom
                     anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.topMargin: 2 * scaling
+                    anchors.topMargin: Style.marginTiniest * scaling
                   }
                 }
               }
@@ -290,12 +290,12 @@ NLoader {
 
           Rectangle {
             id: contextMenuContainer
-            width: 80
-            height: 32
-            radius: 8
+            width: Style.baseWidgetSize * 2.5 * scaling
+            height: Style.baseWidgetSize * scaling
+            radius: Style.radiusTiny * scaling
             color: closeMouseArea.containsMouse ? Colors.mTertiary : Colors.mSurface
             border.color: Colors.mOutline
-            border.width: 1
+            border.width: Math.max(1, Style.borderThin * scaling)
 
             x: {
               if (!contextMenuTarget)
@@ -315,7 +315,7 @@ NLoader {
             Text {
               anchors.centerIn: parent
               text: "Close"
-              font.pixelSize: 14
+              font.pointSize: Style.fontSizeMedium * scaling
               color: Colors.mOnSurface
             }
 
@@ -340,14 +340,14 @@ NLoader {
 
             Behavior on scale {
               NumberAnimation {
-                duration: 150
+                duration: Style.animationFast
                 easing.type: Easing.OutBack
               }
             }
 
             Behavior on opacity {
               NumberAnimation {
-                duration: 100
+                duration: Style.animationFast
               }
             }
           }

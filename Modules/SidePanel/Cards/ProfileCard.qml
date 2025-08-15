@@ -38,7 +38,7 @@ NBox {
 
     ColumnLayout {
       Layout.fillWidth: true
-      spacing: 2 * scaling
+                      spacing: Style.marginTiniest * scaling
       NText {
         text: Quickshell.env("USER") || "user"
         font.weight: Style.fontWeightBold

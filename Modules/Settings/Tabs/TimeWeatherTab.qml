@@ -74,7 +74,7 @@ ColumnLayout {
             font.pointSize: Style.fontSizeXL * scaling
             font.weight: Style.fontWeightBold
             color: Colors.mOnSurface
-            Layout.bottomMargin: 8
+            Layout.bottomMargin: Style.marginSmall * scaling
           }
 
           NToggle {

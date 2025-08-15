@@ -86,9 +86,9 @@ NLoader {
       Rectangle {
         id: wifiMenuRect
         color: Colors.mSurface
-        radius: Style.radiusMedium * scaling
-        border.color: Colors.mOutline
-        border.width: Math.max(1, Style.borderMedium * scaling)
+        radius: Style.radiusLarge * scaling
+        border.color: Colors.mOutlineVariant
+        border.width: Math.max(1, Style.borderThin * scaling)
         width: 340 * scaling
         height: 320 * scaling
         anchors.top: parent.top
@@ -306,8 +306,8 @@ NLoader {
                       }
 
                       Item {
-                        Layout.preferredWidth: 22
-                        Layout.preferredHeight: 22
+                        Layout.preferredWidth: Style.baseWidgetSize * 0.7 * scaling
+                        Layout.preferredHeight: Style.baseWidgetSize * 0.7 * scaling
                         visible: network.connectStatusSsid === modelData.ssid
                                  && (network.connectStatus !== "" || network.connectingSsid === modelData.ssid)
 
@@ -324,7 +324,7 @@ NLoader {
                           visible: network.connectStatus === "success" && !network.connectingSsid
                           text: "check_circle"
                           font.family: "Material Symbols Outlined"
-                          font.pointSize: 18 * scaling
+                          font.pointSize: Style.fontSizeXL * scaling
                           color: "#43a047" // TBC: No!
                           anchors.centerIn: parent
                         }
@@ -374,7 +374,7 @@ NLoader {
                     id: passwordPromptSection
                     Layout.fillWidth: true
                     Layout.preferredHeight: modelData.ssid === passwordPromptSsid && showPasswordPrompt ? 60 : 0
-                    Layout.margins: 8
+                    Layout.margins: Style.marginSmall * scaling
                     visible: modelData.ssid === passwordPromptSsid && showPasswordPrompt
                     color: Colors.mSurfaceVariant
                     radius: Style.radiusSmall * scaling
@@ -386,14 +386,14 @@ NLoader {
 
                       Item {
                         Layout.fillWidth: true
-                        Layout.preferredHeight: 36
+                        Layout.preferredHeight: Style.barHeight * scaling
 
                         Rectangle {
                           anchors.fill: parent
-                          radius: 8
+                          radius: Style.radiusTiny * scaling
                           color: "transparent"
                           border.color: passwordInputField.activeFocus ? Colors.mPrimary : Colors.mOutline
-                          border.width: 1
+                          border.width: Math.max(1, Style.borderThin * scaling)
 
                           TextInput {
                             id: passwordInputField
@@ -425,12 +425,10 @@ NLoader {
                       }
 
                       Rectangle {
-                        Layout.preferredWidth: 80
-                        Layout.preferredHeight: 36
+                        Layout.preferredWidth: Style.baseWidgetSize * 2.5 * scaling
+                        Layout.preferredHeight: Style.barHeight * scaling
                         radius: Style.radiusMedium * scaling
                         color: Colors.mPrimary
-                        border.color: Colors.mPrimary
-                        border.width: 0
 
                         Behavior on color {
                           ColorAnimation {

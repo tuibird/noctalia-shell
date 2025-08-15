@@ -13,7 +13,7 @@ PopupWindow {
   property real anchorX
   property real anchorY
 
-  implicitWidth: 180 * scaling
+          implicitWidth: Style.baseWidgetSize * 5.625 * scaling
   implicitHeight: Math.max(60 * scaling, listView.contentHeight + (Style.marginMedium * 2 * scaling))
   visible: false
   color: "transparent"
@@ -250,7 +250,7 @@ PopupWindow {
 
     PopupWindow {
       id: subMenu
-      implicitWidth: 180 * scaling
+      implicitWidth: Style.baseWidgetSize * 5.625 * scaling
       implicitHeight: Math.max(40, listView.contentHeight + 12)
       visible: false
       color: "transparent"

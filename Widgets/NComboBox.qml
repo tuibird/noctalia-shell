@@ -58,7 +58,7 @@ ColumnLayout {
     }
 
     background: Rectangle {
-      implicitWidth: 120 * scaling
+      implicitWidth: Style.baseWidgetSize * 3.75 * scaling
       implicitHeight: preferredHeight
       color: Colors.mSurface
       border.color: combo.activeFocus ? Colors.mTertiary : Colors.mOutline

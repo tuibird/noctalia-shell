@@ -149,8 +149,7 @@ Item {
                 anchors.margins: Style.marginTiny * scaling
                 imagePath: wallpaperPath
                 fallbackIcon: "image"
-                borderColor: "transparent"
-                borderWidth: 0
+
                 imageRadius: Style.radiusMedium * scaling
               }
 
@@ -185,7 +184,7 @@ Item {
 
                 Behavior on opacity {
                   NumberAnimation {
-                    duration: 150
+                    duration: Style.animationFast
                   }
                 }
               }
@@ -235,7 +234,7 @@ Item {
                 color: Colors.mOnSurface
                 wrapMode: Text.WordWrap
                 horizontalAlignment: Text.AlignHCenter
-                Layout.preferredWidth: 300 * scaling
+                Layout.preferredWidth: Style.sliderWidth * 1.5 * scaling
               }
             }
           }
