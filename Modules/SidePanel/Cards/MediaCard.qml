@@ -339,15 +339,5 @@ NBox {
         Layout.alignment: Qt.AlignHCenter
       }
     }
-
-    // CircularSpectrum {
-    //   visible: Settings.data.audio.visualizerType == "radial"
-    //   values: Cava.values
-    //   innerRadius: 30 * scaling // Position just outside 60x60 album art
-    //   outerRadius: 48 * scaling // Extend bars outward from album art
-    //   fillColor: Colors.mPrimary
-    //   strokeColor: Colors.mPrimary
-    //   strokeWidth: 0 * scaling
-    // }
   }
 }

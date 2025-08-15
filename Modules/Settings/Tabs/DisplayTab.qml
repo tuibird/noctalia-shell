@@ -47,6 +47,95 @@ Item {
           color: Colors.mOnSurface
         }
 
+        NText {
+          text: "By default, all bars are displayed. Select one or more below to narrow your view."
+          font.pointSize: Style.fontSize * scaling
+          color: Colors.mOnSurfaceVariant
+        }
+
+        Repeater {
+          model: Quickshell.screens || []
+          delegate: Rectangle {
+            Layout.fillWidth: true
+            radius: Style.radiusMedium * scaling
+            color: Colors.mSurface
+            border.color: Colors.mOutline
+            border.width: Math.max(1, Style.borderThin * scaling)
+            implicitHeight: contentCol.implicitHeight + Style.marginXL * 2 * scaling
+
+            ColumnLayout {
+              id: contentCol
+              anchors.fill: parent
+              anchors.margins: Style.marginLarge * scaling
+              spacing: Style.marginTiniest * scaling
+
+              NText {
+                text: (modelData.name || "Unknown")
+                font.pointSize: Style.fontSizeLarge * scaling
+                font.weight: Style.fontWeightBold
+                color: Colors.mSecondary
+              }
+
+              NText {
+                text: `Resolution: ${modelData.width}x${modelData.height} - Position: (${modelData.x}, ${modelData.y})`
+                font.pointSize: Style.fontSizeSmall * scaling
+                color: Colors.mOnSurface
+              }
+
+              ColumnLayout {
+                spacing: Style.marginLarge * scaling
+
+                NToggle {
+                  label: "Bar"
+                  description: "Enable the top bar on this monitor"
+                  value: (Settings.data.bar.monitors || []).indexOf(modelData.name) !== -1
+                  onToggled: function (newValue) {
+                    if (newValue) {
+                      Settings.data.bar.monitors = addMonitor(Settings.data.bar.monitors, modelData.name)
+                    } else {
+                      Settings.data.bar.monitors = removeMonitor(Settings.data.bar.monitors, modelData.name)
+                    }
+                  }
+                }
+
+                NToggle {
+                  label: "Dock"
+                  description: "Enable the dock on this monitor"
+                  value: (Settings.data.dock.monitors || []).indexOf(modelData.name) !== -1
+                  onToggled: function (newValue) {
+                    if (newValue) {
+                      Settings.data.dock.monitors = addMonitor(Settings.data.dock.monitors, modelData.name)
+                    } else {
+                      Settings.data.dock.monitors = removeMonitor(Settings.data.dock.monitors, modelData.name)
+                    }
+                  }
+                }
+
+                NToggle {
+                  label: "Notifications"
+                  description: "Enable notifications on this monitor"
+                  value: (Settings.data.notifications.monitors || []).indexOf(modelData.name) !== -1
+                  onToggled: function (newValue) {
+                    if (newValue) {
+                      Settings.data.notifications.monitors = addMonitor(Settings.data.notifications.monitors,
+                                                                        modelData.name)
+                    } else {
+                      Settings.data.notifications.monitors = removeMonitor(Settings.data.notifications.monitors,
+                                                                           modelData.name)
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        NDivider {
+          Layout.fillWidth: true
+          Layout.topMargin: Style.marginLarge * 2 * scaling
+          Layout.bottomMargin: Style.marginLarge * scaling
+        }
+
         // Brightness Section
         ColumnLayout {
           spacing: Style.marginSmall * scaling
@@ -88,89 +177,6 @@ Item {
               text: Settings.data.brightness.brightnessStep + "%"
               Layout.alignment: Qt.AlignVCenter
               color: Colors.mOnSurface
-            }
-          }
-        }
-
-        NDivider {
-          Layout.fillWidth: true
-          Layout.topMargin: Style.marginLarge * 2 * scaling
-          Layout.bottomMargin: Style.marginLarge * scaling
-        }
-
-        Repeater {
-          model: Quickshell.screens || []
-          delegate: Rectangle {
-            Layout.fillWidth: true
-            radius: Style.radiusMedium * scaling
-            color: Colors.mSurface
-            border.color: Colors.mOutline
-            border.width: Math.max(1, Style.borderThin * scaling)
-            implicitHeight: contentCol.implicitHeight + Style.marginXL * 2 * scaling
-
-            ColumnLayout {
-              id: contentCol
-              anchors.fill: parent
-              anchors.margins: Style.marginLarge * scaling
-              spacing: Style.marginTiniest * scaling
-
-              NText {
-                text: (modelData.name || "Unknown")
-                font.pointSize: Style.fontSizeLarge * scaling
-                font.weight: Style.fontWeightBold
-                color: Colors.mSecondary
-              }
-
-              NText {
-                text: `Resolution: ${modelData.width}x${modelData.height} - Position: (${modelData.x}, ${modelData.y})`
-                font.pointSize: Style.fontSizeSmall * scaling
-                color: Colors.mOnSurface
-              }
-
-              ColumnLayout {
-                spacing: Style.marginLarge * scaling
-
-                NToggle {
-                  label: "Bar"
-                  description: "Display the top bar on this monitor"
-                  value: (Settings.data.bar.monitors || []).indexOf(modelData.name) !== -1
-                  onToggled: function (newValue) {
-                    if (newValue) {
-                      Settings.data.bar.monitors = addMonitor(Settings.data.bar.monitors, modelData.name)
-                    } else {
-                      Settings.data.bar.monitors = removeMonitor(Settings.data.bar.monitors, modelData.name)
-                    }
-                  }
-                }
-
-                NToggle {
-                  label: "Dock"
-                  description: "Display the dock on this monitor"
-                  value: (Settings.data.dock.monitors || []).indexOf(modelData.name) !== -1
-                  onToggled: function (newValue) {
-                    if (newValue) {
-                      Settings.data.dock.monitors = addMonitor(Settings.data.dock.monitors, modelData.name)
-                    } else {
-                      Settings.data.dock.monitors = removeMonitor(Settings.data.dock.monitors, modelData.name)
-                    }
-                  }
-                }
-
-                NToggle {
-                  label: "Notifications"
-                  description: "Display notifications on this monitor"
-                  value: (Settings.data.notifications.monitors || []).indexOf(modelData.name) !== -1
-                  onToggled: function (newValue) {
-                    if (newValue) {
-                      Settings.data.notifications.monitors = addMonitor(Settings.data.notifications.monitors,
-                                                                        modelData.name)
-                    } else {
-                      Settings.data.notifications.monitors = removeMonitor(Settings.data.notifications.monitors,
-                                                                           modelData.name)
-                    }
-                  }
-                }
-              }
             }
           }
         }

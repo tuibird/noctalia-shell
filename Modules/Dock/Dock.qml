@@ -40,7 +40,7 @@ NLoader {
         PanelWindow {
           id: dockWindow
 
-          // Dock works differently from bar, it is show only if toggled in Settings/Display
+          // Dock is only shown if explicitely toggled
           visible: modelData ? Settings.data.dock.monitors.includes(modelData.name) : false
 
           screen: modelData
