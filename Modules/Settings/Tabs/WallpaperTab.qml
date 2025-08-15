@@ -183,8 +183,24 @@ ColumnLayout {
           NComboBox {
             label: "Resize Mode"
             description: "How SWWW should resize wallpapers to fit the screen"
-            optionsKeys: ["no", "crop", "fit", "stretch"]
-            optionsLabels: ["No", "Crop", "Fit", "Stretch"]
+            model: ListModel {
+              ListElement {
+                key: "no"
+                name: "No"
+              }
+              ListElement {
+                key: "crop"
+                name: "Crop"
+              }
+              ListElement {
+                key: "fit"
+                name: "Fit"
+              }
+              ListElement {
+                key: "stretch"
+                name: "Stretch"
+              }
+            }
             currentKey: Settings.data.wallpaper.swww.resizeMethod
             onSelected: function (key) {
               Settings.data.wallpaper.swww.resizeMethod = key
@@ -195,8 +211,64 @@ ColumnLayout {
           NComboBox {
             label: "Transition Type"
             description: "Animation type when switching between wallpapers"
-            optionsKeys: ["none", "simple", "fade", "left", "right", "top", "bottom", "wipe", "wave", "grow", "center", "any", "outer", "random"]
-            optionsLabels: ["None", "Simple", "Fade", "Left", "Right", "Top", "Bottom", "Wipe", "Wave", "Grow", "Center", "Any", "Outer", "Random"]
+            model: ListModel {
+              ListElement {
+                key: "none"
+                name: "None"
+              }
+              ListElement {
+                key: "simple"
+                name: "Simple"
+              }
+              ListElement {
+                key: "fade"
+                name: "Fade"
+              }
+              ListElement {
+                key: "left"
+                name: "Left"
+              }
+              ListElement {
+                key: "right"
+                name: "Right"
+              }
+              ListElement {
+                key: "top"
+                name: "Top"
+              }
+              ListElement {
+                key: "bottom"
+                name: "Bottom"
+              }
+              ListElement {
+                key: "wipe"
+                name: "Wipe"
+              }
+              ListElement {
+                key: "wave"
+                name: "Wave"
+              }
+              ListElement {
+                key: "grow"
+                name: "Grow"
+              }
+              ListElement {
+                key: "center"
+                name: "Center"
+              }
+              ListElement {
+                key: "any"
+                name: "Any"
+              }
+              ListElement {
+                key: "outer"
+                name: "Outer"
+              }
+              ListElement {
+                key: "random"
+                name: "Random"
+              }
+            }
             currentKey: Settings.data.wallpaper.swww.transitionType
             onSelected: function (key) {
               Settings.data.wallpaper.swww.transitionType = key

@@ -9,7 +9,7 @@ Singleton {
   id: root
 
   Component.onCompleted: {
-    console.log("[ColorSchemes] Service initialized")
+    console.log("[ColorSchemes] Service started")
     loadColorSchemes()
   }
 

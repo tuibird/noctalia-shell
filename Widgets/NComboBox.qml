@@ -12,8 +12,9 @@ ColumnLayout {
 
   property string label: ""
   property string description: ""
-  property list<string> optionsKeys: []
-  property list<string> optionsLabels: []
+  property ListModel model: {
+
+  }
   property string currentKey: ''
 
   signal selected(string key)
@@ -24,14 +25,12 @@ ColumnLayout {
   ColumnLayout {
     spacing: Style.marginTiniest * scaling
     Layout.fillWidth: true
-
     NText {
       text: label
       font.pointSize: Style.fontSizeMedium * scaling
       font.weight: Style.fontWeightBold
       color: Colors.mOnSurface
     }
-
     NText {
       text: description
       font.pointSize: Style.fontSizeSmall * scaling
@@ -40,19 +39,25 @@ ColumnLayout {
     }
   }
 
+  function findIndexByKey(key) {
+    for (var i = 0; i < root.model.count; i++) {
+      if (root.model.get(i).key === key) {
+        return i
+      }
+    }
+    return -1
+  }
+
   ComboBox {
     id: combo
-
     Layout.fillWidth: true
     Layout.preferredHeight: height
-
-    model: optionsKeys
-    currentIndex: model.indexOf(currentKey)
+    model: model
+    currentIndex: findIndexByKey(currentKey)
     onActivated: {
-      root.selected(model[combo.currentIndex])
+      root.selected(model.get(combo.currentIndex).key)
     }
 
-    // Rounded background
     background: Rectangle {
       implicitWidth: 120 * scaling
       implicitHeight: preferredHeight
@@ -62,18 +67,16 @@ ColumnLayout {
       radius: Style.radiusMedium * scaling
     }
 
-    // Label (currently selected)
     contentItem: NText {
       leftPadding: Style.marginLarge * scaling
       rightPadding: combo.indicator.width + Style.marginLarge * scaling
       font.pointSize: Style.fontSizeMedium * scaling
       verticalAlignment: Text.AlignVCenter
       elide: Text.ElideRight
-      text: (combo.currentIndex >= 0
-             && combo.currentIndex < root.optionsLabels.length) ? root.optionsLabels[combo.currentIndex] : ""
+      text: (combo.currentIndex >= 0 && combo.currentIndex < root.model.count) ? root.model.get(
+                                                                                   combo.currentIndex).name : ""
     }
 
-    // Drop down indicator
     indicator: NText {
       x: combo.width - width - Style.marginMedium * scaling
       y: combo.topPadding + (combo.availableHeight - height) / 2
@@ -89,11 +92,43 @@ ColumnLayout {
       padding: Style.marginMedium * scaling
 
       contentItem: ListView {
+        property var comboBoxRoot: root
         clip: true
         implicitHeight: contentHeight
-        model: combo.popup.visible ? combo.delegateModel : null
-        currentIndex: combo.highlightedIndex
+        model: combo.popup.visible ? root.model : null
         ScrollIndicator.vertical: ScrollIndicator {}
+
+        delegate: ItemDelegate {
+          width: combo.width
+          hoverEnabled: true
+          highlighted: ListView.view.currentIndex === index
+
+          onHoveredChanged: {
+            if (hovered) {
+              ListView.view.currentIndex = index
+            }
+          }
+
+          onClicked: {
+            ListView.view.comboBoxRoot.selected(ListView.view.comboBoxRoot.model.get(index).key)
+            combo.currentIndex = index
+            combo.popup.close()
+          }
+
+          contentItem: NText {
+            text: name
+            font.pointSize: Style.fontSizeMedium * scaling
+            color: highlighted ? Colors.mSurface : Colors.mOnSurface
+            verticalAlignment: Text.AlignVCenter
+            elide: Text.ElideRight
+          }
+
+          background: Rectangle {
+            width: combo.width - Style.marginMedium * scaling * 3
+            color: highlighted ? Colors.mTertiary : "transparent"
+            radius: Style.radiusSmall * scaling
+          }
+        }
       }
 
       background: Rectangle {
@@ -101,26 +136,6 @@ ColumnLayout {
         border.color: Colors.mOutline
         border.width: Math.max(1, Style.borderThin * scaling)
         radius: Style.radiusMedium * scaling
-      }
-    }
-
-    delegate: ItemDelegate {
-      width: combo.width
-      highlighted: combo.highlightedIndex === index
-
-      contentItem: NText {
-        text: (combo.model.indexOf(modelData) >= 0 && combo.model.indexOf(
-                 modelData) < root.optionsLabels.length) ? root.optionsLabels[combo.model.indexOf(modelData)] : ""
-        font.pointSize: Style.fontSizeMedium * scaling
-        color: highlighted ? Colors.mSurface : Colors.mOnSurface
-        verticalAlignment: Text.AlignVCenter
-        elide: Text.ElideRight
-      }
-
-      background: Rectangle {
-        width: combo.width - Style.marginMedium * scaling * 3
-        color: highlighted ? Colors.mTertiary : "transparent"
-        radius: Style.radiusSmall * scaling
       }
     }
   }

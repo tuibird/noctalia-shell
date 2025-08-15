@@ -70,7 +70,6 @@ Singleton {
         property bool showActiveWindowIcon: false
         property bool showSystemInfo: false
         property bool showMedia: false
-        // New: optional taskbar visibility in bar
         property bool showTaskbar: false
         property list<string> monitors: []
       }
@@ -107,7 +106,6 @@ Singleton {
         property string quality: "very_high"
         property string colorRange: "limited"
         property bool showCursor: true
-        // New: optional audio source selection (default: system output)
         property string audioSource: "default_output"
       }
 

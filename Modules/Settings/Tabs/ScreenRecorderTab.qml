@@ -95,8 +95,24 @@ ColumnLayout {
           NComboBox {
             label: "Frame Rate"
             description: "Target frame rate for screen recordings (default: 60)"
-            optionsKeys: ["30", "60", "120", "240"]
-            optionsLabels: ["30 FPS", "60 FPS", "120 FPS", "240 FPS"]
+            model: ListModel {
+              ListElement {
+                key: "30"
+                name: "30 FPS"
+              }
+              ListElement {
+                key: "60"
+                name: "60 FPS"
+              }
+              ListElement {
+                key: "120"
+                name: "120 FPS"
+              }
+              ListElement {
+                key: "240"
+                name: "240 FPS"
+              }
+            }
             currentKey: Settings.data.screenRecorder.frameRate
             onSelected: function (key) {
               Settings.data.screenRecorder.frameRate = key
@@ -107,8 +123,24 @@ ColumnLayout {
           NComboBox {
             label: "Video Quality"
             description: "Higher quality results in larger file sizes"
-            optionsKeys: ["medium", "high", "very_high", "ultra"]
-            optionsLabels: ["Medium", "High", "Very High", "Ultra"]
+            model: ListModel {
+              ListElement {
+                key: "medium"
+                name: "Medium"
+              }
+              ListElement {
+                key: "high"
+                name: "High"
+              }
+              ListElement {
+                key: "very_high"
+                name: "Very High"
+              }
+              ListElement {
+                key: "ultra"
+                name: "Ultra"
+              }
+            }
             currentKey: Settings.data.screenRecorder.quality
             onSelected: function (key) {
               Settings.data.screenRecorder.quality = key
@@ -119,8 +151,28 @@ ColumnLayout {
           NComboBox {
             label: "Video Codec"
             description: "Different codecs offer different compression and compatibility"
-            optionsKeys: ["h264", "hevc", "av1", "vp8", "vp9"]
-            optionsLabels: ["H264", "HEVC", "AV1", "VP8", "VP9"]
+            model: ListModel {
+              ListElement {
+                key: "h264"
+                name: "H264"
+              }
+              ListElement {
+                key: "hevc"
+                name: "HEVC"
+              }
+              ListElement {
+                key: "av1"
+                name: "AV1"
+              }
+              ListElement {
+                key: "vp8"
+                name: "VP8"
+              }
+              ListElement {
+                key: "vp9"
+                name: "VP9"
+              }
+            }
             currentKey: Settings.data.screenRecorder.videoCodec
             onSelected: function (key) {
               Settings.data.screenRecorder.videoCodec = key
@@ -131,8 +183,16 @@ ColumnLayout {
           NComboBox {
             label: "Color Range"
             description: "Limited is recommended for better compatibility"
-            optionsKeys: ["limited", "full"]
-            optionsLabels: ["Limited", "Full"]
+            model: ListModel {
+              ListElement {
+                key: "limited"
+                name: "Limited"
+              }
+              ListElement {
+                key: "full"
+                name: "Full"
+              }
+            }
             currentKey: Settings.data.screenRecorder.colorRange
             onSelected: function (key) {
               Settings.data.screenRecorder.colorRange = key
@@ -163,8 +223,20 @@ ColumnLayout {
           NComboBox {
             label: "Audio Source"
             description: "Audio source to capture during recording"
-            optionsKeys: ["default_output", "default_input", "both"]
-            optionsLabels: ["System Audio", "Microphone", "System Audio + Microphone"]
+            model: ListModel {
+              ListElement {
+                key: "default_output"
+                name: "System Output"
+              }
+              ListElement {
+                key: "default_input"
+                name: "Microphone Input"
+              }
+              ListElement {
+                key: "both"
+                name: "System Output + Microphone Input"
+              }
+            }
             currentKey: Settings.data.screenRecorder.audioSource
             onSelected: function (key) {
               Settings.data.screenRecorder.audioSource = key
@@ -175,8 +247,17 @@ ColumnLayout {
           NComboBox {
             label: "Audio Codec"
             description: "Opus is recommended for best performance and smallest audio size"
-            optionsKeys: ["opus", "aac"]
-            optionsLabels: ["OPUS", "AAC"]
+            model: ListModel {
+              ListElement {
+                key: "opus"
+                name: "Opus"
+              }
+              ListElement {
+                key: "aac"
+                name: "AAC"
+              }
+            }
+
             currentKey: Settings.data.screenRecorder.audioCodec
             onSelected: function (key) {
               Settings.data.screenRecorder.audioCodec = key

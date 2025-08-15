@@ -221,12 +221,40 @@ NLoader {
 
               NComboBox {
                 label: "Animal"
-                description: "What's your favorite"
-                optionsKeys: ["cat", "dog", "bird", "monkey", "fish", "turtle", "elephant", "tiger"]
-                optionsLabels: ["Cat", "Dog", "Bird", "Monkey", "Fish", "Turtle", "Elephant", "Tiger"]
-                currentKey: "cat"
-                onSelected: function (value) {
-                  console.log("[DemoPanel] NComboBox: selected ", value)
+                description: "What's your favorite?"
+                model: ListModel {
+                  ListElement {
+                    key: "cat"
+                    name: "Cat"
+                  }
+                  ListElement {
+                    key: "dog"
+                    name: "Dog"
+                  }
+                  ListElement {
+                    key: "bird"
+                    name: "Bird"
+                  }
+                  ListElement {
+                    key: "fish"
+                    name: "Fish"
+                  }
+                  ListElement {
+                    key: "turtle"
+                    name: "Turtle"
+                  }
+                  ListElement {
+                    key: "elephant"
+                    name: "Elephant"
+                  }
+                  ListElement {
+                    key: "tiger"
+                    name: "Tiger"
+                  }
+                }
+                currentKey: "dog"
+                onSelected: function (key) {
+                  console.log("[DemoPanel] NComboBox: selected ", key)
                 }
               }
 

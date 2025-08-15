@@ -9,7 +9,7 @@ Singleton {
   id: root
 
   Component.onCompleted: {
-    console.log("[Wallpapers] Service initialized")
+    console.log("[Wallpapers] Service started")
     loadWallpapers()
 
     // Wallpaper is set when the settings are loaded.
@@ -23,7 +23,7 @@ Singleton {
   // SWWW
   property string transitionType: Settings.data.wallpaper.swww.transitionType
   property var randomChoices: ["simple", "fade", "left", "right", "top", "bottom", "wipe", "wave", "grow", "center", "any", "outer"]
-  
+
   function loadWallpapers() {
     console.log("[Wallpapers] Load Wallpapers")
     scanning = true

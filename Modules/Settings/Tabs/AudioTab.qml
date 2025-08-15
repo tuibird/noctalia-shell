@@ -256,8 +256,16 @@ ColumnLayout {
           id: audioVisualizerCombo
           label: "Visualization Type"
           description: "Choose a visualization type for media playback"
-          optionsKeys: ["none", "linear"]
-          optionsLabels: ["None", "Linear"]
+          model: ListModel {
+            ListElement {
+              key: "none"
+              name: "None"
+            }
+            ListElement {
+              key: "linear"
+              name: "Linear"
+            }
+          }
           currentKey: Settings.data.audio.visualizerType
           onSelected: function (key) {
             Settings.data.audio.visualizerType = key
