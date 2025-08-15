@@ -39,6 +39,19 @@ ColumnLayout {
           color: Colors.mOnSurface
         }
 
+        // Use Wallpaper Colors
+        NToggle {
+          label: "Use Wallpaper Colors"
+          description: "Automatically generate colors from you active wallpaper (requires Matugen)"
+          value: Settings.data.colorSchemes.useWallpaperColors
+          onToggled: function (newValue) {
+            Settings.data.colorSchemes.useWallpaperColors = newValue
+            if (Settings.data.colorSchemes.useWallpaperColors) {
+              ColorSchemes.changedWallpaper()
+            }
+          }
+        }
+
         ButtonGroup {
           id: schemesGroup
         }
@@ -48,9 +61,18 @@ ColumnLayout {
           NRadioButton {
             property string schemePath: modelData
             ButtonGroup.group: schemesGroup
-            //checked: Audio.sink?.id === modelData.id
-            //onClicked: Audio.setAudioSink(modelData)
-            text: schemePath
+            text: {
+              // Remove json and the full path
+              var chunks = schemePath.replace(".json", "").split("/")
+              return chunks[chunks.length - 1]
+            }
+            checked: Settings.data.colorSchemes.predefinedScheme == schemePath
+            onClicked: {
+              // Disable useWallpaperColors when picking a predefined color scheme
+              Settings.data.colorSchemes.useWallpaperColors = false
+              Settings.data.colorSchemes.predefinedScheme = schemePath
+              ColorSchemes.applyScheme(schemePath)
+            }
           }
         }
       }

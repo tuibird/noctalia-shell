@@ -39,7 +39,7 @@ Singleton {
   }
 
   function setCurrentWallpaper(path, isInitial) {
-    // Only generate colors if the wallpaper actually changed
+    // Only regenerate colors if the wallpaper actually changed
     var wallpaperChanged = currentWallpaper !== path
 
     currentWallpaper = path
@@ -64,9 +64,9 @@ Singleton {
       randomWallpaperTimer.restart()
     }
 
-    // Only generate colors if the wallpaper actually changed
+    // Only notify ColorSchemes service if the wallpaper actually changed
     if (wallpaperChanged) {
-      generateColors()
+      ColorSchemes.changedWallpaper()
     }
   }
 
@@ -92,14 +92,6 @@ Singleton {
     if (Settings.data.wallpaper.isRandom) {
       randomWallpaperTimer.stop()
       randomWallpaperTimer.start()
-    }
-  }
-
-  function generateColors() {
-    console.log("[Wallpapers] generateColors() called, generateColors setting:", Settings.data.wallpaper.generateColors)
-    if (Settings.data.wallpaper.generateColors) {
-      console.log("[Wallpapers] Starting color generation process")
-      generateThemeProcess.running = true
     }
   }
 
@@ -156,25 +148,6 @@ Singleton {
       if (exitCode !== 0) {
         console.log("[SWWW] Process failed. Make sure swww-daemon is running with: swww-daemon")
         console.log("[SWWW] You can start it with: swww-daemon --format xrgb")
-      }
-    }
-  }
-
-  Process {
-    id: generateThemeProcess
-    command: ["matugen", "image", currentWallpaper, "--config", Quickshell.shellDir + "/Assets/Matugen/matugen.toml"]
-    workingDirectory: Quickshell.shellDir
-    running: false
-    stdout: StdioCollector {
-      onStreamFinished: {
-        console.log("[Wallpapers] generated colors from image")
-      }
-    }
-    stderr: StdioCollector {
-      onStreamFinished: {
-        if (this.text !== "") {
-          console.error(this.text)
-        }
       }
     }
   }

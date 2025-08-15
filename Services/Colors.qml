@@ -13,29 +13,25 @@ Singleton {
   id: root
 
   // --- Key Colors: These are the main accent colors that define your app's style
-  property color mPrimary: useCustom ? customColors.mPrimary : defaultColors.mPrimary
-  property color mOnPrimary: useCustom ? customColors.mOnPrimary : defaultColors.mOnPrimary
-  property color mSecondary: useCustom ? customColors.mSecondary : defaultColors.mSecondary
-  property color mOnSecondary: useCustom ? customColors.mOnSecondary : defaultColors.mOnSecondary
-  property color mTertiary: useCustom ? customColors.mTertiary : defaultColors.mTertiary
-  property color mOnTertiary: useCustom ? customColors.mOnTertiary : defaultColors.mOnTertiary
+  property color mPrimary: customColors.mPrimary
+  property color mOnPrimary: customColors.mOnPrimary
+  property color mSecondary: customColors.mSecondary
+  property color mOnSecondary: customColors.mOnSecondary
+  property color mTertiary: customColors.mTertiary
+  property color mOnTertiary: customColors.mOnTertiary
 
   // --- Utility Colors: These colors serve specific, universal purposes like indicating errors
-  property color mError: useCustom ? customColors.mError : defaultColors.mError
-  property color mOnError: useCustom ? customColors.mOnError : defaultColors.mOnError
+  property color mError: customColors.mError
+  property color mOnError: customColors.mOnError
 
   // --- Surface and Variant Colors: These provide additional options for surfaces and their contents, creating visual hierarchy
-  property color mSurface: useCustom ? customColors.mSurface : defaultColors.mSurface
-  property color mOnSurface: useCustom ? customColors.mOnSurface : defaultColors.mOnSurface
-  property color mSurfaceVariant: useCustom ? customColors.mSurfaceVariant : defaultColors.mSurfaceVariant
-  property color mOnSurfaceVariant: useCustom ? customColors.mOnSurfaceVariant : defaultColors.mOnSurfaceVariant
-  property color mOutline: useCustom ? customColors.mOutline : defaultColors.mOutline
-  property color mOutlineVariant: useCustom ? customColors.mOutlineVariant : defaultColors.mOutlineVariant
-  property color mShadow: useCustom ? customColors.mShadow : defaultColors.mShadow
-
-  // -----------
-  // Check if we should use custom colors
-  property bool useCustom: (Settings.data.wallpaper.generateColors && customColorsFile.loaded)
+  property color mSurface: customColors.mSurface
+  property color mOnSurface: customColors.mOnSurface
+  property color mSurfaceVariant: customColors.mSurfaceVariant
+  property color mOnSurfaceVariant: customColors.mOnSurfaceVariant
+  property color mOutline: customColors.mOutline
+  property color mOutlineVariant: customColors.mOutlineVariant
+  property color mShadow: customColors.mShadow
 
   // -----------
   function applyOpacity(color, opacity) {
@@ -98,11 +94,11 @@ Singleton {
     path: Settings.configDir + "colors.json"
     watchChanges: true
     onFileChanged: {
-      console.log("[Colors] reloading colors file from disk")
+      console.log("[Colors] Reloading colors from disk")
       reload()
     }
     onAdapterUpdated: {
-      console.log("[Colors] writing colors to disk, primary color:", mPrimary)
+      console.log("[Colors] Writing colors to disk")
       writeAdapter()
     }
     onLoadFailed: function (error) {

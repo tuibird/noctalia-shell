@@ -92,16 +92,6 @@ ColumnLayout {
           }
         }
 
-        // Use Wallpaper Theme
-        NToggle {
-          label: "Use Wallpaper Colors"
-          description: "Automatically adjust UI colors based on wallpaper using Matugen"
-          value: Settings.data.wallpaper.generateColors
-          onToggled: function (newValue) {
-            Settings.data.wallpaper.generateColors = newValue
-          }
-        }
-
         // Interval
         ColumnLayout {
           RowLayout {

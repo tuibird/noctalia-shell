@@ -119,7 +119,6 @@ Singleton {
         property string current: ""
         property bool isRandom: false
         property int randomInterval: 300
-        property bool generateColors: false
         property JsonObject swww
 
         onDirectoryChanged: Wallpapers.loadWallpapers()
@@ -189,6 +188,13 @@ Singleton {
         property string lastMethod: "internal"
         property list<var> monitorBrightness: []
         property int brightnessStep: 5
+      }
+
+      property JsonObject colorSchemes
+
+      colorSchemes: JsonObject {
+        property bool useWallpaperColors: false
+        property string predefinedScheme: ""
       }
     }
   }
