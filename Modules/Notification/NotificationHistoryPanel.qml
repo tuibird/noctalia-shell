@@ -209,7 +209,6 @@ NLoader {
                   icon: "delete"
                   sizeMultiplier: 0.7
                   tooltipText: "Delete notification"
-                  color: notificationMouseArea.containsMouse ? Colors.mSurface : Colors.mOnSurfaceVariant
                   onClicked: {
                     console.log("[NotificationHistory] Removing notification:", summary)
                     NotificationService.historyModel.remove(index)
