@@ -48,7 +48,7 @@ QtObject {
           break
         }
       }
-      
+
       // Disable WiFi radio
       disableWifiProcess.running = true
     }
@@ -135,8 +135,7 @@ QtObject {
     }
   }
 
-  function onMenuClosed() {
-    // No need to do anything special on close
+  function onMenuClosed() {// No need to do anything special on close
   }
 
   // Process to enable WiFi radio
@@ -167,12 +166,12 @@ QtObject {
     onTriggered: {
       // Force refresh networks multiple times to ensure UI updates
       root.refreshNetworks()
-      
+
       // Try to auto-reconnect to the last connected network if it exists
       if (lastConnectedNetwork) {
         autoReconnectTimer.start()
       }
-      
+
       // Set up additional refresh to ensure UI is populated
       postEnableRefreshTimer.start()
     }

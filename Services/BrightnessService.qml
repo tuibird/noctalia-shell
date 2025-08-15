@@ -1,5 +1,6 @@
 pragma Singleton
-pragma ComponentBehavior: Bound
+
+pragma ComponentBehavior
 
 import QtQuick
 import Quickshell
@@ -17,15 +18,16 @@ Singleton {
   readonly property bool available: focusedMonitor !== null
   readonly property string currentMethod: focusedMonitor ? focusedMonitor.method : Settings.data.brightness.lastMethod
   readonly property var detectedDisplays: monitors.map(m => ({
-    name: m.modelData.name,
-    type: m.isDdc ? "external" : "internal",
-    method: m.method,
-    index: m.busNum
-  }))
+                                                               "name": m.modelData.name,
+                                                               "type": m.isDdc ? "external" : "internal",
+                                                               "method": m.method,
+                                                               "index": m.busNum
+                                                             }))
 
   // Get the currently focused monitor
   readonly property Monitor focusedMonitor: {
-    if (monitors.length === 0) return null
+    if (monitors.length === 0)
+    return null
     // For now, return the first monitor. Could be enhanced to detect focused monitor
     return monitors[0]
   }
@@ -61,8 +63,7 @@ Singleton {
   }
 
   // Backward compatibility functions
-  function updateBrightness(): void {
-    // No longer needed with the new architecture
+  function updateBrightness(): void {// No longer needed with the new architecture
   }
 
   function setDisplay(displayIndex: int): bool {
@@ -72,18 +73,21 @@ Singleton {
 
   function getDisplayInfo(): var {
     return focusedMonitor ? {
-      name: focusedMonitor.modelData.name,
-      type: focusedMonitor.isDdc ? "external" : "internal",
-      method: focusedMonitor.method,
-      index: focusedMonitor.busNum
-    } : null
+                              "name": focusedMonitor.modelData.name,
+                              "type": focusedMonitor.isDdc ? "external" : "internal",
+                              "method": focusedMonitor.method,
+                              "index": focusedMonitor.busNum
+                            } : null
   }
 
   function getAvailableMethods(): list<string> {
     var methods = []
-    if (monitors.some(m => m.isDdc)) methods.push("ddcutil")
-    if (monitors.some(m => !m.isDdc)) methods.push("internal")
-    if (appleDisplayPresent) methods.push("apple")
+    if (monitors.some(m => m.isDdc))
+      methods.push("ddcutil")
+    if (monitors.some(m => !m.isDdc))
+      methods.push("internal")
+    if (appleDisplayPresent)
+      methods.push("apple")
     return methods
   }
 
@@ -121,18 +125,16 @@ Singleton {
       onStreamFinished: {
         var displays = text.trim().split("\n\n").filter(d => d.startsWith("Display "))
         root.ddcMonitors = displays.map(d => {
-          var modelMatch = d.match(/Monitor:.*:(.*):.*/)
-          var busMatch = d.match(/I2C bus:[ ]*\/dev\/i2c-([0-9]+)/)
-          return {
-            model: modelMatch ? modelMatch[1] : "",
-            busNum: busMatch ? busMatch[1] : ""
-          }
-        })
+                                          var modelMatch = d.match(/Monitor:.*:(.*):.*/)
+                                          var busMatch = d.match(/I2C bus:[ ]*\/dev\/i2c-([0-9]+)/)
+                                          return {
+                                            "model": modelMatch ? modelMatch[1] : "",
+                                            "busNum": busMatch ? busMatch[1] : ""
+                                          }
+                                        })
       }
     }
   }
-
-
 
   component Monitor: QtObject {
     id: monitor
@@ -142,19 +144,19 @@ Singleton {
     readonly property string busNum: root.ddcMonitors.find(m => m.model === modelData.model)?.busNum ?? ""
     readonly property bool isAppleDisplay: root.appleDisplayPresent && modelData.model.startsWith("StudioDisplay")
     readonly property string method: isAppleDisplay ? "apple" : (isDdc ? "ddcutil" : "internal")
-    
+
     property real brightness: getStoredBrightness()
     property real queuedBrightness: NaN
 
     // Signal for brightness changes
     signal brightnessUpdated(real newBrightness)
 
-        // Initialize brightness
+    // Initialize brightness
     readonly property Process initProc: Process {
       stdout: StdioCollector {
         onStreamFinished: {
           console.log("[BrightnessService] Raw brightness data for", monitor.modelData.name + ":", text.trim())
-          
+
           if (monitor.isAppleDisplay) {
             var val = parseInt(text.trim())
             if (!isNaN(val)) {
@@ -183,7 +185,7 @@ Singleton {
               }
             }
           }
-          
+
           if (monitor.brightness > 0) {
             // Save the detected brightness to settings
             monitor.saveBrightness(monitor.brightness)
@@ -204,9 +206,7 @@ Singleton {
       }
     }
 
-
-
-        function getStoredBrightness(): real {
+    function getStoredBrightness(): real {
       // Try to get stored brightness for this specific monitor
       var stored = Settings.data.brightness.monitorBrightness.find(m => m.name === modelData.name)
       if (stored) {
@@ -218,19 +218,19 @@ Singleton {
 
     function saveBrightness(value: real): void {
       var brightnessPercent = Math.round(value * 100)
-      
+
       // Update general last brightness
       Settings.data.brightness.lastBrightness = brightnessPercent
       Settings.data.brightness.lastMethod = method
-      
+
       // Update monitor-specific brightness
       var monitorIndex = Settings.data.brightness.monitorBrightness.findIndex(m => m.name === modelData.name)
       var monitorData = {
-        name: modelData.name,
-        brightness: brightnessPercent,
-        method: method
+        "name": modelData.name,
+        "brightness": brightnessPercent,
+        "method": method
       }
-      
+
       if (monitorIndex >= 0) {
         Settings.data.brightness.monitorBrightness[monitorIndex] = monitorData
       } else {
@@ -241,8 +241,9 @@ Singleton {
     function setBrightness(value: real): void {
       value = Math.max(0, Math.min(1, value))
       var rounded = Math.round(value * 100)
-      
-      if (Math.round(brightness * 100) === rounded) return
+
+      if (Math.round(brightness * 100) === rounded)
+        return
 
       if (isDdc && timer.running) {
         queuedBrightness = value
@@ -251,7 +252,7 @@ Singleton {
 
       brightness = value
       brightnessUpdated(brightness)
-      
+
       // Save to settings
       saveBrightness(value)
 
@@ -278,16 +279,14 @@ Singleton {
         initProc.command = ["asdbctl", "get"]
       } else if (isDdc) {
         initProc.command = ["ddcutil", "-b", busNum, "getvcp", "10", "--brief"]
-             } else {
-         // Internal backlight - try to find the first available backlight device
-         initProc.command = ["sh", "-c", "for dev in /sys/class/backlight/*; do if [ -f \"$dev/brightness\" ] && [ -f \"$dev/max_brightness\" ]; then echo \"$(cat $dev/brightness) $(cat $dev/max_brightness)\"; break; fi; done"]
-       }
+      } else {
+        // Internal backlight - try to find the first available backlight device
+        initProc.command = ["sh", "-c", "for dev in /sys/class/backlight/*; do if [ -f \"$dev/brightness\" ] && [ -f \"$dev/max_brightness\" ]; then echo \"$(cat $dev/brightness) $(cat $dev/max_brightness)\"; break; fi; done"]
+      }
       initProc.running = true
     }
-
-
 
     onBusNumChanged: initBrightness()
     Component.onCompleted: initBrightness()
   }
-} 
+}

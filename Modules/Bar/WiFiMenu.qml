@@ -154,7 +154,7 @@ NLoader {
               onToggled: function (value) {
                 Settings.data.network.wifiEnabled = value
                 network.setWifiEnabled(value)
-                
+
                 // If enabling WiFi while menu is open, refresh after a delay
                 if (value) {
                   wifiEnableRefreshTimer.start()
