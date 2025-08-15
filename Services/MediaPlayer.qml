@@ -16,13 +16,13 @@ Singleton {
   property string trackArtist: currentPlayer ? (currentPlayer.trackArtist || "") : ""
   property string trackAlbum: currentPlayer ? (currentPlayer.trackAlbum || "") : ""
   property string trackArtUrl: currentPlayer ? (currentPlayer.trackArtUrl || "") : ""
-  property real trackLength: currentPlayer ? currentPlayer.length : 0
+  property real trackLength: currentPlayer ? ((currentPlayer.length < infiniteTrackLength) ? currentPlayer.length : 0)  : 0
   property bool canPlay: currentPlayer ? currentPlayer.canPlay : false
   property bool canPause: currentPlayer ? currentPlayer.canPause : false
   property bool canGoNext: currentPlayer ? currentPlayer.canGoNext : false
   property bool canGoPrevious: currentPlayer ? currentPlayer.canGoPrevious : false
   property bool canSeek: currentPlayer ? currentPlayer.canSeek : false
-  property bool hasPlayer: getAvailablePlayers().length > 0
+  property real infiniteTrackLength: 922337203685
 
   Component.onCompleted: {
     updateCurrentPlayer()
@@ -49,6 +49,7 @@ Singleton {
   function findActivePlayer() {
     let availablePlayers = getAvailablePlayers()
     if (availablePlayers.length === 0) {
+      console.log("[MediaPlayer] No active player found")
       return null
     }
 
@@ -66,6 +67,7 @@ Singleton {
     if (newPlayer !== currentPlayer) {
       currentPlayer = newPlayer
       currentPosition = currentPlayer ? currentPlayer.position : 0
+      console.log("[MediaPlayer] Switching player")
     }
   }
 
@@ -146,6 +148,7 @@ Singleton {
   Connections {
     target: Mpris.players
     function onValuesChanged() {
+      console.log("[MediaPlayer] Players changed")
       updateCurrentPlayer()
     }
   }
