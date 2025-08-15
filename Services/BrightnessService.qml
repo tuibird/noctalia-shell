@@ -208,7 +208,12 @@ Singleton {
 
     function getStoredBrightness(): real {
       // Try to get stored brightness for this specific monitor
-      var stored = Settings.data.brightness.monitorBrightness.find(m => m.name === modelData.name)
+      var stored = Settings.data.brightness.monitorBrightness.find(m => {
+        if (m !== null) {
+          return m.name === modelData.name
+        }
+        return false
+      })
       if (stored) {
         return stored.brightness / 100
       }
@@ -224,7 +229,12 @@ Singleton {
       Settings.data.brightness.lastMethod = method
 
       // Update monitor-specific brightness
-      var monitorIndex = Settings.data.brightness.monitorBrightness.findIndex(m => m.name === modelData.name)
+      var monitorIndex = Settings.data.brightness.monitorBrightness.findIndex(m => {
+        if (m !== null) {
+          return  m.name === modelData.name
+        }
+        return -1
+      })
       var monitorData = {
         "name": modelData.name,
         "brightness": brightnessPercent,
