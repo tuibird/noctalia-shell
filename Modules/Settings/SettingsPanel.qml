@@ -193,8 +193,8 @@ NLoader {
         border.color: Colors.mOutlineVariant
         border.width: Math.max(1, Style.borderThin * scaling)
         layer.enabled: true
-        width: (screen.width * 0.5) * scaling
-        height: (screen.height * 0.5) * scaling
+        width: Math.max(screen.width * 0.5, 1280) * scaling
+        height: Math.max(screen.width * 0.5, 720) * scaling
         anchors.centerIn: parent
 
         // Animation properties
