@@ -62,7 +62,6 @@ NLoader {
               hidden = true
             }
           }
-                         
         }
 
         // Timer for show delay
@@ -188,7 +187,7 @@ NLoader {
                   Image {
                     id: appIcon
                     width: iconSize * scaling
-                    height:  iconSize * scaling
+                    height: iconSize * scaling
                     anchors.centerIn: parent
                     source: dock.getAppIcon(modelData)
                     visible: source.toString() !== ""
@@ -259,7 +258,7 @@ NLoader {
                     radius: Style.radiusTiny
                     anchors.top: parent.bottom
                     anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.topMargin: 2* scaling
+                    anchors.topMargin: 2 * scaling
                   }
                 }
               }

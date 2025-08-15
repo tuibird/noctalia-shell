@@ -41,7 +41,8 @@ NLoader {
       }
 
       margins {
-        top: Math.floor(Style.barHeight * scaling)
+        top: (Settings.data.bar.monitors.includes(modelData.name)
+              || (Settings.data.bar.monitors.length === 0)) ? Math.floor(Style.barHeight * scaling) : 0
       }
 
       // Source we want to show only as a ring
