@@ -9,6 +9,22 @@ ColumnLayout {
 
   spacing: 0
 
+  // property var colorSchemes: [{
+  //     "label": "Generated from Wallpaper (Matugen required)"
+  //   }, {
+  //     "label": "Catppuccin"
+  //   }, {
+  //     "label": "Dracula"
+  //   }, {
+  //     "label": "Gruvbox"
+  //   }, {
+  //     "label": "Nord"
+  //     "file": "nord.json"
+  //   }, , {
+  //     "label": "Rosé Pine",
+  //     "file": "rosepine.json"
+  //   }]
+
   ScrollView {
     id: scrollView
 
@@ -33,56 +49,25 @@ ColumnLayout {
         Layout.fillWidth: true
 
         NText {
-          text: "Components"
+          text: "TODO"
           font.pointSize: Style.fontSizeXL * scaling
           font.weight: Style.fontWeightBold
           color: Colors.mOnSurface
         }
 
-        NToggle {
-          label: "Show Active Window"
-          description: "Display the title of the currently focused window below the bar"
-          value: Settings.data.bar.showActiveWindow
-          onToggled: function (newValue) {
-            Settings.data.bar.showActiveWindow = newValue
-          }
+        ButtonGroup {
+          id: schemes
         }
 
-        NToggle {
-          label: "Show Active Window Icon"
-          description: "Display the icon of the currently focused window"
-          value: Settings.data.bar.showActiveWindowIcon
-          onToggled: function (newValue) {
-            Settings.data.bar.showActiveWindowIcon = newValue
-          }
-        }
-
-        NToggle {
-          label: "Show System Info"
-          description: "Display system information (CPU, RAM, Temperature)"
-          value: Settings.data.bar.showSystemInfo
-          onToggled: function (newValue) {
-            Settings.data.bar.showSystemInfo = newValue
-          }
-        }
-
-        NToggle {
-          label: "Show Taskbar"
-          description: "Display a taskbar showing currently open windows"
-          value: Settings.data.bar.showTaskbar
-          onToggled: function (newValue) {
-            Settings.data.bar.showTaskbar = newValue
-          }
-        }
-
-        NToggle {
-          label: "Show Media"
-          description: "Display media controls and information"
-          value: Settings.data.bar.showMedia
-          onToggled: function (newValue) {
-            Settings.data.bar.showMedia = newValue
-          }
-        }
+        // Repeater {
+        //   model: root.colorSchemes
+        //   ButtonGroup.group: schemes
+        //   NRadioButton {
+        //     // checked: Audio.sink?.id === modelData.id
+        //     //onClicked: Audio.setAudioSink(modelData)
+        //     text: modelData.label
+        //   }
+        // }
       }
     }
   }
