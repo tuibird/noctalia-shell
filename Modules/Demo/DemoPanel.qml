@@ -273,6 +273,60 @@ NLoader {
                 Layout.fillWidth: true
               }
             }
+
+            // Brightness Control
+            ColumnLayout {
+              spacing: Style.marginMedium * scaling
+              NText {
+                text: "Brightness Control"
+                color: Colors.mSecondary
+                font.weight: Style.fontWeightBold
+              }
+
+              NText {
+                text: `Brightness: ${Math.round(Brightness.brightness)}%`
+                Layout.alignment: Qt.AlignVCenter
+              }
+
+              RowLayout {
+                spacing: Style.marginSmall * scaling
+                NIconButton {
+                  icon: "brightness_low"
+                  fontPointSize: Style.fontSizeLarge * scaling
+                  onClicked: {
+                    Brightness.decreaseBrightness(1)
+                  }
+                }
+                NSlider {
+                  from: 0
+                  to: 100
+                  stepSize: 1
+                  value: Brightness.brightness
+                  implicitWidth: bgRect.width * 0.5
+                  onMoved: {
+                    Brightness.setBrightnessDebounced(value)
+                  }
+                }
+                NIconButton {
+                  icon: "brightness_high"
+                  fontPointSize: Style.fontSizeLarge * scaling
+                  onClicked: {
+                    Brightness.increaseBrightness(1)
+                  }
+                }
+              }
+
+              NText {
+                text: `Method: ${Brightness.currentMethod} | Available: ${Brightness.available}`
+                color: Colors.mOnSurfaceVariant
+                font.pointSize: Style.fontSizeSmall * scaling
+                Layout.alignment: Qt.AlignHCenter
+              }
+
+              NDivider {
+                Layout.fillWidth: true
+              }
+            }
           }
         }
       }

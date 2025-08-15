@@ -119,6 +119,10 @@ Variants {
           anchors.verticalCenter: parent.verticalCenter
         }
 
+        Brightness {
+          anchors.verticalCenter: parent.verticalCenter
+        }
+
         Clock {
           anchors.verticalCenter: parent.verticalCenter
         }
