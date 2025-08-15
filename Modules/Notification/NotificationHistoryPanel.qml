@@ -63,19 +63,19 @@ NLoader {
 
       WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
 
-              Rectangle {
-          id: notificationRect
-          color: Colors.mSurfaceVariant
-          radius: Style.radiusMedium * scaling
-          border.color: Colors.mOutlineVariant
-          border.width: Math.max(1, Style.borderMedium * scaling)
-          width: 400 * scaling
-          height: 500 * scaling
-          anchors.top: parent.top
-          anchors.right: parent.right
-          anchors.topMargin: Style.marginTiny * scaling
-          anchors.rightMargin: Style.marginTiny * scaling
-          clip: true
+      Rectangle {
+        id: notificationRect
+        color: Colors.mSurfaceVariant
+        radius: Style.radiusMedium * scaling
+        border.color: Colors.mOutlineVariant
+        border.width: Math.max(1, Style.borderMedium * scaling)
+        width: 400 * scaling
+        height: 500 * scaling
+        anchors.top: parent.top
+        anchors.right: parent.right
+        anchors.topMargin: Style.marginTiny * scaling
+        anchors.rightMargin: Style.marginTiny * scaling
+        clip: true
 
         // Animation properties
         property real scaleValue: 0.8
