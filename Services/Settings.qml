@@ -48,7 +48,7 @@ Singleton {
       console.log("[Settings] Loaded")
       Qt.callLater(function () {
         if (adapter.wallpaper.current !== "") {
-          console.log("[Settings] Set current wallpaper")
+          console.log("[Settings] Set current wallpaper", adapter.wallpaper.current)
           Wallpapers.setCurrentWallpaper(adapter.wallpaper.current, true)
         }
       })

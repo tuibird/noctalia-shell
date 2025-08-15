@@ -9,7 +9,7 @@ PanelWindow {
   readonly property real scaling: Scaling.scale(screen)
   property bool showOverlay: Settings.data.general.dimDesktop
   property int topMargin: Style.barHeight * scaling
-  property color overlayColor: showOverlay ? Colors.overlay : "transparent"
+  property color overlayColor: showOverlay ? Colors.applyOpacity(Colors.mShadow, "AA") : "transparent"
 
   signal dismissed
 

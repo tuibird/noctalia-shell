@@ -97,8 +97,14 @@ Singleton {
     id: customColorsFile
     path: Settings.configDir + "colors.json"
     watchChanges: true
-    onFileChanged: reload()
-    onAdapterUpdated: writeAdapter()
+    onFileChanged: {
+      console.log("[Colors] reloading colors file from disk")
+      reload()
+    }
+    onAdapterUpdated: {
+      console.log("[Colors] writing colors to disk, primary color:", mPrimary)
+      writeAdapter()
+    }
     onLoadFailed: function (error) {
       if (error.toString().includes("No such file") || error === 2) {
         // File doesn't exist, create it with default values

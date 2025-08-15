@@ -19,6 +19,8 @@ Singleton {
   property var wallpaperList: []
   property string currentWallpaper: Settings.data.wallpaper.current
   property bool scanning: false
+
+  // SWWW
   property string transitionType: Settings.data.wallpaper.swww.transitionType
   property var randomChoices: ["simple", "fade", "left", "right", "top", "bottom", "wipe", "wave", "grow", "center", "any", "outer"]
   
@@ -120,7 +122,8 @@ Singleton {
       if (status === FolderListModel.Ready) {
         var files = []
         for (var i = 0; i < count; i++) {
-          var filepath = folderModel.folder + "/" + get(i, "fileName")
+          var directory = (Settings.data.wallpaper.directory !== undefined ? Settings.data.wallpaper.directory : "")
+          var filepath = directory + "/" + get(i, "fileName")
           files.push(filepath)
         }
         wallpaperList = files
@@ -157,8 +160,14 @@ Singleton {
     running: false
     stdout: StdioCollector {
       onStreamFinished: {
-
-        //console.log(this.text)
+        console.log("[Wallpapers] generated colors from image")
+      }
+    }
+    stderr: StdioCollector {
+      onStreamFinished: {
+        if (this.text !== "") {
+          console.error(this.text)
+        }
       }
     }
   }
