@@ -6,7 +6,7 @@ import Quickshell
 import Quickshell.Io
 
 Singleton {
-  id: manager //TBC
+  id: root
 
   Item {
     Component.onCompleted: {
@@ -121,7 +121,6 @@ Singleton {
     onStatusChanged: {
       if (status === FolderListModel.Ready) {
         var files = []
-        var filesSwww = []
         for (var i = 0; i < count; i++) {
           var filepath = (Settings.data.wallpaper.directory !== undefined ? Settings.data.wallpaper.directory : "") + "/" + get(
             i, "fileName")
