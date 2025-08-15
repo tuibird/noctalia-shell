@@ -13,6 +13,9 @@ import qs.Widgets
 WlSessionLock {
   id: lock
 
+  // Lockscreen is a different beast, needs a capital 'S' in 'Screen' to get the current screen
+  readonly property real scaling: Scaling.scale(Screen)
+
   property string errorMessage: ""
   property bool authenticating: false
   property string password: ""
@@ -166,12 +169,12 @@ WlSessionLock {
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.topMargin: 80 * Scaling.scale(screen)
-        spacing: 40 * Scaling.scale(screen)
+        anchors.topMargin: 80 * scaling
+        spacing: 40 * scaling
 
         // Time display - Large and prominent with pulse animation
         Column {
-          spacing: 8 * Scaling.scale(screen)
+          spacing: 8 * scaling
           Layout.alignment: Qt.AlignHCenter
 
           Text {
@@ -213,28 +216,28 @@ WlSessionLock {
 
         // User section with animated avatar
         Column {
-          spacing: 16 * Scaling.scale(screen)
+          spacing: 16 * scaling
           Layout.alignment: Qt.AlignHCenter
 
           // Animated avatar with glow effect
           Rectangle {
-            width: 120 * Scaling.scale(screen)
-            height: 120 * Scaling.scale(screen)
+            width: 120 * scaling
+            height: 120 * scaling
             radius: width * 0.5
             color: "transparent"
             border.color: Colors.mPrimary
-            border.width: 3 * Scaling.scale(screen)
+            border.width: 3 * scaling
             anchors.horizontalCenter: parent.horizontalCenter
 
             // Glow effect
             Rectangle {
               anchors.centerIn: parent
-              width: parent.width + 24 * Scaling.scale(screen)
-              height: parent.height + 24 * Scaling.scale(screen)
+              width: parent.width + 24 * scaling
+              height: parent.height + 24 * scaling
               radius: width * 0.5
               color: "transparent"
               border.color: Qt.rgba(Colors.mPrimary.r, Colors.mPrimary.g, Colors.mPrimary.b, 0.3)
-              border.width: 2 * Scaling.scale(screen)
+              border.width: 2 * scaling
               z: -1
 
               SequentialAnimation on scale {
@@ -254,8 +257,8 @@ WlSessionLock {
 
             NImageRounded {
               anchors.centerIn: parent
-              width: 100 * Scaling.scale(screen)
-              height: 100 * Scaling.scale(screen)
+              width: 100 * scaling
+              height: 100 * scaling
               imagePath: Quickshell.env("HOME") + "/.face"
               fallbackIcon: "person"
               imageRadius: width * 0.5
@@ -281,19 +284,19 @@ WlSessionLock {
 
       // Centered terminal section
       Item {
-        width: 720 * Scaling.scale(screen)
-        height: 280 * Scaling.scale(screen)
+        width: 720 * scaling
+        height: 280 * scaling
         anchors.centerIn: parent
 
         ColumnLayout {
           anchors.centerIn: parent
-          spacing: 20 * Scaling.scale(screen)
+          spacing: 20 * scaling
           width: parent.width
 
           // Futuristic Terminal-Style Input
           Item {
             width: parent.width
-            height: 280 * Scaling.scale(screen)
+            height: 280 * scaling
             Layout.fillWidth: true
 
             // Terminal background with scanlines
@@ -303,7 +306,7 @@ WlSessionLock {
               radius: 16
               color: Colors.applyOpacity(Colors.mSurface, "E6")
               border.color: Colors.mPrimary
-              border.width: 2 * Scaling.scale(screen)
+              border.width: 2 * scaling
 
               // Scanline effect
               Repeater {
@@ -332,15 +335,15 @@ WlSessionLock {
               // Terminal header
               Rectangle {
                 width: parent.width
-                height: 40 * Scaling.scale(screen)
+                height: 40 * scaling
                 color: Colors.applyOpacity(Colors.mPrimary, "33")
                 topLeftRadius: 14
                 topRightRadius: 14
 
                 RowLayout {
                   anchors.fill: parent
-                  anchors.margins: 12 * Scaling.scale(screen)
-                  spacing: 12 * Scaling.scale(screen)
+                  anchors.margins: 12 * scaling
+                  spacing: 12 * scaling
 
                   Text {
                     text: "SECURE TERMINAL"
@@ -359,14 +362,14 @@ WlSessionLock {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.bottom: parent.bottom
-                anchors.topMargin: 70 * Scaling.scale(screen)
-                anchors.margins: 12 * Scaling.scale(screen)
-                spacing: 12 * Scaling.scale(screen)
+                anchors.topMargin: 70 * scaling
+                anchors.margins: 12 * scaling
+                spacing: 12 * scaling
 
                 // Welcome back typing effect
                 RowLayout {
                   Layout.fillWidth: true
-                  spacing: 12 * Scaling.scale(screen)
+                  spacing: 12 * scaling
 
                   Text {
                     text: "root@noctalia:~$"
@@ -404,7 +407,7 @@ WlSessionLock {
                 // Command line with integrated password input
                 RowLayout {
                   Layout.fillWidth: true
-                  spacing: 12 * Scaling.scale(screen)
+                  spacing: 12 * scaling
 
                   Text {
                     text: "root@noctalia:~$"
@@ -415,7 +418,7 @@ WlSessionLock {
                   }
 
                   Text {
-                    text: "sudo unlock_session"
+                    text: "sudo unlock-session"
                     color: Colors.mOnSurface
                     font.family: "DejaVu Sans Mono"
                     font.pointSize: Style.fontSizeLarge
@@ -481,12 +484,12 @@ WlSessionLock {
 
                   // Blinking cursor positioned right after the asterisks
                   Rectangle {
-                    width: 8 * Scaling.scale(screen)
-                    height: 20 * Scaling.scale(screen)
+                    width: 8 * scaling
+                    height: 20 * scaling
                     color: Colors.mPrimary
                     visible: passwordInput.activeFocus
                     anchors.left: asterisksText.right
-                    anchors.leftMargin: 2 * Scaling.scale(screen)
+                    anchors.leftMargin: 2 * scaling
                     anchors.verticalCenter: asterisksText.verticalCenter
 
                     SequentialAnimation on opacity {
@@ -527,15 +530,15 @@ WlSessionLock {
 
                 // Execute button
                 Rectangle {
-                  width: 120 * Scaling.scale(screen)
-                  height: 40 * Scaling.scale(screen)
+                  width: 120 * scaling
+                  height: 40 * scaling
                   radius: 12
                   color: executeButtonArea.containsMouse ? Colors.mPrimary : Colors.applyOpacity(Colors.mPrimary, "33")
                   border.color: Colors.mPrimary
                   border.width: 1
                   enabled: !lock.authenticating
                   Layout.alignment: Qt.AlignRight
-                  Layout.bottomMargin: -12 * Scaling.scale(screen)
+                  Layout.bottomMargin: -12 * scaling
 
                   Text {
                     anchors.centerIn: parent
@@ -622,27 +625,27 @@ WlSessionLock {
     Row {
       anchors.right: parent.right
       anchors.bottom: parent.bottom
-      anchors.margins: 50 * Scaling.scale(screen)
-      spacing: 20 * Scaling.scale(screen)
+      anchors.margins: 50 * scaling
+      spacing: 20 * scaling
 
       // Shutdown with enhanced styling
       Rectangle {
-        width: 64 * Scaling.scale(screen)
-        height: 64 * Scaling.scale(screen)
+        width: 64 * scaling
+        height: 64 * scaling
         radius: 32
         color: Qt.rgba(Colors.mError.r, Colors.mError.g, Colors.mError.b, shutdownArea.containsMouse ? 0.9 : 0.2)
         border.color: Colors.mError
-        border.width: 2 * Scaling.scale(screen)
+        border.width: 2 * scaling
 
         // Glow effect
         Rectangle {
           anchors.centerIn: parent
-          width: parent.width + 10 * Scaling.scale(screen)
-          height: parent.height + 10 * Scaling.scale(screen)
+          width: parent.width + 10 * scaling
+          height: parent.height + 10 * scaling
           radius: width * 0.5
           color: "transparent"
           border.color: Qt.rgba(Colors.mError.r, Colors.mError.g, Colors.mError.b, 0.3)
-          border.width: 2 * Scaling.scale(screen)
+          border.width: 2 * scaling
           opacity: shutdownArea.containsMouse ? 1 : 0
           z: -1
 
@@ -669,7 +672,7 @@ WlSessionLock {
           anchors.centerIn: parent
           text: "power_settings_new"
           font.family: "Material Symbols Outlined"
-          font.pixelSize: 28 * Scaling.scale(screen)
+          font.pixelSize: 28 * scaling
           color: shutdownArea.containsMouse ? Colors.onAccent : Colors.mError
         }
 
@@ -684,22 +687,22 @@ WlSessionLock {
 
       // Reboot with enhanced styling
       Rectangle {
-        width: 64 * Scaling.scale(screen)
-        height: 64 * Scaling.scale(screen)
+        width: 64 * scaling
+        height: 64 * scaling
         radius: 32
         color: Qt.rgba(Colors.mPrimary.r, Colors.mPrimary.g, Colors.mPrimary.b, rebootArea.containsMouse ? 0.9 : 0.2)
         border.color: Colors.mPrimary
-        border.width: 2 * Scaling.scale(screen)
+        border.width: 2 * scaling
 
         // Glow effect
         Rectangle {
           anchors.centerIn: parent
-          width: parent.width + 10 * Scaling.scale(screen)
-          height: parent.height + 10 * Scaling.scale(screen)
+          width: parent.width + 10 * scaling
+          height: parent.height + 10 * scaling
           radius: width * 0.5
           color: "transparent"
           border.color: Qt.rgba(Colors.mPrimary.r, Colors.mPrimary.g, Colors.mPrimary.b, 0.3)
-          border.width: 2 * Scaling.scale(screen)
+          border.width: 2 * scaling
           opacity: rebootArea.containsMouse ? 1 : 0
           z: -1
 
@@ -725,7 +728,7 @@ WlSessionLock {
           anchors.centerIn: parent
           text: "refresh"
           font.family: "Material Symbols Outlined"
-          font.pixelSize: 28 * Scaling.scale(screen)
+          font.pixelSize: 28 * scaling
           color: rebootArea.containsMouse ? Colors.onAccent : Colors.mPrimary
         }
 
@@ -740,23 +743,23 @@ WlSessionLock {
 
       // Logout with enhanced styling
       Rectangle {
-        width: 64 * Scaling.scale(screen)
-        height: 64 * Scaling.scale(screen)
+        width: 64 * scaling
+        height: 64 * scaling
         radius: 32
         color: Qt.rgba(Colors.mSecondary.r, Colors.mSecondary.g, Colors.mSecondary.b,
                        logoutArea.containsMouse ? 0.9 : 0.2)
         border.color: Colors.mSecondary
-        border.width: 2 * Scaling.scale(screen)
+        border.width: 2 * scaling
 
         // Glow effect
         Rectangle {
           anchors.centerIn: parent
-          width: parent.width + 10 * Scaling.scale(screen)
-          height: parent.height + 10 * Scaling.scale(screen)
+          width: parent.width + 10 * scaling
+          height: parent.height + 10 * scaling
           radius: width * 0.5
           color: "transparent"
           border.color: Qt.rgba(Colors.mSecondary.r, Colors.mSecondary.g, Colors.mSecondary.b, 0.3)
-          border.width: 2 * Scaling.scale(screen)
+          border.width: 2 * scaling
           opacity: logoutArea.containsMouse ? 1 : 0
           z: -1
 
@@ -784,7 +787,7 @@ WlSessionLock {
           anchors.centerIn: parent
           text: "exit_to_app"
           font.family: "Material Symbols Outlined"
-          font.pixelSize: 28 * Scaling.scale(screen)
+          font.pixelSize: 28 * scaling
           color: logoutArea.containsMouse ? Colors.onAccent : Colors.mSecondary
         }
 
