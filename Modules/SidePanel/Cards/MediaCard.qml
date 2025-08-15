@@ -58,7 +58,7 @@ NBox {
     ColumnLayout {
       id: main
 
-      visible: MediaPlayer.currentPlayer
+      visible: MediaPlayer.currentPlayer && MediaPlayer.canPlay
       spacing: Style.marginMedium * scaling
 
       // Player selector
@@ -229,11 +229,13 @@ NBox {
       // Progress bar
       Rectangle {
         id: progressBarBackground
+        visible: (MediaPlayer.currentPlayer && MediaPlayer.trackLength > 0)
         width: parent.width
         height: 4 * scaling
         radius: Style.radiusSmall * scaling
-        color: Colors.mSurfaceVariant
+        color: Colors.mSurface
         Layout.fillWidth: true
+
 
         property real progressRatio: {
           if (!MediaPlayer.currentPlayer || !MediaPlayer.isPlaying || MediaPlayer.trackLength <= 0) {
@@ -259,17 +261,15 @@ NBox {
         // Interactive progress handle
         Rectangle {
           id: progressHandle
+          visible: (MediaPlayer.currentPlayer && MediaPlayer.trackLength > 0)
           width: 16 * scaling
           height: 16 * scaling
           radius: width * 0.5
           color: Colors.mPrimary
           border.color: Colors.mSurface
           border.width: Math.max(1 * Style.borderMedium * scaling)
-
           x: Math.max(0, Math.min(parent.width - width, progressFill.width - width / 2))
           anchors.verticalCenter: parent.verticalCenter
-
-          visible: MediaPlayer.trackLength > 0
           scale: progressMouseArea.containsMouse || progressMouseArea.pressed ? 1.2 : 1.0
 
           Behavior on scale {
