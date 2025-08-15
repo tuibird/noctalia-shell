@@ -9,27 +9,6 @@ ColumnLayout {
 
   spacing: 0
 
-  // Component.onCompleted: {
-  //   console.log("[ColorSchemes] Service initialized")
-  //   ColorScheme.loadColorSchemes()
-  // }
-
-
-  // property var colorSchemes: [{
-  //     "label": "Generated from Wallpaper (Matugen required)"
-  //   }, {
-  //     "label": "Catppuccin"
-  //   }, {
-  //     "label": "Dracula"
-  //   }, {
-  //     "label": "Gruvbox"
-  //   }, {
-  //     "label": "Nord"
-  //     "file": "nord.json"
-  //   }, , {
-  //     "label": "Rosé Pine",
-  //     "file": "rosepine.json"
-  //   }]
   ScrollView {
     id: scrollView
 
@@ -66,16 +45,13 @@ ColumnLayout {
 
         Repeater {
           model: ColorSchemes.schemes
-          delegate: NRadioButton {
+          NRadioButton {
+            property string schemePath: modelData
             ButtonGroup.group: schemesGroup
-            // checked: Audio.sink?.id === modelData.id
+            //checked: Audio.sink?.id === modelData.id
             //onClicked: Audio.setAudioSink(modelData)
-            text: {
-              console.log(modelData.fileName) 
-              return modelData.fileName
-            }
+            text: schemePath
           }
-          
         }
       }
     }

@@ -21,13 +21,13 @@ Singleton {
   property bool scanning: false
   property string transitionType: Settings.data.wallpaper.swww.transitionType
   property var randomChoices: ["simple", "fade", "left", "right", "top", "bottom", "wipe", "wave", "grow", "center", "any", "outer"]
-
+  
   function loadWallpapers() {
     console.log("[Wallpapers] Load Wallpapers")
     scanning = true
     wallpaperList = []
     // Unsetting, then setting the folder will re-trigger the parsing!
-    folderModel.folder = "";
+    folderModel.folder = ""
     folderModel.folder = "file://" + (Settings.data.wallpaper.directory !== undefined ? Settings.data.wallpaper.directory : "")
   }
 
@@ -126,7 +126,7 @@ Singleton {
         }
         wallpaperList = files
         scanning = false
-        console.log("[Wallpapers] List refreshed, count:",  wallpaperList.length)
+        console.log("[Wallpapers] List refreshed, count:", wallpaperList.length)
       }
     }
   }
