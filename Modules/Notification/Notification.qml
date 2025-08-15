@@ -16,6 +16,7 @@ Variants {
 
     required property ShellScreen modelData
     readonly property real scaling: Scaling.scale(screen)
+    screen: modelData
 
     // Access the notification model from the service
     property ListModel notificationModel: NotificationService.notificationModel
@@ -23,7 +24,6 @@ Variants {
     // Track notifications being removed for animation
     property var removingNotifications: ({})
 
-    screen: modelData
     color: "transparent"
 
     // If no notification display activated in settings, then show them all

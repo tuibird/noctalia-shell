@@ -12,16 +12,13 @@ Item {
   property bool isDestroying: false
   property bool hovered: false
 
-  // Unified scale
-  readonly property real s: Scaling.scale(screen)
-
   property ListModel localWorkspaces: ListModel {}
   property real masterProgress: 0.0
   property bool effectsActive: false
   property color effectColor: Colors.mPrimary
 
-  property int horizontalPadding: Math.round(16 * s)
-  property int spacingBetweenPills: Math.round(8 * s)
+  property int horizontalPadding: Math.round(16 * scaling)
+  property int spacingBetweenPills: Math.round(8 * scaling)
 
   signal workspaceChanged(int workspaceId, color accentColor)
 
@@ -30,18 +27,18 @@ Item {
     for (var i = 0; i < localWorkspaces.count; i++) {
       const ws = localWorkspaces.get(i)
       if (ws.isFocused)
-        total += Math.round(44 * s)
+        total += Math.round(44 * scaling)
       else if (ws.isActive)
-        total += Math.round(28 * s)
+        total += Math.round(28 * scaling)
       else
-        total += Math.round(16 * s)
+        total += Math.round(16 * scaling)
     }
     total += Math.max(localWorkspaces.count - 1, 0) * spacingBetweenPills
     total += horizontalPadding * 2
     return total
   }
 
-  height: Math.round(36 * s)
+  height: Math.round(36 * scaling)
 
   Component.onCompleted: {
     localWorkspaces.clear()
@@ -116,14 +113,14 @@ Item {
 
   Rectangle {
     id: workspaceBackground
-    width: parent.width - Math.round(15 * s)
-    height: Math.round(26 * s)
+    width: parent.width - Math.round(15 * scaling)
+    height: Math.round(26 * scaling)
     anchors.horizontalCenter: parent.horizontalCenter
     anchors.verticalCenter: parent.verticalCenter
-    radius: Math.round(12 * s)
+    radius: Math.round(12 * scaling)
     color: Colors.mSurfaceVariant
     border.color: Colors.mOutlineVariant
-    border.width: Math.max(1, Math.round(1 * s))
+    border.width: Math.max(1, Math.round(1 * scaling))
     layer.enabled: true
     layer.effect: MultiEffect {
       shadowColor: Colors.mShadow
@@ -144,14 +141,14 @@ Item {
       model: localWorkspaces
       Item {
         id: workspacePillContainer
-        height: Math.round(12 * s)
+        height: Math.round(12 * scaling)
         width: {
           if (model.isFocused)
-            return Math.round(44 * s)
+            return Math.round(44 * scaling)
           else if (model.isActive)
-            return Math.round(28 * s)
+            return Math.round(28 * scaling)
           else
-            return Math.round(16 * s)
+            return Math.round(16 * scaling)
         }
 
         Rectangle {
@@ -159,10 +156,10 @@ Item {
           anchors.fill: parent
           radius: {
             if (model.isFocused)
-              return Math.round(12 * s)
+              return Math.round(12 * scaling)
             else
               // half of focused height (if you want to animate this too)
-              return Math.round(6 * s)
+              return Math.round(6 * scaling)
           }
           color: {
             if (model.isFocused)
@@ -248,7 +245,7 @@ Item {
           radius: width / 2
           color: "transparent"
           border.color: root.effectColor
-          border.width: Math.max(1, Math.round((2 + 6 * (1.0 - root.masterProgress)) * s))
+          border.width: Math.max(1, Math.round((2 + 6 * (1.0 - root.masterProgress)) * scaling))
           opacity: root.effectsActive && model.isFocused ? (1.0 - root.masterProgress) * 0.7 : 0
           visible: root.effectsActive && model.isFocused
           z: 1

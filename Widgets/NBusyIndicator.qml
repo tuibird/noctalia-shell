@@ -4,8 +4,6 @@ import qs.Services
 Item {
   id: root
 
-  readonly property real scaling: Scaling.scale(screen)
-
   property bool running: true
   property color color: Colors.mPrimary
   property int size: Style.baseWidgetSize * scaling

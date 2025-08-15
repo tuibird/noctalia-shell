@@ -15,6 +15,8 @@ NLoader {
       id: root
 
       required property ShellScreen modelData
+      readonly property real scaling: Scaling.scale(screen)
+      screen: modelData
 
       // Visible ring color
       property color ringColor: Colors.mSurface
@@ -25,7 +27,7 @@ NLoader {
       property int innerRadius: 20
 
       color: "transparent"
-      screen: modelData
+
       WlrLayershell.exclusionMode: ExclusionMode.Ignore
       WlrLayershell.namespace: "quickshell-corner"
       // Do not take keyboard focus and make the surface click-through
@@ -39,7 +41,7 @@ NLoader {
       }
 
       margins {
-        top: Math.round(Style.barHeight * Scaling.scale(screen))
+        top: Math.floor(Style.barHeight * scaling)
       }
 
       // Source we want to show only as a ring

@@ -13,7 +13,6 @@ import qs.Widgets
 NBox {
   id: root
 
-  readonly property real scaling: Scaling.scale(screen)
   property string uptimeText: "--"
 
   Layout.fillWidth: true

@@ -9,7 +9,6 @@ import qs.Widgets
 NIconButton {
   id: root
 
-  readonly property real scaling: Scaling.scale(screen)
   readonly property bool wifiEnabled: Settings.data.network.wifiEnabled
   sizeMultiplier: 0.8
   showBorder: false

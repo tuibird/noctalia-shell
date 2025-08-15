@@ -8,7 +8,6 @@ import qs.Widgets
 PopupWindow {
   id: trayMenu
 
-  readonly property real scaling: Scaling.scale(screen)
   property QsMenuHandle menu
   property var anchorItem: null
   property real anchorX

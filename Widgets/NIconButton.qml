@@ -6,7 +6,6 @@ import qs.Services
 Rectangle {
   id: root
 
-  readonly property real scaling: Scaling.scale(screen)
   // Multiplier to control how large the button container is relative to Style.baseWidgetSize
   property real sizeMultiplier: 1.0
   property real size: Style.baseWidgetSize * sizeMultiplier * scaling

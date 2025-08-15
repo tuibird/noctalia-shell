@@ -5,8 +5,6 @@ import qs.Services
 Item {
   id: root
 
-  readonly property real scaling: Scaling.scale(screen)
-
   property string icon: ""
   property string text: ""
   property string tooltipText: ""

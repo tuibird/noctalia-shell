@@ -7,7 +7,6 @@ import qs.Widgets
 ColumnLayout {
   id: root
 
-  readonly property real scaling: Scaling.scale(screen)
   readonly property real preferredHeight: Style.baseWidgetSize * 1.25 * scaling
 
   property string label: ""

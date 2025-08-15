@@ -6,7 +6,6 @@ import qs.Services
 Item {
   id: root
 
-  readonly property real scaling: Scaling.scale(screen)
   property string label: ""
   property string description: ""
   property bool readOnly: false

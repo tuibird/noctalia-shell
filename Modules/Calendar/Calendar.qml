@@ -13,8 +13,6 @@ NLoader {
     NPanel {
       id: calendarPanel
 
-      readonly property real scaling: Scaling.scale(screen)
-
       // Override hide function to animate first
       function hide() {
         // Start hide animation

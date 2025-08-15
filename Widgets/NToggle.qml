@@ -6,7 +6,6 @@ import qs.Services
 RowLayout {
   id: root
 
-  readonly property real scaling: Scaling.scale(screen)
   property string label: ""
   property string description: ""
   property bool value: false

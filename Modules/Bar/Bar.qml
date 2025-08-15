@@ -14,12 +14,12 @@ Variants {
 
     required property ShellScreen modelData
     readonly property real scaling: Scaling.scale(screen)
-
     screen: modelData
+
     implicitHeight: Style.barHeight * scaling
     color: "transparent"
 
-    // If no bar display activated in settings, then show them all
+    // If no bar activated in settings, then show them all
     visible: modelData ? (Settings.data.bar.monitors.includes(modelData.name)
                           || (Settings.data.bar.monitors.length === 0)) : false
 

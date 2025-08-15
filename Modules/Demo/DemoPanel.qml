@@ -13,8 +13,6 @@ NLoader {
     NPanel {
       id: demoPanel
 
-      readonly property real scaling: Scaling.scale(screen)
-
       // Override hide function to animate first
       function hide() {
         // Start hide animation
@@ -73,7 +71,7 @@ NLoader {
         border.color: Colors.mOutlineVariant
         border.width: Math.max(1, Style.borderThin * scaling)
         width: 500 * scaling
-        height: 700 * scaling
+        height: 900 * scaling
         anchors.centerIn: parent
 
         // Animation properties
@@ -312,7 +310,7 @@ NLoader {
               }
 
               NText {
-                text: `Brightness: ${Math.round(Brightness.brightness)}%`
+                text: `Brightness: ${Math.round(BrightnessService.brightness)}%`
                 Layout.alignment: Qt.AlignVCenter
               }
 
@@ -322,30 +320,30 @@ NLoader {
                   icon: "brightness_low"
                   fontPointSize: Style.fontSizeLarge * scaling
                   onClicked: {
-                    Brightness.decreaseBrightness()
+                    BrightnessService.decreaseBrightness()
                   }
                 }
                 NSlider {
                   from: 0
                   to: 100
                   stepSize: 1
-                  value: Brightness.brightness
+                  value: BrightnessService.brightness
                   implicitWidth: bgRect.width * 0.5
                   onMoved: {
-                    Brightness.setBrightnessDebounced(value)
+                    BrightnessService.setBrightnessDebounced(value)
                   }
                 }
                 NIconButton {
                   icon: "brightness_high"
                   fontPointSize: Style.fontSizeLarge * scaling
                   onClicked: {
-                    Brightness.increaseBrightness()
+                    BrightnessService.increaseBrightness()
                   }
                 }
               }
 
               NText {
-                text: `Method: ${Brightness.currentMethod} | Available: ${Brightness.available}`
+                text: `Method: ${BrightnessService.currentMethod} | Available: ${BrightnessService.available}`
                 color: Colors.mOnSurfaceVariant
                 font.pointSize: Style.fontSizeSmall * scaling
                 Layout.alignment: Qt.AlignHCenter

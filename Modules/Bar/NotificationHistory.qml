@@ -9,7 +9,6 @@ import qs.Widgets
 NIconButton {
   id: root
 
-  readonly property real scaling: Scaling.scale(screen)
   sizeMultiplier: 0.8
   showBorder: false
   icon: "notifications"

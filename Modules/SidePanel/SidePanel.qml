@@ -32,7 +32,6 @@ NLoader {
     NPanel {
       id: sidePanel
 
-      readonly property real scaling: Scaling.scale(screen)
       // Single source of truth for spacing between cards (both axes)
       property real cardSpacing: Style.marginLarge * scaling
       // X coordinate from the bar to align this panel under

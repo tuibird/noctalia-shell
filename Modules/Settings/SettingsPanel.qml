@@ -31,7 +31,6 @@ NLoader {
     NPanel {
       id: panel
 
-      readonly property real scaling: Scaling.scale(screen)
       property int currentTabIndex: 0
 
       // Override hide function to animate first

@@ -5,8 +5,6 @@ import qs.Services
 Rectangle {
   id: root
 
-  readonly property real scaling: Scaling.scale(screen)
-
   implicitWidth: childrenRect.width
   implicitHeight: childrenRect.height
 

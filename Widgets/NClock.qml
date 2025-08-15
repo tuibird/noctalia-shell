@@ -5,8 +5,6 @@ import qs.Widgets
 Rectangle {
   id: root
 
-  readonly property real scaling: Scaling.scale(screen)
-
   signal entered
   signal exited
   signal clicked

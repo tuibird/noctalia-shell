@@ -10,7 +10,6 @@ Rectangle {
   property real imageRadius: width * 0.5
   radius: imageRadius
 
-  readonly property real scaling: Scaling.scale(screen)
   property string imagePath: ""
   property string fallbackIcon: ""
   property color borderColor: "transparent"

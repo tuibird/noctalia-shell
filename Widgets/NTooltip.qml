@@ -4,7 +4,6 @@ import qs.Services
 Window {
   id: root
 
-  readonly property real scaling: Scaling.scale(screen)
   property bool isVisible: false
   property string text: "Placeholder"
   property Item target: null

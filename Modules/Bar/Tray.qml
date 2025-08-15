@@ -9,7 +9,6 @@ import qs.Services
 import qs.Widgets
 
 Item {
-  readonly property real scaling: Scaling.scale(screen)
   readonly property real itemSize: 24 * scaling
 
   width: tray.width

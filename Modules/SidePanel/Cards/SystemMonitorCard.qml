@@ -7,8 +7,6 @@ import qs.Widgets
 NBox {
   id: root
 
-  readonly property real scaling: Scaling.scale(screen)
-
   Layout.preferredWidth: 84 * scaling
   implicitHeight: content.implicitHeight + Style.marginTiny * 2 * scaling
 
