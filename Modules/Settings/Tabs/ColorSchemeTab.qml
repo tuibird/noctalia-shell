@@ -32,13 +32,6 @@ ColumnLayout {
         spacing: Style.marginLarge * scaling
         Layout.fillWidth: true
 
-        NText {
-          text: "TODO"
-          font.pointSize: Style.fontSizeXL * scaling
-          font.weight: Style.fontWeightBold
-          color: Colors.mOnSurface
-        }
-
         // Use Wallpaper Colors
         NToggle {
           label: "Use Wallpaper Colors"

@@ -1,6 +1,7 @@
 import QtQuick
 import qs.Services
 
+// Not used ATM and need rework
 Item {
   id: root
   property int innerRadius: 32 * scaling
