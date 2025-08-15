@@ -125,7 +125,7 @@ PopupWindow {
             id: text
             Layout.fillWidth: true
             color: (modelData?.enabled
-                    ?? true) ? (mouseArea.containsMouse ? Colors.mOnSurface : Colors.mOnSurface) : Colors.textDisabled
+                    ?? true) ? (mouseArea.containsMouse ? Colors.mOnTertiary : Colors.mOnSurface) : Colors.textDisabled
             text: modelData?.text ?? ""
             font.pointSize: Style.fontSizeSmall * scaling
             verticalAlignment: Text.AlignVCenter
