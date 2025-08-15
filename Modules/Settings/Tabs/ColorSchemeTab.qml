@@ -172,28 +172,35 @@ ColumnLayout {
 
         NDivider {
           Layout.fillWidth: true
+          Layout.topMargin: Style.marginLarge * scaling
+          Layout.bottomMargin: Style.marginLarge * scaling
         }
 
-        NText {
-          text: "Predefined Color Schemes"
-          font.pointSize: Style.fontSizeLarge * scaling
-          font.weight: Style.fontWeightBold
-          color: Colors.mOnSurface
+        ColumnLayout {
+          spacing: Style.marginTiniest * scaling
           Layout.fillWidth: true
-        }
 
-        NText {
-          text: "These color schemes only apply when 'Use Matugen' is disabled. When enabled, Matugen will generate colors based on your wallpaper instead."
-          font.pointSize: Style.fontSizeSmall * scaling
-          color: Colors.mOnSurface
-          Layout.fillWidth: true
-          wrapMode: Text.WordWrap
-          Layout.topMargin: -16 * scaling
+          NText {
+            text: "Predefined Color Schemes"
+            font.pointSize: Style.fontSizeLarge * scaling
+            font.weight: Style.fontWeightBold
+            color: Colors.mOnSurface
+            Layout.fillWidth: true
+          }
+
+          NText {
+            text: "These color schemes only apply when 'Use Matugen' is disabled. When enabled, Matugen will generate colors based on your wallpaper instead."
+            font.pointSize: Style.fontSizeSmall * scaling
+            color: Colors.mOnSurface
+            Layout.fillWidth: true
+            wrapMode: Text.WordWrap
+          }
         }
 
         ColumnLayout {
           spacing: Style.marginTiny * scaling
           Layout.fillWidth: true
+          Layout.topMargin: Style.marginLarge * scaling
 
           // Color Schemes Grid
           GridLayout {
@@ -205,14 +212,18 @@ ColumnLayout {
             Repeater {
               model: ColorSchemes.schemes
 
+              property real cardScaleLow: 0.95
+              property real cardScaleHigh: 1.00
+
               Rectangle {
                 id: schemeCard
                 Layout.fillWidth: true
                 Layout.preferredHeight: 120 * scaling
-                radius: 12 * scaling
+                radius: Style.radiusMedium * scaling
                 color: getSchemeColor(modelData, "mSurface")
-                border.width: 2
+                border.width: Math.max(1, Style.borderThick * scaling)
                 border.color: Settings.data.colorSchemes.predefinedScheme === modelData ? Colors.mPrimary : Colors.mOutline
+                scale: cardScaleLow
 
                 property string schemePath: modelData
 
@@ -229,21 +240,19 @@ ColumnLayout {
                   cursorShape: Qt.PointingHandCursor
 
                   onEntered: {
-                    schemeCard.scale = 1.05
-                    schemeCard.border.width = 3
+                    schemeCard.scale = cardScaleHight
                   }
 
                   onExited: {
-                    schemeCard.scale = 1.0
-                    schemeCard.border.width = 2
+                    schemeCard.scale = cardScaleLow
                   }
                 }
 
                 // Card content
                 ColumnLayout {
                   anchors.fill: parent
-                  anchors.margins: 16 * scaling
-                  spacing: 8 * scaling
+                  anchors.margins: Style.marginXL * scaling
+                  spacing: Style.marginSmall * scaling
 
                   // Scheme name
                   NText {
@@ -262,7 +271,7 @@ ColumnLayout {
 
                   // Color swatches
                   RowLayout {
-                    spacing: 8 * scaling
+                    spacing: Style.marginSmall * scaling
                     Layout.fillWidth: true
                     Layout.alignment: Qt.AlignHCenter
 
@@ -270,7 +279,7 @@ ColumnLayout {
                     Rectangle {
                       width: 28 * scaling
                       height: 28 * scaling
-                      radius: 14 * scaling
+                      radius: width * 0.5
                       color: getSchemeColor(modelData, "mPrimary")
                     }
 
@@ -286,7 +295,7 @@ ColumnLayout {
                     Rectangle {
                       width: 28 * scaling
                       height: 28 * scaling
-                      radius: 14 * scaling
+                      radius: width * 0.5
                       color: getSchemeColor(modelData, "mTertiary")
                     }
 
@@ -294,7 +303,7 @@ ColumnLayout {
                     Rectangle {
                       width: 28 * scaling
                       height: 28 * scaling
-                      radius: 14 * scaling
+                      radius: width * 0.5
                       color: getSchemeColor(modelData, "mError")
                     }
                   }
@@ -305,10 +314,10 @@ ColumnLayout {
                   visible: Settings.data.colorSchemes.predefinedScheme === schemePath
                   anchors.right: parent.right
                   anchors.top: parent.top
-                  anchors.margins: 8 * scaling
+                  anchors.margins: Style.marginSmall * scaling
                   width: 24 * scaling
                   height: 24 * scaling
-                  radius: 12 * scaling
+                  radius: width * 0.5
                   color: Colors.mPrimary
 
                   NText {
@@ -323,20 +332,20 @@ ColumnLayout {
                 // Smooth animations
                 Behavior on scale {
                   NumberAnimation {
-                    duration: 200
+                    duration: Style.animationNormal
                     easing.type: Easing.OutCubic
                   }
                 }
 
                 Behavior on border.color {
                   ColorAnimation {
-                    duration: 300
+                    duration: Style.animationNormal
                   }
                 }
 
                 Behavior on border.width {
                   NumberAnimation {
-                    duration: 200
+                    duration: Style.animationFast
                   }
                 }
               }
