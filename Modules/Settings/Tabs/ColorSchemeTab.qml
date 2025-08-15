@@ -9,6 +9,12 @@ ColumnLayout {
 
   spacing: 0
 
+  // Component.onCompleted: {
+  //   console.log("[ColorSchemes] Service initialized")
+  //   ColorScheme.loadColorSchemes()
+  // }
+
+
   // property var colorSchemes: [{
   //     "label": "Generated from Wallpaper (Matugen required)"
   //   }, {
@@ -24,7 +30,6 @@ ColumnLayout {
   //     "label": "Rosé Pine",
   //     "file": "rosepine.json"
   //   }]
-
   ScrollView {
     id: scrollView
 
@@ -56,18 +61,22 @@ ColumnLayout {
         }
 
         ButtonGroup {
-          id: schemes
+          id: schemesGroup
         }
 
-        // Repeater {
-        //   model: root.colorSchemes
-        //   ButtonGroup.group: schemes
-        //   NRadioButton {
-        //     // checked: Audio.sink?.id === modelData.id
-        //     //onClicked: Audio.setAudioSink(modelData)
-        //     text: modelData.label
-        //   }
-        // }
+        Repeater {
+          model: ColorSchemes.schemes
+          delegate: NRadioButton {
+            ButtonGroup.group: schemesGroup
+            // checked: Audio.sink?.id === modelData.id
+            //onClicked: Audio.setAudioSink(modelData)
+            text: {
+              console.log(modelData.fileName) 
+              return modelData.fileName
+            }
+          }
+          
+        }
       }
     }
   }

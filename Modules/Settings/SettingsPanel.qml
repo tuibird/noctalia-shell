@@ -318,17 +318,17 @@ NLoader {
                 Layout.fillHeight: true
                 currentIndex: currentTabIndex
 
-                Tabs.General {}
-                Tabs.Bar {}
-                Tabs.Audio {}
-                Tabs.Display {}
-                Tabs.Network {}
-                Tabs.TimeWeather {}
-                Tabs.ColorScheme {}
-                Tabs.Wallpaper {}
-                Tabs.WallpaperSelector {}
-                Tabs.ScreenRecorder {}
-                Tabs.About {}
+                Tabs.GeneralTab {}
+                Tabs.BarTab {}
+                Tabs.AudioTab {}
+                Tabs.DisplayTab {}
+                Tabs.NetworkTab {}
+                Tabs.TimeWeatherTab {}
+                Tabs.ColorSchemeTab {}
+                Tabs.WallpaperTab {}
+                Tabs.WallpaperSelectorTab {}
+                Tabs.ScreenRecorderTab {}
+                Tabs.AboutTab {}
               }
             }
           }
