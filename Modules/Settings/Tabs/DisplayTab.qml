@@ -48,7 +48,7 @@ Item {
         }
 
         NText {
-          text: "By default, all bars are displayed. Select one or more below to narrow your view."
+          text: "By default, bars and notifications are shown on all displays. Select one or more below to narrow your view."
           font.pointSize: Style.fontSize * scaling
           color: Colors.mOnSurfaceVariant
         }
@@ -99,19 +99,6 @@ Item {
                 }
 
                 NToggle {
-                  label: "Dock"
-                  description: "Enable the dock on this monitor"
-                  value: (Settings.data.dock.monitors || []).indexOf(modelData.name) !== -1
-                  onToggled: function (newValue) {
-                    if (newValue) {
-                      Settings.data.dock.monitors = addMonitor(Settings.data.dock.monitors, modelData.name)
-                    } else {
-                      Settings.data.dock.monitors = removeMonitor(Settings.data.dock.monitors, modelData.name)
-                    }
-                  }
-                }
-
-                NToggle {
                   label: "Notifications"
                   description: "Enable notifications on this monitor"
                   value: (Settings.data.notifications.monitors || []).indexOf(modelData.name) !== -1
@@ -122,6 +109,19 @@ Item {
                     } else {
                       Settings.data.notifications.monitors = removeMonitor(Settings.data.notifications.monitors,
                                                                            modelData.name)
+                    }
+                  }
+                }
+
+                NToggle {
+                  label: "Dock"
+                  description: "Enable the dock on this monitor"
+                  value: (Settings.data.dock.monitors || []).indexOf(modelData.name) !== -1
+                  onToggled: function (newValue) {
+                    if (newValue) {
+                      Settings.data.dock.monitors = addMonitor(Settings.data.dock.monitors, modelData.name)
+                    } else {
+                      Settings.data.dock.monitors = removeMonitor(Settings.data.dock.monitors, modelData.name)
                     }
                   }
                 }
