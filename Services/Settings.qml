@@ -72,7 +72,6 @@ Singleton {
 
       bar: JsonObject {
         property bool showActiveWindow: true
-        property bool showActiveWindowIcon: false
         property bool showSystemInfo: false
         property bool showMedia: false
         property bool showTaskbar: false

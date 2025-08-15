@@ -49,15 +49,6 @@ ColumnLayout {
         }
 
         NToggle {
-          label: "Show Active Window Icon"
-          description: "Display the icon of the currently focused window"
-          value: Settings.data.bar.showActiveWindowIcon
-          onToggled: function (newValue) {
-            Settings.data.bar.showActiveWindowIcon = newValue
-          }
-        }
-
-        NToggle {
           label: "Show System Info"
           description: "Display system information (CPU, RAM, Temperature)"
           value: Settings.data.bar.showSystemInfo
