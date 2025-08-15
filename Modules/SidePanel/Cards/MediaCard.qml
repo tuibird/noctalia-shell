@@ -236,7 +236,6 @@ NBox {
         color: Colors.mSurface
         Layout.fillWidth: true
 
-
         property real progressRatio: {
           if (!MediaPlayer.currentPlayer || !MediaPlayer.isPlaying || MediaPlayer.trackLength <= 0) {
             return 0

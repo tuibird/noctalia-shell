@@ -16,7 +16,7 @@ Singleton {
   property string trackArtist: currentPlayer ? (currentPlayer.trackArtist || "") : ""
   property string trackAlbum: currentPlayer ? (currentPlayer.trackAlbum || "") : ""
   property string trackArtUrl: currentPlayer ? (currentPlayer.trackArtUrl || "") : ""
-  property real trackLength: currentPlayer ? ((currentPlayer.length < infiniteTrackLength) ? currentPlayer.length : 0)  : 0
+  property real trackLength: currentPlayer ? ((currentPlayer.length < infiniteTrackLength) ? currentPlayer.length : 0) : 0
   property bool canPlay: currentPlayer ? currentPlayer.canPlay : false
   property bool canPause: currentPlayer ? currentPlayer.canPause : false
   property bool canGoNext: currentPlayer ? currentPlayer.canGoNext : false
