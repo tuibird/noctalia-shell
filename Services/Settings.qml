@@ -177,6 +177,16 @@ Singleton {
         property string fontFamily: "Roboto" // Family for all text
         property list<string> monitorsScale: []
       }
+
+      // brightness
+      property JsonObject brightness
+
+      brightness: JsonObject {
+        property real lastBrightness: 50.0
+        property string lastMethod: "internal"
+        property list<var> monitorBrightness: []
+        property int brightnessStep: 5
+      }
     }
   }
 }
