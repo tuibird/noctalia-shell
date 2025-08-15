@@ -110,20 +110,11 @@ ColumnLayout {
         }
 
         NToggle {
-          label: "Show Dock"
-          description: "Enable the dock at the bottom of the screen"
-          value: Settings.data.general.showDock
-          onToggled: function (v) {
-            Settings.data.general.showDock = v
-          }
-        }
-
-        NToggle {
           label: "Auto-hide Dock"
           description: "Automatically hide the dock when not in use"
-          value: Settings.data.general.dockAutoHide
+          value: Settings.data.dock.autoHide
           onToggled: function (v) {
-            Settings.data.general.dockAutoHide = v
+            Settings.data.dock.autoHide = v
           }
         }
       }

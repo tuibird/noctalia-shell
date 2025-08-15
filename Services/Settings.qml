@@ -24,7 +24,7 @@ Singleton {
 
   // Used to access via Settings.data.xxx.yyy
   property var data: adapter
-  
+
   // Flag to prevent unnecessary wallpaper calls during reloads
   property bool isInitialLoad: true
 
@@ -86,8 +86,6 @@ Singleton {
         property string avatarImage: defaultAvatar
         property bool dimDesktop: true
         property bool showScreenCorners: false
-        property bool showDock: false
-        property bool dockAutoHide: false
       }
 
       // location
@@ -149,6 +147,7 @@ Singleton {
       property JsonObject dock
 
       dock: JsonObject {
+        property bool autoHide: false
         property bool exclusive: false
         property list<string> monitors: []
       }

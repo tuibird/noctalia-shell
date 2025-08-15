@@ -9,7 +9,7 @@ import qs.Services
 import qs.Widgets
 
 NLoader {
-  isLoaded: Settings.data.general.showDock
+  isLoaded: (Settings.data.dock.monitors.length > 0)
   content: Component {
     Variants {
       model: Quickshell.screens
@@ -19,7 +19,7 @@ NLoader {
         readonly property real scaling: Scaling.scale(modelData)
 
         // Auto-hide properties
-        property bool autoHide: Settings.data.general.dockAutoHide
+        property bool autoHide: Settings.data.dock.autoHide
         property bool hidden: autoHide // Start hidden only if auto-hide is enabled
         property int hideDelay: 500
         property int showDelay: 100
@@ -39,7 +39,10 @@ NLoader {
 
         PanelWindow {
           id: dockWindow
-          visible: true
+
+          // Dock works differently from bar, it is show only if toggled in Settings/Display
+          visible: modelData ? Settings.data.dock.monitors.includes(modelData.name) : false
+
           screen: modelData
           exclusionMode: ExclusionMode.Ignore
           anchors.bottom: true

@@ -18,6 +18,7 @@ Variants {
     screen: modelData
     implicitHeight: Style.barHeight * scaling
     color: "transparent"
+
     visible: modelData ? (Settings.data.bar.monitors.includes(modelData.name)
                           || (Settings.data.bar.monitors.length === 0)) : false
 
