@@ -366,7 +366,7 @@ NLoader {
 
                           delegate: Rectangle {
                             width: appsList.width - Style.marginSmall * scaling
-                            height: 56 * scaling
+                            height: 65 * scaling
                             radius: 16 * scaling
                             property bool isSelected: index === selectedIndex
                             color: (appCardArea.containsMouse || isSelected) ? Qt.darker(Colors.mPrimary,
