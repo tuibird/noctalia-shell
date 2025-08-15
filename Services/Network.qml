@@ -1,4 +1,5 @@
 import QtQuick
+import Quickshell
 import Quickshell.Io
 
 QtObject {
@@ -10,6 +11,8 @@ QtObject {
   property string connectStatusSsid: ""
   property string connectError: ""
   property string detectedInterface: ""
+  property string lastConnectedNetwork: ""
+  property bool isLoading: false
 
   function signalIcon(signal) {
     if (signal >= 80)
@@ -28,7 +31,27 @@ QtObject {
   }
 
   function refreshNetworks() {
+    isLoading = true
     existingNetwork.running = true
+  }
+
+  function setWifiEnabled(enabled) {
+    if (enabled) {
+      // Enable WiFi radio
+      isLoading = true
+      enableWifiProcess.running = true
+    } else {
+      // Store the currently connected network before disabling
+      for (const ssid in networks) {
+        if (networks[ssid].connected) {
+          lastConnectedNetwork = ssid
+          break
+        }
+      }
+      
+      // Disable WiFi radio
+      disableWifiProcess.running = true
+    }
   }
 
   function connectNetwork(ssid, security) {
@@ -87,7 +110,7 @@ QtObject {
 
   property int refreshInterval: 25000
 
-  // Only refresh when we have an active connection
+  // Only refresh when we have an active connection and WiFi is enabled
   property bool hasActiveConnection: {
     for (const net in networks) {
       if (networks[net].connected) {
@@ -99,18 +122,111 @@ QtObject {
 
   property Timer refreshTimer: Timer {
     interval: root.refreshInterval
-    // Only run timer when we're connected to a network
-    running: root.hasActiveConnection
+    // Only run timer when we're connected to a network and WiFi is enabled
+    running: root.hasActiveConnection && Settings.data.network.wifiEnabled
     repeat: true
     onTriggered: root.refreshNetworks()
   }
 
   // Force a refresh when menu is opened
   function onMenuOpened() {
-    refreshNetworks()
+    if (Settings.data.network.wifiEnabled) {
+      refreshNetworks()
+    }
   }
 
-  function onMenuClosed() {// No need to do anything special on close
+  function onMenuClosed() {
+    // No need to do anything special on close
+  }
+
+  // Process to enable WiFi radio
+  property Process enableWifiProcess: Process {
+    id: enableWifiProcess
+    running: false
+    command: ["nmcli", "radio", "wifi", "on"]
+    onRunningChanged: {
+      if (!running) {
+        // Wait a moment for the radio to be enabled, then refresh networks
+        enableWifiDelayTimer.start()
+      }
+    }
+    stderr: StdioCollector {
+      onStreamFinished: {
+        if (text.trim() !== "") {
+          console.warn("Error enabling WiFi:", text)
+        }
+      }
+    }
+  }
+
+  // Timer to delay network refresh after enabling WiFi
+  property Timer enableWifiDelayTimer: Timer {
+    id: enableWifiDelayTimer
+    interval: 2000 // Wait 2 seconds for radio to be ready
+    repeat: false
+    onTriggered: {
+      // Force refresh networks multiple times to ensure UI updates
+      root.refreshNetworks()
+      
+      // Try to auto-reconnect to the last connected network if it exists
+      if (lastConnectedNetwork) {
+        autoReconnectTimer.start()
+      }
+      
+      // Set up additional refresh to ensure UI is populated
+      postEnableRefreshTimer.start()
+    }
+  }
+
+  // Additional timer to ensure networks are populated after enabling
+  property Timer postEnableRefreshTimer: Timer {
+    id: postEnableRefreshTimer
+    interval: 1000
+    repeat: false
+    onTriggered: {
+      root.refreshNetworks()
+    }
+  }
+
+  // Timer to attempt auto-reconnection to the last connected network
+  property Timer autoReconnectTimer: Timer {
+    id: autoReconnectTimer
+    interval: 3000 // Wait 3 seconds after scan for networks to be available
+    repeat: false
+    onTriggered: {
+      if (lastConnectedNetwork && networks[lastConnectedNetwork]) {
+        const network = networks[lastConnectedNetwork]
+        if (network.existing && !network.connected) {
+          upConnectionProcess.profileName = lastConnectedNetwork
+          upConnectionProcess.running = true
+        }
+      }
+    }
+  }
+
+  // Process to disable WiFi radio
+  property Process disableWifiProcess: Process {
+    id: disableWifiProcess
+    running: false
+    command: ["nmcli", "radio", "wifi", "off"]
+    onRunningChanged: {
+      if (!running) {
+        // Clear networks when WiFi is disabled
+        root.networks = ({})
+        root.connectingSsid = ""
+        root.connectStatus = ""
+        root.connectStatusSsid = ""
+        root.connectError = ""
+        root.isLoading = false
+      }
+    }
+    stderr: StdioCollector {
+      onStreamFinished: {
+        if (text.trim() !== "") {
+          console.warn("Error disabling WiFi:", text)
+        }
+      }
+    }
   }
 
   property Process disconnectProfileProcess: Process {
@@ -211,11 +327,10 @@ QtObject {
         }
 
         root.networks = networksMap
+        root.isLoading = false
         scanProcess.existingNetwork = {}
       }
     }
-    
-
   }
 
   property Process connectProcess: Process {
@@ -237,6 +352,7 @@ QtObject {
         root.connectStatus = "success"
         root.connectStatusSsid = connectProcess.ssid
         root.connectError = ""
+        root.lastConnectedNetwork = connectProcess.ssid
         root.refreshNetworks()
       }
     }
@@ -324,8 +440,9 @@ QtObject {
       onStreamFinished: {
         root.connectingSsid = ""
         root.connectStatus = "success"
-        root.connectStatusSsid = root.pendingConnect ? root.pendingConnect.ssid : ""
+        root.connectStatusSsid = root.pendingConnect ? root.pendingConnect.ssid : profileName
         root.connectError = ""
+        root.lastConnectedNetwork = profileName
         root.pendingConnect = null
         root.refreshNetworks()
       }
@@ -334,7 +451,7 @@ QtObject {
       onStreamFinished: {
         root.connectingSsid = ""
         root.connectStatus = "error"
-        root.connectStatusSsid = root.pendingConnect ? root.pendingConnect.ssid : ""
+        root.connectStatusSsid = root.pendingConnect ? root.pendingConnect.ssid : profileName
         root.connectError = text
         root.pendingConnect = null
       }
@@ -342,6 +459,9 @@ QtObject {
   }
 
   Component.onCompleted: {
-    refreshNetworks()
+    // Only refresh networks if WiFi is enabled
+    if (Settings.data.network.wifiEnabled) {
+      refreshNetworks()
+    }
   }
 }
