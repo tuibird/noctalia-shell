@@ -1,5 +1,6 @@
 import QtQuick
 import Quickshell
+import qs.Commons
 import qs.Services
 import qs.Widgets
 
@@ -28,7 +29,7 @@ Row {
 
     NText {
       id: cpuUsageText
-      text: `${SystemStats.cpuUsage}%`
+      text: `${SystemStatsService.cpuUsage}%`
       font.pointSize: Style.fontSizeSmall * scaling
       font.weight: Style.fontWeightBold
       anchors.verticalCenter: parent.verticalCenter
@@ -51,7 +52,7 @@ Row {
     }
 
     NText {
-      text: `${SystemStats.cpuTemp}°C`
+      text: `${SystemStatsService.cpuTemp}°C`
       font.pointSize: Style.fontSizeSmall * scaling
       font.weight: Style.fontWeightBold
       anchors.verticalCenter: parent.verticalCenter
@@ -74,7 +75,7 @@ Row {
     }
 
     NText {
-      text: `${SystemStats.memoryUsageGb}G`
+      text: `${SystemStatsService.memoryUsageGb}G`
       font.pointSize: Style.fontSizeSmall * scaling
       font.weight: Style.fontWeightBold
       anchors.verticalCenter: parent.verticalCenter

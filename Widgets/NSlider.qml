@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Effects
+import qs.Commons
 import qs.Services
 
 Slider {

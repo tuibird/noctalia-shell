@@ -3,6 +3,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Wayland
+import qs.Commons
 import qs.Services
 import qs.Widgets
 
@@ -132,7 +133,7 @@ NLoader {
                 font.weight: Style.fontWeightBold
               }
               NText {
-                text: `${Math.round(Scaling.overrideScale * 100)}%`
+                text: `${Math.round(ScalingService.overrideScale * 100)}%`
                 Layout.alignment: Qt.AlignVCenter
               }
               RowLayout {
@@ -142,14 +143,14 @@ NLoader {
                   from: 0.6
                   to: 1.8
                   stepSize: 0.01
-                  value: Scaling.overrideScale
+                  value: ScalingService.overrideScale
                   implicitWidth: bgRect.width * 0.75
                   onMoved: {
 
                   }
                   onPressedChanged: {
-                    Scaling.overrideScale = value
-                    Scaling.overrideEnabled = true
+                    ScalingService.overrideScale = value
+                    ScalingService.overrideEnabled = true
                   }
                 }
                 NIconButton {
@@ -157,8 +158,8 @@ NLoader {
                   tooltipText: "Reset Scaling"
                   fontPointSize: Style.fontSizeLarge * scaling
                   onClicked: {
-                    Scaling.overrideEnabled = false
-                    Scaling.overrideScale = 1.0
+                    ScalingService.overrideEnabled = false
+                    ScalingService.overrideScale = 1.0
                   }
                 }
               }

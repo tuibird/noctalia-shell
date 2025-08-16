@@ -4,6 +4,7 @@ import QtQuick.Controls
 import Quickshell
 import Quickshell.Wayland
 import Quickshell.Services.Notifications
+import qs.Commons
 import qs.Services
 import qs.Widgets
 

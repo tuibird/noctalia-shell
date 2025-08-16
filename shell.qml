@@ -4,6 +4,7 @@ import Quickshell
 import Quickshell.Io
 import Quickshell.Services.Pipewire
 import Quickshell.Widgets
+import qs.Commons
 import qs.Modules.AppLauncher
 import qs.Modules.Background
 import qs.Modules.Bar
@@ -62,6 +63,6 @@ ShellRoot {
 
   Component.onCompleted: {
     // Ensure our singleton is created as soon as possible so we start fetching weather asap
-    Location.init()
+    LocationService.init()
   }
 }

@@ -4,6 +4,7 @@ import Quickshell
 import Quickshell.Widgets
 import Quickshell.Wayland
 import Quickshell.Services.Notifications
+import qs.Commons
 import qs.Services
 import qs.Widgets
 
@@ -15,7 +16,7 @@ Variants {
     id: root
 
     required property ShellScreen modelData
-    readonly property real scaling: Scaling.scale(screen)
+    readonly property real scaling: ScalingService.scale(screen)
     screen: modelData
 
     // Access the notification model from the service

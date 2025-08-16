@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import QtQuick.Controls
 import Quickshell
 import Quickshell.Wayland
+import qs.Commons
 import qs.Services
 import qs.Widgets
 
@@ -42,7 +43,7 @@ NLoader {
       // Also handle visibility changes from external sources
       onVisibleChanged: {
         if (visible && Settings.data.network.wifiEnabled) {
-          network.refreshNetworks()
+          NetworkService.refreshNetworks()
         } else if (wifiMenuRect.opacityValue > 0) {
           // Start hide animation
           wifiMenuRect.scaleValue = 0.8
@@ -61,15 +62,11 @@ NLoader {
         onTriggered: {
           wifiPanel.visible = false
           wifiPanel.dismissed()
-          network.onMenuClosed()
+          NetworkService.onMenuClosed()
         }
       }
 
       WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
-
-      Network {
-        id: network
-      }
 
       // Timer to refresh networks when WiFi is enabled while menu is open
       Timer {
@@ -78,7 +75,7 @@ NLoader {
         repeat: false
         onTriggered: {
           if (Settings.data.network.wifiEnabled && wifiPanel.visible) {
-            network.refreshNetworks()
+            NetworkService.refreshNetworks()
           }
         }
       }
@@ -153,7 +150,7 @@ NLoader {
               value: Settings.data.network.wifiEnabled
               onToggled: function (value) {
                 Settings.data.network.wifiEnabled = value
-                network.setWifiEnabled(value)
+                NetworkService.setWifiEnabled(value)
 
                 // If enabling WiFi while menu is open, refresh after a delay
                 if (value) {
@@ -168,7 +165,7 @@ NLoader {
               sizeMultiplier: 0.8
               enabled: Settings.data.network.wifiEnabled && !network.isLoading
               onClicked: {
-                network.refreshNetworks()
+                NetworkService.refreshNetworks()
               }
             }
 
@@ -268,7 +265,7 @@ NLoader {
                       spacing: Style.marginSmall * scaling
 
                       NText {
-                        text: network.signalIcon(modelData.signal)
+                        text: NetworkService.signalIcon(modelData.signal)
                         font.family: "Material Symbols Outlined"
                         font.pointSize: Style.fontSizeXL * scaling
                         color: modelData.connected ? Colors.mSurface : (networkMouseArea.containsMouse ? Colors.mSurface : Colors.mOnSurface)
@@ -297,9 +294,9 @@ NLoader {
                         }
 
                         NText {
-                          visible: network.connectStatusSsid === modelData.ssid && network.connectStatus === "error"
+                          visible: NetworkService.connectStatusSsid === modelData.ssid && NetworkService.connectStatus === "error"
                                    && network.connectError.length > 0
-                          text: network.connectError
+                          text: NetworkService.connectError
                           color: Colors.mError
                           font.pointSize: Style.fontSizeSmall * scaling
                           elide: Text.ElideRight
@@ -310,12 +307,12 @@ NLoader {
                       Item {
                         Layout.preferredWidth: Style.baseWidgetSize * 0.7 * scaling
                         Layout.preferredHeight: Style.baseWidgetSize * 0.7 * scaling
-                        visible: network.connectStatusSsid === modelData.ssid
-                                 && (network.connectStatus !== "" || network.connectingSsid === modelData.ssid)
+                        visible: NetworkService.connectStatusSsid === modelData.ssid
+                                 && (network.connectStatus !== "" || NetworkService.connectingSsid === modelData.ssid)
 
                         NBusyIndicator {
-                          visible: network.connectingSsid === modelData.ssid
-                          running: network.connectingSsid === modelData.ssid
+                          visible: NetworkService.connectingSsid === modelData.ssid
+                          running: NetworkService.connectingSsid === modelData.ssid
                           color: Colors.mPrimary
                           anchors.centerIn: parent
                           size: Style.baseWidgetSize * 0.7 * scaling
@@ -323,7 +320,7 @@ NLoader {
 
                         // TBC: Does nothing on my setup
                         NText {
-                          visible: network.connectStatus === "success" && !network.connectingSsid
+                          visible: NetworkService.connectStatus === "success" && !NetworkService.connectingSsid
                           text: "check_circle"
                           font.family: "Material Symbols Outlined"
                           font.pointSize: Style.fontSizeXL * scaling
@@ -333,7 +330,7 @@ NLoader {
 
                         // TBC: Does nothing on my setup
                         NText {
-                          visible: network.connectStatus === "error" && !network.connectingSsid
+                          visible: NetworkService.connectStatus === "error" && !NetworkService.connectingSsid
                           text: "error"
                           font.family: "Material Symbols Outlined"
                           font.pointSize: Style.fontSizeSmall * scaling
@@ -356,8 +353,8 @@ NLoader {
                       hoverEnabled: true
                       onClicked: {
                         if (modelData.connected) {
-                          network.disconnectNetwork(modelData.ssid)
-                        } else if (network.isSecured(modelData.security) && !modelData.existing) {
+                          NetworkService.disconnectNetwork(modelData.ssid)
+                        } else if (NetworkService.isSecured(modelData.security) && !modelData.existing) {
                           passwordPromptSsid = modelData.ssid
                           showPasswordPrompt = true
                           passwordInput = "" // Clear previous input
@@ -365,7 +362,7 @@ NLoader {
                             passwordInputField.forceActiveFocus()
                           })
                         } else {
-                          network.connectNetwork(modelData.ssid, modelData.security)
+                          NetworkService.connectNetwork(modelData.ssid, modelData.security)
                         }
                       }
                     }
@@ -413,7 +410,7 @@ NLoader {
                             echoMode: TextInput.Password
                             onTextChanged: passwordInput = text
                             onAccepted: {
-                              network.submitPassword(passwordPromptSsid, passwordInput)
+                              NetworkService.submitPassword(passwordPromptSsid, passwordInput)
                               showPasswordPrompt = false
                             }
 
@@ -448,7 +445,7 @@ NLoader {
                         MouseArea {
                           anchors.fill: parent
                           onClicked: {
-                            network.submitPassword(passwordPromptSsid, passwordInput)
+                            NetworkService.submitPassword(passwordPromptSsid, passwordInput)
                             showPasswordPrompt = false
                           }
                           cursorShape: Qt.PointingHandCursor

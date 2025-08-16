@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import qs.Commons
 import qs.Services
 import qs.Widgets
 
@@ -206,23 +207,23 @@ ColumnLayout {
           Layout.bottomMargin: Style.marginLarge * scaling
         }
 
-        // Audio Settings
+        // AudioService Settings
         ColumnLayout {
           spacing: Style.marginLarge * scaling
           Layout.fillWidth: true
 
           NText {
-            text: "Audio Settings"
+            text: "AudioService Settings"
             font.pointSize: Style.fontSizeXL * scaling
             font.weight: Style.fontWeightBold
             color: Colors.mOnSurface
             Layout.bottomMargin: Style.marginSmall * scaling
           }
 
-          // Audio Source
+          // AudioService Source
           NComboBox {
-            label: "Audio Source"
-            description: "Audio source to capture during recording"
+            label: "AudioService Source"
+            description: "AudioService source to capture during recording"
             model: ListModel {
               ListElement {
                 key: "default_output"
@@ -243,9 +244,9 @@ ColumnLayout {
             }
           }
 
-          // Audio Codec
+          // AudioService Codec
           NComboBox {
-            label: "Audio Codec"
+            label: "AudioService Codec"
             description: "Opus is recommended for best performance and smallest audio size"
             model: ListModel {
               ListElement {

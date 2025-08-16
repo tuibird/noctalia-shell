@@ -5,6 +5,7 @@ import QtQuick.Window
 import QtQuick.Effects
 import Quickshell
 import Quickshell.Io
+import qs.Commons
 import qs.Services
 
 Item {
@@ -42,8 +43,8 @@ Item {
 
   Component.onCompleted: {
     localWorkspaces.clear()
-    for (var i = 0; i < Workspaces.workspaces.count; i++) {
-      const ws = Workspaces.workspaces.get(i)
+    for (var i = 0; i < WorkspacesService.workspaces.count; i++) {
+      const ws = WorkspacesService.workspaces.get(i)
       if (ws.output.toLowerCase() === screen.name.toLowerCase()) {
         localWorkspaces.append(ws)
       }
@@ -53,11 +54,11 @@ Item {
   }
 
   Connections {
-    target: Workspaces
+    target: WorkspacesService
     function onWorkspacesChanged() {
       localWorkspaces.clear()
-      for (var i = 0; i < Workspaces.workspaces.count; i++) {
-        const ws = Workspaces.workspaces.get(i)
+      for (var i = 0; i < WorkspacesService.workspaces.count; i++) {
+        const ws = WorkspacesService.workspaces.get(i)
         if (ws.output.toLowerCase() === screen.name.toLowerCase()) {
           localWorkspaces.append(ws)
         }
@@ -181,7 +182,7 @@ Item {
             anchors.fill: parent
             cursorShape: Qt.PointingHandCursor
             onClicked: {
-              Workspaces.switchToWorkspace(model.idx)
+              WorkspacesService.switchToWorkspace(model.idx)
             }
             hoverEnabled: true
           }

@@ -3,6 +3,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import Quickshell
 import qs.Modules.Settings
+import qs.Commons
 import qs.Services
 import qs.Widgets
 
@@ -22,10 +23,10 @@ NBox {
     // Screen Recorder
     NIconButton {
       icon: "videocam"
-      tooltipText: ScreenRecorder.isRecording ? "Stop Screen Recording" : "Start Screen Recording"
-      showFilled: ScreenRecorder.isRecording
+      tooltipText: ScreenRecorderService.isRecording ? "Stop Screen Recording" : "Start Screen Recording"
+      showFilled: ScreenRecorderService.isRecording
       onClicked: {
-        ScreenRecorder.toggleRecording()
+        ScreenRecorderService.toggleRecording()
       }
     }
 

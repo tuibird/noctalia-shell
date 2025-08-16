@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import Quickshell
+import qs.Commons
 import qs.Services
 import qs.Widgets
 
@@ -29,8 +30,8 @@ Row {
     target: typeof Niri !== "undefined" ? Niri : null
     function onFocusedWindowIndexChanged() {
       // Check if window actually changed
-      if (Niri.focusedWindowIndex !== lastWindowIndex) {
-        lastWindowIndex = Niri.focusedWindowIndex
+      if (NiriService.focusedWindowIndex !== lastWindowIndex) {
+        lastWindowIndex = NiriService.focusedWindowIndex
         showingFullTitle = true
         fullTitleTimer.restart()
       }
@@ -96,8 +97,8 @@ Row {
     }
 
     // Get the focused window data
-    const focusedWindow = Niri.focusedWindowIndex >= 0
-                        && Niri.focusedWindowIndex < Niri.windows.length ? Niri.windows[Niri.focusedWindowIndex] : null
+    const focusedWindow = NiriService.focusedWindowIndex >= 0
+                        && NiriService.focusedWindowIndex < NiriService.windows.length ? NiriService.windows[NiriService.focusedWindowIndex] : null
 
     if (!focusedWindow) {
       return ""

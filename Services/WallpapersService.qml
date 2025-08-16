@@ -66,7 +66,7 @@ Singleton {
 
     // Only notify ColorSchemes service if the wallpaper actually changed
     if (wallpaperChanged) {
-      ColorSchemes.changedWallpaper()
+      ColorSchemesService.changedWallpaper()
     }
   }
 

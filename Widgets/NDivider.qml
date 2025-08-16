@@ -1,6 +1,7 @@
 import QtQuick
 import Quickshell
 import Quickshell.Widgets
+import qs.Commons
 import qs.Services
 
 Rectangle {

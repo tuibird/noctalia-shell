@@ -1,12 +1,13 @@
 import QtQuick
 import Quickshell
 import Quickshell.Wayland
+import qs.Commons
 import qs.Services
 
 PanelWindow {
   id: root
 
-  readonly property real scaling: Scaling.scale(screen)
+  readonly property real scaling: ScalingService.scale(screen)
 
   property bool showOverlay: Settings.data.general.dimDesktop
   property int topMargin: Style.barHeight * scaling
@@ -19,12 +20,12 @@ PanelWindow {
   }
 
   function show() {
-    // Ensure only one panel is visible at a time using PanelManager as ephemeral storage
+    // Ensure only one panel is visible at a time using PanelService as ephemeral storage
     try {
-      if (PanelManager.openedPanel && PanelManager.openedPanel !== root && PanelManager.openedPanel.hide) {
-        PanelManager.openedPanel.hide()
+      if (PanelService.openedPanel && PanelService.openedPanel !== root && PanelService.openedPanel.hide) {
+        PanelService.openedPanel.hide()
       }
-      PanelManager.openedPanel = root
+      PanelService.openedPanel = root
     } catch (e) {
 
       // ignore

@@ -4,6 +4,7 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Wayland
 import qs.Modules.Settings.Tabs as Tabs
+import qs.Commons
 import qs.Services
 import qs.Widgets
 
@@ -13,7 +14,7 @@ NLoader {
   // Tabs enumeration, order is NOT relevant
   enum Tab {
     About,
-    Audio,
+    AudioService,
     Bar,
     ColorScheme,
     Display,
@@ -119,8 +120,8 @@ NLoader {
           "icon": "web_asset",
           "source": barTab
         }, {
-          "id": SettingsPanel.Tab.Audio,
-          "label": "Audio",
+          "id": SettingsPanel.Tab.AudioService,
+          "label": "AudioService",
           "icon": "volume_up",
           "source": audioTab
         }, {

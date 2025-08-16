@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import qs.Commons
 import qs.Services
 import qs.Widgets
 import Quickshell.Io
@@ -66,7 +67,7 @@ ColumnLayout {
   // When the list of available schemes changes, clear the cache.
   // The Repeater below will automatically re-create the FileViews.
   Connections {
-    target: ColorSchemes
+    target: ColorSchemesService
     function onSchemesChanged() {
       schemeColorsCache = {}
     }
@@ -78,7 +79,7 @@ ColumnLayout {
     id: fileLoaders
 
     Repeater {
-      model: ColorSchemes.schemes
+      model: ColorSchemesService.schemes
 
       // The delegate is a Component, which correctly wraps the non-visual FileView
       delegate: Item {
@@ -132,7 +133,7 @@ ColumnLayout {
           onToggled: function (newValue) {
             Settings.data.colorSchemes.useWallpaperColors = newValue
             if (Settings.data.colorSchemes.useWallpaperColors) {
-              ColorSchemes.changedWallpaper()
+              ColorSchemesService.changedWallpaper()
             }
           }
         }
@@ -177,7 +178,7 @@ ColumnLayout {
             Layout.fillWidth: true
 
             Repeater {
-              model: ColorSchemes.schemes
+              model: ColorSchemesService.schemes
 
               Rectangle {
                 id: schemeCard
@@ -197,9 +198,10 @@ ColumnLayout {
                   anchors.fill: parent
                   onClicked: {
                     // Disable useWallpaperColors when picking a predefined color scheme
+                    // TBC: broken uncheck useWallpaperColors
                     Settings.data.colorSchemes.useWallpaperColors = false
                     Settings.data.colorSchemes.predefinedScheme = schemePath
-                    ColorSchemes.applyScheme(schemePath)
+                    ColorSchemesService.applyScheme(schemePath)
                   }
                   hoverEnabled: true
                   cursorShape: Qt.PointingHandCursor

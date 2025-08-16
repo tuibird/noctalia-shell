@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
+import qs.Commons
 import qs.Services
 import qs.Widgets
 
@@ -27,7 +28,7 @@ NBox {
     }
 
     NCircleStat {
-      value: SystemStats.cpuUsage
+      value: SystemStatsService.cpuUsage
       icon: "speed"
       flat: true
       contentScale: 0.8
@@ -35,7 +36,7 @@ NBox {
       height: 68 * scaling
     }
     NCircleStat {
-      value: SystemStats.cpuTemp
+      value: SystemStatsService.cpuTemp
       suffix: "°C"
       icon: "device_thermostat"
       flat: true
@@ -44,7 +45,7 @@ NBox {
       height: 68 * scaling
     }
     NCircleStat {
-      value: SystemStats.memoryUsagePer
+      value: SystemStatsService.memoryUsagePer
       icon: "memory"
       flat: true
       contentScale: 0.8
@@ -52,7 +53,7 @@ NBox {
       height: 68 * scaling
     }
     NCircleStat {
-      value: SystemStats.diskUsage
+      value: SystemStatsService.diskUsage
       icon: "hard_drive"
       flat: true
       contentScale: 0.8

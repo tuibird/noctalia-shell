@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 import Qt.labs.folderlistmodel
+import qs.Commons
 import qs.Services
 import qs.Widgets
 
@@ -48,7 +49,7 @@ Item {
             id: currentWallpaperImage
             anchors.fill: parent
             anchors.margins: Style.marginSmall * scaling
-            imagePath: Wallpapers.currentWallpaper
+            imagePath: WallpapersService.currentWallpaper
             fallbackIcon: "image"
             borderColor: Colors.mOutline
             borderWidth: Math.max(1, Style.borderThin * scaling)
@@ -96,7 +97,7 @@ Item {
             icon: "refresh"
             tooltipText: "Refresh wallpaper list"
             onClicked: {
-              Wallpapers.loadWallpapers()
+              WallpapersService.loadWallpapers()
             }
             Layout.alignment: Qt.AlignTop | Qt.AlignRight
           }
@@ -106,14 +107,14 @@ Item {
         Item {
           Layout.fillWidth: true
           Layout.preferredHeight: {
-            return Math.ceil(Wallpapers.wallpaperList.length / wallpaperGridView.columns) * wallpaperGridView.cellHeight
+            return Math.ceil(WallpapersService.wallpaperList.length / wallpaperGridView.columns) * wallpaperGridView.cellHeight
           }
 
           GridView {
             id: wallpaperGridView
             anchors.fill: parent
             clip: true
-            model: Wallpapers.wallpaperList
+            model: WallpapersService.wallpaperList
 
             boundsBehavior: Flickable.StopAtBounds
             flickableDirection: Flickable.AutoFlickDirection
@@ -134,7 +135,7 @@ Item {
             delegate: Rectangle {
               id: wallpaperItem
               property string wallpaperPath: modelData
-              property bool isSelected: wallpaperPath === Wallpapers.currentWallpaper
+              property bool isSelected: wallpaperPath === WallpapersService.currentWallpaper
 
               width: wallpaperGridView.itemSize
               height: Math.floor(wallpaperGridView.itemSize * 0.67)
@@ -195,7 +196,7 @@ Item {
                 acceptedButtons: Qt.LeftButton
                 hoverEnabled: true
                 onClicked: {
-                  Wallpapers.changeWallpaper(wallpaperPath)
+                  WallpapersService.changeWallpaper(wallpaperPath)
                 }
               }
             }
@@ -208,7 +209,7 @@ Item {
             radius: Style.radiusMedium * scaling
             border.color: Colors.mOutline
             border.width: Math.max(1, Style.borderThin * scaling)
-            visible: Wallpapers.wallpaperList.length === 0 && !Wallpapers.scanning
+            visible: WallpapersService.wallpaperList.length === 0 && !WallpapersService.scanning
 
             ColumnLayout {
               anchors.centerIn: parent

@@ -2,6 +2,7 @@ pragma Singleton
 
 import Quickshell
 import QtQuick
+import qs.Commons
 import qs.Services
 
 Singleton {

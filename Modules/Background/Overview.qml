@@ -2,14 +2,15 @@ import QtQuick
 import QtQuick.Effects
 import Quickshell
 import Quickshell.Wayland
+import qs.Commons
 import qs.Services
 import qs.Widgets
 
 NLoader {
-  active: Workspaces.isNiri
+  active: WorkspacesService.isNiri
 
   Component.onCompleted: {
-    if (Workspaces.isNiri) {
+    if (WorkspacesService.isNiri) {
       console.log("[Overview] Loading Overview component (Niri detected)")
     } else {
       console.log("[Overview] Skipping Overview component (Niri not detected)")
@@ -21,8 +22,8 @@ NLoader {
 
     delegate: PanelWindow {
       required property ShellScreen modelData
-      property string wallpaperSource: Wallpapers.currentWallpaper !== ""
-                                       && !Settings.data.wallpaper.swww.enabled ? Wallpapers.currentWallpaper : ""
+      property string wallpaperSource: WallpapersService.currentWallpaper !== ""
+                                       && !Settings.data.wallpaper.swww.enabled ? WallpapersService.currentWallpaper : ""
 
       visible: wallpaperSource !== "" && !Settings.data.wallpaper.swww.enabled
       color: "transparent"

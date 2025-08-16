@@ -4,9 +4,6 @@ import Quickshell.Io
 Item {
   id: root
 
-  // Reference to the lockscreen component
-  property var lockscreen: null
-
   IpcHandler {
     target: "settings"
 

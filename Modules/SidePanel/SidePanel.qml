@@ -3,6 +3,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import Quickshell
 import qs.Modules.SidePanel.Cards
+import qs.Commons
 import qs.Services
 import qs.Widgets
 

@@ -5,18 +5,19 @@ import Quickshell.Services.Pipewire
 
 import qs.Modules.Settings
 import qs.Widgets
+import qs.Commons
 import qs.Services
 
 ColumnLayout {
   id: root
 
-  property real localVolume: Audio.volume
+  property real localVolume: AudioService.volume
 
   // Connection used to open the pill when volume changes
   Connections {
-    target: Audio.sink?.audio ? Audio.sink?.audio : null
+    target: AudioService.sink?.audio ? AudioService.sink?.audio : null
     function onVolumeChanged() {
-      localVolume = Audio.volume
+      localVolume = AudioService.volume
     }
   }
 
@@ -46,7 +47,7 @@ ColumnLayout {
         Layout.fillWidth: true
 
         NText {
-          text: "Audio"
+          text: "AudioService"
           font.pointSize: Style.fontSizeXL * scaling
           font.weight: Style.fontWeightBold
           color: Colors.mOnSurface
@@ -90,8 +91,8 @@ ColumnLayout {
                 running: true
                 repeat: true
                 onTriggered: {
-                  if (Math.abs(localVolume - Audio.volume) >= 0.01) {
-                    Audio.setVolume(localVolume)
+                  if (Math.abs(localVolume - AudioService.volume) >= 0.01) {
+                    AudioService.setVolume(localVolume)
                   }
                 }
               }
@@ -108,7 +109,7 @@ ColumnLayout {
               }
 
               NText {
-                text: Math.floor(Audio.volume * 100) + "%"
+                text: Math.floor(AudioService.volume * 100) + "%"
                 Layout.alignment: Qt.AlignVCenter
                 color: Colors.mOnSurface
               }
@@ -122,12 +123,12 @@ ColumnLayout {
             Layout.topMargin: Style.marginMedium * scaling
 
             NToggle {
-              label: "Mute Audio"
+              label: "Mute AudioService"
               description: "Mute or unmute the default audio output"
-              value: Audio.muted
+              value: AudioService.muted
               onToggled: function (newValue) {
-                if (Audio.sink && Audio.sink.audio) {
-                  Audio.sink.audio.muted = newValue
+                if (AudioService.sink && AudioService.sink.audio) {
+                  AudioService.sink.audio.muted = newValue
                 }
               }
             }
@@ -140,13 +141,13 @@ ColumnLayout {
           Layout.bottomMargin: Style.marginLarge * scaling
         }
 
-        // Audio Devices
+        // AudioService Devices
         ColumnLayout {
           spacing: Style.marginLarge * scaling
           Layout.fillWidth: true
 
           NText {
-            text: "Audio Devices"
+            text: "AudioService Devices"
             font.pointSize: Style.fontSizeXL * scaling
             font.weight: Style.fontWeightBold
             color: Colors.mOnSurface
@@ -180,12 +181,12 @@ ColumnLayout {
             }
 
             Repeater {
-              model: Audio.sinks
+              model: AudioService.sinks
               NRadioButton {
                 required property PwNode modelData
                 ButtonGroup.group: sinks
-                checked: Audio.sink?.id === modelData.id
-                onClicked: Audio.setAudioSink(modelData)
+                checked: AudioService.sink?.id === modelData.id
+                onClicked: AudioService.setAudioSink(modelData)
                 text: modelData.description
               }
             }
@@ -219,12 +220,12 @@ ColumnLayout {
           }
 
           Repeater {
-            model: Audio.sources
+            model: AudioService.sources
             NRadioButton {
               required property PwNode modelData
               ButtonGroup.group: sources
-              checked: Audio.source?.id === modelData.id
-              onClicked: Audio.setAudioSource(modelData)
+              checked: AudioService.source?.id === modelData.id
+              onClicked: AudioService.setAudioSource(modelData)
               text: modelData.description
             }
           }
@@ -238,20 +239,20 @@ ColumnLayout {
         Layout.bottomMargin: Style.marginMedium * scaling
       }
 
-      // Audio Visualizer Category
+      // AudioService Visualizer Category
       ColumnLayout {
         spacing: Style.marginSmall * scaling
         Layout.fillWidth: true
 
         NText {
-          text: "Audio Visualizer"
+          text: "AudioService Visualizer"
           font.pointSize: Style.fontSizeXL * scaling
           font.weight: Style.fontWeightBold
           color: Colors.mOnSurface
           Layout.bottomMargin: Style.marginSmall * scaling
         }
 
-        // Audio Visualizer section
+        // AudioService Visualizer section
         NComboBox {
           id: audioVisualizerCombo
           label: "Visualization Type"

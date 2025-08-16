@@ -6,6 +6,7 @@ import QtQuick
 import Quickshell
 import Quickshell.Io
 import Quickshell.Hyprland
+import qs.Commons
 import qs.Services
 
 Singleton {
@@ -106,14 +107,14 @@ Singleton {
   }
 
   Connections {
-    target: Niri
+    target: NiriService
     function onWorkspacesChanged() {
       updateNiriWorkspaces()
     }
   }
 
   function updateNiriWorkspaces() {
-    const niriWorkspaces = Niri.workspaces || []
+    const niriWorkspaces = NiriService.workspaces || []
     workspaces.clear()
     for (var i = 0; i < niriWorkspaces.length; i++) {
       const ws = niriWorkspaces[i]

@@ -6,6 +6,7 @@ import Quickshell
 import Quickshell.Io
 import Quickshell.Wayland
 import Quickshell.Widgets
+import qs.Commons
 import qs.Services
 import qs.Widgets
 
@@ -15,7 +16,7 @@ import "../../Helpers/MathHelper.js" as MathHelper
 NLoader {
   id: appLauncher
   isLoaded: false
-  // Clipboard state is persisted in Services/Clipboard.qml
+  // Clipboard state is persisted in Services/ClipboardService.qml
   content: Component {
     NPanel {
       id: appLauncherPanel
@@ -36,7 +37,7 @@ NLoader {
       }
 
       function updateClipboardHistory() {
-        Clipboard.refresh()
+        ClipboardService.refresh()
       }
 
       function selectNext() {
@@ -119,12 +120,12 @@ NLoader {
 
         // Handle clipboard history
         if (query.startsWith(">clip")) {
-          if (!Clipboard.initialized) {
-            Clipboard.refresh()
+          if (!ClipboardService.initialized) {
+            ClipboardService.refresh()
           }
           const searchTerm = query.slice(5).trim()
 
-          Clipboard.history.forEach(function (clip, index) {
+          ClipboardService.history.forEach(function (clip, index) {
             let searchContent = clip.type === 'image' ? clip.mimeType : clip.content || clip
 
             if (!searchTerm || searchContent.toLowerCase().includes(searchTerm)) {

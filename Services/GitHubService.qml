@@ -1,6 +1,7 @@
 import QtQuick
 import Quickshell
 import Quickshell.Io
+import qs.Commons
 import qs.Services
 pragma Singleton
 
@@ -10,7 +11,7 @@ Singleton {
 
   property string githubDataFile: Quickshell.env("NOCTALIA_GITHUB_FILE") || (Settings.cacheDir + "github.json")
   property int githubUpdateFrequency: 60 * 60 // 1 hour expressed in seconds
-  property var data: adapter // Used to access via GitHub.data.xxx.yyy
+  property var data: adapter // Used to access via GitHubService.data.xxx.yyy
   property bool isFetchingData: false
 
   // Public properties for easy access

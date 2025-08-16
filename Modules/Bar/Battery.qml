@@ -2,6 +2,7 @@ import QtQuick
 import Quickshell
 import Quickshell.Services.UPower
 import QtQuick.Layouts
+import qs.Commons
 import qs.Services
 import qs.Widgets
 

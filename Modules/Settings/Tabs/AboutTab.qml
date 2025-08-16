@@ -4,15 +4,16 @@ import QtQuick.Effects
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Io
+import qs.Commons
 import qs.Services
 import qs.Widgets
 
 ColumnLayout {
   id: root
 
-  property string latestVersion: GitHub.latestVersion
+  property string latestVersion: GitHubService.latestVersion
   property string currentVersion: "Unknown" // Fallback version
-  property var contributors: GitHub.contributors
+  property var contributors: GitHubService.contributors
 
   spacing: 0
   Layout.fillWidth: true

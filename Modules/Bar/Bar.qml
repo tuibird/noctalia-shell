@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import Quickshell
+import qs.Commons
 import qs.Services
 import qs.Widgets
 import qs.Modules.Notification
@@ -13,7 +14,7 @@ Variants {
     id: root
 
     required property ShellScreen modelData
-    readonly property real scaling: Scaling.scale(screen)
+    readonly property real scaling: ScalingService.scale(screen)
     screen: modelData
 
     implicitHeight: Style.barHeight * scaling
@@ -88,11 +89,11 @@ Variants {
           tooltipText: "Screen Recording Active"
           sizeMultiplier: 0.8
           showBorder: false
-          showFilled: ScreenRecorder.isRecording
-          visible: ScreenRecorder.isRecording
+          showFilled: ScreenRecorderService.isRecording
+          visible: ScreenRecorderService.isRecording
           anchors.verticalCenter: parent.verticalCenter
           onClicked: {
-            ScreenRecorder.toggleRecording()
+            ScreenRecorderService.toggleRecording()
           }
         }
 

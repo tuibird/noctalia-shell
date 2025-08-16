@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
+import qs.Commons
 import qs.Services
 import qs.Widgets
 
@@ -8,7 +9,7 @@ Item {
 
   width: visible ? mediaRow.width : 0
   height: Style.barHeight * scaling
-  visible: Settings.data.bar.showMedia && (MediaPlayer.canPlay || MediaPlayer.canPause)
+  visible: Settings.data.bar.showMedia && (MediaService.canPlay || MediaService.canPause)
 
   RowLayout {
     id: mediaRow
@@ -16,18 +17,17 @@ Item {
     spacing: Style.spacingTiniest * scaling
 
     // NIconButton {
-    //   icon: MediaPlayer.isPlaying ? "pause" : "play_arrow"
+    //   icon: MediaService.isPlaying ? "pause" : "play_arrow"
     //   tooltipText: "Play/pause media"
     //   sizeMultiplier: 0.8
     //   showBorder: false
-    //   onClicked: MediaPlayer.playPause()
+    //   onClicked: MediaService.playPause()
     // }
     NText {
-      text: MediaPlayer.isPlaying ? "pause" : "play_arrow"
+      text: MediaService.isPlaying ? "pause" : "play_arrow"
       font.family: "Material Symbols Outlined"
       font.pointSize: Style.fontSizeLarge * scaling
       verticalAlignment: Text.AlignVCenter
-      anchors.verticalCenter: parent.verticalCenter
       color: Colors.mPrimary
 
       MouseArea {
@@ -35,21 +35,20 @@ Item {
         anchors.fill: parent
 
         onClicked: {
-          onClicked: MediaPlayer.playPause()
+          onClicked: MediaService.playPause()
         }
       }
     }
 
     // Track info
     NText {
-      text: MediaPlayer.trackTitle + (MediaPlayer.trackArtist !== "" ? ` - {MediaPlayer.trackArtist}` : "")
+      text: MediaService.trackTitle + (MediaService.trackArtist !== "" ? ` - {MediaService.trackArtist}` : "")
       color: Colors.mOnSurface
       font.pointSize: Style.fontSizeSmall * scaling
       font.weight: Style.fontWeightBold
       elide: Text.ElideRight
 
       verticalAlignment: Text.AlignVCenter
-      anchors.verticalCenter: parent.verticalCenter
       Layout.maximumWidth: 200 * scaling
       Layout.alignment: Qt.AlignVCenter
     }

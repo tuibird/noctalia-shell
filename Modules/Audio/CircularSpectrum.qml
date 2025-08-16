@@ -1,4 +1,5 @@
 import QtQuick
+import qs.Commons
 import qs.Services
 
 // Not used ATM and need rework

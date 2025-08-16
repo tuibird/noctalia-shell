@@ -61,7 +61,7 @@ Singleton {
 
   Process {
     id: generateColorsProcess
-    command: ["matugen", "image", Wallpapers.currentWallpaper, "--config", Quickshell.shellDir + "/Assets/Matugen/matugen.toml"]
+    command: ["matugen", "image", WallpapersService.currentWallpaper, "--config", Quickshell.shellDir + "/Assets/Matugen/matugen.toml"]
     workingDirectory: Quickshell.shellDir
     running: false
     stdout: StdioCollector {

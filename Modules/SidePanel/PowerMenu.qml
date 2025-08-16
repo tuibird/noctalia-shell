@@ -4,6 +4,7 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Io
 import Quickshell.Widgets
+import qs.Commons
 import qs.Services
 import qs.Widgets
 import qs.Modules.LockScreen
@@ -347,9 +348,9 @@ NPanel {
   // ----------------------------------
   // System functions
   function logout() {
-    if (Workspaces.isNiri) {
+    if (WorkspacesService.isNiri) {
       logoutProcessNiri.running = true
-    } else if (Workspaces.isHyprland) {
+    } else if (WorkspacesService.isHyprland) {
       logoutProcessHyprland.running = true
     } else {
       console.warn("No supported compositor detected for logout")

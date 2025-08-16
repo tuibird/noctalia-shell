@@ -2,6 +2,7 @@ import QtQuick
 import Quickshell
 import Quickshell.Services.Pipewire
 import qs.Modules.Settings
+import qs.Commons
 import qs.Services
 import qs.Widgets
 
@@ -15,15 +16,15 @@ Item {
   property bool firstVolumeReceived: false
 
   function getIcon() {
-    if (Audio.muted) {
+    if (AudioService.muted) {
       return "volume_off"
     }
-    return Audio.volume <= Number.EPSILON ? "volume_off" : (Audio.volume < 0.33 ? "volume_down" : "volume_up")
+    return AudioService.volume <= Number.EPSILON ? "volume_off" : (AudioService.volume < 0.33 ? "volume_down" : "volume_up")
   }
 
   // Connection used to open the pill when volume changes
   Connections {
-    target: Audio.sink?.audio ? Audio.sink?.audio : null
+    target: AudioService.sink?.audio ? AudioService.sink?.audio : null
     function onVolumeChanged() {
       // console.log("[Bar:Volume] onVolumeChanged")
       if (!firstVolumeReceived) {
@@ -51,19 +52,19 @@ Item {
     iconCircleColor: Colors.mPrimary
     collapsedIconColor: Colors.mOnSurface
     autoHide: false // Important to be false so we can hover as long as we want
-    text: Math.floor(Audio.volume * 100) + "%"
+    text: Math.floor(AudioService.volume * 100) + "%"
     tooltipText: "Volume: " + Math.round(
-                   Audio.volume * 100) + "%\nLeft click for advanced settings.\nScroll up/down to change volume."
+                   AudioService.volume * 100) + "%\nLeft click for advanced settings.\nScroll up/down to change volume."
 
     onWheel: function (angle) {
       if (angle > 0) {
-        Audio.increaseVolume()
+        AudioService.increaseVolume()
       } else if (angle < 0) {
-        Audio.decreaseVolume()
+        AudioService.decreaseVolume()
       }
     }
     onClicked: {
-      settingsPanel.requestedTab = SettingsPanel.Tab.Audio
+      settingsPanel.requestedTab = SettingsPanel.Tab.AudioService
       settingsPanel.isLoaded = true
     }
   }

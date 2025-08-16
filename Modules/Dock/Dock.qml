@@ -5,6 +5,7 @@ import QtQuick.Effects
 import Quickshell
 import Quickshell.Wayland
 import Quickshell.Widgets
+import qs.Commons
 import qs.Services
 import qs.Widgets
 
@@ -18,7 +19,7 @@ NLoader {
         id: dockWindow
 
         required property ShellScreen modelData
-        readonly property real scaling: Scaling.scale(screen)
+        readonly property real scaling: ScalingService.scale(screen)
         screen: modelData
 
         // Auto-hide properties

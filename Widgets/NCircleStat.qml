@@ -1,4 +1,5 @@
 import QtQuick
+import qs.Commons
 import qs.Services
 
 // Compact circular statistic display used in the SidePanel

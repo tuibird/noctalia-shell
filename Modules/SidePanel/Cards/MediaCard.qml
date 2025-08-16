@@ -3,6 +3,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import Quickshell
 import qs.Modules.Audio
+import qs.Commons
 import qs.Services
 import qs.Widgets
 
@@ -17,7 +18,7 @@ NBox {
   // Height can be overridden by parent layout (SidePanel binds it to stats card)
   //implicitHeight: content.implicitHeight + Style.marginLarge * 2 * scaling
   // Component.onCompleted: {
-  //   console.log(MediaPlayer.trackArtUrl)
+  //   console.log(MediaService.trackArtUrl)
   // }
   ColumnLayout {
     anchors.fill: parent
@@ -58,7 +59,7 @@ NBox {
     ColumnLayout {
       id: main
 
-      visible: MediaPlayer.currentPlayer && MediaPlayer.canPlay
+      visible: MediaService.currentPlayer && MediaService.canPlay
       spacing: Style.marginMedium * scaling
 
       // Player selector
@@ -66,10 +67,10 @@ NBox {
         id: playerSelector
         Layout.fillWidth: true
         Layout.preferredHeight: Style.barHeight * 0.83 * scaling
-        visible: MediaPlayer.getAvailablePlayers().length > 1
-        model: MediaPlayer.getAvailablePlayers()
+        visible: MediaService.getAvailablePlayers().length > 1
+        model: MediaService.getAvailablePlayers()
         textRole: "identity"
-        currentIndex: MediaPlayer.selectedPlayerIndex
+        currentIndex: MediaService.selectedPlayerIndex
 
         background: Rectangle {
           visible: false
@@ -145,8 +146,8 @@ NBox {
         }
 
         onActivated: {
-          MediaPlayer.selectedPlayerIndex = currentIndex
-          MediaPlayer.updateCurrentPlayer()
+          MediaService.selectedPlayerIndex = currentIndex
+          MediaService.updateCurrentPlayer()
         }
       }
 
@@ -167,11 +168,11 @@ NBox {
 
           NImageRounded {
             id: trackArt
-            visible: MediaPlayer.trackArtUrl.toString() !== ""
+            visible: MediaService.trackArtUrl.toString() !== ""
 
             anchors.fill: parent
             anchors.margins: Style.marginTiny * scaling
-            imagePath: MediaPlayer.trackArtUrl
+            imagePath: MediaService.trackArtUrl
             fallbackIcon: "music_note"
             borderColor: Colors.mOutline
             borderWidth: Math.max(1, Style.borderThin * scaling)
@@ -196,8 +197,8 @@ NBox {
           spacing: Style.marginTiny * scaling
 
           NText {
-            visible: MediaPlayer.trackTitle !== ""
-            text: MediaPlayer.trackTitle
+            visible: MediaService.trackTitle !== ""
+            text: MediaService.trackTitle
             font.pointSize: Style.fontSizeMedium * scaling
             font.weight: Style.fontWeightBold
             elide: Text.ElideRight
@@ -207,8 +208,8 @@ NBox {
           }
 
           NText {
-            visible: MediaPlayer.trackArtist !== ""
-            text: MediaPlayer.trackArtist
+            visible: MediaService.trackArtist !== ""
+            text: MediaService.trackArtist
             color: Colors.mOnSurface
             font.pointSize: Style.fontSizeSmall * scaling
             elide: Text.ElideRight
@@ -216,8 +217,8 @@ NBox {
           }
 
           NText {
-            visible: MediaPlayer.trackAlbum !== ""
-            text: MediaPlayer.trackAlbum
+            visible: MediaService.trackAlbum !== ""
+            text: MediaService.trackAlbum
             color: Colors.mOnSurface
             font.pointSize: Style.fontSizeSmall * scaling
             elide: Text.ElideRight
@@ -230,7 +231,7 @@ NBox {
       // Progress bar
       Rectangle {
         id: progressBarBackground
-        visible: (MediaPlayer.currentPlayer && MediaPlayer.trackLength > 0)
+        visible: (MediaService.currentPlayer && MediaService.trackLength > 0)
         width: parent.width
         height: 4 * scaling
         radius: Style.radiusSmall * scaling
@@ -238,10 +239,10 @@ NBox {
         Layout.fillWidth: true
 
         property real progressRatio: {
-          if (!MediaPlayer.currentPlayer || !MediaPlayer.isPlaying || MediaPlayer.trackLength <= 0) {
+          if (!MediaService.currentPlayer || !MediaService.isPlaying || MediaService.trackLength <= 0) {
             return 0
           }
-          return Math.min(1, MediaPlayer.currentPosition / MediaPlayer.trackLength)
+          return Math.min(1, MediaService.currentPosition / MediaService.trackLength)
         }
 
         Rectangle {
@@ -261,7 +262,7 @@ NBox {
         // Interactive progress handle
         Rectangle {
           id: progressHandle
-          visible: (MediaPlayer.currentPlayer && MediaPlayer.trackLength > 0)
+          visible: (MediaService.currentPlayer && MediaService.trackLength > 0)
           width: 16 * scaling
           height: 16 * scaling
           radius: width * 0.5
@@ -285,17 +286,17 @@ NBox {
           anchors.fill: parent
           hoverEnabled: true
           cursorShape: Qt.PointingHandCursor
-          enabled: MediaPlayer.trackLength > 0 && MediaPlayer.canSeek
+          enabled: MediaService.trackLength > 0 && MediaService.canSeek
 
           onClicked: function (mouse) {
             let ratio = mouse.x / width
-            MediaPlayer.seekByRatio(ratio)
+            MediaService.seekByRatio(ratio)
           }
 
           onPositionChanged: function (mouse) {
             if (pressed) {
               let ratio = Math.max(0, Math.min(1, mouse.x / width))
-              MediaPlayer.seekByRatio(ratio)
+              MediaService.seekByRatio(ratio)
             }
           }
         }
@@ -312,24 +313,24 @@ NBox {
         NIconButton {
           icon: "skip_previous"
           tooltipText: "Previous Media"
-          visible: MediaPlayer.canGoPrevious
-          onClicked: MediaPlayer.canGoPrevious ? MediaPlayer.previous() : {}
+          visible: MediaService.canGoPrevious
+          onClicked: MediaService.canGoPrevious ? MediaService.previous() : {}
         }
 
         // Play/Pause button
         NIconButton {
-          icon: MediaPlayer.isPlaying ? "pause" : "play_arrow"
-          tooltipText: MediaPlayer.isPlaying ? "Pause" : "Play"
-          visible: (MediaPlayer.canPlay || MediaPlayer.canPause)
-          onClicked: (MediaPlayer.canPlay || MediaPlayer.canPause) ? MediaPlayer.playPause() : {}
+          icon: MediaService.isPlaying ? "pause" : "play_arrow"
+          tooltipText: MediaService.isPlaying ? "Pause" : "Play"
+          visible: (MediaService.canPlay || MediaService.canPause)
+          onClicked: (MediaService.canPlay || MediaService.canPause) ? MediaService.playPause() : {}
         }
 
         // Next button
         NIconButton {
           icon: "skip_next"
           tooltipText: "Next Media"
-          visible: MediaPlayer.canGoNext
-          onClicked: MediaPlayer.canGoNext ? MediaPlayer.next() : {}
+          visible: MediaService.canGoNext
+          onClicked: MediaService.canGoNext ? MediaService.next() : {}
         }
       }
     }
@@ -341,7 +342,7 @@ NBox {
       sourceComponent: LinearSpectrum {
         width: 300 * scaling
         height: 80 * scaling
-        values: Cava.values
+        values: CavaService.values
         fillColor: Colors.mOnSurface
         Layout.alignment: Qt.AlignHCenter
       }

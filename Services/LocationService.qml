@@ -1,6 +1,7 @@
 import QtQuick
 import Quickshell
 import Quickshell.Io
+import qs.Commons
 import qs.Services
 pragma Singleton
 
@@ -10,7 +11,7 @@ Singleton {
 
   property string locationFile: Quickshell.env("NOCTALIA_WEATHER_FILE") || (Settings.cacheDir + "location.json")
   property int weatherUpdateFrequency: 30 * 60 // 30 minutes expressed in seconds
-  property var data: adapter // Used to access via Location.data.xxx
+  property var data: adapter // Used to access via LocationService.data.xxx
   property bool isFetchingWeather: false
 
   FileView {

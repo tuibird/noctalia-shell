@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import QtQuick.Controls
 import Quickshell
 import Quickshell.Wayland
+import qs.Commons
 import qs.Services
 import qs.Widgets
 
@@ -15,14 +16,14 @@ NIconButton {
   icon: {
     let connected = false
     let signalStrength = 0
-    for (const net in network.networks) {
-      if (network.networks[net].connected) {
+    for (const net in NetworkService.networks) {
+      if (NetworkService.networks[net].connected) {
         connected = true
         signalStrength = network.networks[net].signal
         break
       }
     }
-    return connected ? network.signalIcon(signalStrength) : "wifi_off"
+    return connected ? NetworkService.signalIcon(signalStrength) : "wifi_off"
   }
   tooltipText: "WiFi Networks"
   onClicked: {
@@ -36,18 +37,14 @@ NIconButton {
           wifiMenuLoader.item.hide()
         } else {
           wifiMenuLoader.item.visible = false
-          network.onMenuClosed()
+          NetworkService.onMenuClosed()
         }
       } else {
         // Panel is hidden, show it
         wifiMenuLoader.item.visible = true
-        network.onMenuOpened()
+        NetworkService.onMenuOpened()
       }
     }
-  }
-
-  Network {
-    id: network
   }
 
   WiFiMenu {

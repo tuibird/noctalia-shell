@@ -5,6 +5,7 @@ import QtQuick.Controls
 import Quickshell
 import Quickshell.Services.SystemTray
 import Quickshell.Widgets
+import qs.Commons
 import qs.Services
 import qs.Widgets
 

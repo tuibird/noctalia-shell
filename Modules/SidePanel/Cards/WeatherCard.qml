@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
+import qs.Commons
 import qs.Services
 import qs.Widgets
 
@@ -8,7 +9,7 @@ import qs.Widgets
 NBox {
   id: root
 
-  readonly property bool weatherReady: (Location.data.weather !== null)
+  readonly property bool weatherReady: (LocationService.data.weather !== null)
 
   // TBC weatherReady is not turning to false when we reset weather...
   Layout.fillWidth: true
@@ -26,7 +27,7 @@ NBox {
     RowLayout {
       spacing: Style.marginSmall * scaling
       NText {
-        text: weatherReady ? Location.weatherSymbolFromCode(Location.data.weather.current_weather.weathercode) : ""
+        text: weatherReady ? LocationService.weatherSymbolFromCode(LocationService.data.weather.current_weather.weathercode) : ""
         font.family: "Material Symbols Outlined"
         font.pointSize: Style.fontSizeXXL * 1.5 * scaling
         color: Colors.mPrimary
@@ -51,10 +52,10 @@ NBox {
               if (!weatherReady) {
                 return ""
               }
-              var temp = Location.data.weather.current_weather.temperature
+              var temp = LocationService.data.weather.current_weather.temperature
               var suffix = "C"
               if (Settings.data.location.useFahrenheit) {
-                temp = Location.celsiusToFahrenheit(temp)
+                temp = LocationService.celsiusToFahrenheit(temp)
                 var suffix = "F"
               }
               temp = Math.round(temp)
@@ -65,9 +66,9 @@ NBox {
           }
 
           NText {
-            text: weatherReady ? `(${Location.data.weather.timezone_abbreviation})` : ""
+            text: weatherReady ? `(${LocationService.data.weather.timezone_abbreviation})` : ""
             font.pointSize: Style.fontSizeSmall * scaling
-            visible: Location.data.weather
+            visible: LocationService.data.weather
           }
         }
       }
@@ -84,27 +85,27 @@ NBox {
       Layout.alignment: Qt.AlignHCenter
       spacing: Style.marginLarge * scaling
       Repeater {
-        model: weatherReady ? Location.data.weather.daily.time : []
+        model: weatherReady ? LocationService.data.weather.daily.time : []
         delegate: ColumnLayout {
           Layout.alignment: Qt.AlignHCenter
           spacing: Style.marginSmall * scaling
           NText {
-            text: Qt.formatDateTime(new Date(Location.data.weather.daily.time[index]), "ddd")
+            text: Qt.formatDateTime(new Date(LocationService.data.weather.daily.time[index]), "ddd")
             color: Colors.mOnSurface
           }
           NText {
-            text: Location.weatherSymbolFromCode(Location.data.weather.daily.weathercode[index])
+            text: LocationService.weatherSymbolFromCode(LocationService.data.weather.daily.weathercode[index])
             font.family: "Material Symbols Outlined"
             font.pointSize: Style.fontSizeXL * scaling
             color: Colors.mPrimary
           }
           NText {
             text: {
-              var max = Location.data.weather.daily.temperature_2m_max[index]
-              var min = Location.data.weather.daily.temperature_2m_min[index]
+              var max = LocationService.data.weather.daily.temperature_2m_max[index]
+              var min = LocationService.data.weather.daily.temperature_2m_min[index]
               if (Settings.data.location.useFahrenheit) {
-                max = Location.celsiusToFahrenheit(max)
-                min = Location.celsiusToFahrenheit(min)
+                max = LocationService.celsiusToFahrenheit(max)
+                min = LocationService.celsiusToFahrenheit(min)
               }
               max = Math.round(max)
               min = Math.round(min)

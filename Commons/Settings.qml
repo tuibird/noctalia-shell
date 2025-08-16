@@ -1,6 +1,7 @@
 import QtQuick
 import Quickshell
 import Quickshell.Io
+import qs.Commons
 import qs.Services
 pragma Singleton
 
@@ -53,7 +54,7 @@ Singleton {
         // Only set wallpaper on initial load, not on reloads
         if (isInitialLoad && adapter.wallpaper.current !== "") {
           console.log("[Settings] Set current wallpaper", adapter.wallpaper.current)
-          Wallpapers.setCurrentWallpaper(adapter.wallpaper.current, true)
+          WallpapersService.setCurrentWallpaper(adapter.wallpaper.current, true)
         }
         isInitialLoad = false
       })
@@ -121,9 +122,9 @@ Singleton {
         property int randomInterval: 300
         property JsonObject swww
 
-        onDirectoryChanged: Wallpapers.loadWallpapers()
-        onIsRandomChanged: Wallpapers.toggleRandomWallpaper()
-        onRandomIntervalChanged: Wallpapers.restartRandomWallpaperTimer()
+        onDirectoryChanged: WallpapersService.loadWallpapers()
+        onIsRandomChanged: WallpapersService.toggleRandomWallpaper()
+        onRandomIntervalChanged: WallpapersService.restartRandomWallpaperTimer()
 
         swww: JsonObject {
           property bool enabled: false

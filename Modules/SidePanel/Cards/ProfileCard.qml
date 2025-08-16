@@ -6,6 +6,7 @@ import Quickshell.Io
 import Quickshell.Widgets
 import qs.Modules.Settings
 import qs.Modules.SidePanel
+import qs.Commons
 import qs.Services
 import qs.Widgets
 

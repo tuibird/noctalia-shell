@@ -7,6 +7,7 @@ import Quickshell.Wayland
 import Quickshell.Services.Pam
 import Quickshell.Io
 import Quickshell.Widgets
+import qs.Commons
 import qs.Services
 import qs.Widgets
 
@@ -14,7 +15,7 @@ WlSessionLock {
   id: lock
 
   // Lockscreen is a different beast, needs a capital 'S' in 'Screen' to get the current screen
-  readonly property real scaling: Scaling.scale(Screen)
+  readonly property real scaling: ScalingService.scale(Screen)
 
   property string errorMessage: ""
   property bool authenticating: false
@@ -95,7 +96,7 @@ WlSessionLock {
       id: lockBgImage
       anchors.fill: parent
       fillMode: Image.PreserveAspectCrop
-      source: Wallpapers.currentWallpaper !== "" ? Wallpapers.currentWallpaper : ""
+      source: WallpapersService.currentWallpaper !== "" ? WallpapersService.currentWallpaper : ""
       cache: true
       smooth: true
       mipmap: false

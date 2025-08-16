@@ -37,7 +37,7 @@ Singleton {
   Process {
     id: process
     stdinEnabled: true
-    running: MediaPlayer.isPlaying
+    running: MediaService.isPlaying
     command: ["cava", "-p", "/dev/stdin"]
     onExited: {
       stdinEnabled = true

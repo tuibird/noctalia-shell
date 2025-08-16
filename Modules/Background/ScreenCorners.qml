@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Effects
 import Quickshell
 import Quickshell.Wayland
+import qs.Commons
 import qs.Services
 import qs.Widgets
 
@@ -15,7 +16,7 @@ NLoader {
       id: root
 
       required property ShellScreen modelData
-      readonly property real scaling: Scaling.scale(screen)
+      readonly property real scaling: ScalingService.scale(screen)
       screen: modelData
 
       // Visible ring color
