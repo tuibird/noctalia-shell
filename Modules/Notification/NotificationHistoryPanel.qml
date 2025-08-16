@@ -197,7 +197,7 @@ NLoader {
               width: notificationList ? (notificationList.width - 20) : 380 * scaling
               height: Math.max(80, notificationContent.height + 30)
               radius: Style.radiusMedium * scaling
-              color: notificationMouseArea.containsMouse ? Colors.mPrimary : Colors.mSurface
+              color: notificationMouseArea.containsMouse ? Colors.mPrimary : Colors.mSurfaceVariant
 
               RowLayout {
                 anchors {
