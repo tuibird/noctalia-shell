@@ -9,10 +9,11 @@ Singleton {
   function _formatMessage(...args) {
     var t = Time.getFormattedTimestamp()
     if (args.length > 1) {
-      var module = args.shift()
-      return `\x1b[36m${t}\x1b[0m \x1b[35m[${module}]\x1b[0m ` + args.join(" ")
+      const maxLength = 14
+      var module = args.shift().substring(0, maxLength).padStart(maxLength, ".")
+      return `\x1b[36m[${t}]\x1b[0m \x1b[35m${module}\x1b[0m ` + args.join(" ")
     } else {
-      return `\x1b[36m${t}\x1b[0m ` + args.join(" ")
+      return `[\x1b[36m[${t}]\x1b[0m ` + args.join(" ")
     }
   }
 
