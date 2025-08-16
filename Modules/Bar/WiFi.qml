@@ -19,7 +19,7 @@ NIconButton {
     for (const net in NetworkService.networks) {
       if (NetworkService.networks[net].connected) {
         connected = true
-        signalStrength = network.networks[net].signal
+        signalStrength = NetworkService.networks[net].signal
         break
       }
     }

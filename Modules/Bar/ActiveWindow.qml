@@ -5,7 +5,6 @@ import qs.Commons
 import qs.Services
 import qs.Widgets
 
-
 Row {
   id: layout
   anchors.verticalCenter: parent.verticalCenter

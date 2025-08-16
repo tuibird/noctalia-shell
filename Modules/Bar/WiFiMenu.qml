@@ -62,7 +62,7 @@ NLoader {
         onTriggered: {
           wifiPanel.visible = false
           wifiPanel.dismissed()
-          NetworkService.onMenuClosed()
+          // NetworkService.onMenuClosed()
         }
       }
 
@@ -163,7 +163,7 @@ NLoader {
               icon: "refresh"
               tooltipText: "Refresh Networks"
               sizeMultiplier: 0.8
-              enabled: Settings.data.network.wifiEnabled && !network.isLoading
+              enabled: Settings.data.network.wifiEnabled && !NetworkService.isLoading
               onClicked: {
                 NetworkService.refreshNetworks()
               }
@@ -239,8 +239,8 @@ NLoader {
             ListView {
               id: networkList
               anchors.fill: parent
-              visible: Settings.data.network.wifiEnabled && !network.isLoading
-              model: Object.values(network.networks)
+              visible: Settings.data.network.wifiEnabled && !NetworkService.isLoading
+              model: Object.values(NetworkService.networks)
               spacing: Style.marginMedium * scaling
               clip: true
 
@@ -295,7 +295,7 @@ NLoader {
 
                         NText {
                           visible: NetworkService.connectStatusSsid === modelData.ssid
-                                   && NetworkService.connectStatus === "error" && network.connectError.length > 0
+                                   && NetworkService.connectStatus === "error" && NetworkService.connectError.length > 0
                           text: NetworkService.connectError
                           color: Colors.mError
                           font.pointSize: Style.fontSizeSmall * scaling
@@ -308,7 +308,8 @@ NLoader {
                         Layout.preferredWidth: Style.baseWidgetSize * 0.7 * scaling
                         Layout.preferredHeight: Style.baseWidgetSize * 0.7 * scaling
                         visible: NetworkService.connectStatusSsid === modelData.ssid
-                                 && (network.connectStatus !== "" || NetworkService.connectingSsid === modelData.ssid)
+                                 && (NetworkService.connectStatus !== ""
+                                     || NetworkService.connectingSsid === modelData.ssid)
 
                         NBusyIndicator {
                           visible: NetworkService.connectingSsid === modelData.ssid

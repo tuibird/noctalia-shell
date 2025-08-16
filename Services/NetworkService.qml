@@ -1,6 +1,9 @@
+pragma Singleton
+
 import QtQuick
 import Quickshell
 import Quickshell.Io
+import qs.Commons
 
 Singleton {
   id: root
@@ -13,6 +16,14 @@ Singleton {
   property string detectedInterface: ""
   property string lastConnectedNetwork: ""
   property bool isLoading: false
+
+  Component.onCompleted: {
+    console.log("[Network] Service started")
+    // Only refresh networks if WiFi is enabled
+    if (Settings.data.network.wifiEnabled) {
+      refreshNetworks()
+    }
+  }
 
   function signalIcon(signal) {
     if (signal >= 80)
@@ -252,7 +263,7 @@ Singleton {
         for (var i = 0; i < lines.length; ++i) {
           const line = lines[i].trim()
           if (!line)
-            continue
+          continue
 
           const parts = line.split(":")
           if (parts.length < 2) {
@@ -291,7 +302,7 @@ Singleton {
         for (var i = 0; i < lines.length; ++i) {
           const line = lines[i].trim()
           if (!line)
-            continue
+          continue
 
           const parts = line.split(":")
           if (parts.length < 4) {
@@ -454,13 +465,6 @@ Singleton {
         root.connectError = text
         root.pendingConnect = null
       }
-    }
-  }
-
-  Component.onCompleted: {
-    // Only refresh networks if WiFi is enabled
-    if (Settings.data.network.wifiEnabled) {
-      refreshNetworks()
     }
   }
 }
