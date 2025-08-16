@@ -31,7 +31,17 @@ Item {
         firstVolumeReceived = true
       } else {
         pill.show()
+        externalHideTimer.restart()
       }
+    }
+  }
+
+  Timer {
+    id: externalHideTimer
+    running: false
+    interval: 1500
+    onTriggered: {
+      pill.hide()
     }
   }
 
@@ -40,7 +50,7 @@ Item {
     icon: getIcon()
     iconCircleColor: Colors.mPrimary
     collapsedIconColor: Colors.mOnSurface
-    autoHide: true
+    autoHide: false // Important to be false so we can hover as long as we want
     text: Math.floor(Audio.volume * 100) + "%"
     tooltipText: "Volume: " + Math.round(
                    Audio.volume * 100) + "%\nLeft click for advanced settings.\nScroll up/down to change volume."

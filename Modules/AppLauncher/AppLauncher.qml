@@ -283,7 +283,9 @@ NLoader {
                         radius: Style.radiusMedium * scaling
                         color: Colors.mSurface
                         border.color: searchInput.activeFocus ? Colors.mPrimary : Colors.mOutline
-                        border.width: Math.max(1, searchInput.activeFocus ? Style.borderMedium * scaling : Style.borderThin * scaling)
+                        border.width: Math.max(
+                                        1,
+                                        searchInput.activeFocus ? Style.borderMedium * scaling : Style.borderThin * scaling)
 
                         Row {
                           anchors.fill: parent
@@ -372,7 +374,8 @@ NLoader {
                             color: (appCardArea.containsMouse || isSelected) ? Qt.darker(Colors.mPrimary,
                                                                                          1.1) : Colors.mSurface
                             border.color: (appCardArea.containsMouse || isSelected) ? Colors.mPrimary : "transparent"
-                            border.width: Math.max(1, (appCardArea.containsMouse || isSelected) ? Style.borderMedium * scaling : 0)
+                            border.width: Math.max(1, (appCardArea.containsMouse
+                                                       || isSelected) ? Style.borderMedium * scaling : 0)
 
                             Behavior on color {
                               ColorAnimation {
@@ -414,9 +417,9 @@ NLoader {
                                 // Clipboard image display
                                 Image {
                                   id: clipboardImage
-                                                                  anchors.fill: parent
-                                anchors.margins: Style.marginTiny * scaling
-                                visible: modelData.type === 'image'
+                                  anchors.fill: parent
+                                  anchors.margins: Style.marginTiny * scaling
+                                  visible: modelData.type === 'image'
                                   source: modelData.data || ""
                                   fillMode: Image.PreserveAspectCrop
                                   asynchronous: true

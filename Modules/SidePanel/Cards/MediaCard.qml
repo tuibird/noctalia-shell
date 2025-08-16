@@ -40,7 +40,7 @@ NBox {
         text: "album"
         font.family: "Material Symbols Outlined"
         font.pointSize: Style.fontSizeXXL * 2.5 * scaling
-        color: Colors.mOnSurfaceVariant
+        color: Colors.mPrimary
         Layout.alignment: Qt.AlignHCenter
       }
       NText {
@@ -182,6 +182,7 @@ NBox {
           NText {
             anchors.centerIn: parent
             text: "album"
+            color: Colors.mPrimary
             font.family: "Material Symbols Outlined"
             font.pointSize: Style.fontSizeLarge * 12 * scaling
             visible: !trackArt.visible
@@ -310,18 +311,24 @@ NBox {
         // Previous button
         NIconButton {
           icon: "skip_previous"
+          tooltipText: "Previous Media"
+          visible: MediaPlayer.canGoPrevious
           onClicked: MediaPlayer.canGoPrevious ? MediaPlayer.previous() : {}
         }
 
         // Play/Pause button
         NIconButton {
           icon: MediaPlayer.isPlaying ? "pause" : "play_arrow"
+          tooltipText: MediaPlayer.isPlaying ? "Pause" : "Play"
+          visible: (MediaPlayer.canPlay || MediaPlayer.canPause)
           onClicked: (MediaPlayer.canPlay || MediaPlayer.canPause) ? MediaPlayer.playPause() : {}
         }
 
         // Next button
         NIconButton {
           icon: "skip_next"
+          tooltipText: "Next Media"
+          visible: MediaPlayer.canGoNext
           onClicked: MediaPlayer.canGoNext ? MediaPlayer.next() : {}
         }
       }

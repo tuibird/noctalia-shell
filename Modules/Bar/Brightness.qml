@@ -49,7 +49,7 @@ Item {
     icon: getIcon()
     iconCircleColor: Colors.mPrimary
     collapsedIconColor: Colors.mOnSurface
-    autoHide: true
+    autoHide: false // Important to be false so we can hover as long as we want
     text: Math.round(BrightnessService.brightness) + "%"
     tooltipText: "Brightness: " + Math.round(
                    BrightnessService.brightness) + "%\nMethod: " + BrightnessService.currentMethod

@@ -37,7 +37,7 @@ Window {
   function _showNow() {
     // Compute new size everytime we show the tooltip
     width = Math.max(50 * scaling, tooltipText.implicitWidth + Style.marginLarge * 2 * scaling)
-    height = Math.max(50 * scaling, tooltipText.implicitHeight + Style.marginMedium * 2 * scaling)
+    height = Math.max(40 * scaling, tooltipText.implicitHeight + Style.marginMedium * 2 * scaling)
 
     if (!target) {
       return
@@ -121,7 +121,7 @@ Window {
   // Timer to trigger show animation
   Timer {
     id: showTimer
-            interval: Style.animationFast / 15 // Very short delay to ensure component is visible
+    interval: Style.animationFast / 15 // Very short delay to ensure component is visible
     repeat: false
     onTriggered: {
       // Animate to final values

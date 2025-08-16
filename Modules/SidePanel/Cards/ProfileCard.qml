@@ -38,7 +38,7 @@ NBox {
 
     ColumnLayout {
       Layout.fillWidth: true
-                      spacing: Style.marginTiniest * scaling
+      spacing: Style.marginTiniest * scaling
       NText {
         text: Quickshell.env("USER") || "user"
         font.weight: Style.fontWeightBold
@@ -57,15 +57,17 @@ NBox {
       }
       NIconButton {
         icon: "settings"
-        tooltipText: "Open settings"
+        tooltipText: "Open Settings"
         onClicked: {
           settingsPanel.requestedTab = SettingsPanel.Tab.General
           settingsPanel.isLoaded = !settingsPanel.isLoaded
         }
       }
+
       NIconButton {
         id: powerButton
         icon: "power_settings_new"
+        tooltipText: "Power Menu"
         onClicked: {
           powerMenu.show()
         }

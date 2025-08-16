@@ -58,7 +58,7 @@ Variants {
       id: notificationStack
       anchors.top: parent.top
       anchors.right: parent.right
-                  spacing: Style.marginSmall * scaling
+      spacing: Style.marginSmall * scaling
       width: 360 * scaling
       visible: true
 
@@ -183,12 +183,14 @@ Variants {
           }
 
           NIconButton {
+            icon: "close"
+            tooltipText: "Close"
             sizeMultiplier: 0.8
             showBorder: false
             anchors.top: parent.top
             anchors.right: parent.right
             anchors.margins: Style.marginSmall * scaling
-            icon: "close"
+
             onClicked: {
               animateOut()
             }

@@ -130,7 +130,7 @@ Variants {
         NIconButton {
           id: demoPanelToggle
           icon: "experiment"
-          tooltipText: "Open demo panel"
+          tooltipText: "Open Demo Panel"
           sizeMultiplier: 0.8
           showBorder: false
           anchors.verticalCenter: parent.verticalCenter
@@ -142,7 +142,7 @@ Variants {
         NIconButton {
           id: sidePanelToggle
           icon: "widgets"
-          tooltipText: "Open side panel"
+          tooltipText: "Open Side Panel"
           sizeMultiplier: 0.8
           showBorder: false
           anchors.verticalCenter: parent.verticalCenter

@@ -131,13 +131,14 @@ NLoader {
 
             NIconButton {
               icon: "delete"
+              tooltipText: "Clear History"
               sizeMultiplier: 0.8
-              tooltipText: "Clear history"
               onClicked: NotificationService.clearHistory()
             }
 
             NIconButton {
               icon: "close"
+              tooltipText: "Close"
               sizeMultiplier: 0.8
               onClicked: {
                 notificationPanel.hide()
@@ -207,8 +208,9 @@ NLoader {
                 // Trash icon button
                 NIconButton {
                   icon: "delete"
+                  tooltipText: "Delete Notification"
                   sizeMultiplier: 0.7
-                  tooltipText: "Delete notification"
+
                   onClicked: {
                     console.log("[NotificationHistory] Removing notification:", summary)
                     NotificationService.historyModel.remove(index)

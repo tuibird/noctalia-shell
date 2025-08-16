@@ -164,6 +164,7 @@ NLoader {
 
             NIconButton {
               icon: "refresh"
+              tooltipText: "Refresh Networks"
               sizeMultiplier: 0.8
               enabled: Settings.data.network.wifiEnabled && !network.isLoading
               onClicked: {
@@ -173,6 +174,7 @@ NLoader {
 
             NIconButton {
               icon: "close"
+              tooltipText: "Close"
               sizeMultiplier: 0.8
               onClicked: {
                 wifiPanel.hide()

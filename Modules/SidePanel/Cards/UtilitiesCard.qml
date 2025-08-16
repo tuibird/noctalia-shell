@@ -22,6 +22,7 @@ NBox {
     // Screen Recorder
     NIconButton {
       icon: "videocam"
+      tooltipText: ScreenRecorder.isRecording ? "Stop Screen Recording" : "Start Screen Recording"
       showFilled: ScreenRecorder.isRecording
       onClicked: {
         ScreenRecorder.toggleRecording()
@@ -31,6 +32,7 @@ NBox {
     // Wallpaper
     NIconButton {
       icon: "image"
+      tooltipText: "Open Wallpaper Selector"
       onClicked: {
         settingsPanel.requestedTab = SettingsPanel.Tab.WallpaperSelector
         settingsPanel.isLoaded = true

@@ -120,6 +120,7 @@ NLoader {
 
             NIconButton {
               icon: "chevron_left"
+              tooltipText: "Previous Month"
               onClicked: {
                 let newDate = new Date(grid.year, grid.month - 1, 1)
                 grid.year = newDate.getFullYear()
@@ -138,6 +139,7 @@ NLoader {
 
             NIconButton {
               icon: "chevron_right"
+              tooltipText: "Next Month"
               onClicked: {
                 let newDate = new Date(grid.year, grid.month + 1, 1)
                 grid.year = newDate.getFullYear()

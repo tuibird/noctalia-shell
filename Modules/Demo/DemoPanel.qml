@@ -154,6 +154,7 @@ NLoader {
                 }
                 NIconButton {
                   icon: "refresh"
+                  tooltipText: "Reset Scaling"
                   fontPointSize: Style.fontSizeLarge * scaling
                   onClicked: {
                     Scaling.overrideEnabled = false
@@ -178,6 +179,7 @@ NLoader {
               NIconButton {
                 id: myIconButton
                 icon: "celebration"
+                tooltipText: "A nice tooltip"
                 fontPointSize: Style.fontSizeLarge * scaling
               }
 
@@ -318,6 +320,7 @@ NLoader {
                 spacing: Style.marginSmall * scaling
                 NIconButton {
                   icon: "brightness_low"
+                  tooltipText: "Decrease Brightness"
                   fontPointSize: Style.fontSizeLarge * scaling
                   onClicked: {
                     BrightnessService.decreaseBrightness()
@@ -335,6 +338,7 @@ NLoader {
                 }
                 NIconButton {
                   icon: "brightness_high"
+                  tooltipText: "Increase Brightness"
                   fontPointSize: Style.fontSizeLarge * scaling
                   onClicked: {
                     BrightnessService.increaseBrightness()
