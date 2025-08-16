@@ -22,9 +22,9 @@ NLoader {
         readonly property real scaling: ScalingService.scale(screen)
         screen: modelData
 
-        // Auto-hide properties
+        // Auto-hide properties - make reactive to settings changes
         property bool autoHide: Settings.data.dock.autoHide
-        property bool hidden: autoHide // Start hidden only if auto-hide is enabled
+        property bool hidden: autoHide
         property int hideDelay: 500
         property int showDelay: 100
         property int hideAnimationDuration: Style.animationFast
@@ -54,6 +54,19 @@ NLoader {
         color: "transparent"
         implicitHeight: iconSize * 1.4 * scaling
 
+        // Watch for autoHide setting changes
+        onAutoHideChanged: {
+          if (!autoHide) {
+            // If auto-hide is disabled, show the dock
+            hidden = false
+            hideTimer.stop()
+            showTimer.stop()
+          } else {
+            // If auto-hide is enabled, start hidden
+            hidden = true
+          }
+        }
+
         // Timer for auto-hide delay
         Timer {
           id: hideTimer
@@ -80,24 +93,30 @@ NLoader {
           }
         }
 
-        // Mouse area at screen bottom to detect entry and keep dock visible
         MouseArea {
           id: screenEdgeMouseArea
-          anchors.left: parent.left
-          anchors.right: parent.right
-          anchors.bottom: parent.bottom
-          height: 10 * scaling
+          x: 0
+          y: modelData.geometry.height - (fullHeight + 10 * scaling)
+          width: screen.width
+          height: fullHeight + 10 * scaling
           hoverEnabled: true
           propagateComposedEvents: true
 
-          onEntered: if (autoHide && hidden)
-                       showTimer.start()
-          onExited: if (autoHide && !hidden && !dockHovered && !anyAppHovered)
-                      hideTimer.start()
+          onEntered: {
+            if (autoHide && hidden) {
+              showTimer.start()
+            }
+          }
+          onExited: {
+            if (autoHide && !hidden && !dockHovered && !anyAppHovered && !contextMenuVisible) {
+              hideTimer.start()
+            }
+          }
         }
 
         margins.bottom: hidden ? -(fullHeight - peekHeight) : 0
 
+        // Global click handler to close context menu
         MouseArea {
           anchors.fill: parent
           enabled: contextMenuVisible
@@ -134,8 +153,10 @@ NLoader {
             }
             onExited: {
               dockHovered = false
-              if (autoHide && !anyAppHovered && !contextMenuVisible)
+              // Only start hide timer if we're not hovering over any app or context menu
+              if (autoHide && !anyAppHovered && !contextMenuVisible) {
                 hideTimer.start()
+              }
             }
           }
 
@@ -178,11 +199,28 @@ NLoader {
                   width: iconSize * scaling
                   height: iconSize * scaling
                   color: "transparent"
+                  radius: Style.radiusMedium * scaling
 
                   property bool isActive: ToplevelManager.activeToplevel && ToplevelManager.activeToplevel === modelData
                   property bool hovered: appMouseArea.containsMouse
                   property string appId: modelData ? modelData.appId : ""
                   property string appTitle: modelData ? modelData.title : ""
+
+                  // Hover background
+                  Rectangle {
+                    id: hoverBackground
+                    anchors.fill: parent
+                    color: appButton.hovered ? Colors.mSurfaceVariant : "transparent"
+                    radius: parent.radius
+                    opacity: appButton.hovered ? 0.8 : 0
+                    
+                    Behavior on opacity {
+                      NumberAnimation {
+                        duration: Style.animationFast
+                        easing.type: Easing.OutQuad
+                      }
+                    }
+                  }
 
                   // The icon
                   Image {
@@ -196,6 +234,15 @@ NLoader {
                     mipmap: false
                     antialiasing: false
                     fillMode: Image.PreserveAspectFit
+                    
+                    scale: appButton.hovered ? 1.1 : 1.0
+                    
+                    Behavior on scale {
+                      NumberAnimation {
+                        duration: Style.animationFast
+                        easing.type: Easing.OutBack
+                      }
+                    }
                   }
 
                   // Fall back if no icon
@@ -206,6 +253,15 @@ NLoader {
                     font.family: "Material Symbols Rounded"
                     font.pointSize: iconSize * 0.7 * scaling
                     color: appButton.isActive ? Colors.mPrimary : Colors.mOnSurfaceVariant
+                    
+                    scale: appButton.hovered ? 1.1 : 1.0
+                    
+                    Behavior on scale {
+                      NumberAnimation {
+                        duration: Style.animationFast
+                        easing.type: Easing.OutBack
+                      }
+                    }
                   }
 
                   MouseArea {
@@ -231,8 +287,10 @@ NLoader {
                     onExited: {
                       anyAppHovered = false
                       appTooltip.hide()
-                      if (autoHide && !dockHovered && !contextMenuVisible)
+                      // Only start hide timer if we're not hovering over the dock or context menu
+                      if (autoHide && !dockHovered && !contextMenuVisible) {
                         hideTimer.start()
+                      }
                     }
 
                     onClicked: function (mouse) {
@@ -285,7 +343,17 @@ NLoader {
               contextMenuVisible = false
               contextMenuTarget = null
               contextMenuToplevel = null
-              hidden = true // Hide dock when context menu closes
+              if (autoHide) {
+                // Stop any pending show/hide timers to prevent flickering
+                showTimer.stop()
+                hideTimer.stop()
+                // Add a small delay before hiding to prevent immediate show/hide cycle
+                Qt.callLater(function() {
+                  if (autoHide && !dockHovered && !anyAppHovered) {
+                    hidden = true
+                  }
+                })
+              }
             }
           }
 
@@ -317,7 +385,7 @@ NLoader {
               anchors.centerIn: parent
               text: "Close"
               font.pointSize: Style.fontSizeMedium * scaling
-              color: Colors.mOnSurface
+              color: closeMouseArea.containsMouse ? Colors.mOnTertiary : Colors.mOnSurface
             }
 
             MouseArea {
@@ -330,7 +398,19 @@ NLoader {
                 if (contextMenuToplevel?.close)
                   contextMenuToplevel.close()
                 contextMenuVisible = false
-                hidden = true
+                contextMenuTarget = null
+                contextMenuToplevel = null
+                if (autoHide) {
+                  // Stop any pending show/hide timers to prevent flickering
+                  showTimer.stop()
+                  hideTimer.stop()
+                  // Add a small delay before hiding to prevent immediate show/hide cycle
+                  Qt.callLater(function() {
+                    if (autoHide && !dockHovered && !anyAppHovered) {
+                      hidden = true
+                    }
+                  })
+                }
               }
             }
 
