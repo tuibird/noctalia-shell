@@ -188,11 +188,11 @@ NLoader {
             // Loading indicator
             ColumnLayout {
               anchors.centerIn: parent
-              visible: Settings.data.network.wifiEnabled && network.isLoading
+              visible: Settings.data.network.wifiEnabled && NetworkService.isLoading
               spacing: Style.marginMedium * scaling
 
               NBusyIndicator {
-                running: network.isLoading
+                running: NetworkService.isLoading
                 color: Colors.mPrimary
                 size: Style.baseWidgetSize * scaling
                 Layout.alignment: Qt.AlignHCenter

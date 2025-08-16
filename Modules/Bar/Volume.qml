@@ -1,8 +1,8 @@
 import QtQuick
 import Quickshell
 import Quickshell.Services.Pipewire
-import qs.Modules.Settings
 import qs.Commons
+import qs.Modules.SettingsPanel
 import qs.Services
 import qs.Widgets
 

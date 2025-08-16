@@ -2,8 +2,8 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import Quickshell
-import qs.Modules.Settings
 import qs.Commons
+import qs.Modules.SettingsPanel
 import qs.Services
 import qs.Widgets
 

@@ -13,7 +13,7 @@ import qs.Modules.Demo
 import qs.Modules.Dock
 import qs.Modules.LockScreen
 import qs.Modules.Notification
-import qs.Modules.Settings
+import qs.Modules.SettingsPanel
 import qs.Modules.SidePanel
 import qs.Services
 import qs.Widgets
