@@ -45,7 +45,7 @@ ColumnLayout {
         Layout.fillWidth: true
 
         NText {
-          text: "AudioService"
+          text: "Audio"
           font.pointSize: Style.fontSizeXL * scaling
           font.weight: Style.fontWeightBold
           color: Colors.mOnSurface
@@ -145,7 +145,7 @@ ColumnLayout {
           Layout.fillWidth: true
 
           NText {
-            text: "AudioService Devices"
+            text: "Audio Devices"
             font.pointSize: Style.fontSizeXL * scaling
             font.weight: Style.fontWeightBold
             color: Colors.mOnSurface
@@ -243,7 +243,7 @@ ColumnLayout {
         Layout.fillWidth: true
 
         NText {
-          text: "AudioService Visualizer"
+          text: "Audio Visualizer"
           font.pointSize: Style.fontSizeXL * scaling
           font.weight: Style.fontWeightBold
           color: Colors.mOnSurface

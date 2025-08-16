@@ -16,6 +16,7 @@ NLoader {
     About,
     AudioService,
     Bar,
+    Brightness,
     ColorScheme,
     Display,
     General,
@@ -77,6 +78,10 @@ NLoader {
         Tabs.AudioTab {}
       }
       Component {
+        id: brightnessTab
+        Tabs.BrightnessTab {}
+      }
+      Component {
         id: displayTab
         Tabs.DisplayTab {}
       }
@@ -121,9 +126,14 @@ NLoader {
           "source": barTab
         }, {
           "id": SettingsPanel.Tab.AudioService,
-          "label": "AudioService",
+          "label": "Audio",
           "icon": "volume_up",
           "source": audioTab
+        }, {
+          "id": SettingsPanel.Tab.Brightness,
+          "label": "Brightness",
+          "icon": "brightness_6",
+          "source": brightnessTab
         }, {
           "id": SettingsPanel.Tab.Display,
           "label": "Display",

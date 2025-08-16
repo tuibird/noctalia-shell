@@ -10,6 +10,7 @@ Item {
 
   width: pill.width
   height: pill.height
+  visible: !Settings.data.bar.hideBrightness
 
   // Used to avoid opening the pill on Quickshell startup
   property bool firstBrightnessReceived: false
@@ -67,7 +68,7 @@ Item {
       }
     }
     onClicked: {
-      settingsPanel.requestedTab = SettingsPanel.Tab.Display
+      settingsPanel.requestedTab = SettingsPanel.Tab.Brightness
       settingsPanel.isLoaded = true
     }
   }

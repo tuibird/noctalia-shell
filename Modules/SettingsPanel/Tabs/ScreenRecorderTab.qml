@@ -207,23 +207,23 @@ ColumnLayout {
           Layout.bottomMargin: Style.marginLarge * scaling
         }
 
-        // AudioService Settings
+        // Audio Settings
         ColumnLayout {
           spacing: Style.marginLarge * scaling
           Layout.fillWidth: true
 
           NText {
-            text: "AudioService Settings"
+            text: "Audio Settings"
             font.pointSize: Style.fontSizeXL * scaling
             font.weight: Style.fontWeightBold
             color: Colors.mOnSurface
             Layout.bottomMargin: Style.marginSmall * scaling
           }
 
-          // AudioService Source
+          // Audio Source
           NComboBox {
-            label: "AudioService Source"
-            description: "AudioService source to capture during recording"
+            label: "Audio Source"
+            description: "Audio source to capture during recording"
             model: ListModel {
               ListElement {
                 key: "default_output"
@@ -244,9 +244,9 @@ ColumnLayout {
             }
           }
 
-          // AudioService Codec
+          // Audio Codec
           NComboBox {
-            label: "AudioService Codec"
+            label: "Audio Codec"
             description: "Opus is recommended for best performance and smallest audio size"
             model: ListModel {
               ListElement {
