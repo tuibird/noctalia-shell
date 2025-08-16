@@ -132,57 +132,6 @@ Item {
           }
         }
 
-        NDivider {
-          Layout.fillWidth: true
-          Layout.topMargin: Style.marginLarge * 2 * scaling
-          Layout.bottomMargin: Style.marginLarge * scaling
-        }
-
-        // Brightness Section
-        ColumnLayout {
-          spacing: Style.marginSmall * scaling
-          Layout.fillWidth: true
-          Layout.topMargin: Style.marginSmall * scaling
-
-          NText {
-            text: "Brightness Step Size"
-            font.weight: Style.fontWeightBold
-            color: Colors.mOnSurface
-          }
-
-          NText {
-            text: "Adjust the step size for brightness changes (scroll wheel, ipc bind)"
-            font.pointSize: Style.fontSizeSmall * scaling
-            color: Colors.mOnSurface
-            wrapMode: Text.WordWrap
-            Layout.fillWidth: true
-          }
-
-          RowLayout {
-            Layout.fillWidth: true
-            spacing: Style.marginMedium * scaling
-
-            NSlider {
-              Layout.fillWidth: true
-              from: 1
-              to: 50
-              value: Settings.data.brightness.brightnessStep
-              stepSize: 1
-              onPressedChanged: {
-                if (!pressed) {
-                  Settings.data.brightness.brightnessStep = value
-                }
-              }
-            }
-
-            NText {
-              text: Settings.data.brightness.brightnessStep + "%"
-              Layout.alignment: Qt.AlignVCenter
-              color: Colors.mOnSurface
-            }
-          }
-        }
-
         Item {
           Layout.fillHeight: true
         }
