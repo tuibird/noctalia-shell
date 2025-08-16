@@ -91,12 +91,12 @@ Item {
                   description: "Enable the top bar on this monitor"
                   checked: (Settings.data.bar.monitors || []).indexOf(modelData.name) !== -1
                   onToggled: checked => {
-                    if (checked) {
-                      Settings.data.bar.monitors = addMonitor(Settings.data.bar.monitors, modelData.name)
-                    } else {
-                      Settings.data.bar.monitors = removeMonitor(Settings.data.bar.monitors, modelData.name)
-                    }
-                  }
+                               if (checked) {
+                                 Settings.data.bar.monitors = addMonitor(Settings.data.bar.monitors, modelData.name)
+                               } else {
+                                 Settings.data.bar.monitors = removeMonitor(Settings.data.bar.monitors, modelData.name)
+                               }
+                             }
                 }
 
                 NToggle {
@@ -104,14 +104,14 @@ Item {
                   description: "Enable notifications on this monitor"
                   checked: (Settings.data.notifications.monitors || []).indexOf(modelData.name) !== -1
                   onToggled: checked => {
-                    if (checked) {
-                      Settings.data.notifications.monitors = addMonitor(Settings.data.notifications.monitors,
-                                                                        modelData.name)
-                    } else {
-                      Settings.data.notifications.monitors = removeMonitor(Settings.data.notifications.monitors,
-                                                                           modelData.name)
-                    }
-                  }
+                               if (checked) {
+                                 Settings.data.notifications.monitors = addMonitor(
+                                   Settings.data.notifications.monitors, modelData.name)
+                               } else {
+                                 Settings.data.notifications.monitors = removeMonitor(
+                                   Settings.data.notifications.monitors, modelData.name)
+                               }
+                             }
                 }
 
                 NToggle {
@@ -119,12 +119,13 @@ Item {
                   description: "Enable the dock on this monitor"
                   checked: (Settings.data.dock.monitors || []).indexOf(modelData.name) !== -1
                   onToggled: checked => {
-                    if (checked) {
-                      Settings.data.dock.monitors = addMonitor(Settings.data.dock.monitors, modelData.name)
-                    } else {
-                      Settings.data.dock.monitors = removeMonitor(Settings.data.dock.monitors, modelData.name)
-                    }
-                  }
+                               if (checked) {
+                                 Settings.data.dock.monitors = addMonitor(Settings.data.dock.monitors, modelData.name)
+                               } else {
+                                 Settings.data.dock.monitors = removeMonitor(Settings.data.dock.monitors,
+                                                                             modelData.name)
+                               }
+                             }
                 }
               }
             }

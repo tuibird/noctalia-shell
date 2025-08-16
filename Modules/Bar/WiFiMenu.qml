@@ -149,14 +149,14 @@ NLoader {
               baseSize: Style.baseWidgetSize * 0.75
               checked: Settings.data.network.wifiEnabled
               onToggled: checked => {
-                Settings.data.network.wifiEnabled = checked
-                NetworkService.setWifiEnabled(checked)
+                           Settings.data.network.wifiEnabled = checked
+                           NetworkService.setWifiEnabled(checked)
 
-                // If enabling WiFi while menu is open, refresh after a delay
-                if (checked) {
-                  wifiEnableRefreshTimer.start()
-                }
-              }
+                           // If enabling WiFi while menu is open, refresh after a delay
+                           if (checked) {
+                             wifiEnableRefreshTimer.start()
+                           }
+                         }
             }
 
             NIconButton {

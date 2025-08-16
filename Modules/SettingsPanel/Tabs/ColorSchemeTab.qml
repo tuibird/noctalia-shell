@@ -131,11 +131,11 @@ ColumnLayout {
           description: "Automatically generate colors based on your active wallpaper using Matugen"
           checked: Settings.data.colorSchemes.useWallpaperColors
           onToggled: checked => {
-            Settings.data.colorSchemes.useWallpaperColors = checked
-            if (Settings.data.colorSchemes.useWallpaperColors) {
-              ColorSchemesService.changedWallpaper()
-            }
-          }
+                       Settings.data.colorSchemes.useWallpaperColors = checked
+                       if (Settings.data.colorSchemes.useWallpaperColors) {
+                         ColorSchemesService.changedWallpaper()
+                       }
+                     }
         }
 
         NDivider {

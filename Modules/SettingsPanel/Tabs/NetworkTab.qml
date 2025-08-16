@@ -47,8 +47,8 @@ ColumnLayout {
           description: "Enable WiFi connectivity"
           checked: Settings.data.network.wifiEnabled
           onToggled: checked => {
-            Settings.data.network.wifiEnabled = checked
-          }
+                       Settings.data.network.wifiEnabled = checked
+                     }
         }
 
         NToggle {
@@ -56,8 +56,8 @@ ColumnLayout {
           description: "Enable Bluetooth connectivity"
           checked: Settings.data.network.bluetoothEnabled
           onToggled: checked => {
-            Settings.data.network.bluetoothEnabled = checked
-          }
+                       Settings.data.network.bluetoothEnabled = checked
+                     }
         }
       }
     }

@@ -67,8 +67,8 @@ ColumnLayout {
               description: "Record mouse cursor in the video"
               checked: Settings.data.screenRecorder.showCursor
               onToggled: checked => {
-                Settings.data.screenRecorder.showCursor = checked
-              }
+                           Settings.data.screenRecorder.showCursor = checked
+                         }
             }
           }
         }

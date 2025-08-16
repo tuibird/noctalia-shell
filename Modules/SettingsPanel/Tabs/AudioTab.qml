@@ -125,10 +125,10 @@ ColumnLayout {
               description: "Mute or unmute the default audio output"
               checked: AudioService.muted
               onToggled: checked => {
-                if (AudioService.sink && AudioService.sink.audio) {
-                  AudioService.sink.audio.muted = checked
-                }
-              }
+                           if (AudioService.sink && AudioService.sink.audio) {
+                             AudioService.sink.audio.muted = checked
+                           }
+                         }
             }
           }
         }

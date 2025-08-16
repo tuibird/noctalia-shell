@@ -202,8 +202,8 @@ NLoader {
                 label: "Label"
                 description: "Description"
                 onToggled: checked => {
-                  console.log("[DemoPanel] NToggle:", checked)
-                }
+                             console.log("[DemoPanel] NToggle:", checked)
+                           }
               }
 
               NDivider {

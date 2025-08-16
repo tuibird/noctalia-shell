@@ -89,8 +89,8 @@ ColumnLayout {
           description: "Automatically select random wallpapers from the folder"
           checked: Settings.data.wallpaper.isRandom
           onToggled: checked => {
-            Settings.data.wallpaper.isRandom = checked
-          }
+                       Settings.data.wallpaper.isRandom = checked
+                     }
         }
 
         // Interval
@@ -159,8 +159,8 @@ ColumnLayout {
           description: "Use SWWW daemon for advanced wallpaper management"
           checked: Settings.data.wallpaper.swww.enabled
           onToggled: checked => {
-            Settings.data.wallpaper.swww.enabled = checked
-          }
+                       Settings.data.wallpaper.swww.enabled = checked
+                     }
         }
 
         // SWWW Settings (only visible when useSWWW is enabled)

@@ -45,8 +45,8 @@ ColumnLayout {
           description: "Display the title of the currently focused window below the bar"
           checked: Settings.data.bar.showActiveWindow
           onToggled: checked => {
-            Settings.data.bar.showActiveWindow = checked
-          }
+                       Settings.data.bar.showActiveWindow = checked
+                     }
         }
 
         NToggle {
@@ -54,8 +54,8 @@ ColumnLayout {
           description: "Display system information (CPU, RAM, Temperature)"
           checked: Settings.data.bar.showSystemInfo
           onToggled: checked => {
-            Settings.data.bar.showSystemInfo = checked
-          }
+                       Settings.data.bar.showSystemInfo = checked
+                     }
         }
 
         NToggle {
@@ -63,8 +63,8 @@ ColumnLayout {
           description: "Display media controls and information"
           checked: Settings.data.bar.showMedia
           onToggled: checked => {
-            Settings.data.bar.showMedia = checked
-          }
+                       Settings.data.bar.showMedia = checked
+                     }
         }
       }
     }
