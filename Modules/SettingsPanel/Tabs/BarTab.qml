@@ -43,27 +43,27 @@ ColumnLayout {
         NToggle {
           label: "Show Active Window"
           description: "Display the title of the currently focused window below the bar"
-          value: Settings.data.bar.showActiveWindow
-          onToggled: function (newValue) {
-            Settings.data.bar.showActiveWindow = newValue
+          checked: Settings.data.bar.showActiveWindow
+          onToggled: checked => {
+            Settings.data.bar.showActiveWindow = checked
           }
         }
 
         NToggle {
           label: "Show System Info"
           description: "Display system information (CPU, RAM, Temperature)"
-          value: Settings.data.bar.showSystemInfo
-          onToggled: function (newValue) {
-            Settings.data.bar.showSystemInfo = newValue
+          checked: Settings.data.bar.showSystemInfo
+          onToggled: checked => {
+            Settings.data.bar.showSystemInfo = checked
           }
         }
 
         NToggle {
           label: "Show Media"
           description: "Display media controls and information"
-          value: Settings.data.bar.showMedia
-          onToggled: function (newValue) {
-            Settings.data.bar.showMedia = newValue
+          checked: Settings.data.bar.showMedia
+          onToggled: checked => {
+            Settings.data.bar.showMedia = checked
           }
         }
       }

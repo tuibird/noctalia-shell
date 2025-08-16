@@ -9,11 +9,11 @@ RowLayout {
 
   property string label: ""
   property string description: ""
-  property bool value: false
+  property bool checked: false
   property bool hovering: false
   property int baseSize: Style.baseWidgetSize
 
-  signal toggled(bool balue)
+  signal toggled(bool checked)
   signal entered
   signal exited
 
@@ -45,19 +45,19 @@ RowLayout {
     implicitWidth: root.baseSize * 1.625 * scaling
     implicitHeight: root.baseSize * scaling
     radius: height * 0.5
-    color: value ? Colors.mPrimary : Colors.mSurface
-    border.color: value ? Colors.mPrimary : Colors.mOutline
+    color: root.checked ? Colors.mPrimary : Colors.mSurface
+    border.color: root.checked ? Colors.mPrimary : Colors.mOutline
     border.width: Math.max(1, Style.borderMedium * scaling)
 
     Rectangle {
       implicitWidth: (root.baseSize - 5) * scaling
       implicitHeight: (root.baseSize - 5) * scaling
       radius: height * 0.5
-      color: value ? Colors.mOnPrimary : Colors.mPrimary
-      border.color: value ? Colors.mSurface : Colors.mSurface
+      color: root.checked ? Colors.mOnPrimary : Colors.mPrimary
+      border.color: root.checked ? Colors.mSurface : Colors.mSurface
       border.width: Math.max(1, Style.borderMedium * scaling)
       y: 2 * scaling
-      x: value ? switcher.width - width - 2 * scaling : 2 * scaling
+      x: root.checked ? switcher.width - width - 2 * scaling : 2 * scaling
 
       Behavior on x {
         NumberAnimation {
@@ -80,8 +80,8 @@ RowLayout {
         root.exited()
       }
       onClicked: {
-        value = !value
-        root.toggled(value)
+        root.checked = !root.checked
+        root.toggled(root.checked)
       }
     }
   }

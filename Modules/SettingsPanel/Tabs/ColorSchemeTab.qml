@@ -129,9 +129,9 @@ ColumnLayout {
         NToggle {
           label: "Use Matugen"
           description: "Automatically generate colors based on your active wallpaper using Matugen"
-          value: Settings.data.colorSchemes.useWallpaperColors
-          onToggled: function (newValue) {
-            Settings.data.colorSchemes.useWallpaperColors = newValue
+          checked: Settings.data.colorSchemes.useWallpaperColors
+          onToggled: checked => {
+            Settings.data.colorSchemes.useWallpaperColors = checked
             if (Settings.data.colorSchemes.useWallpaperColors) {
               ColorSchemesService.changedWallpaper()
             }

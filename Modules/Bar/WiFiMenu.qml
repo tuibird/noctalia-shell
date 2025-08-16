@@ -147,13 +147,13 @@ NLoader {
 
             NToggle {
               baseSize: Style.baseWidgetSize * 0.75
-              value: Settings.data.network.wifiEnabled
-              onToggled: function (value) {
-                Settings.data.network.wifiEnabled = value
-                NetworkService.setWifiEnabled(value)
+              checked: Settings.data.network.wifiEnabled
+              onToggled: checked => {
+                Settings.data.network.wifiEnabled = checked
+                NetworkService.setWifiEnabled(checked)
 
                 // If enabling WiFi while menu is open, refresh after a delay
-                if (value) {
+                if (checked) {
                   wifiEnableRefreshTimer.start()
                 }
               }

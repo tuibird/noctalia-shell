@@ -89,9 +89,9 @@ Item {
                 NToggle {
                   label: "Bar"
                   description: "Enable the top bar on this monitor"
-                  value: (Settings.data.bar.monitors || []).indexOf(modelData.name) !== -1
-                  onToggled: function (newValue) {
-                    if (newValue) {
+                  checked: (Settings.data.bar.monitors || []).indexOf(modelData.name) !== -1
+                  onToggled: checked => {
+                    if (checked) {
                       Settings.data.bar.monitors = addMonitor(Settings.data.bar.monitors, modelData.name)
                     } else {
                       Settings.data.bar.monitors = removeMonitor(Settings.data.bar.monitors, modelData.name)
@@ -102,9 +102,9 @@ Item {
                 NToggle {
                   label: "Notifications"
                   description: "Enable notifications on this monitor"
-                  value: (Settings.data.notifications.monitors || []).indexOf(modelData.name) !== -1
-                  onToggled: function (newValue) {
-                    if (newValue) {
+                  checked: (Settings.data.notifications.monitors || []).indexOf(modelData.name) !== -1
+                  onToggled: checked => {
+                    if (checked) {
                       Settings.data.notifications.monitors = addMonitor(Settings.data.notifications.monitors,
                                                                         modelData.name)
                     } else {
@@ -117,9 +117,9 @@ Item {
                 NToggle {
                   label: "Dock"
                   description: "Enable the dock on this monitor"
-                  value: (Settings.data.dock.monitors || []).indexOf(modelData.name) !== -1
-                  onToggled: function (newValue) {
-                    if (newValue) {
+                  checked: (Settings.data.dock.monitors || []).indexOf(modelData.name) !== -1
+                  onToggled: checked => {
+                    if (checked) {
                       Settings.data.dock.monitors = addMonitor(Settings.data.dock.monitors, modelData.name)
                     } else {
                       Settings.data.dock.monitors = removeMonitor(Settings.data.dock.monitors, modelData.name)

@@ -65,9 +65,9 @@ ColumnLayout {
             NToggle {
               label: "Show Cursor"
               description: "Record mouse cursor in the video"
-              value: Settings.data.screenRecorder.showCursor
-              onToggled: function (newValue) {
-                Settings.data.screenRecorder.showCursor = newValue
+              checked: Settings.data.screenRecorder.showCursor
+              onToggled: checked => {
+                Settings.data.screenRecorder.showCursor = checked
               }
             }
           }

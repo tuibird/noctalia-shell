@@ -201,8 +201,8 @@ NLoader {
               NToggle {
                 label: "Label"
                 description: "Description"
-                onToggled: function (value) {
-                  console.log("[DemoPanel] NToggle:", value)
+                onToggled: checked => {
+                  console.log("[DemoPanel] NToggle:", checked)
                 }
               }
 

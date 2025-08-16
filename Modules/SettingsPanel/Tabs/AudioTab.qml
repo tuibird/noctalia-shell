@@ -123,10 +123,10 @@ ColumnLayout {
             NToggle {
               label: "Mute AudioService"
               description: "Mute or unmute the default audio output"
-              value: AudioService.muted
-              onToggled: function (newValue) {
+              checked: AudioService.muted
+              onToggled: checked => {
                 if (AudioService.sink && AudioService.sink.audio) {
-                  AudioService.sink.audio.muted = newValue
+                  AudioService.sink.audio.muted = checked
                 }
               }
             }

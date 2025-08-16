@@ -87,9 +87,9 @@ ColumnLayout {
         NToggle {
           label: "Random Wallpaper"
           description: "Automatically select random wallpapers from the folder"
-          value: Settings.data.wallpaper.isRandom
-          onToggled: function (newValue) {
-            Settings.data.wallpaper.isRandom = newValue
+          checked: Settings.data.wallpaper.isRandom
+          onToggled: checked => {
+            Settings.data.wallpaper.isRandom = checked
           }
         }
 
@@ -157,9 +157,9 @@ ColumnLayout {
         NToggle {
           label: "Use SWWW"
           description: "Use SWWW daemon for advanced wallpaper management"
-          value: Settings.data.wallpaper.swww.enabled
-          onToggled: function (newValue) {
-            Settings.data.wallpaper.swww.enabled = newValue
+          checked: Settings.data.wallpaper.swww.enabled
+          onToggled: checked => {
+            Settings.data.wallpaper.swww.enabled = checked
           }
         }
 

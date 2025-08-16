@@ -95,27 +95,27 @@ ColumnLayout {
         NToggle {
           label: "Show Corners"
           description: "Display rounded corners on the edge of the screen"
-          value: Settings.data.general.showScreenCorners
-          onToggled: function (v) {
-            Settings.data.general.showScreenCorners = v
+          checked: Settings.data.general.showScreenCorners
+          onToggled: checked => {
+            Settings.data.general.showScreenCorners = checked
           }
         }
 
         NToggle {
           label: "Dim Desktop"
           description: "Dim the desktop when panels or menus are open"
-          value: Settings.data.general.dimDesktop
-          onToggled: function (v) {
-            Settings.data.general.dimDesktop = v
+          checked: Settings.data.general.dimDesktop
+          onToggled: checked => {
+            Settings.data.general.dimDesktop = checked
           }
         }
 
         NToggle {
           label: "Auto-hide Dock"
           description: "Automatically hide the dock when not in use"
-          value: Settings.data.dock.autoHide
-          onToggled: function (v) {
-            Settings.data.dock.autoHide = v
+          checked: Settings.data.dock.autoHide
+          onToggled: checked => {
+            Settings.data.dock.autoHide = checked
           }
         }
       }
