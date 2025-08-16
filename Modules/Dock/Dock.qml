@@ -197,7 +197,7 @@ NLoader {
                     color: appButton.hovered ? Colors.mSurfaceVariant : "transparent"
                     radius: parent.radius
                     opacity: appButton.hovered ? 0.8 : 0
-                    
+
                     Behavior on opacity {
                       NumberAnimation {
                         duration: Style.animationFast
@@ -218,9 +218,9 @@ NLoader {
                     mipmap: false
                     antialiasing: false
                     fillMode: Image.PreserveAspectFit
-                    
+
                     scale: appButton.hovered ? 1.1 : 1.0
-                    
+
                     Behavior on scale {
                       NumberAnimation {
                         duration: Style.animationFast
@@ -237,9 +237,9 @@ NLoader {
                     font.family: "Material Symbols Rounded"
                     font.pointSize: iconSize * 0.7 * scaling
                     color: appButton.isActive ? Colors.mPrimary : Colors.mOnSurfaceVariant
-                    
+
                     scale: appButton.hovered ? 1.1 : 1.0
-                    
+
                     Behavior on scale {
                       NumberAnimation {
                         duration: Style.animationFast

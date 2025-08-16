@@ -11,9 +11,9 @@ NLoader {
 
   Component.onCompleted: {
     if (WorkspacesService.isNiri) {
-      console.log("[Overview] Loading Overview component (Niri detected)")
+      Logger.log("Overview", "Loading Overview component (Niri detected)")
     } else {
-      console.log("[Overview] Skipping Overview component (Niri not detected)")
+      Logger.log("Overview", "Skipping Overview component (Niri not detected)")
     }
   }
 

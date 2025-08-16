@@ -95,11 +95,11 @@ Singleton {
     path: Settings.configDir + "colors.json"
     watchChanges: true
     onFileChanged: {
-      console.log("[Colors] Reloading colors from disk")
+      Logger.log("Colors", "Reloading colors from disk")
       reload()
     }
     onAdapterUpdated: {
-      console.log("[Colors] Writing colors to disk")
+      Logger.log("Colors", "Writing colors to disk")
       writeAdapter()
     }
     onLoadFailed: function (error) {

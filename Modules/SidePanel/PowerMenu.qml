@@ -103,7 +103,7 @@ NPanel {
           hoverEnabled: true
           cursorShape: Qt.PointingHandCursor
           onClicked: {
-            console.log("Lock screen requested")
+            Logger.log("PowerMenu", "Lock screen requested")
             // Lock the screen
             lockScreen.locked = true
             powerMenu.visible = false
@@ -353,7 +353,7 @@ NPanel {
     } else if (WorkspacesService.isHyprland) {
       logoutProcessHyprland.running = true
     } else {
-      console.warn("No supported compositor detected for logout")
+      Logger.warn("PowerMenu", "No supported compositor detected for logout")
     }
   }
 

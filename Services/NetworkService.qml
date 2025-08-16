@@ -18,7 +18,7 @@ Singleton {
   property bool isLoading: false
 
   Component.onCompleted: {
-    console.log("[Network] Service started")
+    Logger.log("Network", "Service started")
     // Only refresh networks if WiFi is enabled
     if (Settings.data.network.wifiEnabled) {
       refreshNetworks()
@@ -165,7 +165,7 @@ Singleton {
     stderr: StdioCollector {
       onStreamFinished: {
         if (text.trim() !== "") {
-          console.warn("Error enabling WiFi:", text)
+          Logger.warn("Network", "Error enabling WiFi:", text)
         }
       }
     }
@@ -235,7 +235,7 @@ Singleton {
     stderr: StdioCollector {
       onStreamFinished: {
         if (text.trim() !== "") {
-          console.warn("Error disabling WiFi:", text)
+          Logger.warn("Network", "Error disabling WiFi:", text)
         }
       }
     }
@@ -274,7 +274,7 @@ Singleton {
 
           const parts = line.split(":")
           if (parts.length < 2) {
-            console.warn("Malformed nmcli output line:", line)
+            Logger.warn("Network", "Malformed nmcli output line:", line)
             continue
           }
 
@@ -313,7 +313,7 @@ Singleton {
 
           const parts = line.split(":")
           if (parts.length < 4) {
-            console.warn("Malformed nmcli output line:", line)
+            Logger.warn("Network", "Malformed nmcli output line:", line)
             continue
           }
           const ssid = parts[0]

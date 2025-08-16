@@ -145,8 +145,6 @@ NLoader {
               Layout.fillWidth: true
             }
 
-
-
             NIconButton {
               icon: "refresh"
               tooltipText: "Refresh Networks"

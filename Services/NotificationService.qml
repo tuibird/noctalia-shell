@@ -165,7 +165,7 @@ QtObject {
                             })
       }
     } catch (e) {
-      console.error("[Notifications] Failed to load history:", e)
+      Logger.error("Notifications", "Failed to load history:", e)
     }
   }
 
@@ -190,7 +190,7 @@ QtObject {
         historyFileView.writeAdapter()
       })
     } catch (e) {
-      console.error("[Notifications] Failed to save history:", e)
+      Logger.error("Notifications", "Failed to save history:", e)
     }
   }
 

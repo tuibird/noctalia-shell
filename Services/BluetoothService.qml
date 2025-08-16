@@ -28,21 +28,21 @@ Singleton {
   }
 
   Component.onCompleted: {
-    console.log("[Bluetooth] Service started")
-    
+    Logger.log("Bluetooth", "Service started")
+
     if (isEnabled && Bluetooth.defaultAdapter) {
       // Ensure adapter is enabled
       if (!Bluetooth.defaultAdapter.enabled) {
         Bluetooth.defaultAdapter.enabled = true
       }
-      
+
       // Start discovery to find devices
       if (!Bluetooth.defaultAdapter.discovering) {
         Bluetooth.defaultAdapter.discovering = true
       }
-      
+
       // Refresh devices after a short delay to allow discovery to start
-      Qt.callLater(function() {
+      Qt.callLater(function () {
         refreshDevices()
       })
     }
@@ -50,7 +50,7 @@ Singleton {
 
   // Function to enable/disable Bluetooth
   function setBluetoothEnabled(enabled) {
-    
+
     if (enabled) {
       // Store the currently connected devices before enabling
       for (const device of connectedDevices) {
@@ -59,20 +59,20 @@ Singleton {
           break
         }
       }
-      
+
       // Enable Bluetooth
       if (Bluetooth.defaultAdapter) {
         Bluetooth.defaultAdapter.enabled = true
-        
+
         // Start discovery to find devices
         if (!Bluetooth.defaultAdapter.discovering) {
           Bluetooth.defaultAdapter.discovering = true
         }
-        
+
         // Refresh devices after enabling
         Qt.callLater(refreshDevices)
       } else {
-        console.warn("[Bluetooth] No Bluetooth adapter found!")
+        Logger.warn("Bluetooth", "No adapter found")
       }
     } else {
       // Disconnect from current devices before disabling
@@ -81,14 +81,14 @@ Singleton {
           device.disconnect()
         }
       }
-      
+
       // Disable Bluetooth
       if (Bluetooth.defaultAdapter) {
-        console.log("[Bluetooth] Disabling Bluetooth adapter")
+        Logger.log("Bluetooth", "Disabling adapter")
         Bluetooth.defaultAdapter.enabled = false
       }
     }
-    
+
     Settings.data.network.bluetoothEnabled = enabled
     isEnabled = enabled
   }
@@ -101,25 +101,24 @@ Singleton {
       availableDevices = []
       return
     }
-    
-    // Remove duplicate check since we already did it above
 
+    // Remove duplicate check since we already did it above
     const connected = []
     const paired = []
     const available = []
 
     let devices = null
-    
+
     // Try adapter devices first
     if (Bluetooth.defaultAdapter.enabled && Bluetooth.defaultAdapter.devices) {
       devices = Bluetooth.defaultAdapter.devices
     }
-    
+
     // Fallback to global devices list
     if (!devices && Bluetooth.devices) {
       devices = Bluetooth.devices
     }
-    
+
     if (!devices) {
       connectedDevices = []
       pairedDevices = []
@@ -129,19 +128,20 @@ Singleton {
 
     // Use Qt model methods to iterate through the ObjectModel
     let deviceFound = false
-    
+
     try {
       // Get the row count using the Qt model method
       const rowCount = devices.rowCount()
-      
+
       if (rowCount > 0) {
         // Iterate through each row using the Qt model data() method
-        for (let i = 0; i < rowCount; i++) {
+        for (var i = 0; i < rowCount; i++) {
           try {
             // Create a model index for this row
             const modelIndex = devices.index(i, 0)
-            if (!modelIndex.valid) continue
-            
+            if (!modelIndex.valid)
+              continue
+
             // Get the device object using the Qt.UserRole (typically 256)
             const device = devices.data(modelIndex, 256) // Qt.UserRole
             if (!device) {
@@ -153,9 +153,9 @@ Singleton {
                 continue
               }
             }
-            
+
             deviceFound = true
-            
+
             if (device.connected) {
               connected.push(device)
             } else if (device.paired) {
@@ -163,13 +163,13 @@ Singleton {
             } else {
               available.push(device)
             }
-            
           } catch (e) {
+
             // Silent error handling
           }
         }
       }
-      
+
       // Alternative method: try the values property if available
       if (!deviceFound && devices.values) {
         try {
@@ -177,7 +177,7 @@ Singleton {
           if (values && typeof values === 'object') {
             // Try to iterate through values if it's iterable
             if (values.length !== undefined) {
-              for (let i = 0; i < values.length; i++) {
+              for (var i = 0; i < values.length; i++) {
                 const device = values[i]
                 if (device) {
                   deviceFound = true
@@ -193,18 +193,18 @@ Singleton {
             }
           }
         } catch (e) {
+
           // Silent error handling
         }
       }
-      
     } catch (e) {
-      console.warn("[Bluetooth] Error accessing device model:", e)
+      Logger.warn("Bluetooth", "Error accessing device model:", e)
     }
 
     if (!deviceFound) {
-      console.log("[Bluetooth] No devices found")
+      Logger.log("Bluetooth", "No device found")
     }
-    
+
     connectedDevices = connected
     pairedDevices = paired
     availableDevices = available
@@ -212,39 +212,42 @@ Singleton {
 
   // Function to start discovery
   function startDiscovery() {
-    if (!isEnabled || !Bluetooth.defaultAdapter) return
-    
+    if (!isEnabled || !Bluetooth.defaultAdapter)
+      return
+
     isDiscovering = true
     Bluetooth.defaultAdapter.discovering = true
   }
 
   // Function to stop discovery
   function stopDiscovery() {
-    if (!Bluetooth.defaultAdapter) return
-    
+    if (!Bluetooth.defaultAdapter)
+      return
+
     isDiscovering = false
     Bluetooth.defaultAdapter.discovering = false
   }
 
   // Function to connect to a device
   function connectDevice(device) {
-    if (!device) return
-    
+    if (!device)
+      return
+
     // Check if device is still valid (not stale from previous session)
     if (!device.connect || typeof device.connect !== 'function') {
-      console.warn("[Bluetooth] Device object is stale, refreshing devices")
+      Logger.warn("Bluetooth", "Device object is stale, refreshing devices")
       refreshDevices()
       return
     }
-    
+
     connectStatus = "connecting"
     connectStatusDevice = device.name || device.deviceName
     connectError = ""
-    
+
     try {
       device.connect()
     } catch (error) {
-      console.error("[Bluetooth] Error connecting to device:", error)
+      Logger.error("Bluetooth", "Error connecting to device:", error)
       connectStatus = "error"
       connectError = error.toString()
       Qt.callLater(refreshDevices)
@@ -253,15 +256,16 @@ Singleton {
 
   // Function to disconnect from a device
   function disconnectDevice(device) {
-    if (!device) return
-    
+    if (!device)
+      return
+
     // Check if device is still valid (not stale from previous session)
     if (!device.disconnect || typeof device.disconnect !== 'function') {
-      console.warn("[Bluetooth] Device object is stale, refreshing devices")
+      Logger.warn("Bluetooth", "Device object is stale, refreshing devices")
       refreshDevices()
       return
     }
-    
+
     try {
       device.disconnect()
       // Clear connection status
@@ -269,72 +273,74 @@ Singleton {
       connectStatusDevice = ""
       connectError = ""
     } catch (error) {
-      console.warn("[Bluetooth] Error disconnecting device:", error)
+      Logger.warn("Bluetooth", "Error disconnecting device:", error)
       Qt.callLater(refreshDevices)
     }
   }
 
   // Function to pair with a device
   function pairDevice(device) {
-    if (!device) return
-    
+    if (!device)
+      return
+
     // Check if device is still valid (not stale from previous session)
     if (!device.pair || typeof device.pair !== 'function') {
-      console.warn("[Bluetooth] Device object is stale, refreshing devices")
+      Logger.warn("Bluetooth", "Device object is stale, refreshing devices")
       refreshDevices()
       return
     }
-    
+
     try {
       device.pair()
     } catch (error) {
-      console.warn("[Bluetooth] Error pairing device:", error)
+      Logger.warn("Bluetooth", "Error pairing device:", error)
       Qt.callLater(refreshDevices)
     }
   }
 
   // Function to forget a device
   function forgetDevice(device) {
-    if (!device) return
-    
+    if (!device)
+      return
+
     // Check if device is still valid (not stale from previous session)
     if (!device.forget || typeof device.forget !== 'function') {
-      console.warn("[Bluetooth] Device object is stale, refreshing devices")
+      Logger.warn("Bluetooth", "Device object is stale, refreshing devices")
       refreshDevices()
       return
     }
-    
+
     // Store device info before forgetting (in case device object becomes invalid)
     const deviceName = device.name || device.deviceName || "Unknown Device"
-    
+
     try {
       device.forget()
-      
+
       // Clear any connection status that might be related to this device
       if (connectStatusDevice === deviceName) {
         connectStatus = ""
         connectStatusDevice = ""
         connectError = ""
       }
-      
+
       // Refresh devices after a delay to ensure the forget operation is complete
       Qt.callLater(refreshDevices, 1000)
-      
     } catch (error) {
-      console.warn("[Bluetooth] Error forgetting device:", error)
+      Logger.warn("Bluetooth", "Error forgetting device:", error)
       Qt.callLater(refreshDevices, 500)
     }
   }
 
   // Function to get device icon
   function getDeviceIcon(device) {
-    if (!device) return "bluetooth"
-    
+    if (!device)
+      return "bluetooth"
+
     // Use device icon if available, otherwise fall back to device type
     if (device.icon) {
       return device.icon
     }
-    
+
     // Fallback icons based on common device types
     const name = (device.name || device.deviceName || "").toLowerCase()
     if (name.includes("headphone") || name.includes("earbud") || name.includes("airpods")) {
@@ -350,14 +356,15 @@ Singleton {
     } else if (name.includes("laptop") || name.includes("computer")) {
       return "laptop"
     }
-    
+
     return "bluetooth"
   }
 
   // Function to get device status text
   function getDeviceStatus(device) {
-    if (!device) return ""
-    
+    if (!device)
+      return ""
+
     if (device.connected) {
       return "Connected"
     } else if (device.pairing) {
@@ -371,8 +378,9 @@ Singleton {
 
   // Function to get battery level text
   function getBatteryText(device) {
-    if (!device || !device.batteryAvailable) return ""
-    
+    if (!device || !device.batteryAvailable)
+      return ""
+
     const percentage = Math.round(device.battery * 100)
     return `${percentage}%`
   }
@@ -381,7 +389,7 @@ Singleton {
   Connections {
     target: Bluetooth.defaultAdapter
     ignoreUnknownSignals: true
-    
+
     function onEnabledChanged() {
       root.isEnabled = Bluetooth.defaultAdapter.enabled
       Settings.data.network.bluetoothEnabled = root.isEnabled
@@ -393,20 +401,20 @@ Singleton {
         availableDevices = []
       }
     }
-    
+
     function onDiscoveringChanged() {
       root.isDiscovering = Bluetooth.defaultAdapter.discovering
       if (Bluetooth.defaultAdapter.discovering) {
         Qt.callLater(refreshDevices)
       }
     }
-    
+
     function onStateChanged() {
       if (Bluetooth.defaultAdapter.state >= 4) {
         Qt.callLater(refreshDevices)
       }
     }
-    
+
     function onDevicesChanged() {
       Qt.callLater(refreshDevices)
     }
@@ -416,7 +424,7 @@ Singleton {
   Connections {
     target: Bluetooth
     ignoreUnknownSignals: true
-    
+
     function onDevicesChanged() {
       Qt.callLater(refreshDevices)
     }

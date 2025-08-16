@@ -49,11 +49,11 @@ Singleton {
       reload()
     }
     onLoaded: function () {
-      console.log("[Settings] Loaded")
+      Logger.log("Settings", "Loaded")
       Qt.callLater(function () {
         // Only set wallpaper on initial load, not on reloads
         if (isInitialLoad && adapter.wallpaper.current !== "") {
-          console.log("[Settings] Set current wallpaper", adapter.wallpaper.current)
+          Logger.log("Settings", "Set current wallpaper", adapter.wallpaper.current)
           WallpapersService.setCurrentWallpaper(adapter.wallpaper.current, true)
         }
         isInitialLoad = false

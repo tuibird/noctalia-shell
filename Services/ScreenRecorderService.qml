@@ -34,9 +34,9 @@ Singleton {
         + " -k " + settings.videoCodec + " -a " + settings.audioSource + " -q " + settings.quality
         + " -cursor " + (settings.showCursor ? "yes" : "no") + " -cr " + settings.colorRange + " -o " + outputPath
 
-    //console.log("[ScreenRecorder]", command)
+    //Logger.log("ScreenRecorder", command)
     Quickshell.execDetached(["sh", "-c", command])
-    console.log("[ScreenRecorder] Started recording")
+    Logger.log("ScreenRecorder", "Started recording")
   }
 
   // Stop recording using Quickshell.execDetached
@@ -46,7 +46,7 @@ Singleton {
     }
 
     Quickshell.execDetached(["sh", "-c", "pkill -SIGINT -f 'gpu-screen-recorder.*portal'"])
-    console.log("[ScreenRecorder] Finished recording:", outputPath)
+    Logger.log("ScreenRecorder", "Finished recording:", outputPath)
 
     // Just in case, force kill after 3 seconds
     killTimer.running = true

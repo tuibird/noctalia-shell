@@ -72,9 +72,9 @@ NLoader {
       property string searchText: ""
       property int selectedIndex: 0
       property var filteredEntries: {
-        console.log("[AppLauncher] Total desktop entries:", desktopEntries ? desktopEntries.length : 0)
+        Logger.log("AppLauncher", "Total desktop entries:", desktopEntries ? desktopEntries.length : 0)
         if (!desktopEntries || desktopEntries.length === 0) {
-          console.log("[AppLauncher] No desktop entries available")
+          Logger.log("AppLauncher", "No desktop entries available")
           return []
         }
 
@@ -86,7 +86,7 @@ NLoader {
                                                      return true
                                                    })
 
-        console.log("[AppLauncher] Visible entries:", visibleEntries.length)
+        Logger.log("AppLauncher", "Visible entries:", visibleEntries.length)
 
         var query = searchText ? searchText.toLowerCase() : ""
         var results = []
@@ -225,16 +225,16 @@ NLoader {
           }))
         }
 
-        console.log("[AppLauncher] Filtered entries:", results.length)
+        Logger.log("AppLauncher", "Filtered entries:", results.length)
         return results
       }
 
       Component.onCompleted: {
-        console.log("[AppLauncher] Component completed")
-        console.log("[AppLauncher] DesktopEntries available:", typeof DesktopEntries !== 'undefined')
+        Logger.log("AppLauncher", "Component completed")
+        Logger.log("AppLauncher", "DesktopEntries available:", typeof DesktopEntries !== 'undefined')
         if (typeof DesktopEntries !== 'undefined') {
-          console.log("[AppLauncher] DesktopEntries.entries:",
-                      DesktopEntries.entries ? DesktopEntries.entries.length : 'undefined')
+          Logger.log("AppLauncher", "DesktopEntries.entries:",
+                     DesktopEntries.entries ? DesktopEntries.entries.length : 'undefined')
         }
         // Start clipboard refresh immediately on open
         updateClipboardHistory()

@@ -18,7 +18,7 @@ NBox {
   // Height can be overridden by parent layout (SidePanel binds it to stats card)
   //implicitHeight: content.implicitHeight + Style.marginLarge * 2 * scaling
   // Component.onCompleted: {
-  //   console.log(MediaService.trackArtUrl)
+  //   Logger.logMediaService.trackArtUrl)
   // }
   ColumnLayout {
     anchors.fill: parent

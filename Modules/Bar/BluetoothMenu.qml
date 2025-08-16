@@ -214,34 +214,34 @@ NLoader {
               // Combine all devices into a single list for the ListView
               property var allDevices: {
                 const devices = []
-                
+
                 // Add connected devices first
                 for (const device of BluetoothService.connectedDevices) {
                   devices.push({
-                    device: device,
-                    type: 'connected',
-                    section: 'Connected Devices'
-                  })
+                                 "device": device,
+                                 "type": 'connected',
+                                 "section": 'Connected Devices'
+                               })
                 }
-                
+
                 // Add paired devices
                 for (const device of BluetoothService.pairedDevices) {
                   devices.push({
-                    device: device,
-                    type: 'paired',
-                    section: 'Paired Devices'
-                  })
+                                 "device": device,
+                                 "type": 'paired',
+                                 "section": 'Paired Devices'
+                               })
                 }
-                
+
                 // Add available devices
                 for (const device of BluetoothService.availableDevices) {
                   devices.push({
-                    device: device,
-                    type: 'available',
-                    section: 'Available Devices'
-                  })
+                                 "device": device,
+                                 "type": 'available',
+                                 "section": 'Available Devices'
+                               })
                 }
-                
+
                 return devices
               }
 
@@ -362,9 +362,8 @@ NLoader {
             // Empty state when no devices found
             ColumnLayout {
               anchors.centerIn: parent
-              visible: Settings.data.network.bluetoothEnabled && 
-                       !BluetoothService.isDiscovering && 
-                       deviceList.count === 0
+              visible: Settings.data.network.bluetoothEnabled && !BluetoothService.isDiscovering
+                       && deviceList.count === 0
               spacing: Style.marginMedium * scaling
 
               NText {

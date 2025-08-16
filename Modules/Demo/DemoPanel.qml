@@ -202,7 +202,7 @@ NLoader {
                 label: "Label"
                 description: "Description"
                 onToggled: checked => {
-                             console.log("[DemoPanel] NToggle:", checked)
+                             Logger.log("DemoPanel", "NToggle:", checked)
                            }
               }
 
@@ -255,7 +255,7 @@ NLoader {
                 }
                 currentKey: "dog"
                 onSelected: function (key) {
-                  console.log("[DemoPanel] NComboBox: selected ", key)
+                  Logger.log("DemoPanel", "NComboBox: selected ", key)
                 }
               }
 

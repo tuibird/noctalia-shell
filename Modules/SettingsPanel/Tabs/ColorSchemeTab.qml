@@ -92,7 +92,7 @@ ColumnLayout {
               var jsonData = JSON.parse(text())
               root.schemeLoaded(schemeName, jsonData)
             } catch (e) {
-              console.warn("Failed to parse JSON for scheme:", schemeName, e)
+              Logger.warn("Failed to parse JSON for scheme:", schemeName, e)
               root.schemeLoaded(schemeName, null) // Load defaults on parse error
             }
           }

@@ -24,39 +24,39 @@ WlSessionLock {
   locked: false
 
   function unlockAttempt() {
-    console.log("Unlock attempt started")
+    Logger.log("LockScreen", "Unlock attempt started")
 
     // Real PAM authentication
     if (!pamAvailable) {
       lock.errorMessage = "PAM authentication not available."
-      console.log("PAM not available")
+      Logger.log("LockScreen", "PAM not available")
       return
     }
     if (!lock.password) {
       lock.errorMessage = "Password required."
-      console.log("No password entered")
+      Logger.log("LockScreen", "No password entered")
       return
     }
-    console.log("Starting PAM authentication...")
+    Logger.log("LockScreen", "Starting PAM authentication")
     lock.authenticating = true
     lock.errorMessage = ""
 
-    console.log("[LockScreen] About to create PAM context with userName:", Quickshell.env("USER"))
+    Logger.log("LockScreen", "About to create PAM context with userName:", Quickshell.env("USER"))
     var pam = Qt.createQmlObject(
           'import Quickshell.Services.Pam; PamContext { config: "login"; user: "' + Quickshell.env("USER") + '" }',
           lock)
-    console.log("PamContext created", pam)
+    Logger.log("LockScreen", "PamContext created", pam)
 
     pam.onCompleted.connect(function (result) {
-      console.log("PAM completed with result:", result)
+      Logger.log("LockScreen", "PAM completed with result:", result)
       lock.authenticating = false
       if (result === PamResult.Success) {
-        console.log("Authentication successful, unlocking...")
+        Logger.log("LockScreen", "Authentication successful, unlocking")
         lock.locked = false
         lock.password = ""
         lock.errorMessage = ""
       } else {
-        console.log("Authentication failed")
+        Logger.log("LockScreen", "Authentication failed")
         lock.errorMessage = "Authentication failed."
         lock.password = ""
       }
@@ -64,7 +64,7 @@ WlSessionLock {
     })
 
     pam.onError.connect(function (error) {
-      console.log("PAM error:", error)
+      Logger.log("LockScreen", "PAM error:", error)
       lock.authenticating = false
       lock.errorMessage = pam.message || "Authentication error."
       lock.password = ""
@@ -72,22 +72,22 @@ WlSessionLock {
     })
 
     pam.onPamMessage.connect(function () {
-      console.log("PAM message:", pam.message, "isError:", pam.messageIsError)
+      Logger.log("LockScreen", "PAM message:", pam.message, "isError:", pam.messageIsError)
       if (pam.messageIsError) {
         lock.errorMessage = pam.message
       }
     })
 
     pam.onResponseRequiredChanged.connect(function () {
-      console.log("PAM response required:", pam.responseRequired)
+      Logger.log("LockScreen", "PAM response required:", pam.responseRequired)
       if (pam.responseRequired && lock.authenticating) {
-        console.log("Responding to PAM with password")
+        Logger.log("LockScreen", "Responding to PAM with password")
         pam.respond(lock.password)
       }
     })
 
     var started = pam.start()
-    console.log("PAM start result:", started)
+    Logger.log("LockScreen", "PAM start result:", started)
   }
 
   WlSessionLockSurface {

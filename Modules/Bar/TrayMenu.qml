@@ -44,7 +44,7 @@ PopupWindow {
 
   function showAt(item, x, y) {
     if (!item) {
-      console.warn("CustomTrayMenu: anchorItem is undefined, won't show menu.")
+      Logger.warn("TrayMenu", "anchorItem is undefined, won't show menu.")
       return
     }
     anchorItem = item
@@ -267,7 +267,7 @@ PopupWindow {
 
       function showAt(item, x, y) {
         if (!item) {
-          console.warn("subMenuComponent: anchorItem is undefined, not showing menu.")
+          Logger.warn("TrayMenu", "SubComponent anchorItem is undefined, not showing menu.")
           return
         }
         anchorItem = item

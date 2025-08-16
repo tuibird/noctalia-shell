@@ -50,12 +50,12 @@ Singleton {
   function init() {
     // does nothing but ensure the singleton is created
     // do not remove
-    console.log("[Location] Service started")
+    Logger.log("Location", "Service started")
   }
 
   // --------------------------------
   function resetWeather() {
-    console.log("[Location] Resetting weather data")
+    Logger.log("Location", "Resetting weather data")
 
     data.latitude = ""
     data.longitude = ""
@@ -70,12 +70,12 @@ Singleton {
   // --------------------------------
   function updateWeather() {
     if (isFetchingWeather) {
-      console.warn("[Location] Weather is still fetching")
+      Logger.warn("Location", "Weather is still fetching")
       return
     }
 
     if (data.latitude === "") {
-      console.warn("[Location] Why is my latitude empty")
+      Logger.warn("Location", "Why is my latitude empty")
     }
 
     if ((data.weatherLastFetch === "") || (data.weather === null) || (data.latitude === "") || (data.longitude === "")
@@ -91,7 +91,7 @@ Singleton {
     if ((data.latitude === "") || (data.longitude === "") || (data.name !== Settings.data.location.name)) {
 
       _geocodeLocation(Settings.data.location.name, function (latitude, longitude) {
-        console.log("[Location] Geocoded", Settings.data.location.name, "to:", latitude, "/", longitude)
+        Logger.log("Location", " Geocoded", Settings.data.location.name, "to:", latitude, "/", longitude)
 
         // Save location name
         data.name = Settings.data.location.name
@@ -109,7 +109,7 @@ Singleton {
 
   // --------------------------------
   function _geocodeLocation(locationName, callback, errorCallback) {
-    console.log("[Location] Geocoding from api.open-meteo.com")
+    Logger.log("Location", "Geocoding from api.open-meteo.com")
     var geoUrl = "https://geocoding-api.open-meteo.com/v1/search?name=" + encodeURIComponent(
           locationName) + "&language=en&format=json"
     var xhr = new XMLHttpRequest()
@@ -118,17 +118,17 @@ Singleton {
         if (xhr.status === 200) {
           try {
             var geoData = JSON.parse(xhr.responseText)
-            // console.log(JSON.stringify(geoData))
+            // Logger.logJSON.stringify(geoData))
             if (geoData.results && geoData.results.length > 0) {
               callback(geoData.results[0].latitude, geoData.results[0].longitude)
             } else {
-              errorCallback("[Location] could not resolve location name")
+              errorCallback("Location", "could not resolve location name")
             }
           } catch (e) {
-            errorCallback("[Location] Failed to parse geocoding data: " + e)
+            errorCallback("Location", "Failed to parse geocoding data: " + e)
           }
         } else {
-          errorCallback("[Location] Geocoding error: " + xhr.status)
+          errorCallback("Location", "Geocoding error: " + xhr.status)
         }
       }
     }
@@ -138,7 +138,7 @@ Singleton {
 
   // --------------------------------
   function _fetchWeather(latitude, longitude, errorCallback) {
-    console.log("[Location] Fetching weather from api.open-meteo.com")
+    Logger.log("Location", "Fetching weather from api.open-meteo.com")
     var url = "https://api.open-meteo.com/v1/forecast?latitude=" + latitude + "&longitude=" + longitude
         + "&current_weather=true&current=relativehumidity_2m,surface_pressure&daily=temperature_2m_max,temperature_2m_min,weathercode&timezone=auto"
     var xhr = new XMLHttpRequest()
@@ -155,12 +155,12 @@ Singleton {
             data.longitude = weatherData.longitude.toString()
 
             isFetchingWeather = false
-            console.log("[Location] Cached weather to disk")
+            Logger.log("Location", "Cached weather to disk")
           } catch (e) {
-            errorCallback("[Location] Failed to parse weather data")
+            errorCallback("Location", "Failed to parse weather data")
           }
         } else {
-          errorCallback("[Location] Weather fetch error: " + xhr.status)
+          errorCallback("Location", "Weather fetch error: " + xhr.status)
         }
       }
     }
@@ -170,7 +170,7 @@ Singleton {
 
   // --------------------------------
   function errorCallback(message) {
-    console.error(message)
+    Logger.error(message)
     isFetchingWeather = false
   }
 

@@ -248,7 +248,7 @@ NLoader {
                   sizeMultiplier: 0.7
 
                   onClicked: {
-                    console.log("[NotificationHistory] Removing notification:", summary)
+                    Logger.log("NotificationHistory", "Removing notification:", summary)
                     NotificationService.historyModel.remove(index)
                     NotificationService.saveHistory()
                   }

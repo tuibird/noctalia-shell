@@ -100,7 +100,7 @@ Item {
                            trayPanel.show()
                          } else {
 
-                           console.log("[Tray] no menu available for", modelData.id, "or trayMenu not set")
+                           Logger.log("Tray", "No menu available for", modelData.id, "or trayMenu not set")
                          }
                        }
                      }

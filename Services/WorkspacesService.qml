@@ -41,7 +41,7 @@ Singleton {
         return
       }
     } catch (e) {
-      console.error("[Workspaces] Error detecting compositor:", e)
+      Logger.error("Workspaces", "Error detecting compositor:", e)
     }
   }
 
@@ -54,7 +54,7 @@ Singleton {
       // updateHyprlandWorkspaces();
       return true
     } catch (e) {
-      console.error("Error initializing Hyprland:", e)
+      Logger.error("Error initializing Hyprland:", e)
       isHyprland = false
       return false
     }
@@ -98,7 +98,7 @@ Singleton {
       }
       workspacesChanged()
     } catch (e) {
-      console.error("[Workspaces] Error updating Hyprland workspaces:", e)
+      Logger.error("Workspaces", "Error updating Hyprland workspaces:", e)
     }
   }
 
@@ -138,16 +138,16 @@ Singleton {
       try {
         Hyprland.dispatch(`workspace ${workspaceId}`)
       } catch (e) {
-        console.error("Error switching Hyprland workspace:", e)
+        Logger.error("Error switching Hyprland workspace:", e)
       }
     } else if (isNiri) {
       try {
         Quickshell.execDetached(["niri", "msg", "action", "focus-workspace", workspaceId.toString()])
       } catch (e) {
-        console.error("Error switching Niri workspace:", e)
+        Logger.error("Error switching Niri workspace:", e)
       }
     } else {
-      console.warn("No supported compositor detected for workspace switching")
+      Logger.warn("No supported compositor detected for workspace switching")
     }
   }
 }

@@ -14,12 +14,12 @@ NIconButton {
   sizeMultiplier: 0.8
   showBorder: false
   visible: bluetoothEnabled
-  
+
   Component.onCompleted: {
-    console.log("[Bluetooth] Component loaded, bluetoothEnabled:", bluetoothEnabled)
-    console.log("[Bluetooth] BluetoothService available:", typeof BluetoothService !== 'undefined')
+    Logger.log("Bluetooth", "Component loaded, bluetoothEnabled:", bluetoothEnabled)
+    Logger.log("Bluetooth", "BluetoothService available:", typeof BluetoothService !== 'undefined')
     if (typeof BluetoothService !== 'undefined') {
-      console.log("[Bluetooth] Connected devices:", BluetoothService.connectedDevices.length)
+      Logger.log("Bluetooth", "Connected devices:", BluetoothService.connectedDevices.length)
     }
   }
   icon: {
@@ -55,4 +55,4 @@ NIconButton {
   BluetoothMenu {
     id: bluetoothMenuLoader
   }
-} 
+}

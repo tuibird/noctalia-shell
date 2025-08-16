@@ -63,7 +63,7 @@ Singleton {
 
           root.workspaces = workspacesList
         } catch (e) {
-          console.error("Failed to parse workspaces:", e, line)
+          Logger.error("NiriService", "Failed to parse workspaces:", e, line)
         }
       }
     }
@@ -104,7 +104,7 @@ Singleton {
                 }
               }
             } catch (e) {
-              console.error("Error parsing windows event:", e)
+              Logger.error("NiriService", "Error parsing windows event:", e)
             }
           } else if (event.WorkspaceActivated) {
             workspaceProcess.running = true
@@ -120,17 +120,17 @@ Singleton {
                 root.focusedWindowIndex = -1
               }
             } catch (e) {
-              console.error("Error parsing window focus event:", e)
+              Logger.error("NiriService", "Error parsing window focus event:", e)
             }
           } else if (event.OverviewOpenedOrClosed) {
             try {
               root.inOverview = event.OverviewOpenedOrClosed.is_open === true
             } catch (e) {
-              console.error("Error parsing overview state:", e)
+              Logger.error("NiriService", "Error parsing overview state:", e)
             }
           }
         } catch (e) {
-          console.error("Error parsing event stream:", e, data)
+          Logger.error("NiriService", "Error parsing event stream:", e, data)
         }
       }
     }

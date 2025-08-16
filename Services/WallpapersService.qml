@@ -10,7 +10,7 @@ Singleton {
   id: root
 
   Component.onCompleted: {
-    console.log("[Wallpapers] Service started")
+    Logger.log("Wallpapers", "Service started")
     loadWallpapers()
 
     // Wallpaper is set when the settings are loaded.
@@ -26,7 +26,7 @@ Singleton {
   property var randomChoices: ["simple", "fade", "left", "right", "top", "bottom", "wipe", "wave", "grow", "center", "any", "outer"]
 
   function loadWallpapers() {
-    console.log("[Wallpapers] Load Wallpapers")
+    Logger.log("Wallpapers", "Load Wallpapers")
     scanning = true
     wallpaperList = []
     // Unsetting, then setting the folder will re-trigger the parsing!
@@ -35,7 +35,7 @@ Singleton {
   }
 
   function changeWallpaper(path) {
-    console.log("[Wallpapers] Changing to:", path)
+    Logger.log("Wallpapers", "Changing to:", path)
     setCurrentWallpaper(path, false)
   }
 
@@ -58,7 +58,7 @@ Singleton {
     } else {
 
       // Fallback: update the settings directly for non-SWWW mode
-      //console.log("[Wallpapers] Not using Swww, setting wallpaper directly")
+      //Logger.log("Wallpapers", "Not using Swww, setting wallpaper directly")
     }
 
     if (randomWallpaperTimer.running) {
@@ -98,7 +98,7 @@ Singleton {
 
   function startSWWWDaemon() {
     if (Settings.data.wallpaper.swww.enabled) {
-      console.log("[SWWW] Requesting swww-daemon")
+      Logger.log("Swww", "Requesting swww-daemon")
       startDaemonProcess.running = true
     }
   }
@@ -128,7 +128,7 @@ Singleton {
         }
         wallpaperList = files
         scanning = false
-        console.log("[Wallpapers] List refreshed, count:", wallpaperList.length)
+        Logger.log("Wallpapers", "List refreshed, count:", wallpaperList.length)
       }
     }
   }
@@ -145,10 +145,10 @@ Singleton {
     }
 
     onExited: function (exitCode, exitStatus) {
-      console.log("[SWWW] Process finished with exit code:", exitCode, "status:", exitStatus)
+      Logger.log("Swww", "Process finished with exit code:", exitCode, "status:", exitStatus)
       if (exitCode !== 0) {
-        console.log("[SWWW] Process failed. Make sure swww-daemon is running with: swww-daemon")
-        console.log("[SWWW] You can start it with: swww-daemon --format xrgb")
+        Logger.log("Swww", "Process failed. Make sure swww-daemon is running with: swww-daemon")
+        Logger.log("Swww", "You can start it with: swww-daemon --format xrgb")
       }
     }
   }
@@ -159,15 +159,15 @@ Singleton {
     running: false
 
     onStarted: {
-      console.log("[SWWW] Daemon start process initiated")
+      Logger.log("Swww", "Daemon start process initiated")
     }
 
     onExited: function (exitCode, exitStatus) {
-      console.log("[SWWW] Daemon start process finished with exit code:", exitCode)
+      Logger.log("Swww", "Daemon start process finished with exit code:", exitCode)
       if (exitCode === 0) {
-        console.log("[SWWW] Daemon started successfully")
+        Logger.log("Swww", "Daemon started successfully")
       } else {
-        console.log("[SWWW] Failed to start daemon, may already be running")
+        Logger.log("Swww", "Failed to start daemon, may already be running")
       }
     }
   }

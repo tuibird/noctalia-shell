@@ -58,8 +58,8 @@ Item {
             description: "Display the brightness control icon in the top bar"
             checked: !Settings.data.bar.hideBrightness
             onToggled: checked => {
-              Settings.data.bar.hideBrightness = !checked
-            }
+                         Settings.data.bar.hideBrightness = !checked
+                       }
           }
         }
 
@@ -168,7 +168,9 @@ Item {
                   color: Colors.mSecondary
                 }
 
-                Item { Layout.fillWidth: true }
+                Item {
+                  Layout.fillWidth: true
+                }
 
                 NText {
                   text: BrightnessService.currentMethod === "ddcutil" ? "External (DDC)" : "Internal"
@@ -228,7 +230,9 @@ Item {
                   Layout.alignment: Qt.AlignLeft
                 }
 
-                Item { Layout.fillWidth: true }
+                Item {
+                  Layout.fillWidth: true
+                }
 
                 NText {
                   text: BrightnessService.available ? "Available" : "Unavailable"
@@ -247,4 +251,4 @@ Item {
       }
     }
   }
-} 
+}

@@ -10,7 +10,7 @@ Singleton {
   id: root
 
   Component.onCompleted: {
-    console.log("[ColorSchemes] Service started")
+    Logger.log("ColorSchemes", "Service started")
     loadColorSchemes()
   }
 
@@ -20,7 +20,7 @@ Singleton {
   property string colorsJsonFilePath: Settings.configDir + "colors.json"
 
   function loadColorSchemes() {
-    console.log("[ColorSchemes] Load ColorSchemes")
+    Logger.log("ColorSchemes", "Load ColorSchemes")
     scanning = true
     schemes = []
     // Unsetting, then setting the folder will re-trigger the parsing!
@@ -34,7 +34,7 @@ Singleton {
 
   function changedWallpaper() {
     if (Settings.data.colorSchemes.useWallpaperColors) {
-      console.log("[ColorSchemes] Starting color generation process")
+      Logger.log("ColorSchemes", "Starting color generation from wallpaper")
       generateColorsProcess.running = true
       // Invalidate potential predefined scheme
       Settings.data.colorSchemes.predefinedScheme = ""
@@ -55,7 +55,7 @@ Singleton {
         }
         schemes = files
         scanning = false
-        console.log("[ColorSchemes] Loaded", schemes.length, "schemes")
+        Logger.log("ColorSchemes", "Loaded", schemes.length, "schemes")
       }
     }
   }
@@ -67,13 +67,13 @@ Singleton {
     running: false
     stdout: StdioCollector {
       onStreamFinished: {
-        console.log("[ColorSchemes] Generated colors from wallpaper")
+        Logger.log("ColorSchemes", "Completed colors generation")
       }
     }
     stderr: StdioCollector {
       onStreamFinished: {
         if (this.text !== "") {
-          console.error(this.text)
+          Logger.error(this.text)
         }
       }
     }

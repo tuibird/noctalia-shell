@@ -53,7 +53,7 @@ Singleton {
 
     function onMutedChanged() {
       root._muted = (sink?.audio.muted ?? true)
-      console.log("[AudioService] onMuteChanged:", root._muted)
+      Logger.log("AudioService", "OnMuteChanged:", root._muted)
     }
   }
 
@@ -70,9 +70,9 @@ Singleton {
       // Clamp it accordingly
       sink.audio.muted = false
       sink.audio.volume = Math.max(0, Math.min(1, newVolume))
-      //console.log("[AudioService] setVolume", sink.audio.volume);
+      //Logger.log("AudioService", "SetVolume", sink.audio.volume);
     } else {
-      console.warn("[AudioService] No sink available")
+      Logger.warn("AudioService", "No sink available")
     }
   }
 
@@ -80,7 +80,7 @@ Singleton {
     if (sink?.ready && sink?.audio) {
       sink.audio.muted = muted
     } else {
-      console.warn("[AudioService] No sink available")
+      Logger.warn("AudioService", "No sink available")
     }
   }
 
