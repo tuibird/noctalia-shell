@@ -294,8 +294,8 @@ NLoader {
                         }
 
                         NText {
-                          visible: NetworkService.connectStatusSsid === modelData.ssid && NetworkService.connectStatus === "error"
-                                   && network.connectError.length > 0
+                          visible: NetworkService.connectStatusSsid === modelData.ssid
+                                   && NetworkService.connectStatus === "error" && network.connectError.length > 0
                           text: NetworkService.connectError
                           color: Colors.mError
                           font.pointSize: Style.fontSizeSmall * scaling

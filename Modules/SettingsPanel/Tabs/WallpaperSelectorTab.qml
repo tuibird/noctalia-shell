@@ -107,7 +107,8 @@ Item {
         Item {
           Layout.fillWidth: true
           Layout.preferredHeight: {
-            return Math.ceil(WallpapersService.wallpaperList.length / wallpaperGridView.columns) * wallpaperGridView.cellHeight
+            return Math.ceil(
+                  WallpapersService.wallpaperList.length / wallpaperGridView.columns) * wallpaperGridView.cellHeight
           }
 
           GridView {

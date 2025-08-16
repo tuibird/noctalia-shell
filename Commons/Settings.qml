@@ -75,7 +75,6 @@ Singleton {
         property bool showActiveWindow: true
         property bool showSystemInfo: false
         property bool showMedia: false
-        property bool showTaskbar: false
         property list<string> monitors: []
       }
 

@@ -34,7 +34,7 @@ Singleton {
 
       }
 
-      if (typeof Niri !== "undefined") {
+      if (typeof NiriService !== "undefined") {
         isHyprland = false
         isNiri = true
         initNiri()

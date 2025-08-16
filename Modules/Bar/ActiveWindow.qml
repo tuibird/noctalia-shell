@@ -5,6 +5,7 @@ import qs.Commons
 import qs.Services
 import qs.Widgets
 
+
 Row {
   id: layout
   anchors.verticalCenter: parent.verticalCenter
@@ -27,7 +28,7 @@ Row {
 
   // Update text when window changes
   Connections {
-    target: typeof Niri !== "undefined" ? Niri : null
+    target: typeof NiriService !== "undefined" ? NiriService : null
     function onFocusedWindowIndexChanged() {
       // Check if window actually changed
       if (NiriService.focusedWindowIndex !== lastWindowIndex) {
@@ -92,13 +93,13 @@ Row {
 
   function getDisplayText() {
     // Check if Niri service is available
-    if (typeof Niri === "undefined") {
+    if (typeof NiriService === "undefined") {
       return ""
     }
 
     // Get the focused window data
-    const focusedWindow = NiriService.focusedWindowIndex >= 0
-                        && NiriService.focusedWindowIndex < NiriService.windows.length ? NiriService.windows[NiriService.focusedWindowIndex] : null
+    const focusedWindow = NiriService.focusedWindowIndex >= 0 && NiriService.focusedWindowIndex
+                        < NiriService.windows.length ? NiriService.windows[NiriService.focusedWindowIndex] : null
 
     if (!focusedWindow) {
       return ""

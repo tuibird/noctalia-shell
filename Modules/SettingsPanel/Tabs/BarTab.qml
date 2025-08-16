@@ -59,15 +59,6 @@ ColumnLayout {
         }
 
         NToggle {
-          label: "Show Taskbar"
-          description: "Display a taskbar showing currently open windows"
-          value: Settings.data.bar.showTaskbar
-          onToggled: function (newValue) {
-            Settings.data.bar.showTaskbar = newValue
-          }
-        }
-
-        NToggle {
           label: "Show Media"
           description: "Display media controls and information"
           value: Settings.data.bar.showMedia
