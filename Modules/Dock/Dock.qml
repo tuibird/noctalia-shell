@@ -91,7 +91,7 @@ NLoader {
         MouseArea {
           id: screenEdgeMouseArea
           x: 0
-          y: modelData.geometry.height - (fullHeight + 10 * scaling)
+          y: modelData && modelData.geometry ? modelData.geometry.height - (fullHeight + 10 * scaling) : 0
           width: screen.width
           height: fullHeight + 10 * scaling
           hoverEnabled: true

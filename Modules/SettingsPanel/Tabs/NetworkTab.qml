@@ -48,6 +48,7 @@ ColumnLayout {
           checked: Settings.data.network.wifiEnabled
           onToggled: checked => {
                        Settings.data.network.wifiEnabled = checked
+                       NetworkService.setWifiEnabled(checked)
                      }
         }
 

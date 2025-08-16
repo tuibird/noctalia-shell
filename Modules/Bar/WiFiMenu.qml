@@ -87,7 +87,7 @@ NLoader {
         border.color: Colors.mOutlineVariant
         border.width: Math.max(1, Style.borderThin * scaling)
         width: 340 * scaling
-        height: 320 * scaling
+        height: 500 * scaling
         anchors.top: parent.top
         anchors.right: parent.right
         anchors.topMargin: Style.marginTiny * scaling
@@ -145,19 +145,7 @@ NLoader {
               Layout.fillWidth: true
             }
 
-            NToggle {
-              baseSize: Style.baseWidgetSize * 0.75
-              checked: Settings.data.network.wifiEnabled
-              onToggled: checked => {
-                           Settings.data.network.wifiEnabled = checked
-                           NetworkService.setWifiEnabled(checked)
 
-                           // If enabling WiFi while menu is open, refresh after a delay
-                           if (checked) {
-                             wifiEnableRefreshTimer.start()
-                           }
-                         }
-            }
 
             NIconButton {
               icon: "refresh"
@@ -245,7 +233,7 @@ NLoader {
               clip: true
 
               delegate: Item {
-                width: parent.width
+                width: parent ? parent.width : 0
                 height: modelData.ssid === passwordPromptSsid
                         && showPasswordPrompt ? 108 * scaling : Style.baseWidgetSize * 1.5 * scaling
 

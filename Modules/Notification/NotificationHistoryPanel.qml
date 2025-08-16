@@ -149,6 +149,40 @@ NLoader {
 
           NDivider {}
 
+          // Empty state when no notifications
+          Item {
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            visible: NotificationService.historyModel.count === 0
+
+            ColumnLayout {
+              anchors.centerIn: parent
+              spacing: Style.marginMedium * scaling
+
+              NText {
+                text: "notifications_off"
+                font.family: "Material Symbols Outlined"
+                font.pointSize: Style.fontSizeXXL * scaling
+                color: Colors.mOnSurfaceVariant
+                Layout.alignment: Qt.AlignHCenter
+              }
+
+              NText {
+                text: "No notifications"
+                font.pointSize: Style.fontSizeLarge * scaling
+                color: Colors.mOnSurfaceVariant
+                Layout.alignment: Qt.AlignHCenter
+              }
+
+              NText {
+                text: "Notifications will appear here when you receive them"
+                font.pointSize: Style.fontSizeNormal * scaling
+                color: Colors.mOnSurfaceVariant
+                Layout.alignment: Qt.AlignHCenter
+              }
+            }
+          }
+
           ListView {
             id: notificationList
             Layout.fillWidth: true
@@ -157,6 +191,7 @@ NLoader {
             spacing: Style.marginMedium * scaling
             clip: true
             boundsBehavior: Flickable.StopAtBounds
+            visible: NotificationService.historyModel.count > 0
 
             delegate: Rectangle {
               width: notificationList ? (notificationList.width - 20) : 380 * scaling

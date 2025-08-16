@@ -52,10 +52,12 @@ Singleton {
       isLoading = true
       enableWifiProcess.running = true
     } else {
-      // Store the currently connected network before disabling
+      // Disconnect from current network and store it for reconnection
       for (const ssid in networks) {
         if (networks[ssid].connected) {
           lastConnectedNetwork = ssid
+          // Disconnect from the current network before disabling WiFi
+          disconnectNetwork(ssid)
           break
         }
       }
@@ -246,6 +248,11 @@ Singleton {
     command: ["nmcli", "connection", "down", connectionName]
     onRunningChanged: {
       if (!running) {
+        // Clear connection status when disconnecting
+        root.connectingSsid = ""
+        root.connectStatus = ""
+        root.connectStatusSsid = ""
+        root.connectError = ""
         root.refreshNetworks()
       }
     }
@@ -450,9 +457,9 @@ Singleton {
       onStreamFinished: {
         root.connectingSsid = ""
         root.connectStatus = "success"
-        root.connectStatusSsid = root.pendingConnect ? root.pendingConnect.ssid : profileName
+        root.connectStatusSsid = root.pendingConnect ? root.pendingConnect.ssid : upConnectionProcess.profileName
         root.connectError = ""
-        root.lastConnectedNetwork = profileName
+        root.lastConnectedNetwork = upConnectionProcess.profileName
         root.pendingConnect = null
         root.refreshNetworks()
       }
@@ -461,7 +468,7 @@ Singleton {
       onStreamFinished: {
         root.connectingSsid = ""
         root.connectStatus = "error"
-        root.connectStatusSsid = root.pendingConnect ? root.pendingConnect.ssid : profileName
+        root.connectStatusSsid = root.pendingConnect ? root.pendingConnect.ssid : upConnectionProcess.profileName
         root.connectError = text
         root.pendingConnect = null
       }

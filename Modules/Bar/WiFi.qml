@@ -13,6 +13,7 @@ NIconButton {
   readonly property bool wifiEnabled: Settings.data.network.wifiEnabled
   sizeMultiplier: 0.8
   showBorder: false
+  visible: wifiEnabled
   icon: {
     let connected = false
     let signalStrength = 0
@@ -23,7 +24,7 @@ NIconButton {
         break
       }
     }
-    return connected ? NetworkService.signalIcon(signalStrength) : "wifi_off"
+    return connected ? NetworkService.signalIcon(signalStrength) : "wifi"
   }
   tooltipText: "WiFi Networks"
   onClicked: {
