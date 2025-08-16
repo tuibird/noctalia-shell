@@ -37,11 +37,6 @@ NLoader {
         property bool dockHovered: false
         property bool anyAppHovered: false
 
-        // Context menu properties
-        property bool contextMenuVisible: false
-        property var contextMenuTarget: null
-        property var contextMenuToplevel: null
-
         // Dock is only shown if explicitely toggled
         visible: modelData ? Settings.data.dock.monitors.includes(modelData.name) : false
 
@@ -108,24 +103,13 @@ NLoader {
             }
           }
           onExited: {
-            if (autoHide && !hidden && !dockHovered && !anyAppHovered && !contextMenuVisible) {
+            if (autoHide && !hidden && !dockHovered && !anyAppHovered) {
               hideTimer.start()
             }
           }
         }
 
         margins.bottom: hidden ? -(fullHeight - peekHeight) : 0
-
-        // Global click handler to close context menu
-        MouseArea {
-          anchors.fill: parent
-          enabled: contextMenuVisible
-          onClicked: {
-            contextMenuVisible = false
-            contextMenuTarget = null
-            contextMenuToplevel = null
-          }
-        }
 
         Rectangle {
           id: dockContainer
@@ -153,8 +137,8 @@ NLoader {
             }
             onExited: {
               dockHovered = false
-              // Only start hide timer if we're not hovering over any app or context menu
-              if (autoHide && !anyAppHovered && !contextMenuVisible) {
+              // Only start hide timer if we're not hovering over any app
+              if (autoHide && !anyAppHovered) {
                 hideTimer.start()
               }
             }
@@ -269,7 +253,7 @@ NLoader {
                     anchors.fill: parent
                     hoverEnabled: true
                     cursorShape: Qt.PointingHandCursor
-                    acceptedButtons: Qt.LeftButton | Qt.RightButton | Qt.MiddleButton
+                    acceptedButtons: Qt.LeftButton | Qt.MiddleButton
 
                     onEntered: {
                       anyAppHovered = true
@@ -287,8 +271,8 @@ NLoader {
                     onExited: {
                       anyAppHovered = false
                       appTooltip.hide()
-                      // Only start hide timer if we're not hovering over the dock or context menu
-                      if (autoHide && !dockHovered && !contextMenuVisible) {
+                      // Only start hide timer if we're not hovering over the dock
+                      if (autoHide && !dockHovered) {
                         hideTimer.start()
                       }
                     }
@@ -299,12 +283,6 @@ NLoader {
                       }
                       if (mouse.button === Qt.LeftButton && modelData?.activate) {
                         modelData.activate()
-                      }
-                      if (mouse.button === Qt.RightButton) {
-                        appTooltip.hide()
-                        contextMenuTarget = appButton
-                        contextMenuToplevel = modelData
-                        contextMenuVisible = true
                       }
                     }
                   }
@@ -320,115 +298,6 @@ NLoader {
                     anchors.topMargin: Style.marginTiniest * scaling
                   }
                 }
-              }
-            }
-          }
-        }
-
-        // Context Menu
-        PanelWindow {
-          id: contextMenuWindow
-          visible: contextMenuVisible
-          screen: dockWindow.screen
-          exclusionMode: ExclusionMode.Ignore
-          anchors.bottom: true
-          anchors.left: true
-          anchors.right: true
-          color: "transparent"
-          focusable: false
-
-          MouseArea {
-            anchors.fill: parent
-            onClicked: {
-              contextMenuVisible = false
-              contextMenuTarget = null
-              contextMenuToplevel = null
-              if (autoHide) {
-                // Stop any pending show/hide timers to prevent flickering
-                showTimer.stop()
-                hideTimer.stop()
-                // Add a small delay before hiding to prevent immediate show/hide cycle
-                Qt.callLater(function() {
-                  if (autoHide && !dockHovered && !anyAppHovered) {
-                    hidden = true
-                  }
-                })
-              }
-            }
-          }
-
-          Rectangle {
-            id: contextMenuContainer
-            width: Style.baseWidgetSize * 2.5 * scaling
-            height: Style.baseWidgetSize * scaling
-            radius: Style.radiusTiny * scaling
-            color: closeMouseArea.containsMouse ? Colors.mTertiary : Colors.mSurface
-            border.color: Colors.mOutline
-            border.width: Math.max(1, Style.borderThin * scaling)
-
-            x: {
-              if (!contextMenuTarget)
-                return 0
-              const pos = contextMenuTarget.mapToItem(null, 0, 0)
-              let xPos = pos.x + (contextMenuTarget.width - width) / 2
-              return Math.max(0, Math.min(xPos, dockWindow.width - width))
-            }
-
-            y: {
-              if (!contextMenuTarget)
-                return 0
-              const pos = contextMenuTarget.mapToItem(null, 0, 0)
-              return pos.y - height + 32
-            }
-
-            Text {
-              anchors.centerIn: parent
-              text: "Close"
-              font.pointSize: Style.fontSizeMedium * scaling
-              color: closeMouseArea.containsMouse ? Colors.mOnTertiary : Colors.mOnSurface
-            }
-
-            MouseArea {
-              id: closeMouseArea
-              anchors.fill: parent
-              hoverEnabled: true
-              cursorShape: Qt.PointingHandCursor
-
-              onClicked: {
-                if (contextMenuToplevel?.close)
-                  contextMenuToplevel.close()
-                contextMenuVisible = false
-                contextMenuTarget = null
-                contextMenuToplevel = null
-                if (autoHide) {
-                  // Stop any pending show/hide timers to prevent flickering
-                  showTimer.stop()
-                  hideTimer.stop()
-                  // Add a small delay before hiding to prevent immediate show/hide cycle
-                  Qt.callLater(function() {
-                    if (autoHide && !dockHovered && !anyAppHovered) {
-                      hidden = true
-                    }
-                  })
-                }
-              }
-            }
-
-            // Animation
-            scale: contextMenuVisible ? 1 : 0.9
-            opacity: contextMenuVisible ? 1 : 0
-            transformOrigin: Item.Bottom
-
-            Behavior on scale {
-              NumberAnimation {
-                duration: Style.animationFast
-                easing.type: Easing.OutBack
-              }
-            }
-
-            Behavior on opacity {
-              NumberAnimation {
-                duration: Style.animationFast
               }
             }
           }
