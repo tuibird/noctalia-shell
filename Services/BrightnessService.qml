@@ -5,6 +5,7 @@ pragma ComponentBehavior
 import QtQuick
 import Quickshell
 import Quickshell.Io
+import qs.Commons
 
 Singleton {
   id: root
