@@ -50,7 +50,7 @@ Singleton {
   function findActivePlayer() {
     let availablePlayers = getAvailablePlayers()
     if (availablePlayers.length === 0) {
-      console.log("[MediaPlayer] No active player found")
+      console.log("[Media] No active player found")
       return null
     }
 
@@ -68,7 +68,7 @@ Singleton {
     if (newPlayer !== currentPlayer) {
       currentPlayer = newPlayer
       currentPosition = currentPlayer ? currentPlayer.position : 0
-      console.log("[MediaPlayer] Switching player")
+      console.log("[Media] Switching player")
     }
   }
 
@@ -149,7 +149,7 @@ Singleton {
   Connections {
     target: Mpris.players
     function onValuesChanged() {
-      console.log("[MediaPlayer] Players changed")
+      console.log("[Media] Players changed")
       updateCurrentPlayer()
     }
   }
