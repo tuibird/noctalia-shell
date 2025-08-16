@@ -69,9 +69,9 @@ Row {
       text: getDisplayText()
       font.pointSize: Style.fontSizeSmall * scaling
       font.weight: Style.fontWeightBold
+      elide: Text.ElideRight
       anchors.verticalCenter: parent.verticalCenter
       verticalAlignment: Text.AlignVCenter
-      elide: Text.ElideRight
     }
 
     // Mouse area for hover detection
