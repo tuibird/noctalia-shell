@@ -80,8 +80,7 @@ RowLayout {
         root.exited()
       }
       onClicked: {
-        root.checked = !root.checked
-        root.toggled(root.checked)
+        root.toggled(!root.checked)
       }
     }
   }
