@@ -58,6 +58,7 @@ ColumnLayout {
           checked: Settings.data.network.bluetoothEnabled
           onToggled: checked => {
                        Settings.data.network.bluetoothEnabled = checked
+                       BluetoothService.setBluetoothEnabled(checked)
                      }
         }
       }

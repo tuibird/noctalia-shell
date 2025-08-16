@@ -96,6 +96,7 @@ Singleton {
         property bool useFahrenheit: false
         property bool reverseDayMonth: false
         property bool use12HourClock: false
+        property bool showDateWithClock: false
       }
 
       // screen recorder

@@ -95,6 +95,15 @@ ColumnLayout {
                          Settings.data.location.reverseDayMonth = checked
                        }
           }
+
+          NToggle {
+            label: "Show Date with Clock"
+            description: "Display date alongside time (e.g., 18:12 - Sat, 23 Aug)"
+            checked: Settings.data.location.showDateWithClock
+            onToggled: checked => {
+                         Settings.data.location.showDateWithClock = checked
+                       }
+          }
         }
 
         NDivider {

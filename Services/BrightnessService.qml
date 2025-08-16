@@ -156,13 +156,13 @@ Singleton {
     readonly property Process initProc: Process {
       stdout: StdioCollector {
         onStreamFinished: {
-          console.log("[BrightnessService] Raw brightness data for", monitor.modelData.name + ":", text.trim())
+          console.log("[Brightness] Raw brightness data for", monitor.modelData.name + ":", text.trim())
 
           if (monitor.isAppleDisplay) {
             var val = parseInt(text.trim())
             if (!isNaN(val)) {
               monitor.brightness = val / 101
-              console.log("[BrightnessService] Apple display brightness:", monitor.brightness)
+              console.log("[Brightness] Apple display brightness:", monitor.brightness)
             }
           } else if (monitor.isDdc) {
             var parts = text.trim().split(" ")
@@ -171,7 +171,7 @@ Singleton {
               var max = parseInt(parts[1])
               if (!isNaN(current) && !isNaN(max) && max > 0) {
                 monitor.brightness = current / max
-                console.log("[BrightnessService] DDC brightness:", current + "/" + max + " =", monitor.brightness)
+                console.log("[Brightness] DDC brightness:", current + "/" + max + " =", monitor.brightness)
               }
             }
           } else {
@@ -182,7 +182,7 @@ Singleton {
               var max = parseInt(parts[1])
               if (!isNaN(current) && !isNaN(max) && max > 0) {
                 monitor.brightness = current / max
-                console.log("[BrightnessService] Internal brightness:", current + "/" + max + " =", monitor.brightness)
+                console.log("[Brightness] Internal brightness:", current + "/" + max + " =", monitor.brightness)
               }
             }
           }

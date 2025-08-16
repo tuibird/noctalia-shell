@@ -9,8 +9,20 @@ Singleton {
   id: root
 
   property var date: new Date()
-  property string time: Settings.data.location.use12HourClock ? Qt.formatDateTime(date, "h:mm AP") : Qt.formatDateTime(
-                                                                  date, "HH:mm")
+  property string time: {
+    let timeFormat = Settings.data.location.use12HourClock ? "h:mm AP" : "HH:mm"
+    let timeString = Qt.formatDateTime(date, timeFormat)
+    
+    if (Settings.data.location.showDateWithClock) {
+      let dayName = date.toLocaleDateString(Qt.locale(), "ddd")
+      dayName = dayName.charAt(0).toUpperCase() + dayName.slice(1)
+      let day = date.getDate()
+      let month = date.toLocaleDateString(Qt.locale(), "MMM")
+      return timeString + " - " + dayName + ", " + day + " " + month
+    }
+    
+    return timeString
+  }
   readonly property string dateString: {
     let now = date
     let dayName = now.toLocaleDateString(Qt.locale(), "ddd")
