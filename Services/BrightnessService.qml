@@ -85,7 +85,7 @@ Singleton {
     readonly property bool isAppleDisplay: root.appleDisplayPresent && modelData.model.startsWith("StudioDisplay")
     readonly property string method: isAppleDisplay ? "apple" : (isDdc ? "ddcutil" : "internal")
 
-    property real brightness: getStoredBrightness()
+    property real brightness
     property real lastBrightness: 0
     property real queuedBrightness: NaN
 
@@ -110,9 +110,9 @@ Singleton {
             }
           } else if (monitor.isDdc) {
             var parts = dataText.split(" ")
-            if (parts.length >= 2) {
-              var current = parseInt(parts[0])
-              var max = parseInt(parts[1])
+            if (parts.length >= 4) {
+              var current = parseInt(parts[3])
+              var max = parseInt(parts[4])
               if (!isNaN(current) && !isNaN(max) && max > 0) {
                 monitor.brightness = current / max
                 Logger.log("Brightness", "DDC brightness:", current + "/" + max + " =", monitor.brightness)
@@ -131,11 +131,8 @@ Singleton {
             }
           }
 
-          if (monitor.brightness > 0) {
-            // Save the detected brightness to settings
-            monitor.saveBrightness(monitor.brightness)
-            monitor.brightnessUpdated(monitor.brightness)
-          }
+          // Always update
+          monitor.brightnessUpdated(monitor.brightness)
         }
       }
     }
@@ -161,48 +158,6 @@ Singleton {
       setBrightnessDebounced(monitor.brightness - stepSize)
     }
 
-    function getStoredBrightness(): real {
-      // Try to get stored brightness for this specific monitor
-      var stored = Settings.data.brightness.monitorBrightness.find(m => {
-                                                                     if (m !== null) {
-                                                                       return m.name === modelData.name
-                                                                     }
-                                                                     return false
-                                                                   })
-      if (stored) {
-        return stored.brightness / 100
-      }
-      // Fallback to general last brightness
-      return Settings.data.brightness.lastBrightness / 100
-    }
-
-    function saveBrightness(value: real): void {
-      var brightnessPercent = Math.round(value * 100)
-
-      // Update general last brightness
-      Settings.data.brightness.lastBrightness = brightnessPercent
-      Settings.data.brightness.lastMethod = method
-
-      // Update monitor-specific brightness
-      var monitorIndex = Settings.data.brightness.monitorBrightness.findIndex(m => {
-                                                                                if (m !== null) {
-                                                                                  return m.name === modelData.name
-                                                                                }
-                                                                                return -1
-                                                                              })
-      var monitorData = {
-        "name": modelData.name,
-        "brightness": brightnessPercent,
-        "method": method
-      }
-
-      if (monitorIndex >= 0) {
-        Settings.data.brightness.monitorBrightness[monitorIndex] = monitorData
-      } else {
-        Settings.data.brightness.monitorBrightness.push(monitorData)
-      }
-    }
-
     function setBrightness(value: real): void {
       value = Math.max(0, Math.min(1, value))
       var rounded = Math.round(value * 100)
@@ -217,9 +172,6 @@ Singleton {
 
       brightness = value
       brightnessUpdated(brightness)
-
-      // Save to settings
-      saveBrightness(value)
 
       if (isAppleDisplay) {
         Quickshell.execDetached(["asdbctl", "set", rounded])

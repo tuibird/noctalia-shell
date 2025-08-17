@@ -188,9 +188,6 @@ Singleton {
       property JsonObject brightness
 
       brightness: JsonObject {
-        property real lastBrightness: 50.0
-        property string lastMethod: "internal"
-        property list<var> monitorBrightness: []
         property int brightnessStep: 5
       }
 
