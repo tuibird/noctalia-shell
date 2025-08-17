@@ -61,10 +61,12 @@ Singleton {
     command: ["ddcutil", "detect", "--brief"]
     stdout: StdioCollector {
       onStreamFinished: {
-        var displays = text.trim().split("\n\n").filter(d => d.startsWith("Display "))
+        // Do not filter out invalid displays. For some reason --brief returns some invalid which works fine
+        var displays = text.trim().split("\n\n")
         root.ddcMonitors = displays.map(d => {
                                           var modelMatch = d.match(/Monitor:.*:(.*):.*/)
                                           var busMatch = d.match(/I2C bus:[ ]*\/dev\/i2c-([0-9]+)/)
+                                          console.log(modelMatch)
                                           return {
                                             "model": modelMatch ? modelMatch[1] : "",
                                             "busNum": busMatch ? busMatch[1] : ""
@@ -94,16 +96,20 @@ Singleton {
     readonly property Process initProc: Process {
       stdout: StdioCollector {
         onStreamFinished: {
-          Logger.log("Brightness", "Raw brightness data for", monitor.modelData.name + ":", text.trim())
+          var dataText = text.trim();
+          if (dataText === "") {
+            return
+          }
+          Logger.log("Brightness", "Raw brightness data for", monitor.modelData.name + ":", dataText)
 
           if (monitor.isAppleDisplay) {
-            var val = parseInt(text.trim())
+            var val = parseInt(dataText)
             if (!isNaN(val)) {
               monitor.brightness = val / 101
               Logger.log("Brightness", "Apple display brightness:", monitor.brightness)
             }
           } else if (monitor.isDdc) {
-            var parts = text.trim().split(" ")
+            var parts = dataText.split(" ")
             if (parts.length >= 2) {
               var current = parseInt(parts[0])
               var max = parseInt(parts[1])
@@ -114,7 +120,7 @@ Singleton {
             }
           } else {
             // Internal backlight
-            var parts = text.trim().split(" ")
+            var parts = dataText.split(" ")
             if (parts.length >= 2) {
               var current = parseInt(parts[0])
               var max = parseInt(parts[1])
