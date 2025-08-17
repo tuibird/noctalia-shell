@@ -212,7 +212,6 @@ ColumnLayout {
                   anchors.fill: parent
                   onClicked: {
                     // Disable useWallpaperColors when picking a predefined color scheme
-                    // TBC: broken uncheck useWallpaperColors
                     Settings.data.colorSchemes.useWallpaperColors = false
                     Settings.data.colorSchemes.predefinedScheme = schemePath
                     ColorSchemeService.applyScheme(schemePath)
