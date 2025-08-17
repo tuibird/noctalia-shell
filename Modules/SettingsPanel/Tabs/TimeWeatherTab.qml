@@ -55,6 +55,7 @@ ColumnLayout {
             Layout.fillWidth: true
             onEditingFinished: {
               Settings.data.location.name = text
+              LocationService.resetWeather()
             }
           }
         }
