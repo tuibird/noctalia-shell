@@ -64,6 +64,23 @@ A sleek, minimal, and thoughtfully crafted desktop shell for Wayland using **Qui
 
 ---
 
+## Dependencies
+
+### Required
+
+- `quickshell-git` - Core shell framework
+- `material-symbols-git` - Icon font for UI elements
+- `xdg-desktop-portal-gnome` - Desktop integration (or alternative portal)
+
+### Optional
+
+- `swww` - Wallpaper animations and effects
+- `matugen` - Material You color scheme generation
+- `cava` - Audio visualizer component
+- `gpu-screen-recorder` - Screen recording functionality
+
+---
+
 ## Quick Start
 
 ### Installation
@@ -174,22 +191,6 @@ layer-rule {
 
 ---
 
-## Dependencies
-
-### Required
-
-- `quickshell-git` - Core shell framework
-- `material-symbols-git` - Icon font for UI elements
-- `xdg-desktop-portal-gnome` - Desktop integration (or alternative portal)
-
-### Optional
-
-- `swww` - Wallpaper animations and effects
-- `matugen` - Material You color scheme generation
-- `cava` - Audio visualizer component
-- `gpu-screen-recorder` - Screen recording functionality
-
----
 
 ## Development
 

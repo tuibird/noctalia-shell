@@ -5,6 +5,7 @@ import QtQuick.Effects
 import Quickshell
 import Quickshell.Wayland
 import Quickshell.Services.Pam
+import Quickshell.Services.UPower
 import Quickshell.Io
 import Quickshell.Widgets
 import qs.Commons
@@ -91,6 +92,46 @@ WlSessionLock {
   }
 
   WlSessionLockSurface {
+    // Battery indicator component
+    Item {
+      id: batteryIndicator
+      
+      // Import UPower for battery data
+      property var battery: UPower.displayDevice
+      property bool isReady: battery && battery.ready && battery.isLaptopBattery && battery.isPresent
+      property real percent: isReady ? (battery.percentage * 100) : 0
+      property bool charging: isReady ? battery.state === UPowerDeviceState.Charging : false
+      property bool batteryVisible: isReady && percent > 0
+
+      // Choose icon based on charge and charging state
+      function getIcon() {
+        if (!batteryVisible)
+          return ""
+
+        if (charging)
+          return "battery_android_bolt"
+
+        if (percent >= 95)
+          return "battery_android_full"
+
+        // Hardcoded battery symbols
+        if (percent >= 85)
+          return "battery_android_6"
+        if (percent >= 70)
+          return "battery_android_5"
+        if (percent >= 55)
+          return "battery_android_4"
+        if (percent >= 40)
+          return "battery_android_3"
+        if (percent >= 25)
+          return "battery_android_2"
+        if (percent >= 10)
+          return "battery_android_1"
+        if (percent >= 0)
+          return "battery_android_0"
+      }
+    }
+
     // Wallpaper image
     Image {
       id: lockBgImage
@@ -353,6 +394,27 @@ WlSessionLock {
                     font.pointSize: Style.fontSizeLarge
                     font.weight: Font.Bold
                     Layout.fillWidth: true
+                  }
+
+                  // Battery indicator
+                  Row {
+                    spacing: Style.marginSmall * scaling
+                    visible: batteryIndicator.batteryVisible
+
+                    Text {
+                      text: batteryIndicator.getIcon()
+                      font.family: "Material Symbols Outlined"
+                      font.pointSize: Style.fontSizeMedium
+                      color: batteryIndicator.charging ? Color.mPrimary : Color.mOnSurface
+                    }
+
+                    Text {
+                      text: Math.round(batteryIndicator.percent) + "%"
+                      color: Color.mOnSurface
+                      font.family: "DejaVu Sans Mono"
+                      font.pointSize: Style.fontSizeMedium
+                      font.weight: Font.Bold
+                    }
                   }
                 }
               }
