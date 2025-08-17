@@ -302,62 +302,6 @@ NLoader {
                 Layout.fillWidth: true
               }
             }
-
-            // Brightness Control
-            ColumnLayout {
-              spacing: Style.marginMedium * scaling
-              NText {
-                text: "Brightness Control"
-                color: Color.mSecondary
-                font.weight: Style.fontWeightBold
-              }
-
-              NText {
-                text: `Brightness: ${Math.round(BrightnessService.brightness)}%`
-                Layout.alignment: Qt.AlignVCenter
-              }
-
-              RowLayout {
-                spacing: Style.marginSmall * scaling
-                NIconButton {
-                  icon: "brightness_low"
-                  tooltipText: "Decrease Brightness"
-                  fontPointSize: Style.fontSizeLarge * scaling
-                  onClicked: {
-                    BrightnessService.decreaseBrightness()
-                  }
-                }
-                NSlider {
-                  from: 0
-                  to: 100
-                  stepSize: 1
-                  value: BrightnessService.brightness
-                  implicitWidth: bgRect.width * 0.5
-                  onMoved: {
-                    BrightnessService.setBrightnessDebounced(value)
-                  }
-                }
-                NIconButton {
-                  icon: "brightness_high"
-                  tooltipText: "Increase Brightness"
-                  fontPointSize: Style.fontSizeLarge * scaling
-                  onClicked: {
-                    BrightnessService.increaseBrightness()
-                  }
-                }
-              }
-
-              NText {
-                text: `Method: ${BrightnessService.currentMethod} | Available: ${BrightnessService.available}`
-                color: Color.mOnSurfaceVariant
-                font.pointSize: Style.fontSizeSmall * scaling
-                Layout.alignment: Qt.AlignHCenter
-              }
-
-              NDivider {
-                Layout.fillWidth: true
-              }
-            }
           }
         }
       }
