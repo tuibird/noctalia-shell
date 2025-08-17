@@ -16,20 +16,20 @@ Singleton {
   property string compositorType: "unknown" // "hyprland", "niri", or "unknown"
   property bool isHyprland: false
   property bool isNiri: false
-  
+
   // Generic workspace and window data
   property ListModel workspaces: ListModel {}
   property var windows: []
   property int focusedWindowIndex: -1
   property string focusedWindowTitle: "(No active window)"
   property bool inOverview: false
-  
+
   // Generic events
-  signal workspaceChanged()
-  signal activeWindowChanged()
-  signal overviewStateChanged()
-  signal windowListChanged()
-  
+  signal workspaceChanged
+  signal activeWindowChanged
+  signal overviewStateChanged
+  signal windowListChanged
+
   // Compositor detection
   Component.onCompleted: {
     detectCompositor()
@@ -54,8 +54,6 @@ Singleton {
     }
   }
 
-
-
   function detectCompositor() {
     try {
       // Try Hyprland first
@@ -67,6 +65,7 @@ Singleton {
         return
       }
     } catch (e) {
+
       // Hyprland not available
     }
 
@@ -98,13 +97,13 @@ Singleton {
     }
   }
 
-  function setupHyprlandConnections() {
-    // Connections are set up at the top level, this function just marks that Hyprland is ready
+  function setupHyprlandConnections() {// Connections are set up at the top level, this function just marks that Hyprland is ready
   }
 
   function updateHyprlandWorkspaces() {
-    if (!isHyprland) return
-    
+    if (!isHyprland)
+      return
+
     workspaces.clear()
     try {
       const hlWorkspaces = Hyprland.workspaces.values
@@ -113,14 +112,14 @@ Singleton {
         // Only append workspaces with id >= 1
         if (ws.id >= 1) {
           workspaces.append({
-            "id": i,
-            "idx": ws.id,
-            "name": ws.name || "",
-            "output": ws.monitor?.name || "",
-            "isActive": ws.active === true,
-            "isFocused": ws.focused === true,
-            "isUrgent": ws.urgent === true
-          })
+                              "id": i,
+                              "idx": ws.id,
+                              "name": ws.name || "",
+                              "output": ws.monitor?.name || "",
+                              "isActive": ws.active === true,
+                              "isFocused": ws.focused === true,
+                              "isUrgent": ws.urgent === true
+                            })
         }
       }
     } catch (e) {
@@ -145,15 +144,17 @@ Singleton {
   }
 
   function updateNiriWorkspaces() {
-    if (!isNiri) return
-    
+    if (!isNiri)
+      return
+
     // Get workspaces from the Niri process
     niriWorkspaceProcess.running = true
   }
 
   function updateNiriWindows() {
-    if (!isNiri) return
-    
+    if (!isNiri)
+      return
+
     // Get windows from the Niri process
     niriWindowsProcess.running = true
   }
@@ -172,23 +173,23 @@ Singleton {
 
           for (const ws of workspacesData) {
             workspacesList.push({
-              "id": ws.id,
-              "idx": ws.idx,
-              "name": ws.name || "",
-              "output": ws.output || "",
-              "isFocused": ws.is_focused === true,
-              "isActive": ws.is_active === true,
-              "isUrgent": ws.is_urgent === true,
-              "isOccupied": ws.active_window_id ? true : false
-            })
+                                  "id": ws.id,
+                                  "idx": ws.idx,
+                                  "name": ws.name || "",
+                                  "output": ws.output || "",
+                                  "isFocused": ws.is_focused === true,
+                                  "isActive": ws.is_active === true,
+                                  "isUrgent": ws.is_urgent === true,
+                                  "isOccupied": ws.active_window_id ? true : false
+                                })
           }
 
           workspacesList.sort((a, b) => {
-            if (a.output !== b.output) {
-              return a.output.localeCompare(b.output)
-            }
-            return a.id - b.id
-          })
+                                if (a.output !== b.output) {
+                                  return a.output.localeCompare(b.output)
+                                }
+                                return a.id - b.id
+                              })
 
           // Update the workspaces ListModel
           workspaces.clear()
@@ -222,18 +223,18 @@ Singleton {
               const windowsList = []
               for (const win of windowsData) {
                 windowsList.push({
-                  "id": win.id,
-                  "title": win.title || "",
-                  "appId": win.app_id || "",
-                  "workspaceId": win.workspace_id || null,
-                  "isFocused": win.is_focused === true
-                })
+                                   "id": win.id,
+                                   "title": win.title || "",
+                                   "appId": win.app_id || "",
+                                   "workspaceId": win.workspace_id || null,
+                                   "isFocused": win.is_focused === true
+                                 })
               }
 
               windowsList.sort((a, b) => a.id - b.id)
               windows = windowsList
               windowListChanged()
-              
+
               // Update focused window index
               for (var i = 0; i < windowsList.length; i++) {
                 if (windowsList[i].isFocused) {
@@ -292,18 +293,18 @@ Singleton {
           const windowsList = []
           for (const win of windowsData) {
             windowsList.push({
-              "id": win.id,
-              "title": win.title || "",
-              "appId": win.app_id || "",
-              "workspaceId": win.workspace_id || null,
-              "isFocused": win.is_focused === true
-            })
+                               "id": win.id,
+                               "title": win.title || "",
+                               "appId": win.app_id || "",
+                               "workspaceId": win.workspace_id || null,
+                               "isFocused": win.is_focused === true
+                             })
           }
 
           windowsList.sort((a, b) => a.id - b.id)
           windows = windowsList
           windowListChanged()
-          
+
           // Update focused window index
           for (var i = 0; i < windowsList.length; i++) {
             if (windowsList[i].isFocused) {
@@ -384,4 +385,4 @@ Singleton {
     }
     return null
   }
-} 
+}

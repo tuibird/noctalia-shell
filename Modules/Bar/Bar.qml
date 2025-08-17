@@ -139,7 +139,6 @@ Variants {
         //     demoPanel.isLoaded = !demoPanel.isLoaded
         //   }
         // }
-
         NIconButton {
           id: sidePanelToggle
           icon: "widgets"

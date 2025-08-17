@@ -95,7 +95,7 @@ WlSessionLock {
     // Battery indicator component
     Item {
       id: batteryIndicator
-      
+
       // Import UPower for battery data
       property var battery: UPower.displayDevice
       property bool isReady: battery && battery.ready && battery.isLaptopBattery && battery.isPresent

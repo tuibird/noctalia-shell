@@ -143,102 +143,76 @@ Item {
           }
 
           // Single monitor display using the same data source as the bar icon
-          Rectangle {
-            Layout.fillWidth: true
-            radius: Style.radiusMedium * scaling
-            color: Color.mSurface
-            border.color: Color.mOutline
-            border.width: Math.max(1, Style.borderThin * scaling)
-            implicitHeight: contentCol.implicitHeight + Style.marginXL * 2 * scaling
+          Repeater {
+            model: BrightnessService.monitors
+            Rectangle {
+              Layout.fillWidth: true
+              radius: Style.radiusMedium * scaling
+              color: Color.mSurface
+              border.color: Color.mOutline
+              border.width: Math.max(1, Style.borderThin * scaling)
+              implicitHeight: contentCol.implicitHeight + Style.marginXL * 2 * scaling
 
-            ColumnLayout {
-              id: contentCol
-              anchors.fill: parent
-              anchors.margins: Style.marginLarge * scaling
-              spacing: Style.marginMedium * scaling
-
-              RowLayout {
-                Layout.fillWidth: true
+              ColumnLayout {
+                id: contentCol
+                anchors.fill: parent
+                anchors.margins: Style.marginLarge * scaling
                 spacing: Style.marginMedium * scaling
 
-                NText {
-                  text: "Primary Monitor"
-                  font.pointSize: Style.fontSizeLarge * scaling
-                  font.weight: Style.fontWeightBold
-                  color: Color.mSecondary
-                }
-
-                Item {
+                RowLayout {
                   Layout.fillWidth: true
-                }
+                  spacing: Style.marginMedium * scaling
 
-                NText {
-                  text: BrightnessService.currentMethod === "ddcutil" ? "External (DDC)" : "Internal"
-                  font.pointSize: Style.fontSizeSmall * scaling
-                  color: Color.mOnSurfaceVariant
-                  Layout.alignment: Qt.AlignRight
-                }
-              }
+                  NText {
+                    text: `${model.modelData.name} [${model.modelData.model}]`
+                    font.pointSize: Style.fontSizeLarge * scaling
+                    font.weight: Style.fontWeightBold
+                    color: Color.mSecondary
+                  }
 
-              RowLayout {
-                Layout.fillWidth: true
-                spacing: Style.marginMedium * scaling
+                  Item {
+                    Layout.fillWidth: true
+                  }
 
-                NText {
-                  text: "Brightness:"
-                  font.pointSize: Style.fontSizeMedium * scaling
-                  color: Color.mOnSurface
-                }
-
-                NSlider {
-                  Layout.fillWidth: true
-                  from: 0
-                  to: 100
-                  value: BrightnessService.brightness
-                  stepSize: 1
-                  enabled: BrightnessService.available
-                  onPressedChanged: {
-                    if (!pressed && BrightnessService.available) {
-                      BrightnessService.setBrightness(value)
-                    }
+                  NText {
+                    text: model.method
+                    font.pointSize: Style.fontSizeSmall * scaling
+                    color: Color.mOnSurfaceVariant
+                    Layout.alignment: Qt.AlignRight
                   }
                 }
 
-                NText {
-                  text: BrightnessService.available ? Math.round(BrightnessService.brightness) + "%" : "N/A"
-                  font.pointSize: Style.fontSizeMedium * scaling
-                  font.weight: Style.fontWeightBold
-                  color: BrightnessService.available ? Color.mPrimary : Color.mOnSurfaceVariant
-                  Layout.alignment: Qt.AlignRight
-                }
-              }
-
-              RowLayout {
-                Layout.fillWidth: true
-                spacing: Style.marginMedium * scaling
-
-                NText {
-                  text: "Method:"
-                  font.pointSize: Style.fontSizeSmall * scaling
-                  color: Color.mOnSurfaceVariant
-                }
-
-                NText {
-                  text: BrightnessService.currentMethod || "Unknown"
-                  font.pointSize: Style.fontSizeSmall * scaling
-                  color: Color.mOnSurface
-                  Layout.alignment: Qt.AlignLeft
-                }
-
-                Item {
+                RowLayout {
                   Layout.fillWidth: true
-                }
+                  spacing: Style.marginMedium * scaling
 
-                NText {
-                  text: BrightnessService.available ? "Available" : "Unavailable"
-                  font.pointSize: Style.fontSizeSmall * scaling
-                  color: BrightnessService.available ? Color.mPrimary : Color.mError
-                  Layout.alignment: Qt.AlignRight
+                  NText {
+                    text: "Brightness:"
+                    font.pointSize: Style.fontSizeMedium * scaling
+                    color: Color.mOnSurface
+                  }
+
+                  NSlider {
+                    Layout.fillWidth: true
+                    from: 0
+                    to: 1
+                    value: model.brightness
+                    stepSize: 0.05
+                    onPressedChanged: {
+                      if (!pressed) {
+                        var monitor = BrightnessService.getMonitorForScreen(model.modelData)
+                        monitor.setBrightness(value)
+                      }
+                    }
+                  }
+
+                  NText {
+                    text: Math.round(model.brightness * 100) + "%"
+                    font.pointSize: Style.fontSizeMedium * scaling
+                    font.weight: Style.fontWeightBold
+                    color: Color.mPrimary
+                    Layout.alignment: Qt.AlignRight
+                  }
                 }
               }
             }

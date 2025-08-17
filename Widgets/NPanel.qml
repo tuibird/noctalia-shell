@@ -12,7 +12,9 @@ PanelWindow {
   property bool showOverlay: Settings.data.general.dimDesktop
   property int topMargin: Style.barHeight * scaling
   // Show dimming if this panel is opened OR if we're in a transition (to prevent flickering)
-  property color overlayColor: (showOverlay && (PanelService.openedPanel === root || isTransitioning)) ? Color.applyOpacity(Color.mShadow, "AA") : Color.transparent
+  property color overlayColor: (showOverlay && (PanelService.openedPanel === root
+                                                || isTransitioning)) ? Color.applyOpacity(Color.mShadow,
+                                                                                          "AA") : Color.transparent
   property bool isTransitioning: false
   signal dismissed
 

@@ -130,7 +130,7 @@ NLoader {
           "label": "Audio",
           "icon": "volume_up",
           "source": audioTab
-        },{
+        }, {
           "id": SettingsPanel.Tab.Display,
           "label": "Display",
           "icon": "monitor",
@@ -145,7 +145,7 @@ NLoader {
           "label": "Brightness",
           "icon": "brightness_6",
           "source": brightnessTab
-        },  {
+        }, {
           "id": SettingsPanel.Tab.TimeWeather,
           "label": "Time & Weather",
           "icon": "schedule",

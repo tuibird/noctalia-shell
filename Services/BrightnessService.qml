@@ -66,7 +66,6 @@ Singleton {
         root.ddcMonitors = displays.map(d => {
                                           var modelMatch = d.match(/Monitor:.*:(.*):.*/)
                                           var busMatch = d.match(/I2C bus:[ ]*\/dev\/i2c-([0-9]+)/)
-                                          console.log(modelMatch)
                                           return {
                                             "model": modelMatch ? modelMatch[1] : "",
                                             "busNum": busMatch ? busMatch[1] : ""
@@ -96,7 +95,7 @@ Singleton {
     readonly property Process initProc: Process {
       stdout: StdioCollector {
         onStreamFinished: {
-          var dataText = text.trim();
+          var dataText = text.trim()
           if (dataText === "") {
             return
           }

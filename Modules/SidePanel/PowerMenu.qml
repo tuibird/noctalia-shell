@@ -384,8 +384,6 @@ NPanel {
     running: false
   }
 
-
-
   Process {
     id: logoutProcess
 

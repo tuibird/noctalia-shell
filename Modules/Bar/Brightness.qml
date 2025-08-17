@@ -17,7 +17,8 @@ Item {
 
   function getIcon() {
     var brightness = BrightnessService.getMonitorForScreen(screen).brightness
-    return brightness <= 0 ? "brightness_1" : brightness < 0.33 ? "brightness_low" : brightness < 0.66 ? "brightness_medium" : "brightness_high"
+    return brightness <= 0 ? "brightness_1" : brightness < 0.33 ? "brightness_low" : brightness
+                                                                  < 0.66 ? "brightness_medium" : "brightness_high"
   }
 
   // Connection used to open the pill when brightness changes
@@ -26,7 +27,7 @@ Item {
     function onBrightnessUpdated() {
       Logger.log("Bar-Brightness", "OnBrightnessUpdated")
 
-      var monitor = BrightnessService.getMonitorForScreen(screen);
+      var monitor = BrightnessService.getMonitorForScreen(screen)
       var currentBrightness = monitor.brightness
 
       // Ignore if this is the first time or if brightness hasn't actually changed

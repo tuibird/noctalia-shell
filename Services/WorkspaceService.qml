@@ -14,7 +14,7 @@ Singleton {
   property ListModel workspaces: ListModel {}
   property bool isHyprland: false
   property bool isNiri: false
-  
+
   Component.onCompleted: {
     // Connect to CompositorService workspace changes
     CompositorService.workspaceChanged.connect(updateWorkspaces)
