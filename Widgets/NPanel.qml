@@ -11,11 +11,18 @@ PanelWindow {
 
   property bool showOverlay: Settings.data.general.dimDesktop
   property int topMargin: Style.barHeight * scaling
-  property color overlayColor: showOverlay ? Color.applyOpacity(Color.mShadow, "AA") : "transparent"
+  // Show dimming if this panel is opened OR if we're in a transition (to prevent flickering)
+  property color overlayColor: (showOverlay && (PanelService.openedPanel === root || isTransitioning)) ? Color.applyOpacity(Color.mShadow, "AA") : "transparent"
+  property bool isTransitioning: false
   signal dismissed
 
   function hide() {
-    //visible = false
+    // Clear the panel service when hiding
+    if (PanelService.openedPanel === root) {
+      PanelService.openedPanel = null
+    }
+    isTransitioning = false
+    visible = false
     root.dismissed()
   }
 
@@ -23,14 +30,21 @@ PanelWindow {
     // Ensure only one panel is visible at a time using PanelService as ephemeral storage
     try {
       if (PanelService.openedPanel && PanelService.openedPanel !== root && PanelService.openedPanel.hide) {
+        // Mark both panels as transitioning to prevent dimming flicker
+        isTransitioning = true
+        PanelService.openedPanel.isTransitioning = true
         PanelService.openedPanel.hide()
+        // Small delay to ensure smooth transition
+        showTimer.start()
+        return
       }
+      // No previous panel, show immediately
       PanelService.openedPanel = root
+      visible = true
     } catch (e) {
 
       // ignore
     }
-    visible = true
   }
 
   implicitWidth: screen.width
@@ -57,6 +71,17 @@ PanelWindow {
     }
   }
 
+  Timer {
+    id: showTimer
+    interval: 50 // Small delay to ensure smooth transition
+    repeat: false
+    onTriggered: {
+      PanelService.openedPanel = root
+      isTransitioning = false
+      visible = true
+    }
+  }
+
   Component.onDestruction: {
     try {
       if (visible && Settings.openPanel === root)
@@ -68,8 +93,16 @@ PanelWindow {
 
   onVisibleChanged: {
     try {
-      if (!visible && Settings.openPanel === root)
-        Settings.openPanel = null
+      if (!visible) {
+        // Clear panel service when panel becomes invisible
+        if (PanelService.openedPanel === root) {
+          PanelService.openedPanel = null
+        }
+        if (Settings.openPanel === root) {
+          Settings.openPanel = null
+        }
+        isTransitioning = false
+      }
     } catch (e) {
 
     }

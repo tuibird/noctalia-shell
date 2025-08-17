@@ -27,11 +27,11 @@ Row {
 
   // Update text when window changes
   Connections {
-    target: typeof NiriService !== "undefined" ? NiriService : null
-    function onFocusedWindowIndexChanged() {
+    target: CompositorService
+    function onActiveWindowChanged() {
       // Check if window actually changed
-      if (NiriService.focusedWindowIndex !== lastWindowIndex) {
-        lastWindowIndex = NiriService.focusedWindowIndex
+      if (CompositorService.focusedWindowIndex !== lastWindowIndex) {
+        lastWindowIndex = CompositorService.focusedWindowIndex
         showingFullTitle = true
         fullTitleTimer.restart()
       }
@@ -39,11 +39,7 @@ Row {
   }
 
   function getFocusedWindow() {
-    if (typeof NiriService === "undefined" || NiriService.focusedWindowIndex < 0
-        || NiriService.focusedWindowIndex >= NiriService.windows.length) {
-      return null
-    }
-    return NiriService.windows[NiriService.focusedWindowIndex]
+    return CompositorService.getFocusedWindow()
   }
 
   function getTitle() {

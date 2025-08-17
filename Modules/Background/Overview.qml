@@ -7,10 +7,10 @@ import qs.Services
 import qs.Widgets
 
 NLoader {
-  active: WorkspacesService.isNiri
+  active: CompositorService.isNiri
 
   Component.onCompleted: {
-    if (WorkspacesService.isNiri) {
+    if (CompositorService.isNiri) {
       Logger.log("Overview", "Loading Overview component (Niri detected)")
     } else {
       Logger.log("Overview", "Skipping Overview component (Niri not detected)")

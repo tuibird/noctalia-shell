@@ -348,13 +348,7 @@ NPanel {
   // ----------------------------------
   // System functions
   function logout() {
-    if (WorkspacesService.isNiri) {
-      logoutProcessNiri.running = true
-    } else if (WorkspacesService.isHyprland) {
-      logoutProcessHyprland.running = true
-    } else {
-      Logger.warn("PowerMenu", "No supported compositor detected for logout")
-    }
+    CompositorService.logout()
   }
 
   function suspend() {
@@ -390,19 +384,7 @@ NPanel {
     running: false
   }
 
-  Process {
-    id: logoutProcessNiri
 
-    command: ["niri", "msg", "action", "quit", "--skip-confirmation"]
-    running: false
-  }
-
-  Process {
-    id: logoutProcessHyprland
-
-    command: ["hyprctl", "dispatch", "exit"]
-    running: false
-  }
 
   Process {
     id: logoutProcess
