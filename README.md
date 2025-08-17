@@ -7,14 +7,14 @@
 **_quiet by design_**
 
 <p align="center">
-  <a href="https://github.com/noctalia-dev/Noctalia/commits">
-    <img src="https://img.shields.io/github/last-commit/noctalia-dev/Noctalia?style=for-the-badge&labelColor=0C0D11&color=A8AEFF" alt="Last commit" />
+  <a href="https://github.com/noctalia-dev/noctalia-shell/commits">
+    <img src="https://img.shields.io/github/last-commit/noctalia-dev/noctalia-shell?style=for-the-badge&labelColor=0C0D11&color=A8AEFF" alt="Last commit" />
   </a>
-  <a href="https://github.com/noctalia-dev/Noctalia/stargazers">
-    <img src="https://img.shields.io/github/stars/noctalia-dev/Noctalia?style=for-the-badge&labelColor=0C0D11&color=A8AEFF" alt="GitHub stars" />
+  <a href="https://github.com/noctalia-dev/noctalia-shell/stargazers">
+    <img src="https://img.shields.io/github/stars/noctalia-dev/noctalia-shell?style=for-the-badge&labelColor=0C0D11&color=A8AEFF" alt="GitHub stars" />
   </a>
-  <a href="https://github.com/noctalia-dev/Noctalia/graphs/contributors">
-    <img src="https://img.shields.io/github/contributors/noctalia-dev/Noctalia?style=for-the-badge&labelColor=0C0D11&color=A8AEFF" alt="GitHub contributors" />
+  <a href="https://github.com/noctalia-dev/noctalia-shell/graphs/contributors">
+    <img src="https://img.shields.io/github/contributors/noctalia-dev/noctalia-shell?style=for-the-badge&labelColor=0C0D11&color=A8AEFF" alt="GitHub contributors" />
   </a>
   <a href="https://discord.gg/7JFFYWzWRn">
     <img src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&labelColor=0C0D11&color=A8AEFF&logo=discord&logoColor=white" alt="Discord" />
