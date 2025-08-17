@@ -7,7 +7,7 @@ import qs.Services
 import qs.Widgets
 
 Row {
-  id: layout
+  id: root
   anchors.verticalCenter: parent.verticalCenter
   spacing: Style.marginSmall * scaling
   visible: Settings.data.bar.showActiveWindow
@@ -22,7 +22,6 @@ Row {
     repeat: false
     onTriggered: {
       showingFullTitle = false
-      // No need to update text here, the width property change will handle it
     }
   }
 
@@ -56,13 +55,13 @@ Row {
   NText {
     id: fullTitleMetrics
     visible: false
-    text: getTitle()
+    text: titleText.text
     font: titleText.font
   }
 
   Rectangle {
     // Let the Rectangle size itself based on its content (the Row)
-    width: row.width + Style.marginMedium* scaling * 2
+    width: row.width + Style.marginMedium * scaling * 2
     height: row.height + Style.marginSmall * scaling
     color: Color.mSurfaceVariant
     radius: Style.radiusSmall * scaling
@@ -92,7 +91,11 @@ Row {
 
         NText {
           id: titleText
-          width: (showingFullTitle || mouseArea.containsMouse) ? fullTitleMetrics.contentWidth : 150 * scaling
+
+          // If hovered or just switched window, show up to 300 pixels
+          // If not hovered show up to 150 pixels
+          width: (showingFullTitle || mouseArea.containsMouse) ? Math.min(fullTitleMetrics.contentWidth, 300 * scaling) : Math.min(
+                                                                   fullTitleMetrics.contentWidth, 150 * scaling)
           text: getTitle()
           font.pointSize: Style.fontSizeReduced * scaling
           font.weight: Style.fontWeightBold
@@ -104,7 +107,7 @@ Row {
           Behavior on width {
             NumberAnimation {
               duration: Style.animationSlow
-              easing.type: Easing.OutBack
+              easing.type: Easing.InOutCubic
             }
           }
         }
