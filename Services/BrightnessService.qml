@@ -146,11 +146,11 @@ Singleton {
     }
 
     function increaseBrightness(): void {
-      setBrightness(brightness + 0.1)
+      setBrightnessDebounced(brightness + 0.1)
     }
 
     function decreaseBrightness(): void {
-      setBrightness(monitor.brightness - 0.1)
+      setBrightnessDebounced(monitor.brightness - 0.1)
     }
 
     function getStoredBrightness(): real {
