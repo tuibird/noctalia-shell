@@ -146,11 +146,13 @@ Singleton {
     }
 
     function increaseBrightness(): void {
-      setBrightnessDebounced(brightness + 0.1)
+      var stepSize = Settings.data.brightness.brightnessStep / 100.0
+      setBrightnessDebounced(brightness + stepSize)
     }
 
     function decreaseBrightness(): void {
-      setBrightnessDebounced(monitor.brightness - 0.1)
+      var stepSize = Settings.data.brightness.brightnessStep / 100.0
+      setBrightnessDebounced(monitor.brightness - stepSize)
     }
 
     function getStoredBrightness(): real {
