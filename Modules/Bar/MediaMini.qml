@@ -60,8 +60,8 @@ Row {
           // If hovered or just switched window, show up to 300 pixels
           // If not hovered show up to 150 pixels
           width: (mouseArea.containsMouse) ? Math.min(fullTitleMetrics.contentWidth,
-                                                                          400 * scaling) : Math.min(
-                                                                   fullTitleMetrics.contentWidth, 150 * scaling)
+                                                      400 * scaling) : Math.min(fullTitleMetrics.contentWidth,
+                                                                                150 * scaling)
           text: getTitle()
           font.pointSize: Style.fontSizeReduced * scaling
           font.weight: Style.fontWeightBold
