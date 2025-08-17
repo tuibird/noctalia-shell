@@ -304,26 +304,6 @@ NLoader {
                           anchors.centerIn: parent
                           size: Style.baseWidgetSize * 0.7 * scaling
                         }
-
-                        // TBC: Does nothing on my setup
-                        NText {
-                          visible: NetworkService.connectStatus === "success" && !NetworkService.connectingSsid
-                          text: "check_circle"
-                          font.family: "Material Symbols Outlined"
-                          font.pointSize: Style.fontSizeXL * scaling
-                          color: "#43a047" // TBC: No!
-                          anchors.centerIn: parent
-                        }
-
-                        // TBC: Does nothing on my setup
-                        NText {
-                          visible: NetworkService.connectStatus === "error" && !NetworkService.connectingSsid
-                          text: "error"
-                          font.family: "Material Symbols Outlined"
-                          font.pointSize: Style.fontSizeSmall * scaling
-                          color: Color.mError
-                          anchors.centerIn: parent
-                        }
                       }
 
                       NText {
