@@ -128,17 +128,17 @@ Variants {
           anchors.verticalCenter: parent.verticalCenter
         }
 
-        NIconButton {
-          id: demoPanelToggle
-          icon: "experiment"
-          tooltipText: "Open Demo Panel"
-          sizeMultiplier: 0.8
-          showBorder: false
-          anchors.verticalCenter: parent.verticalCenter
-          onClicked: {
-            demoPanel.isLoaded = !demoPanel.isLoaded
-          }
-        }
+        // NIconButton {
+        //   id: demoPanelToggle
+        //   icon: "experiment"
+        //   tooltipText: "Open Demo Panel"
+        //   sizeMultiplier: 0.8
+        //   showBorder: false
+        //   anchors.verticalCenter: parent.verticalCenter
+        //   onClicked: {
+        //     demoPanel.isLoaded = !demoPanel.isLoaded
+        //   }
+        // }
 
         NIconButton {
           id: sidePanelToggle
