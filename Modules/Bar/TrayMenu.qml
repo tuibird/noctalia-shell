@@ -73,8 +73,8 @@ PopupWindow {
   Rectangle {
     id: bg
     anchors.fill: parent
-    color: Colors.mSurface
-    border.color: Colors.mOutline
+    color: Color.mSurface
+    border.color: Color.mOutline
     border.width: Math.max(1, Style.borderThin * scaling)
     radius: Style.radiusMedium * scaling
     z: 0
@@ -112,7 +112,7 @@ PopupWindow {
       Rectangle {
         id: bg
         anchors.fill: parent
-        color: mouseArea.containsMouse ? Colors.mTertiary : "transparent"
+        color: mouseArea.containsMouse ? Color.mTertiary : "transparent"
         radius: Style.radiusSmall * scaling
         visible: !(modelData?.isSeparator ?? false)
 
@@ -126,7 +126,7 @@ PopupWindow {
             id: text
             Layout.fillWidth: true
             color: (modelData?.enabled
-                    ?? true) ? (mouseArea.containsMouse ? Colors.mOnTertiary : Colors.mOnSurface) : Colors.textDisabled
+                    ?? true) ? (mouseArea.containsMouse ? Color.mOnTertiary : Color.mOnSurface) : Color.textDisabled
             text: modelData?.text ?? ""
             font.pointSize: Style.fontSizeSmall * scaling
             verticalAlignment: Text.AlignVCenter
@@ -148,7 +148,7 @@ PopupWindow {
             font.pointSize: Style.fontSizeSmall * scaling
             verticalAlignment: Text.AlignVCenter
             visible: modelData?.hasChildren ?? false
-            color: Colors.mOnSurface
+            color: Color.mOnSurface
           }
         }
 
@@ -308,8 +308,8 @@ PopupWindow {
       Rectangle {
         id: bg
         anchors.fill: parent
-        color: Colors.mSurface
-        border.color: Colors.mOutline
+        color: Color.mSurface
+        border.color: Color.mOutline
         border.width: Math.max(1, Style.borderThin * scaling)
         radius: Style.radiusMedium * scaling
         z: 0
@@ -347,10 +347,10 @@ PopupWindow {
           Rectangle {
             id: bg
             anchors.fill: parent
-            color: mouseArea.containsMouse ? Colors.mTertiary : "transparent"
+            color: mouseArea.containsMouse ? Color.mTertiary : "transparent"
             radius: Style.radiusSmall * scaling
             visible: !(modelData?.isSeparator ?? false)
-            property color hoverTextColor: mouseArea.containsMouse ? Colors.mOnSurface : Colors.mOnSurface
+            property color hoverTextColor: mouseArea.containsMouse ? Color.mOnSurface : Color.mOnSurface
 
             RowLayout {
               anchors.fill: parent
@@ -361,7 +361,7 @@ PopupWindow {
               NText {
                 id: subText
                 Layout.fillWidth: true
-                color: (modelData?.enabled ?? true) ? bg.hoverTextColor : Colors.textDisabled
+                color: (modelData?.enabled ?? true) ? bg.hoverTextColor : Color.textDisabled
                 text: modelData?.text ?? ""
                 font.pointSize: Style.fontSizeSmall * scaling
                 verticalAlignment: Text.AlignVCenter

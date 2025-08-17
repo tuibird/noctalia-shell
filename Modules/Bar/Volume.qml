@@ -49,8 +49,8 @@ Item {
   NPill {
     id: pill
     icon: getIcon()
-    iconCircleColor: Colors.mPrimary
-    collapsedIconColor: Colors.mOnSurface
+    iconCircleColor: Color.mPrimary
+    collapsedIconColor: Color.mOnSurface
     autoHide: false // Important to be false so we can hover as long as we want
     text: Math.floor(AudioService.volume * 100) + "%"
     tooltipText: "Volume: " + Math.round(

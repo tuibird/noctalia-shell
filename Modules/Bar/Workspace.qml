@@ -16,7 +16,7 @@ Item {
   property ListModel localWorkspaces: ListModel {}
   property real masterProgress: 0.0
   property bool effectsActive: false
-  property color effectColor: Colors.mPrimary
+  property color effectColor: Color.mPrimary
 
   property int horizontalPadding: Math.round(16 * scaling)
   property int spacingBetweenPills: Math.round(8 * scaling)
@@ -70,7 +70,7 @@ Item {
   }
 
   function triggerUnifiedWave() {
-    effectColor = Colors.mPrimary
+    effectColor = Color.mPrimary
     masterAnimation.restart()
   }
 
@@ -106,7 +106,7 @@ Item {
       const ws = localWorkspaces.get(i)
       if (ws.isFocused === true) {
         root.triggerUnifiedWave()
-        root.workspaceChanged(ws.id, Colors.mPrimary)
+        root.workspaceChanged(ws.id, Color.mPrimary)
         break
       }
     }
@@ -119,12 +119,12 @@ Item {
     anchors.horizontalCenter: parent.horizontalCenter
     anchors.verticalCenter: parent.verticalCenter
     radius: Math.round(12 * scaling)
-    color: Colors.mSurfaceVariant
-    border.color: Colors.mOutlineVariant
+    color: Color.mSurfaceVariant
+    border.color: Color.mOutlineVariant
     border.width: Math.max(1, Math.round(1 * scaling))
     layer.enabled: true
     layer.effect: MultiEffect {
-      shadowColor: Colors.mShadow
+      shadowColor: Color.mShadow
       shadowVerticalOffset: 0
       shadowHorizontalOffset: 0
       shadowOpacity: 0.10
@@ -164,15 +164,15 @@ Item {
           }
           color: {
             if (model.isFocused)
-              return Colors.mPrimary
+              return Color.mPrimary
             if (model.isUrgent)
-              return Colors.mError
+              return Color.mError
             if (model.isActive || model.isOccupied)
-              return Colors.mSecondary
+              return Color.mSecondary
             if (model.isUrgent)
-              return Colors.mError
+              return Color.mError
 
-            return Colors.mOutline
+            return Color.mOutline
           }
           scale: model.isFocused ? 1.0 : 0.9
           z: 0

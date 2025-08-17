@@ -41,12 +41,12 @@ NBox {
         text: "album"
         font.family: "Material Symbols Outlined"
         font.pointSize: Style.fontSizeXXL * 2.5 * scaling
-        color: Colors.mPrimary
+        color: Color.mPrimary
         Layout.alignment: Qt.AlignHCenter
       }
       NText {
         text: "No media player detected"
-        color: Colors.mOnSurfaceVariant
+        color: Color.mOnSurfaceVariant
         Layout.alignment: Qt.AlignHCenter
       }
 
@@ -77,7 +77,7 @@ NBox {
           // implicitWidth: 120 * scaling
           // implicitHeight: 30 * scaling
           color: "transparent"
-          border.color: playerSelector.activeFocus ? Colors.mTertiary : Colors.mOutline
+          border.color: playerSelector.activeFocus ? Color.mTertiary : Color.mOutline
           border.width: Math.max(1, Style.borderThin * scaling)
           radius: Style.radiusMedium * scaling
         }
@@ -88,7 +88,7 @@ NBox {
           rightPadding: playerSelector.indicator.width + playerSelector.spacing
           text: playerSelector.displayText
           font.pointSize: Style.fontSizeSmall * scaling
-          color: Colors.mOnSurface
+          color: Color.mOnSurface
           verticalAlignment: Text.AlignVCenter
           elide: Text.ElideRight
         }
@@ -99,7 +99,7 @@ NBox {
           text: "arrow_drop_down"
           font.family: "Material Symbols Outlined"
           font.pointSize: Style.fontSizeXL * scaling
-          color: Colors.mOnSurface
+          color: Color.mOnSurface
           horizontalAlignment: Text.AlignRight
         }
 
@@ -120,8 +120,8 @@ NBox {
           }
 
           background: Rectangle {
-            color: Colors.mSurface
-            border.color: Colors.mOutline
+            color: Color.mSurface
+            border.color: Color.mOutline
             border.width: Math.max(1, Style.borderThin * scaling)
             radius: Style.radiusTiny * scaling
           }
@@ -132,7 +132,7 @@ NBox {
           contentItem: NText {
             text: modelData.identity
             font.pointSize: Style.fontSizeSmall * scaling
-            color: highlighted ? Colors.mSurface : Colors.mOnSurface
+            color: highlighted ? Color.mSurface : Color.mOnSurface
             verticalAlignment: Text.AlignVCenter
             elide: Text.ElideRight
           }
@@ -140,7 +140,7 @@ NBox {
 
           background: Rectangle {
             width: popup.width - Style.marginSmall * scaling * 2
-            color: highlighted ? Colors.mTertiary : "transparent"
+            color: highlighted ? Color.mTertiary : "transparent"
             radius: Style.radiusTiny * scaling
           }
         }
@@ -161,8 +161,8 @@ NBox {
           width: 90 * scaling
           height: 90 * scaling
           radius: width * 0.5
-          color: trackArt.visible ? Colors.mPrimary : "transparent"
-          border.color: trackArt.visible ? Colors.mOutline : "transparent"
+          color: trackArt.visible ? Color.mPrimary : "transparent"
+          border.color: trackArt.visible ? Color.mOutline : "transparent"
           border.width: Math.max(1, Style.borderThin * scaling)
           clip: true
 
@@ -174,7 +174,7 @@ NBox {
             anchors.margins: Style.marginTiny * scaling
             imagePath: MediaService.trackArtUrl
             fallbackIcon: "music_note"
-            borderColor: Colors.mOutline
+            borderColor: Color.mOutline
             borderWidth: Math.max(1, Style.borderThin * scaling)
             imageRadius: width * 0.5
           }
@@ -183,7 +183,7 @@ NBox {
           NText {
             anchors.centerIn: parent
             text: "album"
-            color: Colors.mPrimary
+            color: Color.mPrimary
             font.family: "Material Symbols Outlined"
             font.pointSize: Style.fontSizeLarge * 12 * scaling
             visible: !trackArt.visible
@@ -210,7 +210,7 @@ NBox {
           NText {
             visible: MediaService.trackArtist !== ""
             text: MediaService.trackArtist
-            color: Colors.mOnSurface
+            color: Color.mOnSurface
             font.pointSize: Style.fontSizeSmall * scaling
             elide: Text.ElideRight
             Layout.fillWidth: true
@@ -219,7 +219,7 @@ NBox {
           NText {
             visible: MediaService.trackAlbum !== ""
             text: MediaService.trackAlbum
-            color: Colors.mOnSurface
+            color: Color.mOnSurface
             font.pointSize: Style.fontSizeSmall * scaling
             elide: Text.ElideRight
             Layout.fillWidth: true
@@ -235,7 +235,7 @@ NBox {
         width: parent.width
         height: 4 * scaling
         radius: Style.radiusSmall * scaling
-        color: Colors.mSurface
+        color: Color.mSurface
         Layout.fillWidth: true
 
         property real progressRatio: {
@@ -250,7 +250,7 @@ NBox {
           width: progressBarBackground.progressRatio * parent.width
           height: parent.height
           radius: parent.radius
-          color: Colors.mPrimary
+          color: Color.mPrimary
 
           Behavior on width {
             NumberAnimation {
@@ -266,8 +266,8 @@ NBox {
           width: 16 * scaling
           height: 16 * scaling
           radius: width * 0.5
-          color: Colors.mPrimary
-          border.color: Colors.mOutline
+          color: Color.mPrimary
+          border.color: Color.mOutline
           border.width: Math.max(1 * Style.borderMedium * scaling)
           x: Math.max(0, Math.min(parent.width - width, progressFill.width - width / 2))
           anchors.verticalCenter: parent.verticalCenter
@@ -343,7 +343,7 @@ NBox {
         width: 300 * scaling
         height: 80 * scaling
         values: CavaService.values
-        fillColor: Colors.mOnSurface
+        fillColor: Color.mOnSurface
         Layout.alignment: Qt.AlignHCenter
       }
     }

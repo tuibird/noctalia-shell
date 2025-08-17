@@ -33,15 +33,15 @@ Item {
           text: "Current Wallpaper"
           font.pointSize: Style.fontSizeXL * scaling
           font.weight: Style.fontWeightBold
-          color: Colors.mOnSurface
+          color: Color.mOnSurface
         }
 
         Rectangle {
           Layout.fillWidth: true
           Layout.preferredHeight: 120 * scaling
           radius: Style.radiusMedium * scaling
-          color: Colors.mSurface
-          border.color: Colors.mOutline
+          color: Color.mSurface
+          border.color: Color.mOutline
           border.width: Math.max(1, Style.borderThin * scaling)
           clip: true
 
@@ -51,7 +51,7 @@ Item {
             anchors.margins: Style.marginSmall * scaling
             imagePath: WallpapersService.currentWallpaper
             fallbackIcon: "image"
-            borderColor: Colors.mOutline
+            borderColor: Color.mOutline
             borderWidth: Math.max(1, Style.borderThin * scaling)
             imageRadius: Style.radiusMedium * scaling
           }
@@ -74,12 +74,12 @@ Item {
               text: "Wallpaper Selector"
               font.pointSize: Style.fontSizeXL * scaling
               font.weight: Style.fontWeightBold
-              color: Colors.mOnSurface
+              color: Color.mOnSurface
             }
 
             NText {
               text: "Click on a wallpaper to set it as your current wallpaper"
-              color: Colors.mOnSurface
+              color: Color.mOnSurface
               wrapMode: Text.WordWrap
               Layout.fillWidth: true
             }
@@ -87,7 +87,7 @@ Item {
             NText {
               text: Settings.data.wallpaper.swww.enabled ? "Wallpapers will change with " + Settings.data.wallpaper.swww.transitionType
                                                            + " transition" : "Wallpapers will change instantly"
-              color: Colors.mOnSurface
+              color: Color.mOnSurface
               font.pointSize: Style.fontSizeSmall * scaling
               visible: Settings.data.wallpaper.swww.enabled
             }
@@ -141,8 +141,8 @@ Item {
               width: wallpaperGridView.itemSize
               height: Math.floor(wallpaperGridView.itemSize * 0.67)
               radius: Style.radiusMedium * scaling
-              color: isSelected ? Colors.mPrimary : Colors.mSurface
-              border.color: isSelected ? Colors.mSecondary : Colors.mOutline
+              color: isSelected ? Color.mPrimary : Color.mSurface
+              border.color: isSelected ? Color.mSecondary : Color.mOutline
               border.width: Math.max(1, Style.borderThin * scaling)
               clip: true
 
@@ -163,8 +163,8 @@ Item {
                 width: 20 * scaling
                 height: 20 * scaling
                 radius: width / 2
-                color: Colors.mPrimary
-                border.color: Colors.mOutline
+                color: Color.mPrimary
+                border.color: Color.mOutline
                 border.width: Math.max(1, Style.borderThin * scaling)
                 visible: isSelected
 
@@ -173,14 +173,14 @@ Item {
                   text: "check"
                   font.family: "Material Symbols Outlined"
                   font.pointSize: Style.fontSizeSmall * scaling
-                  color: Colors.mOnPrimary
+                  color: Color.mOnPrimary
                 }
               }
 
               // Hover effect
               Rectangle {
                 anchors.fill: parent
-                color: Colors.mOnSurface
+                color: Color.mOnSurface
                 opacity: mouseArea.containsMouse ? 0.1 : 0
                 radius: parent.radius
 
@@ -206,9 +206,9 @@ Item {
           // Empty state
           Rectangle {
             anchors.fill: parent
-            color: Colors.mSurface
+            color: Color.mSurface
             radius: Style.radiusMedium * scaling
-            border.color: Colors.mOutline
+            border.color: Color.mOutline
             border.width: Math.max(1, Style.borderThin * scaling)
             visible: WallpapersService.wallpaperList.length === 0 && !WallpapersService.scanning
 
@@ -220,20 +220,20 @@ Item {
                 text: "folder_open"
                 font.family: "Material Symbols Outlined"
                 font.pointSize: Style.fontSizeLarge * scaling
-                color: Colors.mOnSurface
+                color: Color.mOnSurface
                 Layout.alignment: Qt.AlignHCenter
               }
 
               NText {
                 text: "No wallpapers found"
-                color: Colors.mOnSurface
+                color: Color.mOnSurface
                 font.weight: Style.fontWeightBold
                 Layout.alignment: Qt.AlignHCenter
               }
 
               NText {
                 text: "Make sure your wallpaper directory is configured and contains image files"
-                color: Colors.mOnSurface
+                color: Color.mOnSurface
                 wrapMode: Text.WordWrap
                 horizontalAlignment: Text.AlignHCenter
                 Layout.preferredWidth: Style.sliderWidth * 1.5 * scaling

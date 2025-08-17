@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Layouts
 import Quickshell
 import qs.Commons
 import qs.Services
@@ -39,57 +40,68 @@ Row {
     }
   }
 
-  // Window icon
-  NText {
-    id: windowIcon
-    text: "desktop_windows"
-    font.family: "Material Symbols Outlined"
-    font.pointSize: Style.fontSizeLarge * scaling
-    verticalAlignment: Text.AlignVCenter
-    anchors.verticalCenter: parent.verticalCenter
-    color: Colors.mPrimary
-    visible: getDisplayText() !== ""
-  }
-
-  // Window title container
-  Item {
-    id: titleContainer
-    width: titleText.width
-    height: titleText.height
+  Rectangle {
+    width: row.width + Style.marginSmall * scaling * 2
+    height: row.height
+    color: Color.mSurfaceVariant
+    radius: Style.radiusSmall * scaling
     anchors.verticalCenter: parent.verticalCenter
 
-    Behavior on width {
-      NumberAnimation {
-        duration: Style.animationNormal
-        easing.type: Easing.OutCubic
-      }
-    }
-
-    NText {
-      id: titleText
-      text: getDisplayText()
-      font.pointSize: Style.fontSizeSmall * scaling
-      font.weight: Style.fontWeightBold
-      elide: Text.ElideRight
-      anchors.verticalCenter: parent.verticalCenter
-      verticalAlignment: Text.AlignVCenter
-    }
-
-    // Mouse area for hover detection
-    MouseArea {
-      id: titleContainerMouseArea
+    Item {
+      id: mainContainer
       anchors.fill: parent
-      hoverEnabled: true
-      cursorShape: Qt.IBeamCursor
-      onEntered: {
-        titleText.text = getDisplayText()
+      anchors.leftMargin: Style.marginSmall * scaling
+      anchors.rightMargin: Style.marginSmall * scaling
+
+      Row {
+        id: row
+        anchors.verticalCenter: parent.verticalCenter
+        spacing: Style.marginTiny * scaling
+
+        // Window icon
+        NText {
+          id: windowIcon
+          text: "dialogs"
+          font.family: "Material Symbols Outlined"
+          font.pointSize: Style.fontSizeLarge * scaling
+          verticalAlignment: Text.AlignVCenter
+          anchors.verticalCenter: parent.verticalCenter
+          visible: getDisplayText() !== ""
+        }
+
+        NText {
+          id: titleText
+          width: (showingFullTitle || mouseArea.containsMouse) ? 300 * scaling : 100 * scaling
+          text: getDisplayText()
+          font.pointSize: Style.fontSizeReduced * scaling
+          font.weight: Style.fontWeightBold
+          elide: Text.ElideRight
+          anchors.verticalCenter: parent.verticalCenter
+          verticalAlignment: Text.AlignVCenter
+          color: Color.mTertiary
+          Behavior on width {
+            NumberAnimation {
+              duration: Style.animationSlow
+              easing.type: Easing.OutBack
+            }
+          }
+        }
       }
-      onExited: {
-        titleText.text = getDisplayText()
+      // Mouse area for hover detection
+      MouseArea {
+        id: mouseArea
+        anchors.fill: parent
+        hoverEnabled: true
+        cursorShape: Qt.IBeamCursor
+        onEntered: {
+          titleText.text = getDisplayText()
+        }
+        onExited: {
+          titleText.text = getDisplayText()
+        }
       }
     }
   }
-
   function getDisplayText() {
     // Check if Niri service is available
     if (typeof NiriService === "undefined") {
@@ -117,27 +129,29 @@ Row {
       const programName = title.split(/[\s\-_]/)[0]
 
       if (programName.length <= 2 || programName === title) {
-        return truncateTitle(title)
+        return title
       }
 
-      if (showingFullTitle || titleContainerMouseArea.containsMouse || isGenericName(programName)) {
-        return truncateTitle(title)
+      if (isGenericName(programName)) {
+        return title
       }
 
       return programName
     }
 
-    // Use appId for program name, show full title on hover or window switch
-    if (showingFullTitle || titleContainerMouseArea.containsMouse) {
-      return truncateTitle(title || appId)
-    }
+    return title
 
-    return appId
+    // // Use appId for program name, show full title on hover or window switch
+    // if (showingFullTitle || mouseArea.containsMouse) {
+    //   return truncateTitle(title || appId, 50)
+    // } else {
+    //   return truncateTitle(title || appId, 20)
+    // }
   }
 
-  function truncateTitle(title) {
-    if (title.length > 50) {
-      return title.substring(0, 47) + "..."
+  function truncateTitle(title, length) {
+    if (title.length > length) {
+      return title.substring(0, length - 3) + "..."
     }
     return title
   }

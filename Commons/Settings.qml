@@ -49,7 +49,7 @@ Singleton {
       reload()
     }
     onLoaded: function () {
-      Logger.log("Settings", "Loaded")
+      Logger.log("Settings", "OnLoaded")
       Qt.callLater(function () {
         // Only set wallpaper on initial load, not on reloads
         if (isInitialLoad && adapter.wallpaper.current !== "") {
@@ -75,7 +75,9 @@ Singleton {
         property bool showActiveWindow: true
         property bool showSystemInfo: false
         property bool showMedia: false
-        property bool hideBrightness: false
+        property bool showBrightness: true
+        property bool showNotificationsHistory: true
+        property bool showTray: true
         property list<string> monitors: []
       }
 

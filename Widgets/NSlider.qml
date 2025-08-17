@@ -26,13 +26,13 @@ Slider {
     width: root.availableWidth
     height: implicitHeight
     radius: height / 2
-    color: Colors.mSurface
+    color: Color.mSurface
 
     Rectangle {
       id: activeTrack
       width: root.visualPosition * parent.width
       height: parent.height
-      color: Colors.mPrimary
+      color: Color.mPrimary
       radius: parent.radius
     }
 
@@ -42,7 +42,7 @@ Slider {
       width: knobDiameter + cutoutExtra
       height: knobDiameter + cutoutExtra
       radius: width / 2
-      color: root.cutoutColor !== undefined ? root.cutoutColor : Colors.mSurface
+      color: root.cutoutColor !== undefined ? root.cutoutColor : Color.mSurface
       x: Math.max(0, Math.min(parent.width - width,
                               root.visualPosition * (parent.width - root.knobDiameter) - cutoutExtra / 2))
       y: (parent.height - height) / 2
@@ -60,7 +60,7 @@ Slider {
       anchors.fill: knob
       source: knob
       shadowEnabled: true
-      shadowColor: Colors.mShadow
+      shadowColor: Color.mShadow
       shadowOpacity: 0.25
       shadowHorizontalOffset: 0
       shadowVerticalOffset: 1
@@ -72,8 +72,8 @@ Slider {
       implicitWidth: knobDiameter
       implicitHeight: knobDiameter
       radius: width * 0.5
-      color: root.pressed ? Colors.mSurfaceVariant : Colors.mSurface
-      border.color: Colors.mPrimary
+      color: root.pressed ? Color.mSurfaceVariant : Color.mSurface
+      border.color: Color.mPrimary
       border.width: Math.max(1, Style.borderThick * scaling)
 
       // Press feedback halo (using accent color, low opacity)
@@ -82,7 +82,7 @@ Slider {
         width: parent.width + 8 * scaling
         height: parent.height + 8 * scaling
         radius: width / 2
-        color: Colors.mPrimary
+        color: Color.mPrimary
         opacity: root.pressed ? 0.16 : 0.0
       }
     }

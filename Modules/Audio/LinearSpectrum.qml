@@ -4,8 +4,8 @@ import qs.Services
 
 Item {
   id: root
-  property color fillColor: Colors.mPrimary
-  property color strokeColor: Colors.mOnSurface
+  property color fillColor: Color.mPrimary
+  property color strokeColor: Color.mOnSurface
   property int strokeWidth: 0
   property var values: []
 

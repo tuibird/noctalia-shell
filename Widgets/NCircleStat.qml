@@ -18,9 +18,9 @@ Rectangle {
 
   width: 68 * scaling
   height: 92 * scaling
-  color: flat ? "transparent" : Colors.mSurface
+  color: flat ? "transparent" : Color.mSurface
   radius: Style.radiusSmall * scaling
-  border.color: flat ? "transparent" : Colors.mSurfaceVariant
+  border.color: flat ? "transparent" : Color.mSurfaceVariant
   border.width: flat ? 0 : Math.max(1, Style.borderThin * scaling)
   clip: true
 
@@ -58,14 +58,14 @@ Rectangle {
           ctx.reset()
           ctx.lineWidth = 6 * scaling * contentScale
           // Track uses surfaceVariant for stronger contrast
-          ctx.strokeStyle = Colors.mSurface
+          ctx.strokeStyle = Color.mSurface
           ctx.beginPath()
           ctx.arc(cx, cy, r, start, endBg)
           ctx.stroke()
           // Value arc
           const ratio = Math.max(0, Math.min(1, root.value / 100))
           const end = start + (endBg - start) * ratio
-          ctx.strokeStyle = Colors.mPrimary
+          ctx.strokeStyle = Color.mPrimary
           ctx.beginPath()
           ctx.arc(cx, cy, r, start, end)
           ctx.stroke()
@@ -79,7 +79,7 @@ Rectangle {
         text: `${root.value}${root.suffix}`
         font.pointSize: Style.fontSizeMedium * scaling * contentScale
         font.weight: Style.fontWeightBold
-        color: Colors.mOnSurface
+        color: Color.mOnSurface
         horizontalAlignment: Text.AlignHCenter
       }
 
@@ -89,8 +89,8 @@ Rectangle {
         width: 28 * scaling * contentScale
         height: width
         radius: width / 2
-        color: Colors.mSurface
-        // border.color: Colors.mPrimary
+        color: Color.mSurface
+        // border.color: Color.mPrimary
         // border.width: Math.max(1, Style.borderThin * scaling)
         anchors.right: parent.right
         anchors.top: parent.top
@@ -102,7 +102,7 @@ Rectangle {
           text: root.icon
           font.family: "Material Symbols Outlined"
           font.pointSize: Style.fontSizeLargeXL * scaling * contentScale
-          color: Colors.mOnSurface
+          color: Color.mOnSurface
           horizontalAlignment: Text.AlignHCenter
           verticalAlignment: Text.AlignVCenter
         }

@@ -199,9 +199,9 @@ NLoader {
 
       Rectangle {
         id: bgRect
-        color: Colors.mSurface
+        color: Color.mSurface
         radius: Style.radiusLarge * scaling
-        border.color: Colors.mOutlineVariant
+        border.color: Color.mOutlineVariant
         border.width: Math.max(1, Style.borderThin * scaling)
         layer.enabled: true
         width: Math.max(screen.width * 0.5, 1280) * scaling
@@ -247,8 +247,8 @@ NLoader {
             id: sidebar
             Layout.preferredWidth: Style.sliderWidth * 1.3 * scaling
             Layout.fillHeight: true
-            color: Colors.mSurfaceVariant
-            border.color: Colors.mOutlineVariant
+            color: Color.mSurfaceVariant
+            border.color: Color.mOutlineVariant
             border.width: Math.max(1, Style.borderThin * scaling)
             radius: Style.radiusMedium * scaling
 
@@ -265,10 +265,10 @@ NLoader {
                   width: parent.width
                   height: 32 * scaling
                   radius: Style.radiusSmall * scaling
-                  color: selected ? Colors.mPrimary : (tabItem.hovering ? Colors.mTertiary : "transparent")
+                  color: selected ? Color.mPrimary : (tabItem.hovering ? Color.mTertiary : "transparent")
                   readonly property bool selected: index === currentTabIndex
                   property bool hovering: false
-                  property color tabTextColor: selected ? Colors.mOnPrimary : (tabItem.hovering ? Colors.mOnTertiary : Colors.mOnSurface)
+                  property color tabTextColor: selected ? Color.mOnPrimary : (tabItem.hovering ? Color.mOnTertiary : Color.mOnSurface)
                   RowLayout {
                     anchors.fill: parent
                     anchors.leftMargin: Style.marginSmall * scaling
@@ -313,8 +313,8 @@ NLoader {
             Layout.fillWidth: true
             Layout.fillHeight: true
             radius: Style.radiusMedium * scaling
-            color: Colors.mSurfaceVariant
-            border.color: Colors.mOutlineVariant
+            color: Color.mSurfaceVariant
+            border.color: Color.mOutlineVariant
             border.width: Math.max(1, Style.borderThin * scaling)
             clip: true
 
@@ -334,7 +334,7 @@ NLoader {
                   text: panel.tabsModel[currentTabIndex].label
                   font.pointSize: Style.fontSizeLarge * scaling
                   font.weight: Style.fontWeightBold
-                  color: Colors.mPrimary
+                  color: Color.mPrimary
                   Layout.fillWidth: true
                 }
                 NIconButton {

@@ -20,7 +20,7 @@ NLoader {
       screen: modelData
 
       // Visible ring color
-      property color ringColor: Colors.mSurface
+      property color ringColor: Color.mSurface
       // The amount subtracted from full size for the inner cutout
       // Inner size = full size - borderWidth (per axis)
       property int borderWidth: Style.borderMedium

@@ -34,6 +34,8 @@ Singleton {
   property color mOutlineVariant: customColors.mOutlineVariant
   property color mShadow: customColors.mShadow
 
+  property color transparent: "transparent"
+
   // -----------
   function applyOpacity(color, opacity) {
     // Convert color to string and apply opacity

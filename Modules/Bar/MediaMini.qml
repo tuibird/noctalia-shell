@@ -28,7 +28,6 @@ Item {
       font.family: "Material Symbols Outlined"
       font.pointSize: Style.fontSizeLarge * scaling
       verticalAlignment: Text.AlignVCenter
-      color: Colors.mPrimary
 
       MouseArea {
         id: titleContainerMouseArea
@@ -43,11 +42,10 @@ Item {
     // Track info
     NText {
       text: MediaService.trackTitle + (MediaService.trackArtist !== "" ? ` - {MediaService.trackArtist}` : "")
-      color: Colors.mOnSurface
-      font.pointSize: Style.fontSizeSmall * scaling
+      font.pointSize: Style.fontSizeReduced * scaling
       font.weight: Style.fontWeightBold
       elide: Text.ElideRight
-
+      color: Color.mSecondary
       verticalAlignment: Text.AlignVCenter
       Layout.maximumWidth: 200 * scaling
       Layout.alignment: Qt.AlignVCenter

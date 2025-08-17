@@ -29,12 +29,12 @@ ColumnLayout {
       text: label
       font.pointSize: Style.fontSizeMedium * scaling
       font.weight: Style.fontWeightBold
-      color: Colors.mOnSurface
+      color: Color.mOnSurface
     }
     NText {
       text: description
       font.pointSize: Style.fontSizeSmall * scaling
-      color: Colors.mOnSurface
+      color: Color.mOnSurface
       wrapMode: Text.WordWrap
     }
   }
@@ -61,8 +61,8 @@ ColumnLayout {
     background: Rectangle {
       implicitWidth: Style.baseWidgetSize * 3.75 * scaling
       implicitHeight: preferredHeight
-      color: Colors.mSurface
-      border.color: combo.activeFocus ? Colors.mTertiary : Colors.mOutline
+      color: Color.mSurface
+      border.color: combo.activeFocus ? Color.mTertiary : Color.mOutline
       border.width: Math.max(1, Style.borderThin * scaling)
       radius: Style.radiusMedium * scaling
     }
@@ -118,22 +118,22 @@ ColumnLayout {
           contentItem: NText {
             text: name
             font.pointSize: Style.fontSizeMedium * scaling
-            color: highlighted ? Colors.mSurface : Colors.mOnSurface
+            color: highlighted ? Color.mSurface : Color.mOnSurface
             verticalAlignment: Text.AlignVCenter
             elide: Text.ElideRight
           }
 
           background: Rectangle {
             width: combo.width - Style.marginMedium * scaling * 3
-            color: highlighted ? Colors.mTertiary : "transparent"
+            color: highlighted ? Color.mTertiary : "transparent"
             radius: Style.radiusSmall * scaling
           }
         }
       }
 
       background: Rectangle {
-        color: Colors.mSurfaceVariant
-        border.color: Colors.mOutline
+        color: Color.mSurfaceVariant
+        border.color: Color.mOutline
         border.width: Math.max(1, Style.borderThin * scaling)
         radius: Style.radiusMedium * scaling
       }

@@ -66,9 +66,9 @@ NLoader {
 
       Rectangle {
         id: notificationRect
-        color: Colors.mSurface
+        color: Color.mSurface
         radius: Style.radiusLarge * scaling
-        border.color: Colors.mOutlineVariant
+        border.color: Color.mOutlineVariant
         border.width: Math.max(1, Style.borderThin * scaling)
         width: 400 * scaling
         height: 500 * scaling
@@ -119,14 +119,14 @@ NLoader {
               text: "notifications"
               font.family: "Material Symbols Outlined"
               font.pointSize: Style.fontSizeXL * scaling
-              color: Colors.mPrimary
+              color: Color.mPrimary
             }
 
             NText {
               text: "Notification History"
               font.pointSize: Style.fontSizeLarge * scaling
               font.bold: true
-              color: Colors.mOnSurface
+              color: Color.mOnSurface
               Layout.fillWidth: true
             }
 
@@ -163,21 +163,21 @@ NLoader {
                 text: "notifications_off"
                 font.family: "Material Symbols Outlined"
                 font.pointSize: Style.fontSizeXXL * scaling
-                color: Colors.mOnSurfaceVariant
+                color: Color.mOnSurfaceVariant
                 Layout.alignment: Qt.AlignHCenter
               }
 
               NText {
                 text: "No notifications"
                 font.pointSize: Style.fontSizeLarge * scaling
-                color: Colors.mOnSurfaceVariant
+                color: Color.mOnSurfaceVariant
                 Layout.alignment: Qt.AlignHCenter
               }
 
               NText {
                 text: "Notifications will appear here when you receive them"
                 font.pointSize: Style.fontSizeNormal * scaling
-                color: Colors.mOnSurfaceVariant
+                color: Color.mOnSurfaceVariant
                 Layout.alignment: Qt.AlignHCenter
               }
             }
@@ -197,7 +197,7 @@ NLoader {
               width: notificationList ? (notificationList.width - 20) : 380 * scaling
               height: Math.max(80, notificationContent.height + 30)
               radius: Style.radiusMedium * scaling
-              color: notificationMouseArea.containsMouse ? Colors.mPrimary : Colors.mSurfaceVariant
+              color: notificationMouseArea.containsMouse ? Color.mPrimary : Color.mSurfaceVariant
 
               RowLayout {
                 anchors {
@@ -217,7 +217,7 @@ NLoader {
                     text: (summary || "No summary").substring(0, 100)
                     font.pointSize: Style.fontSizeMedium * scaling
                     font.weight: Font.Medium
-                    color: notificationMouseArea.containsMouse ? Colors.mSurface : Colors.mOnSurface
+                    color: notificationMouseArea.containsMouse ? Color.mSurface : Color.mOnSurface
                     wrapMode: Text.Wrap
                     width: parent.width - 60
                     maximumLineCount: 2
@@ -227,7 +227,7 @@ NLoader {
                   NText {
                     text: (body || "").substring(0, 150)
                     font.pointSize: Style.fontSizeSmall * scaling
-                    color: notificationMouseArea.containsMouse ? Colors.mSurface : Colors.mOnSurface
+                    color: notificationMouseArea.containsMouse ? Color.mSurface : Color.mOnSurface
                     wrapMode: Text.Wrap
                     width: parent.width - 60
                     maximumLineCount: 3
@@ -237,7 +237,7 @@ NLoader {
                   NText {
                     text: NotificationService.formatTimestamp(timestamp)
                     font.pointSize: Style.fontSizeSmall * scaling
-                    color: notificationMouseArea.containsMouse ? Colors.mSurface : Colors.mOnSurface
+                    color: notificationMouseArea.containsMouse ? Color.mSurface : Color.mOnSurface
                   }
                 }
 

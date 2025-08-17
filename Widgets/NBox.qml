@@ -11,9 +11,9 @@ Rectangle {
   implicitWidth: childrenRect.width
   implicitHeight: childrenRect.height
 
-  color: Colors.mSurfaceVariant
+  color: Color.mSurfaceVariant
   radius: Style.radiusMedium * scaling
-  border.color: Colors.mOutlineVariant
+  border.color: Color.mOutlineVariant
   border.width: Math.max(1, Style.borderThin * scaling)
   clip: true
 }

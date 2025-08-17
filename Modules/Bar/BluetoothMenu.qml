@@ -63,9 +63,9 @@ NLoader {
 
       Rectangle {
         id: bluetoothMenuRect
-        color: Colors.mSurface
+        color: Color.mSurface
         radius: Style.radiusLarge * scaling
-        border.color: Colors.mOutlineVariant
+        border.color: Color.mOutlineVariant
         border.width: Math.max(1, Style.borderThin * scaling)
         width: 340 * scaling
         height: 500 * scaling
@@ -115,14 +115,14 @@ NLoader {
               text: "bluetooth"
               font.family: "Material Symbols Outlined"
               font.pointSize: Style.fontSizeXL * scaling
-              color: Colors.mPrimary
+              color: Color.mPrimary
             }
 
             NText {
               text: "Bluetooth"
               font.pointSize: Style.fontSizeLarge * scaling
               font.bold: true
-              color: Colors.mOnSurface
+              color: Color.mOnSurface
               Layout.fillWidth: true
             }
 
@@ -160,7 +160,7 @@ NLoader {
 
               NBusyIndicator {
                 running: BluetoothService.isDiscovering
-                color: Colors.mPrimary
+                color: Color.mPrimary
                 size: Style.baseWidgetSize * scaling
                 Layout.alignment: Qt.AlignHCenter
               }
@@ -168,7 +168,7 @@ NLoader {
               NText {
                 text: "Scanning for devices..."
                 font.pointSize: Style.fontSizeNormal * scaling
-                color: Colors.mOnSurfaceVariant
+                color: Color.mOnSurfaceVariant
                 Layout.alignment: Qt.AlignHCenter
               }
             }
@@ -183,21 +183,21 @@ NLoader {
                 text: "bluetooth_disabled"
                 font.family: "Material Symbols Outlined"
                 font.pointSize: Style.fontSizeXXL * scaling
-                color: Colors.mOnSurfaceVariant
+                color: Color.mOnSurfaceVariant
                 Layout.alignment: Qt.AlignHCenter
               }
 
               NText {
                 text: "Bluetooth is disabled"
                 font.pointSize: Style.fontSizeLarge * scaling
-                color: Colors.mOnSurfaceVariant
+                color: Color.mOnSurfaceVariant
                 Layout.alignment: Qt.AlignHCenter
               }
 
               NText {
                 text: "Enable Bluetooth to see available devices"
                 font.pointSize: Style.fontSizeNormal * scaling
-                color: Colors.mOnSurfaceVariant
+                color: Color.mOnSurfaceVariant
                 Layout.alignment: Qt.AlignHCenter
               }
             }
@@ -271,7 +271,7 @@ NLoader {
                 Rectangle {
                   anchors.fill: parent
                   radius: Style.radiusMedium * scaling
-                  color: modelData.device.connected ? Colors.mPrimary : (deviceMouseArea.containsMouse ? Colors.mTertiary : "transparent")
+                  color: modelData.device.connected ? Color.mPrimary : (deviceMouseArea.containsMouse ? Color.mTertiary : "transparent")
 
                   RowLayout {
                     anchors.fill: parent
@@ -282,7 +282,7 @@ NLoader {
                       text: BluetoothService.getDeviceIcon(modelData.device)
                       font.family: "Material Symbols Outlined"
                       font.pointSize: Style.fontSizeXL * scaling
-                      color: modelData.device.connected ? Colors.mSurface : (deviceMouseArea.containsMouse ? Colors.mSurface : Colors.mOnSurface)
+                      color: modelData.device.connected ? Color.mSurface : (deviceMouseArea.containsMouse ? Color.mSurface : Color.mOnSurface)
                     }
 
                     ColumnLayout {
@@ -294,7 +294,7 @@ NLoader {
                         font.pointSize: Style.fontSizeNormal * scaling
                         elide: Text.ElideRight
                         Layout.fillWidth: true
-                        color: modelData.device.connected ? Colors.mSurface : (deviceMouseArea.containsMouse ? Colors.mSurface : Colors.mOnSurface)
+                        color: modelData.device.connected ? Color.mSurface : (deviceMouseArea.containsMouse ? Color.mSurface : Color.mOnSurface)
                       }
 
                       NText {
@@ -308,13 +308,13 @@ NLoader {
                           }
                         }
                         font.pointSize: Style.fontSizeSmall * scaling
-                        color: modelData.device.connected ? Colors.mSurface : (deviceMouseArea.containsMouse ? Colors.mSurface : Colors.mOnSurfaceVariant)
+                        color: modelData.device.connected ? Color.mSurface : (deviceMouseArea.containsMouse ? Color.mSurface : Color.mOnSurfaceVariant)
                       }
 
                       NText {
                         text: BluetoothService.getBatteryText(modelData.device)
                         font.pointSize: Style.fontSizeSmall * scaling
-                        color: modelData.device.connected ? Colors.mSurface : (deviceMouseArea.containsMouse ? Colors.mSurface : Colors.mOnSurfaceVariant)
+                        color: modelData.device.connected ? Color.mSurface : (deviceMouseArea.containsMouse ? Color.mSurface : Color.mOnSurfaceVariant)
                         visible: modelData.device.batteryAvailable
                       }
                     }
@@ -327,7 +327,7 @@ NLoader {
                       NBusyIndicator {
                         visible: modelData.device.pairing || modelData.device.state === 2
                         running: modelData.device.pairing || modelData.device.state === 2
-                        color: Colors.mPrimary
+                        color: Color.mPrimary
                         anchors.centerIn: parent
                         size: Style.baseWidgetSize * 0.7 * scaling
                       }
@@ -337,7 +337,7 @@ NLoader {
                       visible: modelData.device.connected
                       text: "connected"
                       font.pointSize: Style.fontSizeSmall * scaling
-                      color: modelData.device.connected ? Colors.mSurface : (deviceMouseArea.containsMouse ? Colors.mSurface : Colors.mOnSurface)
+                      color: modelData.device.connected ? Color.mSurface : (deviceMouseArea.containsMouse ? Color.mSurface : Color.mOnSurface)
                     }
                   }
 
@@ -370,21 +370,21 @@ NLoader {
                 text: "bluetooth_disabled"
                 font.family: "Material Symbols Outlined"
                 font.pointSize: Style.fontSizeXXL * scaling
-                color: Colors.mOnSurfaceVariant
+                color: Color.mOnSurfaceVariant
                 Layout.alignment: Qt.AlignHCenter
               }
 
               NText {
                 text: "No Bluetooth devices"
                 font.pointSize: Style.fontSizeLarge * scaling
-                color: Colors.mOnSurfaceVariant
+                color: Color.mOnSurfaceVariant
                 Layout.alignment: Qt.AlignHCenter
               }
 
               NText {
                 text: "Click the refresh button to discover devices"
                 font.pointSize: Style.fontSizeNormal * scaling
-                color: Colors.mOnSurfaceVariant
+                color: Color.mOnSurfaceVariant
                 Layout.alignment: Qt.AlignHCenter
               }
             }

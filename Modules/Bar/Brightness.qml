@@ -10,7 +10,7 @@ Item {
 
   width: pill.width
   height: pill.height
-  visible: !Settings.data.bar.hideBrightness
+  visible: Settings.data.bar.showBrightness
 
   // Used to avoid opening the pill on Quickshell startup
   property bool firstBrightnessReceived: false
@@ -49,8 +49,8 @@ Item {
   NPill {
     id: pill
     icon: getIcon()
-    iconCircleColor: Colors.mPrimary
-    collapsedIconColor: Colors.mOnSurface
+    iconCircleColor: Color.mPrimary
+    collapsedIconColor: Color.mOnSurface
     autoHide: false // Important to be false so we can hover as long as we want
     text: Math.round(BrightnessService.brightness) + "%"
     tooltipText: "Brightness: " + Math.round(

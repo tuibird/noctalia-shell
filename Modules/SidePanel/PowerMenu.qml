@@ -26,9 +26,9 @@ NPanel {
     width: 160 * scaling
     height: 220 * scaling
     radius: Style.radiusMedium * scaling
-    border.color: Colors.mOutline
+    border.color: Color.mOutline
     border.width: Math.max(1, Style.borderThin * scaling)
-    color: Colors.mSurface
+    color: Color.mSurface
 
     visible: true
     z: 9999
@@ -57,7 +57,7 @@ NPanel {
         Layout.fillWidth: true
         Layout.preferredHeight: Style.barHeight * scaling
         radius: Style.radiusSmall * scaling
-        color: lockButtonArea.containsMouse ? Colors.mTertiary : "transparent"
+        color: lockButtonArea.containsMouse ? Color.mTertiary : "transparent"
 
         Item {
           anchors.left: parent.left
@@ -80,7 +80,7 @@ NPanel {
               font.variableAxes: {
                 "wght": (Font.Normal + Font.Bold) / 2.0
               }
-              color: lockButtonArea.containsMouse ? Colors.mOnTertiary : Colors.mOnSurface
+              color: lockButtonArea.containsMouse ? Color.mOnTertiary : Color.mOnSurface
               verticalAlignment: Text.AlignVCenter
               anchors.verticalCenter: parent.verticalCenter
               anchors.verticalCenterOffset: 1 * scaling
@@ -88,7 +88,7 @@ NPanel {
 
             Text {
               text: "Lock Screen"
-              color: lockButtonArea.containsMouse ? Colors.mOnTertiary : Colors.mOnSurface
+              color: lockButtonArea.containsMouse ? Color.mOnTertiary : Color.mOnSurface
               verticalAlignment: Text.AlignVCenter
               anchors.verticalCenter: parent.verticalCenter
               anchors.verticalCenterOffset: 1 * scaling
@@ -117,7 +117,7 @@ NPanel {
         Layout.fillWidth: true
         Layout.preferredHeight: Style.barHeight * scaling
         radius: Style.radiusSmall * scaling
-        color: suspendButtonArea.containsMouse ? Colors.mTertiary : "transparent"
+        color: suspendButtonArea.containsMouse ? Color.mTertiary : "transparent"
 
         Item {
           anchors.left: parent.left
@@ -140,7 +140,7 @@ NPanel {
               font.variableAxes: {
                 "wght": (Font.Normal + Font.Bold) / 2.0
               }
-              color: suspendButtonArea.containsMouse ? Colors.mOnTertiary : Colors.mOnSurface
+              color: suspendButtonArea.containsMouse ? Color.mOnTertiary : Color.mOnSurface
               verticalAlignment: Text.AlignVCenter
               anchors.verticalCenter: parent.verticalCenter
               anchors.verticalCenterOffset: 1 * scaling
@@ -148,7 +148,7 @@ NPanel {
 
             Text {
               text: "Suspend"
-              color: suspendButtonArea.containsMouse ? Colors.mOnTertiary : Colors.mOnSurface
+              color: suspendButtonArea.containsMouse ? Color.mOnTertiary : Color.mOnSurface
               verticalAlignment: Text.AlignVCenter
               anchors.verticalCenter: parent.verticalCenter
               anchors.verticalCenterOffset: 1 * scaling
@@ -175,7 +175,7 @@ NPanel {
         Layout.fillWidth: true
         Layout.preferredHeight: Style.barHeight * scaling
         radius: Style.radiusSmall * scaling
-        color: rebootButtonArea.containsMouse ? Colors.mTertiary : "transparent"
+        color: rebootButtonArea.containsMouse ? Color.mTertiary : "transparent"
 
         Item {
           anchors.left: parent.left
@@ -198,7 +198,7 @@ NPanel {
               font.variableAxes: {
                 "wght": (Font.Normal + Font.Bold) / 2.0
               }
-              color: rebootButtonArea.containsMouse ? Colors.mOnTertiary : Colors.mOnSurface
+              color: rebootButtonArea.containsMouse ? Color.mOnTertiary : Color.mOnSurface
               verticalAlignment: Text.AlignVCenter
               anchors.verticalCenter: parent.verticalCenter
               anchors.verticalCenterOffset: 1 * scaling
@@ -206,7 +206,7 @@ NPanel {
 
             Text {
               text: "Reboot"
-              color: rebootButtonArea.containsMouse ? Colors.mOnTertiary : Colors.mOnSurface
+              color: rebootButtonArea.containsMouse ? Color.mOnTertiary : Color.mOnSurface
               verticalAlignment: Text.AlignVCenter
               anchors.verticalCenter: parent.verticalCenter
               anchors.verticalCenterOffset: 1 * scaling
@@ -233,7 +233,7 @@ NPanel {
         Layout.fillWidth: true
         Layout.preferredHeight: Style.barHeight * scaling
         radius: Style.radiusSmall * scaling
-        color: logoutButtonArea.containsMouse ? Colors.mTertiary : "transparent"
+        color: logoutButtonArea.containsMouse ? Color.mTertiary : "transparent"
 
         Item {
           anchors.left: parent.left
@@ -256,7 +256,7 @@ NPanel {
               font.variableAxes: {
                 "wght": (Font.Normal + Font.Bold) / 2.0
               }
-              color: logoutButtonArea.containsMouse ? Colors.mOnTertiary : Colors.mOnSurface
+              color: logoutButtonArea.containsMouse ? Color.mOnTertiary : Color.mOnSurface
               verticalAlignment: Text.AlignVCenter
               anchors.verticalCenter: parent.verticalCenter
               anchors.verticalCenterOffset: 1 * scaling
@@ -264,7 +264,7 @@ NPanel {
 
             Text {
               text: "Logout"
-              color: logoutButtonArea.containsMouse ? Colors.mOnTertiary : Colors.mOnSurface
+              color: logoutButtonArea.containsMouse ? Color.mOnTertiary : Color.mOnSurface
               verticalAlignment: Text.AlignVCenter
               anchors.verticalCenter: parent.verticalCenter
               anchors.verticalCenterOffset: 1 * scaling
@@ -291,7 +291,7 @@ NPanel {
         Layout.fillWidth: true
         Layout.preferredHeight: Style.barHeight * scaling
         radius: Style.radiusSmall * scaling
-        color: shutdownButtonArea.containsMouse ? Colors.mTertiary : "transparent"
+        color: shutdownButtonArea.containsMouse ? Color.mTertiary : "transparent"
 
         Item {
           anchors.left: parent.left
@@ -314,7 +314,7 @@ NPanel {
               font.variableAxes: {
                 "wght": (Font.Normal + Font.Bold) / 2.0
               }
-              color: shutdownButtonArea.containsMouse ? Colors.mOnTertiary : Colors.mOnSurface
+              color: shutdownButtonArea.containsMouse ? Color.mOnTertiary : Color.mOnSurface
               verticalAlignment: Text.AlignVCenter
               anchors.verticalCenter: parent.verticalCenter
               anchors.verticalCenterOffset: 1 * scaling
@@ -322,7 +322,7 @@ NPanel {
 
             Text {
               text: "Shutdown"
-              color: shutdownButtonArea.containsMouse ? Colors.mOnTertiary : Colors.mOnSurface
+              color: shutdownButtonArea.containsMouse ? Color.mOnTertiary : Color.mOnSurface
               verticalAlignment: Text.AlignVCenter
               anchors.verticalCenter: parent.verticalCenter
               anchors.verticalCenterOffset: 1 * scaling

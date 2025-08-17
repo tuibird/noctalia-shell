@@ -27,13 +27,13 @@ RowLayout {
       text: label
       font.pointSize: Style.fontSizeMedium * scaling
       font.weight: Style.fontWeightBold
-      color: Colors.mOnSurface
+      color: Color.mOnSurface
     }
 
     NText {
       text: description
       font.pointSize: Style.fontSizeSmall * scaling
-      color: Colors.mOnSurface
+      color: Color.mOnSurface
       wrapMode: Text.WordWrap
       Layout.fillWidth: true
     }
@@ -45,16 +45,16 @@ RowLayout {
     implicitWidth: root.baseSize * 1.625 * scaling
     implicitHeight: root.baseSize * scaling
     radius: height * 0.5
-    color: root.checked ? Colors.mPrimary : Colors.mSurface
-    border.color: root.checked ? Colors.mPrimary : Colors.mOutline
+    color: root.checked ? Color.mPrimary : Color.mSurface
+    border.color: root.checked ? Color.mPrimary : Color.mOutline
     border.width: Math.max(1, Style.borderMedium * scaling)
 
     Rectangle {
       implicitWidth: (root.baseSize - 5) * scaling
       implicitHeight: (root.baseSize - 5) * scaling
       radius: height * 0.5
-      color: root.checked ? Colors.mOnPrimary : Colors.mPrimary
-      border.color: root.checked ? Colors.mSurface : Colors.mSurface
+      color: root.checked ? Color.mOnPrimary : Color.mPrimary
+      border.color: root.checked ? Color.mSurface : Color.mSurface
       border.width: Math.max(1, Style.borderMedium * scaling)
       y: 2 * scaling
       x: root.checked ? switcher.width - width - 2 * scaling : 2 * scaling

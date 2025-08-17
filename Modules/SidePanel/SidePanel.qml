@@ -81,9 +81,9 @@ NLoader {
       // Inline helpers moved to dedicated widgets: NCard and NCircleStat
       Rectangle {
         id: panelBackground
-        color: Colors.mSurface
+        color: Color.mSurface
         radius: Style.radiusLarge * scaling
-        border.color: Colors.mOutlineVariant
+        border.color: Color.mOutlineVariant
         border.width: Math.max(1, Style.borderThin * scaling)
         layer.enabled: true
         width: 460 * scaling

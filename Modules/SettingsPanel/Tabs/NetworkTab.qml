@@ -39,7 +39,7 @@ ColumnLayout {
           text: "Interfaces"
           font.pointSize: Style.fontSizeXL * scaling
           font.weight: Style.fontWeightBold
-          color: Colors.mOnSurface
+          color: Color.mOnSurface
         }
 
         NToggle {

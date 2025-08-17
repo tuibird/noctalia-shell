@@ -15,6 +15,7 @@ Singleton {
   // Font size
   property real fontSizeTiny: 7
   property real fontSizeSmall: 9
+  property real fontSizeReduced: 10
   property real fontSizeMedium: 11
   property real fontSizeInter: 12
   property real fontSizeLarge: 13

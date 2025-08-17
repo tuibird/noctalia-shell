@@ -63,7 +63,7 @@ NLoader {
 
       Rectangle {
         anchors.fill: parent
-        color: Qt.rgba(Colors.mSurface.r, Colors.mSurface.g, Colors.mSurface.b, 0.5)
+        color: Qt.rgba(Color.mSurface.r, Color.mSurface.g, Color.mSurface.b, 0.5)
       }
     }
   }

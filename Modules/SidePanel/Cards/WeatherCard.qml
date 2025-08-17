@@ -31,7 +31,7 @@ NBox {
                                LocationService.data.weather.current_weather.weathercode) : ""
         font.family: "Material Symbols Outlined"
         font.pointSize: Style.fontSizeXXL * 1.5 * scaling
-        color: Colors.mPrimary
+        color: Color.mPrimary
       }
 
       ColumnLayout {
@@ -92,13 +92,13 @@ NBox {
           spacing: Style.marginSmall * scaling
           NText {
             text: Qt.formatDateTime(new Date(LocationService.data.weather.daily.time[index]), "ddd")
-            color: Colors.mOnSurface
+            color: Color.mOnSurface
           }
           NText {
             text: LocationService.weatherSymbolFromCode(LocationService.data.weather.daily.weathercode[index])
             font.family: "Material Symbols Outlined"
             font.pointSize: Style.fontSizeXL * scaling
-            color: Colors.mPrimary
+            color: Color.mPrimary
           }
           NText {
             text: {
@@ -113,7 +113,7 @@ NBox {
               return `${max}°/${min}°`
             }
             font.pointSize: Style.fontSizeSmall * scaling
-            color: Colors.mOnSurfaceVariant
+            color: Color.mOnSurfaceVariant
           }
         }
       }

@@ -31,13 +31,13 @@ Item {
           text: "Brightness Settings"
           font.pointSize: Style.fontSizeXL * scaling
           font.weight: Style.fontWeightBold
-          color: Colors.mOnSurface
+          color: Color.mOnSurface
         }
 
         NText {
           text: "Configure brightness controls and monitor settings."
           font.pointSize: Style.fontSize * scaling
-          color: Colors.mOnSurfaceVariant
+          color: Color.mOnSurfaceVariant
         }
 
         // Bar Visibility Section
@@ -50,15 +50,15 @@ Item {
             text: "Bar Integration"
             font.pointSize: Style.fontSizeLarge * scaling
             font.weight: Style.fontWeightBold
-            color: Colors.mOnSurface
+            color: Color.mOnSurface
           }
 
           NToggle {
             label: "Show Brightness Icon"
             description: "Display the brightness control icon in the top bar"
-            checked: !Settings.data.bar.hideBrightness
+            checked: Settings.data.bar.showBrightness
             onToggled: checked => {
-                         Settings.data.bar.hideBrightness = !checked
+                         Settings.data.bar.showBrightness = checked
                        }
           }
         }
@@ -78,13 +78,13 @@ Item {
             text: "Brightness Step Size"
             font.pointSize: Style.fontSizeLarge * scaling
             font.weight: Style.fontWeightBold
-            color: Colors.mOnSurface
+            color: Color.mOnSurface
           }
 
           NText {
             text: "Adjust the step size for brightness changes (scroll wheel, keyboard shortcuts)"
             font.pointSize: Style.fontSizeSmall * scaling
-            color: Colors.mOnSurfaceVariant
+            color: Color.mOnSurfaceVariant
             wrapMode: Text.WordWrap
             Layout.fillWidth: true
           }
@@ -109,7 +109,7 @@ Item {
             NText {
               text: Settings.data.brightness.brightnessStep + "%"
               Layout.alignment: Qt.AlignVCenter
-              color: Colors.mOnSurface
+              color: Color.mOnSurface
               font.pointSize: Style.fontSizeMedium * scaling
               font.weight: Style.fontWeightBold
             }
@@ -131,13 +131,13 @@ Item {
             text: "Monitor Brightness Overview"
             font.pointSize: Style.fontSizeLarge * scaling
             font.weight: Style.fontWeightBold
-            color: Colors.mOnSurface
+            color: Color.mOnSurface
           }
 
           NText {
             text: "Current brightness levels for all detected monitors"
             font.pointSize: Style.fontSizeSmall * scaling
-            color: Colors.mOnSurfaceVariant
+            color: Color.mOnSurfaceVariant
             wrapMode: Text.WordWrap
             Layout.fillWidth: true
           }
@@ -146,8 +146,8 @@ Item {
           Rectangle {
             Layout.fillWidth: true
             radius: Style.radiusMedium * scaling
-            color: Colors.mSurface
-            border.color: Colors.mOutline
+            color: Color.mSurface
+            border.color: Color.mOutline
             border.width: Math.max(1, Style.borderThin * scaling)
             implicitHeight: contentCol.implicitHeight + Style.marginXL * 2 * scaling
 
@@ -165,7 +165,7 @@ Item {
                   text: "Primary Monitor"
                   font.pointSize: Style.fontSizeLarge * scaling
                   font.weight: Style.fontWeightBold
-                  color: Colors.mSecondary
+                  color: Color.mSecondary
                 }
 
                 Item {
@@ -175,7 +175,7 @@ Item {
                 NText {
                   text: BrightnessService.currentMethod === "ddcutil" ? "External (DDC)" : "Internal"
                   font.pointSize: Style.fontSizeSmall * scaling
-                  color: Colors.mOnSurfaceVariant
+                  color: Color.mOnSurfaceVariant
                   Layout.alignment: Qt.AlignRight
                 }
               }
@@ -187,7 +187,7 @@ Item {
                 NText {
                   text: "Brightness:"
                   font.pointSize: Style.fontSizeMedium * scaling
-                  color: Colors.mOnSurface
+                  color: Color.mOnSurface
                 }
 
                 NSlider {
@@ -208,7 +208,7 @@ Item {
                   text: BrightnessService.available ? Math.round(BrightnessService.brightness) + "%" : "N/A"
                   font.pointSize: Style.fontSizeMedium * scaling
                   font.weight: Style.fontWeightBold
-                  color: BrightnessService.available ? Colors.mPrimary : Colors.mOnSurfaceVariant
+                  color: BrightnessService.available ? Color.mPrimary : Color.mOnSurfaceVariant
                   Layout.alignment: Qt.AlignRight
                 }
               }
@@ -220,13 +220,13 @@ Item {
                 NText {
                   text: "Method:"
                   font.pointSize: Style.fontSizeSmall * scaling
-                  color: Colors.mOnSurfaceVariant
+                  color: Color.mOnSurfaceVariant
                 }
 
                 NText {
                   text: BrightnessService.currentMethod || "Unknown"
                   font.pointSize: Style.fontSizeSmall * scaling
-                  color: Colors.mOnSurface
+                  color: Color.mOnSurface
                   Layout.alignment: Qt.AlignLeft
                 }
 
@@ -237,7 +237,7 @@ Item {
                 NText {
                   text: BrightnessService.available ? "Available" : "Unavailable"
                   font.pointSize: Style.fontSizeSmall * scaling
-                  color: BrightnessService.available ? Colors.mPrimary : Colors.mError
+                  color: BrightnessService.available ? Color.mPrimary : Color.mError
                   Layout.alignment: Qt.AlignRight
                 }
               }

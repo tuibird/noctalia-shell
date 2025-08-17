@@ -67,9 +67,9 @@ NLoader {
 
       Rectangle {
         id: bgRect
-        color: Colors.mSurfaceVariant
+        color: Color.mSurfaceVariant
         radius: Style.radiusMedium * scaling
-        border.color: Colors.mOutlineVariant
+        border.color: Color.mOutlineVariant
         border.width: Math.max(1, Style.borderThin * scaling)
         width: 500 * scaling
         height: 900 * scaling
@@ -114,7 +114,7 @@ NLoader {
 
           NText {
             text: "DemoPanel"
-            color: Colors.mPrimary
+            color: Color.mPrimary
             font.pointSize: Style.fontSizeXL * scaling
             font.weight: Style.fontWeightBold
             Layout.alignment: Qt.AlignHCenter
@@ -129,7 +129,7 @@ NLoader {
               spacing: Style.marginLarge * scaling
               NText {
                 text: "Scaling"
-                color: Colors.mSecondary
+                color: Color.mSecondary
                 font.weight: Style.fontWeightBold
               }
               NText {
@@ -173,7 +173,7 @@ NLoader {
               spacing: Style.marginLarge * scaling
               NText {
                 text: "NIconButton"
-                color: Colors.mSecondary
+                color: Color.mSecondary
                 font.weight: Style.fontWeightBold
               }
 
@@ -194,7 +194,7 @@ NLoader {
               spacing: Style.marginMedium * scaling
               NText {
                 text: "NToggle"
-                color: Colors.mSecondary
+                color: Color.mSecondary
                 font.weight: Style.fontWeightBold
               }
 
@@ -216,7 +216,7 @@ NLoader {
               spacing: Style.marginMedium * scaling
               NText {
                 text: "NComboBox"
-                color: Colors.mSecondary
+                color: Color.mSecondary
                 font.weight: Style.fontWeightBold
               }
 
@@ -269,7 +269,7 @@ NLoader {
               spacing: Style.marginMedium * scaling
               NText {
                 text: "NTextInput"
-                color: Colors.mSecondary
+                color: Color.mSecondary
                 font.weight: Style.fontWeightBold
               }
 
@@ -292,7 +292,7 @@ NLoader {
               spacing: Style.marginMedium * scaling
               NText {
                 text: "NBusyIndicator"
-                color: Colors.mSecondary
+                color: Color.mSecondary
                 font.weight: Style.fontWeightBold
               }
 
@@ -308,7 +308,7 @@ NLoader {
               spacing: Style.marginMedium * scaling
               NText {
                 text: "Brightness Control"
-                color: Colors.mSecondary
+                color: Color.mSecondary
                 font.weight: Style.fontWeightBold
               }
 
@@ -349,7 +349,7 @@ NLoader {
 
               NText {
                 text: `Method: ${BrightnessService.currentMethod} | Available: ${BrightnessService.available}`
-                color: Colors.mOnSurfaceVariant
+                color: Color.mOnSurfaceVariant
                 font.pointSize: Style.fontSizeSmall * scaling
                 Layout.alignment: Qt.AlignHCenter
               }

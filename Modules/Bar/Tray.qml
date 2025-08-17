@@ -12,6 +12,7 @@ import qs.Widgets
 Item {
   readonly property real itemSize: 24 * scaling
 
+  visible: Settings.data.bar.showTray
   width: tray.width
   height: itemSize
 

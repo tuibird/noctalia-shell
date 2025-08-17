@@ -7,5 +7,5 @@ import qs.Services
 Rectangle {
   width: parent.width
   height: Math.max(1, Style.borderThin * scaling)
-  color: Colors.mOutline
+  color: Color.mOutline
 }

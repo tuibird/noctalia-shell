@@ -10,6 +10,7 @@ import qs.Widgets
 NIconButton {
   id: root
 
+  visible: Settings.data.bar.showNotificationsHistory
   sizeMultiplier: 0.8
   showBorder: false
   icon: "notifications"

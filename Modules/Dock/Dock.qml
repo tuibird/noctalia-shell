@@ -115,7 +115,7 @@ NLoader {
           id: dockContainer
           width: dock.width + 48 * scaling
           height: iconSize * 1.4 * scaling
-          color: Colors.mSurface
+          color: Color.mSurface
           anchors.horizontalCenter: parent.horizontalCenter
           anchors.bottom: parent.bottom
           topLeftRadius: Style.radiusLarge * scaling
@@ -194,7 +194,7 @@ NLoader {
                   Rectangle {
                     id: hoverBackground
                     anchors.fill: parent
-                    color: appButton.hovered ? Colors.mSurfaceVariant : "transparent"
+                    color: appButton.hovered ? Color.mSurfaceVariant : "transparent"
                     radius: parent.radius
                     opacity: appButton.hovered ? 0.8 : 0
 
@@ -236,7 +236,7 @@ NLoader {
                     text: "question_mark"
                     font.family: "Material Symbols Rounded"
                     font.pointSize: iconSize * 0.7 * scaling
-                    color: appButton.isActive ? Colors.mPrimary : Colors.mOnSurfaceVariant
+                    color: appButton.isActive ? Color.mPrimary : Color.mOnSurfaceVariant
 
                     scale: appButton.hovered ? 1.1 : 1.0
 
@@ -291,7 +291,7 @@ NLoader {
                     visible: isActive
                     width: iconSize * 0.75
                     height: 4 * scaling
-                    color: Colors.mPrimary
+                    color: Color.mPrimary
                     radius: Style.radiusTiny
                     anchors.top: parent.bottom
                     anchors.horizontalCenter: parent.horizontalCenter

@@ -45,13 +45,13 @@ Item {
           text: "Per‑monitor configuration"
           font.pointSize: Style.fontSizeXL * scaling
           font.weight: Style.fontWeightBold
-          color: Colors.mOnSurface
+          color: Color.mOnSurface
         }
 
         NText {
           text: "By default, bars and notifications are shown on all displays. Select one or more below to narrow your view."
           font.pointSize: Style.fontSize * scaling
-          color: Colors.mOnSurfaceVariant
+          color: Color.mOnSurfaceVariant
         }
 
         Repeater {
@@ -59,8 +59,8 @@ Item {
           delegate: Rectangle {
             Layout.fillWidth: true
             radius: Style.radiusMedium * scaling
-            color: Colors.mSurface
-            border.color: Colors.mOutline
+            color: Color.mSurface
+            border.color: Color.mOutline
             border.width: Math.max(1, Style.borderThin * scaling)
             implicitHeight: contentCol.implicitHeight + Style.marginXL * 2 * scaling
 
@@ -74,13 +74,13 @@ Item {
                 text: (modelData.name || "Unknown")
                 font.pointSize: Style.fontSizeLarge * scaling
                 font.weight: Style.fontWeightBold
-                color: Colors.mSecondary
+                color: Color.mSecondary
               }
 
               NText {
                 text: `Resolution: ${modelData.width}x${modelData.height} - Position: (${modelData.x}, ${modelData.y})`
                 font.pointSize: Style.fontSizeSmall * scaling
-                color: Colors.mOnSurface
+                color: Color.mOnSurface
               }
 
               ColumnLayout {

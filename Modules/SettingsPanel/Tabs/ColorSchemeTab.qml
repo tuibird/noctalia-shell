@@ -152,14 +152,14 @@ ColumnLayout {
             text: "Predefined Color Schemes"
             font.pointSize: Style.fontSizeLarge * scaling
             font.weight: Style.fontWeightBold
-            color: Colors.mOnSurface
+            color: Color.mOnSurface
             Layout.fillWidth: true
           }
 
           NText {
             text: "These color schemes only apply when 'Use Matugen' is disabled. When enabled, Matugen will generate colors based on your wallpaper instead."
             font.pointSize: Style.fontSizeSmall * scaling
-            color: Colors.mOnSurface
+            color: Color.mOnSurface
             Layout.fillWidth: true
             wrapMode: Text.WordWrap
           }
@@ -190,7 +190,7 @@ ColumnLayout {
                 radius: Style.radiusMedium * scaling
                 color: getSchemeColor(modelData, "mSurface")
                 border.width: Math.max(1, Style.borderThick * scaling)
-                border.color: Settings.data.colorSchemes.predefinedScheme === modelData ? Colors.mPrimary : Colors.mOutline
+                border.color: Settings.data.colorSchemes.predefinedScheme === modelData ? Color.mPrimary : Color.mOutline
                 scale: root.cardScaleLow
 
                 // Mouse area for selection
@@ -285,14 +285,14 @@ ColumnLayout {
                   width: 24 * scaling
                   height: 24 * scaling
                   radius: width * 0.5
-                  color: Colors.mPrimary
+                  color: Color.mPrimary
 
                   NText {
                     anchors.centerIn: parent
                     text: "✓"
                     font.pointSize: Style.fontSizeSmall * scaling
                     font.weight: Style.fontWeightBold
-                    color: Colors.mOnPrimary
+                    color: Color.mOnPrimary
                   }
                 }
 

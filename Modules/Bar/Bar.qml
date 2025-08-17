@@ -39,7 +39,7 @@ Variants {
         id: bar
 
         anchors.fill: parent
-        color: Colors.mSurface
+        color: Color.mSurface
         layer.enabled: true
       }
 
@@ -55,9 +55,9 @@ Variants {
 
         SystemMonitor {}
 
-        MediaMini {}
-
         ActiveWindow {}
+
+        MediaMini {}
       }
 
       // Center

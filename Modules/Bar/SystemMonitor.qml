@@ -24,16 +24,16 @@ Row {
       font.pointSize: Style.fontSizeLarge * scaling
       verticalAlignment: Text.AlignVCenter
       anchors.verticalCenter: parent.verticalCenter
-      color: Colors.mPrimary
     }
 
     NText {
       id: cpuUsageText
       text: `${SystemStatsService.cpuUsage}%`
-      font.pointSize: Style.fontSizeSmall * scaling
+      font.pointSize: Style.fontSizeReduced * scaling
       font.weight: Style.fontWeightBold
       anchors.verticalCenter: parent.verticalCenter
       verticalAlignment: Text.AlignVCenter
+      color: Color.mPrimary
     }
   }
 
@@ -46,17 +46,18 @@ Row {
       text: "thermometer"
       font.family: "Material Symbols Outlined"
       font.pointSize: Style.fontSizeLarge * scaling
-      color: Colors.mPrimary
+
       verticalAlignment: Text.AlignVCenter
       anchors.verticalCenter: parent.verticalCenter
     }
 
     NText {
       text: `${SystemStatsService.cpuTemp}°C`
-      font.pointSize: Style.fontSizeSmall * scaling
+      font.pointSize: Style.fontSizeReduced * scaling
       font.weight: Style.fontWeightBold
       anchors.verticalCenter: parent.verticalCenter
       verticalAlignment: Text.AlignVCenter
+      color: Color.mPrimary
     }
   }
 
@@ -69,17 +70,17 @@ Row {
       text: "memory"
       font.family: "Material Symbols Outlined"
       font.pointSize: Style.fontSizeLarge * scaling
-      color: Colors.mPrimary
       verticalAlignment: Text.AlignVCenter
       anchors.verticalCenter: parent.verticalCenter
     }
 
     NText {
       text: `${SystemStatsService.memoryUsageGb}G`
-      font.pointSize: Style.fontSizeSmall * scaling
+      font.pointSize: Style.fontSizeReduced * scaling
       font.weight: Style.fontWeightBold
       anchors.verticalCenter: parent.verticalCenter
       verticalAlignment: Text.AlignVCenter
+      color: Color.mPrimary
     }
   }
 }

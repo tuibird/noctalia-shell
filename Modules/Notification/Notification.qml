@@ -71,9 +71,9 @@ Variants {
           height: Math.max(80 * scaling, contentColumn.implicitHeight + (Style.marginMedium * 2 * scaling))
           clip: true
           radius: Style.radiusMedium * scaling
-          border.color: Colors.mPrimary
+          border.color: Color.mPrimary
           border.width: Math.max(1, Style.borderThin * scaling)
-          color: Colors.mSurface
+          color: Color.mSurface
 
           // Animation properties
           property real scaleValue: 0.8
@@ -141,14 +141,14 @@ Variants {
               spacing: Style.marginSmall * scaling
               NText {
                 text: (model.appName || model.desktopEntry) || "Unknown App"
-                color: Colors.mSecondary
+                color: Color.mSecondary
                 font.pointSize: Style.fontSizeSmall * scaling
               }
               Rectangle {
                 width: 6 * scaling
                 height: 6 * scaling
                 radius: Style.radiusTiny * scaling
-                color: (model.urgency === NotificationUrgency.Critical) ? Colors.mError : (model.urgency === NotificationUrgency.Low) ? Colors.mOnSurface : Colors.mPrimary
+                color: (model.urgency === NotificationUrgency.Critical) ? Color.mError : (model.urgency === NotificationUrgency.Low) ? Color.mOnSurface : Color.mPrimary
                 Layout.alignment: Qt.AlignVCenter
               }
               Item {
@@ -156,7 +156,7 @@ Variants {
               }
               NText {
                 text: NotificationService.formatTimestamp(model.timestamp)
-                color: Colors.mOnSurface
+                color: Color.mOnSurface
                 font.pointSize: Style.fontSizeSmall * scaling
               }
             }
@@ -165,7 +165,7 @@ Variants {
               text: model.summary || "No summary"
               font.pointSize: Style.fontSizeLarge * scaling
               font.weight: Style.fontWeightBold
-              color: Colors.mOnSurface
+              color: Color.mOnSurface
               wrapMode: Text.Wrap
               width: 300 * scaling
               maximumLineCount: 3
@@ -175,7 +175,7 @@ Variants {
             NText {
               text: model.body || ""
               font.pointSize: Style.fontSizeSmall * scaling
-              color: Colors.mOnSurface
+              color: Color.mOnSurface
               wrapMode: Text.Wrap
               width: 300 * scaling
               maximumLineCount: 5

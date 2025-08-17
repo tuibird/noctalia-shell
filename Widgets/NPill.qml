@@ -9,11 +9,11 @@ Item {
   property string icon: ""
   property string text: ""
   property string tooltipText: ""
-  property color pillColor: Colors.mSurfaceVariant
-  property color textColor: Colors.mOnSurface
-  property color iconCircleColor: Colors.mPrimary
-  property color iconTextColor: Colors.mSurface
-  property color collapsedIconColor: Colors.mOnSurface
+  property color pillColor: Color.mSurfaceVariant
+  property color textColor: Color.mOnSurface
+  property color iconCircleColor: Color.mPrimary
+  property color iconTextColor: Color.mSurface
+  property color collapsedIconColor: Color.mOnSurface
   property real sizeMultiplier: 0.8
   property bool autoHide: false
 

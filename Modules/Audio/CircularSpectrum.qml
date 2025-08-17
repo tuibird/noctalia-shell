@@ -7,8 +7,8 @@ Item {
   id: root
   property int innerRadius: 32 * scaling
   property int outerRadius: 64 * scaling
-  property color fillColor: Colors.mPrimary
-  property color strokeColor: Colors.mOnSurface
+  property color fillColor: Color.mPrimary
+  property color strokeColor: Color.mOnSurface
   property int strokeWidth: 0 * scaling
   property var values: []
   property int usableOuter: 64
