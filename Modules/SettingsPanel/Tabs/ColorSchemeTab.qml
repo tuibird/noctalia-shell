@@ -138,6 +138,20 @@ ColumnLayout {
                      }
         }
 
+        // Dark Mode Toggle
+        NToggle {
+          label: "Dark Mode"
+          description: "Generate dark theme colors when using Matugen. Disable for light theme."
+          checked: Settings.data.colorSchemes.darkMode
+          enabled: Settings.data.colorSchemes.useWallpaperColors
+          onToggled: checked => {
+                       Settings.data.colorSchemes.darkMode = checked
+                       if (Settings.data.colorSchemes.useWallpaperColors) {
+                         ColorSchemeService.changedWallpaper()
+                       }
+                     }
+        }
+
         NDivider {
           Layout.fillWidth: true
           Layout.topMargin: Style.marginLarge * scaling
@@ -157,7 +171,7 @@ ColumnLayout {
           }
 
           NText {
-            text: "These color schemes only apply when 'Use Matugen' is disabled. When enabled, Matugen will generate colors based on your wallpaper instead."
+            text: "These color schemes only apply when 'Use Matugen' is disabled. When enabled, Matugen will generate colors based on your wallpaper instead. You can toggle between light and dark themes when using Matugen."
             font.pointSize: Style.fontSizeSmall * scaling
             color: Color.mOnSurface
             Layout.fillWidth: true

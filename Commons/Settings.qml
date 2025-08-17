@@ -199,6 +199,7 @@ Singleton {
       colorSchemes: JsonObject {
         property bool useWallpaperColors: false
         property string predefinedScheme: ""
+        property bool darkMode: true
       }
     }
   }

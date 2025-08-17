@@ -62,7 +62,15 @@ Singleton {
 
   Process {
     id: generateColorsProcess
-    command: ["matugen", "image", WallpaperService.currentWallpaper, "--config", Quickshell.shellDir + "/Assets/Matugen/matugen.toml"]
+    command: {
+      var cmd = ["matugen", "image", WallpaperService.currentWallpaper, "--config", Quickshell.shellDir + "/Assets/Matugen/matugen.toml"]
+      if (!Settings.data.colorSchemes.darkMode) {
+        cmd.push("--mode", "light")
+      } else {
+        cmd.push("--mode", "dark")
+      }
+      return cmd
+    }
     workingDirectory: Quickshell.shellDir
     running: false
     stdout: StdioCollector {
