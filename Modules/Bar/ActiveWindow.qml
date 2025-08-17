@@ -22,7 +22,7 @@ Row {
     repeat: false
     onTriggered: {
       showingFullTitle = false
-      titleText.text = getDisplayText()
+      // No need to update text here, the width property change will handle it
     }
   }
 
@@ -36,13 +36,34 @@ Row {
         showingFullTitle = true
         fullTitleTimer.restart()
       }
-      titleText.text = getDisplayText()
     }
   }
 
+  function getFocusedWindow() {
+    if (typeof NiriService === "undefined" || NiriService.focusedWindowIndex < 0
+        || NiriService.focusedWindowIndex >= NiriService.windows.length) {
+      return null
+    }
+    return NiriService.windows[NiriService.focusedWindowIndex]
+  }
+
+  function getTitle() {
+    const focusedWindow = getFocusedWindow()
+    return focusedWindow ? (focusedWindow.title || focusedWindow.appId || "") : ""
+  }
+
+  //  A hidden text element to safely measure the full title width
+  NText {
+    id: fullTitleMetrics
+    visible: false
+    text: getTitle()
+    font: titleText.font
+  }
+
   Rectangle {
-    width: row.width + Style.marginSmall * scaling * 2
-    height: row.height
+    // Let the Rectangle size itself based on its content (the Row)
+    width: row.width + Style.marginMedium* scaling * 2
+    height: row.height + Style.marginSmall * scaling
     color: Color.mSurfaceVariant
     radius: Style.radiusSmall * scaling
     anchors.verticalCenter: parent.verticalCenter
@@ -66,19 +87,20 @@ Row {
           font.pointSize: Style.fontSizeLarge * scaling
           verticalAlignment: Text.AlignVCenter
           anchors.verticalCenter: parent.verticalCenter
-          visible: getDisplayText() !== ""
+          visible: getTitle() !== ""
         }
 
         NText {
           id: titleText
-          width: (showingFullTitle || mouseArea.containsMouse) ? 300 * scaling : 100 * scaling
-          text: getDisplayText()
+          width: (showingFullTitle || mouseArea.containsMouse) ? fullTitleMetrics.contentWidth : 150 * scaling
+          text: getTitle()
           font.pointSize: Style.fontSizeReduced * scaling
           font.weight: Style.fontWeightBold
           elide: Text.ElideRight
           anchors.verticalCenter: parent.verticalCenter
           verticalAlignment: Text.AlignVCenter
           color: Color.mTertiary
+
           Behavior on width {
             NumberAnimation {
               duration: Style.animationSlow
@@ -87,77 +109,14 @@ Row {
           }
         }
       }
+
       // Mouse area for hover detection
       MouseArea {
         id: mouseArea
         anchors.fill: parent
         hoverEnabled: true
-        cursorShape: Qt.IBeamCursor
-        onEntered: {
-          titleText.text = getDisplayText()
-        }
-        onExited: {
-          titleText.text = getDisplayText()
-        }
+        cursorShape: Qt.PointingHandCursor
       }
     }
-  }
-  function getDisplayText() {
-    // Check if Niri service is available
-    if (typeof NiriService === "undefined") {
-      return ""
-    }
-
-    // Get the focused window data
-    const focusedWindow = NiriService.focusedWindowIndex >= 0 && NiriService.focusedWindowIndex
-                        < NiriService.windows.length ? NiriService.windows[NiriService.focusedWindowIndex] : null
-
-    if (!focusedWindow) {
-      return ""
-    }
-
-    const appId = focusedWindow.appId || ""
-    const title = focusedWindow.title || ""
-
-    // If no appId, fall back to title processing
-    if (!appId) {
-      if (!title || title === "(No active window)" || title === "(Unnamed window)") {
-        return ""
-      }
-
-      // Extract program name from title (before first space or special characters)
-      const programName = title.split(/[\s\-_]/)[0]
-
-      if (programName.length <= 2 || programName === title) {
-        return title
-      }
-
-      if (isGenericName(programName)) {
-        return title
-      }
-
-      return programName
-    }
-
-    return title
-
-    // // Use appId for program name, show full title on hover or window switch
-    // if (showingFullTitle || mouseArea.containsMouse) {
-    //   return truncateTitle(title || appId, 50)
-    // } else {
-    //   return truncateTitle(title || appId, 20)
-    // }
-  }
-
-  function truncateTitle(title, length) {
-    if (title.length > length) {
-      return title.substring(0, length - 3) + "..."
-    }
-    return title
-  }
-
-  function isGenericName(name) {
-    const genericNames = ["window", "application", "app", "program", "process", "unknown"]
-    return genericNames.includes(name.toLowerCase())
   }
 }
