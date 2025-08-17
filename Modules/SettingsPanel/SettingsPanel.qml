@@ -114,6 +114,7 @@ NLoader {
         Tabs.AboutTab {}
       }
 
+      // Order *DOES* matter
       property var tabsModel: [{
           "id": SettingsPanel.Tab.General,
           "label": "General",
@@ -129,12 +130,7 @@ NLoader {
           "label": "Audio",
           "icon": "volume_up",
           "source": audioTab
-        }, {
-          "id": SettingsPanel.Tab.Brightness,
-          "label": "Brightness",
-          "icon": "brightness_6",
-          "source": brightnessTab
-        }, {
+        },{
           "id": SettingsPanel.Tab.Display,
           "label": "Display",
           "icon": "monitor",
@@ -145,6 +141,11 @@ NLoader {
           "icon": "lan",
           "source": networkTab
         }, {
+          "id": SettingsPanel.Tab.Brightness,
+          "label": "Brightness",
+          "icon": "brightness_6",
+          "source": brightnessTab
+        },  {
           "id": SettingsPanel.Tab.TimeWeather,
           "label": "Time & Weather",
           "icon": "schedule",
