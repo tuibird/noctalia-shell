@@ -14,35 +14,34 @@ Item {
 
   // Used to avoid opening the pill on Quickshell startup
   property bool firstBrightnessReceived: false
-  property real lastBrightness: -1
 
   function getIcon() {
-    if (!BrightnessService.available) {
-      return "brightness_auto"
-    }
-    var brightness = BrightnessService.brightness
-    return brightness <= 0 ? "brightness_1" : brightness < 33 ? "brightness_low" : brightness < 66 ? "brightness_medium" : "brightness_high"
+    var brightness = BrightnessService.getMonitorForScreen(screen).brightness
+    return brightness <= 0 ? "brightness_1" : brightness < 0.33 ? "brightness_low" : brightness < 0.66 ? "brightness_medium" : "brightness_high"
   }
 
   // Connection used to open the pill when brightness changes
   Connections {
-    target: BrightnessService.focusedMonitor
+    target: BrightnessService.getMonitorForScreen(screen)
     function onBrightnessUpdated() {
-      var currentBrightness = BrightnessService.brightness
+      Logger.log("Bar-Brightness", "OnBrightnessUpdated")
+
+      var monitor = BrightnessService.getMonitorForScreen(screen);
+      var currentBrightness = monitor.brightness
 
       // Ignore if this is the first time or if brightness hasn't actually changed
       if (!firstBrightnessReceived) {
         firstBrightnessReceived = true
-        lastBrightness = currentBrightness
+        monitor.lastBrightness = currentBrightness
         return
       }
 
       // Only show pill if brightness actually changed (not just loaded from settings)
-      if (Math.abs(currentBrightness - lastBrightness) > 0.1) {
+      if (Math.abs(currentBrightness - monitor.lastBrightness) > 0.1) {
         pill.show()
       }
 
-      lastBrightness = currentBrightness
+      monitor.lastBrightness = currentBrightness
     }
   }
 
@@ -52,21 +51,22 @@ Item {
     iconCircleColor: Color.mPrimary
     collapsedIconColor: Color.mOnSurface
     autoHide: false // Important to be false so we can hover as long as we want
-    text: Math.round(BrightnessService.brightness) + "%"
-    tooltipText: "Brightness: " + Math.round(
-                   BrightnessService.brightness) + "%\nMethod: " + BrightnessService.currentMethod
-                 + "\nLeft click for advanced settings.\nScroll up/down to change brightness."
+    text: Math.round(BrightnessService.getMonitorForScreen(screen).brightness * 100) + "%"
+    tooltipText: {
+      var monitor = BrightnessService.getMonitorForScreen(screen)
+      return "Brightness: " + Math.round(monitor.brightness * 100) + "%\nMethod: " + monitor.method
+          + "\nLeft click for advanced settings.\nScroll up/down to change brightness."
+    }
 
     onWheel: function (angle) {
-      if (!BrightnessService.available)
-        return
-
+      var monitor = BrightnessService.getMonitorForScreen(screen)
       if (angle > 0) {
-        BrightnessService.increaseBrightness()
+        monitor.increaseBrightness()
       } else if (angle < 0) {
-        BrightnessService.decreaseBrightness()
+        monitor.decreaseBrightness()
       }
     }
+
     onClicked: {
       settingsPanel.requestedTab = SettingsPanel.Tab.Brightness
       settingsPanel.isLoaded = true

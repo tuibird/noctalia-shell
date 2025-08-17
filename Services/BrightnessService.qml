@@ -14,71 +14,8 @@ Singleton {
   readonly property list<Monitor> monitors: variants.instances
   property bool appleDisplayPresent: false
 
-  // Public properties for backward compatibility
-  readonly property real brightness: focusedMonitor ? focusedMonitor.brightness * 100 : Settings.data.brightness.lastBrightness
-  readonly property bool available: focusedMonitor !== null
-  readonly property string currentMethod: focusedMonitor ? focusedMonitor.method : Settings.data.brightness.lastMethod
-  readonly property var detectedDisplays: monitors.map(m => ({
-                                                               "name": m.modelData.name,
-                                                               "type": m.isDdc ? "external" : "internal",
-                                                               "method": m.method,
-                                                               "index": m.busNum
-                                                             }))
-
-  // Get the currently focused monitor
-  readonly property Monitor focusedMonitor: {
-    if (monitors.length === 0)
-    return null
-    // For now, return the first monitor. Could be enhanced to detect focused monitor
-    return monitors[0]
-  }
-
   function getMonitorForScreen(screen: ShellScreen): var {
     return monitors.find(m => m.modelData === screen)
-  }
-
-  function increaseBrightness(step = null): void {
-    if (focusedMonitor) {
-      var stepSize = step !== null ? step : Settings.data.brightness.brightnessStep
-      focusedMonitor.setBrightness(focusedMonitor.brightness + (stepSize / 100))
-    }
-  }
-
-  function decreaseBrightness(step = null): void {
-    if (focusedMonitor) {
-      var stepSize = step !== null ? step : Settings.data.brightness.brightnessStep
-      focusedMonitor.setBrightness(focusedMonitor.brightness - (stepSize / 100))
-    }
-  }
-
-  function setBrightness(newBrightness: real): void {
-    if (focusedMonitor) {
-      focusedMonitor.setBrightness(newBrightness / 100)
-    }
-  }
-
-  function setBrightnessDebounced(newBrightness: real): void {
-    if (focusedMonitor) {
-      focusedMonitor.setBrightnessDebounced(newBrightness / 100)
-    }
-  }
-
-  // Backward compatibility functions
-  function updateBrightness(): void {// No longer needed with the new architecture
-  }
-
-  function setDisplay(displayIndex: int): bool {
-    // No longer needed with the new architecture
-    return true
-  }
-
-  function getDisplayInfo(): var {
-    return focusedMonitor ? {
-                              "name": focusedMonitor.modelData.name,
-                              "type": focusedMonitor.isDdc ? "external" : "internal",
-                              "method": focusedMonitor.method,
-                              "index": focusedMonitor.busNum
-                            } : null
   }
 
   function getAvailableMethods(): list<string> {
@@ -147,6 +84,7 @@ Singleton {
     readonly property string method: isAppleDisplay ? "apple" : (isDdc ? "ddcutil" : "internal")
 
     property real brightness: getStoredBrightness()
+    property real lastBrightness: 0
     property real queuedBrightness: NaN
 
     // Signal for brightness changes
@@ -205,6 +143,14 @@ Singleton {
           monitor.queuedBrightness = NaN
         }
       }
+    }
+
+    function increaseBrightness(): void {
+      setBrightness(brightness + 0.1)
+    }
+
+    function decreaseBrightness(): void {
+      setBrightness(monitor.brightness - 0.1)
     }
 
     function getStoredBrightness(): real {
