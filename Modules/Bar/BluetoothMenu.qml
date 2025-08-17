@@ -271,7 +271,7 @@ NLoader {
                 Rectangle {
                   anchors.fill: parent
                   radius: Style.radiusMedium * scaling
-                  color: modelData.device.connected ? Color.mPrimary : (deviceMouseArea.containsMouse ? Color.mTertiary : "transparent")
+                  color: modelData.device.connected ? Color.mPrimary : (deviceMouseArea.containsMouse ? Color.mTertiary : Color.transparent)
 
                   RowLayout {
                     anchors.fill: parent

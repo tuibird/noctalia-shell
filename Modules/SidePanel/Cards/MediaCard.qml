@@ -76,7 +76,7 @@ NBox {
           visible: false
           // implicitWidth: 120 * scaling
           // implicitHeight: 30 * scaling
-          color: "transparent"
+          color: Color.transparent
           border.color: playerSelector.activeFocus ? Color.mTertiary : Color.mOutline
           border.width: Math.max(1, Style.borderThin * scaling)
           radius: Style.radiusMedium * scaling
@@ -140,7 +140,7 @@ NBox {
 
           background: Rectangle {
             width: popup.width - Style.marginSmall * scaling * 2
-            color: highlighted ? Color.mTertiary : "transparent"
+            color: highlighted ? Color.mTertiary : Color.transparent
             radius: Style.radiusTiny * scaling
           }
         }
@@ -161,8 +161,8 @@ NBox {
           width: 90 * scaling
           height: 90 * scaling
           radius: width * 0.5
-          color: trackArt.visible ? Color.mPrimary : "transparent"
-          border.color: trackArt.visible ? Color.mOutline : "transparent"
+          color: trackArt.visible ? Color.mPrimary : Color.transparent
+          border.color: trackArt.visible ? Color.mOutline : Color.transparent
           border.width: Math.max(1, Style.borderThin * scaling)
           clip: true
 

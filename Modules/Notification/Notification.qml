@@ -25,7 +25,7 @@ Variants {
     // Track notifications being removed for animation
     property var removingNotifications: ({})
 
-    color: "transparent"
+    color: Color.transparent
 
     // If no notification display activated in settings, then show them all
     visible: modelData ? (Settings.data.notifications.monitors.includes(modelData.name)

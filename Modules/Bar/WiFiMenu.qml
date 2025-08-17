@@ -243,7 +243,7 @@ NLoader {
                     Layout.fillWidth: true
                     Layout.preferredHeight: Style.baseWidgetSize * 1.5 * scaling
                     radius: Style.radiusMedium * scaling
-                    color: modelData.connected ? Color.mPrimary : (networkMouseArea.containsMouse ? Color.mTertiary : "transparent")
+                    color: modelData.connected ? Color.mPrimary : (networkMouseArea.containsMouse ? Color.mTertiary : Color.transparent)
 
                     RowLayout {
                       anchors.fill: parent
@@ -377,7 +377,7 @@ NLoader {
                         Rectangle {
                           anchors.fill: parent
                           radius: Style.radiusTiny * scaling
-                          color: "transparent"
+                          color: Color.transparent
                           border.color: passwordInputField.activeFocus ? Color.mPrimary : Color.mOutline
                           border.width: Math.max(1, Style.borderThin * scaling)
 

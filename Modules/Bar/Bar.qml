@@ -18,7 +18,7 @@ Variants {
     screen: modelData
 
     implicitHeight: Style.barHeight * scaling
-    color: "transparent"
+    color: Color.transparent
 
     // If no bar activated in settings, then show them all
     visible: modelData ? (Settings.data.bar.monitors.includes(modelData.name)

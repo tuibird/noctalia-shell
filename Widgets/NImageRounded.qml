@@ -7,13 +7,13 @@ import qs.Services
 
 Rectangle {
   id: root
-  color: "transparent"
+  color: Color.transparent
   property real imageRadius: width * 0.5
   radius: imageRadius
 
   property string imagePath: ""
   property string fallbackIcon: ""
-  property color borderColor: "transparent"
+  property color borderColor: Color.transparent
   property real borderWidth: 0
 
   anchors.margins: Style.marginTiniest * scaling
@@ -22,7 +22,7 @@ Rectangle {
   Rectangle {
     anchors.fill: parent
     radius: parent.radius
-    color: "transparent"
+    color: Color.transparent
     border.color: parent.borderColor
     border.width: parent.borderWidth
     z: 10

@@ -125,7 +125,7 @@ ColumnLayout {
 
           background: Rectangle {
             width: combo.width - Style.marginMedium * scaling * 3
-            color: highlighted ? Color.mTertiary : "transparent"
+            color: highlighted ? Color.mTertiary : Color.transparent
             radius: Style.radiusSmall * scaling
           }
         }

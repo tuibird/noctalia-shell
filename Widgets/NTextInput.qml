@@ -55,8 +55,8 @@ Item {
       Rectangle {
         anchors.fill: parent
         radius: frame.radius
-        color: "transparent"
-        border.color: input.activeFocus ? Color.mTertiary : "transparent"
+        color: Color.transparent
+        border.color: input.activeFocus ? Color.mTertiary : Color.transparent
         border.width: input.activeFocus ? Math.max(1, Style.borderThin * scaling) : 0
       }
 

@@ -12,7 +12,7 @@ Rectangle {
 
   width: textItem.paintedWidth
   height: textItem.paintedHeight
-  color: "transparent"
+  color: Color.transparent
 
   NText {
     id: textItem

@@ -22,7 +22,7 @@ Variants {
 
       }
     }
-    color: "transparent"
+    color: Color.transparent
     screen: modelData
     WlrLayershell.layer: WlrLayer.Background
     WlrLayershell.exclusionMode: ExclusionMode.Ignore

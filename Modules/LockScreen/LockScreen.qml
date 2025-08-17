@@ -146,7 +146,7 @@ WlSessionLock {
     // Blurred background
     Rectangle {
       anchors.fill: parent
-      color: "transparent"
+      color: Color.transparent
 
       // Simple blur effect
       layer.enabled: true
@@ -266,7 +266,7 @@ WlSessionLock {
             width: 120 * scaling
             height: 120 * scaling
             radius: width * 0.5
-            color: "transparent"
+            color: Color.transparent
             border.color: Color.mPrimary
             border.width: Math.max(1, Style.borderThick * scaling)
             anchors.horizontalCenter: parent.horizontalCenter
@@ -277,7 +277,7 @@ WlSessionLock {
               width: parent.width + 24 * scaling
               height: parent.height + 24 * scaling
               radius: width * 0.5
-              color: "transparent"
+              color: Color.transparent
               border.color: Qt.rgba(Color.mPrimary.r, Color.mPrimary.g, Color.mPrimary.b, 0.3)
               border.width: Math.max(1, Style.borderMedium * scaling)
               z: -1
@@ -572,7 +572,7 @@ WlSessionLock {
                 // Status messages
                 Text {
                   text: lock.authenticating ? "Authenticating..." : (lock.errorMessage !== "" ? "Authentication failed." : "")
-                  color: lock.authenticating ? Color.mPrimary : (lock.errorMessage !== "" ? Color.mError : "transparent")
+                  color: lock.authenticating ? Color.mPrimary : (lock.errorMessage !== "" ? Color.mError : Color.transparent)
                   font.family: "DejaVu Sans Mono"
                   font.pointSize: Style.fontSizeLarge
                   Layout.fillWidth: true
@@ -659,7 +659,7 @@ WlSessionLock {
               Rectangle {
                 anchors.fill: parent
                 radius: parent.radius
-                color: "transparent"
+                color: Color.transparent
                 border.color: Color.applyOpacity(Color.mPrimary, "4D")
                 border.width: Math.max(1, Style.borderThin * scaling)
                 z: -1
@@ -706,7 +706,7 @@ WlSessionLock {
           width: parent.width + 10 * scaling
           height: parent.height + 10 * scaling
           radius: width * 0.5
-          color: "transparent"
+          color: Color.transparent
           border.color: Qt.rgba(Color.mError.r, Color.mError.g, Color.mError.b, 0.3)
           border.width: Math.max(1, Style.borderMedium * scaling)
           opacity: shutdownArea.containsMouse ? 1 : 0
@@ -763,7 +763,7 @@ WlSessionLock {
           width: parent.width + 10 * scaling
           height: parent.height + 10 * scaling
           radius: width * 0.5
-          color: "transparent"
+          color: Color.transparent
           border.color: Qt.rgba(Color.mPrimary.r, Color.mPrimary.g, Color.mPrimary.b, 0.3)
           border.width: Math.max(1, Style.borderMedium * scaling)
           opacity: rebootArea.containsMouse ? 1 : 0
@@ -819,7 +819,7 @@ WlSessionLock {
           width: parent.width + 10 * scaling
           height: parent.height + 10 * scaling
           radius: width * 0.5
-          color: "transparent"
+          color: Color.transparent
           border.color: Qt.rgba(Color.mSecondary.r, Color.mSecondary.g, Color.mSecondary.b, 0.3)
           border.width: Math.max(1, Style.borderMedium * scaling)
           opacity: logoutArea.containsMouse ? 1 : 0

@@ -244,7 +244,7 @@ Item {
           width: workspacePillContainer.width + 18 * root.masterProgress * scale
           height: workspacePillContainer.height + 18 * root.masterProgress * scale
           radius: width / 2
-          color: "transparent"
+          color: Color.transparent
           border.color: root.effectColor
           border.width: Math.max(1, Math.round((2 + 6 * (1.0 - root.masterProgress)) * scaling))
           opacity: root.effectsActive && model.isFocused ? (1.0 - root.masterProgress) * 0.7 : 0

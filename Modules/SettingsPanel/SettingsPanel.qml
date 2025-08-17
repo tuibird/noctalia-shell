@@ -265,7 +265,7 @@ NLoader {
                   width: parent.width
                   height: 32 * scaling
                   radius: Style.radiusSmall * scaling
-                  color: selected ? Color.mPrimary : (tabItem.hovering ? Color.mTertiary : "transparent")
+                  color: selected ? Color.mPrimary : (tabItem.hovering ? Color.mTertiary : Color.transparent)
                   readonly property bool selected: index === currentTabIndex
                   property bool hovering: false
                   property color tabTextColor: selected ? Color.mOnPrimary : (tabItem.hovering ? Color.mOnTertiary : Color.mOnSurface)

@@ -46,7 +46,7 @@ NLoader {
         anchors.left: true
         anchors.right: true
         focusable: false
-        color: "transparent"
+        color: Color.transparent
         implicitHeight: iconSize * 1.4 * scaling
 
         // Watch for autoHide setting changes
@@ -182,7 +182,7 @@ NLoader {
                   id: appButton
                   width: iconSize * scaling
                   height: iconSize * scaling
-                  color: "transparent"
+                  color: Color.transparent
                   radius: Style.radiusMedium * scaling
 
                   property bool isActive: ToplevelManager.activeToplevel && ToplevelManager.activeToplevel === modelData
@@ -194,7 +194,7 @@ NLoader {
                   Rectangle {
                     id: hoverBackground
                     anchors.fill: parent
-                    color: appButton.hovered ? Color.mSurfaceVariant : "transparent"
+                    color: appButton.hovered ? Color.mSurfaceVariant : Color.transparent
                     radius: parent.radius
                     opacity: appButton.hovered ? 0.8 : 0
 

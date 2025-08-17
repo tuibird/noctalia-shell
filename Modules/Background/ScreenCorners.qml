@@ -27,7 +27,7 @@ NLoader {
       // Rounded radius for the inner cutout
       property int innerRadius: 20
 
-      color: "transparent"
+      color: Color.transparent
 
       WlrLayershell.exclusionMode: ExclusionMode.Ignore
       WlrLayershell.namespace: "quickshell-corner"

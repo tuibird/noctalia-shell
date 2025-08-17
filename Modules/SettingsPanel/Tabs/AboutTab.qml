@@ -110,7 +110,7 @@ ColumnLayout {
         Layout.preferredWidth: updateText.implicitWidth + 46 * scaling
         Layout.preferredHeight: Style.barHeight * scaling
         radius: Style.radiusLarge * scaling
-        color: updateArea.containsMouse ? Color.mPrimary : "transparent"
+        color: updateArea.containsMouse ? Color.mPrimary : Color.transparent
         border.color: Color.mPrimary
         border.width: Math.max(1, Style.borderThin * scaling)
         visible: {
@@ -200,7 +200,7 @@ ColumnLayout {
             width: contributorsGrid.cellWidth - Style.marginLarge * scaling
             height: contributorsGrid.cellHeight - Style.marginTiny * scaling
             radius: Style.radiusLarge * scaling
-            color: contributorArea.containsMouse ? Color.mTertiary : "transparent"
+            color: contributorArea.containsMouse ? Color.mTertiary : Color.transparent
 
             RowLayout {
               anchors.fill: parent

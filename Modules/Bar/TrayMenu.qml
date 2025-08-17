@@ -17,7 +17,7 @@ PopupWindow {
   implicitWidth: Style.baseWidgetSize * 5.625 * scaling
   implicitHeight: Math.max(60 * scaling, listView.contentHeight + (Style.marginMedium * 2 * scaling))
   visible: false
-  color: "transparent"
+  color: Color.transparent
 
   anchor.item: anchorItem ? anchorItem : null
   anchor.rect.x: anchorX
@@ -99,7 +99,7 @@ PopupWindow {
 
       width: listView.width
       height: (modelData?.isSeparator) ? 8 * scaling : Math.max(32 * scaling, text.height + 8)
-      color: "transparent"
+      color: Color.transparent
 
       property var subMenu: null
 
@@ -112,7 +112,7 @@ PopupWindow {
       Rectangle {
         id: bg
         anchors.fill: parent
-        color: mouseArea.containsMouse ? Color.mTertiary : "transparent"
+        color: mouseArea.containsMouse ? Color.mTertiary : Color.transparent
         radius: Style.radiusSmall * scaling
         visible: !(modelData?.isSeparator ?? false)
 
@@ -254,7 +254,7 @@ PopupWindow {
       implicitWidth: Style.baseWidgetSize * 5.625 * scaling
       implicitHeight: Math.max(40, listView.contentHeight + 12)
       visible: false
-      color: "transparent"
+      color: Color.transparent
 
       property QsMenuHandle menu
       property var anchorItem: null
@@ -334,7 +334,7 @@ PopupWindow {
 
           width: listView.width
           height: (modelData?.isSeparator) ? 8 * scaling : Math.max(32 * scaling, subText.height + 8)
-          color: "transparent"
+          color: Color.transparent
 
           property var subMenu: null
 
@@ -347,7 +347,7 @@ PopupWindow {
           Rectangle {
             id: bg
             anchors.fill: parent
-            color: mouseArea.containsMouse ? Color.mTertiary : "transparent"
+            color: mouseArea.containsMouse ? Color.mTertiary : Color.transparent
             radius: Style.radiusSmall * scaling
             visible: !(modelData?.isSeparator ?? false)
             property color hoverTextColor: mouseArea.containsMouse ? Color.mOnSurface : Color.mOnSurface

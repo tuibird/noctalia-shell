@@ -26,7 +26,7 @@ NLoader {
                                        && !Settings.data.wallpaper.swww.enabled ? WallpaperService.currentWallpaper : ""
 
       visible: wallpaperSource !== "" && !Settings.data.wallpaper.swww.enabled
-      color: "transparent"
+      color: Color.transparent
       screen: modelData
       WlrLayershell.layer: WlrLayer.Background
       WlrLayershell.exclusionMode: ExclusionMode.Ignore

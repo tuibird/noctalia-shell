@@ -18,9 +18,9 @@ Rectangle {
 
   width: 68 * scaling
   height: 92 * scaling
-  color: flat ? "transparent" : Color.mSurface
+  color: flat ? Color.transparent : Color.mSurface
   radius: Style.radiusSmall * scaling
-  border.color: flat ? "transparent" : Color.mSurfaceVariant
+  border.color: flat ? Color.transparent : Color.mSurfaceVariant
   border.width: flat ? 0 : Math.max(1, Style.borderThin * scaling)
   clip: true
 

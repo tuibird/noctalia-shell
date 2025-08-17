@@ -172,7 +172,7 @@ Item {
 
     Rectangle {
       id: trayMenuRect
-      color: "transparent"
+      color: Color.transparent
       anchors.fill: parent
 
       // Animation properties

@@ -80,7 +80,7 @@ Item {
     width: iconSize
     height: iconSize
     radius: width * 0.5
-    color: showPill ? iconCircleColor : "transparent"
+    color: showPill ? iconCircleColor : Color.transparent
     anchors.verticalCenter: parent.verticalCenter
     anchors.right: parent.right
 

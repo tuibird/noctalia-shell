@@ -12,7 +12,7 @@ Window {
   property bool positionAbove: false
 
   flags: Qt.ToolTip | Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint
-  color: "transparent"
+  color: Color.transparent
   visible: false
 
   onIsVisibleChanged: {

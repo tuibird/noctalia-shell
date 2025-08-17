@@ -211,7 +211,7 @@ NLoader {
               width: (Style.baseWidgetSize * scaling)
               height: (Style.baseWidgetSize * scaling)
               radius: Style.radiusSmall * scaling
-              color: model.today ? Color.mPrimary : "transparent"
+              color: model.today ? Color.mPrimary : Color.transparent
 
               NText {
                 anchors.centerIn: parent

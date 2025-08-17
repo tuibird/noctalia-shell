@@ -13,7 +13,7 @@ RadioButton {
     implicitWidth: Style.baseWidgetSize * 0.625 * scaling
     implicitHeight: Style.baseWidgetSize * 0.625 * scaling
     radius: width * 0.5
-    color: "transparent"
+    color: Color.transparent
     border.color: root.checked ? Color.mPrimary : Color.mOnSurface
     border.width: Math.max(1, Style.borderMedium * scaling)
     anchors.verticalCenter: parent.verticalCenter
