@@ -10,7 +10,7 @@ Row {
   id: root
   anchors.verticalCenter: parent.verticalCenter
   spacing: Style.marginSmall * scaling
-  visible: Settings.data.bar.showActiveWindow
+  visible: (Settings.data.bar.showActiveWindow && getTitle() !== "")
 
   property bool showingFullTitle: false
   property int lastWindowIndex: -1
@@ -94,7 +94,8 @@ Row {
 
           // If hovered or just switched window, show up to 300 pixels
           // If not hovered show up to 150 pixels
-          width: (showingFullTitle || mouseArea.containsMouse) ? Math.min(fullTitleMetrics.contentWidth, 300 * scaling) : Math.min(
+          width: (showingFullTitle || mouseArea.containsMouse) ? Math.min(fullTitleMetrics.contentWidth,
+                                                                          300 * scaling) : Math.min(
                                                                    fullTitleMetrics.contentWidth, 150 * scaling)
           text: getTitle()
           font.pointSize: Style.fontSizeReduced * scaling
@@ -102,7 +103,7 @@ Row {
           elide: Text.ElideRight
           anchors.verticalCenter: parent.verticalCenter
           verticalAlignment: Text.AlignVCenter
-          color: Color.mTertiary
+          color: Color.mSecondary
 
           Behavior on width {
             NumberAnimation {
