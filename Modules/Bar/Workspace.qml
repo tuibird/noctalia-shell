@@ -43,8 +43,8 @@ Item {
 
   Component.onCompleted: {
     localWorkspaces.clear()
-    for (var i = 0; i < WorkspacesService.workspaces.count; i++) {
-      const ws = WorkspacesService.workspaces.get(i)
+    for (var i = 0; i < WorkspaceService.workspaces.count; i++) {
+      const ws = WorkspaceService.workspaces.get(i)
       if (ws.output.toLowerCase() === screen.name.toLowerCase()) {
         localWorkspaces.append(ws)
       }
@@ -54,11 +54,11 @@ Item {
   }
 
   Connections {
-    target: WorkspacesService
+    target: WorkspaceService
     function onWorkspacesChanged() {
       localWorkspaces.clear()
-      for (var i = 0; i < WorkspacesService.workspaces.count; i++) {
-        const ws = WorkspacesService.workspaces.get(i)
+      for (var i = 0; i < WorkspaceService.workspaces.count; i++) {
+        const ws = WorkspaceService.workspaces.get(i)
         if (ws.output.toLowerCase() === screen.name.toLowerCase()) {
           localWorkspaces.append(ws)
         }
@@ -182,7 +182,7 @@ Item {
             anchors.fill: parent
             cursorShape: Qt.PointingHandCursor
             onClicked: {
-              WorkspacesService.switchToWorkspace(model.idx)
+              WorkspaceService.switchToWorkspace(model.idx)
             }
             hoverEnabled: true
           }

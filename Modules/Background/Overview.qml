@@ -22,8 +22,8 @@ NLoader {
 
     delegate: PanelWindow {
       required property ShellScreen modelData
-      property string wallpaperSource: WallpapersService.currentWallpaper !== ""
-                                       && !Settings.data.wallpaper.swww.enabled ? WallpapersService.currentWallpaper : ""
+      property string wallpaperSource: WallpaperService.currentWallpaper !== ""
+                                       && !Settings.data.wallpaper.swww.enabled ? WallpaperService.currentWallpaper : ""
 
       visible: wallpaperSource !== "" && !Settings.data.wallpaper.swww.enabled
       color: "transparent"

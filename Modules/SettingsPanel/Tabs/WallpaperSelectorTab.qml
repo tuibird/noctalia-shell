@@ -49,7 +49,7 @@ Item {
             id: currentWallpaperImage
             anchors.fill: parent
             anchors.margins: Style.marginSmall * scaling
-            imagePath: WallpapersService.currentWallpaper
+            imagePath: WallpaperService.currentWallpaper
             fallbackIcon: "image"
             borderColor: Color.mOutline
             borderWidth: Math.max(1, Style.borderThin * scaling)
@@ -97,7 +97,7 @@ Item {
             icon: "refresh"
             tooltipText: "Refresh wallpaper list"
             onClicked: {
-              WallpapersService.loadWallpapers()
+              WallpaperService.listWallpapers()
             }
             Layout.alignment: Qt.AlignTop | Qt.AlignRight
           }
@@ -108,14 +108,14 @@ Item {
           Layout.fillWidth: true
           Layout.preferredHeight: {
             return Math.ceil(
-                  WallpapersService.wallpaperList.length / wallpaperGridView.columns) * wallpaperGridView.cellHeight
+                  WallpaperService.wallpaperList.length / wallpaperGridView.columns) * wallpaperGridView.cellHeight
           }
 
           GridView {
             id: wallpaperGridView
             anchors.fill: parent
             clip: true
-            model: WallpapersService.wallpaperList
+            model: WallpaperService.wallpaperList
 
             boundsBehavior: Flickable.StopAtBounds
             flickableDirection: Flickable.AutoFlickDirection
@@ -136,7 +136,7 @@ Item {
             delegate: Rectangle {
               id: wallpaperItem
               property string wallpaperPath: modelData
-              property bool isSelected: wallpaperPath === WallpapersService.currentWallpaper
+              property bool isSelected: wallpaperPath === WallpaperService.currentWallpaper
 
               width: wallpaperGridView.itemSize
               height: Math.floor(wallpaperGridView.itemSize * 0.67)
@@ -197,7 +197,7 @@ Item {
                 acceptedButtons: Qt.LeftButton
                 hoverEnabled: true
                 onClicked: {
-                  WallpapersService.changeWallpaper(wallpaperPath)
+                  WallpaperService.changeWallpaper(wallpaperPath)
                 }
               }
             }
@@ -210,7 +210,7 @@ Item {
             radius: Style.radiusMedium * scaling
             border.color: Color.mOutline
             border.width: Math.max(1, Style.borderThin * scaling)
-            visible: WallpapersService.wallpaperList.length === 0 && !WallpapersService.scanning
+            visible: WallpaperService.wallpaperList.length === 0 && !WallpaperService.scanning
 
             ColumnLayout {
               anchors.centerIn: parent

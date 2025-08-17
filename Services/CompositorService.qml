@@ -81,7 +81,7 @@ Singleton {
     compositorType = "unknown"
     isHyprland = false
     isNiri = false
-    Logger.warn("CompositorService", "No supported compositor detected")
+    Logger.warn("Compositor", "No supported compositor detected")
   }
 
   // Hyprland integration
@@ -90,9 +90,9 @@ Singleton {
       Hyprland.refreshWorkspaces()
       updateHyprlandWorkspaces()
       setupHyprlandConnections()
-      Logger.log("CompositorService", "Hyprland initialized successfully")
+      Logger.log("Compositor", "Hyprland initialized successfully")
     } catch (e) {
-      Logger.error("CompositorService", "Error initializing Hyprland:", e)
+      Logger.error("Compositor", "Error initializing Hyprland:", e)
       compositorType = "unknown"
       isHyprland = false
     }
@@ -124,7 +124,7 @@ Singleton {
         }
       }
     } catch (e) {
-      Logger.error("CompositorService", "Error updating Hyprland workspaces:", e)
+      Logger.error("Compositor", "Error updating Hyprland workspaces:", e)
     }
   }
 
@@ -136,9 +136,9 @@ Singleton {
       // Initial load of workspaces and windows
       updateNiriWorkspaces()
       updateNiriWindows()
-      Logger.log("CompositorService", "Niri initialized successfully")
+      Logger.log("Compositor", "Niri initialized successfully")
     } catch (e) {
-      Logger.error("CompositorService", "Error initializing Niri:", e)
+      Logger.error("Compositor", "Error initializing Niri:", e)
       compositorType = "unknown"
       isNiri = false
     }
@@ -197,7 +197,7 @@ Singleton {
           }
           workspaceChanged()
         } catch (e) {
-          Logger.error("CompositorService", "Failed to parse workspaces:", e, line)
+          Logger.error("Compositor", "Failed to parse workspaces:", e, line)
         }
       }
     }
@@ -244,7 +244,7 @@ Singleton {
               updateFocusedWindowTitle()
               activeWindowChanged()
             } catch (e) {
-              Logger.error("CompositorService", "Error parsing windows event:", e)
+              Logger.error("Compositor", "Error parsing windows event:", e)
             }
           } else if (event.WorkspaceActivated) {
             niriWorkspaceProcess.running = true
@@ -262,18 +262,18 @@ Singleton {
               updateFocusedWindowTitle()
               activeWindowChanged()
             } catch (e) {
-              Logger.error("CompositorService", "Error parsing window focus event:", e)
+              Logger.error("Compositor", "Error parsing window focus event:", e)
             }
           } else if (event.OverviewOpenedOrClosed) {
             try {
               inOverview = event.OverviewOpenedOrClosed.is_open === true
               overviewStateChanged()
             } catch (e) {
-              Logger.error("CompositorService", "Error parsing overview state:", e)
+              Logger.error("Compositor", "Error parsing overview state:", e)
             }
           }
         } catch (e) {
-          Logger.error("CompositorService", "Error parsing event stream:", e, data)
+          Logger.error("Compositor", "Error parsing event stream:", e, data)
         }
       }
     }
@@ -314,7 +314,7 @@ Singleton {
           updateFocusedWindowTitle()
           activeWindowChanged()
         } catch (e) {
-          Logger.error("CompositorService", "Failed to parse windows:", e, line)
+          Logger.error("Compositor", "Failed to parse windows:", e, line)
         }
       }
     }
@@ -334,16 +334,16 @@ Singleton {
       try {
         Hyprland.dispatch(`workspace ${workspaceId}`)
       } catch (e) {
-        Logger.error("CompositorService", "Error switching Hyprland workspace:", e)
+        Logger.error("Compositor", "Error switching Hyprland workspace:", e)
       }
     } else if (isNiri) {
       try {
         Quickshell.execDetached(["niri", "msg", "action", "focus-workspace", workspaceId.toString()])
       } catch (e) {
-        Logger.error("CompositorService", "Error switching Niri workspace:", e)
+        Logger.error("Compositor", "Error switching Niri workspace:", e)
       }
     } else {
-      Logger.warn("CompositorService", "No supported compositor detected for workspace switching")
+      Logger.warn("Compositor", "No supported compositor detected for workspace switching")
     }
   }
 
@@ -353,16 +353,16 @@ Singleton {
       try {
         Quickshell.execDetached(["hyprctl", "dispatch", "exit"])
       } catch (e) {
-        Logger.error("CompositorService", "Error logging out from Hyprland:", e)
+        Logger.error("Compositor", "Error logging out from Hyprland:", e)
       }
     } else if (isNiri) {
       try {
         Quickshell.execDetached(["niri", "msg", "action", "quit", "--skip-confirmation"])
       } catch (e) {
-        Logger.error("CompositorService", "Error logging out from Niri:", e)
+        Logger.error("Compositor", "Error logging out from Niri:", e)
       }
     } else {
-      Logger.warn("CompositorService", "No supported compositor detected for logout")
+      Logger.warn("Compositor", "No supported compositor detected for logout")
     }
   }
 

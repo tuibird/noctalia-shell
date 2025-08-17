@@ -10,17 +10,17 @@ Singleton {
   id: root
 
   Component.onCompleted: {
-    Logger.log("ColorSchemes", "Service started")
+    Logger.log("ColorScheme", "Service started")
     loadColorSchemes()
   }
 
   property var schemes: []
   property bool scanning: false
-  property string schemesDirectory: Quickshell.shellDir + "/Assets/ColorSchemes"
+  property string schemesDirectory: Quickshell.shellDir + "/Assets/ColorScheme"
   property string colorsJsonFilePath: Settings.configDir + "colors.json"
 
   function loadColorSchemes() {
-    Logger.log("ColorSchemes", "Load ColorSchemes")
+    Logger.log("ColorScheme", "Load ColorScheme")
     scanning = true
     schemes = []
     // Unsetting, then setting the folder will re-trigger the parsing!
@@ -34,7 +34,7 @@ Singleton {
 
   function changedWallpaper() {
     if (Settings.data.colorSchemes.useWallpaperColors) {
-      Logger.log("ColorSchemes", "Starting color generation from wallpaper")
+      Logger.log("ColorScheme", "Starting color generation from wallpaper")
       generateColorsProcess.running = true
       // Invalidate potential predefined scheme
       Settings.data.colorSchemes.predefinedScheme = ""
@@ -55,19 +55,19 @@ Singleton {
         }
         schemes = files
         scanning = false
-        Logger.log("ColorSchemes", "Loaded", schemes.length, "schemes")
+        Logger.log("ColorScheme", "Listed", schemes.length, "schemes")
       }
     }
   }
 
   Process {
     id: generateColorsProcess
-    command: ["matugen", "image", WallpapersService.currentWallpaper, "--config", Quickshell.shellDir + "/Assets/Matugen/matugen.toml"]
+    command: ["matugen", "image", WallpaperService.currentWallpaper, "--config", Quickshell.shellDir + "/Assets/Matugen/matugen.toml"]
     workingDirectory: Quickshell.shellDir
     running: false
     stdout: StdioCollector {
       onStreamFinished: {
-        Logger.log("ColorSchemes", "Completed colors generation")
+        Logger.log("ColorScheme", "Completed colors generation")
       }
     }
     stderr: StdioCollector {

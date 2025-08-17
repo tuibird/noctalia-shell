@@ -11,7 +11,7 @@ Singleton {
 
   Component.onCompleted: {
     Logger.log("Wallpapers", "Service started")
-    loadWallpapers()
+    listWallpapers()
 
     // Wallpaper is set when the settings are loaded.
     // Don't start random wallpaper during initialization
@@ -25,8 +25,8 @@ Singleton {
   property string transitionType: Settings.data.wallpaper.swww.transitionType
   property var randomChoices: ["simple", "fade", "left", "right", "top", "bottom", "wipe", "wave", "grow", "center", "any", "outer"]
 
-  function loadWallpapers() {
-    Logger.log("Wallpapers", "Load Wallpapers")
+  function listWallpapers() {
+    Logger.log("Wallpapers", "Listing wallpapers")
     scanning = true
     wallpaperList = []
     // Unsetting, then setting the folder will re-trigger the parsing!
@@ -65,9 +65,9 @@ Singleton {
       randomWallpaperTimer.restart()
     }
 
-    // Only notify ColorSchemes service if the wallpaper actually changed
+    // Only notify ColorScheme service if the wallpaper actually changed
     if (wallpaperChanged) {
-      ColorSchemesService.changedWallpaper()
+      ColorSchemeService.changedWallpaper()
     }
   }
 

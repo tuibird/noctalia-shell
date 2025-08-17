@@ -54,7 +54,7 @@ Singleton {
         // Only set wallpaper on initial load, not on reloads
         if (isInitialLoad && adapter.wallpaper.current !== "") {
           Logger.log("Settings", "Set current wallpaper", adapter.wallpaper.current)
-          WallpapersService.setCurrentWallpaper(adapter.wallpaper.current, true)
+          WallpaperService.setCurrentWallpaper(adapter.wallpaper.current, true)
         }
         isInitialLoad = false
       })
@@ -125,9 +125,9 @@ Singleton {
         property int randomInterval: 300
         property JsonObject swww
 
-        onDirectoryChanged: WallpapersService.loadWallpapers()
-        onIsRandomChanged: WallpapersService.toggleRandomWallpaper()
-        onRandomIntervalChanged: WallpapersService.restartRandomWallpaperTimer()
+        onDirectoryChanged: WallpaperService.listWallpapers()
+        onIsRandomChanged: WallpaperService.toggleRandomWallpaper()
+        onRandomIntervalChanged: WallpaperService.restartRandomWallpaperTimer()
 
         swww: JsonObject {
           property bool enabled: false

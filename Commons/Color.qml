@@ -47,23 +47,23 @@ Singleton {
   QtObject {
     id: defaultColors
 
-    property color mPrimary: "#ebbcba"
-    property color mOnPrimary: "#1f1d2e"
-    property color mSecondary: "#31748f"
-    property color mOnSecondary: "#e0def4"
-    property color mTertiary: "#9ccfd8"
-    property color mOnTertiary: "#191724"
+    property color mPrimary: "#c7a1d8"
+    property color mOnPrimary: "#1a151f"
+    property color mSecondary: "#a984c4"
+    property color mOnSecondary: "#f3edf7"
+    property color mTertiary: "#e0b7c9"
+    property color mOnTertiary: "#20161f"
 
-    property color mError: "#eb6f92"
-    property color mOnError: "#1f1d2e"
+    property color mError: "#e9899d"
+    property color mOnError: "#1e1418"
 
-    property color mSurface: "#1f1d2e"
-    property color mOnSurface: "#e0def4"
-    property color mSurfaceVariant: "#26233a"
-    property color mOnSurfaceVariant: "#908caa"
-    property color mOutline: "#44415a"
-    property color mOutlineVariant: "#514e6c"
-    property color mShadow: "#191724"
+    property color mSurface: "#1c1822"
+    property color mOnSurface: "#e9e4f0"
+    property color mSurfaceVariant: "#262130"
+    property color mOnSurfaceVariant: "#a79ab0"
+    property color mOutline: "#4d445a"
+    property color mOutlineVariant: "#342c42"
+    property color mShadow: "#120f18"
   }
 
   // ----------------------------------------------------------------

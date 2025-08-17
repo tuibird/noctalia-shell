@@ -67,7 +67,7 @@ ColumnLayout {
   // When the list of available schemes changes, clear the cache.
   // The Repeater below will automatically re-create the FileViews.
   Connections {
-    target: ColorSchemesService
+    target: ColorSchemeService
     function onSchemesChanged() {
       schemeColorsCache = {}
     }
@@ -79,7 +79,7 @@ ColumnLayout {
     id: fileLoaders
 
     Repeater {
-      model: ColorSchemesService.schemes
+      model: ColorSchemeService.schemes
 
       // The delegate is a Component, which correctly wraps the non-visual FileView
       delegate: Item {
@@ -133,7 +133,7 @@ ColumnLayout {
           onToggled: checked => {
                        Settings.data.colorSchemes.useWallpaperColors = checked
                        if (Settings.data.colorSchemes.useWallpaperColors) {
-                         ColorSchemesService.changedWallpaper()
+                         ColorSchemeService.changedWallpaper()
                        }
                      }
         }
@@ -178,7 +178,7 @@ ColumnLayout {
             Layout.fillWidth: true
 
             Repeater {
-              model: ColorSchemesService.schemes
+              model: ColorSchemeService.schemes
 
               Rectangle {
                 id: schemeCard
@@ -201,7 +201,7 @@ ColumnLayout {
                     // TBC: broken uncheck useWallpaperColors
                     Settings.data.colorSchemes.useWallpaperColors = false
                     Settings.data.colorSchemes.predefinedScheme = schemePath
-                    ColorSchemesService.applyScheme(schemePath)
+                    ColorSchemeService.applyScheme(schemePath)
                   }
                   hoverEnabled: true
                   cursorShape: Qt.PointingHandCursor
