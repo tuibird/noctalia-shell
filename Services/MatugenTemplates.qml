@@ -167,7 +167,14 @@ Singleton {
           "output": "~/.config/walker/themes/noctalia/style.css"
         }],
       "input": "walker.css"
-    }, {
+    },  {
+      "name": "code",
+      "templates": [{
+          "version": "code",
+          "output": "~/.vscode/extensions/hyprluna.hyprluna-theme-1.0.2/themes/hyprluna.json"
+        }],
+      "input": "code.json"
+    },  {
       "name": "pywalfox",
       "templates": [{
           "version": "pywalfox",
