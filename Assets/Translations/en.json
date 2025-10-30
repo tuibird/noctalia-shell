@@ -612,6 +612,10 @@
           "pywalfox": {
             "description": "Write {filepath} and run pywalfox update",
             "description-missing": "Requires {app} to be installed"
+          },
+          "code": {
+            "description": "Write {filepath} and install/set theme to hyprluna",
+            "description-missing": "Requires {app} to be installed"
           }
         },
         "misc": {
